@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avesta | Next-Gen Bespoke Timepieces</title>
+    <title>Avesta | Custom Watches</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
     <style>
-        /* --- FUTURISTIC VARIABLES --- */
+        /* --- COLORS --- */
         :root {
             --bg-deep: #030508;
             --text-main: #e2e8f0;
@@ -32,7 +32,7 @@
             overflow-x: hidden;
         }
 
-        /* --- HIGH-TECH PRELOADER --- */
+        /* --- PRELOADER (Hovering Avesta) --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -48,28 +48,25 @@
 
         .preloader-brand {
             font-family: 'Courier New', Courier, monospace;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--neon-cyan);
             letter-spacing: 12px;
             text-transform: uppercase;
             text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-            position: relative;
+            opacity: 0; /* Starts invisible */
+            /* This animation makes it hover in, float, and hover out */
+            animation: hoverInOut 3.5s ease-in-out forwards;
         }
 
-        .preloader-brand::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            height: 2px;
-            width: 100%;
-            background: var(--neon-gold);
-            transform: scaleX(0);
-            transform-origin: left;
-            animation: loadingBar 2s ease-in-out forwards;
+        @keyframes hoverInOut {
+            0% { opacity: 0; transform: translateY(50px); } /* Comes from below */
+            20% { opacity: 1; transform: translateY(0); } /* Settles in middle */
+            50% { opacity: 1; transform: translateY(-15px); } /* Hovers up slightly */
+            80% { opacity: 1; transform: translateY(0); } /* Settles back down */
+            100% { opacity: 0; transform: translateY(-50px); } /* Leaves flying upwards */
         }
 
-        /* --- GLASSMORPHISM NAVIGATION --- */
+        /* --- NAVIGATION --- */
         nav {
             display: flex;
             justify-content: space-between;
@@ -101,7 +98,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .nav-links a:hover {
@@ -109,7 +105,7 @@
             text-shadow: 0 0 8px var(--neon-cyan);
         }
 
-        /* --- HERO SECTION WITH HUD OVERLAY --- */
+        /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -142,33 +138,18 @@
             z-index: -2;
         }
 
-        /* Tech Grid Overlay */
-        .grid-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-        }
-
         .hero-content {
             padding: 0 20px;
             z-index: 1;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
-            letter-spacing: 4px;
+            letter-spacing: 2px;
             font-weight: 200;
             text-transform: uppercase;
             color: #fff;
-            text-shadow: 0 0 20px rgba(255,255,255,0.3);
         }
 
         .hero h1 span {
@@ -179,40 +160,63 @@
 
         .hero p {
             font-size: 1.2rem;
-            color: #a0aec0;
+            color: #ccc;
             max-width: 600px;
             margin: 0 auto 2.5rem auto;
             letter-spacing: 1px;
             line-height: 1.6;
         }
 
-        /* Neon Glow Button */
-        .btn {
-            padding: 15px 45px;
+        /* Circular Button */
+        .circle-btn {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
             background: rgba(0, 240, 255, 0.05);
             backdrop-filter: blur(5px);
             color: var(--neon-cyan);
-            border: 1px solid var(--neon-cyan);
+            border: 2px solid var(--neon-cyan);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.4s ease;
             text-decoration: none;
-            display: inline-block;
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1);
-            position: relative;
-            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .circle-btn:hover {
+            background-color: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Normal Button (for checkout) */
+        .btn {
+            padding: 15px 45px;
+            background: rgba(0, 240, 255, 0.05);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
             background-color: var(--neon-cyan);
             color: #000;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
         }
 
-        /* --- 3D DESIGN STUDIO --- */
+        /* --- DESIGN STUDIO --- */
         .studio-wrapper {
             display: flex;
             min-height: 100vh;
@@ -220,7 +224,7 @@
             position: relative;
         }
 
-        /* Left Side: Three.js 3D Canvas Container */
+        /* Left Side: 3D Area */
         .preview-panel {
             flex: 1.2;
             position: relative;
@@ -248,11 +252,10 @@
             color: var(--neon-cyan);
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.8rem;
-            pointer-events: none;
             opacity: 0.7;
         }
 
-        /* Right Side: Glassmorphic Controls */
+        /* Right Side: Controls */
         .controls-panel {
             flex: 1;
             padding: 6rem 5%;
@@ -260,7 +263,6 @@
             flex-direction: column;
             justify-content: center;
             background: var(--bg-deep);
-            position: relative;
             z-index: 10;
         }
 
@@ -269,15 +271,14 @@
             color: var(--neon-gold);
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 183, 0, 0.2);
         }
 
         .subtitle {
-            color: #718096;
+            color: #888;
             margin-bottom: 3rem;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .glass-box {
@@ -287,23 +288,17 @@
             padding: 2rem;
             border-radius: 10px;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: border-color 0.3s ease;
-        }
-
-        .glass-box:hover {
-            border-color: rgba(255, 183, 0, 0.4);
         }
 
         .option-group h3 {
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-bottom: 1.5rem;
             color: var(--neon-cyan);
         }
 
-        /* Glowing Swatches */
+        /* Colors */
         .swatch-container {
             display: flex;
             gap: 15px;
@@ -316,16 +311,14 @@
             border: 2px solid #333;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         .swatch.active {
             border-color: var(--neon-gold);
             transform: scale(1.1);
-            box-shadow: 0 0 15px var(--neon-gold);
         }
 
-        /* Cyberpunk Buttons */
+        /* Straps */
         .strap-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -339,7 +332,6 @@
             color: #fff;
             cursor: pointer;
             text-align: left;
-            transition: all 0.3s ease;
             border-radius: 5px;
         }
 
@@ -347,22 +339,18 @@
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
-            letter-spacing: 1px;
-            color: #cbd5e0;
         }
 
         .strap-btn small {
-            color: #4a5568;
-            font-family: 'Courier New', Courier, monospace;
+            color: #888;
         }
 
         .strap-btn.active, .strap-btn:hover {
             border-color: var(--neon-cyan);
             background: rgba(0, 240, 255, 0.05);
-            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
         }
 
-        /* Holographic Inputs */
+        /* Text Input */
         .engraving-input {
             display: flex;
             gap: 10px;
@@ -375,30 +363,17 @@
             color: var(--neon-cyan);
             outline: none;
             font-size: 1rem;
-            font-family: 'Courier New', Courier, monospace;
             border-radius: 5px;
-            transition: all 0.3s ease;
         }
 
-        .engraving-input input {
-            flex: 2;
-        }
-        
-        .engraving-input select {
-            flex: 1;
-            cursor: pointer;
-        }
+        .engraving-input input { flex: 2; }
+        .engraving-input select { flex: 1; cursor: pointer; }
 
         .engraving-input input:focus, .engraving-input select:focus {
             border-color: var(--neon-gold);
-            box-shadow: 0 0 10px rgba(255, 183, 0, 0.2);
         }
 
-        .engraving-input input::placeholder {
-            color: #4a5568;
-        }
-
-        /* Cyber Checkout */
+        /* Checkout */
         .price-action {
             display: flex;
             justify-content: space-between;
@@ -409,8 +384,6 @@
         .price {
             font-size: 1.8rem;
             color: var(--neon-gold);
-            font-family: 'Courier New', Courier, monospace;
-            text-shadow: 0 0 10px rgba(255, 183, 0, 0.3);
         }
 
         /* Footer */
@@ -422,45 +395,30 @@
         }
 
         footer p {
-            color: #4a5568;
+            color: #666;
             font-size: 0.8rem;
             letter-spacing: 2px;
-            text-transform: uppercase;
         }
 
         @media (max-width: 900px) {
-            .studio-wrapper {
-                flex-direction: column;
-            }
-            .preview-panel {
-                height: 50vh;
-                border-right: none;
-                border-bottom: 1px solid var(--glass-border);
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .engraving-input {
-                flex-direction: column;
-            }
-        }
-
-        @keyframes loadingBar {
-            100% { transform: scaleX(1); }
+            .studio-wrapper { flex-direction: column; }
+            .preview-panel { height: 50vh; border-right: none; border-bottom: 1px solid var(--glass-border); }
+            .hero h1 { font-size: 2.5rem; }
+            .engraving-input { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
     <div id="preloader">
-        <div class="preloader-brand">AVESTA_OS</div>
+        <div class="preloader-brand">AVESTA</div>
     </div>
 
     <nav class="gsap-nav">
         <div class="brand-name">Avesta</div>
         <div class="nav-links">
-            <a href="#home">Initiate</a>
-            <a href="#customizer">Holo-Studio</a>
+            <a href="#home">Home</a>
+            <a href="#customizer">Design Studio</a>
         </div>
     </nav>
 
@@ -470,12 +428,12 @@
             Your browser does not support the video tag.
         </video>
         <div class="video-overlay"></div>
-        <div class="grid-overlay"></div>
         
         <div class="hero-content gsap-hero">
             <h1>The <span>Future</span> of Time</h1>
-            <p>Next-generation bespoke timepieces. Engineered to your exact biometric specifications and aesthetic desires.</p>
-            <a href="#customizer" class="btn">Access Studio</a>
+            <p>Design your own premium watch. Choose your colors, straps, and add your name.</p>
+            <br>
+            <a href="#customizer" class="circle-btn">Access<br>Studio</a>
         </div>
     </section>
 
@@ -483,100 +441,95 @@
         
         <div class="preview-panel">
             <div class="hud-overlay">
-                SYS.RENDER.OBJ_WATCH<br>
-                STATUS: ONLINE<br>
-                POLYCOUNT: OPTIMAL
+                Live 3D Preview
             </div>
             <div id="three-canvas-container"></div>
         </div>
         
         <div class="controls-panel gsap-controls">
-            <h2>System Config</h2>
-            <p class="subtitle">Calibrate your materials</p>
+            <h2>Configure Watch</h2>
+            <p class="subtitle">Choose your options below</p>
 
             <div class="glass-box option-group">
-                <h3>[1] Chassis Material</h3>
+                <h3>1. Watch Case Material</h3>
                 <div class="swatch-container">
                     <button class="swatch active" style="background: #e0e0e0;" title="Stainless Steel" onclick="selectOption(this)"></button>
-                    <button class="swatch" style="background: #111;" title="Obsidian Titanium" onclick="selectOption(this)"></button>
-                    <button class="swatch" style="background: #b76e79;" title="Cyber Rose Gold" onclick="selectOption(this)"></button>
+                    <button class="swatch" style="background: #111;" title="Dark Titanium" onclick="selectOption(this)"></button>
+                    <button class="swatch" style="background: #b76e79;" title="Rose Gold" onclick="selectOption(this)"></button>
                 </div>
             </div>
 
             <div class="glass-box option-group">
-                <h3>[2] Binding Interface</h3>
+                <h3>2. Watch Strap</h3>
                 <div class="strap-options">
                     <button class="strap-btn active" onclick="selectStrap(this)">
-                        <span>Synth-Leather</span>
-                        <small>Carbon-weaved</small>
+                        <span>Leather</span>
+                        <small>Premium Stitching</small>
                     </button>
                     <button class="strap-btn" onclick="selectStrap(this)">
-                        <span>Alloy Mesh</span>
-                        <small>Magnetic lock</small>
+                        <span>Metallic</span>
+                        <small>Chain Mesh</small>
                     </button>
                 </div>
             </div>
 
             <div class="glass-box option-group" style="margin-bottom: 0;">
-                <h3>[3] Data Engraving</h3>
+                <h3>3. Personal Engraving</h3>
                 <div class="engraving-input">
-                    <input type="text" placeholder="INPUT_DATA (Max 15)" maxlength="15">
+                    <input type="text" placeholder="Enter Name (Max 15)" maxlength="15">
                     <select>
-                        <option>Front_Dial</option>
-                        <option>Rear_Plate</option>
+                        <option>Front Dial</option>
+                        <option>Back Cap</option>
                     </select>
                 </div>
                 
                 <div class="price-action">
                     <div class="price">₹4,999</div>
-                    <button class="btn" onclick="alert('SYSTEM OVERRIDE: Design Sequence Initiated.')">Compile Data</button>
+                    <button class="btn" onclick="alert('Design saved! Ready for checkout.')">Finish Design</button>
                 </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>AVESTA SYSTEMS &copy; 2026. ALL RIGHTS RESERVED.</p>
+        <p>AVESTA &copy; 2026. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        // --- 1. GSAP Preloader & Entry Animations ---
+        // Wait for the hover animation to finish before hiding the preloader
         window.onload = () => {
             const tl = gsap.timeline();
             
-            // Fade out preloader
+            // Fade out preloader after 3.5 seconds (when CSS animation ends)
             tl.to("#preloader", {
                 opacity: 0,
-                duration: 1,
-                delay: 2,
-                ease: "power2.inOut",
+                duration: 0.5,
+                delay: 3.5,
                 onComplete: () => document.getElementById('preloader').style.display = 'none'
             })
-            // Animate Hero Content
-            .fromTo(".gsap-hero", {y: 50, opacity: 0}, {y: 0, opacity: 1, duration: 1, ease: "back.out(1.7)"}, "-=0.5")
-            // Animate Nav
+            // Animate Home content
+            .fromTo(".gsap-hero", {y: 50, opacity: 0}, {y: 0, opacity: 1, duration: 1, ease: "back.out(1.7)"}, "-=0.2")
+            // Animate Menu
             .fromTo(".gsap-nav", {y: -50, opacity: 0}, {y: 0, opacity: 1, duration: 0.8}, "-=0.8");
             
-            // Scroll trigger for Customizer
+            // Scroll animation for Studio
             gsap.fromTo(".gsap-controls", 
                 { x: 50, opacity: 0 }, 
                 { x: 0, opacity: 1, duration: 1, ease: "power2.out",
-                  scrollTrigger: {
-                      trigger: ".controls-panel",
-                      start: "top 80%"
-                  }
+                  scrollTrigger: { trigger: ".controls-panel", start: "top 80%" }
                 }
             );
         };
 
-        // --- 2. UI Interaction Logic ---
+        // Button clicks
         function selectOption(element) {
             let siblings = element.parentElement.children;
             for (let sib of siblings) sib.classList.remove('active');
             element.classList.add('active');
-            // Change 3D material color based on swatch click
-            if(element.title === "Obsidian Titanium") ringMaterial.color.setHex(0x222222);
-            else if(element.title === "Cyber Rose Gold") ringMaterial.color.setHex(0xb76e79);
+            
+            // Change 3D color based on selection
+            if(element.title === "Dark Titanium") ringMaterial.color.setHex(0x222222);
+            else if(element.title === "Rose Gold") ringMaterial.color.setHex(0xb76e79);
             else ringMaterial.color.setHex(0x00f0ff);
         }
 
@@ -586,10 +539,8 @@
             element.classList.add('active');
         }
 
-        // --- 3. THREE.JS 3D ENGINE INTEGRATION ---
+        // 3D Engine Setup
         const container = document.getElementById('three-canvas-container');
-        
-        // Scene setup
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -598,7 +549,7 @@
         renderer.setPixelRatio(window.devicePixelRatio);
         container.appendChild(renderer.domElement);
 
-        // Holographic Watch Bezel (Torus)
+        // 3D Shapes
         const ringGeometry = new THREE.TorusGeometry(2, 0.15, 16, 100);
         const ringMaterial = new THREE.MeshStandardMaterial({ 
             color: 0x00f0ff, 
@@ -609,17 +560,14 @@
         const holoRing = new THREE.Mesh(ringGeometry, ringMaterial);
         scene.add(holoRing);
 
-        // Inner mechanisms (Floating geometric shapes)
         const innerGeo = new THREE.OctahedronGeometry(1.2, 0);
         const innerMat = new THREE.MeshBasicMaterial({ color: 0xffb700, wireframe: true, transparent: true, opacity: 0.5 });
         const core = new THREE.Mesh(innerGeo, innerMat);
         scene.add(core);
 
-        // Particle System (Energy Dust)
         const particleGeo = new THREE.BufferGeometry();
-        const particleCount = 800;
-        const posArray = new Float32Array(particleCount * 3);
-        for(let i = 0; i < particleCount * 3; i++) {
+        const posArray = new Float32Array(800 * 3);
+        for(let i = 0; i < 800 * 3; i++) {
             posArray[i] = (Math.random() - 0.5) * 15;
         }
         particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
@@ -627,41 +575,30 @@
         const particles = new THREE.Points(particleGeo, particleMat);
         scene.add(particles);
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
+        // Lights
+        scene.add(new THREE.AmbientLight(0xffffff, 0.5));
         const pointLight = new THREE.PointLight(0xffb700, 2, 50);
         pointLight.position.set(5, 5, 5);
         scene.add(pointLight);
 
         camera.position.z = 6;
 
-        // Mouse interaction logic
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-        const windowHalfX = container.clientWidth / 2;
-        const windowHalfY = container.clientHeight / 2;
-
+        // Mouse rotation
+        let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
         container.addEventListener('mousemove', (event) => {
             const rect = container.getBoundingClientRect();
-            mouseX = (event.clientX - rect.left) - windowHalfX;
-            mouseY = (event.clientY - rect.top) - windowHalfY;
+            mouseX = (event.clientX - rect.left) - (container.clientWidth / 2);
+            mouseY = (event.clientY - rect.top) - (container.clientHeight / 2);
         });
 
-        // Animation Loop
         function animate() {
             requestAnimationFrame(animate);
-
-            // Smoothly rotate based on mouse
             targetX = mouseX * 0.001;
             targetY = mouseY * 0.001;
             
             holoRing.rotation.y += 0.05 * (targetX - holoRing.rotation.y);
             holoRing.rotation.x += 0.05 * (targetY - holoRing.rotation.x);
             
-            // Constant base rotation
             holoRing.rotation.z -= 0.005;
             core.rotation.x += 0.01;
             core.rotation.y += 0.01;
@@ -671,7 +608,7 @@
         }
         animate();
 
-        // Handle Window Resize
+        // Screen Resize
         window.addEventListener('resize', () => {
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
