@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avesta | Bespoke Timepieces</title>
+    <title>Avesta | Next-Gen Bespoke Timepieces</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <style>
-        /* --- GLOBAL VARIABLES & RESET --- */
+        /* --- FUTURISTIC VARIABLES --- */
         :root {
-            --bg-color: #050505;
-            --text-color: #ffffff;
-            --accent-gold: #d4af37;
-            --panel-bg: #111111;
-            --border-color: #333333;
+            --bg-deep: #030508;
+            --text-main: #e2e8f0;
+            --neon-cyan: #00f0ff;
+            --neon-gold: #ffb700;
+            --glass-bg: rgba(10, 15, 25, 0.4);
+            --glass-border: rgba(0, 240, 255, 0.2);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', 'Helvetica Neue', sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        /* --- PRELOADER --- */
+        /* --- HIGH-TECH PRELOADER --- */
         #preloader {
             position: fixed;
             top: 0;
@@ -40,55 +44,72 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            animation: slideUpOut 1.5s cubic-bezier(0.77, 0, 0.175, 1) 2.5s forwards;
         }
 
         .preloader-brand {
-            font-family: 'Georgia', serif;
+            font-family: 'Courier New', Courier, monospace;
             font-size: 3rem;
-            color: var(--accent-gold);
-            letter-spacing: 8px;
+            color: var(--neon-cyan);
+            letter-spacing: 12px;
             text-transform: uppercase;
-            opacity: 0;
-            animation: fadeInOut 2s ease-in-out 0.5s forwards;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+            position: relative;
         }
 
-        /* --- NAVIGATION --- */
+        .preloader-brand::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            height: 2px;
+            width: 100%;
+            background: var(--neon-gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: loadingBar 2s ease-in-out forwards;
+        }
+
+        /* --- GLASSMORPHISM NAVIGATION --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 5%;
-            position: absolute;
+            position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            background: rgba(3, 5, 8, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .brand-name {
-            font-family: 'Georgia', serif;
+            font-family: 'Courier New', Courier, monospace;
             font-size: 2rem;
-            color: var(--accent-gold);
+            color: var(--neon-gold);
             text-transform: uppercase;
             letter-spacing: 4px;
+            text-shadow: 0 0 10px rgba(255, 183, 0, 0.3);
         }
 
         .nav-links a {
-            color: var(--text-color);
+            color: var(--text-main);
             text-decoration: none;
             margin-left: 2rem;
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--accent-gold);
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px var(--neon-cyan);
         }
 
-        /* --- HERO SECTION WITH VIDEO --- */
+        /* --- HERO SECTION WITH HUD OVERLAY --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -107,7 +128,7 @@
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            z-index: -2;
+            z-index: -3;
             transform: scale(1.05);
         }
 
@@ -117,118 +138,172 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(rgba(5,5,5,0.4), rgba(5,5,5,0.8));
+            background: linear-gradient(rgba(3,5,8,0.6), rgba(3,5,8,0.9));
+            z-index: -2;
+        }
+
+        /* Tech Grid Overlay */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -1;
         }
 
         .hero-content {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUpIn 1.5s ease-out 3s forwards;
             padding: 0 20px;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-family: 'Georgia', serif;
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin-bottom: 1rem;
-            letter-spacing: 2px;
-            font-weight: 300;
+            letter-spacing: 4px;
+            font-weight: 200;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .hero h1 span {
+            color: var(--neon-cyan);
+            font-weight: 600;
+            text-shadow: 0 0 15px var(--neon-cyan);
         }
 
         .hero p {
-            font-size: 1.1rem;
-            color: #ddd;
+            font-size: 1.2rem;
+            color: #a0aec0;
             max-width: 600px;
             margin: 0 auto 2.5rem auto;
-            font-weight: 300;
             letter-spacing: 1px;
             line-height: 1.6;
         }
 
+        /* Neon Glow Button */
         .btn {
             padding: 15px 45px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 240, 255, 0.05);
             backdrop-filter: blur(5px);
-            color: var(--text-color);
-            border: 1px solid rgba(255,255,255,0.3);
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
             text-transform: uppercase;
             letter-spacing: 3px;
             font-size: 0.9rem;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.4s ease;
             text-decoration: none;
             display: inline-block;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-            background-color: rgba(212, 175, 55, 0.1);
+            background-color: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
         }
 
-        /* --- DESIGN STUDIO --- */
+        /* --- 3D DESIGN STUDIO --- */
         .studio-wrapper {
             display: flex;
             min-height: 100vh;
-            background-color: var(--bg-color);
+            background-color: var(--bg-deep);
+            position: relative;
         }
 
+        /* Left Side: Three.js 3D Canvas Container */
         .preview-panel {
-            flex: 1;
+            flex: 1.2;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(0,240,255,0.05) 0%, var(--bg-deep) 70%);
+            border-right: 1px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
-            border-right: 1px solid var(--border-color);
-            padding: 2rem;
+            overflow: hidden;
         }
 
-        .placeholder-watch {
-            width: 320px;
-            height: 320px;
-            border: 1px dashed #555;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: rgba(255,255,255,0.02);
+        #three-canvas-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: grab;
         }
 
+        .hud-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--neon-cyan);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* Right Side: Glassmorphic Controls */
         .controls-panel {
             flex: 1;
-            padding: 5rem 10%;
+            padding: 6rem 5%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background: var(--bg-deep);
+            position: relative;
+            z-index: 10;
         }
 
         .controls-panel h2 {
-            font-family: 'Georgia', serif;
             font-size: 2.2rem;
-            color: var(--accent-gold);
+            color: var(--neon-gold);
             margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 183, 0, 0.2);
         }
 
         .subtitle {
-            color: #888;
+            color: #718096;
             margin-bottom: 3rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .option-group {
-            margin-bottom: 2.5rem;
+        .glass-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: border-color 0.3s ease;
+        }
+
+        .glass-box:hover {
+            border-color: rgba(255, 183, 0, 0.4);
         }
 
         .option-group h3 {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
-            color: #ccc;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            color: var(--neon-cyan);
         }
 
+        /* Glowing Swatches */
         .swatch-container {
             display: flex;
             gap: 15px;
@@ -238,16 +313,19 @@
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            border: 2px solid transparent;
+            border: 2px solid #333;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .swatch.active {
-            border-color: var(--accent-gold);
+            border-color: var(--neon-gold);
             transform: scale(1.1);
+            box-shadow: 0 0 15px var(--neon-gold);
         }
 
+        /* Cyberpunk Buttons */
         .strap-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -255,31 +333,36 @@
         }
 
         .strap-btn {
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.4);
+            border: 1px solid #333;
             padding: 15px;
             color: #fff;
             cursor: pointer;
             text-align: left;
             transition: all 0.3s ease;
+            border-radius: 5px;
         }
 
         .strap-btn span {
             display: block;
-            font-weight: normal;
+            font-weight: bold;
             margin-bottom: 5px;
             letter-spacing: 1px;
+            color: #cbd5e0;
         }
 
         .strap-btn small {
-            color: #777;
+            color: #4a5568;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .strap-btn.active, .strap-btn:hover {
-            border-color: var(--accent-gold);
-            background: #1a1a1a;
+            border-color: var(--neon-cyan);
+            background: rgba(0, 240, 255, 0.05);
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
         }
 
+        /* Holographic Inputs */
         .engraving-input {
             display: flex;
             gap: 10px;
@@ -287,11 +370,14 @@
 
         .engraving-input input, .engraving-input select {
             padding: 15px;
-            background: var(--panel-bg);
-            border: 1px solid var(--border-color);
-            color: #fff;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            color: var(--neon-cyan);
             outline: none;
             font-size: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
         .engraving-input input {
@@ -304,50 +390,42 @@
         }
 
         .engraving-input input:focus, .engraving-input select:focus {
-            border-color: var(--accent-gold);
+            border-color: var(--neon-gold);
+            box-shadow: 0 0 10px rgba(255, 183, 0, 0.2);
         }
 
+        .engraving-input input::placeholder {
+            color: #4a5568;
+        }
+
+        /* Cyber Checkout */
         .price-action {
-            margin-top: 1rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 1rem;
         }
 
         .price {
-            font-size: 1.5rem;
-            font-family: 'Georgia', serif;
+            font-size: 1.8rem;
+            color: var(--neon-gold);
+            font-family: 'Courier New', Courier, monospace;
+            text-shadow: 0 0 10px rgba(255, 183, 0, 0.3);
         }
 
-        .checkout-btn {
-            padding: 15px 40px;
-            background-color: var(--accent-gold);
-            color: #000;
-            border: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .checkout-btn:hover {
-            background-color: #e5c158;
-        }
-
+        /* Footer */
         footer {
             text-align: center;
-            padding: 3rem;
-            background-color: var(--panel-bg);
-            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+            background-color: #010204;
+            border-top: 1px solid #111;
         }
 
         footer p {
-            color: #666;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            color: #4a5568;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         @media (max-width: 900px) {
@@ -355,49 +433,34 @@
                 flex-direction: column;
             }
             .preview-panel {
-                padding: 4rem 2rem;
+                height: 50vh;
                 border-right: none;
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid var(--glass-border);
             }
             .hero h1 {
-                font-size: 3rem;
-            }
-            .nav-links {
-                display: none;
+                font-size: 2.5rem;
             }
             .engraving-input {
                 flex-direction: column;
             }
         }
 
-        @keyframes fadeInOut {
-            0% { opacity: 0; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(1.05); }
-        }
-
-        @keyframes slideUpOut {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-100%); display: none; }
-        }
-
-        @keyframes fadeUpIn {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
+        @keyframes loadingBar {
+            100% { transform: scaleX(1); }
         }
     </style>
 </head>
 <body>
 
     <div id="preloader">
-        <div class="preloader-brand">Avesta</div>
+        <div class="preloader-brand">AVESTA_OS</div>
     </div>
 
-    <nav>
+    <nav class="gsap-nav">
         <div class="brand-name">Avesta</div>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#customizer">Studio</a>
+            <a href="#home">Initiate</a>
+            <a href="#customizer">Holo-Studio</a>
         </div>
     </nav>
 
@@ -407,93 +470,213 @@
             Your browser does not support the video tag.
         </video>
         <div class="video-overlay"></div>
+        <div class="grid-overlay"></div>
         
-        <div class="hero-content">
-            <h1>Crafted for You.</h1>
-            <p>Every detail, from the engraved dial to the tailored strap, designed by your own vision.</p>
-            <a href="#customizer" class="btn">Begin Design</a>
+        <div class="hero-content gsap-hero">
+            <h1>The <span>Future</span> of Time</h1>
+            <p>Next-generation bespoke timepieces. Engineered to your exact biometric specifications and aesthetic desires.</p>
+            <a href="#customizer" class="btn">Access Studio</a>
         </div>
     </section>
 
     <section id="customizer" class="studio-wrapper">
+        
         <div class="preview-panel">
-            <div class="placeholder-watch">
-                <div style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 10px;">Live Preview Area</div>
-                <p style="font-size: 0.85rem; color: #888;">Interactive watch model rendering space.</p>
+            <div class="hud-overlay">
+                SYS.RENDER.OBJ_WATCH<br>
+                STATUS: ONLINE<br>
+                POLYCOUNT: OPTIMAL
             </div>
+            <div id="three-canvas-container"></div>
         </div>
         
-        <div class="controls-panel">
-            <h2>Configure Your Avesta</h2>
-            <p class="subtitle">Select your materials and personal engraving.</p>
+        <div class="controls-panel gsap-controls">
+            <h2>System Config</h2>
+            <p class="subtitle">Calibrate your materials</p>
 
-            <div class="option-group">
-                <h3>1. Case Material</h3>
+            <div class="glass-box option-group">
+                <h3>[1] Chassis Material</h3>
                 <div class="swatch-container">
-                    <button class="swatch active" style="background: #e0e0e0;" title="Stainless Steel" onclick="selectOption(this, 'case')"></button>
-                    <button class="swatch" style="background: #2a2a2a;" title="Matte Titanium" onclick="selectOption(this, 'case')"></button>
-                    <button class="swatch" style="background: #b76e79;" title="Rose Gold" onclick="selectOption(this, 'case')"></button>
+                    <button class="swatch active" style="background: #e0e0e0;" title="Stainless Steel" onclick="selectOption(this)"></button>
+                    <button class="swatch" style="background: #111;" title="Obsidian Titanium" onclick="selectOption(this)"></button>
+                    <button class="swatch" style="background: #b76e79;" title="Cyber Rose Gold" onclick="selectOption(this)"></button>
                 </div>
             </div>
 
-            <div class="option-group">
-                <h3>2. Strap Selection</h3>
+            <div class="glass-box option-group">
+                <h3>[2] Binding Interface</h3>
                 <div class="strap-options">
                     <button class="strap-btn active" onclick="selectStrap(this)">
-                        <span>Classic Leather</span>
-                        <small>Hand-stitched texture</small>
+                        <span>Synth-Leather</span>
+                        <small>Carbon-weaved</small>
                     </button>
                     <button class="strap-btn" onclick="selectStrap(this)">
-                        <span>Metallic Mesh</span>
-                        <small>Interlocking steel</small>
+                        <span>Alloy Mesh</span>
+                        <small>Magnetic lock</small>
                     </button>
                 </div>
             </div>
 
-            <div class="option-group">
-                <h3>3. Personal Engraving</h3>
+            <div class="glass-box option-group" style="margin-bottom: 0;">
+                <h3>[3] Data Engraving</h3>
                 <div class="engraving-input">
-                    <input type="text" placeholder="Enter name or date" maxlength="15">
+                    <input type="text" placeholder="INPUT_DATA (Max 15)" maxlength="15">
                     <select>
-                        <option>Dial (Front)</option>
-                        <option>Back Cap</option>
+                        <option>Front_Dial</option>
+                        <option>Rear_Plate</option>
                     </select>
                 </div>
-            </div>
-
-            <div class="price-action">
-                <div class="price">₹4,999</div>
-                <button class="checkout-btn" onclick="alert('Design saved! Transitioning to checkout...')">Finalize</button>
+                
+                <div class="price-action">
+                    <div class="price">₹4,999</div>
+                    <button class="btn" onclick="alert('SYSTEM OVERRIDE: Design Sequence Initiated.')">Compile Data</button>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="brand-name" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Avesta</div>
-        <p>&copy; 2026 Avesta Bespoke Timepieces. All Rights Reserved.</p>
+        <p>AVESTA SYSTEMS &copy; 2026. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        setTimeout(() => {
-            const preloader = document.getElementById('preloader');
-            if(preloader) preloader.style.display = 'none';
-        }, 4000);
+        // --- 1. GSAP Preloader & Entry Animations ---
+        window.onload = () => {
+            const tl = gsap.timeline();
+            
+            // Fade out preloader
+            tl.to("#preloader", {
+                opacity: 0,
+                duration: 1,
+                delay: 2,
+                ease: "power2.inOut",
+                onComplete: () => document.getElementById('preloader').style.display = 'none'
+            })
+            // Animate Hero Content
+            .fromTo(".gsap-hero", {y: 50, opacity: 0}, {y: 0, opacity: 1, duration: 1, ease: "back.out(1.7)"}, "-=0.5")
+            // Animate Nav
+            .fromTo(".gsap-nav", {y: -50, opacity: 0}, {y: 0, opacity: 1, duration: 0.8}, "-=0.8");
+            
+            // Scroll trigger for Customizer
+            gsap.fromTo(".gsap-controls", 
+                { x: 50, opacity: 0 }, 
+                { x: 0, opacity: 1, duration: 1, ease: "power2.out",
+                  scrollTrigger: {
+                      trigger: ".controls-panel",
+                      start: "top 80%"
+                  }
+                }
+            );
+        };
 
+        // --- 2. UI Interaction Logic ---
         function selectOption(element) {
             let siblings = element.parentElement.children;
-            for (let sib of siblings) {
-                sib.classList.remove('active');
-            }
+            for (let sib of siblings) sib.classList.remove('active');
             element.classList.add('active');
+            // Change 3D material color based on swatch click
+            if(element.title === "Obsidian Titanium") ringMaterial.color.setHex(0x222222);
+            else if(element.title === "Cyber Rose Gold") ringMaterial.color.setHex(0xb76e79);
+            else ringMaterial.color.setHex(0x00f0ff);
         }
 
         function selectStrap(element) {
             let siblings = element.parentElement.children;
-            for (let sib of siblings) {
-                sib.classList.remove('active');
-            }
+            for (let sib of siblings) sib.classList.remove('active');
             element.classList.add('active');
         }
+
+        // --- 3. THREE.JS 3D ENGINE INTEGRATION ---
+        const container = document.getElementById('three-canvas-container');
+        
+        // Scene setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Holographic Watch Bezel (Torus)
+        const ringGeometry = new THREE.TorusGeometry(2, 0.15, 16, 100);
+        const ringMaterial = new THREE.MeshStandardMaterial({ 
+            color: 0x00f0ff, 
+            wireframe: true,
+            emissive: 0x00f0ff,
+            emissiveIntensity: 0.4
+        });
+        const holoRing = new THREE.Mesh(ringGeometry, ringMaterial);
+        scene.add(holoRing);
+
+        // Inner mechanisms (Floating geometric shapes)
+        const innerGeo = new THREE.OctahedronGeometry(1.2, 0);
+        const innerMat = new THREE.MeshBasicMaterial({ color: 0xffb700, wireframe: true, transparent: true, opacity: 0.5 });
+        const core = new THREE.Mesh(innerGeo, innerMat);
+        scene.add(core);
+
+        // Particle System (Energy Dust)
+        const particleGeo = new THREE.BufferGeometry();
+        const particleCount = 800;
+        const posArray = new Float32Array(particleCount * 3);
+        for(let i = 0; i < particleCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 15;
+        }
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particleMat = new THREE.PointsMaterial({ size: 0.03, color: 0x00f0ff, transparent: true, opacity: 0.8 });
+        const particles = new THREE.Points(particleGeo, particleMat);
+        scene.add(particles);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xffb700, 2, 50);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        camera.position.z = 6;
+
+        // Mouse interaction logic
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+        const windowHalfX = container.clientWidth / 2;
+        const windowHalfY = container.clientHeight / 2;
+
+        container.addEventListener('mousemove', (event) => {
+            const rect = container.getBoundingClientRect();
+            mouseX = (event.clientX - rect.left) - windowHalfX;
+            mouseY = (event.clientY - rect.top) - windowHalfY;
+        });
+
+        // Animation Loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Smoothly rotate based on mouse
+            targetX = mouseX * 0.001;
+            targetY = mouseY * 0.001;
+            
+            holoRing.rotation.y += 0.05 * (targetX - holoRing.rotation.y);
+            holoRing.rotation.x += 0.05 * (targetY - holoRing.rotation.x);
+            
+            // Constant base rotation
+            holoRing.rotation.z -= 0.005;
+            core.rotation.x += 0.01;
+            core.rotation.y += 0.01;
+            particles.rotation.y -= 0.001;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
     </script>
 </body>
 </html>
