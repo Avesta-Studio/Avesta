@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avesta | Bespoke Timepieces</title>
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --bg-color: #050505;
+            --text-color: #ffffff;
+            --accent-gold: #d4af37;
+            --panel-bg: #111111;
+            --border-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- PRELOADER --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: slideUpOut 1.5s cubic-bezier(0.77, 0, 0.175, 1) 2.5s forwards;
+        }
+
+        .preloader-brand {
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInOut 2s ease-in-out 0.5s forwards;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .brand-name {
+            font-family: 'Georgia', serif;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* --- HERO SECTION WITH VIDEO --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -2;
+            transform: scale(1.05);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(5,5,5,0.4), rgba(5,5,5,0.8));
+            z-index: -1;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUpIn 1.5s ease-out 3s forwards;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Georgia', serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #ddd;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            font-weight: 300;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 15px 45px;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            color: var(--text-color);
+            border: 1px solid rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        /* --- DESIGN STUDIO --- */
+        .studio-wrapper {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+        }
+
+        .preview-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem;
+        }
+
+        .placeholder-watch {
+            width: 320px;
+            height: 320px;
+            border: 1px dashed #555;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .controls-panel {
+            flex: 1;
+            padding: 5rem 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .controls-panel h2 {
+            font-family: 'Georgia', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #888;
+            margin-bottom: 3rem;
+        }
+
+        .option-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .option-group h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .swatch-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .swatch {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .swatch.active {
+            border-color: var(--accent-gold);
+            transform: scale(1.1);
+        }
+
+        .strap-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .strap-btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            color: #fff;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .strap-btn span {
+            display: block;
+            font-weight: normal;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .strap-btn small {
+            color: #777;
+        }
+
+        .strap-btn.active, .strap-btn:hover {
+            border-color: var(--accent-gold);
+            background: #1a1a1a;
+        }
+
+        .engraving-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .engraving-input input, .engraving-input select {
+            padding: 15px;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .engraving-input input {
+            flex: 2;
+        }
+        
+        .engraving-input select {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .engraving-input input:focus, .engraving-input select:focus {
+            border-color: var(--accent-gold);
+        }
+
+        .price-action {
+            margin-top: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .checkout-btn {
+            padding: 15px 40px;
+            background-color: var(--accent-gold);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #e5c158;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background-color: var(--panel-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            color: #666;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 900px) {
+            .studio-wrapper {
+                flex-direction: column;
+            }
+            .preview-panel {
+                padding: 4rem 2rem;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .engraving-input {
+                flex-direction: column;
+            }
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.05); }
+        }
+
+        @keyframes slideUpOut {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); display: none; }
+        }
+
+        @keyframes fadeUpIn {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="preloader-brand">Avesta</div>
+    </div>
+
+    <nav>
+        <div class="brand-name">Avesta</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#customizer">Studio</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <video class="hero-video" autoplay loop muted playsinline>
+            <source src="Background Video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>Crafted for You.</h1>
+            <p>Every detail, from the engraved dial to the tailored strap, designed by your own vision.</p>
+            <a href="#customizer" class="btn">Begin Design</a>
+        </div>
+    </section>
+
+    <section id="customizer" class="studio-wrapper">
+        <div class="preview-panel">
+            <div class="placeholder-watch">
+                <div style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 10px;">Live Preview Area</div>
+                <p style="font-size: 0.85rem; color: #888;">Interactive watch model rendering space.</p>
+            </div>
+        </div>
+        
+        <div class="controls-panel">
+            <h2>Configure Your Avesta</h2>
+            <p class="subtitle">Select your materials and personal engraving.</p>
+
+            <div class="option-group">
+                <h3>1. Case Material</h3>
+                <div class="swatch-container">
+                    <button class="swatch active" style="background: #e0e0e0;" title="Stainless Steel" onclick="selectOption(this, 'case')"></button>
+                    <button class="swatch" style="background: #2a2a2a;" title="Matte Titanium" onclick="selectOption(this, 'case')"></button>
+                    <button class="swatch" style="background: #b76e79;" title="Rose Gold" onclick="selectOption(this, 'case')"></button>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <h3>2. Strap Selection</h3>
+                <div class="strap-options">
+                    <button class="strap-btn active" onclick="selectStrap(this)">
+                        <span>Classic Leather</span>
+                        <small>Hand-stitched texture</small>
+                    </button>
+                    <button class="strap-btn" onclick="selectStrap(this)">
+                        <span>Metallic Mesh</span>
+                        <small>Interlocking steel</small>
+                    </button>
+                </div>
+            </div>
+
+            <div class="option-group">
+                <h3>3. Personal Engraving</h3>
+                <div class="engraving-input">
+                    <input type="text" placeholder="Enter name or date" maxlength="15">
+                    <select>
+                        <option>Dial (Front)</option>
+                        <option>Back Cap</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="price-action">
+                <div class="price">₹4,999</div>
+                <button class="checkout-btn" onclick="alert('Design saved! Transitioning to checkout...')">Finalize</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="brand-name" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Avesta</div>
+        <p>&copy; 2026 Avesta Bespoke Timepieces. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        setTimeout(() => {
+            const preloader = document.getElementById('preloader');
+            if(preloader) preloader.style.display = 'none';
+        }, 4000);
+
+        function selectOption(element) {
+            let siblings = element.parentElement.children;
+            for (let sib of siblings) {
+                sib.classList.remove('active');
+            }
+            element.classList.add('active');
+        }
+
+        function selectStrap(element) {
+            let siblings = element.parentElement.children;
+            for (let sib of siblings) {
+                sib.classList.remove('active');
+            }
+            element.classList.add('active');
+        }
+    </script>
+</body>
+</html>
