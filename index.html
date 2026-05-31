@@ -26,7 +26,7 @@
                     },
                     fontFamily: {
                         'sans': ['Inter', 'sans-serif'],
-                        'serif': ['Playfair Display', 'serif'],
+                        'serif': ['Cinzel', 'serif'],
                     },
                     animation: { 
                         'fade-in-up': 'fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards',
@@ -48,20 +48,20 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        /* Updated font to Cinzel for that authentic Avesta brand aesthetic */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
         
         body { font-family: 'Inter', sans-serif; background-color: #0A0A0A; color: white; margin: 0; overflow-x: hidden; }
-        h1, h2, h3, .serif-text { font-family: 'Playfair Display', serif; }
+        h1, h2, h3, .serif-text { font-family: 'Cinzel', serif; }
         
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0A0A0A; }
         ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
         
-        /* UPDATED VIDEO CONTAINER CSS FOR PERFECT MOBILE RATIO */
         .video-container { 
             position: relative; 
             height: 100vh; /* Fallback */
-            height: 100dvh; /* Dynamic height for mobile browsers */
+            height: 100dvh; /* Dynamic height for perfect mobile fit */
             width: 100vw; 
             overflow: hidden; 
             background-color: #000; 
@@ -72,12 +72,21 @@
             left: 0; 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Handles perfect ratio without stretching */
-            object-position: center; /* Keeps the focal point in the middle */
+            object-fit: cover; 
+            object-position: center; 
             opacity: 0.6; 
             z-index: 1; 
         }
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 0%, #0A0A0A 100%); z-index: 2; }
+        /* Updated Darker Overlay for Text Readability */
+        .video-overlay { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: radial-gradient(circle at center, rgba(10, 10, 10, 0.4) 0%, #0A0A0A 100%); 
+            z-index: 2; 
+        }
         
         .btn-gold { background: transparent; color: #C5A059; border: 1px solid #C5A059; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
         .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.2), transparent); transition: all 0.6s ease; }
@@ -109,7 +118,7 @@
             </nav>
             
             <div class="flex-shrink-0 cursor-pointer text-center group" onclick="window.scrollTo(0,0)">
-                <h1 class="text-2xl md:text-3xl font-bold tracking-widest text-white group-hover:text-gold transition-colors duration-500 serif-text">AVESTA</h1>
+                <h1 class="text-xl md:text-3xl font-bold tracking-widest text-white group-hover:text-gold transition-colors duration-500 serif-text">AVESTA</h1>
                 <p class="text-[7px] md:text-[9px] tracking-[0.4em] text-gold/80 mt-1 uppercase font-sans">Master of Horology</p>
             </div>
 
@@ -443,12 +452,12 @@
         const db = firebase.firestore();
         // ==========================================
 
-        // EXCLUSIVE LUXURY WATCH CATALOG
+        // EXCLUSIVE LUXURY WATCH CATALOG WITH WORKING 4TH IMAGE
         const products = [
             { id: 1, name: 'Chronograph Gold Edition', category: 'Watches', price: 24999, images: ['https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1000&auto=format&fit=crop'], description: 'A masterpiece of precision horology. Features a 42mm 18k gold-plated stainless steel case, sweeping second hand, and a highly precise automatic movement.\n\nWater Resistance: 50m\nGlass: Sapphire Crystal' },
             { id: 2, name: 'Obsidian Black Automatic', category: 'Watches', price: 29999, images: ['https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1000&auto=format&fit=crop'], description: 'Deep obsidian dial with exposed mechanical gears. Forged from premium matte black titanium, paired with a genuine handcrafted leather strap.\n\nWater Resistance: 100m\nMovement: Swiss Automatic' },
             { id: 3, name: 'Navy Sapphire Tourbillon', category: 'Watches', price: 45999, images: ['https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000&auto=format&fit=crop'], description: 'Nautical-inspired navy blue dial protected by a dome of scratch-resistant sapphire crystal. Features a breathtaking mastercrafted tourbillon movement.\n\nStrap: Grade 5 Titanium\nPower Reserve: 72 Hours' },
-            { id: 4, name: 'Classic Silver Heritage', category: 'Watches', price: 18999, images: ['https://images.unsplash.com/photo-1587836374828-cb4387df3c5c?q=80&w=1000&auto=format&fit=crop'], description: 'Timeless elegance. Slim profile surgical-grade stainless steel case, minimalist silver dial, complete with a genuine handcrafted alligator leather strap.\n\nMovement: Precision Quartz\nThickness: 7mm Ultra-Slim' }
+            { id: 4, name: 'Classic Silver Heritage', category: 'Watches', price: 18999, images: ['https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1000&auto=format&fit=crop'], description: 'Timeless elegance. Slim profile surgical-grade stainless steel case, minimalist silver dial, complete with a genuine handcrafted alligator leather strap.\n\nMovement: Precision Quartz\nThickness: 7mm Ultra-Slim' }
         ];
 
         let cart = [];
