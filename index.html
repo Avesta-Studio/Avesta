@@ -56,6 +56,12 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0A0A0A; }
         ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
+
+        /* 🔥 MOBILE SCROLL FIX (No More Jumping or Bulking) 🔥 */
+        .hero-min-h {
+            min-height: 100vh; /* Fallback for older browsers */
+            min-height: 100svh; /* Locks height ignoring address bar shifts */
+        }
         
         .btn-gold { background: transparent; color: #C5A059; border: 1px solid #C5A059; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
         .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.2), transparent); transition: all 0.6s ease; }
@@ -99,34 +105,36 @@
         </div>
     </header>
 
-    <section class="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden bg-black pt-20">
+    <section class="relative w-full hero-min-h flex flex-col overflow-hidden bg-black">
         <video class="absolute inset-0 w-full h-full object-cover object-center opacity-60 z-0" autoplay loop muted playsinline>
             <source src="Background Video.mp4" type="video/mp4">
         </video>
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(10,10,10,0.4)_0%,#0A0A0A_100%)] z-0"></div>
         
-        <div class="relative z-10 flex flex-col items-center justify-center flex-grow px-4 w-full max-w-4xl mx-auto py-10 text-center">
-            <p class="text-gold text-xs md:text-sm tracking-[0.3em] uppercase font-medium mb-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">Welcome to the new era</p>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight opacity-0 animate-fade-in-up serif-text" style="animation-delay: 0.5s;">
+        <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 w-full max-w-4xl mx-auto pt-24 pb-8 text-center">
+            <p class="text-gold text-[10px] md:text-sm tracking-[0.3em] uppercase font-medium mb-4 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">Welcome to the new era</p>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight opacity-0 animate-fade-in-up serif-text" style="animation-delay: 0.5s;">
                 Craft Your <br/> <span class="italic font-light">Timepiece</span>
             </h1>
-            <p class="text-gray-300 text-sm md:text-lg font-light max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-up" style="animation-delay: 0.8s;">
+            
+            <p class="text-gray-300 text-xs sm:text-sm md:text-lg font-light max-w-2xl mx-auto mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.8s;">
                 Experience bespoke horology. Custom-engineered luxury watches, personalized to your exact specifications and built to last generations.
             </p>
             
-            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 opacity-0 animate-fade-in-up w-full sm:w-auto" style="animation-delay: 1.1s;">
-                <a href="#" class="btn-gold px-8 py-4 uppercase tracking-[0.15em] font-semibold text-xs md:text-sm inline-block text-center w-full sm:w-auto">
+            <div class="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up w-full sm:w-auto" style="animation-delay: 1.1s;">
+                <a href="#" class="btn-gold px-8 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">
                     Design Your Watch
                 </a>
-                <a href="#collection" class="bg-white/5 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 px-8 py-4 uppercase tracking-[0.15em] font-semibold text-xs md:text-sm inline-block text-center w-full sm:w-auto">
+                <a href="#collection" class="bg-white/5 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 px-8 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">
                     Explore Collection
                 </a>
             </div>
         </div>
 
         <div class="relative z-10 flex flex-col items-center animate-pulse-slow pb-6 shrink-0 mt-auto">
-            <span class="text-gray-400 text-[9px] uppercase tracking-[0.2em] mb-2">Discover More</span>
-            <div class="w-[1px] h-10 md:h-12 bg-gradient-to-b from-gold to-transparent"></div>
+            <span class="text-gray-400 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-2">Discover More</span>
+            <div class="w-[1px] h-8 md:h-12 bg-gradient-to-b from-gold to-transparent"></div>
         </div>
     </section>
 
@@ -652,7 +660,7 @@
     <script> 
         AOS.init({ duration: 1000, once: true, easing: 'ease-out' }); 
         
-        // Navbar scroll effect (Fixed jump by swapping borders instead of removing them)
+        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if(window.scrollY > 50) {
