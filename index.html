@@ -69,49 +69,28 @@
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #C5A059; border: 4px solid #111; position: relative; z-index: 10; }
-        .timeline-line { position: absolute; left: 7px; top: 16px; bottom: -20px; width: 2px; background: rgba(197, 160, 89, 0.3); z-index: 5; }
+        .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #C5A059; border: 4px solid #111; position: relative; z-index: 10; transition: 0.3s;}
+        .timeline-line { position: absolute; left: 7px; top: 16px; bottom: -20px; width: 2px; background: rgba(197, 160, 89, 0.3); z-index: 5; transition: 0.3s;}
         .timeline-item:last-child .timeline-line { display: none; }
         .timeline-dot.pending { background: #333; border-color: #111; }
         .timeline-dot.pending + .timeline-line { background: #333; }
 
         /* 🔥 BULLETPROOF PRINT CSS 🔥 */
         @media print {
-            /* 1. Set physical paper properties and hide browser URLs/Dates */
             @page { margin: 10mm; size: A4 portrait; }
-            
-            /* 2. COMPLETELY hide the rest of the website to fix the 5-page blank issue */
             body > *:not(#ebill-modal) { display: none !important; }
-            
-            /* 3. Reset Body properties so paper is fresh */
             html, body { background: white !important; margin: 0 !important; padding: 0 !important; height: auto !important; width: 100% !important; overflow: visible !important; }
-            
-            /* 4. Convert Modal into standard document flow */
             #ebill-modal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; background: white !important; inset: auto !important; padding: 0 !important; }
-            
-            /* 5. Clean up borders and shadows for print */
             #ebill-content { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; max-height: none !important; border-radius: 0 !important; background: white !important;}
-            
-            /* 6. Hide buttons during print */
             .print-hide { display: none !important; }
-            
-            /* 7. Typography and Inverting Dark Mode Colors */
             #printable-invoice { background: white !important; padding: 10mm !important; overflow: visible !important; color: black !important; }
             #printable-invoice * { color: #222 !important; text-shadow: none !important; }
-            
-            /* Force gold to print properly */
             #printable-invoice .text-gold, #printable-invoice .text-gold * { color: #C5A059 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             #printable-invoice .text-gray-400 { color: #555 !important; }
             #printable-invoice .text-gray-500 { color: #777 !important; }
-            
-            /* Convert white borders to crisp grey lines for structure */
             #printable-invoice .border-white\/10 { border-color: #dddddd !important; border-style: solid !important; }
             #printable-invoice .border-gold\/20 { border-color: #C5A059 !important; border-style: solid !important; }
-            
-            /* Background Watermark Fix */
             .watermark-icon { color: #f0f0f0 !important; opacity: 1 !important; font-size: 18rem !important; }
-            
-            /* Ensure background graphics are printed */
             * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
     </style>
@@ -356,7 +335,6 @@
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
                     <i class="fa-regular fa-clock text-[18rem] opacity-5 watermark-icon"></i>
                 </div>
-                
                 <div class="relative z-10">
                     <div class="flex justify-between items-start border-b border-white/10 pb-6 mb-6">
                         <div>
@@ -369,24 +347,20 @@
                             <p id="ebill-date" class="text-gray-500 text-[10px] mt-1"></p>
                         </div>
                     </div>
-
                     <div class="mb-8">
                         <h4 class="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-2">Billed To:</h4>
                         <p id="ebill-name" class="text-white text-sm font-medium"></p>
                         <p id="ebill-email" class="text-gray-400 text-xs font-light mt-1"></p>
                         <p id="ebill-phone" class="text-gray-400 text-xs font-light mt-1"></p>
                     </div>
-
                     <div class="mb-8">
                         <div class="flex justify-between text-gray-500 text-[10px] uppercase tracking-widest border-b border-white/10 pb-2 mb-4 font-semibold">
                             <span class="w-3/5">Item Description</span>
                             <span class="w-1/5 text-center">Qty</span>
                             <span class="w-1/5 text-right">Price</span>
                         </div>
-                        <div id="ebill-items" class="space-y-4">
-                            </div>
+                        <div id="ebill-items" class="space-y-4"></div>
                     </div>
-
                     <div class="border-t border-white/10 pt-4 flex flex-col items-end gap-2 text-sm font-light">
                         <div class="flex justify-between w-full md:w-1/2 lg:w-1/3">
                             <span class="text-gray-400">Subtotal:</span>
@@ -401,7 +375,6 @@
                             <span id="ebill-total" class="text-gold text-lg font-medium"></span>
                         </div>
                     </div>
-                    
                     <div class="mt-12 text-center border-t border-gold/20 pt-6">
                         <p class="text-gold text-[10px] tracking-widest uppercase italic serif-text">Crafted with precision. Thank you for choosing Avesta.</p>
                     </div>
@@ -437,23 +410,23 @@
                 <div class="pl-2">
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot absolute left-0 top-1"></div><div class="timeline-line"></div>
-                        <h5 class="text-white font-medium text-xs tracking-wider uppercase mb-1">Order Confirmed</h5>
-                        <p class="text-gray-500 text-[10px] font-light">Payment verified. Design sent to workshop.</p>
+                        <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Order Confirmed</h5>
+                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Payment verified. Design sent to workshop.</p>
                     </div>
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot absolute left-0 top-1"></div><div class="timeline-line"></div>
-                        <h5 class="text-white font-medium text-xs tracking-wider uppercase mb-1">Our Workshop, Agra</h5>
-                        <p class="text-gray-500 text-[10px] font-light">Timepiece is undergoing custom assembly & testing.</p>
+                        <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Our Workshop, Agra</h5>
+                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Timepiece is undergoing custom assembly & testing.</p>
                     </div>
                     <div class="timeline-item relative pl-8 pb-8">
-                        <div class="timeline-dot pending absolute left-0 top-1"></div><div class="timeline-line"></div>
-                        <h5 class="text-gray-500 font-medium text-xs tracking-wider uppercase mb-1">Shipped</h5>
-                        <p class="text-gray-600 text-[10px] font-light">Awaiting courier pickup.</p>
+                        <div class="timeline-dot absolute left-0 top-1"></div><div class="timeline-line"></div>
+                        <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Shipped</h5>
+                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Courier partner has picked up your package.</p>
                     </div>
                     <div class="timeline-item relative pl-8">
-                        <div class="timeline-dot pending absolute left-0 top-1"></div>
-                        <h5 class="text-gray-500 font-medium text-xs tracking-wider uppercase mb-1">Out for Delivery</h5>
-                        <p class="text-gray-600 text-[10px] font-light">Arriving securely to your location.</p>
+                        <div class="timeline-dot absolute left-0 top-1"></div>
+                        <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Delivered</h5>
+                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Package has securely reached your location.</p>
                     </div>
                 </div>
                 <button onclick="resetTracking()" class="mt-8 w-full bg-transparent border border-white/20 text-gray-400 py-3 rounded-sm text-[10px] font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase">Track Another</button>
@@ -550,8 +523,15 @@
         function closePolicy() { document.getElementById('policy-modal').classList.replace('flex', 'hidden'); document.body.style.overflow = 'auto';}
 
         function openTracking() { document.getElementById('tracking-modal').classList.replace('hidden', 'flex'); document.body.style.overflow = 'hidden'; }
-        function closeTracking() { document.getElementById('tracking-modal').classList.replace('flex', 'hidden'); document.body.style.overflow = 'auto'; resetTracking(); }
         
+        // 🔥 MODIFIED: Dynamic Tracking Reset 🔥
+        function closeTracking() { 
+            document.getElementById('tracking-modal').classList.replace('flex', 'hidden'); 
+            document.body.style.overflow = 'auto'; 
+            resetTracking(); 
+        }
+        
+        // 🔥 NEW: DYNAMIC TRACKING LOGIC 🔥
         async function simulateTracking() {
             const input = document.getElementById('order-id-input').value.trim().toUpperCase();
             if(input.length < 4) return alert("Please enter a valid Order Reference");
@@ -563,21 +543,55 @@
             if(db) {
                 try {
                     const doc = await db.collection("orders").doc(input).get();
-                    if (doc.exists) { showTrackingResult(input); } 
-                    else { alert("Order reference not found in our secure database."); resetTracking(); }
+                    if (doc.exists) { 
+                        showTrackingResult(doc.data()); // Pass full data to extract status
+                    } 
+                    else { 
+                        alert("Order reference not found in our secure database."); 
+                        resetTracking(); 
+                    }
                 } catch (e) {
                     console.error("Database connection error", e);
-                    showTrackingResult(input);
+                    alert("Network connection error.");
+                    resetTracking();
                 }
             } else {
-                setTimeout(() => { showTrackingResult(input); }, 1500);
+                setTimeout(() => { resetTracking(); }, 1500);
             }
         }
 
-        function showTrackingResult(id) {
+        function showTrackingResult(data) {
             document.getElementById('tracking-loading').classList.remove('flex');
             document.getElementById('tracking-loading').classList.add('hidden');
-            document.getElementById('display-order-id').innerText = id;
+            document.getElementById('display-order-id').innerText = data.orderId;
+            
+            // Extract actual status from database
+            const status = data.status || "Order Confirmed";
+            
+            const dots = document.querySelectorAll('.timeline-dot');
+            const titles = document.querySelectorAll('.timeline-title');
+            const descs = document.querySelectorAll('.timeline-desc');
+            
+            // First, make all dots gray/pending
+            for(let i=0; i<4; i++) {
+                dots[i].classList.add('pending');
+                titles[i].classList.replace('text-white', 'text-gray-500');
+                descs[i].classList.replace('text-gray-500', 'text-gray-600');
+            }
+            
+            // Decide how many dots to light up based on status
+            let activeCount = 1; // Default: Order Confirmed
+            if(status === "In Workshop") activeCount = 2;
+            if(status === "Shipped") activeCount = 3;
+            if(status === "Delivered") activeCount = 4;
+            
+            // Light them up!
+            for(let i=0; i<activeCount; i++) {
+                dots[i].classList.remove('pending');
+                titles[i].classList.replace('text-gray-500', 'text-white');
+                descs[i].classList.replace('text-gray-600', 'text-gray-500');
+            }
+
             document.getElementById('tracking-result').classList.remove('hidden');
         }
 
@@ -743,7 +757,7 @@
                 db.collection("orders").doc(orderId).set({
                     orderId: orderId, customerName: custName, email: custEmail, phone: custPhone,
                     items: cart, discountApplied: currentDiscount, promoCode: activePromoCode,
-                    totalAmount: finalOrderTotal, status: "Order Confirmed",
+                    totalAmount: finalOrderTotal, status: "Order Confirmed", // Sets default status here
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 }).then(() => { showPaymentSuccess(orderDetails); }).catch((error) => {
                     console.error("DB Error: ", error); showPaymentSuccess(orderDetails); 
