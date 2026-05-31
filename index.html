@@ -75,20 +75,44 @@
         .timeline-dot.pending { background: #333; border-color: #111; }
         .timeline-dot.pending + .timeline-line { background: #333; }
 
-        /* 🔥 PRINT INVOICE CSS FIXES 🔥 */
+        /* 🔥 BULLETPROOF PRINT CSS 🔥 */
         @media print {
-            body * { visibility: hidden; }
-            #ebill-modal, #ebill-modal * { visibility: visible; }
-            #ebill-modal { position: absolute; left: 0; top: 0; width: 100%; height: auto; background: white !important; color: black !important; padding: 0; }
-            #ebill-content { border: none !important; box-shadow: none !important; width: 100%; max-width: 100%; }
+            /* 1. Set physical paper properties and hide browser URLs/Dates */
+            @page { margin: 10mm; size: A4 portrait; }
+            
+            /* 2. COMPLETELY hide the rest of the website to fix the 5-page blank issue */
+            body > *:not(#ebill-modal) { display: none !important; }
+            
+            /* 3. Reset Body properties so paper is fresh */
+            html, body { background: white !important; margin: 0 !important; padding: 0 !important; height: auto !important; width: 100% !important; overflow: visible !important; }
+            
+            /* 4. Convert Modal into standard document flow */
+            #ebill-modal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; background: white !important; inset: auto !important; padding: 0 !important; }
+            
+            /* 5. Clean up borders and shadows for print */
+            #ebill-content { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; max-height: none !important; border-radius: 0 !important; background: white !important;}
+            
+            /* 6. Hide buttons during print */
             .print-hide { display: none !important; }
-            /* Convert dark themes to printer friendly white/black */
-            #printable-invoice { background: white !important; color: black !important; padding: 20px; }
-            #printable-invoice .text-white { color: black !important; }
-            #printable-invoice .text-gray-400 { color: #333 !important; }
-            #printable-invoice .text-gray-500 { color: #555 !important; }
-            #printable-invoice .border-white\/10 { border-color: #ddd !important; }
-            #printable-invoice .border-gold\/20 { border-color: #C5A059 !important; }
+            
+            /* 7. Typography and Inverting Dark Mode Colors */
+            #printable-invoice { background: white !important; padding: 10mm !important; overflow: visible !important; color: black !important; }
+            #printable-invoice * { color: #222 !important; text-shadow: none !important; }
+            
+            /* Force gold to print properly */
+            #printable-invoice .text-gold, #printable-invoice .text-gold * { color: #C5A059 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            #printable-invoice .text-gray-400 { color: #555 !important; }
+            #printable-invoice .text-gray-500 { color: #777 !important; }
+            
+            /* Convert white borders to crisp grey lines for structure */
+            #printable-invoice .border-white\/10 { border-color: #dddddd !important; border-style: solid !important; }
+            #printable-invoice .border-gold\/20 { border-color: #C5A059 !important; border-style: solid !important; }
+            
+            /* Background Watermark Fix */
+            .watermark-icon { color: #f0f0f0 !important; opacity: 1 !important; font-size: 18rem !important; }
+            
+            /* Ensure background graphics are printed */
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
     </style>
 </head>
@@ -96,7 +120,6 @@
 
     <header class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-black/40 backdrop-blur-md" id="navbar">
         <div class="max-w-7xl mx-auto h-20 px-4 md:px-8 flex items-center justify-between">
-            
             <div class="w-1/3 flex justify-start">
                 <nav class="hidden md:flex items-center gap-6 text-sm font-medium tracking-[0.2em] uppercase text-gray-400">
                     <a href="#custom" class="hover:text-gold transition-colors duration-300">Custom</a>
@@ -104,14 +127,12 @@
                 </nav>
                 <button onclick="openTracking()" class="md:hidden text-gray-400 hover:text-gold text-[10px] uppercase tracking-widest font-medium">Track</button>
             </div>
-            
             <div class="w-1/3 flex justify-center cursor-pointer group" onclick="window.scrollTo(0,0)">
                 <div class="text-center">
                     <h1 class="text-xl md:text-3xl font-bold tracking-widest text-white group-hover:text-gold transition-colors duration-500 serif-text">AVESTA</h1>
                     <p class="text-[7px] md:text-[9px] tracking-[0.3em] text-gold/80 mt-1 uppercase font-sans whitespace-nowrap">Premium Timepieces</p>
                 </div>
             </div>
-
             <div class="w-1/3 flex justify-end items-center gap-4 md:gap-6">
                 <a href="#" onclick="openContact()" class="text-white hover:text-gold transition-colors text-lg p-1"><i class="fa-regular fa-envelope"></i></a>
                 <button onclick="toggleCart()" class="text-white hover:text-gold transition-colors text-lg relative p-1">
@@ -119,7 +140,6 @@
                     <span id="cart-count" class="absolute -top-1 -right-1 bg-gold text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-sans">0</span>
                 </button>
             </div>
-            
         </div>
     </header>
 
@@ -128,28 +148,19 @@
             <source src="Background Video.mp4" type="video/mp4">
         </video>
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(10,10,10,0.4)_0%,#0A0A0A_100%)] z-0"></div>
-        
         <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 w-full max-w-4xl mx-auto pt-24 pb-8 text-center">
             <p class="text-gold text-[10px] md:text-sm tracking-[0.3em] uppercase font-medium mb-4 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">Welcome to the new era</p>
-            
             <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 leading-tight opacity-0 animate-fade-in-up serif-text" style="animation-delay: 0.5s;">
                 Craft Your <br/> <span class="italic font-light">Timepiece</span>
             </h1>
-            
             <p class="text-gray-300 text-xs sm:text-sm md:text-lg font-light max-w-2xl mx-auto mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.8s;">
                 Experience premium watchmaking. Custom-engineered luxury timepieces, personalized to your exact specifications and built to last generations.
             </p>
-            
             <div class="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up w-full sm:w-auto" style="animation-delay: 1.1s;">
-                <a href="#custom" class="btn-gold px-8 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">
-                    Design Your Timepiece
-                </a>
-                <a href="#collection" class="bg-white/5 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 px-8 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">
-                    Explore Collection
-                </a>
+                <a href="#custom" class="btn-gold px-8 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Design Your Timepiece</a>
+                <a href="#collection" class="bg-white/5 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 px-8 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Explore Collection</a>
             </div>
         </div>
-
         <div class="relative z-10 flex flex-col items-center animate-pulse-slow pb-6 shrink-0 mt-auto">
             <span class="text-gray-400 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-2">Discover More</span>
             <div class="w-[1px] h-8 md:h-12 bg-gradient-to-b from-gold to-transparent"></div>
@@ -165,7 +176,6 @@
                     <p class="absolute bottom-10 text-gray-500 text-[10px] md:text-xs tracking-widest uppercase group-hover:text-white transition-colors duration-300 font-sans">Interactive 3D Studio Coming Soon</p>
                 </div>
             </div>
-            
             <div class="w-full md:w-1/2" data-aos="fade-left">
                 <h3 class="text-gold text-xs tracking-[0.2em] uppercase mb-4 font-sans">The Custom Experience</h3>
                 <h2 class="text-3xl md:text-5xl text-white mb-6 leading-snug serif-text">Designed by You. <br/><span class="italic text-gray-400">Perfected by Us.</span></h2>
@@ -191,9 +201,7 @@
                 <h2 class="text-3xl md:text-5xl text-white serif-text">Our Collection</h2>
                 <div class="w-12 h-1 bg-gold mx-auto mt-6"></div>
             </div>
-            
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 font-sans">
-                </div>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 font-sans"></div>
         </div>
     </section>
 
@@ -288,7 +296,6 @@
                 <button onclick="applyPromo()" class="bg-gold/10 text-gold border border-gold/30 px-6 py-3 rounded-sm font-bold hover:bg-gold hover:text-black transition-colors text-xs tracking-widest uppercase">Apply</button>
             </div>
             <p id="promo-message" class="text-[10px] mb-4 hidden tracking-wide"></p>
-            
             <div class="space-y-2 mb-6 text-sm font-light">
                 <div class="flex justify-between items-center text-gray-400">
                     <span>Subtotal</span><span id="cart-subtotal" class="text-white">₹0</span>
@@ -346,8 +353,8 @@
             </div>
             
             <div id="printable-invoice" class="p-8 overflow-y-auto bg-[#0a0a0a] flex-1 relative">
-                <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-                    <i class="fa-regular fa-clock text-[20rem]"></i>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                    <i class="fa-regular fa-clock text-[18rem] opacity-5 watermark-icon"></i>
                 </div>
                 
                 <div class="relative z-10">
@@ -712,7 +719,6 @@
             const custEmail = document.getElementById('cust-email').value;
             const custPhone = document.getElementById('cust-phone').value;
 
-            // Prepare Order Details for E-Bill
             const orderDetails = {
                 orderId: orderId,
                 name: custName,
@@ -745,7 +751,6 @@
             } else { setTimeout(() => { showPaymentSuccess(orderDetails); }, 2000); }
         }
 
-        // 🔥 NEW JS FOR E-BILL 🔥
         function showPaymentSuccess(details) {
             document.getElementById('payment-status').innerHTML = '<p class="text-gold font-medium text-xs tracking-widest uppercase"><i class="fa-solid fa-check text-green-400 mr-2"></i> Authorized<br><span class="text-[10px] text-gray-400 mt-2 block">Ref: ' + details.orderId + '</span></p>'; 
             
@@ -765,9 +770,9 @@
             const itemsContainer = document.getElementById('ebill-items');
             itemsContainer.innerHTML = details.items.map(item => `
                 <div class="flex justify-between text-sm font-light">
-                    <span class="w-3/5 text-gray-300 truncate">${item.name}</span>
-                    <span class="w-1/5 text-center text-gray-400">x${item.quantity}</span>
-                    <span class="w-1/5 text-right text-white">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
+                    <span class="w-3/5 text-gray-800 truncate">${item.name}</span>
+                    <span class="w-1/5 text-center text-gray-600">x${item.quantity}</span>
+                    <span class="w-1/5 text-right font-medium">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
                 </div>
             `).join('');
 
@@ -782,11 +787,9 @@
 
             document.getElementById('ebill-total').innerText = '₹' + details.total.toLocaleString('en-IN');
 
-            // Show E-Bill Modal
             document.getElementById('ebill-modal').classList.replace('hidden', 'flex');
             document.body.style.overflow = 'hidden';
 
-            // Clear Cart after successful order
             cart = []; currentDiscount = 0; activePromoCode = ''; document.getElementById('promo-input').value = '';
             document.getElementById('promo-message').classList.add('hidden'); updateCartUI(); 
         }
