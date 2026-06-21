@@ -37,7 +37,6 @@
         ::-webkit-scrollbar-track { background: #0A0A0A; }
         ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
 
-        /* 🔥 Reverted back to original 100% full screen fitting 🔥 */
         .hero-min-h { height: 100vh; height: 100svh; min-height: -webkit-fill-available; }
         
         .btn-gold { background: transparent; color: #C5A059; border: 1px solid #C5A059; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
@@ -105,9 +104,9 @@
         </div>
     </header>
 
-    <section class="relative w-full hero-min-h flex flex-col overflow-hidden bg-black">
+    <section class="relative w-full hero-min-h flex flex-col overflow-hidden bg-black border-b border-white/5">
         
-        <video class="absolute inset-0 w-full h-full object-cover object-center opacity-60 z-0" autoplay loop muted playsinline>
+        <video class="absolute inset-0 w-full h-full object-cover object-center opacity-70 z-0" autoplay loop muted playsinline>
             <source src="Background Video.mp4" type="video/mp4">
         </video>
         
@@ -219,7 +218,7 @@
             </div>
             <div class="border-t border-white/10 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
                 <p class="text-gray-500 text-center md:text-left tracking-widest uppercase">© 2026 AVESTA Premium Timepieces. All rights reserved.</p>
-                <div class="flex items-center gap-3"><span class="text-gray-500 uppercase tracking-widest">Secure UPI Checkout</span><i class="fa-solid fa-shield-halved text-gold"></i></div>
+                <div class="flex items-center gap-3"><span class="text-gray-500 uppercase tracking-widest">Secure Checkout</span><i class="fa-solid fa-shield-halved text-gold"></i></div>
             </div>
         </div>
     </footer>
@@ -246,7 +245,7 @@
                     <p id="detail-desc" class="text-gray-300 font-light leading-relaxed text-sm whitespace-pre-line"></p>
                 </div>
                 <div class="flex flex-col gap-3 mt-auto">
-                    <button id="detail-add-btn" class="w-full btn-gold bg-gold/10 py-4 rounded-sm font-semibold tracking-widest uppercase text-sm">Add to Cart</button>
+                    <button type="button" id="detail-add-btn" class="w-full btn-gold bg-gold/10 py-4 rounded-sm font-semibold tracking-widest uppercase text-sm">Add to Cart</button>
                     <button type="button" onclick="closeProductDetail()" class="w-full bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-white transition-all text-sm tracking-widest uppercase">Back</button>
                 </div>
             </div>
@@ -522,7 +521,6 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // 🔥 FAMAPP UPI ID 🔥
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
         const products = [
@@ -656,6 +654,14 @@
             document.getElementById('detail-title').innerText = product.name;
             document.getElementById('detail-price').innerText = '₹' + product.price.toLocaleString('en-IN');
             document.getElementById('detail-desc').innerText = product.description;
+            
+            // 🔥 THE FIX: Yeh line code short karte waqt delete ho gayi thi. Ab perfectly wapas laga di gayi hai. 🔥
+            document.getElementById('detail-add-btn').onclick = function() { 
+                addToCart(product.id); 
+                closeProductDetail(); 
+                toggleCart(); 
+            };
+            
             openModalSafely('product-detail-modal');
         }
 
