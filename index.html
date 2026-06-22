@@ -14,6 +14,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -54,24 +58,6 @@
         .timeline-item:last-child .timeline-line { display: none; }
         .timeline-dot.pending { background: #333; border-color: #111; }
         .timeline-dot.pending + .timeline-line { background: #333; }
-
-        @media print {
-            @page { margin: 10mm; size: A4 portrait; }
-            body > *:not(#ebill-modal) { display: none !important; }
-            html, body { background: white !important; margin: 0 !important; padding: 0 !important; height: auto !important; width: 100% !important; overflow: visible !important; }
-            #ebill-modal { position: relative !important; display: block !important; width: 100% !important; height: auto !important; background: white !important; inset: auto !important; padding: 0 !important; }
-            #ebill-content { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; max-height: none !important; border-radius: 0 !important; background: white !important;}
-            .print-hide { display: none !important; }
-            #printable-invoice { background: white !important; padding: 10mm !important; overflow: visible !important; color: black !important; }
-            #printable-invoice * { color: #222 !important; text-shadow: none !important; }
-            #printable-invoice .text-gold, #printable-invoice .text-gold * { color: #C5A059 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            #printable-invoice .text-gray-400 { color: #555 !important; }
-            #printable-invoice .text-gray-500 { color: #777 !important; }
-            #printable-invoice .border-white\/10 { border-color: #dddddd !important; border-style: solid !important; }
-            #printable-invoice .border-gold\/20 { border-color: #C5A059 !important; border-style: solid !important; }
-            .watermark-icon { color: #f0f0f0 !important; opacity: 1 !important; font-size: 18rem !important; }
-            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-        }
     </style>
 </head>
 <body class="antialiased selection:bg-gold selection:text-black flex flex-col min-h-screen">
@@ -123,7 +109,6 @@
                 <a href="#collection" class="bg-white/5 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 px-6 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Explore Collection</a>
             </div>
         </div>
-
         <div class="relative z-10 flex flex-col items-center animate-pulse-slow pb-4 md:pb-6 shrink-0 mt-auto">
             <span class="text-gray-400 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-2 drop-shadow-md">Discover More</span>
             <div class="w-[1px] h-8 md:h-12 bg-gradient-to-b from-gold to-transparent shadow-lg"></div>
@@ -142,17 +127,13 @@
             <div class="w-full md:w-1/2" data-aos="fade-left">
                 <h3 class="text-gold text-xs tracking-[0.2em] uppercase mb-4 font-sans">The Custom Experience</h3>
                 <h2 class="text-3xl md:text-5xl text-white mb-6 leading-snug serif-text">Designed by You. <br/><span class="italic text-gray-400">Perfected by Us.</span></h2>
-                <p class="text-gray-400 font-light leading-relaxed mb-8 text-sm md:text-base">
-                    Step into our digital studio. Choose the weight of your case, select the precise color of your dial, pick between premium leather or solid gold straps, and engrave your name on the case back.
-                </p>
+                <p class="text-gray-400 font-light leading-relaxed mb-8 text-sm md:text-base">Step into our digital studio. Choose the weight of your case, select the precise color of your dial, pick between premium leather or solid gold straps, and engrave your name on the case back.</p>
                 <ul class="space-y-4 mb-10 text-xs md:text-sm font-light text-gray-300 font-sans">
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> Personal Engraving</li>
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> Case, Dial & Strap Customization</li>
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> 360° Real-time 3D View</li>
                 </ul>
-                <button type="button" onclick="alert('Our 3D Customization Studio is launching soon! Stay tuned.');" class="inline-flex items-center gap-2 text-gold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-gold pb-1 font-sans">
-                    Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i>
-                </button>
+                <button type="button" onclick="alert('Our 3D Customization Studio is launching soon! Stay tuned.');" class="inline-flex items-center gap-2 text-gold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-gold pb-1 font-sans">Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i></button>
             </div>
         </div>
     </section>
@@ -173,9 +154,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="col-span-1 md:col-span-2 lg:col-span-1">
                     <h1 class="text-2xl font-bold tracking-widest text-white mb-4 serif-text">AVESTA</h1>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6 font-light">
-                        Redefining watchmaking with custom luxury and top-quality craftsmanship. Built for the elite.
-                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 font-light">Redefining watchmaking with custom luxury and top-quality craftsmanship. Built for the elite.</p>
                 </div>
                 <div>
                     <h4 class="text-gold font-bold uppercase tracking-widest text-xs mb-6">Explore</h4>
@@ -320,7 +299,7 @@
                         </div>
 
                         <div class="text-[10px] text-gray-300 space-y-2 mb-4 font-light leading-relaxed">
-                            <p><strong class="text-gold">STEP 1:</strong> Scan the QR code or use the UPI ID above in any app (FamPay, GPay, PhonePe).</p>
+                            <p><strong class="text-gold">STEP 1:</strong> Scan the QR code or use the UPI ID above in any app.</p>
                             <p><strong class="text-gold">STEP 2:</strong> Transfer the exact amount of <span id="upi-step-amount" class="font-bold text-white"></span>.</p>
                             <p><strong class="text-gold">STEP 3:</strong> After successful payment, copy the 12-digit UTR/Reference No. and paste it below to confirm your order.</p>
                         </div>
@@ -329,9 +308,7 @@
                     </div>
 
                     <div id="cod-view" class="hidden text-center py-4">
-                        <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fa-solid fa-hand-holding-dollar text-xl text-gold"></i>
-                        </div>
+                        <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-hand-holding-dollar text-xl text-gold"></i></div>
                         <p class="text-xs text-gray-300 tracking-wide leading-relaxed font-light">Pay directly via Cash or UPI when your premium timepiece arrives at your doorstep.</p>
                     </div>
                 </div>
@@ -346,7 +323,7 @@
     </div>
 
     <div id="ebill-modal" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-xl transition-opacity font-sans">
-        <div id="ebill-content" class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)] flex flex-col max-h-[90vh]">
+        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)] flex flex-col max-h-[90vh]">
             <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black print-hide">
                 <h4 class="text-gold font-bold text-sm tracking-[0.2em] uppercase">Order Submitted</h4>
                 <button onclick="closeEbill()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
@@ -354,7 +331,7 @@
             
             <div id="printable-invoice" class="p-8 overflow-y-auto bg-[#0a0a0a] flex-1 relative">
                 <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                    <i class="fa-regular fa-clock text-[18rem] opacity-5 watermark-icon"></i>
+                    <i class="fa-regular fa-clock text-[18rem] opacity-5 text-gray-600"></i>
                 </div>
                 <div class="relative z-10">
                     <div class="flex justify-between items-start border-b border-white/10 pb-6 mb-6">
@@ -406,7 +383,7 @@
             </div>
             
             <div class="p-6 bg-black border-t border-gold/10 flex gap-4 print-hide">
-                <button type="button" onclick="window.print()" class="flex-1 btn-gold bg-gold/10 py-3 rounded-sm font-semibold tracking-widest uppercase text-xs flex items-center justify-center gap-2"><i class="fa-solid fa-print"></i> Save / Print PDF</button>
+                <button type="button" onclick="downloadPDF()" class="flex-1 btn-gold bg-gold/10 py-3 rounded-sm font-semibold tracking-widest uppercase text-xs flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i> Save PDF Bill</button>
                 <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-gold transition-all text-xs tracking-widest uppercase">Continue Shopping</button>
             </div>
         </div>
@@ -519,12 +496,15 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // 🔥 FAMAPP UPI ID 🔥
+        // 🔥 EMAILJS CONFIGURATION (All Keys Integrated) 🔥
+        (function() {
+            emailjs.init("_fpanrTUXPG_S9y47"); 
+        })();
+
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
-        // 🔥 ADDED THE ₹1 TRIAL PRODUCT 🔥
         const products = [
-            { id: 0, name: 'For Trial (Test Product)', category: 'Testing', price: 1, images: ['https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000&auto=format&fit=crop'], description: 'This is a ₹1 dummy product to test the complete checkout, UPI, COD, and tracking flow. Feel free to buy it to check how the system works without spending actual money.\n\nType: System Test\nPrice: ₹1' },
+            { id: 0, name: 'For Trial (Test Product)', category: 'Testing', price: 1, images: ['https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000&auto=format&fit=crop'], description: 'This is a ₹1 dummy product to test the complete checkout, UPI, COD, and tracking flow.\n\nType: System Test\nPrice: ₹1' },
             { id: 1, name: 'Chronograph Gold Edition', category: 'Timepieces', price: 24999, images: ['https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=1000&auto=format&fit=crop'], description: 'A masterpiece of precision watchmaking. Features a 42mm 18k gold-plated stainless steel case, sweeping second hand, and a highly precise automatic movement.\n\nWater Resistance: 50m\nGlass: Sapphire Crystal' },
             { id: 2, name: 'Obsidian Black Automatic', category: 'Timepieces', price: 29999, images: ['https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1000&auto=format&fit=crop'], description: 'Deep obsidian dial with exposed mechanical gears. Forged from premium matte black titanium, paired with a genuine handcrafted leather strap.\n\nWater Resistance: 100m\nMovement: Swiss Automatic' },
             { id: 3, name: 'Navy Sapphire Tourbillon', category: 'Timepieces', price: 45999, images: ['https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?q=80&w=1000&auto=format&fit=crop'], description: 'Nautical-inspired navy blue dial protected by a dome of scratch-resistant sapphire crystal. Features a breathtaking tourbillon movement.\n\nStrap: Grade 5 Titanium\nPower Reserve: 72 Hours' },
@@ -559,18 +539,31 @@
             document.body.style.overflow = 'auto';
         }
 
-        function openPolicy(type) { 
-            document.getElementById('policy-title').innerText = policiesData[type].title; 
-            document.getElementById('policy-content').innerHTML = policiesData[type].content; 
-            openModalSafely('policy-modal'); 
-        }
+        function openPolicy(type) { document.getElementById('policy-title').innerText = policiesData[type].title; document.getElementById('policy-content').innerHTML = policiesData[type].content; openModalSafely('policy-modal'); }
         function closePolicy() { closeModalSafely('policy-modal'); }
-        
         function openTracking() { openModalSafely('tracking-modal'); }
         function closeTracking() { closeModalSafely('tracking-modal'); resetTracking(); }
-        
         function openContact() { openModalSafely('contact-modal'); }
         function closeContact() { closeModalSafely('contact-modal'); }
+
+        function downloadPDF() {
+            const element = document.getElementById('printable-invoice');
+            const orderId = document.getElementById('ebill-order-id').innerText.replace('#', '');
+            element.style.backgroundColor = '#0A0A0A';
+            element.style.padding = '20px';
+            
+            const opt = {
+                margin:       0.5,
+                filename:     `Avesta_Receipt_${orderId}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0A0A0A' },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.padding = '32px'; 
+            });
+        }
 
         async function simulateTracking() {
             const input = document.getElementById('order-id-input').value.trim().toUpperCase();
@@ -656,7 +649,6 @@
             document.getElementById('detail-price').innerText = '₹' + product.price.toLocaleString('en-IN');
             document.getElementById('detail-desc').innerText = product.description;
             
-            // 🔥 FIXED: ADD TO CART LINKED PROPERLY 🔥
             document.getElementById('detail-add-btn').onclick = function() { 
                 addToCart(product.id); 
                 closeProductDetail(); 
@@ -741,7 +733,6 @@
                 btnUpi.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 btnCod.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 
-                // Show UPI generation button, hide final confirm button initially
                 generateUpiBtn.classList.remove('hidden');
                 confirmBtn.classList.add('hidden');
                 paymentDynamicContent.classList.add('hidden');
@@ -753,7 +744,6 @@
                 btnCod.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 btnUpi.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 
-                // Hide UPI button, show dynamic content (COD view) and final confirm button
                 generateUpiBtn.classList.add('hidden');
                 paymentDynamicContent.classList.remove('hidden');
                 confirmBtn.classList.remove('hidden');
@@ -764,7 +754,6 @@
             }
         }
 
-        // 🔥 ADDED STRICT VALIDATION FOR UPI CLICK 🔥
         function generateUPIInterface() {
             const name = document.getElementById('cust-name').value.trim();
             const email = document.getElementById('cust-email').value.trim();
@@ -781,7 +770,6 @@
             document.getElementById('upi-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}&margin=10`;
             document.getElementById('upi-intent-link').href = upiString;
 
-            // Transition UI
             document.getElementById('checkout-fields').classList.add('hidden');
             document.getElementById('generate-upi-btn').classList.add('hidden');
             document.getElementById('payment-dynamic-content').classList.remove('hidden');
@@ -792,8 +780,8 @@
             if(cart.length === 0) return; 
             toggleCart(); 
             
-            // Reset to defaults
             document.getElementById('checkout-fields').classList.remove('hidden');
+            document.getElementById('generate-upi-btn').classList.remove('hidden');
             document.getElementById('payment-dynamic-content').classList.add('hidden');
             document.getElementById('pay-button').classList.add('hidden');
             
@@ -807,6 +795,29 @@
             closeModalSafely('checkout-modal');
             document.getElementById('payment-form').reset(); 
             document.getElementById('payment-status').classList.add('hidden'); 
+        }
+
+        function sendEmailReceipt(details) {
+            // 🔥 2. EMAILSJS KEYS ARE SET HERE 🔥
+            const serviceID = 'service_n368ztv';
+            const templateID = 'template_vdfgsap'; 
+            
+            const templateParams = {
+                to_name: details.name,
+                to_email: details.email,
+                order_id: details.orderId,
+                total_amount: '₹' + details.total.toLocaleString('en-IN'),
+                payment_method: details.method,
+                delivery_address: details.address,
+                tracking_link: "https://avesta-studio.github.io/Avesta/" 
+            };
+
+            emailjs.send(serviceID, templateID, templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS! Email sent.', response.status, response.text);
+                }, function(error) {
+                    console.log('FAILED to send email...', error);
+                });
         }
 
         function processPayment(e) { 
@@ -832,7 +843,7 @@
             const custName = document.getElementById('cust-name').value;
             const custEmail = document.getElementById('cust-email').value;
             const custPhone = document.getElementById('cust-phone').value;
-            const custAddress = document.getElementById('cust-address').value; // Capture address
+            const custAddress = document.getElementById('cust-address').value;
 
             const orderDetails = {
                 orderId: orderId, name: custName, email: custEmail, phone: custPhone, address: custAddress,
@@ -856,10 +867,18 @@
                     items: cart, discountApplied: currentDiscount, promoCode: activePromoCode,
                     totalAmount: finalOrderTotal, paymentMethod: paymentMethod.toUpperCase(), utr: finalUtr,
                     status: defaultStatus, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                }).then(() => { showPaymentSuccess(orderDetails); }).catch((error) => {
-                    console.error("DB Error: ", error); showPaymentSuccess(orderDetails); 
+                }).then(() => { 
+                    showPaymentSuccess(orderDetails); 
+                    sendEmailReceipt(orderDetails);
+                }).catch((error) => {
+                    console.error("DB Error: ", error); 
+                    showPaymentSuccess(orderDetails); 
                 });
-            } else { setTimeout(() => { showPaymentSuccess(orderDetails); }, 2000); }
+            } else { 
+                setTimeout(() => { 
+                    showPaymentSuccess(orderDetails); 
+                }, 2000); 
+            }
         }
 
         function showPaymentSuccess(details) {
@@ -880,7 +899,7 @@
             document.getElementById('ebill-name').innerText = details.name;
             document.getElementById('ebill-email').innerText = details.email;
             document.getElementById('ebill-phone').innerText = details.phone;
-            document.getElementById('ebill-address').innerText = details.address; // Display address
+            document.getElementById('ebill-address').innerText = details.address; 
             
             if(details.method === 'UPI') {
                 document.getElementById('ebill-status-text').innerText = "Verification Pending";
