@@ -153,6 +153,9 @@
                             ? `<span class="bg-blue-500/10 text-blue-400 border border-blue-500/30 px-2 py-1 rounded-sm"><i class="fa-solid fa-truck-fast mr-1"></i> COD</span>`
                             : `<span class="bg-purple-500/10 text-purple-400 border border-purple-500/30 px-2 py-1 rounded-sm"><i class="fa-solid fa-bolt mr-1"></i> UPI (${data.utr || 'N/A'})</span>`;
                         
+                        // 🔥 ADDED ADDRESS TO ADMIN PANEL 🔥
+                        let customerAddress = data.address ? data.address : "Address not provided";
+
                         html += `
                         <div class="glass-panel p-4 md:p-5 rounded-md relative overflow-hidden group">
                             <div class="flex justify-between items-start mb-3 border-b border-white/10 pb-3">
@@ -169,6 +172,7 @@
                             <div class="pt-1 pb-2">
                                 <p class="text-sm font-medium text-white"><i class="fa-regular fa-user text-gold w-5 text-center"></i> ${data.customerName}</p>
                                 <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-phone text-gold w-5 text-center"></i> ${data.phone}</p>
+                                <p class="text-xs text-gray-400 mt-1 leading-relaxed"><i class="fa-solid fa-location-dot text-gold w-5 text-center"></i> ${customerAddress}</p>
                                 <div class="text-[9px] mt-2 tracking-widest uppercase font-bold">${methodBadge}</div>
                             </div>
 
