@@ -19,10 +19,10 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script type="text/javascript">
-        // EmailJS Init
+        // 🔥 1. APNI EMAILJS PUBLIC KEY YAHA DAALEIN 🔥
         (function() {
             emailjs.init({
-              publicKey: "_fpanrTUXPG_S9y47",
+              publicKey: "_fpanrTUXPG_S9y47", 
             });
         })();
     </script>
@@ -349,7 +349,7 @@
                             <p style="color: #C5A059; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; margin:0;">E-Invoice</p>
                             <p id="ebill-order-id" style="color: #9ca3af; font-size: 12px; margin-top: 4px; font-weight: 500;"></p>
                             <p id="ebill-date" style="color: #6b7280; font-size: 10px; margin-top: 4px;"></p>
-                            <p id="ebill-status-text" style="color: white; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; border: 1px solid rgba(255,255,255,0.3); background-color: rgba(255,255,255,0.1); padding: 4px 8px; display: inline-block; border-radius: 2px;"></p>
+                            <p id="ebill-status-text" style="color: white; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; border: 1px solid rgba(255,255,255,0.3); background-color: rgba(255,255,255,0.1); padding: 6px 10px; display: inline-block; border-radius: 2px; line-height: 1.2; box-sizing: border-box;"></p>
                         </div>
                     </div>
                     <div style="margin-bottom: 32px;">
@@ -388,7 +388,7 @@
                 </div>
             </div>
             
-            <div class="p-6 bg-black border-t border-gold/10 flex gap-4 print-hide">
+            <div class="p-6 bg-black border-t border-gold/10 flex gap-4">
                 <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold bg-gold/10 py-3 rounded-sm font-semibold tracking-widest uppercase text-xs flex items-center justify-center gap-2"><i class="fa-solid fa-image"></i> Save Bill (Photo)</button>
                 <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-gold transition-all text-xs tracking-widest uppercase">Continue Shopping</button>
             </div>
@@ -547,12 +547,10 @@
         function openContact() { openModalSafely('contact-modal'); }
         function closeContact() { closeModalSafely('contact-modal'); }
 
-        // 🔥 THE NEW PHOTO DOWNLOAD FUNCTION 🔥
         function downloadBillImage() {
             const originalElement = document.getElementById('receipt-content');
             const orderId = document.getElementById('ebill-order-id').innerText.replace('#', '');
             
-            // Ek naya invisible box banate hain taaki screen size ki wajah se photo kharab na ho
             const clonedElement = originalElement.cloneNode(true);
             const tempContainer = document.createElement('div');
             tempContainer.style.position = 'absolute';
@@ -564,20 +562,17 @@
             tempContainer.appendChild(clonedElement);
             document.body.appendChild(tempContainer);
             
-            // Photo generate karo
             html2canvas(clonedElement, {
                 scale: 2, 
                 useCORS: true, 
                 backgroundColor: '#0a0a0a', 
                 logging: false 
             }).then(canvas => {
-                // Phone me download karwao
                 const link = document.createElement('a');
                 link.download = `Avesta_Receipt_${orderId}.jpg`;
                 link.href = canvas.toDataURL('image/jpeg', 1.0);
                 link.click();
                 
-                // Box wapas delete kar do
                 document.body.removeChild(tempContainer); 
             });
         }
@@ -815,8 +810,9 @@
         }
 
         function sendEmailReceipt(details) {
+            // 🔥 2. EMAILSJS TEMPLATE ID YAHAN DAALEIN 🔥
             const serviceID = 'service_n368ztv';
-            const templateID = 'template_vdfgsap'; 
+            const templateID = 'YOUR_TEMPLATE_ID'; 
             
             const templateParams = {
                 to_name: details.name,
@@ -833,6 +829,7 @@
                     console.log('SUCCESS! Email sent successfully.', response.status, response.text);
                 }, function(error) {
                     console.error('FAILED to send email...', error);
+                    alert("Order Placed. Note: Automated email receipt failed due to server error, but we received your order.");
                 });
         }
 
@@ -877,8 +874,6 @@
                 }
             }
 
-            sendEmailReceipt(orderDetails);
-
             if(db) {
                 db.collection("orders").doc(orderId).set({
                     orderId: orderId, customerName: custName, email: custEmail, phone: custPhone, address: custAddress,
@@ -886,13 +881,16 @@
                     totalAmount: finalOrderTotal, paymentMethod: paymentMethod.toUpperCase(), utr: finalUtr,
                     status: defaultStatus, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 }).then(() => { 
+                    sendEmailReceipt(orderDetails); 
                     showPaymentSuccess(orderDetails); 
                 }).catch((error) => {
                     console.error("DB Error: ", error); 
+                    sendEmailReceipt(orderDetails); 
                     showPaymentSuccess(orderDetails); 
                 });
             } else { 
                 setTimeout(() => { 
+                    sendEmailReceipt(orderDetails); 
                     showPaymentSuccess(orderDetails); 
                 }, 2000); 
             }
@@ -910,6 +908,7 @@
             }, 2000); 
         }
 
+        // 🔥 FIXED UI/UX in generateEbill 🔥
         function generateEbill(details) {
             document.getElementById('ebill-order-id').innerText = '#' + details.orderId;
             document.getElementById('ebill-date').innerText = details.date;
@@ -921,18 +920,23 @@
             if(details.method === 'UPI') {
                 document.getElementById('ebill-status-text').innerText = "Verification Pending";
                 document.getElementById('ebill-status-text').style.color = '#eab308'; 
+                document.getElementById('ebill-status-text').style.borderColor = 'rgba(234, 179, 8, 0.3)';
+                document.getElementById('ebill-status-text').style.backgroundColor = 'rgba(234, 179, 8, 0.1)';
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
             } else {
                 document.getElementById('ebill-status-text').innerText = "Confirmed (COD)";
                 document.getElementById('ebill-status-text').style.color = '#4ade80'; 
+                document.getElementById('ebill-status-text').style.borderColor = 'rgba(74, 222, 128, 0.3)';
+                document.getElementById('ebill-status-text').style.backgroundColor = 'rgba(74, 222, 128, 0.1)';
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
             }
 
             const itemsContainer = document.getElementById('ebill-items');
             
+            // Fixed line-height and padding so text doesn't cut
             itemsContainer.innerHTML = details.items.map(item => `
-                <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 300;">
-                    <span style="width: 60%; color: #d1d5db; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 300; padding: 4px 0; line-height: 1.5;">
+                    <span style="width: 60%; color: #d1d5db; padding-bottom: 2px;">${item.name}</span>
                     <span style="width: 20%; text-align: center; color: #9ca3af;">x${item.quantity}</span>
                     <span style="width: 20%; text-align: right; font-weight: 500; color: white;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
                 </div>
