@@ -496,7 +496,7 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // 🔥 EMAILJS CONFIGURATION (All Keys Integrated) 🔥
+        // 🔥 1. EMAILJS PUBLIC KEY 🔥
         (function() {
             emailjs.init("_fpanrTUXPG_S9y47"); 
         })();
@@ -546,22 +546,27 @@
         function openContact() { openModalSafely('contact-modal'); }
         function closeContact() { closeModalSafely('contact-modal'); }
 
+        // 🔥 FIXED PDF DOWNLOAD TRICK 🔥
         function downloadPDF() {
             const element = document.getElementById('printable-invoice');
             const orderId = document.getElementById('ebill-order-id').innerText.replace('#', '');
-            element.style.backgroundColor = '#0A0A0A';
-            element.style.padding = '20px';
+            
+            // Temporary hatayein scrollbar warna html2canvas black screen de dega
+            element.classList.remove('overflow-y-auto');
+            element.style.height = 'max-content';
             
             const opt = {
-                margin:       0.5,
+                margin:       0,
                 filename:     `Avesta_Receipt_${orderId}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0A0A0A' },
+                image:        { type: 'jpeg', quality: 1 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a0a0a' },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
             html2pdf().set(opt).from(element).save().then(() => {
-                element.style.padding = '32px'; 
+                // PDF download hone ke baad wapas laga dein
+                element.classList.add('overflow-y-auto');
+                element.style.height = '';
             });
         }
 
@@ -797,8 +802,9 @@
             document.getElementById('payment-status').classList.add('hidden'); 
         }
 
+        // 🔥 2. ROBUST EMAIL FUNCTION 🔥
         function sendEmailReceipt(details) {
-            // 🔥 2. EMAILSJS KEYS ARE SET HERE 🔥
+            console.log("Attempting to send email...");
             const serviceID = 'service_n368ztv';
             const templateID = 'template_vdfgsap'; 
             
@@ -814,9 +820,9 @@
 
             emailjs.send(serviceID, templateID, templateParams)
                 .then(function(response) {
-                    console.log('SUCCESS! Email sent.', response.status, response.text);
+                    console.log('SUCCESS! Email sent successfully.', response.status, response.text);
                 }, function(error) {
-                    console.log('FAILED to send email...', error);
+                    console.error('FAILED to send email...', error);
                 });
         }
 
@@ -868,14 +874,16 @@
                     totalAmount: finalOrderTotal, paymentMethod: paymentMethod.toUpperCase(), utr: finalUtr,
                     status: defaultStatus, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 }).then(() => { 
+                    sendEmailReceipt(orderDetails); // Call exactly at success
                     showPaymentSuccess(orderDetails); 
-                    sendEmailReceipt(orderDetails);
                 }).catch((error) => {
                     console.error("DB Error: ", error); 
+                    sendEmailReceipt(orderDetails); // Call as fallback
                     showPaymentSuccess(orderDetails); 
                 });
             } else { 
                 setTimeout(() => { 
+                    sendEmailReceipt(orderDetails); // Call as fallback
                     showPaymentSuccess(orderDetails); 
                 }, 2000); 
             }
