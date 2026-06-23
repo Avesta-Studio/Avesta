@@ -16,7 +16,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+              publicKey: "_fpanrTUXPG_S9y47",
+            });
+        })();
+    </script>
 
     <script>
         tailwind.config = {
@@ -324,65 +331,62 @@
 
     <div id="ebill-modal" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-xl transition-opacity font-sans">
         <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)] flex flex-col max-h-[90vh]">
-            <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black print-hide">
+            <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black">
                 <h4 class="text-gold font-bold text-sm tracking-[0.2em] uppercase">Order Submitted</h4>
                 <button onclick="closeEbill()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <div id="printable-invoice" class="p-8 overflow-y-auto bg-[#0a0a0a] flex-1 relative">
-                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                    <i class="fa-regular fa-clock text-[18rem] opacity-5 text-gray-600"></i>
-                </div>
-                <div class="relative z-10">
-                    <div class="flex justify-between items-start border-b border-white/10 pb-6 mb-6">
+            <div class="overflow-y-auto flex-1">
+                <div id="receipt-content" style="background-color: #0A0A0A; padding: 32px; color: white;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px; margin-bottom: 24px;">
                         <div>
-                            <h1 class="text-3xl font-bold tracking-widest text-white serif-text">AVESTA</h1>
-                            <p class="text-[9px] tracking-[0.3em] text-gold/80 mt-1 uppercase">Premium Timepieces</p>
+                            <h1 style="font-size: 24px; font-weight: bold; letter-spacing: 0.1em; color: white; font-family: 'Cinzel', serif; margin:0;">AVESTA</h1>
+                            <p style="font-size: 9px; letter-spacing: 0.3em; color: #C5A059; margin-top: 4px; text-transform: uppercase;">Premium Timepieces</p>
                         </div>
-                        <div class="text-right">
-                            <p class="text-gold font-bold tracking-widest uppercase text-xs">E-Invoice</p>
-                            <p id="ebill-order-id" class="text-gray-400 text-xs mt-1 font-medium"></p>
-                            <p id="ebill-date" class="text-gray-500 text-[10px] mt-1"></p>
-                            <p id="ebill-status-text" class="text-white text-[9px] uppercase tracking-widest mt-2 border border-white/30 bg-white/10 px-2 py-1 inline-block rounded-sm"></p>
+                        <div style="text-align: right;">
+                            <p style="color: #C5A059; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; margin:0;">E-Invoice</p>
+                            <p id="ebill-order-id" style="color: #9ca3af; font-size: 12px; margin-top: 4px; font-weight: 500;"></p>
+                            <p id="ebill-date" style="color: #6b7280; font-size: 10px; margin-top: 4px;"></p>
+                            <p id="ebill-status-text" style="color: white; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px; border: 1px solid rgba(255,255,255,0.3); background-color: rgba(255,255,255,0.1); padding: 4px 8px; display: inline-block; border-radius: 2px;"></p>
                         </div>
                     </div>
-                    <div class="mb-8">
-                        <h4 class="text-gray-500 text-[10px] uppercase tracking-widest font-semibold mb-2">Billed & Shipped To:</h4>
-                        <p id="ebill-name" class="text-white text-sm font-medium"></p>
-                        <p id="ebill-email" class="text-gray-400 text-xs font-light mt-1"></p>
-                        <p id="ebill-phone" class="text-gray-400 text-xs font-light mt-1"></p>
-                        <p id="ebill-address" class="text-gray-400 text-xs font-light mt-1 leading-relaxed max-w-xs"></p>
-                        <p id="ebill-method-text" class="text-gold text-[10px] font-light mt-3 tracking-wide"></p>
+                    <div style="margin-bottom: 32px;">
+                        <h4 style="color: #6b7280; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Billed & Shipped To:</h4>
+                        <p id="ebill-name" style="color: white; font-size: 14px; font-weight: 500; margin: 0;"></p>
+                        <p id="ebill-email" style="color: #9ca3af; font-size: 12px; font-weight: 300; margin-top: 4px;"></p>
+                        <p id="ebill-phone" style="color: #9ca3af; font-size: 12px; font-weight: 300; margin-top: 4px;"></p>
+                        <p id="ebill-address" style="color: #9ca3af; font-size: 12px; font-weight: 300; margin-top: 4px; line-height: 1.6; max-width: 300px;"></p>
+                        <p id="ebill-method-text" style="color: #C5A059; font-size: 10px; font-weight: 300; margin-top: 12px; letter-spacing: 0.05em;"></p>
                     </div>
-                    <div class="mb-8">
-                        <div class="flex justify-between text-gray-500 text-[10px] uppercase tracking-widest border-b border-white/10 pb-2 mb-4 font-semibold">
-                            <span class="w-3/5">Item Description</span>
-                            <span class="w-1/5 text-center">Qty</span>
-                            <span class="w-1/5 text-right">Price</span>
+                    <div style="margin-bottom: 32px;">
+                        <div style="display: flex; justify-content: space-between; color: #6b7280; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 16px; font-weight: 600;">
+                            <span style="width: 60%;">Item Description</span>
+                            <span style="width: 20%; text-align: center;">Qty</span>
+                            <span style="width: 20%; text-align: right;">Price</span>
                         </div>
-                        <div id="ebill-items" class="space-y-4"></div>
+                        <div id="ebill-items" style="display: flex; flex-direction: column; gap: 16px;"></div>
                     </div>
-                    <div class="border-t border-white/10 pt-4 flex flex-col items-end gap-2 text-sm font-light">
-                        <div class="flex justify-between w-full md:w-1/2 lg:w-1/3">
-                            <span class="text-gray-400">Subtotal:</span>
-                            <span id="ebill-subtotal" class="text-white"></span>
+                    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-size: 14px; font-weight: 300;">
+                        <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px;">
+                            <span style="color: #9ca3af;">Subtotal:</span>
+                            <span id="ebill-subtotal" style="color: white;"></span>
                         </div>
-                        <div id="ebill-discount-row" class="flex justify-between w-full md:w-1/2 lg:w-1/3 text-gold hidden">
+                        <div id="ebill-discount-row" style="display: none; justify-content: space-between; width: 100%; max-width: 250px; color: #C5A059;">
                             <span>VIP Pass Applied:</span>
                             <span id="ebill-discount"></span>
                         </div>
-                        <div class="flex justify-between w-full md:w-1/2 lg:w-1/3 pt-2 border-t border-white/10 mt-2">
-                            <span class="text-white tracking-widest uppercase text-xs font-semibold">Total Amount:</span>
-                            <span id="ebill-total" class="text-gold text-lg font-medium"></span>
+                        <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px;">
+                            <span style="color: white; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; font-weight: 600;">Total Amount:</span>
+                            <span id="ebill-total" style="color: #C5A059; font-size: 18px; font-weight: 500;"></span>
                         </div>
                     </div>
-                    <div class="mt-12 text-center border-t border-gold/20 pt-6">
-                        <p class="text-gold text-[10px] tracking-widest uppercase italic serif-text">Crafted with precision. Thank you for choosing Avesta.</p>
+                    <div style="margin-top: 48px; text-align: center; border-top: 1px solid rgba(197,160,89,0.2); padding-top: 24px;">
+                        <p style="color: #C5A059; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-style: italic; font-family: 'Cinzel', serif;">Crafted with precision. Thank you for choosing Avesta.</p>
                     </div>
                 </div>
             </div>
             
-            <div class="p-6 bg-black border-t border-gold/10 flex gap-4 print-hide">
+            <div class="p-6 bg-black border-t border-gold/10 flex gap-4">
                 <button type="button" onclick="downloadPDF()" class="flex-1 btn-gold bg-gold/10 py-3 rounded-sm font-semibold tracking-widest uppercase text-xs flex items-center justify-center gap-2"><i class="fa-solid fa-download"></i> Save PDF Bill</button>
                 <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-gold transition-all text-xs tracking-widest uppercase">Continue Shopping</button>
             </div>
@@ -496,11 +500,6 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // 🔥 1. EMAILJS PUBLIC KEY 🔥
-        (function() {
-            emailjs.init("_fpanrTUXPG_S9y47"); 
-        })();
-
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
         const products = [
@@ -546,28 +545,21 @@
         function openContact() { openModalSafely('contact-modal'); }
         function closeContact() { closeModalSafely('contact-modal'); }
 
-        // 🔥 FIXED PDF DOWNLOAD TRICK 🔥
+        // 🔥 THE PDF RENDER FIX 🔥
         function downloadPDF() {
-            const element = document.getElementById('printable-invoice');
+            const element = document.getElementById('receipt-content');
             const orderId = document.getElementById('ebill-order-id').innerText.replace('#', '');
             
-            // Temporary hatayein scrollbar warna html2canvas black screen de dega
-            element.classList.remove('overflow-y-auto');
-            element.style.height = 'max-content';
-            
             const opt = {
-                margin:       0,
+                margin:       0.2,
                 filename:     `Avesta_Receipt_${orderId}.pdf`,
                 image:        { type: 'jpeg', quality: 1 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a0a0a' },
+                // ScrollY set to 0 and explicitly stating background color ensures no black screen
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', scrollY: 0 },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
-            html2pdf().set(opt).from(element).save().then(() => {
-                // PDF download hone ke baad wapas laga dein
-                element.classList.add('overflow-y-auto');
-                element.style.height = '';
-            });
+            html2pdf().set(opt).from(element).save();
         }
 
         async function simulateTracking() {
@@ -802,9 +794,8 @@
             document.getElementById('payment-status').classList.add('hidden'); 
         }
 
-        // 🔥 2. ROBUST EMAIL FUNCTION 🔥
+        // 🔥 THE EMAIL SENDING FIX (Bulletproof V4) 🔥
         function sendEmailReceipt(details) {
-            console.log("Attempting to send email...");
             const serviceID = 'service_n368ztv';
             const templateID = 'template_vdfgsap'; 
             
@@ -820,9 +811,11 @@
 
             emailjs.send(serviceID, templateID, templateParams)
                 .then(function(response) {
-                    console.log('SUCCESS! Email sent successfully.', response.status, response.text);
+                    console.log('SUCCESS! Email sent.', response.status, response.text);
                 }, function(error) {
                     console.error('FAILED to send email...', error);
+                    // Ab agar error aayega toh popup ho jayega jisse galti pakdi jayegi
+                    alert("Email System Notice: Email delivery failed. (Error code: " + error.status + ")");
                 });
         }
 
@@ -867,6 +860,9 @@
                 }
             }
 
+            // Bhejo email immediately regardless of DB delay
+            sendEmailReceipt(orderDetails);
+
             if(db) {
                 db.collection("orders").doc(orderId).set({
                     orderId: orderId, customerName: custName, email: custEmail, phone: custPhone, address: custAddress,
@@ -874,18 +870,13 @@
                     totalAmount: finalOrderTotal, paymentMethod: paymentMethod.toUpperCase(), utr: finalUtr,
                     status: defaultStatus, timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 }).then(() => { 
-                    sendEmailReceipt(orderDetails); // Call exactly at success
                     showPaymentSuccess(orderDetails); 
                 }).catch((error) => {
                     console.error("DB Error: ", error); 
-                    sendEmailReceipt(orderDetails); // Call as fallback
                     showPaymentSuccess(orderDetails); 
                 });
             } else { 
-                setTimeout(() => { 
-                    sendEmailReceipt(orderDetails); // Call as fallback
-                    showPaymentSuccess(orderDetails); 
-                }, 2000); 
+                setTimeout(() => { showPaymentSuccess(orderDetails); }, 2000); 
             }
         }
 
@@ -911,28 +902,32 @@
             
             if(details.method === 'UPI') {
                 document.getElementById('ebill-status-text').innerText = "Verification Pending";
-                document.getElementById('ebill-status-text').className = "text-yellow-500 text-[9px] uppercase tracking-widest mt-2 border border-yellow-500/30 bg-yellow-500/10 px-2 py-1 inline-block rounded-sm";
-                document.getElementById('ebill-method-text').innerHTML = `Method: <span class="text-white">UPI App</span> <br/> UTR/Ref: <span class="text-white">${details.utr}</span>`;
+                document.getElementById('ebill-status-text').style.color = '#eab308'; // Tailwind yellow-500
+                document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
             } else {
                 document.getElementById('ebill-status-text').innerText = "Confirmed (COD)";
-                document.getElementById('ebill-status-text').className = "text-green-400 text-[9px] uppercase tracking-widest mt-2 border border-green-400/30 bg-green-400/10 px-2 py-1 inline-block rounded-sm";
-                document.getElementById('ebill-method-text').innerHTML = `Method: <span class="text-white">Cash on Delivery</span>`;
+                document.getElementById('ebill-status-text').style.color = '#4ade80'; // Tailwind green-400
+                document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
             }
 
             const itemsContainer = document.getElementById('ebill-items');
+            
+            // Format item rows explicitly for PDF compatibility
             itemsContainer.innerHTML = details.items.map(item => `
-                <div class="flex justify-between text-sm font-light">
-                    <span class="w-3/5 text-gray-800 truncate">${item.name}</span>
-                    <span class="w-1/5 text-center text-gray-600">x${item.quantity}</span>
-                    <span class="w-1/5 text-right font-medium">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
+                <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 300;">
+                    <span style="width: 60%; color: #d1d5db; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</span>
+                    <span style="width: 20%; text-align: center; color: #9ca3af;">x${item.quantity}</span>
+                    <span style="width: 20%; text-align: right; font-weight: 500; color: white;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
                 </div>
             `).join('');
 
             document.getElementById('ebill-subtotal').innerText = '₹' + details.subtotal.toLocaleString('en-IN');
             if(details.discount > 0) {
-                document.getElementById('ebill-discount-row').classList.remove('hidden');
+                document.getElementById('ebill-discount-row').style.display = 'flex';
                 document.getElementById('ebill-discount').innerText = '-₹' + details.discount.toLocaleString('en-IN');
-            } else { document.getElementById('ebill-discount-row').classList.add('hidden'); }
+            } else { 
+                document.getElementById('ebill-discount-row').style.display = 'none'; 
+            }
             document.getElementById('ebill-total').innerText = '₹' + details.total.toLocaleString('en-IN');
 
             openModalSafely('ebill-modal');
@@ -943,20 +938,6 @@
 
         function closeEbill() { closeModalSafely('ebill-modal'); }
         renderProducts();
-    </script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script> 
-        AOS.init({ duration: 1000, once: true, easing: 'ease-out' }); 
-        window.addEventListener('scroll', () => { 
-            const nav = document.getElementById('navbar'); 
-            if(window.scrollY > 50) { 
-                nav.classList.add('bg-black/95', 'border-gold/20'); 
-                nav.classList.remove('bg-black/40', 'border-transparent'); 
-            } else { 
-                nav.classList.add('bg-black/40', 'border-transparent'); 
-                nav.classList.remove('bg-black/95', 'border-gold/20'); 
-            } 
-        }); 
     </script>
 </body>
 </html>
