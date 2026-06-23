@@ -19,7 +19,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script type="text/javascript">
-        // 🔥 1. APNI EMAILJS PUBLIC KEY YAHA DAALEIN 🔥
+        // 🔥 1. EMAILJS PUBLIC KEY INJECTED 🔥
         (function() {
             emailjs.init({
               publicKey: "_fpanrTUXPG_S9y47", 
@@ -388,7 +388,7 @@
                 </div>
             </div>
             
-            <div class="p-6 bg-black border-t border-gold/10 flex gap-4">
+            <div class="p-6 bg-black border-t border-gold/10 flex gap-4 print-hide">
                 <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold bg-gold/10 py-3 rounded-sm font-semibold tracking-widest uppercase text-xs flex items-center justify-center gap-2"><i class="fa-solid fa-image"></i> Save Bill (Photo)</button>
                 <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-gold transition-all text-xs tracking-widest uppercase">Continue Shopping</button>
             </div>
@@ -810,9 +810,9 @@
         }
 
         function sendEmailReceipt(details) {
-            // 🔥 2. EMAILSJS TEMPLATE ID YAHAN DAALEIN 🔥
+            // 🔥 2. EMAILSJS KEYS INJECTED 🔥
             const serviceID = 'service_n368ztv';
-            const templateID = 'YOUR_TEMPLATE_ID'; 
+            const templateID = 'template_vdfgsap'; 
             
             const templateParams = {
                 to_name: details.name,
@@ -829,7 +829,6 @@
                     console.log('SUCCESS! Email sent successfully.', response.status, response.text);
                 }, function(error) {
                     console.error('FAILED to send email...', error);
-                    alert("Order Placed. Note: Automated email receipt failed due to server error, but we received your order.");
                 });
         }
 
@@ -908,7 +907,6 @@
             }, 2000); 
         }
 
-        // 🔥 FIXED UI/UX in generateEbill 🔥
         function generateEbill(details) {
             document.getElementById('ebill-order-id').innerText = '#' + details.orderId;
             document.getElementById('ebill-date').innerText = details.date;
@@ -933,7 +931,6 @@
 
             const itemsContainer = document.getElementById('ebill-items');
             
-            // Fixed line-height and padding so text doesn't cut
             itemsContainer.innerHTML = details.items.map(item => `
                 <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 300; padding: 4px 0; line-height: 1.5;">
                     <span style="width: 60%; color: #d1d5db; padding-bottom: 2px;">${item.name}</span>
