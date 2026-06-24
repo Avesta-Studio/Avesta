@@ -145,7 +145,7 @@
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> Case, Dial & Strap Customization</li>
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> 360° Real-time 3D View</li>
                 </ul>
-                <button type="button" onclick="alert('Our 3D Customization Studio is launching soon! Stay tuned.');" class="inline-flex items-center gap-2 text-gold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-gold pb-1 font-sans">Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i></button>
+                <button type="button" onclick="showCustomAlert('Coming Soon', 'Our 3D Customization Studio is launching soon! Stay tuned.', 'info')" class="inline-flex items-center gap-2 text-gold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-gold pb-1 font-sans">Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i></button>
             </div>
         </div>
     </section>
@@ -237,16 +237,13 @@
                 
                 <div id="detail-options" class="mb-8 hidden relative">
                     <h4 class="text-gray-400 text-[10px] uppercase tracking-widest mb-2 font-semibold">Select Color / Variant</h4>
-                    
                     <input type="hidden" id="detail-color-select" value="Default">
-                    
                     <button type="button" id="custom-select-btn" onclick="toggleCustomDropdown()" class="w-full bg-[#050505] border border-white/20 text-gray-300 text-sm p-4 rounded-sm outline-none hover:border-gold hover:text-white flex justify-between items-center transition-all duration-300 shadow-inner">
                         <span id="custom-select-text" class="tracking-wide">Select Option</span>
                         <i class="fa-solid fa-chevron-down text-gold text-xs transition-transform duration-300" id="custom-select-icon"></i>
                     </button>
-                    
                     <ul id="custom-select-list" class="absolute z-50 w-full bg-[#0a0a0a] border border-gold/30 rounded-sm mt-1 max-h-48 overflow-y-auto hidden shadow-[0_10px_30px_rgba(0,0,0,0.8)] scrollbar-hide opacity-0 transition-opacity duration-300">
-                        </ul>
+                    </ul>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-auto">
@@ -514,6 +511,17 @@
         </div>
     </div>
 
+    <div id="custom-alert-modal" class="fixed inset-0 z-[120] hidden flex-col items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans opacity-0">
+        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(197,160,89,0.1)] relative transform scale-95 transition-transform duration-300" id="custom-alert-box">
+            <div id="alert-icon-container" class="w-12 h-12 rounded-full border flex items-center justify-center mx-auto mb-4">
+                <i id="alert-icon" class="fa-solid text-xl"></i>
+            </div>
+            <h3 id="alert-title" class="text-white text-lg serif-text tracking-widest mb-2">Notice</h3>
+            <p id="alert-modal-text" class="text-gray-400 text-xs font-light leading-relaxed mb-6"></p>
+            <button onclick="closeCustomAlert()" class="w-full bg-gold/10 border border-gold/30 text-gold hover:bg-gold hover:text-black py-3 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Okay</button>
+        </div>
+    </div>
+
     <script>
         const firebaseConfig = {
           apiKey: "AIzaSyAN3SStrczNH5cwhU9o5Whg0QVbaRAlUpg",
@@ -530,42 +538,51 @@
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
         const products = [
+            { id: 0, name: 'For Trial (Test Product)', category: 'Testing', price: 1, images: ['Male Collection/Male Watch 1.jpg'], description: 'System Test Product.', colors: [] },
             
             // --- 20 MEN'S WATCHES ---
-            { id: 1, name: 'The Faxon Octagon Prestige', category: 'Men', price: 849, images: ['Male Collection/Male Watch 1.jpg'], description: 'Redefine your style with the bold, geometric brilliance of the Faxon Octagon Prestige. Featuring a striking octagonal bezel, this watch commands attention. The dynamic tapisserie (waffle) dial texture provides incredible visual depth, perfectly framing the highly practical stacked Day and Date complication at 6:00. It is a masterclass in sport-luxe design.', colors: ['Golden Strap with Golden Dial', 'Golden + Silver Strap with White Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with White Dial', 'Golden Strap with Black Dial'] },
-            { id: 2, name: 'The Faxon Global Icon Edition', category: 'Men', price: 799, images: ['Male Collection/Male Watch 2.jpg'], description: 'Wear the watch of champions. Endorsed by global icons Cristiano Ronaldo and Chris Gayle, this exceptional timepiece offers an unmatched legacy. Boasting the distinguished Eastern Arabic numeral dial within a perfectly proportioned cushion case, it radiates absolute prestige. Whether configured in full gold or premium two-tone, this watch makes a powerful, unforgettable statement.', colors: ['Rose Gold + Silver Strap with White Dial', 'Rose Gold + Silver Strap with Black Dial', 'Golden Strap with Golden Dial', 'Golden with White Dial'] },
-            { id: 3, name: 'The Faxon Timeless Cushion', category: 'Men', price: 799, images: ['Male Collection/Male Watch 3.jpg'], description: 'Wear the watch of champions. Endorsed by global icons Cristiano Ronaldo and Chris Gayle, this exceptional timepiece offers an unmatched legacy. Boasting the distinguished Eastern Arabic numeral dial within a perfectly proportioned cushion case, it radiates absolute prestige. Whether configured in full gold or premium two-tone, this watch makes a powerful, unforgettable statement.', colors: ['Golden Strap with Golden Dial', 'Golden Strap with Black Dial', 'Golden + Silver Strap with White Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with White Dial'] },
-            { id: 4, name: 'The Faxon Octagon Excellence', category: 'Men', price: 849, images: ['Male Collection/Male Watch 4.jpg'], description: 'Elevate every moment with this striking octagonal timepiece. Featuring an integrated bracelet and a captivating tapisserie-patterned dial, it seamlessly blends sporty robustness with refined elegance. Available in five stunning styles, including a vibrant ice blue and a sleek all-black variant, this collection is designed for those who wear their legacy on their wrist', colors: ['Silver Strap with White Dial', 'Silver Strap with Black Dial', 'Black Strap with Black Dial', 'Silver Strap with Blue Dial'] },
-            { id: 5, name: 'The Faxon Stealth Cushion', category: 'Men', price: 799, images: ['Male Collection/Male Watch 5.jpg'], description: 'Modern, stealthy, and undeniably powerful. This variation of the Faxon cushion case takes a contemporary approach with sleek gunmetal and deep black finishes. The dial features a sharp vertical grid texture, accented by bold Roman numerals at the bottom hemisphere for an unexpected touch of classical heritage. It is the perfect daily wearer for the modern man who prefers an edgy yet sophisticated aesthetic.', colors: ['Black Strap with Black Dial'] },
-            { id: 6, name: 'The Faxon Legacy Day-Date', category: 'Men', price: 849, images: ['Male Collection/Male Watch 6.jpg'], description: 'Channeling the spirit of classic executive timepieces, the Faxon Legacy features a prestigious curved "Day" window at 12:00 clock and a Date window at 6:00 clock. The dial boasts a stunning sunburst texture with concentric detailing that draws the eye inward. Available in a striking emerald green, deep black, and classic silver, it is an absolute essential for any serious watch collector.', colors: ['Silver Strap with Black Dial', 'Silver Strap with Grey Dial', 'Silver Strap with White Dial', 'Silver Strap with Green Dial'] },
-            { id: 7, name: 'The Faxon Prestige Sub-Dial', category: 'Men', price: 849, images: ['Male Collection/Male Watch 7.jpg'], description: 'A true statement of prestige, this refined round timepiece masterfully blends Swiss design with timeless style. The minimalist textured dial is perfectly balanced by an intricate small-seconds sub-dial positioned gracefully at 6:00 clock. From the crisp white dial with rose gold accents to the striking ice blue variation, it is expertly crafted for absolute excellence.', colors: ['Black Strap with Black Dial', 'Silver Strap with White Dial', 'Silver Strap with Blue Dial', 'Silver Strap with Black Dial'] },
-            { id: 8, name: 'The Faxon Sovereign', category: 'Men', price: 799, images: ['Male Collection/Male Watch 8.jpg'], description: 'Make a bold statement with the Faxon Sovereign. Sharing the beloved Eastern Arabic numeral design, this iteration shines in full gold-tone and brilliant two-tone variations. The horizontal guilloché dial catches the light from every angle, highlighting the meticulous craftsmanship and precision engineering within. It is a timepiece designed for those who value every second and demand excellence in their everyday wear.', colors: ['Golden Strap with Golden Dial', 'Golden + Silver Strap with White Dial', 'Golden Strap with Black Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with White Dial'] },
-            { id: 9, name: 'The Faxon Minimalist Sub-Dial', category: 'Men', price: 849, images: ['Male Collection/Male Watch 9.jpg'], description: 'Crafted for excellence, this elegant round timepiece strips away the unnecessary to focus purely on refined aesthetics. The standout feature is the meticulously detailed small-seconds sub-dial positioned at 6:00 clock, adding a touch of vintage charm to a highly modern silhouette. With a beautifully textured waffle dial and sleek baton hands, it is the ultimate dress watch for the discerning gentleman.', colors: ['Golden Strap with Golden Dial', 'Golden + Silver Strap with White Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with Black Dial', 'Golden Strap with White Dial'] },
-            { id: 10, name: 'The Faxon Precision Executive', category: 'Men', price: 849, images: ['Male Collection/Male Watch 10.jpg'], description: 'Meticulously crafted and elegantly refined, this timepiece features a beautifully structured inner dial texture that separates the hour track from the center. Retaining the classic Day at 12 and Date at 6 layout, it offers incredible symmetry and readability. Whether in the striking black/gunmetal finish or the luxurious two-tone rose gold, it embodies precision and timeless sophistication.', colors: ['Rose Gold + Silver Strap with White Dial', 'Black Strap with Black Dial'] },
-            { id: 11, name: 'The Faxon Heritage Edition', category: 'Men', price: 799, images: ['Male Collection/Male Watch 11.jpg'], description: 'Embrace a truly unique aesthetic with the Faxon Heritage, a timepiece that beautifully marries Swiss precision with cultural elegance. Featuring striking Eastern Arabic numerals against a deep, horizontally textured dial, this watch is a captivating conversation starter. The refined cushion-shaped case and premium two-tone stainless steel bracelet offer a perfect balance of classic prestige and modern sophistication.', colors: ['Rose Gold + Silver Strap with White Dial', 'Rose Gold + Silver Strap with Grey Dial', 'Rose Gold + Silver with Black Dial', 'Black Strap with Black Dial'] },
-            { id: 12, name: 'The Faxon Heritage Silver', category: 'Men', price: 799, images: ['Male Collection/Male Watch 12.jpg'], description: 'Redefine your time with a watch crafted strictly for those who define excellence. This elegant silver-tone timepiece features a sophisticated cushion case and striking Eastern Arabic numerals that pay homage to timeless cultural heritage. The intricately horizontally textured dial adds subtle depth, making it an uncompromisingly high-quality addition to any professional wardrobe.', colors: ['Silver Strap with Royal Blue Dial', 'Silver Strap with Black Dial', 'Silver Strap with Silver Dial'] },
-            { id: 13, name: 'The Faxon Crown Day-Date', category: 'Men', price: 849, images: ['Male Collection/Male Watch 13.jpg'], description: 'For those who prefer the commanding presence of a full-gold aesthetic, the Faxon Crown delivers. Showcasing the timeless curved Day and Date complications, this watch is a testament to premium craftsmanship. The dial—available in contrasting black, pristine white, and matching gold—features a refined micro-texture that ensures the watch remains an eye-catching statement piece in any lighting.', colors: ['Golden Strap with Golden Dial', 'Golden Strap with Black Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with White Dial'] },
-            { id: 14, name: 'The Faxon Octagon Elite Two-Tone', category: 'Men', price: 849, images: ['Male Collection/Male Watch 14.jpg'], description: 'The ultimate expression of elevated style. This variation of the distinctive octagonal Faxon watch highlights the gorgeous contrast of premium two-tone metals. The intricate texture of the dial is elevated by rose gold and yellow gold accents on the hands and indices. Built to last and engineered for perfection, it bridges the gap between a rugged sports watch and a high-end dress piece.', colors: ['Rose Gold + Silver with Black Dial', 'Rose Gold + Silver with Grey Dial', 'Rose Gold + Silver with White Dial'] },
-            { id: 15, name: 'The Faxon Signature Cushion Collection', category: 'Men', price: 799, images: ['Male Collection/Male Watch 15.jpg'], description: 'Discover the pinnacle of precision engineering and timeless elegance with the expansive Signature Cushion collection. This comprehensive lineup offers nine distinct references, ensuring a perfect match for any personal style. Each watch features a unique dial layout with prominent Roman numerals at the base, protected by a sophisticated, softened cushion-shaped case.', colors: ['Rose Gold + Silver with Black Dial', 'Rose Gold + Silver with White Dial', 'Silver Strap with Black Dial', 'Silver Strap with Blue Dial', 'Rose Gold + Silver with Grey Dial'] },
-            
+            { id: 1, name: 'Male Watch 1', category: 'Men', price: 15000, images: ['Male Collection/Male Watch 1.jpg'], description: 'Command attention with this bold timepiece. Crafted from 316L stainless steel with a scratch-resistant sapphire crystal face. Features a precision chronograph movement and luminescent hands for ultimate clarity.\n\nMaterial: Stainless Steel\nMovement: Chronograph', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 2, name: 'Male Watch 2', category: 'Men', price: 18000, images: ['Male Collection/Male Watch 2.jpg'], description: 'Designed for the modern gentleman. A deep, textured dial enclosed in a rugged titanium case, finished with a premium, hand-stitched leather strap. Built for endurance and style.\n\nMaterial: Titanium\nStrap: Genuine Leather', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 3, name: 'Male Watch 3', category: 'Men', price: 21000, images: ['Male Collection/Male Watch 3.jpg'], description: 'A seamless blend of sport and luxury. This diver-style watch offers 100m water resistance, a rotating bezel, and a robust automatic movement that winds with the motion of your wrist.\n\nWater Resistance: 100m\nMovement: Swiss Automatic', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 4, name: 'Male Watch 4', category: 'Men', price: 12000, images: ['Male Collection/Male Watch 4.jpg'], description: 'The essence of minimalism. Featuring an ultra-slim 7mm profile, this watch glides effortlessly under a shirt cuff. The sunburst dial and sleek baton indices offer unmatched understated elegance.\n\nProfile: 7mm Ultra-Slim\nGlass: Sapphire Crystal', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 5, name: 'Male Watch 5', category: 'Men', price: 14500, images: ['Male Collection/Male Watch 5.jpg'], description: 'Aviator-inspired aesthetics with dual sub-dials. The matte-finished case and high-contrast numerals ensure instant readability, perfectly paired with a brushed metal bracelet.\n\nStyle: Aviator\nComplications: Dual Sub-dials', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 6, name: 'Male Watch 6', category: 'Men', price: 19999, images: ['Male Collection/Male Watch 6.jpg'], description: 'Command attention with this bold timepiece. Crafted from 316L stainless steel with a scratch-resistant sapphire crystal face. Features a precision chronograph movement.\n\nMaterial: Stainless Steel\nMovement: Quartz', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 7, name: 'Male Watch 7', category: 'Men', price: 25000, images: ['Male Collection/Male Watch 7.jpg'], description: 'Designed for the modern gentleman. A deep, textured dial enclosed in a rugged titanium case, finished with a premium, hand-stitched leather strap.\n\nMaterial: Titanium\nStrap: Leather', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 8, name: 'Male Watch 8', category: 'Men', price: 30000, images: ['Male Collection/Male Watch 8.jpg'], description: 'A seamless blend of sport and luxury. This diver-style watch offers 100m water resistance, a rotating bezel, and a robust automatic movement.\n\nWater Resistance: 100m\nMovement: Automatic', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 9, name: 'Male Watch 9', category: 'Men', price: 11500, images: ['Male Collection/Male Watch 9.jpg'], description: 'The essence of minimalism. Featuring an ultra-slim profile, this watch glides effortlessly under a shirt cuff. The sunburst dial offers unmatched elegance.\n\nProfile: Slim\nGlass: Mineral', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 10, name: 'Male Watch 10', category: 'Men', price: 13999, images: ['Male Collection/Male Watch 10.jpg'], description: 'Aviator-inspired aesthetics with dual sub-dials. The matte-finished case and high-contrast numerals ensure instant readability.\n\nStyle: Aviator\nMaterial: Alloy', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 11, name: 'Male Watch 11', category: 'Men', price: 16500, images: ['Male Collection/Male Watch 11.jpg'], description: 'Command attention with this bold timepiece. Crafted from 316L stainless steel with a scratch-resistant sapphire crystal face.\n\nMaterial: Stainless Steel', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 12, name: 'Male Watch 12', category: 'Men', price: 22000, images: ['Male Collection/Male Watch 12.jpg'], description: 'Designed for the modern gentleman. A deep, textured dial enclosed in a rugged titanium case.\n\nMaterial: Titanium', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 13, name: 'Male Watch 13', category: 'Men', price: 28000, images: ['Male Collection/Male Watch 13.jpg'], description: 'A seamless blend of sport and luxury. This diver-style watch offers 100m water resistance.\n\nWater Resistance: 100m', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 14, name: 'Male Watch 14', category: 'Men', price: 19000, images: ['Male Collection/Male Watch 14.jpg'], description: 'The essence of minimalism. Featuring an ultra-slim 7mm profile, this watch glides effortlessly under a shirt cuff.\n\nProfile: 7mm', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 15, name: 'Male Watch 15', category: 'Men', price: 26500, images: ['Male Collection/Male Watch 15.jpg'], description: 'Aviator-inspired aesthetics with dual sub-dials. The matte-finished case ensures instant readability.\n\nStyle: Aviator', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 16, name: 'Male Watch 16', category: 'Men', price: 32000, images: ['Male Collection/Male Watch 16.jpg'], description: 'Command attention with this bold timepiece. Precision chronograph movement and luminescent hands.\n\nMovement: Chronograph', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 17, name: 'Male Watch 17', category: 'Men', price: 45000, images: ['Male Collection/Male Watch 17.jpg'], description: 'Designed for the modern gentleman. Finished with a premium, hand-stitched leather strap.\n\nStrap: Genuine Leather', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 18, name: 'Male Watch 18', category: 'Men', price: 13000, images: ['Male Collection/Male Watch 18.jpg'], description: 'A seamless blend of sport and luxury. Rotating bezel and robust automatic movement.\n\nMovement: Automatic', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 19, name: 'Male Watch 19', category: 'Men', price: 24500, images: ['Male Collection/Male Watch 19.jpg'], description: 'The essence of minimalism. The sunburst dial and sleek baton indices offer unmatched elegance.\n\nDial: Sunburst', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 20, name: 'Male Watch 20', category: 'Men', price: 27500, images: ['Male Collection/Male Watch 20.jpg'], description: 'Aviator-inspired aesthetics perfectly paired with a brushed metal bracelet.\n\nStrap: Metal Bracelet', colors: ['Rose Gold', 'Silver', 'Black'] },
 
             // --- 20 WOMEN'S WATCHES ---
-            { id: 21, name: 'The Velaris Starlight Pavé Chronograph', category: 'Women', price: 399, images: ['Female Collection/Female Watch 1.jpg'], description: 'For the woman who loves bold luxury and uncompromising sparkle. This striking timepiece takes the confident, sporty aesthetic of a classic multi-dial watch and elevates it to pure high-fashion glamour. Featuring a brilliant pavé crystal bezel and matching crystal-encrusted center links down the bracelet, it catches the light from across the room. It is a powerful, iced-out statement piece that demands attention.', colors: ['Rose Gold', 'Black', ' Pure Silver', 'Silver with Blue'] },
-            { id: 22, name: 'The Velaris Enchanted Dial Collection', category: 'Women', price: 299, images: ['Female Collection/Female Watch 2.jpg'], description: 'Make a breathtaking statement with a timepiece that is as much a work of art as it is a functional accessory. The Velaris Enchanted Dial features an intricate, mesmerizing pattern that evokes the delicate beauty of butterfly wings, meticulously adorned with subtle crystal accents. Framed by a polished bezel and featuring prominent, stylized 12 and 6 numerals, this watch effortlessly blends whimsical charm with contemporary elegance.', colors: ['Rose Gold', 'Golden', 'Silver Strap with Blue Dial', 'Black', 'Silver Strap with White Dial'] },
-            { id: 23, name: 'The Velaris Interlocking Chainlink', category: 'Women', price: 349, images: ['Female Collection/Female Watch 3.jpg'], description: 'Chic, modern, and sophisticated. For the woman who loves contemporary minimalism, this watch features a beautifully smooth, elongated oval case that rests gracefully on the wrist. The minimalist sunburst dial is elevated by the stunning interlocking chain-link bracelet, a staple design in high-end fashion jewelry. It is the perfect everyday piece that transitions flawlessly from the office to a night out.', colors: ['Rose Gold', 'Dark Brown', 'Black', 'Silver'] },
-            { id: 24, name: 'The Velaris Heritage Multi-Dial', category: 'Women', price: 299, images: ['Female Collection/Female Watch 4.jpg'], description: 'Sophistication meets superior craftsmanship. The Velaris Heritage watch offers a beautifully tailored, professional aesthetic with its complex multi-dial layout and traditional chronograph pushers. The dial is a masterpiece of detail, featuring a fine, radiating guilloché-style texture and classic Roman numeral markers. Paired with an elegant, fluid multi-link bracelet, this watch is the epitome of refined, everyday luxury.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver'] },
-            { id: 25, name: 'The Velaris Blossom Ribbon', category: 'Women', price: 299, images: ['Female Collection/Female Watch 5.jpg'], description: 'Playful, charming, and radiating with sparkle. The Velaris Blossom features an enchanting dial scattered with delicate floral motifs, but the true magic lies in the case design. Beautiful, crystal-encrusted curved accents flank the top and bottom of the dial, resembling a glittering ribbon or bow. Paired with a distinctive beaded-style bracelet, this watch is the epitome of joyful elegance.', colors: ['Rose Gold Strap with Brown Dial', ' Rose Gold Strap with Rose Gold Dial', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with White Dial'] },
-            { id: 26, name: 'The Velaris Open-Halo Chainlink', category: 'Women', price: 349, images: ['Female Collection/Female Watch 6.jpg'], description: 'Artistic, contemporary, and effortlessly chic. This highly distinctive timepiece redefines the concept of a jewelry watch with its stunning open-circle chainlink bracelet. The delicate crystal accents at the connection points beautifully complement the crystal-encrusted bezel. To balance the modern bracelet, the dial is kept classic and sophisticated, featuring clean lines and traditional Roman numerals at the 12:00 and 6;00 clock positions.', colors: ['Rose Gold', 'White', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with Silver Dial'] },
-            { id: 27, name: 'The Velaris Legacy Multi-Dial', category: 'Women', price: 299, images: ['Female Collection/Female Watch 7.jpg'], description: 'For the woman who commands her time, the Velaris Legacy brings the classic, complex look of a multi-functional watch to a perfectly proportioned feminine silhouette. Featuring traditional Roman numeral hour markers and intricate sub-dials, it offers a sophisticated, "boyfriend-watch" appeal without sacrificing elegance. The classic multi-link bracelet ensures it remains a timeless staple in your collection.', colors: ['Rose Gold', 'Black', 'Brown', 'Silver'] },
-            { id: 28, name: 'The Velaris Prismatic Jewel Bracelet', category: 'Women', price: 299, images: ['Female Collection/Female Watch 8.jpg'], description: 'Blur the lines between high-fashion jewelry and timekeeping with the avant-garde Velaris Prismatic collection. This bold statement piece features an incredible bracelet composed of large, rectangular, gem-like links—including breathtaking iridescent options that shift colors in the light. The petite, geometric rectangular dial perfectly balances the dramatic bracelet, resulting in a watch that is guaranteed to turn heads.', colors: ['Rose Gold', 'Black', 'Brown', 'Royal Blue', 'Silver'] },
-            { id: 29, name: 'The Velaris Radiant Octagon', category: 'Women', price: 299, images: ['Female Collection/Female Watch 9.jpg'], description: 'Embrace the luxury sport-chic trend with this exceptional octagonal timepiece. The sharp, geometric lines of the multi-faceted case are softened by a brilliant, crystal-studded bezel. The delicately textured dial adds visual depth, while the intricate, mixed-link bracelet provides a secure, premium feel. It is a watch designed for the modern woman who loves a touch of edge with her sparkle.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver Strap with White Dial', 'Silver Strap with Blue Dial'] },
-            { id: 30, name: 'The Velaris Infinity Crystal Collection', category: 'Women', price: 349, images: ['Female Collection/Female Watch 10.jpg'], description: 'Breathtakingly glamorous, this timepiece is designed to be the ultimate showstopper. The watch features a stunning, crystal-encrusted infinity motif that flows seamlessly from the intricate dial pattern out into the beautifully intertwined links of the bracelet. The dazzling halo bezel completes this jewelry-forward design, making it the perfect accessory for special occasions or whenever you want to feel truly radiant.', colors: ['Rose Gold', 'Golden', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with White Dial'] },
-            { id: 31, name: 'The Velaris Flora & Fauna Silhouette', category: 'Women', price: 299, images: ['Female Collection/Female Watch 11.jpg'], description: 'Delicate, feminine, and undeniably radiant. This elegant timepiece is designed for the woman who appreciates subtle, romantic details. The minimalist dial is graced with a whimsical butterfly and floral motif, perfectly complemented by a halo of sparkling crystals set into the bezel. The true standout is the uniquely crafted, pebble-like link bracelet that drapes beautifully like fine jewelry.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver'] },
-            { id: 32, name: 'The Velaris Deco Geometric', category: 'Women', price: 299, images: ['Female Collection/Female Watch 12.jpg'], description: 'Channeling the structured elegance of the Art Deco era, this distinctive square timepiece offers a sharp, confident aesthetic. The beveled, stepped case frames a rich dial featuring bold, vintage-inspired Arabic numerals. The bracelet is a work of art in itself, featuring unique rectangular links with beautifully contrasting center accents that tie the whole look together.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver'] },
-            { id: 33, name: 'The Velaris Deco Elegance', category: 'Women', price: 299, images: ['Female Collection/Female Watch 13.jpg'], description: 'Channeling the sophisticated glamour of the Art Deco era, this stunning rectangular timepiece is the epitome of understated luxury. The classic "tank" style case features beautifully stepped edges that draw the eye toward a clean, refined dial graced with elegant Roman numerals at the 12:00 and 6:00 clock positions. Paired with a highly intricate, jewelry-inspired multi-link bracelet that drapes fluidly on the wrist, this watch offers a vintage-inspired aesthetic that remains effortlessly modern. ', colors: ['Rose Gold Strap with Golden Dial', 'Rose Gold Strap with Grey Dial', 'Black', 'Silver'] },
-            { id: 34, name: 'The Velaris Diamond-Cut Facet', category: 'Women', price: 299, images: ['Female Collection/Female Watch 14.jpg'], description: 'Experience the mesmerizing illusion of depth and light. This extraordinary watch is defined by its 3D, diamond-cut faceted glass that sits over a beautifully minimalist dial, catching the light from every possible angle. Adding to its regal charm are the uniquely designed lug attachments, which feature a delicate, crystal-studded fan motif that seamlessly connects the round case to the elegant multi-link bracelet.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with Cream Dial'] },
-            { id: 35, name: 'The Velaris Crystal Halo Oval', category: 'Women', price: 299, images: ['Female Collection/Female Watch 15.jpg'], description: 'Absolute glamour in a soft, refined package. The Velaris Crystal Halo features a highly polished oval dial encased entirely in a brilliant, continuous ring of sparkling crystals. The dial is kept impeccably clean and minimalist to allow the radiant bezel to shine, while the high-polish, fluid link bracelet perfectly complements the luxurious feel of the piece.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver'] },
-            { id: 36, name: 'The Velaris Papillon Classic', category: 'Women', price: 299, images: ['Female Collection/Female Watch 16.jpg'], description: 'Find the perfect balance between timeless watchmaking and whimsical femininity. The Velaris Papillon features a beautifully classic, multi-link stainless steel bracelet that offers supreme comfort and a traditional silhouette. The magic lies within the dial, where a delicate, crystal-studded butterfly rests beautifully against a rich, sunburst-textured background. It is a graceful everyday watch that sparks joy with every glance.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver Strap with White Dial', 'Silver Strap with Blue Dial'] },
+            { id: 21, name: 'Female Watch 1', category: 'Women', price: 12000, images: ['Female Collection/Female Watch 1.jpg'], description: 'Exude timeless elegance with this slender, beautifully proportioned watch. Features a captivating sunray dial, delicate hands, and a premium mesh bracelet. Designed for sophisticated grace.\n\nDial: Sunray\nBracelet: Premium Mesh', colors: ['Rose Gold', 'Silver'] },
+            { id: 22, name: 'Female Watch 2', category: 'Women', price: 14000, images: ['Female Collection/Female Watch 2.jpg'], description: 'A touch of glamour for your wrist. This stunning timepiece features a dial adorned with subtle crystalline accents and a slim, polished bezel that reflects light beautifully from every angle.\n\nAccents: Crystalline\nBezel: High-Polish', colors: ['Rose Gold', 'Silver'] },
+            { id: 23, name: 'Female Watch 3', category: 'Women', price: 16500, images: ['Female Collection/Female Watch 3.jpg'], description: 'The perfect harmony of strength and beauty. Crafted with a genuine mother-of-pearl dial, no two watches are exactly alike. Complemented by an intricate link bracelet for ultimate luxury.\n\nDial: Genuine Mother-of-Pearl\nStrap: Intricate Link', colors: ['Rose Gold', 'Silver'] },
+            { id: 24, name: 'Female Watch 4', category: 'Women', price: 11000, images: ['Female Collection/Female Watch 4.jpg'], description: 'Contemporary chic meets classic watchmaking. A minimalist face unburdened by numerals, housed in a petite 28mm case. It’s jewelry that tells time.\n\nSize: 28mm Petite\nStyle: Modern Minimalist', colors: ['Rose Gold', 'Silver'] },
+            { id: 25, name: 'Female Watch 5', category: 'Women', price: 13500, images: ['Female Collection/Female Watch 5.jpg'], description: 'Effortless everyday luxury. Featuring a scratch-resistant crystal and a supple, genuine leather strap that ages beautifully over time. The rose gold-tone indices add a warm, refined finish.\n\nCrystal: Scratch-Resistant\nStrap: Genuine Leather', colors: ['Rose Gold', 'Silver'] },
+            { id: 26, name: 'Female Watch 6', category: 'Women', price: 19000, images: ['Female Collection/Female Watch 6.jpg'], description: 'Exude timeless elegance with this slender, beautifully proportioned watch. Features a captivating sunray dial.\n\nDial: Sunray', colors: ['Rose Gold', 'Silver'] },
+            { id: 27, name: 'Female Watch 7', category: 'Women', price: 21000, images: ['Female Collection/Female Watch 7.jpg'], description: 'A touch of glamour for your wrist. This stunning timepiece features a dial adorned with subtle crystalline accents.\n\nAccents: Crystalline', colors: ['Rose Gold', 'Silver'] },
+            { id: 28, name: 'Female Watch 8', category: 'Women', price: 24000, images: ['Female Collection/Female Watch 8.jpg'], description: 'The perfect harmony of strength and beauty. Crafted with a genuine mother-of-pearl dial.\n\nDial: Mother-of-Pearl', colors: ['Rose Gold', 'Silver'] },
+            { id: 29, name: 'Female Watch 9', category: 'Women', price: 12500, images: ['Female Collection/Female Watch 9.jpg'], description: 'Contemporary chic meets classic watchmaking. A minimalist face unburdened by numerals.\n\nStyle: Minimalist', colors: ['Rose Gold', 'Silver'] },
+            { id: 30, name: 'Female Watch 10', category: 'Women', price: 15999, images: ['Female Collection/Female Watch 10.jpg'], description: 'Effortless everyday luxury. Featuring a supple, genuine leather strap that ages beautifully over time.\n\nStrap: Leather', colors: ['Rose Gold', 'Silver'] },
+            { id: 31, name: 'Female Watch 11', category: 'Women', price: 17500, images: ['Female Collection/Female Watch 11.jpg'], description: 'Exude timeless elegance with this slender, beautifully proportioned watch. Premium mesh bracelet.\n\nStrap: Mesh', colors: ['Rose Gold', 'Silver'] },
+            { id: 32, name: 'Female Watch 12', category: 'Women', price: 22000, images: ['Female Collection/Female Watch 12.jpg'], description: 'A touch of glamour for your wrist. Slim, polished bezel that reflects light beautifully.\n\nBezel: Polished', colors: ['Rose Gold', 'Silver'] },
+            { id: 33, name: 'Female Watch 13', category: 'Women', price: 26000, images: ['Female Collection/Female Watch 13.jpg'], description: 'The perfect harmony of strength and beauty. Complemented by an intricate link bracelet.\n\nBracelet: Intricate Link', colors: ['Rose Gold', 'Silver'] },
+            { id: 34, name: 'Female Watch 14', category: 'Women', price: 18000, images: ['Female Collection/Female Watch 14.jpg'], description: 'Contemporary chic meets classic watchmaking. Housed in a petite 28mm case.\n\nSize: 28mm', colors: ['Rose Gold', 'Silver'] },
+            { id: 35, name: 'Female Watch 15', category: 'Women', price: 23500, images: ['Female Collection/Female Watch 15.jpg'], description: 'Effortless everyday luxury. The rose gold-tone indices add a warm, refined finish.\n\nIndices: Rose Gold-Tone', colors: ['Rose Gold', 'Silver'] },
+            { id: 36, name: 'Female Watch 16', category: 'Women', price: 28000, images: ['Female Collection/Female Watch 16.jpg'], description: 'Exude timeless elegance with this slender watch. Designed for sophisticated grace.\n\nStyle: Elegant', colors: ['Rose Gold', 'Silver'] },
+            { id: 37, name: 'Female Watch 17', category: 'Women', price: 35000, images: ['Female Collection/Female Watch 17.jpg'], description: 'A touch of glamour for your wrist. Reflects light beautifully from every angle.\n\nFinish: High-Shine', colors: ['Rose Gold', 'Silver'] },
+            { id: 38, name: 'Female Watch 18', category: 'Women', price: 19500, images: ['Female Collection/Female Watch 18.jpg'], description: 'The perfect harmony of strength and beauty. No two watches are exactly alike.\n\nExclusivity: Unique Dial', colors: ['Rose Gold', 'Silver'] },
+            { id: 39, name: 'Female Watch 19', category: 'Women', price: 31000, images: ['Female Collection/Female Watch 19.jpg'], description: 'Contemporary chic meets classic watchmaking. It’s jewelry that tells time.\n\nFunction: Jewelry Timepiece', colors: ['Rose Gold', 'Silver'] },
+            { id: 40, name: 'Female Watch 20', category: 'Women', price: 14500, images: ['Female Collection/Female Watch 20.jpg'], description: 'Effortless everyday luxury. Featuring a scratch-resistant crystal.\n\nCrystal: Sapphire', colors: ['Rose Gold', 'Silver'] },
 
             // --- 20 PREMIUM WATCHES ---
             { id: 41, name: 'Premium Watch 1', category: 'Premium', price: 55000, images: ['Premium Collection/Premium Watch 1.jpg'], description: 'The absolute pinnacle of horology. This masterpiece features an exposed tourbillon movement, hand-polished platinum casing, and unparalleled mechanical precision. A true heirloom.\n\nMovement: Exposed Tourbillon\nMaterial: Hand-Polished Platinum', colors: ['Platinum', 'Pure Gold'] },
@@ -603,6 +620,52 @@
             'return': { title: 'Return & Warranty', content: '<p><strong class="text-gold">Warranty:</strong> Every AVESTA timepiece comes with a 2-year warranty.</p>' },
             'shipping': { title: 'Secure Shipping', content: '<p><strong class="text-gold">Free Delivery:</strong> Priority shipping across India for all our timepieces.</p>' }
         };
+
+        // 🔥 CUSTOM ALERT LOGIC 🔥
+        function showCustomAlert(title, message, type = 'info') {
+            document.getElementById('alert-title').innerText = title;
+            document.getElementById('alert-modal-text').innerHTML = message;
+            
+            const iconContainer = document.getElementById('alert-icon-container');
+            const icon = document.getElementById('alert-icon');
+            
+            if(type === 'success') {
+                iconContainer.className = "w-12 h-12 rounded-full border border-green-500/30 bg-green-500/10 flex items-center justify-center mx-auto mb-4";
+                icon.className = "fa-solid fa-check text-green-400 text-xl";
+            } else if(type === 'error') {
+                iconContainer.className = "w-12 h-12 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center mx-auto mb-4";
+                icon.className = "fa-solid fa-xmark text-red-500 text-xl";
+            } else {
+                iconContainer.className = "w-12 h-12 rounded-full border border-gold/30 bg-gold/10 flex items-center justify-center mx-auto mb-4";
+                icon.className = "fa-solid fa-info text-gold text-xl";
+            }
+
+            const modal = document.getElementById('custom-alert-modal');
+            const box = document.getElementById('custom-alert-box');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                box.classList.remove('scale-95');
+                box.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeCustomAlert() {
+            const modal = document.getElementById('custom-alert-modal');
+            const box = document.getElementById('custom-alert-box');
+            
+            modal.classList.add('opacity-0');
+            box.classList.remove('scale-100');
+            box.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 300);
+        }
 
         function openModalSafely(modalId) {
             const modal = document.getElementById(modalId);
@@ -657,7 +720,8 @@
 
         async function simulateTracking() {
             const input = document.getElementById('order-id-input').value.trim().toUpperCase();
-            if(input.length < 4) return alert("Please enter a valid Order Reference");
+            if(input.length < 4) return showCustomAlert('Invalid Input', 'Please enter a valid Order Reference.', 'error');
+            
             document.getElementById('tracking-input-area').classList.add('hidden');
             document.getElementById('tracking-loading').classList.remove('hidden');
             document.getElementById('tracking-loading').classList.add('flex');
@@ -666,8 +730,8 @@
                 try {
                     const doc = await db.collection("orders").doc(input).get();
                     if (doc.exists) { showTrackingResult(doc.data()); } 
-                    else { alert("Order reference not found."); resetTracking(); }
-                } catch (e) { alert("Network error."); resetTracking(); }
+                    else { showCustomAlert('Not Found', 'Order reference not found.', 'error'); resetTracking(); }
+                } catch (e) { showCustomAlert('Network Error', 'Please check your connection and try again.', 'error'); resetTracking(); }
             }
         }
 
@@ -745,7 +809,6 @@
             `).join('');
         }
 
-        // 🔥 CUSTOM DROPDOWN LOGIC ADDED 🔥
         function toggleCustomDropdown() {
             const list = document.getElementById('custom-select-list');
             const icon = document.getElementById('custom-select-icon');
@@ -766,7 +829,6 @@
             toggleCustomDropdown();
         }
 
-        // Close dropdown when clicking outside
         window.addEventListener('click', function(e) {
             const btn = document.getElementById('custom-select-btn');
             const list = document.getElementById('custom-select-list');
@@ -785,7 +847,7 @@
             const product = products.find(p => p.id === id);
             document.getElementById('detail-main-img').src = product.images[0];
             const thumbsContainer = document.getElementById('detail-thumbnails');
-            thumbsContainer.innerHTML = product.images.map((imgSrc) => `<button onclick="changeMainImage('${imgSrc}')" class="w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden border border-transparent focus:border-gold hover:border-gold/50 transition-all bg-[#050505]"><img src="${imgSrc}" class="w-full h-full object-cover opacity-70 hover:opacity-100 mix-blend-lighten"></button>`).join('');
+            thumbsContainer.innerHTML = product.images.map((imgSrc) => `<button onclick="changeMainImage('${imgSrc}')" class="w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden border border-transparent focus:border-gold hover:border-gold/50 transition-all bg-[#050505]"><img src="${imgSrc}" class="w-full h-full object-contain opacity-70 hover:opacity-100 mix-blend-lighten"></button>`).join('');
             document.getElementById('detail-category').innerText = product.id === 0 ? "System Test" : product.category + " Collection";
             document.getElementById('detail-title').innerText = product.name;
             document.getElementById('detail-price').innerText = '₹' + product.price.toLocaleString('en-IN');
@@ -946,7 +1008,7 @@
             const address = document.getElementById('cust-address').value.trim();
 
             if(!name || !email || !phone || !address) {
-                alert("Please fill in your complete details including your Delivery Address first.");
+                showCustomAlert('Missing Details', 'Please fill in your complete details including your Delivery Address first.', 'error');
                 return;
             }
 
@@ -1013,7 +1075,7 @@
             if(paymentMethod === 'upi') {
                 const utrInput = document.getElementById('utr-number').value.trim();
                 if(utrInput.length < 8) {
-                    alert("Please enter a valid 12-digit UTR/Reference ID to verify your payment.");
+                    showCustomAlert('Verification Failed', 'Please enter a valid 12-digit UTR/Reference ID to verify your payment.', 'error');
                     return;
                 }
                 finalUtr = utrInput;
