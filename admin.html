@@ -55,6 +55,31 @@
         <div id="orders-container" class="space-y-4 hidden pb-10"></div>
     </main>
 
+    <div id="custom-confirm-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans">
+        <div class="glass-panel border border-red-500/30 bg-[#0a0a0a] rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(239,68,68,0.1)] relative">
+            <div class="w-12 h-12 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-red-500 text-xl"></i>
+            </div>
+            <h3 class="text-white text-lg serif-text tracking-widest mb-2">Delete Order?</h3>
+            <p id="confirm-modal-text" class="text-gray-400 text-xs font-light leading-relaxed mb-6"></p>
+            <div class="flex gap-3">
+                <button onclick="closeConfirmModal()" class="flex-1 border border-white/20 text-gray-400 hover:text-white hover:border-white py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Cancel</button>
+                <button onclick="executeDelete()" class="flex-1 bg-red-500/10 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all shadow-lg">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="custom-alert-modal" class="fixed inset-0 z-[110] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans">
+        <div class="glass-panel border border-gold/30 bg-[#0a0a0a] rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(197,160,89,0.1)] relative">
+            <div id="alert-icon-container" class="w-12 h-12 rounded-full border flex items-center justify-center mx-auto mb-4">
+                <i id="alert-icon" class="fa-solid text-xl"></i>
+            </div>
+            <h3 id="alert-title" class="text-white text-lg serif-text tracking-widest mb-2">Notice</h3>
+            <p id="alert-modal-text" class="text-gray-400 text-xs font-light leading-relaxed mb-6"></p>
+            <button onclick="closeAlertModal()" class="w-full bg-gold/10 border border-gold/30 text-gold hover:bg-gold hover:text-black py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Okay</button>
+        </div>
+    </div>
+
     <script>
         const firebaseConfig = {
           apiKey: "AIzaSyAN3SStrczNH5cwhU9o5Whg0QVbaRAlUpg",
@@ -69,6 +94,7 @@
         const db = firebase.firestore();
 
         const SECRET_CODE = "AvestaAdmin2026"; 
+        let currentOrderIdToDelete = null;
 
         if(sessionStorage.getItem("avesta_admin") === "true") { showDashboard(); }
 
@@ -96,6 +122,59 @@
             fetchOrders();
         }
 
+        // --- CUSTOM MODAL LOGIC ---
+        function showCustomAlert(title, message, type) {
+            document.getElementById('alert-title').innerText = title;
+            document.getElementById('alert-modal-text').innerHTML = message;
+            
+            const iconContainer = document.getElementById('alert-icon-container');
+            const icon = document.getElementById('alert-icon');
+            
+            if(type === 'success') {
+                iconContainer.className = "w-12 h-12 rounded-full border border-green-500/30 bg-green-500/10 flex items-center justify-center mx-auto mb-4";
+                icon.className = "fa-solid fa-check text-green-400 text-xl";
+            } else {
+                iconContainer.className = "w-12 h-12 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center mx-auto mb-4";
+                icon.className = "fa-solid fa-xmark text-red-500 text-xl";
+            }
+
+            document.getElementById('custom-alert-modal').classList.remove('hidden');
+            document.getElementById('custom-alert-modal').classList.add('flex');
+        }
+
+        function closeAlertModal() {
+            document.getElementById('custom-alert-modal').classList.add('hidden');
+            document.getElementById('custom-alert-modal').classList.remove('flex');
+        }
+
+        function deleteOrder(orderId) {
+            currentOrderIdToDelete = orderId;
+            document.getElementById('confirm-modal-text').innerHTML = `Are you sure you want to permanently delete <strong>Order #${orderId}</strong>?<br><br>This action cannot be undone.`;
+            document.getElementById('custom-confirm-modal').classList.remove('hidden');
+            document.getElementById('custom-confirm-modal').classList.add('flex');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('custom-confirm-modal').classList.add('hidden');
+            document.getElementById('custom-confirm-modal').classList.remove('flex');
+            currentOrderIdToDelete = null;
+        }
+
+        async function executeDelete() {
+            if(!currentOrderIdToDelete) return;
+            const orderId = currentOrderIdToDelete;
+            closeConfirmModal();
+
+            try {
+                await db.collection("orders").doc(orderId).delete();
+                showCustomAlert("Success", `Order <strong>#${orderId}</strong> has been deleted successfully.`, "success");
+                fetchOrders(); 
+            } catch (error) {
+                showCustomAlert("Error", "Failed to delete order. Please try again.", "error");
+            }
+        }
+        // --------------------------
+
         async function updateOrderStatus(orderId) {
             const selectElement = document.getElementById(`status-${orderId}`);
             const updateBtn = document.getElementById(`btn-${orderId}`);
@@ -111,22 +190,9 @@
                     updateBtn.classList.replace("text-green-400", "text-gold");
                     fetchOrders();
                 }, 2000);
-            } catch (error) { alert("Failed to update status."); updateBtn.innerHTML = 'Update'; }
-        }
-
-        // 🔥 NEW DELETE FUNCTION 🔥
-        async function deleteOrder(orderId) {
-            // Confirm from admin before deleting
-            const isConfirmed = confirm(`Are you sure you want to permanently DELETE Order #${orderId}?\nThis action cannot be undone.`);
-            
-            if(isConfirmed) {
-                try {
-                    await db.collection("orders").doc(orderId).delete();
-                    alert(`Order #${orderId} has been deleted successfully.`);
-                    fetchOrders(); // Refresh the list automatically
-                } catch (error) {
-                    alert("Failed to delete order. Please try again.");
-                }
+            } catch (error) { 
+                showCustomAlert("Error", "Failed to update status. Please try again.", "error");
+                updateBtn.innerHTML = 'Update'; 
             }
         }
 
@@ -154,7 +220,6 @@
                         let itemsHTML = '';
                         if(data.items && data.items.length > 0) {
                             data.items.forEach(item => {
-                                // Add color to the item description if selected
                                 let colorText = (item.selectedColor && item.selectedColor !== 'Default') ? ` (${item.selectedColor})` : '';
                                 itemsHTML += `<div class="flex justify-between text-[10px] text-gray-400 mt-2 bg-black p-2 rounded-sm border border-white/5"><span class="truncate pr-2">${item.quantity}x ${item.name}<span class="text-gold">${colorText}</span></span><span class="text-gold">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span></div>`;
                             });
