@@ -520,74 +520,75 @@
 
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
+        // 🔥 PRODUCTS ARRAY 🔥
         const products = [
-            { id: 0, name: 'For Trial (Test Product)', category: 'Testing', price: 1, images: ['Enter the name of image'], description: 'Dummy product to test checkout, UPI, COD, and flow.', colors: [] },
+            { id: 0, name: 'For Trial (Test Product)', category: 'Testing', price: 1, images: ['https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000&auto=format&fit=crop'], description: 'Dummy product to test checkout, UPI, COD, and flow.', colors: [] },
             
             // --- 20 MEN'S WATCHES ---
-            { id: 1, name: 'Male Watch 1', category: 'Men', price: 15000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 2, name: 'Male Watch 2', category: 'Men', price: 18000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 3, name: 'Male Watch 3', category: 'Men', price: 21000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 4, name: 'Male Watch 4', category: 'Men', price: 12000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 5, name: 'Male Watch 5', category: 'Men', price: 14500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 6, name: 'Male Watch 6', category: 'Men', price: 19999, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 7, name: 'Male Watch 7', category: 'Men', price: 25000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 8, name: 'Male Watch 8', category: 'Men', price: 30000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 9, name: 'Male Watch 9', category: 'Men', price: 11500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 10, name: 'Male Watch 10', category: 'Men', price: 13999, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 11, name: 'Male Watch 11', category: 'Men', price: 16500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 12, name: 'Male Watch 12', category: 'Men', price: 22000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 13, name: 'Male Watch 13', category: 'Men', price: 28000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 14, name: 'Male Watch 14', category: 'Men', price: 19000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 15, name: 'Male Watch 15', category: 'Men', price: 26500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 16, name: 'Male Watch 16', category: 'Men', price: 32000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 17, name: 'Male Watch 17', category: 'Men', price: 45000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 18, name: 'Male Watch 18', category: 'Men', price: 13000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 19, name: 'Male Watch 19', category: 'Men', price: 24500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
-            { id: 20, name: 'Male Watch 20', category: 'Men', price: 27500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 1, name: 'Male Watch 1', category: 'Men', price: 15000, images: ['Male Watch 1.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 2, name: 'Male Watch 2', category: 'Men', price: 18000, images: ['Male Watch 2.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 3, name: 'Male Watch 3', category: 'Men', price: 21000, images: ['Male Watch 3.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 4, name: 'Male Watch 4', category: 'Men', price: 12000, images: ['Male Watch 4.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 5, name: 'Male Watch 5', category: 'Men', price: 14500, images: ['Male Watch 5.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 6, name: 'Male Watch 6', category: 'Men', price: 19999, images: ['Male Watch 6.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 7, name: 'Male Watch 7', category: 'Men', price: 25000, images: ['Male Watch 7.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 8, name: 'Male Watch 8', category: 'Men', price: 30000, images: ['Male Watch 8.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 9, name: 'Male Watch 9', category: 'Men', price: 11500, images: ['Male Watch 9.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 10, name: 'Male Watch 10', category: 'Men', price: 13999, images: ['Male Watch 10.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 11, name: 'Male Watch 11', category: 'Men', price: 16500, images: ['Male Watch 11.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 12, name: 'Male Watch 12', category: 'Men', price: 22000, images: ['Male Watch 12.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 13, name: 'Male Watch 13', category: 'Men', price: 28000, images: ['Male Watch 13.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 14, name: 'Male Watch 14', category: 'Men', price: 19000, images: ['Male Watch 14.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 15, name: 'Male Watch 15', category: 'Men', price: 26500, images: ['Male Watch 15.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 16, name: 'Male Watch 16', category: 'Men', price: 32000, images: ['Male Watch 16.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 17, name: 'Male Watch 17', category: 'Men', price: 45000, images: ['Male Watch 17.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 18, name: 'Male Watch 18', category: 'Men', price: 13000, images: ['Male Watch 18.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 19, name: 'Male Watch 19', category: 'Men', price: 24500, images: ['Male Watch 19.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
+            { id: 20, name: 'Male Watch 20', category: 'Men', price: 27500, images: ['Male Watch 20.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver', 'Black'] },
 
             // --- 20 WOMEN'S WATCHES ---
-            { id: 21, name: 'Female Watch 1', category: 'Women', price: 12000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 22, name: 'Female Watch 2', category: 'Women', price: 14000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 23, name: 'Female Watch 3', category: 'Women', price: 16500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 24, name: 'Female Watch 4', category: 'Women', price: 11000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 25, name: 'Female Watch 5', category: 'Women', price: 13500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 26, name: 'Female Watch 6', category: 'Women', price: 19000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 27, name: 'Female Watch 7', category: 'Women', price: 21000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 28, name: 'Female Watch 8', category: 'Women', price: 24000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 29, name: 'Female Watch 9', category: 'Women', price: 12500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 30, name: 'Female Watch 10', category: 'Women', price: 15999, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 31, name: 'Female Watch 11', category: 'Women', price: 17500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 32, name: 'Female Watch 12', category: 'Women', price: 22000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 33, name: 'Female Watch 13', category: 'Women', price: 26000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 34, name: 'Female Watch 14', category: 'Women', price: 18000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 35, name: 'Female Watch 15', category: 'Women', price: 23500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 36, name: 'Female Watch 16', category: 'Women', price: 28000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 37, name: 'Female Watch 17', category: 'Women', price: 35000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 38, name: 'Female Watch 18', category: 'Women', price: 19500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 39, name: 'Female Watch 19', category: 'Women', price: 31000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
-            { id: 40, name: 'Female Watch 20', category: 'Women', price: 14500, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 21, name: 'Female Watch 1', category: 'Women', price: 12000, images: ['Female Watch 1.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 22, name: 'Female Watch 2', category: 'Women', price: 14000, images: ['Female Watch 2.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 23, name: 'Female Watch 3', category: 'Women', price: 16500, images: ['Female Watch 3.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 24, name: 'Female Watch 4', category: 'Women', price: 11000, images: ['Female Watch 4.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 25, name: 'Female Watch 5', category: 'Women', price: 13500, images: ['Female Watch 5.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 26, name: 'Female Watch 6', category: 'Women', price: 19000, images: ['Female Watch 6.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 27, name: 'Female Watch 7', category: 'Women', price: 21000, images: ['Female Watch 7.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 28, name: 'Female Watch 8', category: 'Women', price: 24000, images: ['Female Watch 8.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 29, name: 'Female Watch 9', category: 'Women', price: 12500, images: ['Female Watch 9.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 30, name: 'Female Watch 10', category: 'Women', price: 15999, images: ['Female Watch 10.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 31, name: 'Female Watch 11', category: 'Women', price: 17500, images: ['Female Watch 11.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 32, name: 'Female Watch 12', category: 'Women', price: 22000, images: ['Female Watch 12.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 33, name: 'Female Watch 13', category: 'Women', price: 26000, images: ['Female Watch 13.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 34, name: 'Female Watch 14', category: 'Women', price: 18000, images: ['Female Watch 14.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 35, name: 'Female Watch 15', category: 'Women', price: 23500, images: ['Female Watch 15.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 36, name: 'Female Watch 16', category: 'Women', price: 28000, images: ['Female Watch 16.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 37, name: 'Female Watch 17', category: 'Women', price: 35000, images: ['Female Watch 17.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 38, name: 'Female Watch 18', category: 'Women', price: 19500, images: ['Female Watch 18.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 39, name: 'Female Watch 19', category: 'Women', price: 31000, images: ['Female Watch 19.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
+            { id: 40, name: 'Female Watch 20', category: 'Women', price: 14500, images: ['Female Watch 20.jpg'], description: 'Add your description here...', colors: ['Rose Gold', 'Silver'] },
 
             // --- 20 PREMIUM WATCHES ---
-            { id: 41, name: 'Premium Watch 1', category: 'Premium', price: 55000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 42, name: 'Premium Watch 2', category: 'Premium', price: 65000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 43, name: 'Premium Watch 3', category: 'Premium', price: 75000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 44, name: 'Premium Watch 4', category: 'Premium', price: 85000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 45, name: 'Premium Watch 5', category: 'Premium', price: 95000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 46, name: 'Premium Watch 6', category: 'Premium', price: 58000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 47, name: 'Premium Watch 7', category: 'Premium', price: 62000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 48, name: 'Premium Watch 8', category: 'Premium', price: 72000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 49, name: 'Premium Watch 9', category: 'Premium', price: 88000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 50, name: 'Premium Watch 10', category: 'Premium', price: 99999, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 51, name: 'Premium Watch 11', category: 'Premium', price: 51000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 52, name: 'Premium Watch 12', category: 'Premium', price: 69000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 53, name: 'Premium Watch 13', category: 'Premium', price: 78000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 54, name: 'Premium Watch 14', category: 'Premium', price: 82000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 55, name: 'Premium Watch 15', category: 'Premium', price: 91000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 56, name: 'Premium Watch 16', category: 'Premium', price: 105000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 57, name: 'Premium Watch 17', category: 'Premium', price: 115000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 58, name: 'Premium Watch 18', category: 'Premium', price: 125000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 59, name: 'Premium Watch 19', category: 'Premium', price: 135000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
-            { id: 60, name: 'Premium Watch 20', category: 'Premium', price: 150000, images: ['Enter the name of image'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] }
+            { id: 41, name: 'Premium Watch 1', category: 'Premium', price: 55000, images: ['Premium Watch 1.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 42, name: 'Premium Watch 2', category: 'Premium', price: 65000, images: ['Premium Watch 2.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 43, name: 'Premium Watch 3', category: 'Premium', price: 75000, images: ['Premium Watch 3.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 44, name: 'Premium Watch 4', category: 'Premium', price: 85000, images: ['Premium Watch 4.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 45, name: 'Premium Watch 5', category: 'Premium', price: 95000, images: ['Premium Watch 5.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 46, name: 'Premium Watch 6', category: 'Premium', price: 58000, images: ['Premium Watch 6.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 47, name: 'Premium Watch 7', category: 'Premium', price: 62000, images: ['Premium Watch 7.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 48, name: 'Premium Watch 8', category: 'Premium', price: 72000, images: ['Premium Watch 8.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 49, name: 'Premium Watch 9', category: 'Premium', price: 88000, images: ['Premium Watch 9.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 50, name: 'Premium Watch 10', category: 'Premium', price: 99999, images: ['Premium Watch 10.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 51, name: 'Premium Watch 11', category: 'Premium', price: 51000, images: ['Premium Watch 11.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 52, name: 'Premium Watch 12', category: 'Premium', price: 69000, images: ['Premium Watch 12.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 53, name: 'Premium Watch 13', category: 'Premium', price: 78000, images: ['Premium Watch 13.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 54, name: 'Premium Watch 14', category: 'Premium', price: 82000, images: ['Premium Watch 14.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 55, name: 'Premium Watch 15', category: 'Premium', price: 91000, images: ['Premium Watch 15.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 56, name: 'Premium Watch 16', category: 'Premium', price: 105000, images: ['Premium Watch 16.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 57, name: 'Premium Watch 17', category: 'Premium', price: 115000, images: ['Premium Watch 17.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 58, name: 'Premium Watch 18', category: 'Premium', price: 125000, images: ['Premium Watch 18.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 59, name: 'Premium Watch 19', category: 'Premium', price: 135000, images: ['Premium Watch 19.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] },
+            { id: 60, name: 'Premium Watch 20', category: 'Premium', price: 150000, images: ['Premium Watch 20.jpg'], description: 'Add your description here...', colors: ['Platinum', 'Pure Gold'] }
         ];
 
         let cart = [];
@@ -1044,19 +1045,19 @@
             
             if(details.method === 'UPI') {
                 document.getElementById('ebill-status-text').innerText = "Verification Pending";
-                document.getElementById('ebill-status-text').style.cssText = 'color: #eab308; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); padding: 6px 12px; display: inline-flex; align-items: center; justify-content: center; text-align: center; border-radius: 2px; line-height: 1;'; 
+                document.getElementById('ebill-status-text').style.cssText = 'color: #eab308; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); padding: 6px 12px; display: inline-flex; align-items: center; justify-content: center; text-align: center; border-radius: 2px; line-height: 1; transform: translateY(-1px);'; 
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
             } else {
                 document.getElementById('ebill-status-text').innerText = "Confirmed (COD)";
-                document.getElementById('ebill-status-text').style.cssText = 'color: #4ade80; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); padding: 6px 12px; display: inline-flex; align-items: center; justify-content: center; text-align: center; border-radius: 2px; line-height: 1;'; 
+                document.getElementById('ebill-status-text').style.cssText = 'color: #4ade80; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); padding: 6px 12px; display: inline-flex; align-items: center; justify-content: center; text-align: center; border-radius: 2px; line-height: 1; transform: translateY(-1px);'; 
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
             }
 
             const itemsContainer = document.getElementById('ebill-items');
             
             itemsContainer.innerHTML = details.items.map(item => `
-                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 300; padding: 6px 0; line-height: 1.6;">
-                    <span style="width: 60%; color: #d1d5db; word-break: break-word;">${item.name} ${item.selectedColor !== 'Default' ? `<span style="color:#C5A059; font-size:11px; margin-left:4px;">(${item.selectedColor})</span>` : ''}</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 300; padding: 4px 0; line-height: 1.5;">
+                    <span style="width: 60%; color: #d1d5db;">${item.name} ${item.selectedColor !== 'Default' ? `<span style="color:#C5A059; font-size:11px; margin-left:4px;">(${item.selectedColor})</span>` : ''}</span>
                     <span style="width: 20%; text-align: center; color: #9ca3af;">x${item.quantity}</span>
                     <span style="width: 20%; text-align: right; font-weight: 500; color: white;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
                 </div>
@@ -1078,7 +1079,23 @@
         }
 
         function closeEbill() { closeModalSafely('ebill-modal'); }
+        
         renderProducts();
+    </script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> 
+        AOS.init({ duration: 1000, once: true, easing: 'ease-out' }); 
+        window.addEventListener('scroll', () => { 
+            const nav = document.getElementById('navbar'); 
+            if(window.scrollY > 50) { 
+                nav.classList.add('bg-black/95', 'border-gold/20'); 
+                nav.classList.remove('bg-black/40', 'border-transparent'); 
+            } else { 
+                nav.classList.add('bg-black/40', 'border-transparent'); 
+                nav.classList.remove('bg-black/95', 'border-gold/20'); 
+            } 
+        }); 
     </script>
 </body>
 </html>
