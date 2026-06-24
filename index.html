@@ -227,6 +227,7 @@
             </div>
             <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-gradient-to-b from-darkgray to-black">
                 <p id="detail-category" class="text-gold text-[10px] tracking-widest uppercase font-bold mb-2"></p>
+                
                 <h2 id="detail-title" class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight serif-text"></h2>
                 <p id="detail-price" class="text-2xl md:text-3xl font-light text-white mb-6"></p>
                 <div class="mb-6">
@@ -234,9 +235,18 @@
                     <p id="detail-desc" class="text-gray-300 font-light leading-relaxed text-sm whitespace-pre-line"></p>
                 </div>
                 
-                <div id="detail-options" class="mb-6 hidden">
-                    <h4 class="text-gray-400 text-[10px] uppercase tracking-widest mb-2 font-semibold">Select Color Variant</h4>
-                    <select id="detail-color-select" class="w-full bg-black border border-white/20 text-white text-sm p-3 rounded-sm outline-none focus:border-gold cursor-pointer transition-colors"></select>
+                <div id="detail-options" class="mb-8 hidden relative">
+                    <h4 class="text-gray-400 text-[10px] uppercase tracking-widest mb-2 font-semibold">Select Color / Variant</h4>
+                    
+                    <input type="hidden" id="detail-color-select" value="Default">
+                    
+                    <button type="button" id="custom-select-btn" onclick="toggleCustomDropdown()" class="w-full bg-[#050505] border border-white/20 text-gray-300 text-sm p-4 rounded-sm outline-none hover:border-gold hover:text-white flex justify-between items-center transition-all duration-300 shadow-inner">
+                        <span id="custom-select-text" class="tracking-wide">Select Option</span>
+                        <i class="fa-solid fa-chevron-down text-gold text-xs transition-transform duration-300" id="custom-select-icon"></i>
+                    </button>
+                    
+                    <ul id="custom-select-list" class="absolute z-50 w-full bg-[#0a0a0a] border border-gold/30 rounded-sm mt-1 max-h-48 overflow-y-auto hidden shadow-[0_10px_30px_rgba(0,0,0,0.8)] scrollbar-hide opacity-0 transition-opacity duration-300">
+                        </ul>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-auto">
@@ -519,7 +529,6 @@
 
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
-        // 🔥 EXACTLY 60 PRODUCTS WITH NEW DESCRIPTIONS AND FOLDERS 🔥
         const products = [
             { id: 0, name: 'For Trial (Test Product)', category: 'Testing', price: 1, images: ['Male Collection/Male Watch 1.jpg'], description: 'System Test Product.', colors: [] },
             
@@ -558,7 +567,7 @@
             { id: 34, name: 'Female Watch 14', category: 'Women', price: 299, images: ['Female Collection/Female Watch 14.jpg'], description: 'Contemporary chic meets classic watchmaking. Housed in a petite 28mm case.\n\nSize: 28mm', colors: ['Rose Gold', 'Silver'] },
             { id: 35, name: 'Female Watch 15', category: 'Women', price: 299, images: ['Female Collection/Female Watch 15.jpg'], description: 'Effortless everyday luxury. The rose gold-tone indices add a warm, refined finish.\n\nIndices: Rose Gold-Tone', colors: ['Rose Gold', 'Silver'] },
             { id: 36, name: 'Female Watch 16', category: 'Women', price: 299, images: ['Female Collection/Female Watch 16.jpg'], description: 'Exude timeless elegance with this slender watch. Designed for sophisticated grace.\n\nStyle: Elegant', colors: ['Rose Gold', 'Silver'] },
-            
+
             // --- 20 PREMIUM WATCHES ---
             { id: 41, name: 'Premium Watch 1', category: 'Premium', price: 55000, images: ['Premium Collection/Premium Watch 1.jpg'], description: 'The absolute pinnacle of horology. This masterpiece features an exposed tourbillon movement, hand-polished platinum casing, and unparalleled mechanical precision. A true heirloom.\n\nMovement: Exposed Tourbillon\nMaterial: Hand-Polished Platinum', colors: ['Platinum', 'Pure Gold'] },
             { id: 42, name: 'Premium Watch 2', category: 'Premium', price: 65000, images: ['Premium Collection/Premium Watch 2.jpg'], description: 'A marvel of skeletonized design. Watch the intricate dance of gears through the pure sapphire crystal front and case-back. Secured by a hand-crafted, exotic leather strap.\n\nDesign: Skeletonized Dual-Glass\nStrap: Exotic Artisan Leather', colors: ['Platinum', 'Pure Gold'] },
@@ -737,6 +746,42 @@
             `).join('');
         }
 
+        // 🔥 CUSTOM DROPDOWN LOGIC ADDED 🔥
+        function toggleCustomDropdown() {
+            const list = document.getElementById('custom-select-list');
+            const icon = document.getElementById('custom-select-icon');
+            if(list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                setTimeout(() => list.classList.remove('opacity-0'), 10);
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                list.classList.add('opacity-0');
+                setTimeout(() => list.classList.add('hidden'), 300);
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function selectCustomOption(val) {
+            document.getElementById('detail-color-select').value = val;
+            document.getElementById('custom-select-text').innerText = val;
+            toggleCustomDropdown();
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            const btn = document.getElementById('custom-select-btn');
+            const list = document.getElementById('custom-select-list');
+            if (btn && list) {
+                if (!btn.contains(e.target) && !list.contains(e.target)) {
+                    if (!list.classList.contains('hidden')) {
+                        list.classList.add('opacity-0');
+                        setTimeout(() => list.classList.add('hidden'), 300);
+                        document.getElementById('custom-select-icon').style.transform = 'rotate(0deg)';
+                    }
+                }
+            }
+        });
+
         function openProductDetail(id) {
             const product = products.find(p => p.id === id);
             document.getElementById('detail-main-img').src = product.images[0];
@@ -749,12 +794,21 @@
             
             const colorContainer = document.getElementById('detail-options');
             const colorSelect = document.getElementById('detail-color-select');
+            const customList = document.getElementById('custom-select-list');
+            const customBtnText = document.getElementById('custom-select-text');
             
             if (product.colors && product.colors.length > 0) {
-                colorSelect.innerHTML = product.colors.map(c => `<option value="${c}">${c}</option>`).join('');
+                colorSelect.value = product.colors[0]; 
+                customBtnText.innerText = product.colors[0]; 
+                
+                customList.innerHTML = product.colors.map(c => `
+                    <li onclick="selectCustomOption('${c}')" class="px-4 py-3.5 text-sm text-gray-400 hover:bg-gold/10 hover:text-gold cursor-pointer border-b border-white/5 last:border-0 transition-colors tracking-wide">${c}</li>
+                `).join('');
+                
                 colorContainer.classList.remove('hidden');
             } else {
                 colorContainer.classList.add('hidden');
+                colorSelect.value = 'Default';
             }
             
             document.getElementById('detail-add-btn').onclick = function() { 
