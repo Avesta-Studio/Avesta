@@ -74,8 +74,7 @@
         .filter-btn { transition: all 0.3s ease; }
         .filter-active { background-color: #C5A059 !important; color: #0A0A0A !important; border-color: #C5A059 !important; box-shadow: 0 0 15px rgba(197, 160, 89, 0.3); }
     </style>
-    <!-- Meta Pixel Code -->
-<script>
+    <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -90,7 +89,6 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
 </head>
 <body class="antialiased selection:bg-gold selection:text-black flex flex-col min-h-screen">
 
@@ -113,7 +111,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             </div>
             
             <div class="w-1/3 flex justify-end items-center gap-4 md:gap-6">
-                <button type="button" onclick="openTracking()" class="hidden md:inline-block text-gray-400 hover:text-gold text-[10px] uppercase tracking-widest font-medium mr-2">Track Order</button>
                 <button type="button" onclick="openContact()" class="text-white hover:text-gold transition-colors text-lg p-1"><i class="fa-regular fa-envelope"></i></button>
                 <button type="button" onclick="toggleCart()" class="text-white hover:text-gold transition-colors text-lg relative p-1">
                     <i class="fa-solid fa-bag-shopping"></i>
@@ -301,7 +298,9 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
                     <span id="cart-total" class="text-gold text-xl font-medium">₹0</span>
                 </div>
             </div>
+            
             <button type="button" onclick="openCheckout()" class="w-full bg-gold text-black py-4 rounded-sm font-bold hover:bg-white transition-all tracking-[0.2em] uppercase text-xs">Proceed to Checkout</button>
+            
         </div>
     </div>
 
@@ -594,7 +593,7 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             { id: 34, name: 'The Velaris Diamond-Cut Facet', category: 'Women', price: 299, images: ['Female Collection/Female Watch 14.jpg'], description: 'Experience the mesmerizing illusion of depth and light. This extraordinary watch is defined by its 3D, diamond-cut faceted glass that sits over a beautifully minimalist dial, catching the light from every possible angle. Adding to its regal charm are the uniquely designed lug attachments, which feature a delicate, crystal-studded fan motif that seamlessly connects the round case to the elegant multi-link bracelet.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with Cream Dial'] },
             { id: 35, name: 'The Velaris Crystal Halo Oval', category: 'Women', price: 329, images: ['Female Collection/Female Watch 15.jpg'], description: 'Absolute glamour in a soft, refined package. The Velaris Crystal Halo features a highly polished oval dial encased entirely in a brilliant, continuous ring of sparkling crystals. The dial is kept impeccably clean and minimalist to allow the radiant bezel to shine, while the high-polish, fluid link bracelet perfectly complements the luxurious feel of the piece.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver'] },
             { id: 36, name: 'The Velaris Papillon Classic', category: 'Women', price: 299, images: ['Female Collection/Female Watch 16.jpg'], description: 'Find the perfect balance between timeless watchmaking and whimsical femininity. The Velaris Papillon features a beautifully classic, multi-link stainless steel bracelet that offers supreme comfort and a traditional silhouette. The magic lies within the dial, where a delicate, crystal-studded butterfly rests beautifully against a rich, sunburst-textured background. It is a graceful everyday watch that sparks joy with every glance.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver Strap with White Dial', 'Silver Strap with Blue Dial'] },
-           
+            
             
             // 🔥 PREMIUM WATCHES (NOW WITH 5 IMAGE SLOTS) 🔥
             { id: 41, name: 'The Tissot PRX Quartz Silver & Rose Gold', category: 'Premium', price: 2499, images: ['Premium Collection/Premium Watch 1-1.webp', 'Premium Collection/Premium Watch 1-2.webp', 'Premium Collection/Premium Watch 1-3.webp', 'Premium Collection/Premium Watch 1-4.webp', 'Premium Collection/Premium Watch 1-5.webp'], description: 'Step into timeless 1978 heritage with a sleek, modern twist. This iteration of the iconic Tissot PRX features a remarkably crisp, vertically brushed silver dial beautifully warmed by rose gold-tone hands and indices. The slim, tapered case flows seamlessly into the integrated satin-finished bracelet, offering an incredibly ergonomic fit and a masterclass in geometric precision.' },
