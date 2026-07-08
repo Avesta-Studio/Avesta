@@ -850,7 +850,12 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
                         <div class="absolute bottom-4 left-4 right-4 z-10">
                             <p class="text-gold text-[9px] tracking-widest uppercase font-semibold mb-1">${product.category === 'Testing' ? 'Trial Product' : product.category + ' Collection'}</p>
                             <h3 class="text-sm md:text-base font-light text-white mb-1 line-clamp-1 serif-text">${product.name}</h3>
-                            <p class="text-sm font-medium text-white tracking-wider">₹${product.price.toLocaleString('en-IN')}</p>
+                            <p class="text-sm font-medium text-white tracking-wider">
+                                ${product.category === 'Premium' 
+                                    ? `<span class="text-gray-500 line-through text-xs mr-2">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-gold">₹${product.price.toLocaleString('en-IN')}</span>` 
+                                    : `₹${product.price.toLocaleString('en-IN')}`
+                                }
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -908,7 +913,13 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
 
             document.getElementById('detail-category').innerText = product.id === 0 ? "System Test" : product.category + " Collection";
             document.getElementById('detail-title').innerText = product.name;
-            document.getElementById('detail-price').innerText = '₹' + product.price.toLocaleString('en-IN');
+            
+            if(product.category === 'Premium') {
+                document.getElementById('detail-price').innerHTML = `<span class="line-through text-gray-500 text-xl mr-3 font-medium">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-gold font-bold">₹${product.price.toLocaleString('en-IN')}</span>`;
+            } else {
+                document.getElementById('detail-price').innerHTML = '₹' + product.price.toLocaleString('en-IN');
+            }
+            
             document.getElementById('detail-desc').innerText = product.description;
             
             const colorContainer = document.getElementById('detail-options');
