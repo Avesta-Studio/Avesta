@@ -6,8 +6,13 @@
     <title>AVESTA | Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- Added Firebase Auth -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    
     <script>
         tailwind.config = { theme: { extend: { colors: { gold: '#C5A059', black: '#0A0A0A', darkgray: '#141414' }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Cinzel', 'serif'] } } } }
     </script>
@@ -19,18 +24,16 @@
         .input-gold { background: rgba(255,255,255,0.05); border: 1px solid rgba(197,160,89,0.3); color: white; outline: none; transition: 0.3s; }
         .input-gold:focus { border-color: #C5A059; background: rgba(255,255,255,0.1); }
         
-        /* 🔥 IMPROVED CUSTOM DROPDOWN STYLING 🔥 */
         .custom-select-wrapper { position: relative; display: inline-block; width: 100%; flex: 1; }
         .custom-select {
             appearance: none; -webkit-appearance: none; -moz-appearance: none;
-            width: 100%; bg-black; color: #d1d5db; border: 1px solid rgba(255,255,255,0.1);
+            width: 100%; background: #000; color: #d1d5db; border: 1px solid rgba(255,255,255,0.1);
             padding: 0.5rem 2rem 0.5rem 0.75rem; border-radius: 0.25rem; font-size: 10px;
             letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; outline: none;
             transition: all 0.3s ease;
         }
         .custom-select:focus, .custom-select:hover { border-color: #C5A059; color: white; background: rgba(197, 160, 89, 0.05); }
         .custom-select-icon { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); color: #C5A059; font-size: 10px; pointer-events: none; }
-        /* Styling the option list */
         select option { background-color: #050505; color: #d1d5db; font-size: 12px; padding: 10px; }
     </style>
 </head>
@@ -68,6 +71,7 @@
         <div id="orders-container" class="space-y-4 hidden pb-10"></div>
     </main>
 
+    <!-- Modals (Unchanged) -->
     <div id="custom-confirm-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans">
         <div class="glass-panel border border-red-500/30 bg-[#0a0a0a] rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(239,68,68,0.1)] relative">
             <div class="w-12 h-12 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center mx-auto mb-4">
@@ -105,25 +109,45 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const auth = firebase.auth();
 
-        const SECRET_CODE = "AvestaAdmin2026"; 
         let currentOrderIdToDelete = null;
 
-        if(sessionStorage.getItem("avesta_admin") === "true") { showDashboard(); }
+        // Firebase Auth Listener
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                showDashboard();
+            } else {
+                document.getElementById("dashboard-section").classList.add("hidden");
+                document.getElementById("dashboard-section").classList.remove("flex");
+                document.getElementById("logout-btn").classList.add("hidden");
+                document.getElementById("login-section").classList.remove("hidden");
+                document.getElementById("login-section").classList.add("flex");
+            }
+        });
 
+        // Secure Login Function
         function checkPassword() {
-            if(document.getElementById("admin-password").value === SECRET_CODE) { sessionStorage.setItem("avesta_admin", "true"); showDashboard(); } 
-            else { document.getElementById("login-error").classList.remove("hidden"); }
+            const email = "avesta.tech.online@gmail.com"; 
+            const password = document.getElementById("admin-password").value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    document.getElementById("login-error").classList.add("hidden");
+                    document.getElementById("admin-password").value = "";
+                })
+                .catch((error) => {
+                    document.getElementById("login-error").innerText = "Access Denied. Invalid Code.";
+                    document.getElementById("login-error").classList.remove("hidden");
+                    console.error("Login failed:", error.message);
+                });
         }
 
+        // Secure Logout Function
         function logout() {
-            sessionStorage.removeItem("avesta_admin");
-            document.getElementById("dashboard-section").classList.add("hidden");
-            document.getElementById("logout-btn").classList.add("hidden");
-            document.getElementById("login-section").classList.remove("hidden");
-            document.getElementById("login-section").classList.add("flex");
-            document.getElementById("admin-password").value = "";
-            document.getElementById("login-error").classList.add("hidden");
+            auth.signOut().catch((error) => {
+                console.error("Logout Error", error);
+            });
         }
 
         function showDashboard() {
