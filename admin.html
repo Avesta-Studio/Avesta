@@ -23,18 +23,6 @@
         .glass-panel { background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(197, 160, 89, 0.2); }
         .input-gold { background: rgba(255,255,255,0.05); border: 1px solid rgba(197,160,89,0.3); color: white; outline: none; transition: 0.3s; }
         .input-gold:focus { border-color: #C5A059; background: rgba(255,255,255,0.1); }
-        
-        .custom-select-wrapper { position: relative; display: inline-block; width: 100%; flex: 1; }
-        .custom-select {
-            appearance: none; -webkit-appearance: none; -moz-appearance: none;
-            width: 100%; background: #000; color: #d1d5db; border: 1px solid rgba(255,255,255,0.1);
-            padding: 0.5rem 2rem 0.5rem 0.75rem; border-radius: 0.25rem; font-size: 10px;
-            letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; outline: none;
-            transition: all 0.3s ease;
-        }
-        .custom-select:focus, .custom-select:hover { border-color: #C5A059; color: white; background: rgba(197, 160, 89, 0.05); }
-        .custom-select-icon { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); color: #C5A059; font-size: 10px; pointer-events: none; }
-        select option { background-color: #050505; color: #d1d5db; font-size: 12px; padding: 10px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -224,14 +212,18 @@
         }
 
         async function updateOrderStatus(orderId) {
-            const selectElement = document.getElementById(`status-${orderId}`);
+            // Updated to pull from the hidden input field instead of a select tag
+            const hiddenInputElement = document.getElementById(`status-${orderId}`);
             const updateBtn = document.getElementById(`btn-${orderId}`);
+            
             updateBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
             try {
-                await db.collection("orders").doc(orderId).update({ status: selectElement.value });
+                await db.collection("orders").doc(orderId).update({ status: hiddenInputElement.value });
+                
                 updateBtn.innerHTML = '<i class="fa-solid fa-check"></i> Updated';
                 updateBtn.classList.replace("bg-gold/10", "bg-green-500/20");
                 updateBtn.classList.replace("text-gold", "text-green-400");
+                
                 setTimeout(() => {
                     updateBtn.innerHTML = 'Update';
                     updateBtn.classList.replace("bg-green-500/20", "bg-gold/10");
@@ -250,7 +242,6 @@
             document.getElementById("loading-spinner").classList.add("flex");
 
             try {
-                // FIXED: Added .limit(50) to prevent browser crashing with large datasets
                 const snapshot = await db.collection("orders").orderBy("timestamp", "desc").limit(50).get();
                 const container = document.getElementById("orders-container");
                 
@@ -287,9 +278,14 @@
                         
                         let customerAddress = data.address ? data.address : "Address not provided";
                         let customerEmail = data.email ? data.email : "Email not provided";
+                        
+                        let displayStatusText = data.status === 'Verification Pending' ? 'Verify Pending' : 
+                                                data.status === 'Order Confirmed' ? 'Payment Verified' : 
+                                                data.status || 'New';
 
+                        // Removed overflow-hidden from the main panel so the new dropdown menu doesn't get cut off
                         html += `
-                        <div class="glass-panel p-4 md:p-5 rounded-md relative overflow-hidden group hover:border-gold/40 transition-colors">
+                        <div class="glass-panel p-4 md:p-5 rounded-md relative group hover:border-gold/40 transition-colors">
                             <div class="flex justify-between items-start mb-3 border-b border-white/10 pb-3">
                                 <div>
                                     <span class="bg-gold/20 text-gold text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-widest uppercase border border-gold/30">#${data.orderId}</span>
@@ -315,15 +311,23 @@
                             </div>
                             
                             <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between gap-2">
-                                <div class="custom-select-wrapper">
-                                    <select id="status-${data.orderId}" class="custom-select bg-[#050505]">
-                                        <option value="Verification Pending" ${data.status === 'Verification Pending' ? 'selected' : ''}>Verify Pending</option>
-                                        <option value="Order Confirmed" ${data.status === 'Order Confirmed' ? 'selected' : ''}>Payment Verified</option>
-                                        <option value="In Workshop" ${data.status === 'In Workshop' ? 'selected' : ''}>In Workshop</option>
-                                        <option value="Shipped" ${data.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
-                                        <option value="Delivered" ${data.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
-                                    </select>
-                                    <i class="fa-solid fa-chevron-down custom-select-icon"></i>
+                                
+                                <!-- Custom Stylized Dropdown Menu -->
+                                <div class="relative w-full flex-1" id="dropdown-wrapper-${data.orderId}">
+                                    <button onclick="toggleDropdown(event, '${data.orderId}')" class="w-full bg-[#000] text-[#d1d5db] border border-white/10 px-3 py-[9px] rounded-sm text-[10px] tracking-[0.1em] uppercase text-left flex justify-between items-center hover:border-gold hover:text-white transition-all focus:outline-none focus:border-gold group">
+                                        <span id="selected-text-${data.orderId}">${displayStatusText}</span>
+                                        <i class="fa-solid fa-chevron-down text-gold group-hover:rotate-180 transition-transform duration-300 pointer-events-none"></i>
+                                    </button>
+                                    
+                                    <div id="dropdown-menu-${data.orderId}" class="hidden absolute left-0 bottom-full mb-1 w-full bg-[#0a0a0a] border border-gold/30 rounded-sm shadow-[0_0_20px_rgba(197,160,89,0.15)] z-[60] overflow-hidden backdrop-blur-md">
+                                        <div onclick="selectStatus('${data.orderId}', 'Verification Pending', 'Verify Pending')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">Verify Pending</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'Order Confirmed', 'Payment Verified')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">Payment Verified</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'In Workshop', 'In Workshop')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">In Workshop</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'Shipped', 'Shipped')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">Shipped</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'Delivered', 'Delivered')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer transition-colors">Delivered</div>
+                                    </div>
+                                    
+                                    <input type="hidden" id="status-${data.orderId}" value="${data.status}">
                                 </div>
                                 
                                 <button id="btn-${data.orderId}" onclick="updateOrderStatus('${data.orderId}')" class="w-24 text-gold bg-gold/10 border border-gold/30 px-3 py-[9px] rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-colors" title="Update Status">
@@ -346,6 +350,32 @@
                 document.getElementById("loading-spinner").innerHTML = '<p class="text-red-400 text-xs tracking-widest uppercase">Connection Error. Retrying...</p>';
             }
         }
+
+        // Custom Dropdown JavaScript Logic
+        function toggleDropdown(event, orderId) {
+            event.stopPropagation();
+            const menu = document.getElementById(`dropdown-menu-${orderId}`);
+            
+            document.querySelectorAll('[id^="dropdown-menu-"]').forEach(el => {
+                if(el.id !== `dropdown-menu-${orderId}`) el.classList.add('hidden');
+            });
+            
+            menu.classList.toggle('hidden');
+        }
+
+        function selectStatus(orderId, dbValue, displayText) {
+            document.getElementById(`status-${orderId}`).value = dbValue;
+            document.getElementById(`selected-text-${orderId}`).innerText = displayText;
+            document.getElementById(`dropdown-menu-${orderId}`).classList.add('hidden');
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('[id^="dropdown-wrapper-"]')) {
+                document.querySelectorAll('[id^="dropdown-menu-"]').forEach(el => {
+                    el.classList.add('hidden');
+                });
+            }
+        });
     </script>
 </body>
 </html>
