@@ -238,9 +238,12 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         <button onclick="closeProductDetail()" class="absolute top-4 right-4 md:top-8 md:right-8 text-gray-400 hover:text-white transition-colors text-4xl leading-none z-50 drop-shadow-lg"><i class="fa-solid fa-xmark"></i></button>
         <div class="bg-darkgray md:border md:border-gold/20 md:rounded-xl w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl overflow-y-auto shadow-[0_0_50px_rgba(197,160,89,0.1)] relative flex flex-col md:flex-row">
             <div class="w-full md:w-1/2 bg-black flex flex-col p-4 md:p-8">
-                <div class="w-full h-[50vh] md:h-[60vh] bg-[#0a0a0a] rounded-lg overflow-hidden mb-3 relative flex items-center justify-center border border-white/5">
-                    <img id="detail-main-img" src="" alt="Product" class="w-full h-full object-contain transition-opacity duration-300 mix-blend-lighten">
+                
+                <!-- 🔥 UPDATED ZOOM CONTAINER 🔥 -->
+                <div id="image-zoom-container" class="w-full h-[50vh] md:h-[60vh] bg-[#0a0a0a] rounded-lg overflow-hidden mb-3 relative flex items-center justify-center border border-white/5 cursor-crosshair">
+                    <img id="detail-main-img" src="" alt="Product" class="w-full h-full object-contain mix-blend-lighten transition-all duration-200 ease-out">
                 </div>
+                
                 <div id="detail-thumbnails" class="hidden gap-3 overflow-x-auto pb-2 scrollbar-hide"></div>
             </div>
             <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-gradient-to-b from-darkgray to-black">
@@ -560,7 +563,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
 
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
-        // 🔥 EXACTLY 60 PRODUCTS WITH NEW DESCRIPTIONS AND FOLDERS 🔥
         const products = [
             
             // --- 20 MEN'S WATCHES ---
@@ -635,7 +637,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
 
         let cart = [];
         
-        // 🔥 NEW DYNAMIC PROMO CODES SYSTEM 🔥
         const validPromoCodes = { 
             // 10 Codes: ₹500 off on purchase of ₹3499
             'AVESTA500-A1': { discount: 500, min: 3499 },
@@ -681,7 +682,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             'shipping': { title: 'Secure Shipping', content: '<p><strong class="text-gold">Free Delivery:</strong> Priority shipping across India for all our timepieces.</p>' }
         };
 
-        // 🔥 CUSTOM ALERT LOGIC 🔥
         function showCustomAlert(title, message, type = 'info') {
             document.getElementById('alert-title').innerText = title;
             document.getElementById('alert-modal-text').innerHTML = message;
@@ -961,8 +961,11 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             openModalSafely('product-detail-modal');
         }
 
+        // 🔥 ADDED ZOOM RESET FOR THUMBNAIL SWITCHING 🔥
         function changeMainImage(src) {
-            const mainImg = document.getElementById('detail-main-img'); mainImg.style.opacity = 0;
+            const mainImg = document.getElementById('detail-main-img'); 
+            mainImg.style.opacity = 0;
+            mainImg.style.transform = 'scale(1)'; 
             setTimeout(() => { mainImg.src = src; mainImg.style.opacity = 1; }, 200);
         }
 
@@ -986,7 +989,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             updateCartUI(); 
         }
 
-        // 🔥 DYNAMIC PROMO CODE FUNCTION 🔥
         function applyPromo() {
             const inputVal = document.getElementById('promo-input').value.trim().toUpperCase();
             const msgBox = document.getElementById('promo-message');
@@ -1026,7 +1028,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             document.getElementById('cart-count').innerText = cart.reduce((s, i) => s + i.quantity, 0);
             const subtotal = cart.reduce((s, i) => s + (i.price * i.quantity), 0);
             
-            // Check if active promo still meets minimum requirement
             if (activePromoCode) { 
                 const requiredMin = validPromoCodes[activePromoCode].min;
                 if (subtotal < requiredMin) {
@@ -1214,7 +1215,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
                 date: new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
             };
 
-            // 🔥 SAVE USED PROMO CODE TO LOCAL STORAGE 🔥
             if (activePromoCode) {
                 let usedCodes = JSON.parse(localStorage.getItem('usedPromoCodes')) || [];
                 if (!usedCodes.includes(activePromoCode)) {
@@ -1299,6 +1299,49 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         }
 
         function closeEbill() { closeModalSafely('ebill-modal'); }
+
+        // ==========================================
+        // 🔥 PREMIUM IMAGE ZOOM CAPABILITY 🔥
+        // ==========================================
+        const zoomContainer = document.getElementById('image-zoom-container');
+        const zoomImg = document.getElementById('detail-main-img');
+
+        // 1. Desktop Hover Panning
+        zoomContainer.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = zoomContainer.getBoundingClientRect();
+            
+            const x = ((e.clientX - left) / width) * 100;
+            const y = ((e.clientY - top) / height) * 100;
+            
+            zoomImg.style.transformOrigin = `${x}% ${y}%`;
+            zoomImg.style.transform = 'scale(2.5)';
+        });
+
+        // Reset image when mouse leaves
+        zoomContainer.addEventListener('mouseleave', () => {
+            zoomImg.style.transformOrigin = 'center center';
+            zoomImg.style.transform = 'scale(1)';
+        });
+
+        // 2. Mobile Touch Panning
+        zoomContainer.addEventListener('touchmove', (e) => {
+            e.preventDefault(); 
+            
+            const touch = e.touches[0];
+            const { left, top, width, height } = zoomContainer.getBoundingClientRect();
+            
+            const x = ((touch.clientX - left) / width) * 100;
+            const y = ((touch.clientY - top) / height) * 100;
+            
+            zoomImg.style.transformOrigin = `${x}% ${y}%`;
+            zoomImg.style.transform = 'scale(2.5)';
+        }, { passive: false });
+
+        // Reset image when finger is lifted
+        zoomContainer.addEventListener('touchend', () => {
+            zoomImg.style.transformOrigin = 'center center';
+            zoomImg.style.transform = 'scale(1)';
+        });
         
         renderProducts();
     </script>
