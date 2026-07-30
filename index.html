@@ -1180,18 +1180,26 @@
             const upiView = document.getElementById('upi-view'), codView = document.getElementById('cod-view');
             const utrInput = document.getElementById('utr-number'), generateUpiBtn = document.getElementById('generate-upi-btn');
             const confirmBtn = document.getElementById('pay-button'), paymentDynamicContent = document.getElementById('payment-dynamic-content');
+            
+            
+            if(details.method === 'UPI') {
+    document.getElementById('ebill-status-text').innerHTML = `
+        <div style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;">
+            <span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; text-align: center;">
+                Verification<br>Pending
+            </span>
+        </div>`;
+    document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
+} else {
+    document.getElementById('ebill-status-text').innerHTML = `
+        <div style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); border-radius: 2px;">
+            <span style="color: #4ade80; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; text-align: center;">
+                Confirmed<br>(COD)
+            </span>
+        </div>`;
+    document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
+}
 
-            if(method === 'upi') {
-                btnUpi.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
-                btnCod.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
-                generateUpiBtn.classList.remove('hidden'); confirmBtn.classList.add('hidden'); paymentDynamicContent.classList.add('hidden');
-                upiView.classList.remove('hidden'); codView.classList.add('hidden'); utrInput.required = true;
-            } else {
-                btnCod.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
-                btnUpi.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
-                generateUpiBtn.classList.add('hidden'); paymentDynamicContent.classList.remove('hidden'); confirmBtn.classList.remove('hidden');
-                codView.classList.remove('hidden'); upiView.classList.add('hidden'); utrInput.required = false;
-            }
         }
 
         function generateUPIInterface() {
