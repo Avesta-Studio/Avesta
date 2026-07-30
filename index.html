@@ -6,27 +6,18 @@
     <title>AVESTA | Custom Timepieces</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <meta name="description" content="AVESTA Premium Timepieces. Explore our exclusive collection of luxury, custom, and premium watches. Crafted for the elite. Order online with secure delivery across India.">
-    <meta name="keywords" content="Avesta watches, Avesta, Watches, First copy watches, First copy watch, cheap watches, Cheap watch, Watch, watches, Luxury Watches, Wrist watches, luxury watches India, premium watches, premium watch, buy luxury watch online, custom timepieces, premium watches for men, watch for men, watch for man, watches for man, watches for men, watches for women, watches for woman, watch for women, watch for woman, luxury watches for women">
     
-    <meta name="google-site-verification" content="Bj-M6UOkpr6_Oidwz0oefAhD-RsdVREGisDcytWdn4k" />
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script type="text/javascript">
         (function() {
-            emailjs.init({
-              publicKey: "_fpanrTUXPG_S9y47", 
-            });
+            emailjs.init({ publicKey: "_fpanrTUXPG_S9y47" });
         })();
     </script>
 
@@ -52,14 +43,12 @@
         ::-webkit-scrollbar { width: 6px; display: none; }
         ::-webkit-scrollbar-track { background: #0A0A0A; }
         ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
-
-        .hero-min-h { height: 100vh; height: 100svh; min-height: -webkit-fill-available; }
         
+        .hero-min-h { height: 100vh; height: 100svh; min-height: -webkit-fill-available; }
         .btn-gold { background: transparent; color: #C5A059; border: 1px solid #C5A059; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
         .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.2), transparent); transition: all 0.6s ease; }
         .btn-gold:hover { background: #C5A059; color: #0A0A0A; box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); }
         .btn-gold:hover::before { left: 100%; }
-        
         .checkout-input { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 160, 89, 0.3); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; outline: none; transition: all 0.3s; }
         .checkout-input:focus { border-color: #C5A059; background: rgba(255, 255, 255, 0.1); }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -71,24 +60,12 @@
         .timeline-dot.pending { background: #333; border-color: #111; }
         .timeline-dot.pending + .timeline-line { background: #333; }
         
-        .filter-btn { transition: all 0.3s ease; }
-        .filter-active { background-color: #C5A059 !important; color: #0A0A0A !important; border-color: #C5A059 !important; box-shadow: 0 0 15px rgba(197, 160, 89, 0.3); }
+        /* Custom scrollbar for filters */
+        .scrollbar-thin::-webkit-scrollbar { display: block; width: 4px; }
+        .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.3); border-radius: 4px; }
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: rgba(197, 160, 89, 0.6); }
     </style>
-    <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1050680477289562');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
-/></noscript>
 </head>
 <body class="antialiased selection:bg-gold selection:text-black flex flex-col min-h-screen">
 
@@ -168,22 +145,108 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         </div>
     </section>
 
-    <section id="collection" class="py-20 bg-darkgray relative border-t border-white/5 flex-grow">
+    <!-- ================= COLLECTION SECTION WITH AMAZON/FLIPKART FILTERS ================= -->
+    <section id="collection" class="py-16 bg-darkgray relative border-t border-white/5 flex-grow">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-10" data-aos="fade-up">
+            
+            <div class="text-center mb-8" data-aos="fade-up">
                 <h3 class="text-gold text-xs tracking-[0.2em] uppercase mb-2 font-sans">Crafted For You</h3>
                 <h2 class="text-3xl md:text-5xl text-white serif-text">Our Collection</h2>
-                <div class="w-12 h-1 bg-gold mx-auto mt-6"></div>
-            </div>
-            
-            <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-12" data-aos="fade-up" data-aos-delay="100">
-                <button onclick="filterCollection('All')" id="btn-filter-All" class="filter-btn filter-active px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-400 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-gold">All Watches</button>
-                <button onclick="filterCollection('Men')" id="btn-filter-Men" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-400 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-gold">Men</button>
-                <button onclick="filterCollection('Women')" id="btn-filter-Women" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-400 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-gold">Women</button>
-                <button onclick="filterCollection('Premium')" id="btn-filter-Premium" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-400 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-gold">Premium</button>
+                <div class="w-12 h-1 bg-gold mx-auto mt-4"></div>
             </div>
 
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 font-sans"></div>
+            <div class="lg:hidden mb-6 flex justify-between items-center bg-black/60 p-4 border border-white/10 rounded-sm">
+                <span id="active-filter-summary" class="text-xs text-gray-400 font-light">Showing all timepieces</span>
+                <button type="button" onclick="toggleMobileFilter()" class="btn-gold px-4 py-2 text-xs font-semibold uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-gold"></i> Filters
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                
+                <aside id="filter-sidebar" class="hidden lg:block lg:col-span-1 bg-black/80 border border-white/10 p-6 rounded-sm space-y-6 h-fit sticky top-24 z-30 font-sans">
+                    
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <h4 class="text-white font-bold uppercase tracking-widest text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-filter text-gold"></i> Filters
+                        </h4>
+                        <button type="button" onclick="resetFilters()" class="text-gold hover:text-white text-[11px] tracking-wider uppercase font-medium transition-colors">
+                            Clear All
+                        </button>
+                    </div>
+
+                    <div>
+                        <h5 class="text-gold text-[11px] uppercase tracking-widest font-semibold mb-3">Watch Category</h5>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 text-sm text-gray-300 hover:text-white cursor-pointer select-none">
+                                <input type="radio" name="mainCategory" value="All" checked onchange="handleMainCategoryChange('All')" class="accent-gold w-4 h-4">
+                                <span>All Watches</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-300 hover:text-white cursor-pointer select-none">
+                                <input type="radio" name="mainCategory" value="non-branded" onchange="handleMainCategoryChange('non-branded')" class="accent-gold w-4 h-4">
+                                <span>Non-Branded Watches</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-300 hover:text-white cursor-pointer select-none">
+                                <input type="radio" name="mainCategory" value="branded" onchange="handleMainCategoryChange('branded')" class="accent-gold w-4 h-4">
+                                <span>Branded Watches</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="sub-section-nonbranded" class="border-t border-white/10 pt-5">
+                        <h5 class="text-gold text-[11px] uppercase tracking-widest font-semibold mb-3">Non-Branded Collection</h5>
+                        <div class="space-y-2 pl-2">
+                            <label class="flex items-center gap-3 text-xs text-gray-400 hover:text-white cursor-pointer select-none">
+                                <input type="radio" name="genderCategory" value="All" checked onchange="applyFilters()" class="accent-gold w-3.5 h-3.5">
+                                <span>All Non-Branded</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-xs text-gray-400 hover:text-white cursor-pointer select-none">
+                                <input type="radio" name="genderCategory" value="Men" onchange="applyFilters()" class="accent-gold w-3.5 h-3.5">
+                                <span>Men's Timepieces</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-xs text-gray-400 hover:text-white cursor-pointer select-none">
+                                <input type="radio" name="genderCategory" value="Women" onchange="applyFilters()" class="accent-gold w-3.5 h-3.5">
+                                <span>Women's Timepieces</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="sub-section-brands" class="border-t border-white/10 pt-5">
+                        <div class="flex justify-between items-center mb-3">
+                            <h5 class="text-gold text-[11px] uppercase tracking-widest font-semibold">Select Brands</h5>
+                            <span id="brand-count-badge" class="text-[10px] text-gray-500 font-mono"></span>
+                        </div>
+                        <div id="brand-checkbox-list" class="space-y-2 max-h-56 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gold/50 text-xs">
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/10 pt-5">
+                        <div class="flex justify-between items-center mb-2">
+                            <h5 class="text-gold text-[11px] uppercase tracking-widest font-semibold">Max Price</h5>
+                            <span id="price-slider-value" class="text-xs font-bold text-white font-mono">₹5,000</span>
+                        </div>
+                        <input type="range" id="price-range-input" min="200" max="5000" step="100" value="5000" oninput="updatePriceSlider(this.value)" class="w-full accent-gold bg-darkgray h-1.5 rounded-lg cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-gray-500 font-mono mt-1">
+                            <span>₹200</span>
+                            <span>₹5,000+</span>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="toggleMobileFilter()" class="lg:hidden w-full btn-gold py-3 uppercase tracking-widest text-xs font-semibold mt-4">
+                        Apply & Close
+                    </button>
+                </aside>
+
+                <div class="lg:col-span-3">
+                    <div id="filter-results-bar" class="mb-4 flex justify-between items-center text-xs text-gray-400 font-sans border-b border-white/10 pb-2">
+                        <span>Showing <strong id="product-count" class="text-gold">0</strong> timepieces</span>
+                    </div>
+
+                    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 font-sans">
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -239,9 +302,9 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         <div class="bg-darkgray md:border md:border-gold/20 md:rounded-xl w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl overflow-y-auto shadow-[0_0_50px_rgba(197,160,89,0.1)] relative flex flex-col md:flex-row">
             <div class="w-full md:w-1/2 bg-black flex flex-col p-4 md:p-8">
                 
-                <!-- 🔥 UPDATED ZOOM CONTAINER 🔥 -->
+                <!-- NEW SMOOTH ZOOM CONTAINER -->
                 <div id="image-zoom-container" class="w-full h-[50vh] md:h-[60vh] bg-[#0a0a0a] rounded-lg overflow-hidden mb-3 relative flex items-center justify-center border border-white/5 cursor-crosshair">
-                    <img id="detail-main-img" src="" alt="Product" class="w-full h-full object-contain mix-blend-lighten transition-all duration-200 ease-out">
+                    <img id="detail-main-img" src="" alt="Product" class="w-full h-full object-contain mix-blend-lighten">
                 </div>
                 
                 <div id="detail-thumbnails" class="hidden gap-3 overflow-x-auto pb-2 scrollbar-hide"></div>
@@ -279,6 +342,8 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         </div>
     </div>
 
+    <!-- Modals for Cart, Checkout, E-bill, Tracking, Contact, Policy remain fully intact below -->
+    
     <div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300" onclick="toggleCart()"></div>
     <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-darkgray border-l border-gold/20 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col font-sans">
         <div class="flex items-center justify-between p-6 border-b border-gold/10 bg-black">
@@ -305,9 +370,7 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
                     <span id="cart-total" class="text-gold text-xl font-medium">₹0</span>
                 </div>
             </div>
-            
             <button type="button" onclick="openCheckout()" class="w-full bg-gold text-black py-4 rounded-sm font-bold hover:bg-white transition-all tracking-[0.2em] uppercase text-xs">Proceed to Checkout</button>
-            
         </div>
     </div>
 
@@ -564,7 +627,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
         const products = [
-            
             // --- 20 MEN'S WATCHES ---
             { id: 1, name: 'The Faxon Octagon Prestige', category: 'Men', price: 849, images: ['Male Collection/Male Watch 1.jpg'], description: 'Redefine your style with the bold, geometric brilliance of the Faxon Octagon Prestige. Featuring a striking octagonal bezel, this watch commands attention. The dynamic tapisserie (waffle) dial texture provides incredible visual depth, perfectly framing the highly practical stacked Day and Date complication at 6:00. It is a masterclass in sport-luxe design.', colors: ['Golden Strap with Golden Dial', 'Golden + Silver Strap with White Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with White Dial', 'Golden Strap with Black Dial'] },
             { id: 2, name: 'The Faxon Global Icon Edition', category: 'Men', price: 799, images: ['Male Collection/Male Watch 2.jpg'], description: 'Wear the watch of champions. Endorsed by global icons Cristiano Ronaldo and Chris Gayle, this exceptional timepiece offers an unmatched legacy. Boasting the distinguished Eastern Arabic numeral dial within a perfectly proportioned cushion case, it radiates absolute prestige. Whether configured in full gold or premium two-tone, this watch makes a powerful, unforgettable statement.', colors: ['Rose Gold + Silver Strap with White Dial', 'Rose Gold + Silver Strap with Black Dial', 'Golden Strap with Golden Dial', 'Golden with White Dial'] },
@@ -631,341 +693,211 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             { id: 68, name: 'The TAG Heuer Formula 1 Calibre 16 Chronograph', category: 'Premium', price: 2799, realPrice: 485000, images: ['Premium Collection/Premium Watch 28-1.jpg', 'Premium Collection/Premium Watch 28-2.jpg', 'Premium Collection/Premium Watch 28-3.jpg', 'Premium Collection/Premium Watch 28-4.jpg'], description: 'Fuel your competitive spirit and embrace the thrill of the racetrack with the TAG Heuer Formula 1 Calibre 16. This high-performance chronograph commands attention with a striking, deep blue sunray dial and a matching fixed bezel featuring a bold red tachymeter scale. The dynamic aesthetic is elevated by a unique bracelet that seamlessly integrates brushed stainless steel with sleek blue center links. Accented with subtle red detailing on the dial and pushers, this watch is the ultimate fusion of avant-garde design and motorsport-inspired precision.' },
             { id: 69, name: 'The Cartier Avant-Garde Open-Heart Edition', category: 'Premium', price: 1999, realPrice: 350000, images: ['Premium Collection/Premium Watch 29-1.jpg', 'Premium Collection/Premium Watch 29-2.jpg', 'Premium Collection/Premium Watch 29-3.jpg', 'Premium Collection/Premium Watch 29-4.jpg', 'Premium Collection/Premium Watch 29-5.jpg'], description: 'Experience the pinnacle of sophisticated watchmaking with this breathtaking Cartier masterpiece. This timepiece redefines traditional elegance through a captivating, multi-layered dial featuring striking cut-out details and a mesmerizing open-heart aperture that reveals the intricate mechanical heartbeat within. The luxurious two-tone construction brilliantly pairs resilient stainless steel with radiant rose gold accents across the bezel, hands, and fluid link bracelet. It is a true statement of haute horlogerie designed for the collector who demands artistry and uncompromising luxury.', colors: ['Silver + Rose Gold Strap with Emerald Green Dial', 'Silver + Rose Gold Strap with White Dial', 'Silver + Rose Gold Strap with Black Dial', 'Golden Strap with Emerald Green Dial', 'Golden Strap with Black Dial', 'Golden Strap with White Dial', 'Silver Strap with White Dial', 'Silver Strap with Black Dial', 'Silver Strap with Royal Blue Dial', 'Silver Strap with Sky Blue Dial'] },
             { id: 70, name: 'The OMEGA Speedmaster "Silver Snoopy Award" 50th Anniversary', category: 'Premium', price: 3799, realPrice: 10000000, images: ['Premium Collection/Premium Watch 30-1.webp', 'Premium Collection/Premium Watch 30-2.webp', 'Premium Collection/Premium Watch 30-3.webp', 'Premium Collection/Premium Watch 30-4.webp', 'Premium Collection/Premium Watch 30-5.webp', 'Premium Collection/Premium Watch 30-6.webp', 'Premium Collection/Premium Watch 30-7.webp'], description: 'Celebrate a legendary milestone in space exploration history with this highly sought-after OMEGA Speedmaster. Commemorating the 50th anniversary of the prestigious "Silver Snoopy Award" presented to OMEGA by NASA astronauts in 1970, this chronograph is a true masterpiece of storytelling and horological excellence. The crisp silver dial is brilliantly contrasted by deep blue sub-dials, hands, and hour markers, with an adorable, embossed silver Snoopy medallion playfully featured on the 9 sub-dial. Framed by a rich blue ceramic bezel and paired with a tailored blue fabric strap, this watch is an absolute must-have for serious collectors and space enthusiasts alike.' },
-                        // --- NEW BATCH ADDITIONS ---
-            { 
-                id: 72, 
-                name: 'The Emporio Armani Gianni Classic', 
-                category: 'Premium', 
-                price: 1899, 
-                realPrice: 32495, 
-                images: [
-                    'Premium Collection/IMG-20260730-WA0009.jpg', 
-                    'Premium Collection/IMG-20260730-WA0008.jpg', 
-                    'Premium Collection/IMG-20260730-WA0007.jpg', 
-                    'Premium Collection/IMG-20260730-WA0006.jpg', 
-                    'Premium Collection/IMG-20260730-WA0005.jpg', 
-                    'Premium Collection/IMG-20260730-WA0004.jpg', 
-                    'Premium Collection/IMG-20260730-WA0002.jpg', 
-                    'Premium Collection/IMG-20260730-WA0001.jpg'
-                ], 
-                description: 'A true masterclass in minimalist sophistication and Italian design. The Emporio Armani Gianni Classic series is engineered for those who appreciate understated luxury. It features a strikingly fluid, highly polished multi-link stainless steel bracelet that conforms effortlessly to the wrist. The impeccably clean sunburst dial is punctuated by the iconic eagle emblem resting proudly at 12 o\'clock, accompanied by an elegant mix of applied Roman and baton numerals. Complete with a sharply framed, highly practical date complication at 3 o\'clock and protected by scratch-resistant mineral crystal, this timepiece bridges the gap between high-end corporate attire and refined evening wear.', 
-                colors: ['Silver Strap with Blue Dial', 'Silver Strap with White Dial', 'Silver Strap with Green Dial', 'Two-Tone (Silver & Rose Gold) with White Dial', 'Two-Tone (Silver & Rose Gold) with Black Dial'] 
-            },
-            { 
-                id: 73, 
-                name: 'The Casio Edifice Chronograph', 
-                category: 'Premium', 
-                price: 1499, 
-                realPrice: 12995, 
-                images: [
-                    'Premium Collection/IMG-20260729-WA0024.jpg', 
-                    'Premium Collection/IMG-20260729-WA0022.jpg', 
-                    'Premium Collection/IMG-20260729-WA0020.jpg', 
-                    'Premium Collection/IMG-20260729-WA0018.jpg', 
-                    'Premium Collection/IMG-20260729-WA0016.jpg', 
-                    'Premium Collection/IMG-20260729-WA0014.jpg', 
-                    'Premium Collection/IMG-20260729-WA0012.jpg', 
-                    'Premium Collection/IMG-20260729-WA0009.jpg', 
-                    'Premium Collection/IMG-20260729-WA0007.jpg'
-                ], 
-                description: 'Engineered for relentless speed, unyielding precision, and dynamic style. This Casio Edifice Chronograph draws heavy inspiration from the adrenaline-fueled world of motorsports. The multi-layered, architectural dial boasts three distinct functional sub-dials that provide precision stopwatch capabilities, perfectly framed by a tachymeter bezel for on-the-fly speed calculations. Striking automotive-inspired color accents give the watch an aggressive edge, while the robust, solid stainless steel case and intricately brushed multi-link bracelet ensure maximum durability. It is the ultimate hybrid of high-octane sports functionality and premium everyday luxury.', 
-                colors: ['Two-Tone (Silver & Gold) with Gold Bezel and White Dial', 'Silver Strap with Blue Bezel and Silver/Black Dial', 'Two-Tone (Silver & Gold) with Gold Bezel and Gold Dial', 'Two-Tone (Silver & Gold) with Gold Bezel and Black Dial'] 
-            },
-            { 
-                id: 74, 
-                name: 'The BOSS Classic Guilloché', 
-                category: 'Premium', 
-                price: 1599, 
-                realPrice: 24500, 
-                images: [
-                    'Premium Collection/IMG-20260727-WA0047.jpg', 
-                    'Premium Collection/IMG-20260727-WA0046.jpg', 
-                    'Premium Collection/IMG-20260727-WA0045.jpg', 
-                    'Premium Collection/IMG-20260727-WA0044.jpg', 
-                    'Premium Collection/IMG-20260727-WA0043.jpg', 
-                    'Premium Collection/IMG-20260727-WA0042.jpg', 
-                    'Premium Collection/IMG-20260727-WA0041.jpg', 
-                    'Premium Collection/IMG-20260727-WA0040.jpg', 
-                    'Premium Collection/IMG-20260727-WA0039.jpg'
-                ], 
-                description: 'Understated elegance meets razor-sharp European tailoring. The BOSS Classic dress watch commands attention without ever having to shout. Its centerpiece is a meticulously crafted guilloché inner dial, offering a rich, woven texture that dances in the light. This is elegantly framed by a smooth outer track featuring slender Roman numerals and perfectly proportioned baton hands. Encased in high-polish stainless steel and featuring a perfectly balanced, discrete date window at 6 o\'clock, this timepiece offers a sophisticated symmetry that serves as the quintessential accessory for the modern, discerning gentleman.', 
-                colors: ['Two-Tone (Silver & Rose Gold) with White Dial', 'Silver Strap with Black Dial', 'Two-Tone (Silver & Rose Gold) with Black Dial', 'Silver Strap with Green Dial', 'All Black with Gold Accents', 'Silver Strap with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial', 'Two-Tone (Silver & Yellow Gold) with Green Dial'] 
-            },
-            { 
-                id: 75, 
-                name: 'The Armani Exchange Skeleton Automatic', 
-                category: 'Premium', 
-                price: 2199, 
-                realPrice: 28995, 
-                images: [
-                    'Premium Collection/IMG-20260727-WA0038.jpg', 
-                    'Premium Collection/IMG-20260727-WA0037.jpg', 
-                    'Premium Collection/IMG-20260727-WA0036.jpg', 
-                    'Premium Collection/IMG-20260727-WA0035.jpg', 
-                    'Premium Collection/IMG-20260727-WA0034.jpg', 
-                    'Premium Collection/IMG-20260727-WA0033.jpg', 
-                    'Premium Collection/IMG-20260727-WA0032.jpg', 
-                    'Premium Collection/IMG-20260727-WA0031.jpg', 
-                    'Premium Collection/IMG-20260727-WA0030.jpg'
-                ], 
-                description: 'Bold, incredibly avant-garde, and completely transparent. The Armani Exchange Skeleton Automatic dares to strip away the traditional dial entirely, putting its complex, kinetic mechanical heartbeat on full, glorious display. Every gear, spring, and jewel is showcased between two panels of hardened crystal. The design is further elevated by suspended, architectural hour markers that float on an outer ring, creating a mesmerizing three-dimensional effect. Paired with a highly integrated, brushed H-link bracelet, this watch offers an uncompromising, industrial-chic aesthetic for the trailblazer.', 
-                colors: ['Full Silver', 'Full Gold', 'Two-Tone (Silver & Rose Gold)', 'Full Black'] 
-            },
-            { 
-                id: 76, 
-                name: 'The Versace Medusa Skeleton', 
-                category: 'Premium', 
-                price: 2499, 
-                realPrice: 145000, 
-                images: [
-                    'Premium Collection/IMG-20260727-WA0029.jpg', 
-                    'Premium Collection/IMG-20260727-WA0028.jpg', 
-                    'Premium Collection/IMG-20260727-WA0027.jpg', 
-                    'Premium Collection/IMG-20260727-WA0026.jpg', 
-                    'Premium Collection/IMG-20260727-WA0025.jpg', 
-                    'Premium Collection/IMG-20260727-WA0024.jpg', 
-                    'Premium Collection/IMG-20260727-WA0023.jpg', 
-                    'Premium Collection/IMG-20260727-WA0022.jpg'
-                ], 
-                description: 'Unapologetic opulence in every single detail. This striking Versace masterpiece blurs the line between a high-precision timekeeping instrument and elite designer jewelry. It features a bold, meticulously sculpted 3D Medusa head that appears to float effortlessly over a fully skeletonized mechanical movement. The luxurious visual experience is amplified by the brand\'s signature Greca pattern adorning the deeply engraved bezel, combined with faceted studded hour markers. This is an assertive, powerful statement of uncompromising high-fashion luxury.', 
-                colors: ['All Black with Gold Medusa', 'Two-Tone (Silver & Rose Gold) with White Dial', 'Full Yellow Gold with Green Dial', 'Full Yellow Gold with White Dial', 'Two-Tone (Silver & Rose Gold) with Black Dial', 'Full Silver with Black Dial', 'Full Silver with White Dial', 'Full Yellow Gold with Gold Dial'] 
-            },
-            { 
-                id: 77, 
-                name: 'The Seiko Presage Open-Heart', 
-                category: 'Premium', 
-                price: 1899, 
-                realPrice: 42000, 
-                images: [
-                    'Premium Collection/IMG-20260727-WA0021.jpg', 
-                    'Premium Collection/IMG-20260727-WA0019.jpg', 
-                    'Premium Collection/IMG-20260727-WA0018.jpg'
-                ], 
-                description: 'A poetic tribute to classic Japanese mechanical watchmaking. Inspired by the legendary craftsmanship of the Presage line, this Seiko Automatic is an absolute joy to wear. It features a beautifully polished, perfectly circular open-heart aperture at 9 o\'clock, allowing the wearer an intimate view of the sweeping balance wheel oscillating in real-time. The rich, textured dial is complemented by razor-sharp, dauphine-style hands and applied baton indices that catch light brilliantly. Paired with a supple, premium crocodile-embossed genuine leather strap, it delivers unmatched vintage charm and enduring reliability.', 
-                colors: ['All Black', 'Rose Gold & Blue', 'Rose Gold & Black', 'Rose Gold & White', 'Silver & Black', 'Silver & Dark Blue', 'Silver & Ice Blue', 'Silver & White', 'Yellow Gold & Black', 'Yellow Gold & White', 'Yellow Gold & Green'] 
-            },
-            { 
-                id: 78, 
-                name: 'The Rolex Masterwork Skeleton', 
-                category: 'Premium', 
-                price: 2999, 
-                realPrice: 2850000, 
-                images: [
-                    'Premium Collection/IMG-20260725-WA0020.jpg', 
-                    'Premium Collection/IMG-20260725-WA0019.jpg', 
-                    'Premium Collection/IMG-20260725-WA0018.jpg', 
-                    'Premium Collection/IMG-20260725-WA0017.jpg', 
-                    'Premium Collection/IMG-20260725-WA0016.jpg'
-                ], 
-                description: 'A breathtaking display of mechanical theater and bespoke luxury. The Rolex Masterwork Skeleton takes a radical, highly exclusive approach to horology, entirely exposing its meticulously decorated, sweeping automatic movement. The intricate internal bridges and gears are hand-finished to perfection, framed by an elegant colored chapter ring. Brilliant, hand-set crystal indices mark the hours, while the iconic Rolex crown emblem anchors the design at 6 o\'clock. This is a rare, commanding statement piece designed strictly for the bold and elite collector.', 
-                colors: ['Two-Tone (Silver & Rose Gold) with White Outer Dial', 'Full Silver with Light Blue Outer Dial', 'Full Yellow Gold with Black Outer Dial', 'Two-Tone (Silver & Rose Gold) with Black Outer Dial', 'Full Silver with Black Outer Dial'] 
-            },
-            { 
-                id: 79, 
-                name: 'The Tissot Astral Skeleton', 
-                category: 'Premium', 
-                price: 2299, 
-                realPrice: 57000, 
-                images: [
-                    'Premium Collection/IMG-20260725-WA0015.jpg', 
-                    'Premium Collection/IMG-20260725-WA0014.jpg', 
-                    'Premium Collection/IMG-20260725-WA0013.jpg', 
-                    'Premium Collection/IMG-20260725-WA0012.jpg', 
-                    'Premium Collection/IMG-20260725-WA0011.jpg'
-                ], 
-                description: 'Where cutting-edge, angular geometry meets celestial romance. Building on the highly coveted integrated bracelet design, the Tissot Astral Skeleton presents an incredibly sophisticated, open-worked dial. The visual hierarchy is perfectly balanced: a stunning, romantic moon-phase indicator graces the 12 o\'clock position, directly counterbalanced by the exposed, beating mechanical heart at 6 o\'clock. Surrounded by intricate, swirling filigree and sharp, faceted hour markers, this watch offers an avant-garde approach to Swiss luxury that guarantees absolute presence on the wrist.', 
-                colors: ['Full Silver with White Dial & Blue Accents', 'Full Silver with Black Dial', 'All Black with Black Dial', 'Two-Tone (Silver & Rose Gold) with White Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial & Blue Accents'] 
-            },
-            { 
-                id: 80, 
-                name: 'The Patek Philippe Golden Ellipse', 
-                category: 'Premium', 
-                price: 3499, 
-                realPrice: 3100000, 
-                images: [
-                    'Premium Collection/IMG-20260723-WA0032.jpg', 
-                    'Premium Collection/IMG-20260723-WA0031.jpg', 
-                    'Premium Collection/IMG-20260723-WA0030.jpg', 
-                    'Premium Collection/IMG-20260723-WA0029.jpg', 
-                    'Premium Collection/IMG-20260723-WA0028.jpg', 
-                    'Premium Collection/IMG-20260723-WA0027.jpg', 
-                    'Premium Collection/IMG-20260723-WA0026.jpg', 
-                    'Premium Collection/IMG-20260723-WA0025.jpg', 
-                    'Premium Collection/IMG-20260723-WA0024.jpg', 
-                    'Premium Collection/IMG-20260723-WA0023.jpg', 
-                    'Premium Collection/IMG-20260723-WA0022.jpg', 
-                    'Premium Collection/IMG-20260723-WA0021.jpg', 
-                    'Premium Collection/IMG-20260723-WA0020.jpg', 
-                    'Premium Collection/IMG-20260723-WA0019.jpg', 
-                    'Premium Collection/IMG-20260723-WA0018.jpg', 
-                    'Premium Collection/IMG-20260723-WA0017.jpg', 
-                    'Premium Collection/IMG-20260723-WA0016.jpg', 
-                    'Premium Collection/IMG-20260723-WA0015.jpg', 
-                    'Premium Collection/IMG-20260723-WA0014.jpg', 
-                    'Premium Collection/IMG-20260723-WA0013.jpg', 
-                    'Premium Collection/IMG-20260723-WA0012.jpg', 
-                    'Premium Collection/IMG-20260723-WA0011.jpg'
-                ], 
-                description: 'The absolute pinnacle of ultra-thin, refined elegance. This Patek Philippe Golden Ellipse masterfully pays homage to the "divine proportion" with its flawless, organically smoothed cushion-shaped case. It eschews traditional lugs, attaching seamlessly to an incredibly supple, intricately woven Milanese mesh bracelet that drapes over the wrist like pure silk. Featuring a flawlessly clean dial devoid of sweeping seconds, adorned only by delicate, polished baton hands and markers, it is the ultimate expression of quiet, generational luxury.', 
-                colors: ['Yellow Gold with White/Silver Dial', 'Yellow Gold with Blue Dial', 'Yellow Gold with Black Dial', 'Silver with Blue Dial', 'Silver with Black Dial', 'Rose Gold with Black Dial', 'Rose Gold with Pink/Rose Dial', 'Rose Gold with White/Silver Dial', 'Yellow Gold with Peach/Salmon Dial', 'All Black', 'Silver with White Dial', 'Silver with Green Dial'] 
-            },
-            { 
-                id: 81, 
-                name: 'The Rolex Cellini Milanese', 
-                category: 'Premium', 
-                price: 2799, 
-                realPrice: 1450000, 
-                images: [
-                    'Premium Collection/Pic1.png.jpg', 
-                    'Premium Collection/Pic2.png.jpg', 
-                    'Premium Collection/Pic3.png.jpg', 
-                    'Premium Collection/Pic4.png.jpg', 
-                    'Premium Collection/Pic5.png.jpg', 
-                    'Premium Collection/Pic6.png.jpg', 
-                    'Premium Collection/Pic7.png.jpg',
-                    'Premium Collection/Pic8.png.jpg',
-                    'Premium Collection/IMG-20260723-WA0002.jpg', 
-                    'Premium Collection/IMG-20260723-WA0001.jpg', 
-                    'Premium Collection/IMG-20260723-WA0000.jpg'
-                ], 
-                description: 'A stunning tribute to classical watchmaking heritage and refined artistry. This Rolex Cellini masterfully blends the soft lines of a highly polished, refined cushion case with the luxurious drape of a fine Milanese mesh bracelet. The dial is a study in purposeful minimalism, adorned only with perfectly faceted slim baton hour markers, the unmistakable signature crown applied at 12 o\'clock, and elegant, sweeping script at 6 o\'clock. This is a timeless dress watch that radiates pure, uninterrupted prestige from the boardroom to the ballroom.', 
-                colors: ['Silver with Blue Dial', 'Rose Gold with White Dial', 'Rose Gold with Peach Dial', 'Yellow Gold with Peach Dial', 'Silver with Black Dial', 'Silver with Green Dial', 'Yellow Gold with Black Dial', 'Rose Gold with Pink Dial', 'Silver with White Dial'] 
-            },
-            { 
-                id: 82, 
-                name: 'The Breguet Classique Open-Heart', 
-                category: 'Premium', 
-                price: 3299, 
-                realPrice: 3800000, 
-                images: [
-                    'Premium Collection/IMG-20260721-WA0021.jpg', 
-                    'Premium Collection/IMG-20260721-WA0020.jpg', 
-                    'Premium Collection/IMG-20260721-WA0019.jpg', 
-                    'Premium Collection/IMG-20260721-WA0018.jpg', 
-                    'Premium Collection/IMG-20260721-WA0017.jpg'
-                ], 
-                description: 'A breathtaking masterpiece steeped in the profound traditions of haute horlogerie. The Breguet Classique captivates immediately with its mathematically perfect, off-centered main dial, which is swept by the brand\'s legendary, signature hollow-tip blued steel hands. The dial itself is a work of art, featuring a brilliantly textured sunray guilloché pattern that radiates outward. The exposed mechanical balance wheel showcased in a tourbillon-style aperture at 6 o\'clock provides mesmerizing, kinetic movement, perfectly secured to the wrist by a premium, alligator-embossed genuine leather strap.', 
-                colors: ['Silver Case with White Dial', 'Silver Case with Blue Dial', 'Rose Gold Case with Black Dial', 'Rose Gold Case with White Dial', 'Rose Gold Case with Blue Dial'] 
-            },
-            { 
-                id: 83, 
-                name: 'The Patek Philippe Complications Skeleton', 
-                category: 'Premium', 
-                price: 3899, 
-                realPrice: 6500000, 
-                images: [
-                    'Premium Collection/IMG-20260721-WA0016.jpg', 
-                    'Premium Collection/IMG-20260721-WA0015.jpg', 
-                    'Premium Collection/IMG-20260721-WA0014.jpg', 
-                    'Premium Collection/IMG-20260721-WA0013.jpg', 
-                    'Premium Collection/IMG-20260721-WA0012.jpg', 
-                    'Premium Collection/IMG-20260721-WA0011.jpg'
-                ], 
-                description: 'The undisputed pinnacle of mechanical artistry and luxury design. This Patek Philippe masterpiece reveals its extraordinarily complex, fully skeletonized automatic movement through both the sapphire crystal front and the exhibition case back. Every bridge and plate is meticulously carved and decorated by hand. The inner mechanics are beautifully accented by a bold, richly colored outer chapter ring and elegant, high-polish dauphine hands. It is secured with a meticulously stitched premium leather strap, ensuring an uncompromising, classic luxury aesthetic for the true connoisseur.', 
-                colors: ['Rose Gold Case with Black Inner Ring', 'Rose Gold Case with Blue Inner Ring', 'Silver Case with Blue Inner Ring', 'Rose Gold Case with Silver/White Inner Ring', 'Silver Case with Silver/White Inner Ring', 'Silver Case with Black Inner Ring'] 
-            },
-            { 
-                id: 84, 
-                name: 'The Citizen Automatic Multi-Dial Open-Heart', 
-                category: 'Premium', 
-                price: 1199, 
-                realPrice: 35000, 
-                images: [
-                    'Premium Collection/IMG-20260721-WA0009.jpg', 
-                    'Premium Collection/IMG-20260721-WA0008.jpg', 
-                    'Premium Collection/IMG-20260721-WA0007.jpg'
-                ], 
-                description: 'Brilliantly engineered for flawless everyday performance and deeply sophisticated style. This highly robust Citizen Automatic features a remarkably detailed, multi-layered dial construction. The eye is instantly drawn to the prominent open-heart aperture nestled at 7 o\'clock, allowing a perpetual view of the beating escapement inside. The dial is further enhanced by two deeply recessed, highly functional sub-dials. Paired with an incredibly solid, expertly brushed and polished multi-link metal bracelet, this watch is a durable, versatile powerhouse designed to anchor any collection.', 
-                colors: ['Full Silver with Blue Dial', 'Full Silver with Green Dial', 'Full Yellow Gold with Green Dial', 'Full Yellow Gold with Black Dial', 'Full Yellow Gold with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Black Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial'] 
-            },
-            { 
-                id: 85, 
-                name: 'The Diesel Mega Chief Chronograph', 
-                category: 'Premium', 
-                price: 1499, 
-                realPrice: 22500, 
-                images: [
-                    'Premium Collection/IMG-20260718-WA0025.jpg', 
-                    'Premium Collection/IMG-20260718-WA0024.jpg', 
-                    'Premium Collection/IMG-20260718-WA0023.jpg', 
-                    'Premium Collection/IMG-20260718-WA0022.jpg', 
-                    'Premium Collection/IMG-20260718-WA0021.jpg', 
-                    'Premium Collection/IMG-20260718-WA0020.jpg', 
-                    'Premium Collection/IMG-20260718-WA0019.jpg', 
-                    'Premium Collection/IMG-20260718-WA0018.jpg', 
-                    'Premium Collection/IMG-20260718-WA0017.jpg', 
-                    'Premium Collection/IMG-20260718-WA0016.jpg', 
-                    'Premium Collection/IMG-20260718-WA0015.jpg', 
-                    'Premium Collection/IMG-20260718-WA0014.jpg', 
-                    'Premium Collection/IMG-20260718-WA0013.jpg', 
-                    'Premium Collection/IMG-20260718-WA0012.jpg', 
-                    'Premium Collection/IMG-20260718-WA0011.jpg', 
-                    'Premium Collection/IMG-20260718-WA0010.jpg', 
-                    'Premium Collection/IMG-20260718-WA0009.jpg', 
-                    'Premium Collection/IMG-20260718-WA0008.jpg', 
-                    'Premium Collection/IMG-20260718-WA0007.jpg', 
-                    'Premium Collection/IMG-20260718-WA0006.jpg'
-                ], 
-                description: 'Command the room and conquer your day with the unapologetic, oversized architecture of the legendary Diesel Mega Chief. Featuring a fiercely rugged industrial case profile with an iconic asymmetrical crown guard and signature screw-down bezel accents, this commanding chronograph makes a massive impact. The watch boasts a complex, deep multi-layered dial featuring three functional sub-dials, an integrated date window, and aggressive cut-out numerals. Paired with a heavy-duty stainless steel bracelet, it is the ultimate statement piece for those who refuse to blend into the background.', 
-                colors: ['Full Silver with Light Blue Dial', 'Full Yellow Gold with Green Dial', 'Two-Tone (Silver & Gold) with Black Dial', 'Full Yellow Gold with Gold Dial', 'Two-Tone (Silver & Gold) with White Dial', 'Full Yellow Gold with Black Dial', 'All Black with Copper/Brown Dial', 'Full Silver with White Dial', 'Full Silver with Silver Dial', 'Full Silver with Black Dial', 'All Black with Gold Accents'] 
-            },
-            { 
-                id: 86, 
-                name: 'The Diesel Liquid Metal Collection', 
-                category: 'Premium', 
-                price: 1299, 
-                realPrice: 16500, 
-                images: [
-                    'Premium Collection/IMG-20260716-WA0118.jpg', 
-                    'Premium Collection/IMG-20260716-WA0119.jpg', 
-                    'Premium Collection/IMG-20260716-WA0120.jpg', 
-                    'Premium Collection/IMG-20260716-WA0121.jpg', 
-                    'Premium Collection/IMG-20260716-WA0122.jpg', 
-                    'Premium Collection/IMG-20260716-WA0123.jpg', 
-                    'Premium Collection/IMG-20260716-WA0124.jpg', 
-                    'Premium Collection/Pic9.png.jpg'
-                ], 
-                description: 'Shatter conventional boundaries and embrace hyper-modern, avant-garde aesthetics with this striking Diesel timepiece. The defining characteristic of this watch is its organically sculpted, incredibly unique stainless steel case and highly integrated bracelet, which flow together seamlessly to resemble drops of molten liquid metal. Despite its futuristic exterior, the face remains clean and highly legible, featuring a gorgeous sunburst minimalist dial, razor-sharp faceted indices, and a deeply practical date window. It is a bold, futuristic accessory designed to turn heads and start conversations.', 
-                colors: ['Silver with Cyan/Teal Dial', 'Two-Tone (Gold & White) with Black Dial', 'Full Silver with Taupe/Grey Dial', 'Full Silver with Ice Blue Dial', 'Glossy Black with Black Dial', 'Two-Tone (Gold & White) with Gold Dial', 'Metallic Emerald Green with Green Dial', 'Glossy Black with Coral/Red Dial'] 
-            }
-
-
-        
+            { id: 72, name: 'The Emporio Armani Gianni Classic', category: 'Premium', price: 1899, realPrice: 32495, images: ['Premium Collection/IMG-20260730-WA0009.jpg', 'Premium Collection/IMG-20260730-WA0008.jpg', 'Premium Collection/IMG-20260730-WA0007.jpg', 'Premium Collection/IMG-20260730-WA0006.jpg', 'Premium Collection/IMG-20260730-WA0005.jpg', 'Premium Collection/IMG-20260730-WA0004.jpg', 'Premium Collection/IMG-20260730-WA0002.jpg', 'Premium Collection/IMG-20260730-WA0001.jpg'], description: 'A true masterclass in minimalist sophistication and Italian design. The Emporio Armani Gianni Classic series is engineered for those who appreciate understated luxury. It features a strikingly fluid, highly polished multi-link stainless steel bracelet that conforms effortlessly to the wrist. The impeccably clean sunburst dial is punctuated by the iconic eagle emblem resting proudly at 12 o\'clock, accompanied by an elegant mix of applied Roman and baton numerals. Complete with a sharply framed, highly practical date complication at 3 o\'clock and protected by scratch-resistant mineral crystal, this timepiece bridges the gap between high-end corporate attire and refined evening wear.', colors: ['Silver Strap with Blue Dial', 'Silver Strap with White Dial', 'Silver Strap with Green Dial', 'Two-Tone (Silver & Rose Gold) with White Dial', 'Two-Tone (Silver & Rose Gold) with Black Dial'] },
+            { id: 73, name: 'The Casio Edifice Chronograph', category: 'Premium', price: 1499, realPrice: 12995, images: ['Premium Collection/IMG-20260729-WA0024.jpg', 'Premium Collection/IMG-20260729-WA0022.jpg', 'Premium Collection/IMG-20260729-WA0020.jpg', 'Premium Collection/IMG-20260729-WA0018.jpg', 'Premium Collection/IMG-20260729-WA0016.jpg', 'Premium Collection/IMG-20260729-WA0014.jpg', 'Premium Collection/IMG-20260729-WA0012.jpg', 'Premium Collection/IMG-20260729-WA0009.jpg', 'Premium Collection/IMG-20260729-WA0007.jpg'], description: 'Engineered for relentless speed, unyielding precision, and dynamic style. This Casio Edifice Chronograph draws heavy inspiration from the adrenaline-fueled world of motorsports. The multi-layered, architectural dial boasts three distinct functional sub-dials that provide precision stopwatch capabilities, perfectly framed by a tachymeter bezel for on-the-fly speed calculations. Striking automotive-inspired color accents give the watch an aggressive edge, while the robust, solid stainless steel case and intricately brushed multi-link bracelet ensure maximum durability. It is the ultimate hybrid of high-octane sports functionality and premium everyday luxury.', colors: ['Two-Tone (Silver & Gold) with Gold Bezel and White Dial', 'Silver Strap with Blue Bezel and Silver/Black Dial', 'Two-Tone (Silver & Gold) with Gold Bezel and Gold Dial', 'Two-Tone (Silver & Gold) with Gold Bezel and Black Dial'] },
+            { id: 74, name: 'The BOSS Classic Guilloché', category: 'Premium', price: 1599, realPrice: 24500, images: ['Premium Collection/IMG-20260727-WA0047.jpg', 'Premium Collection/IMG-20260727-WA0046.jpg', 'Premium Collection/IMG-20260727-WA0045.jpg', 'Premium Collection/IMG-20260727-WA0044.jpg', 'Premium Collection/IMG-20260727-WA0043.jpg', 'Premium Collection/IMG-20260727-WA0042.jpg', 'Premium Collection/IMG-20260727-WA0041.jpg', 'Premium Collection/IMG-20260727-WA0040.jpg', 'Premium Collection/IMG-20260727-WA0039.jpg'], description: 'Understated elegance meets razor-sharp European tailoring. The BOSS Classic dress watch commands attention without ever having to shout. Its centerpiece is a meticulously crafted guilloché inner dial, offering a rich, woven texture that dances in the light. This is elegantly framed by a smooth outer track featuring slender Roman numerals and perfectly proportioned baton hands. Encased in high-polish stainless steel and featuring a perfectly balanced, discrete date window at 6 o\'clock, this timepiece offers a sophisticated symmetry that serves as the quintessential accessory for the modern, discerning gentleman.', colors: ['Two-Tone (Silver & Rose Gold) with White Dial', 'Silver Strap with Black Dial', 'Two-Tone (Silver & Rose Gold) with Black Dial', 'Silver Strap with Green Dial', 'All Black with Gold Accents', 'Silver Strap with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial', 'Two-Tone (Silver & Yellow Gold) with Green Dial'] },
+            { id: 75, name: 'The Armani Exchange Skeleton Automatic', category: 'Premium', price: 2199, realPrice: 28995, images: ['Premium Collection/IMG-20260727-WA0038.jpg', 'Premium Collection/IMG-20260727-WA0037.jpg', 'Premium Collection/IMG-20260727-WA0036.jpg', 'Premium Collection/IMG-20260727-WA0035.jpg', 'Premium Collection/IMG-20260727-WA0034.jpg', 'Premium Collection/IMG-20260727-WA0033.jpg', 'Premium Collection/IMG-20260727-WA0032.jpg', 'Premium Collection/IMG-20260727-WA0031.jpg', 'Premium Collection/IMG-20260727-WA0030.jpg'], description: 'Bold, incredibly avant-garde, and completely transparent. The Armani Exchange Skeleton Automatic dares to strip away the traditional dial entirely, putting its complex, kinetic mechanical heartbeat on full, glorious display. Every gear, spring, and jewel is showcased between two panels of hardened crystal. The design is further elevated by suspended, architectural hour markers that float on an outer ring, creating a mesmerizing three-dimensional effect. Paired with a highly integrated, brushed H-link bracelet, this watch offers an uncompromising, industrial-chic aesthetic for the trailblazer.', colors: ['Full Silver', 'Full Gold', 'Two-Tone (Silver & Rose Gold)', 'Full Black'] },
+            { id: 76, name: 'The Versace Medusa Skeleton', category: 'Premium', price: 2499, realPrice: 145000, images: ['Premium Collection/IMG-20260727-WA0029.jpg', 'Premium Collection/IMG-20260727-WA0028.jpg', 'Premium Collection/IMG-20260727-WA0027.jpg', 'Premium Collection/IMG-20260727-WA0026.jpg', 'Premium Collection/IMG-20260727-WA0025.jpg', 'Premium Collection/IMG-20260727-WA0024.jpg', 'Premium Collection/IMG-20260727-WA0023.jpg', 'Premium Collection/IMG-20260727-WA0022.jpg'], description: 'Unapologetic opulence in every single detail. This striking Versace masterpiece blurs the line between a high-precision timekeeping instrument and elite designer jewelry. It features a bold, meticulously sculpted 3D Medusa head that appears to float effortlessly over a fully skeletonized mechanical movement. The luxurious visual experience is amplified by the brand\'s signature Greca pattern adorning the deeply engraved bezel, combined with faceted studded hour markers. This is an assertive, powerful statement of uncompromising high-fashion luxury.', colors: ['All Black with Gold Medusa', 'Two-Tone (Silver & Rose Gold) with White Dial', 'Full Yellow Gold with Green Dial', 'Full Yellow Gold with White Dial', 'Two-Tone (Silver & Rose Gold) with Black Dial', 'Full Silver with Black Dial', 'Full Silver with White Dial', 'Full Yellow Gold with Gold Dial'] },
+            { id: 77, name: 'The Seiko Presage Open-Heart', category: 'Premium', price: 1899, realPrice: 42000, images: ['Premium Collection/IMG-20260727-WA0021.jpg', 'Premium Collection/IMG-20260727-WA0019.jpg', 'Premium Collection/IMG-20260727-WA0018.jpg'], description: 'A poetic tribute to classic Japanese mechanical watchmaking. Inspired by the legendary craftsmanship of the Presage line, this Seiko Automatic is an absolute joy to wear. It features a beautifully polished, perfectly circular open-heart aperture at 9 o\'clock, allowing the wearer an intimate view of the sweeping balance wheel oscillating in real-time. The rich, textured dial is complemented by razor-sharp, dauphine-style hands and applied baton indices that catch light brilliantly. Paired with a supple, premium crocodile-embossed genuine leather strap, it delivers unmatched vintage charm and enduring reliability.', colors: ['All Black', 'Rose Gold & Blue', 'Rose Gold & Black', 'Rose Gold & White', 'Silver & Black', 'Silver & Dark Blue', 'Silver & Ice Blue', 'Silver & White', 'Yellow Gold & Black', 'Yellow Gold & White', 'Yellow Gold & Green'] },
+            { id: 78, name: 'The Rolex Masterwork Skeleton', category: 'Premium', price: 2999, realPrice: 2850000, images: ['Premium Collection/IMG-20260725-WA0020.jpg', 'Premium Collection/IMG-20260725-WA0019.jpg', 'Premium Collection/IMG-20260725-WA0018.jpg', 'Premium Collection/IMG-20260725-WA0017.jpg', 'Premium Collection/IMG-20260725-WA0016.jpg'], description: 'A breathtaking display of mechanical theater and bespoke luxury. The Rolex Masterwork Skeleton takes a radical, highly exclusive approach to horology, entirely exposing its meticulously decorated, sweeping automatic movement. The intricate internal bridges and gears are hand-finished to perfection, framed by an elegant colored chapter ring. Brilliant, hand-set crystal indices mark the hours, while the iconic Rolex crown emblem anchors the design at 6 o\'clock. This is a rare, commanding statement piece designed strictly for the bold and elite collector.', colors: ['Two-Tone (Silver & Rose Gold) with White Outer Dial', 'Full Silver with Light Blue Outer Dial', 'Full Yellow Gold with Black Outer Dial', 'Two-Tone (Silver & Rose Gold) with Black Outer Dial', 'Full Silver with Black Outer Dial'] },
+            { id: 79, name: 'The Tissot Astral Skeleton', category: 'Premium', price: 2299, realPrice: 57000, images: ['Premium Collection/IMG-20260725-WA0015.jpg', 'Premium Collection/IMG-20260725-WA0014.jpg', 'Premium Collection/IMG-20260725-WA0013.jpg', 'Premium Collection/IMG-20260725-WA0012.jpg', 'Premium Collection/IMG-20260725-WA0011.jpg'], description: 'Where cutting-edge, angular geometry meets celestial romance. Building on the highly coveted integrated bracelet design, the Tissot Astral Skeleton presents an incredibly sophisticated, open-worked dial. The visual hierarchy is perfectly balanced: a stunning, romantic moon-phase indicator graces the 12 o\'clock position, directly counterbalanced by the exposed, beating mechanical heart at 6 o\'clock. Surrounded by intricate, swirling filigree and sharp, faceted hour markers, this watch offers an avant-garde approach to Swiss luxury that guarantees absolute presence on the wrist.', colors: ['Full Silver with White Dial & Blue Accents', 'Full Silver with Black Dial', 'All Black with Black Dial', 'Two-Tone (Silver & Rose Gold) with White Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial & Blue Accents'] },
+            { id: 80, name: 'The Patek Philippe Golden Ellipse', category: 'Premium', price: 3499, realPrice: 3100000, images: ['Premium Collection/IMG-20260723-WA0032.jpg', 'Premium Collection/IMG-20260723-WA0031.jpg', 'Premium Collection/IMG-20260723-WA0030.jpg', 'Premium Collection/IMG-20260723-WA0029.jpg', 'Premium Collection/IMG-20260723-WA0028.jpg', 'Premium Collection/IMG-20260723-WA0027.jpg', 'Premium Collection/IMG-20260723-WA0026.jpg', 'Premium Collection/IMG-20260723-WA0025.jpg', 'Premium Collection/IMG-20260723-WA0024.jpg', 'Premium Collection/IMG-20260723-WA0023.jpg', 'Premium Collection/IMG-20260723-WA0022.jpg', 'Premium Collection/IMG-20260723-WA0021.jpg', 'Premium Collection/IMG-20260723-WA0020.jpg', 'Premium Collection/IMG-20260723-WA0019.jpg', 'Premium Collection/IMG-20260723-WA0018.jpg', 'Premium Collection/IMG-20260723-WA0017.jpg', 'Premium Collection/IMG-20260723-WA0016.jpg', 'Premium Collection/IMG-20260723-WA0015.jpg', 'Premium Collection/IMG-20260723-WA0014.jpg', 'Premium Collection/IMG-20260723-WA0013.jpg', 'Premium Collection/IMG-20260723-WA0012.jpg', 'Premium Collection/IMG-20260723-WA0011.jpg'], description: 'The absolute pinnacle of ultra-thin, refined elegance. This Patek Philippe Golden Ellipse masterfully pays homage to the "divine proportion" with its flawless, organically smoothed cushion-shaped case. It eschews traditional lugs, attaching seamlessly to an incredibly supple, intricately woven Milanese mesh bracelet that drapes over the wrist like pure silk. Featuring a flawlessly clean dial devoid of sweeping seconds, adorned only by delicate, polished baton hands and markers, it is the ultimate expression of quiet, generational luxury.', colors: ['Yellow Gold with White/Silver Dial', 'Yellow Gold with Blue Dial', 'Yellow Gold with Black Dial', 'Silver with Blue Dial', 'Silver with Black Dial', 'Rose Gold with Black Dial', 'Rose Gold with Pink/Rose Dial', 'Rose Gold with White/Silver Dial', 'Yellow Gold with Peach/Salmon Dial', 'All Black', 'Silver with White Dial', 'Silver with Green Dial'] },
+            { id: 81, name: 'The Rolex Cellini Milanese', category: 'Premium', price: 2799, realPrice: 1450000, images: ['Premium Collection/Pic1.png.jpg', 'Premium Collection/Pic2.png.jpg', 'Premium Collection/Pic3.png.jpg', 'Premium Collection/Pic4.png.jpg', 'Premium Collection/Pic5.png.jpg', 'Premium Collection/Pic6.png.jpg', 'Premium Collection/Pic7.png.jpg', 'Premium Collection/Pic8.png.jpg', 'Premium Collection/IMG-20260723-WA0002.jpg', 'Premium Collection/IMG-20260723-WA0001.jpg', 'Premium Collection/IMG-20260723-WA0000.jpg'], description: 'A stunning tribute to classical watchmaking heritage and refined artistry. This Rolex Cellini masterfully blends the soft lines of a highly polished, refined cushion case with the luxurious drape of a fine Milanese mesh bracelet. The dial is a study in purposeful minimalism, adorned only with perfectly faceted slim baton hour markers, the unmistakable signature crown applied at 12 o\'clock, and elegant, sweeping script at 6 o\'clock. This is a timeless dress watch that radiates pure, uninterrupted prestige from the boardroom to the ballroom.', colors: ['Silver with Blue Dial', 'Rose Gold with White Dial', 'Rose Gold with Peach Dial', 'Yellow Gold with Peach Dial', 'Silver with Black Dial', 'Silver with Green Dial', 'Yellow Gold with Black Dial', 'Rose Gold with Pink Dial', 'Silver with White Dial'] },
+            { id: 82, name: 'The Breguet Classique Open-Heart', category: 'Premium', price: 3299, realPrice: 3800000, images: ['Premium Collection/IMG-20260721-WA0021.jpg', 'Premium Collection/IMG-20260721-WA0020.jpg', 'Premium Collection/IMG-20260721-WA0019.jpg', 'Premium Collection/IMG-20260721-WA0018.jpg', 'Premium Collection/IMG-20260721-WA0017.jpg'], description: 'A breathtaking masterpiece steeped in the profound traditions of haute horlogerie. The Breguet Classique captivates immediately with its mathematically perfect, off-centered main dial, which is swept by the brand\'s legendary, signature hollow-tip blued steel hands. The dial itself is a work of art, featuring a brilliantly textured sunray guilloché pattern that radiates outward. The exposed mechanical balance wheel showcased in a tourbillon-style aperture at 6 o\'clock provides mesmerizing, kinetic movement, perfectly secured to the wrist by a premium, alligator-embossed genuine leather strap.', colors: ['Silver Case with White Dial', 'Silver Case with Blue Dial', 'Rose Gold Case with Black Dial', 'Rose Gold Case with White Dial', 'Rose Gold Case with Blue Dial'] },
+            { id: 83, name: 'The Patek Philippe Complications Skeleton', category: 'Premium', price: 3899, realPrice: 6500000, images: ['Premium Collection/IMG-20260721-WA0016.jpg', 'Premium Collection/IMG-20260721-WA0015.jpg', 'Premium Collection/IMG-20260721-WA0014.jpg', 'Premium Collection/IMG-20260721-WA0013.jpg', 'Premium Collection/IMG-20260721-WA0012.jpg', 'Premium Collection/IMG-20260721-WA0011.jpg'], description: 'The undisputed pinnacle of mechanical artistry and luxury design. This Patek Philippe masterpiece reveals its extraordinarily complex, fully skeletonized automatic movement through both the sapphire crystal front and the exhibition case back. Every bridge and plate is meticulously carved and decorated by hand. The inner mechanics are beautifully accented by a bold, richly colored outer chapter ring and elegant, high-polish dauphine hands. It is secured with a meticulously stitched premium leather strap, ensuring an uncompromising, classic luxury aesthetic for the true connoisseur.', colors: ['Rose Gold Case with Black Inner Ring', 'Rose Gold Case with Blue Inner Ring', 'Silver Case with Blue Inner Ring', 'Rose Gold Case with Silver/White Inner Ring', 'Silver Case with Silver/White Inner Ring', 'Silver Case with Black Inner Ring'] },
+            { id: 84, name: 'The Citizen Automatic Multi-Dial Open-Heart', category: 'Premium', price: 1199, realPrice: 35000, images: ['Premium Collection/IMG-20260721-WA0009.jpg', 'Premium Collection/IMG-20260721-WA0008.jpg', 'Premium Collection/IMG-20260721-WA0007.jpg'], description: 'Brilliantly engineered for flawless everyday performance and deeply sophisticated style. This highly robust Citizen Automatic features a remarkably detailed, multi-layered dial construction. The eye is instantly drawn to the prominent open-heart aperture nestled at 7 o\'clock, allowing a perpetual view of the beating escapement inside. The dial is further enhanced by two deeply recessed, highly functional sub-dials. Paired with an incredibly solid, expertly brushed and polished multi-link metal bracelet, this watch is a durable, versatile powerhouse designed to anchor any collection.', colors: ['Full Silver with Blue Dial', 'Full Silver with Green Dial', 'Full Yellow Gold with Green Dial', 'Full Yellow Gold with Black Dial', 'Full Yellow Gold with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Black Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial'] },
+            { id: 85, name: 'The Diesel Mega Chief Chronograph', category: 'Premium', price: 1499, realPrice: 22500, images: ['Premium Collection/IMG-20260718-WA0025.jpg', 'Premium Collection/IMG-20260718-WA0024.jpg', 'Premium Collection/IMG-20260718-WA0023.jpg', 'Premium Collection/IMG-20260718-WA0022.jpg', 'Premium Collection/IMG-20260718-WA0021.jpg', 'Premium Collection/IMG-20260718-WA0020.jpg', 'Premium Collection/IMG-20260718-WA0019.jpg', 'Premium Collection/IMG-20260718-WA0018.jpg', 'Premium Collection/IMG-20260718-WA0017.jpg', 'Premium Collection/IMG-20260718-WA0016.jpg', 'Premium Collection/IMG-20260718-WA0015.jpg', 'Premium Collection/IMG-20260718-WA0014.jpg', 'Premium Collection/IMG-20260718-WA0013.jpg', 'Premium Collection/IMG-20260718-WA0012.jpg', 'Premium Collection/IMG-20260718-WA0011.jpg', 'Premium Collection/IMG-20260718-WA0010.jpg', 'Premium Collection/IMG-20260718-WA0009.jpg', 'Premium Collection/IMG-20260718-WA0008.jpg', 'Premium Collection/IMG-20260718-WA0007.jpg', 'Premium Collection/IMG-20260718-WA0006.jpg'], description: 'Command the room and conquer your day with the unapologetic, oversized architecture of the legendary Diesel Mega Chief. Featuring a fiercely rugged industrial case profile with an iconic asymmetrical crown guard and signature screw-down bezel accents, this commanding chronograph makes a massive impact. The watch boasts a complex, deep multi-layered dial featuring three functional sub-dials, an integrated date window, and aggressive cut-out numerals. Paired with a heavy-duty stainless steel bracelet, it is the ultimate statement piece for those who refuse to blend into the background.', colors: ['Full Silver with Light Blue Dial', 'Full Yellow Gold with Green Dial', 'Two-Tone (Silver & Gold) with Black Dial', 'Full Yellow Gold with Gold Dial', 'Two-Tone (Silver & Gold) with White Dial', 'Full Yellow Gold with Black Dial', 'All Black with Copper/Brown Dial', 'Full Silver with White Dial', 'Full Silver with Silver Dial', 'Full Silver with Black Dial', 'All Black with Gold Accents'] },
+            { id: 86, name: 'The Diesel Liquid Metal Collection', category: 'Premium', price: 1299, realPrice: 16500, images: ['Premium Collection/IMG-20260716-WA0118.jpg', 'Premium Collection/IMG-20260716-WA0119.jpg', 'Premium Collection/IMG-20260716-WA0120.jpg', 'Premium Collection/IMG-20260716-WA0121.jpg', 'Premium Collection/IMG-20260716-WA0122.jpg', 'Premium Collection/IMG-20260716-WA0123.jpg', 'Premium Collection/IMG-20260716-WA0124.jpg', 'Premium Collection/Pic9.png.jpg'], description: 'Shatter conventional boundaries and embrace hyper-modern, avant-garde aesthetics with this striking Diesel timepiece. The defining characteristic of this watch is its organically sculpted, incredibly unique stainless steel case and highly integrated bracelet, which flow together seamlessly to resemble drops of molten liquid metal. Despite its futuristic exterior, the face remains clean and highly legible, featuring a gorgeous sunburst minimalist dial, razor-sharp faceted indices, and a deeply practical date window. It is a bold, futuristic accessory designed to turn heads and start conversations.', colors: ['Silver with Cyan/Teal Dial', 'Two-Tone (Gold & White) with Black Dial', 'Full Silver with Taupe/Grey Dial', 'Full Silver with Ice Blue Dial', 'Glossy Black with Black Dial', 'Two-Tone (Gold & White) with Gold Dial', 'Metallic Emerald Green with Green Dial', 'Glossy Black with Coral/Red Dial'] }
         ];
 
-        let cart = [];
-        
-        const validPromoCodes = { 
-            // 10 Codes: ₹500 off on purchase of ₹3499
-            'AVESTA500-A1': { discount: 500, min: 3499 },
-            'AVESTA500-B2': { discount: 500, min: 3499 },
-            'AVESTA500-C3': { discount: 500, min: 3499 },
-            'AVESTA500-D4': { discount: 500, min: 3499 },
-            'AVESTA500-E5': { discount: 500, min: 3499 },
-            'LUXE500-F6': { discount: 500, min: 3499 },
-            'LUXE500-G7': { discount: 500, min: 3499 },
-            'LUXE500-H8': { discount: 500, min: 3499 },
-            'LUXE500-I9': { discount: 500, min: 3499 },
-            'LUXE500-J0': { discount: 500, min: 3499 },
-            
-            // 10 Codes: ₹249 off on purchase of ₹1499
-            'TIME249-K1': { discount: 249, min: 1499 },
-            'TIME249-L2': { discount: 249, min: 1499 },
-            'TIME249-M3': { discount: 249, min: 1499 },
-            'TIME249-N4': { discount: 249, min: 1499 },
-            'TIME249-O5': { discount: 249, min: 1499 },
-            'STYLE249-P6': { discount: 249, min: 1499 },
-            'STYLE249-Q7': { discount: 249, min: 1499 },
-            'STYLE249-R8': { discount: 249, min: 1499 },
-            'STYLE249-S9': { discount: 249, min: 1499 },
-            'STYLE249-T0': { discount: 249, min: 1499 },
+        // ==========================================
+        // 🛠️ BRAND & CATEGORY ENRICHMENT ENGINE
+        // ==========================================
+        const BRAND_LIST = [
+            'Tissot', 'Rolex', 'Audemars Piguet', 'Fossil', 'Versace', 
+            'Seiko', 'Tommy Hilfiger', 'Rado', 'GUESS', 'Emporio Armani', 
+            'Casio', 'BOSS', 'Armani Exchange', 'Patek Philippe', 'Breguet', 
+            'Citizen', 'Diesel', 'GT Drive', 'TAG Heuer', 'Cartier', 'OMEGA'
+        ];
 
-            // 5 Codes: ₹1000 off on purchase of ₹6499
-            'ELITE1000-U1': { discount: 1000, min: 6499 },
-            'ELITE1000-V2': { discount: 1000, min: 6499 },
-            'ROYAL1000-W3': { discount: 1000, min: 6499 },
-            'ROYAL1000-X4': { discount: 1000, min: 6499 },
-            'CROWN1000-Y5': { discount: 1000, min: 6499 }
+        products.forEach(p => {
+            if (p.category === 'Men') {
+                p.type = 'non-branded';
+                p.gender = 'Men';
+                p.brand = 'Faxon';
+            } else if (p.category === 'Women') {
+                p.type = 'non-branded';
+                p.gender = 'Women';
+                p.brand = 'Velaris';
+            } else {
+                p.type = 'branded';
+                p.gender = 'Unisex';
+                const foundBrand = BRAND_LIST.find(b => p.name.toLowerCase().includes(b.toLowerCase()));
+                p.brand = foundBrand || 'Other Brands';
+            }
+        });
+
+        let currentFilters = {
+            mainCategory: 'All',
+            gender: 'All',
+            selectedBrands: [],
+            maxPrice: 5000
+        };
+
+        function initFilterUI() {
+            const brandedProducts = products.filter(p => p.type === 'branded');
+            const brandCounts = {};
+            
+            brandedProducts.forEach(p => {
+                brandCounts[p.brand] = (brandCounts[p.brand] || 0) + 1;
+            });
+
+            const sortedBrands = Object.keys(brandCounts).sort();
+            const brandContainer = document.getElementById('brand-checkbox-list');
+            
+            if (brandContainer) {
+                brandContainer.innerHTML = sortedBrands.map(b => `
+                    <label class="flex items-center justify-between text-gray-400 hover:text-white cursor-pointer select-none group">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" value="${b}" onchange="handleBrandSelection()" class="brand-checkbox accent-gold w-3.5 h-3.5">
+                            <span class="group-hover:text-gold transition-colors">${b}</span>
+                        </div>
+                        <span class="text-[10px] text-gray-600 font-mono">(${brandCounts[b]})</span>
+                    </label>
+                `).join('');
+                
+                document.getElementById('brand-count-badge').innerText = `${sortedBrands.length} Brands`;
+            }
+
+            applyFilters();
+        }
+
+        function handleMainCategoryChange(val) {
+            currentFilters.mainCategory = val;
+            const nonBrandedSection = document.getElementById('sub-section-nonbranded');
+            const brandedSection = document.getElementById('sub-section-brands');
+
+            if (val === 'non-branded') {
+                nonBrandedSection.classList.remove('hidden');
+                brandedSection.classList.add('hidden');
+            } else if (val === 'branded') {
+                nonBrandedSection.classList.add('hidden');
+                brandedSection.classList.remove('hidden');
+            } else {
+                nonBrandedSection.classList.remove('hidden');
+                brandedSection.classList.remove('hidden');
+            }
+
+            applyFilters();
+        }
+
+        function handleBrandSelection() {
+            const checkboxes = document.querySelectorAll('.brand-checkbox:checked');
+            currentFilters.selectedBrands = Array.from(checkboxes).map(cb => cb.value);
+            applyFilters();
+        }
+
+        function updatePriceSlider(val) {
+            currentFilters.maxPrice = parseInt(val);
+            document.getElementById('price-slider-value').innerText = val >= 5000 ? '₹5,000+' : `₹${parseInt(val).toLocaleString('en-IN')}`;
+            applyFilters();
+        }
+
+        function resetFilters() {
+            currentFilters = { mainCategory: 'All', gender: 'All', selectedBrands: [], maxPrice: 5000 };
+            
+            const mainRadios = document.getElementsByName('mainCategory');
+            mainRadios.forEach(r => r.checked = (r.value === 'All'));
+
+            const genderRadios = document.getElementsByName('genderCategory');
+            genderRadios.forEach(r => r.checked = (r.value === 'All'));
+
+            document.querySelectorAll('.brand-checkbox').forEach(cb => cb.checked = false);
+            
+            const slider = document.getElementById('price-range-input');
+            if (slider) { slider.value = 5000; }
+            document.getElementById('price-slider-value').innerText = '₹5,000+';
+
+            document.getElementById('sub-section-nonbranded').classList.remove('hidden');
+            document.getElementById('sub-section-brands').classList.remove('hidden');
+
+            applyFilters();
+        }
+
+        function toggleMobileFilter() {
+            const sidebar = document.getElementById('filter-sidebar');
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+                sidebar.classList.add('fixed', 'inset-0', 'z-50', 'bg-black', 'p-6', 'overflow-y-auto');
+            } else {
+                sidebar.classList.add('hidden');
+                sidebar.classList.remove('fixed', 'inset-0', 'z-50', 'bg-black', 'p-6', 'overflow-y-auto');
+            }
+        }
+
+        function applyFilters() {
+            const genderValue = document.querySelector('input[name="genderCategory"]:checked')?.value || 'All';
+            currentFilters.gender = genderValue;
+
+            const filteredProducts = products.filter(product => {
+                if (currentFilters.mainCategory === 'non-branded' && product.type !== 'non-branded') return false;
+                if (currentFilters.mainCategory === 'branded' && product.type !== 'branded') return false;
+
+                if (product.type === 'non-branded' && currentFilters.gender !== 'All') {
+                    if (product.gender !== currentFilters.gender) return false;
+                }
+
+                if (product.type === 'branded' && currentFilters.selectedBrands.length > 0) {
+                    if (!currentFilters.selectedBrands.includes(product.brand)) return false;
+                }
+
+                if (currentFilters.maxPrice < 5000 && product.price > currentFilters.maxPrice) return false;
+
+                return true;
+            });
+
+            renderProductGrid(filteredProducts);
+        }
+
+        function renderProductGrid(items) {
+            const grid = document.getElementById('product-grid');
+            const countElem = document.getElementById('product-count');
+            
+            if (countElem) countElem.innerText = items.length;
+            if (!grid) return;
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center">
+                        <i class="fa-solid fa-clock text-4xl text-gold/30 mb-4"></i>
+                        <h4 class="text-white text-base serif-text mb-2">No Timepieces Match Your Filters</h4>
+                        <p class="text-gray-500 text-xs font-light mb-4">Try clearing some filters or adjusting your price range.</p>
+                        <button type="button" onclick="resetFilters()" class="btn-gold px-6 py-2 text-xs uppercase tracking-widest font-semibold">Reset Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = items.map(product => `
+                <div class="animate-fade-in group rounded-sm bg-[#0a0a0a] overflow-hidden border border-white/5 transition-all hover:border-gold/30 flex flex-col cursor-pointer shadow-lg" onclick="openProductDetail(${product.id})">
+                    <div class="aspect-[4/5] bg-[#050505] flex items-center justify-center relative overflow-hidden">
+                        <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-in-out mix-blend-lighten text-gray-500 text-[10px] text-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100"></div>
+                        <div class="absolute bottom-4 left-4 right-4 z-10">
+                            <p class="text-gold text-[9px] tracking-widest uppercase font-semibold mb-1">${product.brand}</p>
+                            <h3 class="text-sm md:text-base font-light text-white mb-1 line-clamp-1 serif-text">${product.name}</h3>
+                            <p class="text-sm font-medium text-white tracking-wider">
+                                <span class="text-gray-500 line-through text-[10px] mr-2">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-gold">₹${product.price.toLocaleString('en-IN')}</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        let cart = [];
+        const validPromoCodes = { 
+            'AVESTA500-A1': { discount: 500, min: 3499 }, 'TIME249-K1': { discount: 249, min: 1499 }, 'ELITE1000-U1': { discount: 1000, min: 6499 }
         };
 
         let currentDiscount = 0;
@@ -973,11 +905,54 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         let finalOrderTotal = 0; 
         let paymentMethod = 'upi'; 
 
+        // ==========================================
+        // 📜 DETAILED & PROFESSIONAL POLICIES
+        // ==========================================
         const policiesData = {
-            'privacy': { title: 'Privacy Policy', content: '<p><strong class="text-gold">Data Protection:</strong> At AVESTA, your privacy is treated with care. Data is stored securely.</p>' },
-            'terms': { title: 'Terms of Service', content: '<p><strong class="text-gold">Custom Orders:</strong> By purchasing, you acknowledge the crafting timeline.</p>' },
-            'return': { title: 'Return & Warranty', content: '<p><strong class="text-gold">Warranty:</strong> Every AVESTA timepiece comes with a 2-year warranty.</p>' },
-            'shipping': { title: 'Secure Shipping', content: '<p><strong class="text-gold">Free Delivery:</strong> Priority shipping across India for all our timepieces.</p>' }
+            'privacy': {
+                title: 'Privacy Policy',
+                content: `
+                    <div class="space-y-4 text-sm font-light leading-relaxed text-gray-300">
+                        <p><strong class="text-gold font-medium">1. Data Protection & Security:</strong> At AVESTA, safeguarding your personal information is our highest priority. We employ industry-leading, military-grade encryption protocols (SSL/TLS) to ensure that all data transmitted through our platform—including your contact details and payment identifiers—remains strictly confidential and secure against unauthorized access.</p>
+                        <p><strong class="text-gold font-medium">2. Information Collection & Utilization:</strong> We collect only the information essential to fulfill your bespoke orders and enhance your luxury shopping experience. This includes your name, shipping address, email, and contact number. Your data is strictly used for order processing, logistics coordination, and providing tailored customer support.</p>
+                        <p><strong class="text-gold font-medium">3. Third-Party Disclosure:</strong> AVESTA maintains a strict non-disclosure policy. We do not sell, trade, or rent your personal information to external marketers. Information is only shared with our trusted, vetted logistics partners exclusively for the purpose of ensuring the secure delivery of your timepiece.</p>
+                        <p><strong class="text-gold font-medium">4. Your Privacy Rights:</strong> You retain full control over your digital footprint with AVESTA. Should you wish to review, amend, or request the deletion of your personal records from our secure servers, our concierge team is available 24/7 to process your requests with absolute discretion.</p>
+                    </div>
+                `
+            },
+            'terms': {
+                title: 'Terms of Service',
+                content: `
+                    <div class="space-y-4 text-sm font-light leading-relaxed text-gray-300">
+                        <p><strong class="text-gold font-medium">1. Agreement to Terms:</strong> By accessing the AVESTA platform and securing a timepiece, you formally agree to be bound by these comprehensive Terms of Service. Our platform is dedicated to providing an unparalleled luxury experience, and these terms ensure mutual clarity and excellence.</p>
+                        <p><strong class="text-gold font-medium">2. The Custom Crafting Timeline:</strong> Perfection cannot be rushed. By placing a custom or premium order, you acknowledge and accept our meticulous crafting timeline. Each timepiece undergoes rigorous assembly, calibration, and quality assurance at our Agra workshop before dispatch.</p>
+                        <p><strong class="text-gold font-medium">3. Pricing & Accuracy:</strong> While we strive for absolute precision in our digital boutique, AVESTA reserves the right to correct any typographical errors, inaccuracies, or omissions relating to product pricing and availability without prior notice. All financial transactions are processed securely in INR (₹).</p>
+                        <p><strong class="text-gold font-medium">4. Intellectual Property:</strong> All content presented on this platform—including but not limited to digital assets, 3D renders, photographic materials, and brand typography—is the exclusive intellectual property of AVESTA Premium Timepieces and is protected by international copyright laws.</p>
+                    </div>
+                `
+            },
+            'return': {
+                title: 'Return & Warranty',
+                content: `
+                    <div class="space-y-4 text-sm font-light leading-relaxed text-gray-300">
+                        <p><strong class="text-gold font-medium">1. The AVESTA Guarantee:</strong> We stand unequivocally behind the mechanical integrity and aesthetic brilliance of our creations. Every AVESTA timepiece is accompanied by a comprehensive 2-Year International Warranty, safeguarding against any manufacturing defects or mechanical irregularities.</p>
+                        <p><strong class="text-gold font-medium">2. Warranty Exclusions:</strong> Please note that our warranty does not cover damages resulting from negligence, inappropriate handling, unauthorized third-party modifications, extreme water exposure beyond the stated ATM rating, or standard wear and tear of leather straps and surface plating.</p>
+                        <p><strong class="text-gold font-medium">3. Return Policy:</strong> We offer a highly accommodating 7-day return window from the date of delivery. To qualify for a return or exchange, the timepiece must be unworn, entirely unblemished, and returned in its original, sealed luxury packaging with all protective films and authenticity documents intact.</p>
+                        <p><strong class="text-gold font-medium">4. Custom Orders:</strong> Due to the highly personalized nature of custom-engraved and bespoke built-to-order timepieces, these specific items are considered final sale and are strictly non-refundable, except in the rare event of a verified manufacturing defect.</p>
+                    </div>
+                `
+            },
+            'shipping': {
+                title: 'Secure Shipping',
+                content: `
+                    <div class="space-y-4 text-sm font-light leading-relaxed text-gray-300">
+                        <p><strong class="text-gold font-medium">1. Priority Transit:</strong> We understand the anticipation of receiving a masterpiece. AVESTA provides complimentary, expedited priority shipping across the entirety of India. We partner exclusively with top-tier, specialized logistics firms to ensure your package is handled with the utmost care.</p>
+                        <p><strong class="text-gold font-medium">2. Fully Insured Delivery:</strong> Your peace of mind is paramount. Every shipment dispatched from our workshop is fully insured transit coverage until the precise moment it is signed for and handed to you at your designated delivery address.</p>
+                        <p><strong class="text-gold font-medium">3. Unboxing Security:</strong> To guarantee absolute security and prevent any potential discrepancies, we highly mandate that customers record a continuous, unedited video while unboxing their AVESTA package. This ensures a seamless resolution process in the highly unlikely event of transit damage.</p>
+                        <p><strong class="text-gold font-medium">4. Real-Time Tracking:</strong> Upon the departure of your timepiece from our Agra facility, you will be provided with a unique Order Reference ID. This allows you to monitor your shipment's journey in real-time through our digital tracking portal, ensuring complete transparency until delivery.</p>
+                    </div>
+                `
+            }
         };
 
         function showCustomAlert(title, message, type = 'info') {
@@ -1133,42 +1108,6 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
 
         function resetTracking() { document.getElementById('order-id-input').value = ''; document.getElementById('tracking-result').classList.add('hidden'); document.getElementById('tracking-input-area').classList.remove('hidden'); }
 
-        function filterCollection(category) {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('filter-active');
-            });
-            document.getElementById('btn-filter-' + category).classList.add('filter-active');
-
-            renderProducts(category);
-        }
-
-        function renderProducts(category = 'All') {
-            const grid = document.getElementById('product-grid');
-            if(!grid) return;
-
-            let itemsToRender = products;
-            
-            if (category !== 'All') {
-                itemsToRender = products.filter(p => p.category === category);
-            }
-
-            grid.innerHTML = itemsToRender.map(product => `
-                <div class="animate-fade-in group rounded-sm bg-[#0a0a0a] overflow-hidden border border-white/5 transition-all hover:border-gold/30 flex flex-col cursor-pointer shadow-lg" onclick="openProductDetail(${product.id})">
-                    <div class="aspect-[4/5] bg-[#050505] flex items-center justify-center relative overflow-hidden">
-                        <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-in-out mix-blend-lighten text-gray-500 text-[10px] text-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100"></div>
-                        <div class="absolute bottom-4 left-4 right-4 z-10">
-                            <p class="text-gold text-[9px] tracking-widest uppercase font-semibold mb-1">${product.category === 'Testing' ? 'Trial Product' : product.category + ' Collection'}</p>
-                            <h3 class="text-sm md:text-base font-light text-white mb-1 line-clamp-1 serif-text">${product.name}</h3>
-                            <p class="text-sm font-medium text-white tracking-wider">
-                                <span class="text-gray-500 line-through text-[10px] mr-2">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-gold">₹${product.price.toLocaleString('en-IN')}</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
         function toggleCustomDropdown() {
             const list = document.getElementById('custom-select-list');
             const icon = document.getElementById('custom-select-icon');
@@ -1218,12 +1157,12 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
                 thumbsContainer.classList.add('hidden');
             }
 
-            document.getElementById('detail-category').innerText = product.id === 0 ? "System Test" : product.category + " Collection";
+            document.getElementById('detail-category').innerText = product.brand;
             document.getElementById('detail-title').innerText = product.name;
             
             let priceHtml = `<span class="line-through text-gray-500 text-xl mr-3 font-medium">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-gold font-bold">₹${product.price.toLocaleString('en-IN')}</span>`;
             
-            if (product.category === 'Premium' && product.realPrice) {
+            if (product.type === 'branded' && product.realPrice) {
                 priceHtml += `<br><div class="mt-3 text-[10px] text-gray-400 font-light tracking-widest uppercase border border-white/10 bg-black inline-block px-3 py-1.5 rounded-sm"><i class="fa-solid fa-gem text-gold mr-1"></i> Authentic Retail Price: <span class="text-white font-medium">₹${product.realPrice.toLocaleString('en-IN')}</span></div>`;
             }
             
@@ -1259,11 +1198,10 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
             openModalSafely('product-detail-modal');
         }
 
-        // 🔥 ADDED ZOOM RESET FOR THUMBNAIL SWITCHING 🔥
         function changeMainImage(src) {
             const mainImg = document.getElementById('detail-main-img'); 
             mainImg.style.opacity = 0;
-            mainImg.style.transform = 'scale(1)'; 
+            mainImg.style.transform = 'translate(0%, 0%) scale(1)'; 
             setTimeout(() => { mainImg.src = src; mainImg.style.opacity = 1; }, 200);
         }
 
@@ -1599,49 +1537,57 @@ src="https://www.facebook.com/tr?id=1050680477289562&ev=PageView&noscript=1"
         function closeEbill() { closeModalSafely('ebill-modal'); }
 
         // ==========================================
-        // 🔥 PREMIUM IMAGE ZOOM CAPABILITY 🔥
+        // 🔥 HIGH-PERFORMANCE IMAGE ZOOM CAPABILITY 🔥
         // ==========================================
         const zoomContainer = document.getElementById('image-zoom-container');
         const zoomImg = document.getElementById('detail-main-img');
 
-        // 1. Desktop Hover Panning
-        zoomContainer.addEventListener('mousemove', (e) => {
-            const { left, top, width, height } = zoomContainer.getBoundingClientRect();
-            
-            const x = ((e.clientX - left) / width) * 100;
-            const y = ((e.clientY - top) / height) * 100;
-            
-            zoomImg.style.transformOrigin = `${x}% ${y}%`;
-            zoomImg.style.transform = 'scale(2.5)';
-        });
+        // Apply a highly responsive cubic-bezier transition specifically for hardware-accelerated transforms
+        zoomImg.style.transition = 'transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.2s ease-out';
+        zoomImg.style.willChange = 'transform'; 
 
-        // Reset image when mouse leaves
-        zoomContainer.addEventListener('mouseleave', () => {
-            zoomImg.style.transformOrigin = 'center center';
-            zoomImg.style.transform = 'scale(1)';
-        });
-
-        // 2. Mobile Touch Panning
-        zoomContainer.addEventListener('touchmove', (e) => {
+        function handleZoomMove(e) {
             e.preventDefault(); 
-            
-            const touch = e.touches[0];
             const { left, top, width, height } = zoomContainer.getBoundingClientRect();
             
-            const x = ((touch.clientX - left) / width) * 100;
-            const y = ((touch.clientY - top) / height) * 100;
-            
-            zoomImg.style.transformOrigin = `${x}% ${y}%`;
-            zoomImg.style.transform = 'scale(2.5)';
-        }, { passive: false });
+            let clientX, clientY;
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
 
-        // Reset image when finger is lifted
-        zoomContainer.addEventListener('touchend', () => {
-            zoomImg.style.transformOrigin = 'center center';
-            zoomImg.style.transform = 'scale(1)';
-        });
+            // Calculate exact position percentages (bounded 0 to 1)
+            const x = Math.max(0, Math.min(1, (clientX - left) / width));
+            const y = Math.max(0, Math.min(1, (clientY - top) / height));
+            
+            const scale = 2.8; // Defined zoom intensity
+            
+            // Translate mathematically ensures the image pans relative to hover coordinates
+            const transX = (0.5 - x) * (scale - 1) * 100;
+            const transY = (0.5 - y) * (scale - 1) * 100;
+            
+            zoomImg.style.transform = `translate(${transX}%, ${transY}%) scale(${scale})`;
+        }
+
+        function resetZoom() {
+            zoomImg.style.transform = 'translate(0%, 0%) scale(1)';
+        }
+
+        // Desktop Events
+        zoomContainer.addEventListener('mousemove', handleZoomMove);
+        zoomContainer.addEventListener('mouseleave', resetZoom);
+
+        // Mobile Events
+        zoomContainer.addEventListener('touchmove', handleZoomMove, { passive: false });
+        zoomContainer.addEventListener('touchend', resetZoom);
         
-        renderProducts();
+        // Initialize App UI
+        window.addEventListener('DOMContentLoaded', () => {
+            initFilterUI();
+        });
     </script>
     
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
