@@ -1182,7 +1182,7 @@
             const confirmBtn = document.getElementById('pay-button'), paymentDynamicContent = document.getElementById('payment-dynamic-content');
             
             
-            if(details.method === 'UPI') {
+            ifif(details.method === 'UPI') {
     document.getElementById('ebill-status-text').innerHTML = `
         <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;">
             <span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
@@ -1198,8 +1198,7 @@
             </span>
         </div>`;
     document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
-            }
-        }
+}
 
         function generateUPIInterface() {
             const name = document.getElementById('cust-name').value.trim(), email = document.getElementById('cust-email').value.trim();
