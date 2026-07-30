@@ -1184,22 +1184,21 @@
             
             if(details.method === 'UPI') {
     document.getElementById('ebill-status-text').innerHTML = `
-        <div style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;">
-            <span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; text-align: center;">
-                Verification<br>Pending
+        <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;">
+            <span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
+                VERIFICATION PENDING
             </span>
         </div>`;
     document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
 } else {
     document.getElementById('ebill-status-text').innerHTML = `
-        <div style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); border-radius: 2px;">
-            <span style="color: #4ade80; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.4; text-align: center;">
-                Confirmed<br>(COD)
+        <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); border-radius: 2px;">
+            <span style="color: #4ade80; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
+                CONFIRMED (COD)
             </span>
         </div>`;
     document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
-}
-
+            }
         }
 
         function generateUPIInterface() {
