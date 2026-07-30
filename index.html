@@ -217,9 +217,10 @@
             </div>
 
             <!-- Dynamic Sub-Categories -->
-            <div id="sub-category-container" class="flex flex-wrap justify-center gap-2 mb-12 min-h-[40px] transition-all duration-300" data-aos="fade-up" data-aos-delay="150">
-                <!-- Sub categories populated via JS -->
-            </div>
+<div id="sub-category-container" class="hidden flex-wrap justify-center gap-2 mb-8 transition-all duration-300" data-aos="fade-up" data-aos-delay="150">
+    <!-- Sub categories populated via JS -->
+</div>
+
 
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 font-sans"></div>
             
@@ -886,25 +887,35 @@
         }
 
         function renderSubCategories() {
-            const container = document.getElementById('sub-category-container');
-            container.innerHTML = '';
+        function renderSubCategories() {
+    const container = document.getElementById('sub-category-container');
+    container.innerHTML = '';
 
-            if (activeMainCategory === 'All') return;
+    // If 'All' is selected, completely hide the container to remove the blank space
+    if (activeMainCategory === 'All') {
+        container.classList.add('hidden');
+        container.classList.remove('flex');
+        return;
+    }
 
-            let subCats = [];
-            if (activeMainCategory === 'Non-Branded') {
-                subCats = ['All', 'Men', 'Women'];
-            } else if (activeMainCategory === 'Branded') {
-                subCats = ['All', ...allBrands];
-            }
+    // Otherwise, show the container
+    container.classList.remove('hidden');
+    container.classList.add('flex');
 
-            container.innerHTML = subCats.map(sc => {
-                const isActive = activeSubCategory === sc;
-                const activeClasses = isActive ? 'bg-gold text-black border-gold' : 'bg-transparent text-gray-400 border-white/20';
-                const idSafe = sc.replace(/\s+/g, '-');
-                return `<button onclick="setSubCategory('${sc}')" id="btn-sub-${idSafe}" class="px-4 py-1.5 md:px-5 md:py-2 border rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 hover:border-gold hover:text-gold ${activeClasses}">${sc}</button>`;
-            }).join('');
-        }
+    let subCats = [];
+    if (activeMainCategory === 'Non-Branded') {
+        subCats = ['All', 'Men', 'Women'];
+    } else if (activeMainCategory === 'Branded') {
+        subCats = ['All', ...allBrands];
+    }
+
+    container.innerHTML = subCats.map(sc => {
+        const isActive = activeSubCategory === sc;
+        const activeClasses = isActive ? 'bg-gold text-black border-gold' : 'bg-transparent text-gray-400 border-white/20';
+        const idSafe = sc.replace(/\s+/g, '-');
+        return `<button onclick="setSubCategory('${sc}')" id="btn-sub-${idSafe}" class="px-4 py-1.5 md:px-5 md:py-2 border rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 hover:border-gold hover:text-gold ${activeClasses}">${sc}</button>`;
+    }).join('');
+}
 
         function renderProducts() {
             const grid = document.getElementById('product-grid');
