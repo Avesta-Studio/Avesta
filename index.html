@@ -473,10 +473,16 @@
                     </div>
                 </div>
             </div>
-            <div class="p-6 bg-black border-t border-gold/10 flex gap-4">
-                <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold bg-gold/10 py-3 rounded-sm font-semibold tracking-widest uppercase text-xs flex items-center justify-center gap-2"><i class="fa-solid fa-image"></i> Save Bill (Photo)</button>
-                <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-gold transition-all text-xs tracking-widest uppercase">Continue Shopping</button>
-            </div>
+            <div class="p-4 sm:p-6 bg-black border-t border-gold/10 flex gap-3 sm:gap-4">
+    <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold bg-gold/10 py-3 px-1 rounded-sm font-semibold tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center leading-tight">
+        <i class="fa-solid fa-image text-sm"></i>
+        <span>Save Bill <br class="sm:hidden"/>(Photo)</span>
+    </button>
+    <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 px-1 rounded-sm font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center text-center leading-tight">
+        <span>Continue <br class="sm:hidden"/>Shopping</span>
+    </button>
+</div>
+
         </div>
     </div>
 
