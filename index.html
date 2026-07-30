@@ -887,7 +887,6 @@
         }
 
         function renderSubCategories() {
-        function renderSubCategories() {
     const container = document.getElementById('sub-category-container');
     container.innerHTML = '';
 
@@ -915,8 +914,8 @@
         const idSafe = sc.replace(/\s+/g, '-');
         return `<button onclick="setSubCategory('${sc}')" id="btn-sub-${idSafe}" class="px-4 py-1.5 md:px-5 md:py-2 border rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 hover:border-gold hover:text-gold ${activeClasses}">${sc}</button>`;
     }).join('');
-}
-
+                }
+                                     
         function renderProducts() {
             const grid = document.getElementById('product-grid');
             const noMsg = document.getElementById('no-products-msg');
