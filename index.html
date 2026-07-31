@@ -191,7 +191,7 @@
         </div>
     </section>
 
-    <!-- 🔥 UPDATED COLLECTION SECTION 🔥 -->
+    <!-- Collection Section -->
     <section id="collection" class="py-20 bg-darkgray relative border-t border-white/5 flex-grow">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-8" data-aos="fade-up">
@@ -217,10 +217,9 @@
             </div>
 
             <!-- Dynamic Sub-Categories -->
-<div id="sub-category-container" class="hidden flex-wrap justify-center gap-2 mb-8 transition-all duration-300" data-aos="fade-up" data-aos-delay="150">
-    <!-- Sub categories populated via JS -->
-</div>
-
+            <div id="sub-category-container" class="hidden flex-wrap justify-center gap-2 mb-8 transition-all duration-300" data-aos="fade-up" data-aos-delay="150">
+                <!-- Sub categories populated via JS -->
+            </div>
 
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 font-sans"></div>
             
@@ -284,7 +283,7 @@
         <div class="bg-darkgray md:border md:border-gold/20 md:rounded-xl w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl overflow-y-auto shadow-[0_0_50px_rgba(197,160,89,0.1)] relative flex flex-col md:flex-row">
             <div class="w-full md:w-1/2 bg-black flex flex-col p-4 md:p-8">
                 
-                <!-- 🔥 SMOOTHER ZOOM CONTAINER 🔥 -->
+                <!-- Smoother Zoom Container -->
                 <div id="image-zoom-container" class="w-full h-[50vh] md:h-[60vh] bg-[#0a0a0a] rounded-lg mb-3 relative flex items-center justify-center border border-white/5 cursor-crosshair group">
                     <img id="detail-main-img" src="" alt="Product" class="w-full h-full object-contain mix-blend-lighten pointer-events-none">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end justify-center pb-4">
@@ -328,7 +327,7 @@
         </div>
     </div>
 
-    <!-- Cart, Checkout, EBill, Tracking, Contact (Unchanged HTML structure, just keeping them in flow) -->
+    <!-- Cart Drawer -->
     <div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300" onclick="toggleCart()"></div>
     <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-darkgray border-l border-gold/20 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col font-sans">
         <div class="flex items-center justify-between p-6 border-b border-gold/10 bg-black">
@@ -359,6 +358,7 @@
         </div>
     </div>
 
+    <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 z-[70] hidden flex-col items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-opacity font-sans">
         <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)]">
             <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black">
@@ -473,16 +473,16 @@
                     </div>
                 </div>
             </div>
+            <!-- Updated Flex Footer for Icon Alignment -->
             <div class="p-4 sm:p-6 bg-black border-t border-gold/10 flex gap-3 sm:gap-4">
-    <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold bg-gold/10 py-3 px-1 rounded-sm font-semibold tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center leading-tight">
-        <i class="fa-solid fa-image text-sm"></i>
-        <span>Save Bill <br class="sm:hidden"/>(Photo)</span>
-    </button>
-    <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 px-1 rounded-sm font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center text-center leading-tight">
-        <span>Continue <br class="sm:hidden"/>Shopping</span>
-    </button>
-</div>
-
+                <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold bg-gold/10 py-3 px-1 rounded-sm font-semibold tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center leading-tight">
+                    <i class="fa-solid fa-image text-sm"></i>
+                    <span>Save Bill <br class="sm:hidden"/>(Photo)</span>
+                </button>
+                <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 px-1 rounded-sm font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center text-center leading-tight">
+                    <span>Continue <br class="sm:hidden"/>Shopping</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -606,14 +606,9 @@
 
         const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
 
-        // UPDATED CLASSIFICATION LOGIC
-        // Products are now classified as 'Branded' or 'Non-Branded'.
-        // For 'Branded', 'brand' property is required. 
-        // For 'Non-Branded', 'subCategory' (Men/Women) is required.
-
         const products = [
             
-            // --- NON-BRANDED MEN'S WATCHES (Previously 'Men') ---
+            // --- NON-BRANDED MEN'S WATCHES ---
             { id: 1, name: 'The Faxon Octagon Prestige', category: 'Non-Branded', subCategory: 'Men', price: 849, images: ['Male Collection/Male Watch 1.jpg'], description: 'Redefine your style with the bold, geometric brilliance of the Faxon Octagon Prestige. Featuring a striking octagonal bezel, this watch commands attention. The dynamic tapisserie (waffle) dial texture provides incredible visual depth, perfectly framing the highly practical stacked Day and Date complication at 6:00. It is a masterclass in sport-luxe design.', colors: ['Golden Strap with Golden Dial', 'Golden + Silver Strap with White Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with White Dial', 'Golden Strap with Black Dial'] },
             { id: 2, name: 'The Faxon Global Icon Edition', category: 'Non-Branded', subCategory: 'Men', price: 799, images: ['Male Collection/Male Watch 2.jpg'], description: 'Wear the watch of champions. Endorsed by global icons Cristiano Ronaldo and Chris Gayle, this exceptional timepiece offers an unmatched legacy. Boasting the distinguished Eastern Arabic numeral dial within a perfectly proportioned cushion case, it radiates absolute prestige. Whether configured in full gold or premium two-tone, this watch makes a powerful, unforgettable statement.', colors: ['Rose Gold + Silver Strap with White Dial', 'Rose Gold + Silver Strap with Black Dial', 'Golden Strap with Golden Dial', 'Golden with White Dial'] },
             { id: 3, name: 'The Faxon Timeless Cushion', category: 'Non-Branded', subCategory: 'Men', price: 799, images: ['Male Collection/Male Watch 3.jpg'], description: 'Wear the watch of champions. Endorsed by global icons Cristiano Ronaldo and Chris Gayle, this exceptional timepiece offers an unmatched legacy. Boasting the distinguished Eastern Arabic numeral dial within a perfectly proportioned cushion case, it radiates absolute prestige. Whether configured in full gold or premium two-tone, this watch makes a powerful, unforgettable statement.', colors: ['Golden Strap with Golden Dial', 'Golden Strap with Black Dial', 'Golden + Silver Strap with White Dial', 'Golden + Silver Strap with Black Dial', 'Golden Strap with White Dial'] },
@@ -630,7 +625,7 @@
             { id: 14, name: 'The Faxon Octagon Elite Two-Tone', category: 'Non-Branded', subCategory: 'Men', price: 849, images: ['Male Collection/Male Watch 14.jpg'], description: 'The ultimate expression of elevated style. This variation of the distinctive octagonal Faxon watch highlights the gorgeous contrast of premium two-tone metals. The intricate texture of the dial is elevated by rose gold and yellow gold accents on the hands and indices. Built to last and engineered for perfection, it bridges the gap between a rugged sports watch and a high-end dress piece.', colors: ['Rose Gold + Silver with Black Dial', 'Rose Gold + Silver with Grey Dial', 'Rose Gold + Silver with White Dial'] },
             { id: 15, name: 'The Faxon Signature Cushion Collection', category: 'Non-Branded', subCategory: 'Men', price: 799, images: ['Male Collection/Male Watch 15.jpg'], description: 'Discover the pinnacle of precision engineering and timeless elegance with the expansive Signature Cushion collection. This comprehensive lineup offers nine distinct references, ensuring a perfect match for any personal style. Each watch features a unique dial layout with prominent Roman numerals at the base, protected by a sophisticated, softened cushion-shaped case.', colors: ['Rose Gold + Silver with Black Dial', 'Rose Gold + Silver with White Dial', 'Silver Strap with Black Dial', 'Silver Strap with Blue Dial', 'Rose Gold + Silver with Grey Dial'] },
 
-            // --- NON-BRANDED WOMEN'S WATCHES (Previously 'Women') ---
+            // --- NON-BRANDED WOMEN'S WATCHES ---
             { id: 21, name: 'The Velaris Starlight Pavé Chronograph', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 1.jpg'], description: 'For the woman who loves bold luxury and uncompromising sparkle. This striking timepiece takes the confident, sporty aesthetic of a classic multi-dial watch and elevates it to pure high-fashion glamour. Featuring a brilliant pavé crystal bezel and matching crystal-encrusted center links down the bracelet, it catches the light from across the room. It is a powerful, iced-out statement piece that demands attention.', colors: ['Rose Gold', 'Black', ' Pure Silver', 'Silver with Blue'] },
             { id: 22, name: 'The Velaris Enchanted Dial Collection', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 2.jpg'], description: 'Make a breathtaking statement with a timepiece that is as much a work of art as it is a functional accessory. The Velaris Enchanted Dial features an intricate, mesmerizing pattern that evokes the delicate beauty of butterfly wings, meticulously adorned with subtle crystal accents. Framed by a polished bezel and featuring prominent, stylized 12 and 6 numerals, this watch effortlessly blends whimsical charm with contemporary elegance.', colors: ['Rose Gold', 'Golden', 'Silver Strap with Blue Dial', 'Black', 'Silver Strap with White Dial'] },
             { id: 23, name: 'The Velaris Interlocking Chainlink', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 3.jpg'], description: 'Chic, modern, and sophisticated. For the woman who loves contemporary minimalism, this watch features a beautifully smooth, elongated oval case that rests gracefully on the wrist. The minimalist sunburst dial is elevated by the stunning interlocking chain-link bracelet, a staple design in high-end fashion jewelry. It is the perfect everyday piece that transitions flawlessly from the office to a night out.', colors: ['Rose Gold', 'Dark Brown', 'Black', 'Silver'] },
@@ -648,7 +643,7 @@
             { id: 35, name: 'The Velaris Crystal Halo Oval', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 15.jpg'], description: 'Absolute glamour in a soft, refined package. The Velaris Crystal Halo features a highly polished oval dial encased entirely in a brilliant, continuous ring of sparkling crystals. The dial is kept impeccably clean and minimalist to allow the radiant bezel to shine, while the high-polish, fluid link bracelet perfectly complements the luxurious feel of the piece.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver'] },
             { id: 36, name: 'The Velaris Papillon Classic', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 16.jpg'], description: 'Find the perfect balance between timeless watchmaking and whimsical femininity. The Velaris Papillon features a beautifully classic, multi-link stainless steel bracelet that offers supreme comfort and a traditional silhouette. The magic lies within the dial, where a delicate, crystal-studded butterfly rests beautifully against a rich, sunburst-textured background. It is a graceful everyday watch that sparks joy with every glance.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver Strap with White Dial', 'Silver Strap with Blue Dial'] },
             
-            // --- BRANDED WATCHES (Previously 'Premium' - Now require 'brand' property) ---
+            // --- BRANDED WATCHES ---
             { id: 41, name: 'The Tissot PRX Quartz Silver & Rose Gold', category: 'Branded', brand: 'Tissot', price: 2499, realPrice: 44000, images: ['Premium Collection/Premium Watch 1-1.webp', 'Premium Collection/Premium Watch 1-2.webp', 'Premium Collection/Premium Watch 1-3.webp', 'Premium Collection/Premium Watch 1-4.webp', 'Premium Collection/Premium Watch 1-5.webp'], description: 'Step into timeless 1978 heritage with a sleek, modern twist. This iteration of the iconic Tissot PRX features a remarkably crisp, vertically brushed silver dial beautifully warmed by rose gold-tone hands and indices. The slim, tapered case flows seamlessly into the integrated satin-finished bracelet, offering an incredibly ergonomic fit and a masterclass in geometric precision.' },
             { id: 42, name: 'The Tissot PRX Powermatic 80 Ice Blue', category: 'Branded', brand: 'Tissot', price: 2499, realPrice: 83500, images: ['Premium Collection/Premium Watch 2-1.jpg', 'Premium Collection/Premium Watch 2-2.webp', 'Premium Collection/Premium Watch 2-3.webp', 'Premium Collection/Premium Watch 2-4.webp'], description: 'Command attention with one of the most coveted styles in modern horology. Featuring a mesmerizing ice blue dial adorned with an intricate waffle (clous de Paris) texture, this automatic timepiece perfectly balances structural depth with a cool, contemporary aesthetic. Its multi-faceted, polished, and satin-brushed surfaces catch the light beautifully from every angle.' },
             { id: 43, name: 'The Tissot PRX Quartz Emerald Sunburst', category: 'Branded', brand: 'Tissot', price: 2499, realPrice: 83500, images: ['Premium Collection/Premium Watch 3-1.jpg', 'Premium Collection/Premium Watch 3-2.webp', 'Premium Collection/Premium Watch 3-3.webp', 'Premium Collection/Premium Watch 3-4.webp'], description: 'Bold, rich, and undeniably sophisticated. This model showcases a deep emerald green dial with a stunning sunburst finish that shifts brilliantly in changing light. The pure, clean lines of the dial let the flawless finish take center stage, making it an incredibly versatile companion that elevates casual wear and complements formal attire effortlessly.' },
@@ -691,7 +686,7 @@
             { id: 81, name: 'The Rolex Cellini Milanese', category: 'Branded', brand: 'Rolex', price: 2799, realPrice: 1450000, images: ['Premium Collection/Pic1.png.jpg', 'Premium Collection/Pic2.png.jpg', 'Premium Collection/Pic3.png.jpg', 'Premium Collection/Pic4.png.jpg', 'Premium Collection/Pic5.png.jpg', 'Premium Collection/Pic6.png.jpg', 'Premium Collection/Pic7.png.jpg', 'Premium Collection/Pic8.png.jpg', 'Premium Collection/IMG-20260723-WA0002.jpg', 'Premium Collection/IMG-20260723-WA0001.jpg', 'Premium Collection/IMG-20260723-WA0000.jpg'], description: 'A stunning tribute to classical watchmaking heritage and refined artistry. This Rolex Cellini masterfully blends the soft lines of a highly polished, refined cushion case with the luxurious drape of a fine Milanese mesh bracelet. The dial is a study in purposeful minimalism, adorned only with perfectly faceted slim baton hour markers, the unmistakable signature crown applied at 12 o\'clock, and elegant, sweeping script at 6 o\'clock. This is a timeless dress watch that radiates pure, uninterrupted prestige from the boardroom to the ballroom.', colors: ['Silver with Blue Dial', 'Rose Gold with White Dial', 'Rose Gold with Peach Dial', 'Yellow Gold with Peach Dial', 'Silver with Black Dial', 'Silver with Green Dial', 'Yellow Gold with Black Dial', 'Rose Gold with Pink Dial', 'Silver with White Dial'] },
             { id: 82, name: 'The Breguet Classique Open-Heart', category: 'Branded', brand: 'Breguet', price: 3299, realPrice: 3800000, images: ['Premium Collection/IMG-20260721-WA0021.jpg', 'Premium Collection/IMG-20260721-WA0020.jpg', 'Premium Collection/IMG-20260721-WA0019.jpg', 'Premium Collection/IMG-20260721-WA0018.jpg', 'Premium Collection/IMG-20260721-WA0017.jpg'], description: 'A breathtaking masterpiece steeped in the profound traditions of haute horlogerie. The Breguet Classique captivates immediately with its mathematically perfect, off-centered main dial, which is swept by the brand\'s legendary, signature hollow-tip blued steel hands. The dial itself is a work of art, featuring a brilliantly textured sunray guilloché pattern that radiates outward. The exposed mechanical balance wheel showcased in a tourbillon-style aperture at 6 o\'clock provides mesmerizing, kinetic movement, perfectly secured to the wrist by a premium, alligator-embossed genuine leather strap.', colors: ['Silver Case with White Dial', 'Silver Case with Blue Dial', 'Rose Gold Case with Black Dial', 'Rose Gold Case with White Dial', 'Rose Gold Case with Blue Dial'] },
             { id: 83, name: 'The Patek Philippe Complications Skeleton', category: 'Branded', brand: 'Patek Philippe', price: 3899, realPrice: 6500000, images: ['Premium Collection/IMG-20260721-WA0016.jpg', 'Premium Collection/IMG-20260721-WA0015.jpg', 'Premium Collection/IMG-20260721-WA0014.jpg', 'Premium Collection/IMG-20260721-WA0013.jpg', 'Premium Collection/IMG-20260721-WA0012.jpg', 'Premium Collection/IMG-20260721-WA0011.jpg'], description: 'The undisputed pinnacle of mechanical artistry and luxury design. This Patek Philippe masterpiece reveals its extraordinarily complex, fully skeletonized automatic movement through both the sapphire crystal front and the exhibition case back. Every bridge and plate is meticulously carved and decorated by hand. The inner mechanics are beautifully accented by a bold, richly colored outer chapter ring and elegant, high-polish dauphine hands. It is secured with a meticulously stitched premium leather strap, ensuring an uncompromising, classic luxury aesthetic for the true connoisseur.', colors: ['Rose Gold Case with Black Inner Ring', 'Rose Gold Case with Blue Inner Ring', 'Silver Case with Blue Inner Ring', 'Rose Gold Case with Silver/White Inner Ring', 'Silver Case with Silver/White Inner Ring', 'Silver Case with Black Inner Ring'] },
-            { id: 84, name: 'The Citizen Automatic Multi-Dial Open-Heart', category: 'Branded', brand: 'Citizen', price: 1199, realPrice: 35000, images: ['Premium Collection/IMG-20260716-WA0119.jpg', 'Premium Collection/IMG-20260721-WA0009.jpg', 'Premium Collection/IMG-20260721-WA0007.jpg'], description: 'Brilliantly engineered for flawless everyday performance and deeply sophisticated style. This highly robust Citizen Automatic features a remarkably detailed, multi-layered dial construction. The eye is instantly drawn to the prominent open-heart aperture nestled at 7 o\'clock, allowing a perpetual view of the beating escapement inside. The dial is further enhanced by two deeply recessed, highly functional sub-dials. Paired with an incredibly solid, expertly brushed and polished multi-link metal bracelet, this watch is a durable, versatile powerhouse designed to anchor any collection.', colors: ['Full Silver with Blue Dial', 'Full Silver with Green Dial', 'Full Yellow Gold with Green Dial', 'Full Yellow Gold with Black Dial', 'Full Yellow Gold with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Black Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial'] },
+            { id: 84, name: 'The Citizen Automatic Multi-Dial Open-Heart', category: 'Branded', brand: 'Citizen', price: 1199, realPrice: 35000, images: ['Premium Collection/IMG-20260721-WA0009.jpg', 'Premium Collection/IMG-20260721-WA0008.jpg', 'Premium Collection/IMG-20260721-WA0007.jpg'], description: 'Brilliantly engineered for flawless everyday performance and deeply sophisticated style. This highly robust Citizen Automatic features a remarkably detailed, multi-layered dial construction. The eye is instantly drawn to the prominent open-heart aperture nestled at 7 o\'clock, allowing a perpetual view of the beating escapement inside. The dial is further enhanced by two deeply recessed, highly functional sub-dials. Paired with an incredibly solid, expertly brushed and polished multi-link metal bracelet, this watch is a durable, versatile powerhouse designed to anchor any collection.', colors: ['Full Silver with Blue Dial', 'Full Silver with Green Dial', 'Full Yellow Gold with Green Dial', 'Full Yellow Gold with Black Dial', 'Full Yellow Gold with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Blue Dial', 'Two-Tone (Silver & Yellow Gold) with Black Dial', 'Two-Tone (Silver & Yellow Gold) with White Dial'] },
             { id: 85, name: 'The Diesel Mega Chief Chronograph', category: 'Branded', brand: 'Diesel', price: 1499, realPrice: 22500, images: ['Premium Collection/IMG-20260718-WA0025.jpg', 'Premium Collection/IMG-20260718-WA0024.jpg', 'Premium Collection/IMG-20260718-WA0023.jpg', 'Premium Collection/IMG-20260718-WA0022.jpg', 'Premium Collection/IMG-20260718-WA0021.jpg', 'Premium Collection/IMG-20260718-WA0020.jpg', 'Premium Collection/IMG-20260718-WA0019.jpg', 'Premium Collection/IMG-20260718-WA0018.jpg', 'Premium Collection/IMG-20260718-WA0017.jpg', 'Premium Collection/IMG-20260718-WA0016.jpg', 'Premium Collection/IMG-20260718-WA0015.jpg', 'Premium Collection/IMG-20260718-WA0014.jpg', 'Premium Collection/IMG-20260718-WA0013.jpg', 'Premium Collection/IMG-20260718-WA0012.jpg', 'Premium Collection/IMG-20260718-WA0011.jpg', 'Premium Collection/IMG-20260718-WA0010.jpg', 'Premium Collection/IMG-20260718-WA0009.jpg', 'Premium Collection/IMG-20260718-WA0008.jpg', 'Premium Collection/IMG-20260718-WA0007.jpg', 'Premium Collection/IMG-20260718-WA0006.jpg'], description: 'Command the room and conquer your day with the unapologetic, oversized architecture of the legendary Diesel Mega Chief. Featuring a fiercely rugged industrial case profile with an iconic asymmetrical crown guard and signature screw-down bezel accents, this commanding chronograph makes a massive impact. The watch boasts a complex, deep multi-layered dial featuring three functional sub-dials, an integrated date window, and aggressive cut-out numerals. Paired with a heavy-duty stainless steel bracelet, it is the ultimate statement piece for those who refuse to blend into the background.', colors: ['Full Silver with Light Blue Dial', 'Full Yellow Gold with Green Dial', 'Two-Tone (Silver & Gold) with Black Dial', 'Full Yellow Gold with Gold Dial', 'Two-Tone (Silver & Gold) with White Dial', 'Full Yellow Gold with Black Dial', 'All Black with Copper/Brown Dial', 'Full Silver with White Dial', 'Full Silver with Silver Dial', 'Full Silver with Black Dial', 'All Black with Gold Accents'] },
             { id: 86, name: 'The Diesel Liquid Metal Collection', category: 'Branded', brand: 'Diesel', price: 1299, realPrice: 16500, images: ['Premium Collection/IMG-20260716-WA0118.jpg', 'Premium Collection/IMG-20260716-WA0119.jpg', 'Premium Collection/IMG-20260716-WA0120.jpg', 'Premium Collection/IMG-20260716-WA0121.jpg', 'Premium Collection/IMG-20260716-WA0122.jpg', 'Premium Collection/IMG-20260716-WA0123.jpg', 'Premium Collection/IMG-20260716-WA0124.jpg', 'Premium Collection/Pic9.png.jpg'], description: 'Shatter conventional boundaries and embrace hyper-modern, avant-garde aesthetics with this striking Diesel timepiece. The defining characteristic of this watch is its organically sculpted, incredibly unique stainless steel case and highly integrated bracelet, which flow together seamlessly to resemble drops of molten liquid metal. Despite its futuristic exterior, the face remains clean and highly legible, featuring a gorgeous sunburst minimalist dial, razor-sharp faceted indices, and a deeply practical date window. It is a bold, futuristic accessory designed to turn heads and start conversations.', colors: ['Silver with Cyan/Teal Dial', 'Two-Tone (Gold & White) with Black Dial', 'Full Silver with Taupe/Grey Dial', 'Full Silver with Ice Blue Dial', 'Glossy Black with Black Dial', 'Two-Tone (Gold & White) with Gold Dial', 'Metallic Emerald Green with Green Dial', 'Glossy Black with Coral/Red Dial'] }
         ];
@@ -780,7 +775,7 @@
                     </div>
                     <div class="mb-6 border-b border-gold/20 pb-4">
                         <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">2. Comprehensive Warranty Coverage</p>
-                        <p>All AVESTA timepieces are accompanied with a warranty of 24 hours (if unworn and should be with all the protective films), effective from the date of delivery. This warranty covers intrinsic mechanical failures and manufacturing defects. It explicitly excludes damages resulting from abnormal use, blunt force trauma, unauthorized third-party modifications, water damage beyond the specified atmospheric resistance (ATM) rating, and normal wear and tear of straps, crystals, and external plating.</p>
+                        <p>All AVESTA timepieces are accompanied by a standard 24-month comprehensive warranty, effective from the date of delivery. This warranty covers intrinsic mechanical failures and manufacturing defects. It explicitly excludes damages resulting from abnormal use, blunt force trauma, unauthorized third-party modifications, water damage beyond the specified atmospheric resistance (ATM) rating, and normal wear and tear of straps, crystals, and external plating.</p>
                     </div>
                     <div class="mb-6">
                         <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">3. Return Protocol</p>
@@ -868,9 +863,8 @@
 
         function setMainCategory(category) {
             activeMainCategory = category;
-            activeSubCategory = 'All'; // Reset sub-category when main changes
+            activeSubCategory = 'All'; 
             
-            // UI Update for main buttons
             document.querySelectorAll('#collection .filter-btn').forEach(btn => btn.classList.remove('filter-active'));
             document.getElementById('btn-cat-' + category).classList.add('filter-active');
 
@@ -881,7 +875,6 @@
         function setSubCategory(subCat) {
             activeSubCategory = subCat;
             
-            // UI Update for sub buttons
             document.querySelectorAll('#sub-category-container button').forEach(btn => {
                 btn.classList.remove('bg-gold', 'text-black', 'border-gold');
                 btn.classList.add('bg-transparent', 'text-gray-400', 'border-white/20');
@@ -892,36 +885,35 @@
             renderProducts();
         }
 
+        // 🔥 FIX 1: Subcategory dynamically hides when empty to remove blank space 🔥
         function renderSubCategories() {
-    const container = document.getElementById('sub-category-container');
-    container.innerHTML = '';
+            const container = document.getElementById('sub-category-container');
+            container.innerHTML = '';
 
-    // If 'All' is selected, completely hide the container to remove the blank space
-    if (activeMainCategory === 'All') {
-        container.classList.add('hidden');
-        container.classList.remove('flex');
-        return;
-    }
+            if (activeMainCategory === 'All') {
+                container.classList.add('hidden');
+                container.classList.remove('flex');
+                return;
+            }
 
-    // Otherwise, show the container
-    container.classList.remove('hidden');
-    container.classList.add('flex');
+            container.classList.remove('hidden');
+            container.classList.add('flex');
 
-    let subCats = [];
-    if (activeMainCategory === 'Non-Branded') {
-        subCats = ['All', 'Men', 'Women'];
-    } else if (activeMainCategory === 'Branded') {
-        subCats = ['All', ...allBrands];
-    }
+            let subCats = [];
+            if (activeMainCategory === 'Non-Branded') {
+                subCats = ['All', 'Men', 'Women'];
+            } else if (activeMainCategory === 'Branded') {
+                subCats = ['All', ...allBrands];
+            }
 
-    container.innerHTML = subCats.map(sc => {
-        const isActive = activeSubCategory === sc;
-        const activeClasses = isActive ? 'bg-gold text-black border-gold' : 'bg-transparent text-gray-400 border-white/20';
-        const idSafe = sc.replace(/\s+/g, '-');
-        return `<button onclick="setSubCategory('${sc}')" id="btn-sub-${idSafe}" class="px-4 py-1.5 md:px-5 md:py-2 border rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 hover:border-gold hover:text-gold ${activeClasses}">${sc}</button>`;
-    }).join('');
-                }
-                                     
+            container.innerHTML = subCats.map(sc => {
+                const isActive = activeSubCategory === sc;
+                const activeClasses = isActive ? 'bg-gold text-black border-gold' : 'bg-transparent text-gray-400 border-white/20';
+                const idSafe = sc.replace(/\s+/g, '-');
+                return `<button onclick="setSubCategory('${sc}')" id="btn-sub-${idSafe}" class="px-4 py-1.5 md:px-5 md:py-2 border rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 hover:border-gold hover:text-gold ${activeClasses}">${sc}</button>`;
+            }).join('');
+        }
+
         function renderProducts() {
             const grid = document.getElementById('product-grid');
             const noMsg = document.getElementById('no-products-msg');
@@ -1037,9 +1029,8 @@
                 closeProductDetail(); toggleCart(); 
             };
             
-            // Reset zoom state on open
             const mainImg = document.getElementById('detail-main-img');
-            mainImg.style.transform = 'scale(1) translate(0px, 0px)';
+            mainImg.style.transform = 'translate3d(0, 0, 0) scale(1)';
             
             openModalSafely('product-detail-modal');
         }
@@ -1047,7 +1038,7 @@
         function changeMainImage(src) {
             const mainImg = document.getElementById('detail-main-img'); 
             mainImg.style.opacity = 0;
-            mainImg.style.transform = 'scale(1) translate(0px, 0px)'; // Reset zoom
+            mainImg.style.transform = 'translate3d(0, 0, 0) scale(1)'; 
             setTimeout(() => { mainImg.src = src; mainImg.style.opacity = 1; }, 200);
         }
         function closeProductDetail() { closeModalSafely('product-detail-modal'); }
@@ -1058,45 +1049,25 @@
 
         function handleZoomMove(e, clientX, clientY) {
             const { left, top, width, height } = zoomContainer.getBoundingClientRect();
-            
-            // Calculate mouse position relative to the container (0 to 1)
             const xRel = (clientX - left) / width;
             const yRel = (clientY - top) / height;
             
-            // Calculate translation amounts. 
-            // When scaled by 2, the image is twice as large. To see the edges, we need to move it up to half its width/height.
-            // Using a scale of 2.2 for dramatic effect.
             const scale = 2.2;
             const maxTranslateX = (width * scale - width) / 2;
             const maxTranslateY = (height * scale - height) / 2;
 
-            // Map the 0-1 relative position to the translation range (inverted, so moving right pans left)
             const translateX = maxTranslateX - (xRel * (maxTranslateX * 2));
             const translateY = maxTranslateY - (yRel * (maxTranslateY * 2));
 
-            // Use 3D transform for hardware acceleration and smoother rendering
             zoomImg.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
         }
 
-        zoomContainer.addEventListener('mousemove', (e) => {
-            handleZoomMove(e, e.clientX, e.clientY);
-        });
+        zoomContainer.addEventListener('mousemove', (e) => { handleZoomMove(e, e.clientX, e.clientY); });
+        zoomContainer.addEventListener('mouseleave', () => { zoomImg.style.transform = 'translate3d(0, 0, 0) scale(1)'; });
+        zoomContainer.addEventListener('touchmove', (e) => { e.preventDefault(); const touch = e.touches[0]; handleZoomMove(e, touch.clientX, touch.clientY); }, { passive: false });
+        zoomContainer.addEventListener('touchend', () => { zoomImg.style.transform = 'translate3d(0, 0, 0) scale(1)'; });
 
-        zoomContainer.addEventListener('mouseleave', () => {
-            zoomImg.style.transform = 'translate3d(0, 0, 0) scale(1)';
-        });
-
-        zoomContainer.addEventListener('touchmove', (e) => {
-            e.preventDefault(); 
-            const touch = e.touches[0];
-            handleZoomMove(e, touch.clientX, touch.clientY);
-        }, { passive: false });
-
-        zoomContainer.addEventListener('touchend', () => {
-            zoomImg.style.transform = 'translate3d(0, 0, 0) scale(1)';
-        });
-
-        // --- CART & CHECKOUT FUNCTIONS (Unchanged logic, just maintaining flow) ---
+        // --- CART & CHECKOUT FUNCTIONS ---
         function addToCart(id, color = 'Default') { 
             const product = products.find(p => p.id === id); 
             const cartItemId = `${id}-${color}`; 
@@ -1180,25 +1151,19 @@
             const upiView = document.getElementById('upi-view'), codView = document.getElementById('cod-view');
             const utrInput = document.getElementById('utr-number'), generateUpiBtn = document.getElementById('generate-upi-btn');
             const confirmBtn = document.getElementById('pay-button'), paymentDynamicContent = document.getElementById('payment-dynamic-content');
-            
-            
-            ifif(details.method === 'UPI') {
-    document.getElementById('ebill-status-text').innerHTML = `
-        <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;">
-            <span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
-                VERIFICATION PENDING
-            </span>
-        </div>`;
-    document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
-} else {
-    document.getElementById('ebill-status-text').innerHTML = `
-        <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); border-radius: 2px;">
-            <span style="color: #4ade80; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
-                CONFIRMED (COD)
-            </span>
-        </div>`;
-    document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
-}
+
+            if(method === 'upi') {
+                btnUpi.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
+                btnCod.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
+                generateUpiBtn.classList.remove('hidden'); confirmBtn.classList.add('hidden'); paymentDynamicContent.classList.add('hidden');
+                upiView.classList.remove('hidden'); codView.classList.add('hidden'); utrInput.required = true;
+            } else {
+                btnCod.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
+                btnUpi.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
+                generateUpiBtn.classList.add('hidden'); paymentDynamicContent.classList.remove('hidden'); confirmBtn.classList.remove('hidden');
+                codView.classList.remove('hidden'); upiView.classList.add('hidden'); utrInput.required = false;
+            }
+        }
 
         function generateUPIInterface() {
             const name = document.getElementById('cust-name').value.trim(), email = document.getElementById('cust-email').value.trim();
@@ -1269,6 +1234,7 @@
             setTimeout(() => { closeCheckout(); generateEbill(details); }, 2000); 
         }
 
+        // 🔥 FIX 3 & 4: Perfectly aligned, non-congested inline-block status badges for html2canvas 🔥
         function generateEbill(details) {
             document.getElementById('ebill-order-id').innerText = '#' + details.orderId;
             document.getElementById('ebill-date').innerText = details.date;
@@ -1276,10 +1242,20 @@
             document.getElementById('ebill-phone').innerText = details.phone; document.getElementById('ebill-address').innerText = details.address; 
             
             if(details.method === 'UPI') {
-                document.getElementById('ebill-status-text').innerHTML = `<div style="display: inline-flex; align-items: center; justify-content: center; height: 22px; padding: 0 10px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;"><span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1;">Verification Pending</span></div>`;
+                document.getElementById('ebill-status-text').innerHTML = `
+                    <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;">
+                        <span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
+                            VERIFICATION PENDING
+                        </span>
+                    </div>`;
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
             } else {
-                document.getElementById('ebill-status-text').innerHTML = `<div style="display: inline-flex; align-items: center; justify-content: center; height: 22px; padding: 0 10px; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); border-radius: 2px;"><span style="color: #4ade80; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1;">Confirmed (COD)</span></div>`;
+                document.getElementById('ebill-status-text').innerHTML = `
+                    <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); border-radius: 2px;">
+                        <span style="color: #4ade80; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
+                            CONFIRMED (COD)
+                        </span>
+                    </div>`;
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
             }
 
