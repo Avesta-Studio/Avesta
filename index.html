@@ -392,7 +392,7 @@
                             </div>
                             <div class="text-center sm:text-left flex-1">
                                 <p class="text-[10px] text-gray-400 tracking-wider uppercase mb-1">Scan or Pay to ID:</p>
-                                <p class="text-sm font-bold text-gold select-all tracking-wide bg-gold/10 inline-block px-2 py-1 rounded border border-gold/20">hanzalahshakir@fam</p>
+                                <p class="text-sm font-bold text-gold select-all tracking-wide bg-gold/10 inline-block px-2 py-1 rounded border border-gold/20">7579942958@ptyes</p>
                                 <a id="upi-intent-link" href="#" class="mt-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-3 py-2 rounded-sm uppercase tracking-wider text-[10px] font-semibold flex items-center justify-center gap-2 sm:hidden"><i class="fa-solid fa-mobile-screen"></i> Open UPI App</a>
                             </div>
                         </div>
@@ -604,7 +604,8 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        const FAMAPP_UPI_ID = "hanzalahshakir@fam"; 
+        const FAMAPP_UPI_ID = "7579942958@ptyes"; 
+ 
 
         const products = [
             
@@ -1086,10 +1087,12 @@
         let cart = [];
         
         const validPromoCodes = { 
-            'AVESTA500-A1': { discount: 500, min: 2499 },
-            'TIME249-K1': { discount: 249, min: 1499 },
-            'ELITE1000-U1': { discount: 1000, min: 6499 }
-        };
+    'PAYTM500': { discount: 500, min: 2499 },
+    'AVESTA500-A1': { discount: 500, min: 2499 },
+    'TIME249-K1': { discount: 249, min: 1499 },
+    'ELITE1000-U1': { discount: 1000, min: 6499 }
+};
+
 
         let currentDiscount = 0;
         let activePromoCode = '';
