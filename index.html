@@ -1001,7 +1001,7 @@
             }
 
             noMsg.classList.add('hidden');
-            // Lazy loading removed to ensure instant image rendering across all 77 products
+            // Lazy loading removed to ensure instant rendering across all 77 products
             grid.innerHTML = filtered.map(product => `
                 <div class="animate-fade-in group rounded-sm bg-[#121212] overflow-hidden border border-gold/20 transition-all hover:border-gold/80 flex flex-col cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(223,177,91,0.25)]" onclick="openProductDetail(${product.id})">
                     <div class="aspect-[4/5] bg-[#0A0A0A] flex items-center justify-center relative overflow-hidden">
@@ -1411,5 +1411,3 @@
     </script>
 </body>
 </html>
-
-    <!-- FOOTER, MODALS AND JS TO FOLLOW IN PARTS 2, 3, AND 4 -->
