@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AVESTA | Custom Timepieces</title>
+    <title>DYNAST | Custom Timepieces</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="AVESTA Premium Timepieces. Explore our exclusive collection of luxury, custom, and premium watches. Crafted for the elite. Order online with secure delivery across India.">
-    <meta name="keywords" content="Avesta watches, Avesta, Watches, First copy watches, First copy watch, cheap watches, Cheap watch, Watch, watches, Luxury Watches, Wrist watches, luxury watches India, premium watches, premium watch, buy luxury watch online, custom timepieces, premium watches for men, watch for men, watch for man, watches for man, watches for men, watches for women, watches for woman, watch for women, watch for woman, luxury watches for women">
+    <meta name="description" content="DYNAST Premium Timepieces. Explore our exclusive collection of luxury, custom, and premium watches. Crafted for the elite. Order online with secure delivery across India.">
+    <meta name="keywords" content="Dynast watches, Dynast, Watches, First copy watches, First copy watch, cheap watches, Cheap watch, Watch, watches, Luxury Watches, Wrist watches, luxury watches India, premium watches, premium watch, buy luxury watch online, custom timepieces, premium watches for men, watch for men, watch for man, watches for man, watches for men, watches for women, watches for woman, watch for women, watch for woman, luxury watches for women">
     
     <meta name="google-site-verification" content="Bj-M6UOkpr6_Oidwz0oefAhD-RsdVREGisDcytWdn4k" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,7 +34,13 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { gold: '#C5A059', black: '#0A0A0A', darkgray: '#141414', lightgold: '#E3C886' },
+                    colors: {
+                        gold: '#5B6CFA',       /* Royal Sapphire Accent */
+                        royal: '#2922CE',      /* Deep Logo Royal Blue */
+                        black: '#03030B',      /* Deep Midnight Black */
+                        darkgray: '#09091E',   /* Rich Royal Navy-Black */
+                        lightgold: '#93A3FF'   /* Soft Royal Highlight */
+                    },
                     fontFamily: { 'sans': ['Inter', 'sans-serif'], 'serif': ['Cinzel', 'serif'] },
                     animation: { 'fade-in-up': 'fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards', 'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite', 'fade-in': 'fadeIn 0.5s ease-out' },
                     keyframes: {
@@ -47,32 +53,43 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0A0A0A; color: white; margin: 0; overflow-x: hidden; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #020206 0%, #080724 55%, #1A158C 100%);
+            background-attachment: fixed;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+        }
         h1, h2, h3, .serif-text { font-family: 'Cinzel', serif; }
         ::-webkit-scrollbar { width: 6px; display: none; }
-        ::-webkit-scrollbar-track { background: #0A0A0A; }
-        ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
+        ::-webkit-scrollbar-track { background: #03030B; }
+        ::-webkit-scrollbar-thumb { background: #2922CE; border-radius: 10px; }
 
         .hero-min-h { height: 100vh; height: 100svh; min-height: -webkit-fill-available; }
         
-        .btn-gold { background: transparent; color: #C5A059; border: 1px solid #C5A059; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
-        .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.2), transparent); transition: all 0.6s ease; }
-        .btn-gold:hover { background: #C5A059; color: #0A0A0A; box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); }
+        .royal-gradient-bg {
+            background: linear-gradient(90deg, #020206 0%, #0C0A38 50%, #2922CE 100%);
+        }
+
+        .btn-gold { background: rgba(41, 34, 206, 0.15); color: #FFFFFF; border: 1px solid #5B6CFA; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
+        .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(91, 108, 250, 0.35), transparent); transition: all 0.6s ease; }
+        .btn-gold:hover { background: linear-gradient(90deg, #1E1999 0%, #2922CE 100%); color: #FFFFFF; border-color: #93A3FF; box-shadow: 0 0 25px rgba(41, 34, 206, 0.6); }
         .btn-gold:hover::before { left: 100%; }
         
-        .checkout-input { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(197, 160, 89, 0.3); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; outline: none; transition: all 0.3s; }
-        .checkout-input:focus { border-color: #C5A059; background: rgba(255, 255, 255, 0.1); }
+        .checkout-input { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(91, 108, 250, 0.3); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; outline: none; transition: all 0.3s; }
+        .checkout-input:focus { border-color: #5B6CFA; background: rgba(41, 34, 206, 0.15); box-shadow: 0 0 15px rgba(41, 34, 206, 0.3); }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #C5A059; border: 4px solid #111; position: relative; z-index: 10; transition: 0.3s;}
-        .timeline-line { position: absolute; left: 7px; top: 16px; bottom: -20px; width: 2px; background: rgba(197, 160, 89, 0.3); z-index: 5; transition: 0.3s;}
+        .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #5B6CFA; border: 4px solid #09091E; position: relative; z-index: 10; transition: 0.3s;}
+        .timeline-line { position: absolute; left: 7px; top: 16px; bottom: -20px; width: 2px; background: rgba(91, 108, 250, 0.35); z-index: 5; transition: 0.3s;}
         .timeline-item:last-child .timeline-line { display: none; }
-        .timeline-dot.pending { background: #333; border-color: #111; }
-        .timeline-dot.pending + .timeline-line { background: #333; }
+        .timeline-dot.pending { background: #262645; border-color: #09091E; }
+        .timeline-dot.pending + .timeline-line { background: #262645; }
         
         .filter-btn { transition: all 0.3s ease; }
-        .filter-active { background-color: #C5A059 !important; color: #0A0A0A !important; border-color: #C5A059 !important; box-shadow: 0 0 15px rgba(197, 160, 89, 0.3); }
+        .filter-active { background: linear-gradient(90deg, #161278 0%, #2922CE 100%) !important; color: #FFFFFF !important; border-color: #5B6CFA !important; box-shadow: 0 0 20px rgba(41, 34, 206, 0.5); }
 
         /* Smoother Zoom Styling */
         #image-zoom-container {
@@ -96,16 +113,16 @@
             height: 16px;
             width: 16px;
             border-radius: 50%;
-            background: #C5A059;
+            background: #5B6CFA;
             cursor: pointer;
             margin-top: -6px; 
-            box-shadow: 0 0 10px rgba(197,160,89,0.5);
+            box-shadow: 0 0 12px rgba(41, 34, 206, 0.8);
         }
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
             cursor: pointer;
-            background: rgba(255,255,255,0.2);
+            background: rgba(91, 108, 250, 0.25);
             border-radius: 2px;
         }
         input[type=range]:focus {
@@ -113,23 +130,23 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-gold selection:text-black flex flex-col min-h-screen">
+<body class="antialiased selection:bg-royal selection:text-white flex flex-col min-h-screen">
 
-    <header class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-black/40 backdrop-blur-md" id="navbar">
+    <header class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-black/50 backdrop-blur-md" id="navbar">
         <div class="max-w-7xl mx-auto h-16 md:h-20 px-4 md:px-8 flex items-center justify-between">
             <div class="w-1/3 flex justify-start">
-                <nav class="hidden md:flex items-center gap-6 text-sm font-medium tracking-[0.2em] uppercase text-gray-400">
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium tracking-[0.2em] uppercase text-gray-300">
                     <a href="#custom" class="hover:text-gold transition-colors duration-300">Custom</a>
                     <a href="#collection" class="hover:text-gold transition-colors duration-300">Collection</a>
                     <button type="button" onclick="openTracking()" class="hover:text-gold transition-colors duration-300">Track</button>
                 </nav>
-                <button type="button" onclick="openTracking()" class="md:hidden text-gray-400 hover:text-gold text-[10px] uppercase tracking-widest font-medium">Track</button>
+                <button type="button" onclick="openTracking()" class="md:hidden text-gray-300 hover:text-gold text-[10px] uppercase tracking-widest font-medium">Track</button>
             </div>
             
             <div class="w-1/3 flex justify-center cursor-pointer group" onclick="window.scrollTo(0,0)">
                 <div class="text-center mt-1">
-                    <h1 class="text-xl md:text-3xl font-bold tracking-widest text-white group-hover:text-gold transition-colors duration-500 serif-text">AVESTA</h1>
-                    <p class="text-[6px] md:text-[9px] tracking-[0.3em] text-gold/80 uppercase font-sans whitespace-nowrap">Premium Timepieces</p>
+                    <h1 class="text-xl md:text-3xl font-bold tracking-[0.2em] text-white group-hover:text-lightgold transition-colors duration-500 serif-text drop-shadow-[0_0_15px_rgba(41,34,206,0.6)]">DYNAST</h1>
+                    <p class="text-[6px] md:text-[9px] tracking-[0.3em] text-lightgold uppercase font-sans whitespace-nowrap">Premium Timepieces</p>
                 </div>
             </div>
             
@@ -137,65 +154,65 @@
                 <button type="button" onclick="openContact()" class="text-white hover:text-gold transition-colors text-lg p-1"><i class="fa-regular fa-envelope"></i></button>
                 <button type="button" onclick="toggleCart()" class="text-white hover:text-gold transition-colors text-lg relative p-1">
                     <i class="fa-solid fa-bag-shopping"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-gold text-black text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-sans">0</span>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-royal border border-gold/50 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-sans">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <section class="relative w-full hero-min-h flex flex-col overflow-hidden bg-black border-b border-white/5">
-        <video class="absolute inset-0 w-full h-full object-cover object-center opacity-70 z-0" autoplay loop muted playsinline>
+    <section class="relative w-full hero-min-h flex flex-col overflow-hidden bg-black border-b border-gold/15">
+        <video class="absolute inset-0 w-full h-full object-cover object-center opacity-60 z-0" autoplay loop muted playsinline>
             <source src="Background Video.mp4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(10,10,10,0.4)_0%,#0A0A0A_100%)] z-0 pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,2,6,0.85)_0%,rgba(12,10,56,0.65)_55%,rgba(41,34,206,0.45)_100%)] z-0 pointer-events-none"></div>
         
         <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 w-full max-w-4xl mx-auto pt-20 pb-4 text-center">
-            <p class="text-gold text-[9px] md:text-sm tracking-[0.3em] uppercase font-medium mb-3 md:mb-4 opacity-0 animate-fade-in-up drop-shadow-md" style="animation-delay: 0.2s;">Welcome to the new era</p>
+            <p class="text-lightgold text-[9px] md:text-sm tracking-[0.3em] uppercase font-medium mb-3 md:mb-4 opacity-0 animate-fade-in-up drop-shadow-md" style="animation-delay: 0.2s;">Welcome to the royal era</p>
             <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-3 md:mb-4 leading-tight opacity-0 animate-fade-in-up serif-text drop-shadow-2xl" style="animation-delay: 0.5s;">
-                Craft Your <br/> <span class="italic font-light">Timepiece</span>
+                Craft Your <br/> <span class="italic font-light text-lightgold">Timepiece</span>
             </h1>
-            <p class="text-gray-300 text-[11px] sm:text-sm md:text-lg font-light max-w-2xl mx-auto mb-6 md:mb-8 opacity-0 animate-fade-in-up drop-shadow-lg" style="animation-delay: 0.8s;">
-                Experience premium watchmaking. Custom-engineered luxury timepieces, personalized to your exact specifications and built to last generations.
+            <p class="text-gray-200 text-[11px] sm:text-sm md:text-lg font-light max-w-2xl mx-auto mb-6 md:mb-8 opacity-0 animate-fade-in-up drop-shadow-lg" style="animation-delay: 0.8s;">
+                Experience royal watchmaking with DYNAST. Custom-engineered luxury timepieces, personalized to your exact specifications and built to last generations.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 md:gap-4 opacity-0 animate-fade-in-up w-full sm:w-auto" style="animation-delay: 1.1s;">
                 <a href="#custom" class="btn-gold px-6 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Design Your Timepiece</a>
-                <a href="#collection" class="bg-white/5 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-300 px-6 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Explore Collection</a>
+                <a href="#collection" class="bg-white/5 border border-white/25 text-white hover:bg-white hover:text-black transition-all duration-300 px-6 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Explore Collection</a>
             </div>
         </div>
         <div class="relative z-10 flex flex-col items-center animate-pulse-slow pb-4 md:pb-6 shrink-0 mt-auto">
-            <span class="text-gray-400 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-2 drop-shadow-md">Discover More</span>
+            <span class="text-gray-300 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-2 drop-shadow-md">Discover More</span>
             <div class="w-[1px] h-8 md:h-12 bg-gradient-to-b from-gold to-transparent shadow-lg"></div>
         </div>
     </section>
 
-    <section id="custom" class="py-20 md:py-32 bg-black relative border-t border-white/5">
+    <section id="custom" class="py-20 md:py-32 royal-gradient-bg relative border-t border-gold/15">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div class="w-full md:w-1/2" data-aos="fade-right">
-                <div class="aspect-square bg-darkgray border border-white/10 rounded-sm relative flex items-center justify-center overflow-hidden group cursor-pointer shadow-[0_0_40px_rgba(197,160,89,0.05)]">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                    <i class="fa-regular fa-clock text-6xl text-gold/30 group-hover:text-gold transition-colors duration-500 transform group-hover:rotate-12 group-hover:scale-110"></i>
-                    <p class="absolute bottom-10 text-gray-500 text-[10px] md:text-xs tracking-widest uppercase group-hover:text-white transition-colors duration-300 font-sans">Interactive 3D Studio Coming Soon</p>
+                <div class="aspect-square bg-black/70 border border-gold/25 rounded-sm relative flex items-center justify-center overflow-hidden group cursor-pointer shadow-[0_0_50px_rgba(41,34,206,0.25)]">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-royal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <i class="fa-regular fa-clock text-6xl text-gold/50 group-hover:text-white transition-colors duration-500 transform group-hover:rotate-12 group-hover:scale-110"></i>
+                    <p class="absolute bottom-10 text-gray-400 text-[10px] md:text-xs tracking-widest uppercase group-hover:text-white transition-colors duration-300 font-sans">Interactive 3D Studio Coming Soon</p>
                 </div>
             </div>
             <div class="w-full md:w-1/2" data-aos="fade-left">
-                <h3 class="text-gold text-xs tracking-[0.2em] uppercase mb-4 font-sans">The Custom Experience</h3>
-                <h2 class="text-3xl md:text-5xl text-white mb-6 leading-snug serif-text">Designed by You. <br/><span class="italic text-gray-400">Perfected by Us.</span></h2>
-                <p class="text-gray-400 font-light leading-relaxed mb-8 text-sm md:text-base">Step into our digital studio. Choose the weight of your case, select the precise color of your dial, pick between premium leather or solid gold straps, and engrave your name on the case back.</p>
-                <ul class="space-y-4 mb-10 text-xs md:text-sm font-light text-gray-300 font-sans">
-                    <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> Personal Engraving</li>
-                    <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> Case, Dial & Strap Customization</li>
-                    <li class="flex items-center gap-4"><i class="fa-solid fa-check text-gold"></i> 360° Real-time 3D View</li>
+                <h3 class="text-lightgold text-xs tracking-[0.2em] uppercase mb-4 font-sans">The DYNAST Custom Experience</h3>
+                <h2 class="text-3xl md:text-5xl text-white mb-6 leading-snug serif-text">Designed by You. <br/><span class="italic text-lightgold">Perfected by Us.</span></h2>
+                <p class="text-gray-200 font-light leading-relaxed mb-8 text-sm md:text-base">Step into our digital studio. Choose the weight of your case, select the precise color of your dial, pick between premium leather or solid metal straps, and engrave your name on the case back.</p>
+                <ul class="space-y-4 mb-10 text-xs md:text-sm font-light text-gray-200 font-sans">
+                    <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> Personal Engraving</li>
+                    <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> Case, Dial & Strap Customization</li>
+                    <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> 360° Real-time 3D View</li>
                 </ul>
-                <button type="button" onclick="showCustomAlert('Coming Soon', 'Our 3D Customization Studio is launching soon! Stay tuned.', 'info')" class="inline-flex items-center gap-2 text-gold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-gold pb-1 font-sans">Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i></button>
+                <button type="button" onclick="showCustomAlert('Coming Soon', 'Our 3D Customization Studio is launching soon! Stay tuned.', 'info')" class="inline-flex items-center gap-2 text-lightgold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-lightgold pb-1 font-sans">Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i></button>
             </div>
         </div>
     </section>
 
     <!-- Collection Section -->
-    <section id="collection" class="py-20 bg-darkgray relative border-t border-white/5 flex-grow">
+    <section id="collection" class="py-20 bg-darkgray/90 relative border-t border-gold/15 flex-grow">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-8" data-aos="fade-up">
-                <h3 class="text-gold text-xs tracking-[0.2em] uppercase mb-2 font-sans">Crafted For You</h3>
+                <h3 class="text-lightgold text-xs tracking-[0.2em] uppercase mb-2 font-sans">Crafted For Royalty</h3>
                 <h2 class="text-3xl md:text-5xl text-white serif-text">Our Collection</h2>
                 <div class="w-12 h-1 bg-gold mx-auto mt-6"></div>
             </div>
@@ -203,17 +220,17 @@
             <!-- Price Range Filter -->
             <div class="max-w-md mx-auto mb-10" data-aos="fade-up" data-aos-delay="50">
                 <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-400 text-[10px] uppercase tracking-widest font-semibold">Max Price</span>
-                    <span id="price-display" class="text-gold text-sm font-bold">₹5000</span>
+                    <span class="text-gray-300 text-[10px] uppercase tracking-widest font-semibold">Max Price</span>
+                    <span id="price-display" class="text-lightgold text-sm font-bold">₹5000</span>
                 </div>
                 <input type="range" id="price-range" min="0" max="5000" step="100" value="5000" class="w-full" oninput="updatePriceFilter(this.value)">
             </div>
             
             <!-- Main Categories -->
             <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-6" data-aos="fade-up" data-aos-delay="100">
-                <button onclick="setMainCategory('All')" id="btn-cat-All" class="filter-btn filter-active px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-400 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-gold">All Watches</button>
-                <button onclick="setMainCategory('Branded')" id="btn-cat-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-400 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-gold">Branded</button>
-                <button onclick="setMainCategory('Non-Branded')" id="btn-cat-Non-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-400 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-gold">Non-Branded</button>
+                <button onclick="setMainCategory('All')" id="btn-cat-All" class="filter-btn filter-active px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-300 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">All Watches</button>
+                <button onclick="setMainCategory('Branded')" id="btn-cat-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-300 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">Branded</button>
+                <button onclick="setMainCategory('Non-Branded')" id="btn-cat-Non-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-300 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">Non-Branded</button>
             </div>
 
             <!-- Dynamic Sub-Categories -->
@@ -224,55 +241,55 @@
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 font-sans"></div>
             
             <div id="no-products-msg" class="hidden text-center py-20">
-                 <i class="fa-solid fa-clock text-4xl text-gray-600 mb-4"></i>
-                 <p class="text-gray-400 text-sm tracking-widest uppercase">No timepieces found matching your criteria.</p>
+                 <i class="fa-solid fa-clock text-4xl text-gray-500 mb-4"></i>
+                 <p class="text-gray-300 text-sm tracking-widest uppercase">No timepieces found matching your criteria.</p>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black pt-16 pb-8 border-t border-gold/20 relative z-10 font-sans">
+    <footer class="royal-gradient-bg pt-16 pb-8 border-t border-gold/30 relative z-10 font-sans">
         <div class="container mx-auto max-w-7xl px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="col-span-1 md:col-span-2 lg:col-span-1">
-                    <h1 class="text-2xl font-bold tracking-widest text-white mb-4 serif-text">AVESTA</h1>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6 font-light">Redefining watchmaking with custom luxury and top-quality craftsmanship. Built for the elite.</p>
+                    <h1 class="text-2xl font-bold tracking-[0.2em] text-white mb-4 serif-text">DYNAST</h1>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6 font-light">Redefining watchmaking with custom royal luxury and top-quality craftsmanship. Built for the elite.</p>
                 </div>
                 <div>
-                    <h4 class="text-gold font-bold uppercase tracking-widest text-xs mb-6">Explore</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-light flex flex-col items-start">
-                        <li><a href="#" class="hover:text-gold transition-colors block py-1">Home</a></li>
-                        <li><a href="#collection" class="hover:text-gold transition-colors block py-1">Our Collection</a></li>
-                        <li><button type="button" onclick="openTracking()" class="hover:text-gold transition-colors block py-1 text-left">Track Order</button></li>
-                        <li><button type="button" onclick="openContact()" class="hover:text-gold transition-colors block py-1 text-left">Contact Us</button></li>
+                    <h4 class="text-lightgold font-bold uppercase tracking-widest text-xs mb-6">Explore</h4>
+                    <ul class="space-y-3 text-sm text-gray-300 font-light flex flex-col items-start">
+                        <li><a href="#" class="hover:text-white transition-colors block py-1">Home</a></li>
+                        <li><a href="#collection" class="hover:text-white transition-colors block py-1">Our Collection</a></li>
+                        <li><button type="button" onclick="openTracking()" class="hover:text-white transition-colors block py-1 text-left">Track Order</button></li>
+                        <li><button type="button" onclick="openContact()" class="hover:text-white transition-colors block py-1 text-left">Contact Us</button></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-gold font-bold uppercase tracking-widest text-xs mb-6">Legal</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-light flex flex-col items-start">
-                        <li><button type="button" onclick="openPolicy('privacy')" class="hover:text-gold transition-colors block py-1 text-left">Privacy Policy</button></li>
-                        <li><button type="button" onclick="openPolicy('terms')" class="hover:text-gold transition-colors block py-1 text-left">Terms of Service</button></li>
-                        <li><button type="button" onclick="openPolicy('return')" class="hover:text-gold transition-colors block py-1 text-left">Return & Warranty</button></li>
-                        <li><button type="button" onclick="openPolicy('shipping')" class="hover:text-gold transition-colors block py-1 text-left">Secure Shipping</button></li>
+                    <h4 class="text-lightgold font-bold uppercase tracking-widest text-xs mb-6">Legal</h4>
+                    <ul class="space-y-3 text-sm text-gray-300 font-light flex flex-col items-start">
+                        <li><button type="button" onclick="openPolicy('privacy')" class="hover:text-white transition-colors block py-1 text-left">Privacy Policy</button></li>
+                        <li><button type="button" onclick="openPolicy('terms')" class="hover:text-white transition-colors block py-1 text-left">Terms of Service</button></li>
+                        <li><button type="button" onclick="openPolicy('return')" class="hover:text-white transition-colors block py-1 text-left">Return & Warranty</button></li>
+                        <li><button type="button" onclick="openPolicy('shipping')" class="hover:text-white transition-colors block py-1 text-left">Secure Shipping</button></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-gold font-bold uppercase tracking-widest text-xs mb-6">Connect</h4>
-                    <ul class="space-y-3 text-sm text-gray-400 font-light">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-gold"></i> Agra, India</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-gold"></i> +91 7579942958</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-gold"></i> avesta.online.org@gmail.com</li>
-                        <li class="mt-6 pt-6 border-t border-white/10">
-                            <a href="https://instagram.com/avesta_luxury" target="_blank" class="text-white hover:text-gold transition-colors flex items-center gap-3 group">
+                    <h4 class="text-lightgold font-bold uppercase tracking-widest text-xs mb-6">Connect</h4>
+                    <ul class="space-y-3 text-sm text-gray-300 font-light">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-lightgold"></i> Agra, India</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-lightgold"></i> +91 7579942958</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-lightgold"></i> dynast.online.org@gmail.com</li>
+                        <li class="mt-6 pt-6 border-t border-white/15">
+                            <a href="https://instagram.com/dynast_luxury" target="_blank" class="text-white hover:text-lightgold transition-colors flex items-center gap-3 group">
                                 <i class="fa-brands fa-instagram text-xl group-hover:scale-110 transition-transform"></i>
-                                <span class="font-medium tracking-wide">@avesta_luxury</span>
+                                <span class="font-medium tracking-wide">@dynast_luxury</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/10 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
-                <p class="text-gray-500 text-center md:text-left tracking-widest uppercase">© 2026 AVESTA Premium Timepieces. All rights reserved.</p>
-                <div class="flex items-center gap-3"><span class="text-gray-500 uppercase tracking-widest">Secure UPI Checkout</span><i class="fa-solid fa-shield-halved text-gold"></i></div>
+            <div class="border-t border-white/15 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
+                <p class="text-gray-300 text-center md:text-left tracking-widest uppercase">© 2026 DYNAST Premium Timepieces. All rights reserved.</p>
+                <div class="flex items-center gap-3"><span class="text-gray-300 uppercase tracking-widest">Secure UPI Checkout</span><i class="fa-solid fa-shield-halved text-lightgold"></i></div>
             </div>
         </div>
     </footer>
@@ -280,21 +297,21 @@
     <!-- Product Detail Modal -->
     <div id="product-detail-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-0 md:p-6 bg-black/95 backdrop-blur-xl transition-opacity font-sans">
         <button onclick="closeProductDetail()" class="absolute top-4 right-4 md:top-8 md:right-8 text-gray-400 hover:text-white transition-colors text-4xl leading-none z-50 drop-shadow-lg"><i class="fa-solid fa-xmark"></i></button>
-        <div class="bg-darkgray md:border md:border-gold/20 md:rounded-xl w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl overflow-y-auto shadow-[0_0_50px_rgba(197,160,89,0.1)] relative flex flex-col md:flex-row">
+        <div class="bg-darkgray md:border md:border-gold/30 md:rounded-xl w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl overflow-y-auto shadow-[0_0_60px_rgba(41,34,206,0.3)] relative flex flex-col md:flex-row">
             <div class="w-full md:w-1/2 bg-black flex flex-col p-4 md:p-8">
                 
                 <!-- Smoother Zoom Container -->
-                <div id="image-zoom-container" class="w-full h-[50vh] md:h-[60vh] bg-[#0a0a0a] rounded-lg mb-3 relative flex items-center justify-center border border-white/5 cursor-crosshair group">
+                <div id="image-zoom-container" class="w-full h-[50vh] md:h-[60vh] bg-[#050512] rounded-lg mb-3 relative flex items-center justify-center border border-gold/15 cursor-crosshair group">
                     <img id="detail-main-img" src="" alt="Product" class="w-full h-full object-contain mix-blend-lighten pointer-events-none">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end justify-center pb-4">
-                        <span class="text-white/70 text-[10px] tracking-[0.2em] uppercase font-light"><i class="fa-solid fa-magnifying-glass mr-2"></i>Hover to inspect</span>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end justify-center pb-4">
+                        <span class="text-white/80 text-[10px] tracking-[0.2em] uppercase font-light"><i class="fa-solid fa-magnifying-glass mr-2"></i>Hover to inspect</span>
                     </div>
                 </div>
                 
                 <div id="detail-thumbnails" class="hidden gap-3 overflow-x-auto pb-2 scrollbar-hide"></div>
             </div>
             <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-gradient-to-b from-darkgray to-black">
-                <p id="detail-category" class="text-gold text-[10px] tracking-widest uppercase font-bold mb-2"></p>
+                <p id="detail-category" class="text-lightgold text-[10px] tracking-widest uppercase font-bold mb-2"></p>
                 <p id="detail-brand" class="text-gray-400 text-xs tracking-widest uppercase font-medium mb-1"></p>
                 
                 <h2 id="detail-title" class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight serif-text"></h2>
@@ -304,23 +321,23 @@
                 </div>
                 
                 <div class="mb-6">
-                    <h4 class="text-gray-400 text-[10px] uppercase tracking-widest mb-3 font-semibold border-b border-gold/20 pb-2">Technical Details</h4>
-                    <p id="detail-desc" class="text-gray-300 font-light leading-relaxed text-sm whitespace-pre-line"></p>
+                    <h4 class="text-gray-300 text-[10px] uppercase tracking-widest mb-3 font-semibold border-b border-gold/25 pb-2">Technical Details</h4>
+                    <p id="detail-desc" class="text-gray-200 font-light leading-relaxed text-sm whitespace-pre-line"></p>
                 </div>
                 
                 <div id="detail-options" class="mb-8 hidden relative">
-                    <h4 class="text-gray-400 text-[10px] uppercase tracking-widest mb-2 font-semibold">Select Color / Variant</h4>
+                    <h4 class="text-gray-300 text-[10px] uppercase tracking-widest mb-2 font-semibold">Select Color / Variant</h4>
                     <input type="hidden" id="detail-color-select" value="Default">
-                    <button type="button" id="custom-select-btn" onclick="toggleCustomDropdown()" class="w-full bg-[#050505] border border-white/20 text-gray-300 text-sm p-4 rounded-sm outline-none hover:border-gold hover:text-white flex justify-between items-center transition-all duration-300 shadow-inner">
+                    <button type="button" id="custom-select-btn" onclick="toggleCustomDropdown()" class="w-full bg-[#050512] border border-gold/30 text-gray-200 text-sm p-4 rounded-sm outline-none hover:border-gold hover:text-white flex justify-between items-center transition-all duration-300 shadow-inner">
                         <span id="custom-select-text" class="tracking-wide">Select Option</span>
-                        <i class="fa-solid fa-chevron-down text-gold text-xs transition-transform duration-300" id="custom-select-icon"></i>
+                        <i class="fa-solid fa-chevron-down text-lightgold text-xs transition-transform duration-300" id="custom-select-icon"></i>
                     </button>
-                    <ul id="custom-select-list" class="absolute z-50 w-full bg-[#0a0a0a] border border-gold/30 rounded-sm mt-1 max-h-48 overflow-y-auto hidden shadow-[0_10px_30px_rgba(0,0,0,0.8)] scrollbar-hide opacity-0 transition-opacity duration-300">
+                    <ul id="custom-select-list" class="absolute z-50 w-full bg-[#07071A] border border-gold/40 rounded-sm mt-1 max-h-48 overflow-y-auto hidden shadow-[0_10px_30px_rgba(0,0,0,0.9)] scrollbar-hide opacity-0 transition-opacity duration-300">
                     </ul>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-auto">
-                    <button type="button" id="detail-add-btn" class="w-full btn-gold bg-gold/10 py-4 rounded-sm font-semibold tracking-widest uppercase text-sm">Add to Cart</button>
+                    <button type="button" id="detail-add-btn" class="w-full btn-gold py-4 rounded-sm font-semibold tracking-widest uppercase text-sm">Add to Cart</button>
                     <button type="button" onclick="closeProductDetail()" class="w-full bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-white transition-all text-sm tracking-widest uppercase">Back</button>
                 </div>
             </div>
@@ -328,17 +345,17 @@
     </div>
 
     <!-- Cart Drawer -->
-    <div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300" onclick="toggleCart()"></div>
-    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-darkgray border-l border-gold/20 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col font-sans">
-        <div class="flex items-center justify-between p-6 border-b border-gold/10 bg-black">
-            <h2 class="text-gold text-sm font-bold tracking-[0.2em] uppercase">Your Cart</h2>
-            <button onclick="toggleCart()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-darkgray border-l border-gold/30 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col font-sans">
+        <div class="flex items-center justify-between p-6 border-b border-gold/20 royal-gradient-bg">
+            <h2 class="text-white text-sm font-bold tracking-[0.2em] uppercase">Your Royal Cart</h2>
+            <button onclick="toggleCart()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
-        <div class="border-t border-gold/10 p-6 bg-black shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div class="border-t border-gold/20 p-6 bg-black shadow-[0_-10px_30px_rgba(0,0,0,0.6)]">
             <div class="flex gap-2 mb-2">
-                <input type="text" id="promo-input" placeholder="Enter VIP Pass" class="flex-1 bg-white/5 border border-white/10 text-white px-3 py-3 rounded-sm outline-none focus:border-gold uppercase transition-colors text-xs tracking-widest">
-                <button type="button" onclick="applyPromo()" class="bg-gold/10 text-gold border border-gold/30 px-6 py-3 rounded-sm font-bold hover:bg-gold hover:text-black transition-colors text-xs tracking-widest uppercase">Apply</button>
+                <input type="text" id="promo-input" placeholder="Enter VIP Pass" class="flex-1 bg-white/5 border border-white/15 text-white px-3 py-3 rounded-sm outline-none focus:border-gold uppercase transition-colors text-xs tracking-widest">
+                <button type="button" onclick="applyPromo()" class="bg-royal/40 text-white border border-gold/40 px-6 py-3 rounded-sm font-bold hover:bg-royal hover:text-white transition-colors text-xs tracking-widest uppercase">Apply</button>
             </div>
             <p id="promo-message" class="text-[10px] mb-4 hidden tracking-wide"></p>
             <div class="space-y-2 mb-6 text-sm font-light">
@@ -346,29 +363,29 @@
                     <span>Subtotal</span><span id="cart-subtotal" class="text-white">₹0</span>
                 </div>
                 <div id="discount-row" class="flex justify-between items-center hidden">
-                    <span class="text-gold flex items-center gap-2">Discount <span id="applied-code-name" class="bg-gold/20 px-2 py-0.5 rounded-sm text-[9px] uppercase tracking-widest border border-gold/30"></span></span>
-                    <span id="cart-discount" class="text-gold">-₹0</span>
+                    <span class="text-lightgold flex items-center gap-2">Discount <span id="applied-code-name" class="bg-royal/40 px-2 py-0.5 rounded-sm text-[9px] uppercase tracking-widest border border-gold/40"></span></span>
+                    <span id="cart-discount" class="text-lightgold">-₹0</span>
                 </div>
                 <div class="flex justify-between items-center pt-3 border-t border-white/10 mt-3">
                     <span class="text-white tracking-widest uppercase text-xs font-semibold">Total</span>
-                    <span id="cart-total" class="text-gold text-xl font-medium">₹0</span>
+                    <span id="cart-total" class="text-lightgold text-xl font-medium">₹0</span>
                 </div>
             </div>
-            <button type="button" onclick="openCheckout()" class="w-full bg-gold text-black py-4 rounded-sm font-bold hover:bg-white transition-all tracking-[0.2em] uppercase text-xs">Proceed to Checkout</button>
+            <button type="button" onclick="openCheckout()" class="w-full royal-gradient-bg border border-gold/50 text-white py-4 rounded-sm font-bold hover:brightness-125 transition-all tracking-[0.2em] uppercase text-xs shadow-[0_0_20px_rgba(41,34,206,0.5)]">Proceed to Checkout</button>
         </div>
     </div>
 
     <!-- Checkout Modal -->
     <div id="checkout-modal" class="fixed inset-0 z-[70] hidden flex-col items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)]">
-            <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black">
-                <h4 class="text-gold font-bold text-sm tracking-[0.2em] uppercase"><i class="fa-solid fa-lock mr-2"></i>Secure Checkout</h4>
-                <button onclick="closeCheckout()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
+        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)]">
+            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+                <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase"><i class="fa-solid fa-lock mr-2 text-lightgold"></i>Secure Checkout</h4>
+                <button onclick="closeCheckout()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <form id="payment-form" onsubmit="processPayment(event)" class="p-6 flex flex-col gap-4 max-h-[80vh] overflow-y-auto scrollbar-hide">
                 <div class="flex justify-between items-end border-b border-white/10 pb-3">
-                    <span class="text-gray-400 text-xs tracking-widest uppercase">Amount Due:</span>
-                    <span id="checkout-amount" class="text-2xl font-medium text-gold">₹0</span>
+                    <span class="text-gray-300 text-xs tracking-widest uppercase">Amount Due:</span>
+                    <span id="checkout-amount" class="text-2xl font-medium text-lightgold">₹0</span>
                 </div>
                 <div class="space-y-3" id="checkout-fields">
                     <div><input type="text" id="cust-name" required placeholder="Your Full Name" class="checkout-input text-sm font-light"></div>
@@ -377,105 +394,104 @@
                     <div><textarea id="cust-address" required placeholder="Complete Delivery Address (with PIN Code)" class="checkout-input text-sm font-light resize-none h-20"></textarea></div>
                 </div>
                 <div class="mt-2">
-                    <p class="text-gray-400 text-[10px] tracking-widest uppercase font-semibold mb-2">Select Payment Method</p>
+                    <p class="text-gray-300 text-[10px] tracking-widest uppercase font-semibold mb-2">Select Payment Method</p>
                     <div class="grid grid-cols-2 gap-3">
-                        <button type="button" id="btn-upi" onclick="selectPayment('upi')" class="border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all"><i class="fa-solid fa-bolt mr-1"></i> Pay via UPI App</button>
+                        <button type="button" id="btn-upi" onclick="selectPayment('upi')" class="border border-gold bg-royal/30 text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all"><i class="fa-solid fa-bolt mr-1 text-lightgold"></i> Pay via UPI App</button>
                         <button type="button" id="btn-cod" onclick="selectPayment('cod')" class="border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all"><i class="fa-solid fa-truck-fast mr-1"></i> Cash on Delivery</button>
                     </div>
                 </div>
-                <button type="button" id="generate-upi-btn" onclick="generateUPIInterface()" class="w-full bg-gold text-black py-3 rounded-sm font-bold hover:bg-white transition-all tracking-wider uppercase text-xs mt-2">Proceed with UPI</button>
-                <div id="payment-dynamic-content" class="hidden border border-gold/30 bg-black/40 p-4 rounded-sm mt-2">
+                <button type="button" id="generate-upi-btn" onclick="generateUPIInterface()" class="w-full royal-gradient-bg border border-gold/50 text-white py-3 rounded-sm font-bold hover:brightness-125 transition-all tracking-wider uppercase text-xs mt-2">Proceed with UPI</button>
+                <div id="payment-dynamic-content" class="hidden border border-gold/30 bg-black/50 p-4 rounded-sm mt-2">
                     <div id="upi-view">
                         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 pb-4 border-b border-white/10">
                             <div class="bg-white p-2 rounded-lg flex-shrink-0">
                                 <img id="upi-qr-img" src="" alt="UPI QR" class="w-24 h-24 sm:w-28 sm:h-28 object-contain">
                             </div>
                             <div class="text-center sm:text-left flex-1">
-                                <p class="text-[10px] text-gray-400 tracking-wider uppercase mb-1">Scan or Pay to ID:</p>
-                                <p class="text-sm font-bold text-gold select-all tracking-wide bg-gold/10 inline-block px-2 py-1 rounded border border-gold/20">7579942958@ptyes</p>
-                                <a id="upi-intent-link" href="#" class="mt-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-3 py-2 rounded-sm uppercase tracking-wider text-[10px] font-semibold flex items-center justify-center gap-2 sm:hidden"><i class="fa-solid fa-mobile-screen"></i> Open UPI App</a>
+                                <p class="text-[10px] text-gray-300 tracking-wider uppercase mb-1">Scan or Pay to ID:</p>
+                                <p class="text-sm font-bold text-lightgold select-all tracking-wide bg-royal/25 inline-block px-2 py-1 rounded border border-gold/30">7579942958@ptyes</p>
+                                <a id="upi-intent-link" href="#" class="mt-3 royal-gradient-bg border border-gold/40 text-white px-3 py-2 rounded-sm uppercase tracking-wider text-[10px] font-semibold flex items-center justify-center gap-2 sm:hidden"><i class="fa-solid fa-mobile-screen"></i> Open UPI App</a>
                             </div>
                         </div>
                         <div class="text-[10px] text-gray-300 space-y-2 mb-4 font-light leading-relaxed">
-                            <p><strong class="text-gold">STEP 1:</strong> Scan the QR code or use the UPI ID above in any app.</p>
-                            <p><strong class="text-gold">STEP 2:</strong> Transfer the exact amount of <span id="upi-step-amount" class="font-bold text-white"></span>.</p>
-                            <p><strong class="text-gold">STEP 3:</strong> After successful payment, copy the 12-digit UTR/Reference No. and paste it below to confirm your order.</p>
+                            <p><strong class="text-lightgold">STEP 1:</strong> Scan the QR code or use the UPI ID above in any app.</p>
+                            <p><strong class="text-lightgold">STEP 2:</strong> Transfer the exact amount of <span id="upi-step-amount" class="font-bold text-white"></span>.</p>
+                            <p><strong class="text-lightgold">STEP 3:</strong> After successful payment, copy the 12-digit UTR/Reference No. and paste it below to confirm your order.</p>
                         </div>
-                        <input type="text" id="utr-number" placeholder="Enter 12-Digit UTR Number" class="w-full bg-white/5 border border-gold/50 text-gold px-3 py-3 rounded-sm outline-none focus:border-white transition-colors text-xs tracking-widest text-center">
+                        <input type="text" id="utr-number" placeholder="Enter 12-Digit UTR Number" class="w-full bg-white/5 border border-gold/50 text-white px-3 py-3 rounded-sm outline-none focus:border-white transition-colors text-xs tracking-widest text-center">
                     </div>
                     <div id="cod-view" class="hidden text-center py-4">
-                        <div class="w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-hand-holding-dollar text-xl text-gold"></i></div>
-                        <p class="text-xs text-gray-300 tracking-wide leading-relaxed font-light">Pay directly via Cash or UPI when your premium timepiece arrives at your doorstep.</p>
+                        <div class="w-12 h-12 bg-royal/20 border border-gold/30 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-hand-holding-dollar text-xl text-lightgold"></i></div>
+                        <p class="text-xs text-gray-300 tracking-wide leading-relaxed font-light">Pay directly via Cash or UPI when your premium DYNAST timepiece arrives at your doorstep.</p>
                     </div>
                 </div>
-                <div id="payment-status" class="hidden w-full text-center py-3 bg-black/50 rounded-sm border border-gold/20 mt-2">
-                    <p class="text-gold text-xs tracking-widest uppercase animate-pulse"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Processing Order...</p>
+                <div id="payment-status" class="hidden w-full text-center py-3 bg-black/50 rounded-sm border border-gold/30 mt-2">
+                    <p class="text-lightgold text-xs tracking-widest uppercase animate-pulse"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Processing Order...</p>
                 </div>
-                <button id="pay-button" type="submit" class="hidden w-full bg-gold text-black py-4 rounded-sm font-bold hover:bg-white transition-all tracking-[0.2em] uppercase text-xs shadow-md mt-2">Confirm & Place Order</button>
+                <button id="pay-button" type="submit" class="hidden w-full royal-gradient-bg border border-gold/50 text-white py-4 rounded-sm font-bold hover:brightness-125 transition-all tracking-[0.2em] uppercase text-xs shadow-md mt-2">Confirm & Place Order</button>
             </form>
         </div>
     </div>
 
     <!-- Ebill Modal -->
     <div id="ebill-modal" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-xl transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)] flex flex-col max-h-[90vh]">
-            <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black">
-                <h4 class="text-gold font-bold text-sm tracking-[0.2em] uppercase">Order Submitted</h4>
-                <button onclick="closeEbill()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
+        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)] flex flex-col max-h-[90vh]">
+            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+                <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase">Order Submitted</h4>
+                <button onclick="closeEbill()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="overflow-y-auto flex-1 p-8">
-                <div id="receipt-content" style="background-color: #0A0A0A; padding: 20px; color: white;">
+                <div id="receipt-content" style="background: linear-gradient(135deg, #03030B 0%, #0A092E 60%, #1E1999 100%); padding: 24px; color: white; border: 1px solid rgba(91,108,250,0.3);">
                     <!-- Ebill Content populated dynamically -->
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 24px; margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 24px; margin-bottom: 24px;">
                         <div>
-                            <h1 style="font-size: 24px; font-weight: bold; letter-spacing: 0.1em; color: white; font-family: 'Cinzel', serif; margin:0;">AVESTA</h1>
-                            <p style="font-size: 9px; letter-spacing: 0.3em; color: #C5A059; margin-top: 4px; text-transform: uppercase;">Premium Timepieces</p>
+                            <h1 style="font-size: 26px; font-weight: bold; letter-spacing: 0.2em; color: white; font-family: 'Cinzel', serif; margin:0;">DYNAST</h1>
+                            <p style="font-size: 9px; letter-spacing: 0.3em; color: #93A3FF; margin-top: 4px; text-transform: uppercase;">Premium Timepieces</p>
                         </div>
                         <div style="text-align: right;">
-                            <p style="color: #C5A059; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; margin:0;">E-Invoice</p>
-                            <p id="ebill-order-id" style="color: #9ca3af; font-size: 12px; margin-top: 4px; font-weight: 500;"></p>
-                            <p id="ebill-date" style="color: #6b7280; font-size: 10px; margin-top: 4px;"></p>
+                            <p style="color: #93A3FF; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; margin:0;">E-Invoice</p>
+                            <p id="ebill-order-id" style="color: #e5e7eb; font-size: 12px; margin-top: 4px; font-weight: 500;"></p>
+                            <p id="ebill-date" style="color: #9ca3af; font-size: 10px; margin-top: 4px;"></p>
                             <div style="margin-top: 8px;" id="ebill-status-text"></div>
                         </div>
                     </div>
                     <div style="margin-bottom: 32px;">
-                        <h4 style="color: #6b7280; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Billed & Shipped To:</h4>
+                        <h4 style="color: #93A3FF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Billed & Shipped To:</h4>
                         <p id="ebill-name" style="color: white; font-size: 14px; font-weight: 500; margin: 0;"></p>
-                        <p id="ebill-email" style="color: #9ca3af; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
-                        <p id="ebill-phone" style="color: #9ca3af; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
-                        <p id="ebill-address" style="color: #9ca3af; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0; line-height: 1.6; max-width: 300px;"></p>
-                        <p id="ebill-method-text" style="color: #C5A059; font-size: 10px; font-weight: 300; margin-top: 12px; letter-spacing: 0.05em;"></p>
+                        <p id="ebill-email" style="color: #d1d5db; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
+                        <p id="ebill-phone" style="color: #d1d5db; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
+                        <p id="ebill-address" style="color: #d1d5db; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0; line-height: 1.6; max-width: 300px;"></p>
+                        <p id="ebill-method-text" style="color: #93A3FF; font-size: 10px; font-weight: 300; margin-top: 12px; letter-spacing: 0.05em;"></p>
                     </div>
                     <div style="margin-bottom: 32px;">
-                        <div style="display: flex; justify-content: space-between; color: #6b7280; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 16px; font-weight: 600;">
+                        <div style="display: flex; justify-content: space-between; color: #93A3FF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 8px; margin-bottom: 16px; font-weight: 600;">
                             <span style="width: 60%;">Item Description</span>
                             <span style="width: 20%; text-align: center;">Qty</span>
                             <span style="width: 20%; text-align: right;">Price</span>
                         </div>
                         <div id="ebill-items" style="display: flex; flex-direction: column; gap: 16px;"></div>
                     </div>
-                    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-size: 14px; font-weight: 300;">
+                    <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-size: 14px; font-weight: 300;">
                         <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px;">
-                            <span style="color: #9ca3af;">Subtotal:</span>
+                            <span style="color: #d1d5db;">Subtotal:</span>
                             <span id="ebill-subtotal" style="color: white;"></span>
                         </div>
-                        <div id="ebill-discount-row" style="display: none; justify-content: space-between; width: 100%; max-width: 250px; color: #C5A059;">
+                        <div id="ebill-discount-row" style="display: none; justify-content: space-between; width: 100%; max-width: 250px; color: #93A3FF;">
                             <span>VIP Pass Applied:</span>
                             <span id="ebill-discount"></span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 8px;">
+                        <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.15); margin-top: 8px;">
                             <span style="color: white; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; font-weight: 600;">Total Amount:</span>
-                            <span id="ebill-total" style="color: #C5A059; font-size: 18px; font-weight: 500;"></span>
+                            <span id="ebill-total" style="color: #93A3FF; font-size: 18px; font-weight: 600;"></span>
                         </div>
                     </div>
-                    <div style="margin-top: 48px; text-align: center; border-top: 1px solid rgba(197,160,89,0.2); padding-top: 24px;">
-                        <p style="color: #C5A059; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-style: italic; font-family: 'Cinzel', serif;">Crafted with precision. Thank you for choosing Avesta.</p>
+                    <div style="margin-top: 48px; text-align: center; border-top: 1px solid rgba(147,163,255,0.25); padding-top: 24px;">
+                        <p style="color: #93A3FF; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; font-style: italic; font-family: 'Cinzel', serif;">Crafted with royal precision. Thank you for choosing DYNAST.</p>
                     </div>
                 </div>
             </div>
-            <!-- Updated Flex Footer for Icon Alignment -->
-            <div class="p-4 sm:p-6 bg-black border-t border-gold/10 flex gap-3 sm:gap-4">
-                <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold bg-gold/10 py-3 px-1 rounded-sm font-semibold tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center leading-tight">
+            <div class="p-4 sm:p-6 bg-black border-t border-gold/20 flex gap-3 sm:gap-4">
+                <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold py-3 px-1 rounded-sm font-semibold tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center leading-tight">
                     <i class="fa-solid fa-image text-sm"></i>
                     <span>Save Bill <br class="sm:hidden"/>(Photo)</span>
                 </button>
@@ -488,22 +504,22 @@
 
     <!-- Tracking Modal -->
     <div id="tracking-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/20 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)]">
-            <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black">
-                <h4 class="text-gold font-bold text-sm tracking-[0.2em] uppercase">Track Your Order</h4>
-                <button onclick="closeTracking()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
+        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)]">
+            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+                <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase">Track Your Order</h4>
+                <button onclick="closeTracking()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-8" id="tracking-input-area">
-                <p class="text-gray-400 text-xs font-light leading-relaxed mb-6">Enter your exclusive AVESTA Order ID to check the delivery status of your timepiece.</p>
-                <input type="text" id="order-id-input" placeholder="e.g. AV-123456" class="checkout-input mb-6 text-center tracking-widest uppercase font-medium" maxlength="9">
-                <button type="button" onclick="simulateTracking()" class="w-full btn-gold bg-gold/10 py-4 rounded-sm font-semibold tracking-widest uppercase text-xs">Track Order</button>
+                <p class="text-gray-300 text-xs font-light leading-relaxed mb-6">Enter your exclusive DYNAST Order ID to check the delivery status of your timepiece.</p>
+                <input type="text" id="order-id-input" placeholder="e.g. DY-123456" class="checkout-input mb-6 text-center tracking-widest uppercase font-medium" maxlength="9">
+                <button type="button" onclick="simulateTracking()" class="w-full btn-gold py-4 rounded-sm font-semibold tracking-widest uppercase text-xs">Track Order</button>
             </div>
             <div id="tracking-loading" class="p-12 hidden flex-col items-center justify-center">
-                <i class="fa-solid fa-compass text-3xl text-gold animate-spin-slow mb-4 opacity-70"></i>
-                <p class="text-gray-400 text-[10px] tracking-[0.2em] uppercase animate-pulse">Searching Database...</p>
+                <i class="fa-solid fa-compass text-3xl text-lightgold animate-spin-slow mb-4 opacity-70"></i>
+                <p class="text-gray-300 text-[10px] tracking-[0.2em] uppercase animate-pulse">Searching Database...</p>
             </div>
             <div id="tracking-result" class="p-8 hidden bg-black">
-                <p class="text-white text-xs font-medium mb-6 border-b border-white/10 pb-4 tracking-widest uppercase">Order Ref: <span id="display-order-id" class="text-gold ml-2"></span></p>
+                <p class="text-white text-xs font-medium mb-6 border-b border-white/10 pb-4 tracking-widest uppercase">Order Ref: <span id="display-order-id" class="text-lightgold ml-2"></span></p>
                 <div id="verification-pending-msg" class="hidden mb-6 p-4 border border-yellow-500/30 bg-yellow-500/10 rounded-sm">
                     <p class="text-yellow-500 text-[10px] uppercase tracking-widest font-semibold"><i class="fa-solid fa-clock-rotate-left mr-2"></i>UPI Verification Pending</p>
                     <p class="text-gray-400 text-[10px] mt-2 leading-relaxed">Your payment UTR is currently being verified by our team. The tracker will activate once confirmed.</p>
@@ -512,12 +528,12 @@
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot absolute left-0 top-1"></div><div class="timeline-line"></div>
                         <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Order Confirmed</h5>
-                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Details verified. Design sent to workshop.</p>
+                        <p class="timeline-desc text-gray-400 text-[10px] font-light">Details verified. Design sent to workshop.</p>
                     </div>
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot absolute left-0 top-1"></div><div class="timeline-line"></div>
                         <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Our Workshop, Agra</h5>
-                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Timepiece is undergoing custom assembly & testing.</p>
+                        <p class="timeline-desc text-gray-400 text-[10px] font-light">Timepiece is undergoing custom assembly & testing.</p>
                     </div>
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot pending absolute left-0 top-1"></div><div class="timeline-line"></div>
@@ -530,48 +546,48 @@
                         <p class="timeline-desc text-gray-600 text-[10px] font-light">Package has securely reached your location.</p>
                     </div>
                 </div>
-                <button type="button" onclick="resetTracking()" class="mt-8 w-full bg-transparent border border-white/20 text-gray-400 py-3 rounded-sm text-[10px] font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase">Track Another</button>
+                <button type="button" onclick="resetTracking()" class="mt-8 w-full bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm text-[10px] font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase">Track Another</button>
             </div>
         </div>
     </div>
 
     <!-- Policy Modal -->
     <div id="policy-modal" class="fixed inset-0 z-[90] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/20 rounded-lg w-full max-w-3xl max-h-[85vh] overflow-hidden relative flex flex-col shadow-[0_0_50px_rgba(197,160,89,0.1)]">
-            <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black">
-                <h4 id="policy-title" class="text-gold font-bold text-sm tracking-[0.2em] uppercase">Policy Title</h4>
-                <button onclick="closePolicy()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
+        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-3xl max-h-[85vh] overflow-hidden relative flex flex-col shadow-[0_0_50px_rgba(41,34,206,0.3)]">
+            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+                <h4 id="policy-title" class="text-white font-bold text-sm tracking-[0.2em] uppercase">Policy Title</h4>
+                <button onclick="closePolicy()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="p-8 overflow-y-auto flex-1 text-gray-300 text-sm font-light leading-relaxed space-y-6" id="policy-content"></div>
+            <div class="p-8 overflow-y-auto flex-1 text-gray-200 text-sm font-light leading-relaxed space-y-6" id="policy-content"></div>
         </div>
     </div>
 
     <!-- Contact Modal -->
     <div id="contact-modal" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/20 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(197,160,89,0.1)]">
-            <div class="p-6 border-b border-gold/10 flex justify-between items-center bg-black">
-                <h4 class="text-gold font-bold text-sm tracking-[0.2em] uppercase">Contact Us</h4>
-                <button onclick="closeContact()" class="text-gray-400 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
+        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)]">
+            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+                <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase">Contact DYNAST</h4>
+                <button onclick="closeContact()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-8 flex flex-col gap-8">
                 <div class="flex items-start gap-5">
-                    <div class="w-10 h-10 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-phone text-gold"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-gold/40 bg-royal/20 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-phone text-lightgold"></i></div>
                     <div>
-                        <p class="text-gray-500 text-[10px] mb-1 uppercase tracking-widest font-semibold">Phone</p>
+                        <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-widest font-semibold">Phone</p>
                         <p class="text-white font-light text-sm">+91 7579942958</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-5">
-                    <div class="w-10 h-10 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-envelope text-gold"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-gold/40 bg-royal/20 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-envelope text-lightgold"></i></div>
                     <div>
-                        <p class="text-gray-500 text-[10px] mb-1 uppercase tracking-widest font-semibold">Email</p>
-                        <a href="mailto:avesta.online.org@gmail.com" class="text-white font-light text-sm hover:text-gold transition-colors">avesta.online.org@gmail.com</a>
+                        <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-widest font-semibold">Email</p>
+                        <a href="mailto:dynast.online.org@gmail.com" class="text-white font-light text-sm hover:text-lightgold transition-colors">dynast.online.org@gmail.com</a>
                     </div>
                 </div>
                 <div class="flex items-start gap-5">
-                    <div class="w-10 h-10 rounded-full border border-gold/30 bg-gold/5 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-location-dot text-gold"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-gold/40 bg-royal/20 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-location-dot text-lightgold"></i></div>
                     <div>
-                        <p class="text-gray-500 text-[10px] mb-1 uppercase tracking-widest font-semibold">Our Workshop</p>
+                        <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-widest font-semibold">Our Workshop</p>
                         <p class="text-white font-light text-sm">Agra, Uttar Pradesh, India</p>
                     </div>
                 </div>
@@ -581,13 +597,13 @@
 
     <!-- Alert Modal -->
     <div id="custom-alert-modal" class="fixed inset-0 z-[120] hidden flex-col items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans opacity-0">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(197,160,89,0.1)] relative transform scale-95 transition-transform duration-300" id="custom-alert-box">
+        <div class="bg-darkgray border border-gold/40 rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(41,34,206,0.3)] relative transform scale-95 transition-transform duration-300" id="custom-alert-box">
             <div id="alert-icon-container" class="w-12 h-12 rounded-full border flex items-center justify-center mx-auto mb-4">
                 <i id="alert-icon" class="fa-solid text-xl"></i>
             </div>
             <h3 id="alert-title" class="text-white text-lg serif-text tracking-widest mb-2">Notice</h3>
-            <p id="alert-modal-text" class="text-gray-400 text-xs font-light leading-relaxed mb-6"></p>
-            <button onclick="closeCustomAlert()" class="w-full bg-gold/10 border border-gold/30 text-gold hover:bg-gold hover:text-black py-3 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Okay</button>
+            <p id="alert-modal-text" class="text-gray-300 text-xs font-light leading-relaxed mb-6"></p>
+            <button onclick="closeCustomAlert()" class="w-full btn-gold py-3 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Okay</button>
         </div>
     </div>
 
@@ -605,8 +621,6 @@
         const db = firebase.firestore();
 
         const FAMAPP_UPI_ID = "7579942958@ptyes"; 
- 
-
         const products = [
             
             // --- NON-BRANDED MEN'S WATCHES ---
@@ -627,12 +641,12 @@
             { id: 15, name: 'The Faxon Signature Cushion Collection', category: 'Non-Branded', subCategory: 'Men', price: 799, images: ['Male Collection/Male Watch 15.jpg'], description: 'Discover the pinnacle of precision engineering and timeless elegance with the expansive Signature Cushion collection. This comprehensive lineup offers nine distinct references, ensuring a perfect match for any personal style. Each watch features a unique dial layout with prominent Roman numerals at the base, protected by a sophisticated, softened cushion-shaped case.', colors: ['Rose Gold + Silver with Black Dial', 'Rose Gold + Silver with White Dial', 'Silver Strap with Black Dial', 'Silver Strap with Blue Dial', 'Rose Gold + Silver with Grey Dial'] },
 
             // --- NON-BRANDED WOMEN'S WATCHES ---
-            { id: 21, name: 'The Velaris Starlight Pavé Chronograph', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 1.jpg'], description: 'For the woman who loves bold luxury and uncompromising sparkle. This striking timepiece takes the confident, sporty aesthetic of a classic multi-dial watch and elevates it to pure high-fashion glamour. Featuring a brilliant pavé crystal bezel and matching crystal-encrusted center links down the bracelet, it catches the light from across the room. It is a powerful, iced-out statement piece that demands attention.', colors: ['Rose Gold', 'Black', ' Pure Silver', 'Silver with Blue'] },
+            { id: 21, name: 'The Velaris Starlight Pavé Chronograph', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 1.jpg'], description: 'For the woman who loves bold luxury and uncompromising sparkle. This striking timepiece takes the confident, sporty aesthetic of a classic multi-dial watch and elevates it to pure high-fashion glamour. Featuring a brilliant pavé crystal bezel and matching crystal-encrusted center links down the bracelet, it catches the light from across the room. It is a powerful, iced-out statement piece that demands attention.', colors: ['Rose Gold', 'Black', 'Pure Silver', 'Silver with Blue'] },
             { id: 22, name: 'The Velaris Enchanted Dial Collection', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 2.jpg'], description: 'Make a breathtaking statement with a timepiece that is as much a work of art as it is a functional accessory. The Velaris Enchanted Dial features an intricate, mesmerizing pattern that evokes the delicate beauty of butterfly wings, meticulously adorned with subtle crystal accents. Framed by a polished bezel and featuring prominent, stylized 12 and 6 numerals, this watch effortlessly blends whimsical charm with contemporary elegance.', colors: ['Rose Gold', 'Golden', 'Silver Strap with Blue Dial', 'Black', 'Silver Strap with White Dial'] },
             { id: 23, name: 'The Velaris Interlocking Chainlink', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 3.jpg'], description: 'Chic, modern, and sophisticated. For the woman who loves contemporary minimalism, this watch features a beautifully smooth, elongated oval case that rests gracefully on the wrist. The minimalist sunburst dial is elevated by the stunning interlocking chain-link bracelet, a staple design in high-end fashion jewelry. It is the perfect everyday piece that transitions flawlessly from the office to a night out.', colors: ['Rose Gold', 'Dark Brown', 'Black', 'Silver'] },
             { id: 24, name: 'The Velaris Heritage Multi-Dial', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 4.jpg'], description: 'Sophistication meets superior craftsmanship. The Velaris Heritage watch offers a beautifully tailored, professional aesthetic with its complex multi-dial layout and traditional chronograph pushers. The dial is a masterpiece of detail, featuring a fine, radiating guilloché-style texture and classic Roman numeral markers. Paired with an elegant, fluid multi-link bracelet, this watch is the epitome of refined, everyday luxury.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver'] },
-            { id: 25, name: 'The Velaris Blossom Ribbon', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 5.jpg'], description: 'Playful, charming, and radiating with sparkle. The Velaris Blossom features an enchanting dial scattered with delicate floral motifs, but the true magic lies in the case design. Beautiful, crystal-encrusted curved accents flank the top and bottom of the dial, resembling a glittering ribbon or bow. Paired with a distinctive beaded-style bracelet, this watch is the epitome of joyful elegance.', colors: ['Rose Gold Strap with Brown Dial', ' Rose Gold Strap with Rose Gold Dial', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with White Dial'] },
-            { id: 26, name: 'The Velaris Open-Halo Chainlink', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 6.jpg'], description: 'Artistic, contemporary, and effortlessly chic. This highly distinctive timepiece redefines the concept of a jewelry watch with its stunning open-circle chainlink bracelet. The delicate crystal accents at the connection points beautifully complement the crystal-encrusted bezel. To balance the modern bracelet, the dial is kept classic and sophisticated, featuring clean lines and traditional Roman numerals at the 12:00 and 6;00 clock positions.', colors: ['Rose Gold', 'White', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with Silver Dial'] },
+            { id: 25, name: 'The Velaris Blossom Ribbon', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 5.jpg'], description: 'Playful, charming, and radiating with sparkle. The Velaris Blossom features an enchanting dial scattered with delicate floral motifs, but the true magic lies in the case design. Beautiful, crystal-encrusted curved accents flank the top and bottom of the dial, resembling a glittering ribbon or bow. Paired with a distinctive beaded-style bracelet, this watch is the epitome of joyful elegance.', colors: ['Rose Gold Strap with Brown Dial', 'Rose Gold Strap with Rose Gold Dial', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with White Dial'] },
+            { id: 26, name: 'The Velaris Open-Halo Chainlink', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 6.jpg'], description: 'Artistic, contemporary, and effortlessly chic. This highly distinctive timepiece redefines the concept of a jewelry watch with its stunning open-circle chainlink bracelet. The delicate crystal accents at the connection points beautifully complement the crystal-encrusted bezel. To balance the modern bracelet, the dial is kept classic and sophisticated, featuring clean lines and traditional Roman numerals at the 12:00 and 6:00 clock positions.', colors: ['Rose Gold', 'White', 'Black', 'Silver Strap with Blue Dial', 'Silver Strap with Silver Dial'] },
             { id: 27, name: 'The Velaris Legacy Multi-Dial', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 7.jpg'], description: 'For the woman who commands her time, the Velaris Legacy brings the classic, complex look of a multi-functional watch to a perfectly proportioned feminine silhouette. Featuring traditional Roman numeral hour markers and intricate sub-dials, it offers a sophisticated, "boyfriend-watch" appeal without sacrificing elegance. The classic multi-link bracelet ensures it remains a timeless staple in your collection.', colors: ['Rose Gold', 'Black', 'Brown', 'Silver'] },
             { id: 28, name: 'The Velaris Prismatic Jewel Bracelet', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 8.jpg'], description: 'Blur the lines between high-fashion jewelry and timekeeping with the avant-garde Velaris Prismatic collection. This bold statement piece features an incredible bracelet composed of large, rectangular, gem-like links—including breathtaking iridescent options that shift colors in the light. The petite, geometric rectangular dial perfectly balances the dramatic bracelet, resulting in a watch that is guaranteed to turn heads.', colors: ['Rose Gold', 'Black', 'Brown', 'Royal Blue', 'Silver'] },
             { id: 29, name: 'The Velaris Radiant Octagon', category: 'Non-Branded', subCategory: 'Women', price: 249, images: ['Female Collection/Female Watch 9.jpg'], description: 'Embrace the luxury sport-chic trend with this exceptional octagonal timepiece. The sharp, geometric lines of the multi-faceted case are softened by a brilliant, crystal-studded bezel. The delicately textured dial adds visual depth, while the intricate, mixed-link bracelet provides a secure, premium feel. It is a watch designed for the modern woman who loves a touch of edge with her sparkle.', colors: ['Rose Gold', 'Brown', 'Black', 'Silver Strap with White Dial', 'Silver Strap with Blue Dial'] },
@@ -665,11 +679,13 @@
             { id: 58, name: 'The Tommy Hilfiger Olive Chronograph', category: 'Branded', brand: 'Tommy Hilfiger', price: 4399, realPrice: 20999, images: ['Premium Collection/Premium Watch 18-1.jpg'], description: 'Sporty, sophisticated, and ready for anything. This Tommy Hilfiger chronograph blends classic stainless steel elegance with a dynamic, modern dial design. The rich olive-green dial features a highly textured, multi-dimensional layout with three functional sub-dials and a sleek inner tachymeter ring. Finished with a high-polish steel bracelet, it brings a luxurious, tailored edge to your everyday casual wear.' },
             { id: 59, name: 'The Seiko Open-Heart Nautical Collection', category: 'Branded', brand: 'Seiko', price: 1599, realPrice: 18999, images: ['Premium Collection/Premium watch 19-1.jpg', 'Premium Collection/Premium watch 19-2.jpg', 'Premium Collection/Premium watch 19-3.jpg', 'Premium Collection/Premium watch 19-4.jpg', 'Premium Collection/Premium watch 19-5.jpg', 'Premium Collection/Premium watch 19-6.jpg', 'Premium Collection/Premium watch 19-7.jpg', 'Premium Collection/Premium watch 19-8.jpg', 'Premium Collection/Premium watch 19-9.jpg', 'Premium Collection/Premium watch 19-10.jpg', 'Premium Collection/Premium watch 19-11.jpg', 'Premium Collection/Premium watch 19-12.jpg', 'Premium Collection/Premium watch 19-13.jpg', 'Premium Collection/Premium watch 19-14.jpg', 'Premium Collection/Premium watch 19-15.jpg'], description: 'Discover the perfect fusion of high-end sports luxury and captivating mechanical artistry. This extraordinary collection features an iconic, porthole-inspired case design that flows seamlessly into an elegant integrated bracelet, offering an incredibly ergonomic and sophisticated fit. The true centerpiece of these timepieces is the beautiful "open-heart" window positioned at 9, allowing you to watch the beating balance wheel of the automatic movement. Set against a richly textured, horizontally embossed dial, it is a masterclass in dynamic, modern watchmaking. With fourteen stunning variations to choose from, you can find the perfect match for any wardrobe or occasion.', colors: ['Rose Gold Strap with White Dial', 'Rose Gold Strap with Black Dial', 'Rose Gold Strap with Emerald Green Dial', 'Rose Gold Strap with Royal Blue Dial', 'Rose Gold Strap with Ice Blue Dial', 'Silver Strap with White Dial', 'Silver Strap with Black Dial', 'Silver Strap with Royal Blue Dial', 'Silver Strap with Chocolate Brown Dial', 'Silver Strap with Emerald Green', 'Black Strap with Black Dial', 'Golden Strap with White Dial', 'Golden Strap with Dark Brown', 'Golden Strap with Emerald Green'] },
             { id: 60, name: 'The Rado Jubilé High-Tech Ceramic Set', category: 'Branded', brand: 'Rado', price: 1999, realPrice: 400000, images: ['Premium Collection/Premium Watch 20-1.jpg', 'Premium Collection/Premium Watch 20-2.jpg', 'Premium Collection/Premium Watch 20-3.jpg', 'Premium Collection/Premium Watch 20-4.jpg'], description: 'Celebrate timeless elegance and enduring commitment with the exquisite Rado Jubilé collection. Renowned globally as the "Master of Materials," Rado showcases its signature high-tech ceramic in a brilliant, pristine white, flawlessly intertwined with luxurious gold-tone metal accents. The minimalist dial is elevated by sparkling, gem-set indices at the quarter hours and a practical date complication, embodying a clean yet opulent aesthetic. Presented in complementary sizes, this is the ultimate expression of sophisticated, matching style for couples who share a legacy of excellence.', colors: ['White with Gold', 'Black with Rose Gold', 'Pure Black', 'White with Rose Gold'] },
-            { id: 61, name: 'The GUESS Vanguard Chronograph Collection', category: 'Branded', brand: 'GUESS', price: 1399, realPrice: 27995, images: ['Premium Collection/Premium Watch 21-1.jpg'], description: 'Make a bold impression with a timepiece designed for the modern man who values both high-performance functionality and high-impact style. The GUESS Vanguard Chronograph collection features a striking, multi-faceted octagonal bezel that instantly commands attention. The dynamic dial showcases a highly practical three-sub-dial chronograph layout, perfectly balanced by sleek indices and a convenient date window. Whether you prefer the stealthy all-black finish, the classic silver-tone, or the luxurious two-tone gold variations, this collection delivers a commanding, sport-luxe aesthetic that elevates any wardrobe.', colors: ['Pure Black', 'Silver Strap with Whote Dial', 'Silver + Rose Gold Strap with Black Dial', 'Silver + Golden Strap with White Dial'] },
+            { id: 61, name: 'The GUESS Vanguard Chronograph Collection', category: 'Branded', brand: 'GUESS', price: 1399, realPrice: 27995, images: ['Premium Collection/Premium Watch 21-1.jpg'], description: 'Make a bold impression with a timepiece designed for the modern man who values both high-performance functionality and high-impact style. The GUESS Vanguard Chronograph collection features a striking, multi-faceted octagonal bezel that instantly commands attention. The dynamic dial showcases a highly practical three-sub-dial chronograph layout, perfectly balanced by sleek indices and a convenient date window. Whether you prefer the stealthy all-black finish, the classic silver-tone, or the luxurious two-tone gold variations, this collection delivers a commanding, sport-luxe aesthetic that elevates any wardrobe.', colors: ['Pure Black', 'Silver Strap with White Dial', 'Silver + Rose Gold Strap with Black Dial', 'Silver + Golden Strap with White Dial'] },
             { id: 62, name: 'The Rolex Datejust Slate Dial Fluted Bezel & Jubilee Bracelet', category: 'Branded', brand: 'Rolex', price: 2349, realPrice: 1102500, images: ['Premium Collection/Premium Watch 22-1.jpg', 'Premium Collection/Premium Watch 22-2.jpg', 'Premium Collection/Premium Watch 22-3.jpg', 'Premium Collection/Premium Watch 22-4.jpg'], description: 'Experience the epitome of timeless sophistication with this iconic Rolex Datejust. Showcasing a mesmerizing slate grey sunburst dial, this timepiece catches ambient light with incredible depth and clarity. The signature fluted bezel adds a brilliant dimension of texture, perfectly complementing the fluid, highly polished center links of the legendary Jubilee bracelet. Complete with the distinguished Superlative Chronometer green seal, this watch is not just an instrument of time, but a flawless statement of enduring luxury, prestige, and peerless craftsmanship.' },
             { id: 63, name: 'The Rolex Datejust Fluted Motif Everose Two-Tone', category: 'Branded', brand: 'Rolex', price: 2349, realPrice: 2026447, images: ['Premium Collection/Premium Watch 23-1.jpg', 'Premium Collection/Premium Watch 23-2.jpg', 'Premium Collection/Premium Watch 23-3.jpg', 'Premium Collection/Premium Watch 23-4.jpg', 'Premium Collection/Premium Watch 23-5.jpg'], description: 'Elevate your collection with a timepiece that masterfully blends iconic heritage with striking modern textures. This extraordinary Rolex Datejust features a captivating silver "fluted motif" dial, a sophisticated laser-etched pattern that perfectly echoes the watch signature rose gold fluted bezel. The warm, luxurious Everose gold and durable Oystersteel two-tone construction is flawlessly paired with the legendary Jubilee bracelet, offering an unparalleled standard of elegance and comfort. It is a brilliant, highly textured take on a legendary classic.' },
-            { id: 64, name: 'The GT Drive Series Collection', category: 'Branded', brand: 'GT', price: 1299, images: ['Premium Collection/Premium Watch 24-1.png', 'Premium Collection/Premium Watch 24-2.png', 'Premium Collection/Premium Watch 24-3.png', 'Premium Collection/Premium Watch 24-4.png', 'Premium Collection/Premium Watch 24-5.png'], description: 'Fuel your passion for the open road with a timepiece engineered for the true automotive enthusiast. The GT Drive Series seamlessly merges high-performance car design with bold, modern horology. The centerpiece is a breathtaking, high-fidelity 3D dial featuring a flat-bottom sports steering wheel, complete with intricate grip textures and a dynamic dashboard instrument cluster in the background. Housed in a sleek case with a seamlessly integrated horizontal-link bracelet, it offers an aerodynamic, premium aesthetic that is guaranteed to turn heads and start conversations.', colors: ['Mate Black', 'Silver', 'Gold'] },
+            { id: 64, name: 'The GT Drive Series Collection', category: 'Branded', brand: 'GT', price: 1299, images: ['Premium Collection/Premium Watch 24-1.png', 'Premium Collection/Premium Watch 24-2.png', 'Premium Collection/Premium Watch 24-3.png', 'Premium Collection/Premium Watch 24-4.png', 'Premium Collection/Premium Watch 24-5.png'], description: 'Fuel your passion for the open road with a timepiece engineered for the true automotive enthusiast. The GT Drive Series seamlessly merges high-performance car design with bold, modern horology. The centerpiece is a breathtaking, high-fidelity 3D dial featuring a flat-bottom sports steering wheel, complete with intricate grip textures and a dynamic dashboard instrument cluster in the background. Housed in a sleek case with a seamlessly integrated horizontal-link bracelet, it offers an aerodynamic, premium aesthetic that is guaranteed to turn heads and start conversations.', colors: ['Matte Black', 'Silver', 'Gold'] },
             { id: 65, name: 'The Masterwork Submariner Bespoke Edition', category: 'Branded', brand: 'Rolex', price: 899, images: ['Premium Collection/Premium Watch 25-1.jpg', 'Premium Collection/Premium Watch 25-2.jpg'], description: 'Command attention with a breathtaking reimagining of a legendary dive watch. This bespoke Rolex Submariner is a triumph of high-end luxury watch craftsmanship, featuring a striking blacked-out silhouette brilliantly contrasted by deeply engraved, ornate gold filigree across the center links. The impeccable detailing highlights intricate metallic textures that truly come alive, radiating a premium, commercial-grade visual aesthetic whether catching sharp studio lighting or the natural gleam of the sun. It is a masterpiece for the collector who demands uncompromising individuality and exceptional visual depth.' },
+
+        // === PASTE PART 3 DIRECTLY BELOW THIS LINE ===
             { id: 66, name: 'The Tommy Hilfiger Skeleton Heritage Collection', category: 'Branded', brand: 'Tommy Hilfiger', price: 1499, realPrice: 23999, images: ['Premium Collection/Premium Watch 26-1.jpg', 'Premium Collection/Premium Watch 26-2.jpg'], description: 'The standout feature is the meticulously crafted skeleton dial, which strips away the superfluous to reveal the intricate metallic textures and the dynamic mechanical heart of the watch. Framed by a crisp, highly legible outer dial featuring bold indices and the iconic Tommy Hilfiger flag logo at 3, it perfectly balances modern architectural design with classic horology. Whether catching sharp studio lighting or the natural glow of golden hour, the highly polished case and richly textured genuine leather strap deliver a cinematic quality to your everyday style.', colors: ['Dark Brown Strap with White Dial', 'Pure Black', 'Brown Strap with White Dial', 'Dark Brown Strap with Black Dial'] },
             { id: 67, name: 'The Richard Mille Avant-Garde Chronograph', category: 'Branded', brand: 'Richard Mille', price: 2199, realPrice: 21999, images: ['Premium Collection/Premium Watch 27-1.jpg', 'Premium Collection/Premium Watch 27-2.jpg'], description: 'Command the room with an absolute icon of ultra-luxury horology. This extraordinary Richard Mille timepiece showcases the brand’s legendary tonneau-shaped case, engineered for those who demand the absolute pinnacle of high-performance design. The intricate, multi-layered dial reveals a complex chronograph layout, bold oversized Arabic numerals, and skeletonized hands that hint at the mechanical mastery within. What truly sets this specific model apart is the incredibly robust, full-metal integrated bracelet, providing a commanding, weighty presence on the wrist that merges extreme sports aesthetics with uncompromising luxury.', colors: ['Black Strap with Black Dial', 'Black Strap with Rose Gold Dial', 'Royal Blue', 'Silver Strap with Black Dial', 'Silver Strap with Blue Dial'] },
             { id: 68, name: 'The TAG Heuer Formula 1 Calibre 16 Chronograph', category: 'Branded', brand: 'TAG Heuer', price: 2799, realPrice: 485000, images: ['Premium Collection/Premium Watch 28-1.jpg', 'Premium Collection/Premium Watch 28-2.jpg', 'Premium Collection/Premium Watch 28-3.jpg', 'Premium Collection/Premium Watch 28-4.jpg'], description: 'Fuel your competitive spirit and embrace the thrill of the racetrack with the TAG Heuer Formula 1 Calibre 16. This high-performance chronograph commands attention with a striking, deep blue sunray dial and a matching fixed bezel featuring a bold red tachymeter scale. The dynamic aesthetic is elevated by a unique bracelet that seamlessly integrates brushed stainless steel with sleek blue center links. Accented with subtle red detailing on the dial and pushers, this watch is the ultimate fusion of avant-garde design and motorsport-inspired precision.' },
@@ -1071,9 +1087,6 @@
             'All-Black with Black Dial'
         ] 
                 }
-            
-            
-
 ];
 
         // FILTER STATE
@@ -1087,29 +1100,28 @@
         let cart = [];
         
         const validPromoCodes = { 
-    'PAYTM500': { discount: 500, min: 2499 },
-    'AVESTA500-A1': { discount: 500, min: 2499 },
-    'TIME249-K1': { discount: 249, min: 1499 },
-    'ELITE1000-U1': { discount: 1000, min: 6499 }
-};
-
+            'PAYTM500': { discount: 500, min: 2499 },
+            'DYNAST500-A1': { discount: 500, min: 2499 },
+            'TIME249-K1': { discount: 249, min: 1499 },
+            'ELITE1000-U1': { discount: 1000, min: 6499 }
+        };
 
         let currentDiscount = 0;
         let activePromoCode = '';
         let finalOrderTotal = 0; 
         let paymentMethod = 'upi'; 
 
-        // 🔥 EXPANDED AND PROFESSIONAL POLICIES 🔥
+        // 🔥 PROFESSIONAL DYNAST POLICIES 🔥
         const policiesData = {
             'privacy': { 
                 title: 'Privacy Policy', 
                 content: `
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">1. Introduction</p>
-                        <p>At AVESTA Premium Timepieces, we are committed to safeguarding the privacy of our clientele. This Privacy Policy delineates how we collect, process, and protect your Personally Identifiable Information (PII) when you engage with our digital storefront or acquire our luxury goods. By accessing this platform, you explicitly consent to the practices described herein, in accordance with applicable data protection frameworks.</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">1. Introduction</p>
+                        <p>At DYNAST Premium Timepieces, we are committed to safeguarding the privacy of our clientele. This Privacy Policy delineates how we collect, process, and protect your Personally Identifiable Information (PII) when you engage with our digital storefront or acquire our luxury goods. By accessing this platform, you explicitly consent to the practices described herein, in accordance with applicable data protection frameworks.</p>
                     </div>
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">2. Data Collection Protocols</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">2. Data Collection Protocols</p>
                         <p class="mb-2">We collect information strictly necessary to provide a frictionless, high-end experience:</p>
                         <ul class="list-disc pl-5 space-y-1">
                             <li><strong>Direct Identifiers:</strong> Full name, billing address, secure delivery coordinates, email address, and primary contact number.</li>
@@ -1117,8 +1129,8 @@
                             <li><strong>Technical telemetry:</strong> IP addresses, browser typologies, and strictly necessary cookies deployed solely to optimize platform performance and ensure session continuity.</li>
                         </ul>
                     </div>
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">3. Utilization of Information</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">3. Utilization of Information</p>
                         <p class="mb-2">Your data is processed under the legal basis of contract fulfillment and legitimate business interests, specifically:</p>
                         <ul class="list-disc pl-5 space-y-1">
                             <li><strong>Order Fulfillment:</strong> Executing bespoke crafting requests, processing payments, and arranging secure logistics.</li>
@@ -1127,45 +1139,45 @@
                         </ul>
                     </div>
                     <div class="mb-6">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">4. Data Security & Third-Party Disclosure</p>
-                        <p>AVESTA unequivocally does not sell, rent, or lease client data. Disclosure is strictly limited to verified operational partners (e.g., premier courier services such as FedEx or DHL) solely for the purpose of fulfilling your order. We employ industry-standard cryptographic protocols (SSL/TLS) to secure data in transit. For inquiries regarding data erasure or modification requests, please contact our Data Protection Officer at avesta.online.org@gmail.com.</p>
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">4. Data Security & Third-Party Disclosure</p>
+                        <p>DYNAST unequivocally does not sell, rent, or lease client data. Disclosure is strictly limited to verified operational partners (e.g., premier courier services such as FedEx or DHL) solely for the purpose of fulfilling your order. We employ industry-standard cryptographic protocols (SSL/TLS) to secure data in transit. For inquiries regarding data erasure or modification requests, please contact our Data Protection Officer at dynast.online.org@gmail.com.</p>
                     </div>
                 ` 
             },
             'terms': { 
                 title: 'Terms of Service', 
                 content: `
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">1. Binding Agreement</p>
-                        <p>These Terms of Service constitute a legally binding agreement between the user ("Client") and AVESTA Premium Timepieces. By utilizing this platform to commission or purchase a timepiece, you acknowledge that you have read, understood, and agreed to be bound by these provisions.</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">1. Binding Agreement</p>
+                        <p>These Terms of Service constitute a legally binding agreement between the user ("Client") and DYNAST Premium Timepieces. By utilizing this platform to commission or purchase a timepiece, you acknowledge that you have read, understood, and agreed to be bound by these provisions.</p>
                     </div>
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">2. Order Acceptance & Pricing</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">2. Order Acceptance & Pricing</p>
                         <p>All orders placed through our digital storefront represent an offer to purchase. We reserve the unequivocal right to accept, decline, or limit any order at our sole discretion. Prices are displayed in Indian Rupees (INR) and are subject to modification without prior notice. A contract of sale is only finalized upon the issuance of an official Order Confirmation and receipt of cleared funds.</p>
                     </div>
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">3. Product Representation</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">3. Product Representation</p>
                         <p>While we employ high-fidelity digital rendering to display our timepieces, inherent variations in monitor calibration may result in slight discrepancies between the digital representation and the physical product, particularly regarding dial hues and metal finishes. Such variances do not constitute a defect.</p>
                     </div>
                     <div class="mb-6">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">4. Limitation of Liability</p>
-                        <p>To the maximum extent permitted by applicable law, AVESTA shall not be liable for any indirect, incidental, punitive, or consequential damages arising from the use of our platform or the procurement of our goods. Our total aggregate liability for any claim shall not exceed the purchase price of the specific timepiece in question.</p>
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">4. Limitation of Liability</p>
+                        <p>To the maximum extent permitted by applicable law, DYNAST shall not be liable for any indirect, incidental, punitive, or consequential damages arising from the use of our platform or the procurement of our goods. Our total aggregate liability for any claim shall not exceed the purchase price of the specific timepiece in question.</p>
                     </div>
                 ` 
             },
             'return': { 
                 title: 'Return & Warranty', 
                 content: `
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">1. The AVESTA Guarantee</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">1. The DYNAST Guarantee</p>
                         <p>Every timepiece dispatched from our atelier is subjected to rigorous multi-point quality assurance. We stand behind our craftsmanship and engineer our products for enduring performance.</p>
                     </div>
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">2. Comprehensive Warranty Coverage</p>
-                        <p>All AVESTA timepieces are accompanied by a standard 24-month comprehensive warranty, effective from the date of delivery. This warranty covers intrinsic mechanical failures and manufacturing defects. It explicitly excludes damages resulting from abnormal use, blunt force trauma, unauthorized third-party modifications, water damage beyond the specified atmospheric resistance (ATM) rating, and normal wear and tear of straps, crystals, and external plating.</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">2. Comprehensive Warranty Coverage</p>
+                        <p>All DYNAST timepieces are accompanied by a standard 24-month comprehensive warranty, effective from the date of delivery. This warranty covers intrinsic mechanical failures and manufacturing defects. It explicitly excludes damages resulting from abnormal use, blunt force trauma, unauthorized third-party modifications, water damage beyond the specified atmospheric resistance (ATM) rating, and normal wear and tear of straps, crystals, and external plating.</p>
                     </div>
                     <div class="mb-6">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">3. Return Protocol</p>
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">3. Return Protocol</p>
                         <p>Given the bespoke nature of our inventory, returns are processed strictly for items that arrive demonstrably defective or damaged in transit. Clients must initiate a return request within 48 hours of receipt by contacting our support desk. The timepiece must remain unworn, with all protective films intact, and housed within its original presentation box accompanied by all authenticating documentation. Refunds will only be issued following a thorough physical inspection by our master watchmakers.</p>
                     </div>
                 ` 
@@ -1173,22 +1185,23 @@
             'shipping': { 
                 title: 'Secure Shipping', 
                 content: `
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">1. Priority Logistics</p>
-                        <p>AVESTA partners exclusively with premier logistics providers to ensure the secure and expedited transit of your luxury timepiece. Standard domestic shipping within India is provided on a complimentary basis for all verified orders.</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">1. Priority Logistics</p>
+                        <p>DYNAST partners exclusively with premier logistics providers to ensure the secure and expedited transit of your luxury timepiece. Standard domestic shipping within India is provided on a complimentary basis for all verified orders.</p>
                     </div>
-                    <div class="mb-6 border-b border-gold/20 pb-4">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">2. Dispatch & Transit Timelines</p>
+                    <div class="mb-6 border-b border-gold/25 pb-4">
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">2. Dispatch & Transit Timelines</p>
                         <p>Upon successful payment verification, non-custom orders are typically dispatched from our Agra workshop within 24 to 48 hours. Depending on the destination coordinates, transit typically requires 3 to 7 business days. Custom or heavily modified orders require additional crafting time, which will be communicated during the checkout process.</p>
                     </div>
                     <div class="mb-6">
-                        <p class="text-gold uppercase tracking-widest text-xs font-bold mb-2">3. Risk of Loss</p>
-                        <p>All shipments are fully insured by AVESTA while in transit. The risk of loss and title for the timepiece transfers to the Client upon physical delivery and signature capture at the specified shipping address. Clients are highly advised to thoroughly inspect the external packaging for signs of tampering prior to accepting the delivery.</p>
+                        <p class="text-lightgold uppercase tracking-widest text-xs font-bold mb-2">3. Risk of Loss</p>
+                        <p>All shipments are fully insured by DYNAST while in transit. The risk of loss and title for the timepiece transfers to the Client upon physical delivery and signature capture at the specified shipping address. Clients are highly advised to thoroughly inspect the external packaging for signs of tampering prior to accepting the delivery.</p>
                     </div>
                 ` 
             }
         };
 
+        // === PASTE PART 4 DIRECTLY BELOW THIS LINE ===
         // --- ALERT & MODAL FUNCTIONS ---
         function showCustomAlert(title, message, type = 'info') {
             document.getElementById('alert-title').innerText = title;
@@ -1203,8 +1216,8 @@
                 iconContainer.className = "w-12 h-12 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center mx-auto mb-4";
                 icon.className = "fa-solid fa-xmark text-red-500 text-xl";
             } else {
-                iconContainer.className = "w-12 h-12 rounded-full border border-gold/30 bg-gold/10 flex items-center justify-center mx-auto mb-4";
-                icon.className = "fa-solid fa-info text-gold text-xl";
+                iconContainer.className = "w-12 h-12 rounded-full border border-gold/40 bg-royal/20 flex items-center justify-center mx-auto mb-4";
+                icon.className = "fa-solid fa-info text-lightgold text-xl";
             }
 
             const modal = document.getElementById('custom-alert-modal');
@@ -1263,16 +1276,15 @@
             activeSubCategory = subCat;
             
             document.querySelectorAll('#sub-category-container button').forEach(btn => {
-                btn.classList.remove('bg-gold', 'text-black', 'border-gold');
-                btn.classList.add('bg-transparent', 'text-gray-400', 'border-white/20');
+                btn.classList.remove('bg-royal', 'text-white', 'border-gold');
+                btn.classList.add('bg-transparent', 'text-gray-300', 'border-white/20');
             });
-            document.getElementById('btn-sub-' + subCat.replace(/\s+/g, '-')).classList.remove('bg-transparent', 'text-gray-400', 'border-white/20');
-            document.getElementById('btn-sub-' + subCat.replace(/\s+/g, '-')).classList.add('bg-gold', 'text-black', 'border-gold');
+            document.getElementById('btn-sub-' + subCat.replace(/\s+/g, '-')).classList.remove('bg-transparent', 'text-gray-300', 'border-white/20');
+            document.getElementById('btn-sub-' + subCat.replace(/\s+/g, '-')).classList.add('bg-royal', 'text-white', 'border-gold');
 
             renderProducts();
         }
 
-        // 🔥 FIX 1: Subcategory dynamically hides when empty to remove blank space 🔥
         function renderSubCategories() {
             const container = document.getElementById('sub-category-container');
             container.innerHTML = '';
@@ -1295,9 +1307,9 @@
 
             container.innerHTML = subCats.map(sc => {
                 const isActive = activeSubCategory === sc;
-                const activeClasses = isActive ? 'bg-gold text-black border-gold' : 'bg-transparent text-gray-400 border-white/20';
+                const activeClasses = isActive ? 'bg-royal text-white border-gold shadow-[0_0_15px_rgba(41,34,206,0.5)]' : 'bg-transparent text-gray-300 border-white/25';
                 const idSafe = sc.replace(/\s+/g, '-');
-                return `<button onclick="setSubCategory('${sc}')" id="btn-sub-${idSafe}" class="px-4 py-1.5 md:px-5 md:py-2 border rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 hover:border-gold hover:text-gold ${activeClasses}">${sc}</button>`;
+                return `<button onclick="setSubCategory('${sc}')" id="btn-sub-${idSafe}" class="px-4 py-1.5 md:px-5 md:py-2 border rounded-full text-[9px] md:text-[10px] font-semibold tracking-widest uppercase transition-all duration-300 hover:border-gold hover:text-white ${activeClasses}">${sc}</button>`;
             }).join('');
         }
 
@@ -1327,15 +1339,15 @@
 
             noMsg.classList.add('hidden');
             grid.innerHTML = filtered.map(product => `
-                <div class="animate-fade-in group rounded-sm bg-[#0a0a0a] overflow-hidden border border-white/5 transition-all hover:border-gold/30 flex flex-col cursor-pointer shadow-lg" onclick="openProductDetail(${product.id})">
-                    <div class="aspect-[4/5] bg-[#050505] flex items-center justify-center relative overflow-hidden">
-                        <img src="${product.images[0]}" alt="${product.name}" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-in-out mix-blend-lighten text-gray-500 text-[10px] text-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-100"></div>
+                <div class="animate-fade-in group rounded-sm bg-[#050512] overflow-hidden border border-gold/15 transition-all hover:border-gold/60 flex flex-col cursor-pointer shadow-lg hover:shadow-[0_0_25px_rgba(41,34,206,0.3)]" onclick="openProductDetail(${product.id})">
+                    <div class="aspect-[4/5] bg-[#03030B] flex items-center justify-center relative overflow-hidden">
+                        <img src="${product.images[0]}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-in-out mix-blend-lighten text-gray-400 text-[10px] text-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-100"></div>
                         <div class="absolute bottom-4 left-4 right-4 z-10">
-                            <p class="text-gold text-[9px] tracking-widest uppercase font-semibold mb-1">${product.category === 'Branded' ? product.brand : product.subCategory + ' Collection'}</p>
+                            <p class="text-lightgold text-[9px] tracking-widest uppercase font-semibold mb-1">${product.category === 'Branded' ? product.brand : product.subCategory + ' Collection'}</p>
                             <h3 class="text-sm md:text-base font-light text-white mb-1 line-clamp-1 serif-text">${product.name}</h3>
                             <p class="text-sm font-medium text-white tracking-wider">
-                                <span class="text-gray-500 line-through text-[10px] mr-2">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-gold">₹${product.price.toLocaleString('en-IN')}</span>
+                                <span class="text-gray-500 line-through text-[10px] mr-2">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-lightgold">₹${product.price.toLocaleString('en-IN')}</span>
                             </p>
                         </div>
                     </div>
@@ -1370,7 +1382,7 @@
             const thumbsContainer = document.getElementById('detail-thumbnails');
             
             if (product.images && product.images.length > 1) {
-                thumbsContainer.innerHTML = product.images.map((imgSrc) => `<button onclick="changeMainImage('${imgSrc}')" class="w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden border border-transparent focus:border-gold hover:border-gold/50 transition-all bg-[#050505]"><img src="${imgSrc}" class="w-full h-full object-contain opacity-70 hover:opacity-100 mix-blend-lighten"></button>`).join('');
+                thumbsContainer.innerHTML = product.images.map((imgSrc) => `<button onclick="changeMainImage('${imgSrc}')" class="w-16 h-16 flex-shrink-0 rounded-sm overflow-hidden border border-transparent focus:border-gold hover:border-gold/50 transition-all bg-[#03030B]"><img src="${imgSrc}" loading="lazy" class="w-full h-full object-contain opacity-70 hover:opacity-100 mix-blend-lighten"></button>`).join('');
                 thumbsContainer.classList.remove('hidden'); thumbsContainer.classList.add('flex');
             } else {
                 thumbsContainer.innerHTML = '';
@@ -1389,8 +1401,8 @@
 
             document.getElementById('detail-title').innerText = product.name;
             
-            let priceHtml = `<span class="line-through text-gray-500 text-xl mr-3 font-medium">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-gold font-bold">₹${product.price.toLocaleString('en-IN')}</span>`;
-            if (product.realPrice) priceHtml += `<br><div class="mt-3 text-[10px] text-gray-400 font-light tracking-widest uppercase border border-white/10 bg-black inline-block px-3 py-1.5 rounded-sm"><i class="fa-solid fa-gem text-gold mr-1"></i> Authentic Retail Price: <span class="text-white font-medium">₹${product.realPrice.toLocaleString('en-IN')}</span></div>`;
+            let priceHtml = `<span class="line-through text-gray-500 text-xl mr-3 font-medium">₹${Math.round(product.price * 1.5).toLocaleString('en-IN')}</span><span class="text-lightgold font-bold">₹${product.price.toLocaleString('en-IN')}</span>`;
+            if (product.realPrice) priceHtml += `<br><div class="mt-3 text-[10px] text-gray-300 font-light tracking-widest uppercase border border-gold/30 bg-black/60 inline-block px-3 py-1.5 rounded-sm"><i class="fa-solid fa-gem text-lightgold mr-1"></i> Authentic Retail Price: <span class="text-white font-medium">₹${product.realPrice.toLocaleString('en-IN')}</span></div>`;
             
             document.getElementById('detail-price').innerHTML = priceHtml;
             document.getElementById('detail-desc').innerText = product.description;
@@ -1403,7 +1415,7 @@
             if (product.colors && product.colors.length > 0) {
                 colorSelect.value = product.colors[0]; 
                 customBtnText.innerText = product.colors[0]; 
-                customList.innerHTML = product.colors.map(c => `<li onclick="selectCustomOption('${c}')" class="px-4 py-3.5 text-sm text-gray-400 hover:bg-gold/10 hover:text-gold cursor-pointer border-b border-white/5 last:border-0 transition-colors tracking-wide">${c}</li>`).join('');
+                customList.innerHTML = product.colors.map(c => `<li onclick="selectCustomOption('${c}')" class="px-4 py-3.5 text-sm text-gray-300 hover:bg-royal/30 hover:text-white cursor-pointer border-b border-white/10 last:border-0 transition-colors tracking-wide">${c}</li>`).join('');
                 colorContainer.classList.remove('hidden');
             } else {
                 colorContainer.classList.add('hidden');
@@ -1428,7 +1440,17 @@
             mainImg.style.transform = 'translate3d(0, 0, 0) scale(1)'; 
             setTimeout(() => { mainImg.src = src; mainImg.style.opacity = 1; }, 200);
         }
-        function closeProductDetail() { closeModalSafely('product-detail-modal'); }
+        
+        function closeProductDetail() { 
+            // 🔥 FIXED: Forcefully reset the variant dropdown state when closing the product modal 🔥
+            const list = document.getElementById('custom-select-list');
+            if (list) {
+                list.classList.add('opacity-0', 'hidden');
+                const icon = document.getElementById('custom-select-icon');
+                if (icon) icon.style.transform = 'rotate(0deg)';
+            }
+            closeModalSafely('product-detail-modal'); 
+        }
 
         // --- SMOOTHER ZOOM IMPLEMENTATION ---
         const zoomContainer = document.getElementById('image-zoom-container');
@@ -1481,7 +1503,7 @@
                 if (usedCodes.includes(inputVal)) {
                     currentDiscount = 0; activePromoCode = ''; msgBox.innerText = "Code redeemed previously."; msgBox.className = "text-[10px] mb-4 text-red-400 uppercase tracking-widest"; msgBox.classList.remove('hidden');
                 } else if (subtotal >= promoDetails.min) {
-                    currentDiscount = promoDetails.discount; activePromoCode = inputVal; msgBox.innerText = `VIP Pass Accepted (₹${currentDiscount} OFF)`; msgBox.className = "text-[10px] mb-4 text-gold uppercase tracking-widest"; msgBox.classList.remove('hidden');
+                    currentDiscount = promoDetails.discount; activePromoCode = inputVal; msgBox.innerText = `VIP Pass Accepted (₹${currentDiscount} OFF)`; msgBox.className = "text-[10px] mb-4 text-lightgold uppercase tracking-widest"; msgBox.classList.remove('hidden');
                 } else {
                     currentDiscount = 0; activePromoCode = ''; msgBox.innerText = `Min. purchase ₹${promoDetails.min.toLocaleString('en-IN')} req.`; msgBox.className = "text-[10px] mb-4 text-red-400 uppercase tracking-widest"; msgBox.classList.remove('hidden');
                 }
@@ -1517,17 +1539,17 @@
             document.getElementById('checkout-amount').innerText = '₹' + finalOrderTotal.toLocaleString('en-IN');
             
             const cont = document.getElementById('cart-items');
-            if (cart.length === 0) cont.innerHTML = '<p class="text-center text-gray-500 mt-10 text-xs font-light uppercase tracking-widest">Your cart is empty.</p>';
+            if (cart.length === 0) cont.innerHTML = '<p class="text-center text-gray-400 mt-10 text-xs font-light uppercase tracking-widest">Your cart is empty.</p>';
             else cont.innerHTML = cart.map(i => `
-                <div class="flex gap-4 items-center bg-[#050505] p-3 rounded-sm border border-white/5">
-                    <div class="w-16 h-16 bg-black rounded-sm overflow-hidden border border-white/10">
-                        <img src="${i.images[0]}" class="w-full h-full object-cover opacity-80 mix-blend-lighten text-gray-500 text-[8px] text-center">
+                <div class="flex gap-4 items-center bg-[#050512] p-3 rounded-sm border border-gold/20">
+                    <div class="w-16 h-16 bg-black rounded-sm overflow-hidden border border-gold/30">
+                        <img src="${i.images[0]}" loading="lazy" class="w-full h-full object-cover opacity-85 mix-blend-lighten text-gray-400 text-[8px] text-center">
                     </div>
                     <div class="flex-1">
-                        <h4 class="text-white text-xs font-medium line-clamp-1 tracking-wide">${i.name} ${i.selectedColor !== 'Default' ? `<span class="text-gold text-[10px] font-light block">(${i.selectedColor})</span>` : ''}</h4>
-                        <p class="text-gray-500 text-[10px] mt-1 font-light">Qty: ${i.quantity} <span class="mx-1">|</span> <span class="text-gold">₹${i.price.toLocaleString('en-IN')}</span></p>
+                        <h4 class="text-white text-xs font-medium line-clamp-1 tracking-wide">${i.name} ${i.selectedColor !== 'Default' ? `<span class="text-lightgold text-[10px] font-light block">(${i.selectedColor})</span>` : ''}</h4>
+                        <p class="text-gray-300 text-[10px] mt-1 font-light">Qty: ${i.quantity} <span class="mx-1">|</span> <span class="text-lightgold">₹${i.price.toLocaleString('en-IN')}</span></p>
                     </div>
-                    <button type="button" onclick="removeFromCart('${i.cartItemId}')" class="text-gray-600 hover:text-white transition-colors text-lg px-2"><i class="fa-solid fa-trash-can text-sm"></i></button>
+                    <button type="button" onclick="removeFromCart('${i.cartItemId}')" class="text-gray-400 hover:text-white transition-colors text-lg px-2"><i class="fa-solid fa-trash-can text-sm"></i></button>
                 </div>
             `).join('');
         }
@@ -1540,12 +1562,12 @@
             const confirmBtn = document.getElementById('pay-button'), paymentDynamicContent = document.getElementById('payment-dynamic-content');
 
             if(method === 'upi') {
-                btnUpi.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
+                btnUpi.className = "border border-gold bg-royal/30 text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 btnCod.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 generateUpiBtn.classList.remove('hidden'); confirmBtn.classList.add('hidden'); paymentDynamicContent.classList.add('hidden');
                 upiView.classList.remove('hidden'); codView.classList.add('hidden'); utrInput.required = true;
             } else {
-                btnCod.className = "border border-gold bg-gold/10 text-gold py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
+                btnCod.className = "border border-gold bg-royal/30 text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 btnUpi.className = "border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all";
                 generateUpiBtn.classList.add('hidden'); paymentDynamicContent.classList.remove('hidden'); confirmBtn.classList.remove('hidden');
                 codView.classList.remove('hidden'); upiView.classList.add('hidden'); utrInput.required = false;
@@ -1558,7 +1580,7 @@
             if(!name || !email || !phone || !address) { showCustomAlert('Missing Details', 'Please fill in your complete details including your Delivery Address first.', 'error'); return; }
 
             document.getElementById('upi-step-amount').innerText = '₹' + finalOrderTotal.toLocaleString('en-IN');
-            const upiString = `upi://pay?pa=${FAMAPP_UPI_ID}&pn=AVESTA%20LUXURY&am=${finalOrderTotal}&cu=INR&tn=Custom%20Timepiece`;
+            const upiString = `upi://pay?pa=${FAMAPP_UPI_ID}&pn=DYNAST%20LUXURY&am=${finalOrderTotal}&cu=INR&tn=Custom%20Timepiece`;
             document.getElementById('upi-qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}&margin=10`;
             document.getElementById('upi-intent-link').href = upiString;
 
@@ -1578,7 +1600,7 @@
         function sendEmailReceipt(details) {
             emailjs.send('service_n368ztv', 'template_vdfgsap', {
                 to_name: details.name, to_email: details.email, order_id: details.orderId, total_amount: '₹' + details.total.toLocaleString('en-IN'),
-                payment_method: details.method, delivery_address: details.address, tracking_link: "https://avesta-studio.github.io/Avesta/" 
+                payment_method: details.method, delivery_address: details.address, tracking_link: "https://dynast-studio.github.io/Dynast/" 
             }).catch(console.error);
         }
 
@@ -1594,7 +1616,7 @@
 
             document.getElementById('pay-button').classList.add('hidden'); document.getElementById('payment-status').classList.remove('hidden'); 
             
-            const orderId = 'AV-' + Math.floor(100000 + Math.random() * 900000);
+            const orderId = 'DY-' + Math.floor(100000 + Math.random() * 900000);
             const orderDetails = {
                 orderId: orderId, name: document.getElementById('cust-name').value, email: document.getElementById('cust-email').value, 
                 phone: document.getElementById('cust-phone').value, address: document.getElementById('cust-address').value,
@@ -1617,11 +1639,10 @@
         function showPaymentSuccess(details) {
             let msg = details.method === 'UPI' ? "Sent For Verification" : "Order Confirmed Successfully";
             let colorClass = details.method === 'UPI' ? "text-yellow-500" : "text-green-400";
-            document.getElementById('payment-status').innerHTML = `<p class="text-gold font-medium text-xs tracking-widest uppercase"><i class="fa-solid fa-check ${colorClass} mr-2"></i> ${msg}<br><span class="text-[10px] text-gray-400 mt-2 block">Ref: ${details.orderId}</span></p>`; 
+            document.getElementById('payment-status').innerHTML = `<p class="text-lightgold font-medium text-xs tracking-widest uppercase"><i class="fa-solid fa-check ${colorClass} mr-2"></i> ${msg}<br><span class="text-[10px] text-gray-300 mt-2 block">Ref: ${details.orderId}</span></p>`; 
             setTimeout(() => { closeCheckout(); generateEbill(details); }, 2000); 
         }
 
-        // 🔥 FIX 3 & 4: Perfectly aligned, non-congested inline-block status badges for html2canvas 🔥
         function generateEbill(details) {
             document.getElementById('ebill-order-id').innerText = '#' + details.orderId;
             document.getElementById('ebill-date').innerText = details.date;
@@ -1630,7 +1651,7 @@
             
             if(details.method === 'UPI') {
                 document.getElementById('ebill-status-text').innerHTML = `
-                    <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.3); background-color: rgba(234, 179, 8, 0.1); border-radius: 2px;">
+                    <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(234, 179, 8, 0.4); background-color: rgba(234, 179, 8, 0.15); border-radius: 2px;">
                         <span style="color: #eab308; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
                             VERIFICATION PENDING
                         </span>
@@ -1638,7 +1659,7 @@
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">UPI App</span> <br/> UTR/Ref: <span style="color:white;">${details.utr}</span>`;
             } else {
                 document.getElementById('ebill-status-text').innerHTML = `
-                    <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.3); background-color: rgba(74, 222, 128, 0.1); border-radius: 2px;">
+                    <div style="display: inline-block; padding: 6px 12px; border: 1px solid rgba(74, 222, 128, 0.4); background-color: rgba(74, 222, 128, 0.15); border-radius: 2px;">
                         <span style="color: #4ade80; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; line-height: 1; display: block; text-align: center;">
                             CONFIRMED (COD)
                         </span>
@@ -1646,7 +1667,7 @@
                 document.getElementById('ebill-method-text').innerHTML = `Method: <span style="color:white;">Cash on Delivery</span>`;
             }
 
-            document.getElementById('ebill-items').innerHTML = details.items.map(item => `<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 300; padding: 6px 0; line-height: 1.6;"><span style="width: 60%; color: #d1d5db; word-break: break-word;">${item.name} ${item.selectedColor !== 'Default' ? `<span style="color:#C5A059; font-size:11px; margin-left:6px;">(${item.selectedColor})</span>` : ''}</span><span style="width: 20%; text-align: center; color: #9ca3af;">x${item.quantity}</span><span style="width: 20%; text-align: right; font-weight: 500; color: white;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span></div>`).join('');
+            document.getElementById('ebill-items').innerHTML = details.items.map(item => `<div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 300; padding: 6px 0; line-height: 1.6;"><span style="width: 60%; color: #e5e7eb; word-break: break-word;">${item.name} ${item.selectedColor !== 'Default' ? `<span style="color:#93A3FF; font-size:11px; margin-left:6px;">(${item.selectedColor})</span>` : ''}</span><span style="width: 20%; text-align: center; color: #9ca3af;">x${item.quantity}</span><span style="width: 20%; text-align: right; font-weight: 500; color: white;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span></div>`).join('');
             document.getElementById('ebill-subtotal').innerText = '₹' + details.subtotal.toLocaleString('en-IN');
             
             if(details.discount > 0) {
@@ -1664,10 +1685,10 @@
         function downloadBillImage() {
             const el = document.getElementById('receipt-content'), orderId = document.getElementById('ebill-order-id').innerText.replace('#', '');
             const clone = el.cloneNode(true), temp = document.createElement('div');
-            temp.style.position = 'absolute'; temp.style.top = '-9999px'; temp.style.left = '0'; temp.style.width = '800px'; temp.style.backgroundColor = '#0a0a0a';
+            temp.style.position = 'absolute'; temp.style.top = '-9999px'; temp.style.left = '0'; temp.style.width = '800px'; temp.style.background = '#03030B';
             temp.appendChild(clone); document.body.appendChild(temp);
-            html2canvas(clone, { scale: 2, useCORS: true, backgroundColor: '#0a0a0a', logging: false }).then(canvas => {
-                const link = document.createElement('a'); link.download = `Avesta_Receipt_${orderId}.jpg`; link.href = canvas.toDataURL('image/jpeg', 1.0); link.click();
+            html2canvas(clone, { scale: 2, useCORS: true, backgroundColor: '#03030B', logging: false }).then(canvas => {
+                const link = document.createElement('a'); link.download = `Dynast_Receipt_${orderId}.jpg`; link.href = canvas.toDataURL('image/jpeg', 1.0); link.click();
                 document.body.removeChild(temp); 
             });
         }
@@ -1693,9 +1714,9 @@
             } else {
                 document.getElementById('timeline-container').classList.remove('hidden'); document.getElementById('verification-pending-msg').classList.add('hidden');
                 const dots = document.querySelectorAll('.timeline-dot'), titles = document.querySelectorAll('.timeline-title'), descs = document.querySelectorAll('.timeline-desc');
-                for(let i=0; i<4; i++) { dots[i].classList.add('pending'); titles[i].classList.replace('text-white', 'text-gray-500'); descs[i].classList.replace('text-gray-500', 'text-gray-600'); }
+                for(let i=0; i<4; i++) { dots[i].classList.add('pending'); titles[i].classList.replace('text-white', 'text-gray-500'); descs[i].classList.replace('text-gray-400', 'text-gray-600'); }
                 let activeCount = 1; if(status === "In Workshop") activeCount = 2; if(status === "Shipped") activeCount = 3; if(status === "Delivered") activeCount = 4;
-                for(let i=0; i<activeCount; i++) { dots[i].classList.remove('pending'); titles[i].classList.replace('text-gray-500', 'text-white'); descs[i].classList.replace('text-gray-600', 'text-gray-500'); }
+                for(let i=0; i<activeCount; i++) { dots[i].classList.remove('pending'); titles[i].classList.replace('text-gray-500', 'text-white'); descs[i].classList.replace('text-gray-600', 'text-gray-400'); }
             }
             document.getElementById('tracking-result').classList.remove('hidden');
         }
@@ -1720,9 +1741,10 @@
         AOS.init({ duration: 1000, once: true, easing: 'ease-out' }); 
         window.addEventListener('scroll', () => { 
             const nav = document.getElementById('navbar'); 
-            if(window.scrollY > 50) { nav.classList.add('bg-black/95', 'border-gold/20'); nav.classList.remove('bg-black/40', 'border-transparent'); } 
-            else { nav.classList.add('bg-black/40', 'border-transparent'); nav.classList.remove('bg-black/95', 'border-gold/20'); } 
+            if(window.scrollY > 50) { nav.classList.add('bg-black/95', 'border-gold/35'); nav.classList.remove('bg-black/50', 'border-transparent'); } 
+            else { nav.classList.add('bg-black/50', 'border-transparent'); nav.classList.remove('bg-black/95', 'border-gold/35'); } 
         }); 
     </script>
 </body>
 </html>
+        // === PASTE PART 2 DIRECTLY BELOW THIS LINE ===
