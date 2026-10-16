@@ -38,7 +38,7 @@
                         gold: '#5B6CFA',       /* Royal Sapphire Accent */
                         royal: '#2922CE',      /* Deep Logo Royal Blue */
                         black: '#03030B',      /* Deep Midnight Black */
-                        darkgray: '#09091E',   /* Rich Royal Navy-Black */
+                        darkgray: '#0c0b24',   /* Brighter Royal-Navy Shading */
                         lightgold: '#93A3FF'   /* Soft Royal Highlight */
                     },
                     fontFamily: { 'sans': ['Inter', 'sans-serif'], 'serif': ['Cinzel', 'serif'] },
@@ -53,9 +53,11 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        /* 🔥 Exact Dual-Color Shading Background like the Logo 🔥 */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #020206 0%, #080724 55%, #1A158C 100%);
+            background: linear-gradient(135deg, #03030B 0%, #151052 50%, #2922CE 100%);
             background-attachment: fixed;
             color: white;
             margin: 0;
@@ -69,27 +71,27 @@
         .hero-min-h { height: 100vh; height: 100svh; min-height: -webkit-fill-available; }
         
         .royal-gradient-bg {
-            background: linear-gradient(90deg, #020206 0%, #0C0A38 50%, #2922CE 100%);
+            background: linear-gradient(135deg, #03030B 0%, #181361 50%, #2922CE 100%);
         }
 
-        .btn-gold { background: rgba(41, 34, 206, 0.15); color: #FFFFFF; border: 1px solid #5B6CFA; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
-        .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(91, 108, 250, 0.35), transparent); transition: all 0.6s ease; }
-        .btn-gold:hover { background: linear-gradient(90deg, #1E1999 0%, #2922CE 100%); color: #FFFFFF; border-color: #93A3FF; box-shadow: 0 0 25px rgba(41, 34, 206, 0.6); }
+        .btn-gold { background: rgba(41, 34, 206, 0.25); color: #FFFFFF; border: 1px solid #5B6CFA; position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer;}
+        .btn-gold::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(147, 163, 255, 0.4), transparent); transition: all 0.6s ease; }
+        .btn-gold:hover { background: linear-gradient(90deg, #241FB8 0%, #3B34ED 100%); color: #FFFFFF; border-color: #93A3FF; box-shadow: 0 0 25px rgba(41, 34, 206, 0.7); }
         .btn-gold:hover::before { left: 100%; }
         
-        .checkout-input { width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(91, 108, 250, 0.3); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; outline: none; transition: all 0.3s; }
-        .checkout-input:focus { border-color: #5B6CFA; background: rgba(41, 34, 206, 0.15); box-shadow: 0 0 15px rgba(41, 34, 206, 0.3); }
+        .checkout-input { width: 100%; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(91, 108, 250, 0.4); color: white; padding: 0.75rem 1rem; border-radius: 0.5rem; outline: none; transition: all 0.3s; }
+        .checkout-input:focus { border-color: #5B6CFA; background: rgba(41, 34, 206, 0.25); box-shadow: 0 0 15px rgba(91, 108, 250, 0.4); }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         
-        .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #5B6CFA; border: 4px solid #09091E; position: relative; z-index: 10; transition: 0.3s;}
-        .timeline-line { position: absolute; left: 7px; top: 16px; bottom: -20px; width: 2px; background: rgba(91, 108, 250, 0.35); z-index: 5; transition: 0.3s;}
+        .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: #5B6CFA; border: 4px solid #100D38; position: relative; z-index: 10; transition: 0.3s;}
+        .timeline-line { position: absolute; left: 7px; top: 16px; bottom: -20px; width: 2px; background: rgba(91, 108, 250, 0.4); z-index: 5; transition: 0.3s;}
         .timeline-item:last-child .timeline-line { display: none; }
-        .timeline-dot.pending { background: #262645; border-color: #09091E; }
-        .timeline-dot.pending + .timeline-line { background: #262645; }
+        .timeline-dot.pending { background: #322A8C; border-color: #100D38; }
+        .timeline-dot.pending + .timeline-line { background: #322A8C; }
         
         .filter-btn { transition: all 0.3s ease; }
-        .filter-active { background: linear-gradient(90deg, #161278 0%, #2922CE 100%) !important; color: #FFFFFF !important; border-color: #5B6CFA !important; box-shadow: 0 0 20px rgba(41, 34, 206, 0.5); }
+        .filter-active { background: linear-gradient(90deg, #1D1896 0%, #2922CE 100%) !important; color: #FFFFFF !important; border-color: #5B6CFA !important; box-shadow: 0 0 20px rgba(41, 34, 206, 0.6); }
 
         /* Smoother Zoom Styling */
         #image-zoom-container {
@@ -116,13 +118,13 @@
             background: #5B6CFA;
             cursor: pointer;
             margin-top: -6px; 
-            box-shadow: 0 0 12px rgba(41, 34, 206, 0.8);
+            box-shadow: 0 0 12px rgba(41, 34, 206, 0.9);
         }
         input[type=range]::-webkit-slider-runnable-track {
             width: 100%;
             height: 4px;
             cursor: pointer;
-            background: rgba(91, 108, 250, 0.25);
+            background: rgba(91, 108, 250, 0.3);
             border-radius: 2px;
         }
         input[type=range]:focus {
@@ -132,73 +134,74 @@
 </head>
 <body class="antialiased selection:bg-royal selection:text-white flex flex-col min-h-screen">
 
-    <header class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-black/50 backdrop-blur-md" id="navbar">
+    <header class="fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent bg-[#03030B]/60 backdrop-blur-md" id="navbar">
         <div class="max-w-7xl mx-auto h-16 md:h-20 px-4 md:px-8 flex items-center justify-between">
             <div class="w-1/3 flex justify-start">
-                <nav class="hidden md:flex items-center gap-6 text-sm font-medium tracking-[0.2em] uppercase text-gray-300">
-                    <a href="#custom" class="hover:text-gold transition-colors duration-300">Custom</a>
-                    <a href="#collection" class="hover:text-gold transition-colors duration-300">Collection</a>
-                    <button type="button" onclick="openTracking()" class="hover:text-gold transition-colors duration-300">Track</button>
+                <nav class="hidden md:flex items-center gap-6 text-sm font-medium tracking-[0.2em] uppercase text-gray-200">
+                    <a href="#custom" class="hover:text-lightgold transition-colors duration-300">Custom</a>
+                    <a href="#collection" class="hover:text-lightgold transition-colors duration-300">Collection</a>
+                    <button type="button" onclick="openTracking()" class="hover:text-lightgold transition-colors duration-300">Track</button>
                 </nav>
-                <button type="button" onclick="openTracking()" class="md:hidden text-gray-300 hover:text-gold text-[10px] uppercase tracking-widest font-medium">Track</button>
+                <button type="button" onclick="openTracking()" class="md:hidden text-gray-200 hover:text-lightgold text-[10px] uppercase tracking-widest font-medium">Track</button>
             </div>
             
             <div class="w-1/3 flex justify-center cursor-pointer group" onclick="window.scrollTo(0,0)">
                 <div class="text-center mt-1">
-                    <h1 class="text-xl md:text-3xl font-bold tracking-[0.2em] text-white group-hover:text-lightgold transition-colors duration-500 serif-text drop-shadow-[0_0_15px_rgba(41,34,206,0.6)]">DYNAST</h1>
+                    <h1 class="text-xl md:text-3xl font-bold tracking-[0.2em] text-white group-hover:text-lightgold transition-colors duration-500 serif-text drop-shadow-[0_0_15px_rgba(41,34,206,0.8)]">DYNAST</h1>
                     <p class="text-[6px] md:text-[9px] tracking-[0.3em] text-lightgold uppercase font-sans whitespace-nowrap">Premium Timepieces</p>
                 </div>
             </div>
             
             <div class="w-1/3 flex justify-end items-center gap-4 md:gap-6">
-                <button type="button" onclick="openContact()" class="text-white hover:text-gold transition-colors text-lg p-1"><i class="fa-regular fa-envelope"></i></button>
-                <button type="button" onclick="toggleCart()" class="text-white hover:text-gold transition-colors text-lg relative p-1">
+                <button type="button" onclick="openContact()" class="text-white hover:text-lightgold transition-colors text-lg p-1"><i class="fa-regular fa-envelope"></i></button>
+                <button type="button" onclick="toggleCart()" class="text-white hover:text-lightgold transition-colors text-lg relative p-1">
                     <i class="fa-solid fa-bag-shopping"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-royal border border-gold/50 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-sans">0</span>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-royal border border-gold/60 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center font-sans">0</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <section class="relative w-full hero-min-h flex flex-col overflow-hidden bg-black border-b border-gold/15">
-        <video class="absolute inset-0 w-full h-full object-cover object-center opacity-60 z-0" autoplay loop muted playsinline>
+    <section class="relative w-full hero-min-h flex flex-col overflow-hidden bg-black border-b border-gold/20">
+        <video class="absolute inset-0 w-full h-full object-cover object-center opacity-50 z-0" autoplay loop muted playsinline>
             <source src="Background Video.mp4" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,2,6,0.85)_0%,rgba(12,10,56,0.65)_55%,rgba(41,34,206,0.45)_100%)] z-0 pointer-events-none"></div>
+        <!-- Dual-Color Shading Overlay -->
+        <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(3,3,11,0.8)_0%,rgba(24,19,97,0.6)_50%,rgba(41,34,206,0.5)_100%)] z-0 pointer-events-none"></div>
         
         <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 w-full max-w-4xl mx-auto pt-20 pb-4 text-center">
             <p class="text-lightgold text-[9px] md:text-sm tracking-[0.3em] uppercase font-medium mb-3 md:mb-4 opacity-0 animate-fade-in-up drop-shadow-md" style="animation-delay: 0.2s;">Welcome to the royal era</p>
             <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-3 md:mb-4 leading-tight opacity-0 animate-fade-in-up serif-text drop-shadow-2xl" style="animation-delay: 0.5s;">
                 Craft Your <br/> <span class="italic font-light text-lightgold">Timepiece</span>
             </h1>
-            <p class="text-gray-200 text-[11px] sm:text-sm md:text-lg font-light max-w-2xl mx-auto mb-6 md:mb-8 opacity-0 animate-fade-in-up drop-shadow-lg" style="animation-delay: 0.8s;">
+            <p class="text-gray-100 text-[11px] sm:text-sm md:text-lg font-light max-w-2xl mx-auto mb-6 md:mb-8 opacity-0 animate-fade-in-up drop-shadow-lg" style="animation-delay: 0.8s;">
                 Experience royal watchmaking with DYNAST. Custom-engineered luxury timepieces, personalized to your exact specifications and built to last generations.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 md:gap-4 opacity-0 animate-fade-in-up w-full sm:w-auto" style="animation-delay: 1.1s;">
                 <a href="#custom" class="btn-gold px-6 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Design Your Timepiece</a>
-                <a href="#collection" class="bg-white/5 border border-white/25 text-white hover:bg-white hover:text-black transition-all duration-300 px-6 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Explore Collection</a>
+                <a href="#collection" class="bg-white/10 border border-white/30 text-white hover:bg-white hover:text-black transition-all duration-300 px-6 py-3.5 md:py-4 uppercase tracking-[0.15em] font-semibold text-[10px] md:text-xs inline-block text-center w-full sm:w-auto">Explore Collection</a>
             </div>
         </div>
         <div class="relative z-10 flex flex-col items-center animate-pulse-slow pb-4 md:pb-6 shrink-0 mt-auto">
-            <span class="text-gray-300 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-2 drop-shadow-md">Discover More</span>
-            <div class="w-[1px] h-8 md:h-12 bg-gradient-to-b from-gold to-transparent shadow-lg"></div>
+            <span class="text-gray-200 text-[8px] md:text-[9px] uppercase tracking-[0.2em] mb-2 drop-shadow-md">Discover More</span>
+            <div class="w-[1px] h-8 md:h-12 bg-gradient-to-b from-lightgold to-transparent shadow-lg"></div>
         </div>
     </section>
 
-    <section id="custom" class="py-20 md:py-32 royal-gradient-bg relative border-t border-gold/15">
+    <section id="custom" class="py-20 md:py-32 royal-gradient-bg relative border-t border-gold/20">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div class="w-full md:w-1/2" data-aos="fade-right">
-                <div class="aspect-square bg-black/70 border border-gold/25 rounded-sm relative flex items-center justify-center overflow-hidden group cursor-pointer shadow-[0_0_50px_rgba(41,34,206,0.25)]">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-royal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                    <i class="fa-regular fa-clock text-6xl text-gold/50 group-hover:text-white transition-colors duration-500 transform group-hover:rotate-12 group-hover:scale-110"></i>
-                    <p class="absolute bottom-10 text-gray-400 text-[10px] md:text-xs tracking-widest uppercase group-hover:text-white transition-colors duration-300 font-sans">Interactive 3D Studio Coming Soon</p>
+                <div class="aspect-square bg-[#0c0b24]/80 border border-gold/30 rounded-sm relative flex items-center justify-center overflow-hidden group cursor-pointer shadow-[0_0_50px_rgba(41,34,206,0.35)]">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-royal/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <i class="fa-regular fa-clock text-6xl text-lightgold/60 group-hover:text-white transition-colors duration-500 transform group-hover:rotate-12 group-hover:scale-110"></i>
+                    <p class="absolute bottom-10 text-gray-300 text-[10px] md:text-xs tracking-widest uppercase group-hover:text-white transition-colors duration-300 font-sans">Interactive 3D Studio Coming Soon</p>
                 </div>
             </div>
             <div class="w-full md:w-1/2" data-aos="fade-left">
                 <h3 class="text-lightgold text-xs tracking-[0.2em] uppercase mb-4 font-sans">The DYNAST Custom Experience</h3>
                 <h2 class="text-3xl md:text-5xl text-white mb-6 leading-snug serif-text">Designed by You. <br/><span class="italic text-lightgold">Perfected by Us.</span></h2>
                 <p class="text-gray-200 font-light leading-relaxed mb-8 text-sm md:text-base">Step into our digital studio. Choose the weight of your case, select the precise color of your dial, pick between premium leather or solid metal straps, and engrave your name on the case back.</p>
-                <ul class="space-y-4 mb-10 text-xs md:text-sm font-light text-gray-200 font-sans">
+                <ul class="space-y-4 mb-10 text-xs md:text-sm font-light text-gray-100 font-sans">
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> Personal Engraving</li>
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> Case, Dial & Strap Customization</li>
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> 360° Real-time 3D View</li>
@@ -209,18 +212,18 @@
     </section>
 
     <!-- Collection Section -->
-    <section id="collection" class="py-20 bg-darkgray/90 relative border-t border-gold/15 flex-grow">
+    <section id="collection" class="py-20 royal-gradient-bg relative border-t border-gold/20 flex-grow">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-8" data-aos="fade-up">
                 <h3 class="text-lightgold text-xs tracking-[0.2em] uppercase mb-2 font-sans">Crafted For Royalty</h3>
                 <h2 class="text-3xl md:text-5xl text-white serif-text">Our Collection</h2>
-                <div class="w-12 h-1 bg-gold mx-auto mt-6"></div>
+                <div class="w-12 h-1 bg-lightgold mx-auto mt-6 shadow-[0_0_10px_rgba(147,163,255,0.8)]"></div>
             </div>
 
             <!-- Price Range Filter -->
             <div class="max-w-md mx-auto mb-10" data-aos="fade-up" data-aos-delay="50">
                 <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-300 text-[10px] uppercase tracking-widest font-semibold">Max Price</span>
+                    <span class="text-gray-200 text-[10px] uppercase tracking-widest font-semibold">Max Price</span>
                     <span id="price-display" class="text-lightgold text-sm font-bold">₹5000</span>
                 </div>
                 <input type="range" id="price-range" min="0" max="5000" step="100" value="5000" class="w-full" oninput="updatePriceFilter(this.value)">
@@ -228,9 +231,9 @@
             
             <!-- Main Categories -->
             <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-6" data-aos="fade-up" data-aos-delay="100">
-                <button onclick="setMainCategory('All')" id="btn-cat-All" class="filter-btn filter-active px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-300 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">All Watches</button>
-                <button onclick="setMainCategory('Branded')" id="btn-cat-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-300 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">Branded</button>
-                <button onclick="setMainCategory('Non-Branded')" id="btn-cat-Non-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/20 text-gray-300 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">Non-Branded</button>
+                <button onclick="setMainCategory('All')" id="btn-cat-All" class="filter-btn filter-active px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/25 text-gray-200 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">All Watches</button>
+                <button onclick="setMainCategory('Branded')" id="btn-cat-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/25 text-gray-200 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">Branded</button>
+                <button onclick="setMainCategory('Non-Branded')" id="btn-cat-Non-Branded" class="filter-btn px-6 py-2.5 md:px-8 md:py-3 bg-transparent border border-white/25 text-gray-200 rounded-full text-[10px] md:text-xs font-semibold tracking-widest uppercase hover:border-gold hover:text-white">Non-Branded</button>
             </div>
 
             <!-- Dynamic Sub-Categories -->
@@ -241,8 +244,8 @@
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 font-sans"></div>
             
             <div id="no-products-msg" class="hidden text-center py-20">
-                 <i class="fa-solid fa-clock text-4xl text-gray-500 mb-4"></i>
-                 <p class="text-gray-300 text-sm tracking-widest uppercase">No timepieces found matching your criteria.</p>
+                 <i class="fa-solid fa-clock text-4xl text-gray-400 mb-4"></i>
+                 <p class="text-gray-200 text-sm tracking-widest uppercase">No timepieces found matching your criteria.</p>
             </div>
         </div>
     </section>
@@ -252,11 +255,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="col-span-1 md:col-span-2 lg:col-span-1">
                     <h1 class="text-2xl font-bold tracking-[0.2em] text-white mb-4 serif-text">DYNAST</h1>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-6 font-light">Redefining watchmaking with custom royal luxury and top-quality craftsmanship. Built for the elite.</p>
+                    <p class="text-gray-200 text-sm leading-relaxed mb-6 font-light">Redefining watchmaking with custom royal luxury and top-quality craftsmanship. Built for the elite.</p>
                 </div>
                 <div>
                     <h4 class="text-lightgold font-bold uppercase tracking-widest text-xs mb-6">Explore</h4>
-                    <ul class="space-y-3 text-sm text-gray-300 font-light flex flex-col items-start">
+                    <ul class="space-y-3 text-sm text-gray-200 font-light flex flex-col items-start">
                         <li><a href="#" class="hover:text-white transition-colors block py-1">Home</a></li>
                         <li><a href="#collection" class="hover:text-white transition-colors block py-1">Our Collection</a></li>
                         <li><button type="button" onclick="openTracking()" class="hover:text-white transition-colors block py-1 text-left">Track Order</button></li>
@@ -265,7 +268,7 @@
                 </div>
                 <div>
                     <h4 class="text-lightgold font-bold uppercase tracking-widest text-xs mb-6">Legal</h4>
-                    <ul class="space-y-3 text-sm text-gray-300 font-light flex flex-col items-start">
+                    <ul class="space-y-3 text-sm text-gray-200 font-light flex flex-col items-start">
                         <li><button type="button" onclick="openPolicy('privacy')" class="hover:text-white transition-colors block py-1 text-left">Privacy Policy</button></li>
                         <li><button type="button" onclick="openPolicy('terms')" class="hover:text-white transition-colors block py-1 text-left">Terms of Service</button></li>
                         <li><button type="button" onclick="openPolicy('return')" class="hover:text-white transition-colors block py-1 text-left">Return & Warranty</button></li>
@@ -274,11 +277,11 @@
                 </div>
                 <div>
                     <h4 class="text-lightgold font-bold uppercase tracking-widest text-xs mb-6">Connect</h4>
-                    <ul class="space-y-3 text-sm text-gray-300 font-light">
+                    <ul class="space-y-3 text-sm text-gray-200 font-light">
                         <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-lightgold"></i> Agra, India</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-lightgold"></i> +91 7579942958</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-lightgold"></i> dynast.online.org@gmail.com</li>
-                        <li class="mt-6 pt-6 border-t border-white/15">
+                        <li class="mt-6 pt-6 border-t border-white/20">
                             <a href="https://instagram.com/dynast_luxury" target="_blank" class="text-white hover:text-lightgold transition-colors flex items-center gap-3 group">
                                 <i class="fa-brands fa-instagram text-xl group-hover:scale-110 transition-transform"></i>
                                 <span class="font-medium tracking-wide">@dynast_luxury</span>
@@ -287,32 +290,32 @@
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-white/15 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
-                <p class="text-gray-300 text-center md:text-left tracking-widest uppercase">© 2026 DYNAST Premium Timepieces. All rights reserved.</p>
-                <div class="flex items-center gap-3"><span class="text-gray-300 uppercase tracking-widest">Secure UPI Checkout</span><i class="fa-solid fa-shield-halved text-lightgold"></i></div>
+            <div class="border-t border-white/20 pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
+                <p class="text-gray-200 text-center md:text-left tracking-widest uppercase">© 2026 DYNAST Premium Timepieces. All rights reserved.</p>
+                <div class="flex items-center gap-3"><span class="text-gray-200 uppercase tracking-widest">Secure UPI Checkout</span><i class="fa-solid fa-shield-halved text-lightgold"></i></div>
             </div>
         </div>
     </footer>
 
     <!-- Product Detail Modal -->
-    <div id="product-detail-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-0 md:p-6 bg-black/95 backdrop-blur-xl transition-opacity font-sans">
-        <button onclick="closeProductDetail()" class="absolute top-4 right-4 md:top-8 md:right-8 text-gray-400 hover:text-white transition-colors text-4xl leading-none z-50 drop-shadow-lg"><i class="fa-solid fa-xmark"></i></button>
-        <div class="bg-darkgray md:border md:border-gold/30 md:rounded-xl w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl overflow-y-auto shadow-[0_0_60px_rgba(41,34,206,0.3)] relative flex flex-col md:flex-row">
-            <div class="w-full md:w-1/2 bg-black flex flex-col p-4 md:p-8">
+    <div id="product-detail-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-0 md:p-6 bg-black/90 backdrop-blur-xl transition-opacity font-sans">
+        <button onclick="closeProductDetail()" class="absolute top-4 right-4 md:top-8 md:right-8 text-gray-300 hover:text-white transition-colors text-4xl leading-none z-50 drop-shadow-lg"><i class="fa-solid fa-xmark"></i></button>
+        <div class="royal-gradient-bg md:border md:border-gold/40 md:rounded-xl w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl overflow-y-auto shadow-[0_0_60px_rgba(41,34,206,0.5)] relative flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 bg-[#05041a] flex flex-col p-4 md:p-8">
                 
                 <!-- Smoother Zoom Container -->
-                <div id="image-zoom-container" class="w-full h-[50vh] md:h-[60vh] bg-[#050512] rounded-lg mb-3 relative flex items-center justify-center border border-gold/15 cursor-crosshair group">
+                <div id="image-zoom-container" class="w-full h-[50vh] md:h-[60vh] bg-[#03030B] rounded-lg mb-3 relative flex items-center justify-center border border-gold/25 cursor-crosshair group">
                     <img id="detail-main-img" src="" alt="Product" class="w-full h-full object-contain mix-blend-lighten pointer-events-none">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end justify-center pb-4">
-                        <span class="text-white/80 text-[10px] tracking-[0.2em] uppercase font-light"><i class="fa-solid fa-magnifying-glass mr-2"></i>Hover to inspect</span>
+                        <span class="text-white/90 text-[10px] tracking-[0.2em] uppercase font-light"><i class="fa-solid fa-magnifying-glass mr-2"></i>Hover to inspect</span>
                     </div>
                 </div>
                 
                 <div id="detail-thumbnails" class="hidden gap-3 overflow-x-auto pb-2 scrollbar-hide"></div>
             </div>
-            <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-gradient-to-b from-darkgray to-black">
+            <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center bg-gradient-to-b from-[#0c0a2e] to-[#03030B]">
                 <p id="detail-category" class="text-lightgold text-[10px] tracking-widest uppercase font-bold mb-2"></p>
-                <p id="detail-brand" class="text-gray-400 text-xs tracking-widest uppercase font-medium mb-1"></p>
+                <p id="detail-brand" class="text-gray-300 text-xs tracking-widest uppercase font-medium mb-1"></p>
                 
                 <h2 id="detail-title" class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight serif-text"></h2>
                 
@@ -321,69 +324,69 @@
                 </div>
                 
                 <div class="mb-6">
-                    <h4 class="text-gray-300 text-[10px] uppercase tracking-widest mb-3 font-semibold border-b border-gold/25 pb-2">Technical Details</h4>
-                    <p id="detail-desc" class="text-gray-200 font-light leading-relaxed text-sm whitespace-pre-line"></p>
+                    <h4 class="text-gray-200 text-[10px] uppercase tracking-widest mb-3 font-semibold border-b border-gold/30 pb-2">Technical Details</h4>
+                    <p id="detail-desc" class="text-gray-100 font-light leading-relaxed text-sm whitespace-pre-line"></p>
                 </div>
                 
                 <div id="detail-options" class="mb-8 hidden relative">
-                    <h4 class="text-gray-300 text-[10px] uppercase tracking-widest mb-2 font-semibold">Select Color / Variant</h4>
+                    <h4 class="text-gray-200 text-[10px] uppercase tracking-widest mb-2 font-semibold">Select Color / Variant</h4>
                     <input type="hidden" id="detail-color-select" value="Default">
-                    <button type="button" id="custom-select-btn" onclick="toggleCustomDropdown()" class="w-full bg-[#050512] border border-gold/30 text-gray-200 text-sm p-4 rounded-sm outline-none hover:border-gold hover:text-white flex justify-between items-center transition-all duration-300 shadow-inner">
+                    <button type="button" id="custom-select-btn" onclick="toggleCustomDropdown()" class="w-full bg-[#080722] border border-gold/40 text-gray-100 text-sm p-4 rounded-sm outline-none hover:border-gold hover:text-white flex justify-between items-center transition-all duration-300 shadow-inner">
                         <span id="custom-select-text" class="tracking-wide">Select Option</span>
                         <i class="fa-solid fa-chevron-down text-lightgold text-xs transition-transform duration-300" id="custom-select-icon"></i>
                     </button>
-                    <ul id="custom-select-list" class="absolute z-50 w-full bg-[#07071A] border border-gold/40 rounded-sm mt-1 max-h-48 overflow-y-auto hidden shadow-[0_10px_30px_rgba(0,0,0,0.9)] scrollbar-hide opacity-0 transition-opacity duration-300">
+                    <ul id="custom-select-list" class="absolute z-50 w-full bg-[#0c0a2e] border border-gold/50 rounded-sm mt-1 max-h-48 overflow-y-auto hidden shadow-[0_10px_30px_rgba(0,0,0,0.9)] scrollbar-hide opacity-0 transition-opacity duration-300">
                     </ul>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-auto">
                     <button type="button" id="detail-add-btn" class="w-full btn-gold py-4 rounded-sm font-semibold tracking-widest uppercase text-sm">Add to Cart</button>
-                    <button type="button" onclick="closeProductDetail()" class="w-full bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm font-medium hover:text-white hover:border-white transition-all text-sm tracking-widest uppercase">Back</button>
+                    <button type="button" onclick="closeProductDetail()" class="w-full bg-transparent border border-white/30 text-gray-200 py-3 rounded-sm font-medium hover:text-white hover:border-white transition-all text-sm tracking-widest uppercase">Back</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Cart Drawer -->
-    <div id="cart-overlay" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300" onclick="toggleCart()"></div>
-    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-darkgray border-l border-gold/30 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col font-sans">
-        <div class="flex items-center justify-between p-6 border-b border-gold/20 royal-gradient-bg">
+    <div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-300" onclick="toggleCart()"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] royal-gradient-bg border-l border-gold/40 z-50 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col font-sans">
+        <div class="flex items-center justify-between p-6 border-b border-gold/30 bg-[#03030B]/80">
             <h2 class="text-white text-sm font-bold tracking-[0.2em] uppercase">Your Royal Cart</h2>
             <button onclick="toggleCart()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
-        <div class="border-t border-gold/20 p-6 bg-black shadow-[0_-10px_30px_rgba(0,0,0,0.6)]">
+        <div class="border-t border-gold/30 p-6 bg-[#03030B] shadow-[0_-10px_30px_rgba(0,0,0,0.6)]">
             <div class="flex gap-2 mb-2">
-                <input type="text" id="promo-input" placeholder="Enter VIP Pass" class="flex-1 bg-white/5 border border-white/15 text-white px-3 py-3 rounded-sm outline-none focus:border-gold uppercase transition-colors text-xs tracking-widest">
-                <button type="button" onclick="applyPromo()" class="bg-royal/40 text-white border border-gold/40 px-6 py-3 rounded-sm font-bold hover:bg-royal hover:text-white transition-colors text-xs tracking-widest uppercase">Apply</button>
+                <input type="text" id="promo-input" placeholder="Enter VIP Pass" class="flex-1 bg-white/10 border border-white/20 text-white px-3 py-3 rounded-sm outline-none focus:border-gold uppercase transition-colors text-xs tracking-widest">
+                <button type="button" onclick="applyPromo()" class="bg-royal text-white border border-gold/40 px-6 py-3 rounded-sm font-bold hover:brightness-125 transition-colors text-xs tracking-widest uppercase">Apply</button>
             </div>
             <p id="promo-message" class="text-[10px] mb-4 hidden tracking-wide"></p>
             <div class="space-y-2 mb-6 text-sm font-light">
-                <div class="flex justify-between items-center text-gray-400">
+                <div class="flex justify-between items-center text-gray-300">
                     <span>Subtotal</span><span id="cart-subtotal" class="text-white">₹0</span>
                 </div>
                 <div id="discount-row" class="flex justify-between items-center hidden">
-                    <span class="text-lightgold flex items-center gap-2">Discount <span id="applied-code-name" class="bg-royal/40 px-2 py-0.5 rounded-sm text-[9px] uppercase tracking-widest border border-gold/40"></span></span>
+                    <span class="text-lightgold flex items-center gap-2">Discount <span id="applied-code-name" class="bg-royal/60 px-2 py-0.5 rounded-sm text-[9px] uppercase tracking-widest border border-gold/40"></span></span>
                     <span id="cart-discount" class="text-lightgold">-₹0</span>
                 </div>
-                <div class="flex justify-between items-center pt-3 border-t border-white/10 mt-3">
+                <div class="flex justify-between items-center pt-3 border-t border-white/15 mt-3">
                     <span class="text-white tracking-widest uppercase text-xs font-semibold">Total</span>
                     <span id="cart-total" class="text-lightgold text-xl font-medium">₹0</span>
                 </div>
             </div>
-            <button type="button" onclick="openCheckout()" class="w-full royal-gradient-bg border border-gold/50 text-white py-4 rounded-sm font-bold hover:brightness-125 transition-all tracking-[0.2em] uppercase text-xs shadow-[0_0_20px_rgba(41,34,206,0.5)]">Proceed to Checkout</button>
+            <button type="button" onclick="openCheckout()" class="w-full royal-gradient-bg border border-gold/60 text-white py-4 rounded-sm font-bold hover:brightness-125 transition-all tracking-[0.2em] uppercase text-xs shadow-[0_0_20px_rgba(41,34,206,0.6)]">Proceed to Checkout</button>
         </div>
     </div>
 
     <!-- Checkout Modal -->
-    <div id="checkout-modal" class="fixed inset-0 z-[70] hidden flex-col items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)]">
-            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+    <div id="checkout-modal" class="fixed inset-0 z-[70] hidden flex-col items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-opacity font-sans">
+        <div class="royal-gradient-bg border border-gold/40 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_60px_rgba(41,34,206,0.4)]">
+            <div class="p-6 border-b border-gold/30 flex justify-between items-center bg-[#03030B]/80">
                 <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase"><i class="fa-solid fa-lock mr-2 text-lightgold"></i>Secure Checkout</h4>
                 <button onclick="closeCheckout()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <form id="payment-form" onsubmit="processPayment(event)" class="p-6 flex flex-col gap-4 max-h-[80vh] overflow-y-auto scrollbar-hide">
-                <div class="flex justify-between items-end border-b border-white/10 pb-3">
+                <div class="flex justify-between items-end border-b border-white/15 pb-3">
                     <span class="text-gray-300 text-xs tracking-widest uppercase">Amount Due:</span>
                     <span id="checkout-amount" class="text-2xl font-medium text-lightgold">₹0</span>
                 </div>
@@ -396,106 +399,106 @@
                 <div class="mt-2">
                     <p class="text-gray-300 text-[10px] tracking-widest uppercase font-semibold mb-2">Select Payment Method</p>
                     <div class="grid grid-cols-2 gap-3">
-                        <button type="button" id="btn-upi" onclick="selectPayment('upi')" class="border border-gold bg-royal/30 text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all"><i class="fa-solid fa-bolt mr-1 text-lightgold"></i> Pay via UPI App</button>
-                        <button type="button" id="btn-cod" onclick="selectPayment('cod')" class="border border-white/20 text-gray-400 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all"><i class="fa-solid fa-truck-fast mr-1"></i> Cash on Delivery</button>
+                        <button type="button" id="btn-upi" onclick="selectPayment('upi')" class="border border-gold bg-royal/40 text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all"><i class="fa-solid fa-bolt mr-1 text-lightgold"></i> Pay via UPI App</button>
+                        <button type="button" id="btn-cod" onclick="selectPayment('cod')" class="border border-white/30 text-gray-300 hover:text-white py-3 rounded-sm text-[10px] sm:text-xs uppercase tracking-widest font-bold transition-all"><i class="fa-solid fa-truck-fast mr-1"></i> Cash on Delivery</button>
                     </div>
                 </div>
-                <button type="button" id="generate-upi-btn" onclick="generateUPIInterface()" class="w-full royal-gradient-bg border border-gold/50 text-white py-3 rounded-sm font-bold hover:brightness-125 transition-all tracking-wider uppercase text-xs mt-2">Proceed with UPI</button>
-                <div id="payment-dynamic-content" class="hidden border border-gold/30 bg-black/50 p-4 rounded-sm mt-2">
+                <button type="button" id="generate-upi-btn" onclick="generateUPIInterface()" class="w-full royal-gradient-bg border border-gold/60 text-white py-3 rounded-sm font-bold hover:brightness-125 transition-all tracking-wider uppercase text-xs mt-2">Proceed with UPI</button>
+                <div id="payment-dynamic-content" class="hidden border border-gold/40 bg-[#03030B]/70 p-4 rounded-sm mt-2">
                     <div id="upi-view">
-                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 pb-4 border-b border-white/10">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 pb-4 border-b border-white/15">
                             <div class="bg-white p-2 rounded-lg flex-shrink-0">
                                 <img id="upi-qr-img" src="" alt="UPI QR" class="w-24 h-24 sm:w-28 sm:h-28 object-contain">
                             </div>
                             <div class="text-center sm:text-left flex-1">
-                                <p class="text-[10px] text-gray-300 tracking-wider uppercase mb-1">Scan or Pay to ID:</p>
-                                <p class="text-sm font-bold text-lightgold select-all tracking-wide bg-royal/25 inline-block px-2 py-1 rounded border border-gold/30">7579942958@ptyes</p>
-                                <a id="upi-intent-link" href="#" class="mt-3 royal-gradient-bg border border-gold/40 text-white px-3 py-2 rounded-sm uppercase tracking-wider text-[10px] font-semibold flex items-center justify-center gap-2 sm:hidden"><i class="fa-solid fa-mobile-screen"></i> Open UPI App</a>
+                                <p class="text-[10px] text-gray-200 tracking-wider uppercase mb-1">Scan or Pay to ID:</p>
+                                <p class="text-sm font-bold text-lightgold select-all tracking-wide bg-royal/40 inline-block px-2 py-1 rounded border border-gold/40">7579942958@ptyes</p>
+                                <a id="upi-intent-link" href="#" class="mt-3 royal-gradient-bg border border-gold/50 text-white px-3 py-2 rounded-sm uppercase tracking-wider text-[10px] font-semibold flex items-center justify-center gap-2 sm:hidden"><i class="fa-solid fa-mobile-screen"></i> Open UPI App</a>
                             </div>
                         </div>
-                        <div class="text-[10px] text-gray-300 space-y-2 mb-4 font-light leading-relaxed">
+                        <div class="text-[10px] text-gray-200 space-y-2 mb-4 font-light leading-relaxed">
                             <p><strong class="text-lightgold">STEP 1:</strong> Scan the QR code or use the UPI ID above in any app.</p>
                             <p><strong class="text-lightgold">STEP 2:</strong> Transfer the exact amount of <span id="upi-step-amount" class="font-bold text-white"></span>.</p>
                             <p><strong class="text-lightgold">STEP 3:</strong> After successful payment, copy the 12-digit UTR/Reference No. and paste it below to confirm your order.</p>
                         </div>
-                        <input type="text" id="utr-number" placeholder="Enter 12-Digit UTR Number" class="w-full bg-white/5 border border-gold/50 text-white px-3 py-3 rounded-sm outline-none focus:border-white transition-colors text-xs tracking-widest text-center">
+                        <input type="text" id="utr-number" placeholder="Enter 12-Digit UTR Number" class="w-full bg-white/10 border border-gold/60 text-white px-3 py-3 rounded-sm outline-none focus:border-white transition-colors text-xs tracking-widest text-center">
                     </div>
                     <div id="cod-view" class="hidden text-center py-4">
-                        <div class="w-12 h-12 bg-royal/20 border border-gold/30 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-hand-holding-dollar text-xl text-lightgold"></i></div>
-                        <p class="text-xs text-gray-300 tracking-wide leading-relaxed font-light">Pay directly via Cash or UPI when your premium DYNAST timepiece arrives at your doorstep.</p>
+                        <div class="w-12 h-12 bg-royal/30 border border-gold/40 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fa-solid fa-hand-holding-dollar text-xl text-lightgold"></i></div>
+                        <p class="text-xs text-gray-200 tracking-wide leading-relaxed font-light">Pay directly via Cash or UPI when your premium DYNAST timepiece arrives at your doorstep.</p>
                     </div>
                 </div>
-                <div id="payment-status" class="hidden w-full text-center py-3 bg-black/50 rounded-sm border border-gold/30 mt-2">
+                <div id="payment-status" class="hidden w-full text-center py-3 bg-[#03030B]/80 rounded-sm border border-gold/40 mt-2">
                     <p class="text-lightgold text-xs tracking-widest uppercase animate-pulse"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Processing Order...</p>
                 </div>
-                <button id="pay-button" type="submit" class="hidden w-full royal-gradient-bg border border-gold/50 text-white py-4 rounded-sm font-bold hover:brightness-125 transition-all tracking-[0.2em] uppercase text-xs shadow-md mt-2">Confirm & Place Order</button>
+                <button id="pay-button" type="submit" class="hidden w-full royal-gradient-bg border border-gold/60 text-white py-4 rounded-sm font-bold hover:brightness-125 transition-all tracking-[0.2em] uppercase text-xs shadow-md mt-2">Confirm & Place Order</button>
             </form>
         </div>
     </div>
 
     <!-- Ebill Modal -->
     <div id="ebill-modal" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-xl transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)] flex flex-col max-h-[90vh]">
-            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+        <div class="royal-gradient-bg border border-gold/40 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_60px_rgba(41,34,206,0.4)] flex flex-col max-h-[90vh]">
+            <div class="p-6 border-b border-gold/30 flex justify-between items-center bg-[#03030B]/80">
                 <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase">Order Submitted</h4>
                 <button onclick="closeEbill()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="overflow-y-auto flex-1 p-8">
-                <div id="receipt-content" style="background: linear-gradient(135deg, #03030B 0%, #0A092E 60%, #1E1999 100%); padding: 24px; color: white; border: 1px solid rgba(91,108,250,0.3);">
+                <div id="receipt-content" style="background: linear-gradient(135deg, #03030B 0%, #151052 50%, #2922CE 100%); padding: 24px; color: white; border: 1px solid rgba(147,163,255,0.4);">
                     <!-- Ebill Content populated dynamically -->
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 24px; margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 24px; margin-bottom: 24px;">
                         <div>
                             <h1 style="font-size: 26px; font-weight: bold; letter-spacing: 0.2em; color: white; font-family: 'Cinzel', serif; margin:0;">DYNAST</h1>
                             <p style="font-size: 9px; letter-spacing: 0.3em; color: #93A3FF; margin-top: 4px; text-transform: uppercase;">Premium Timepieces</p>
                         </div>
                         <div style="text-align: right;">
                             <p style="color: #93A3FF; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; margin:0;">E-Invoice</p>
-                            <p id="ebill-order-id" style="color: #e5e7eb; font-size: 12px; margin-top: 4px; font-weight: 500;"></p>
-                            <p id="ebill-date" style="color: #9ca3af; font-size: 10px; margin-top: 4px;"></p>
+                            <p id="ebill-order-id" style="color: #f3f4f6; font-size: 12px; margin-top: 4px; font-weight: 500;"></p>
+                            <p id="ebill-date" style="color: #d1d5db; font-size: 10px; margin-top: 4px;"></p>
                             <div style="margin-top: 8px;" id="ebill-status-text"></div>
                         </div>
                     </div>
                     <div style="margin-bottom: 32px;">
                         <h4 style="color: #93A3FF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Billed & Shipped To:</h4>
                         <p id="ebill-name" style="color: white; font-size: 14px; font-weight: 500; margin: 0;"></p>
-                        <p id="ebill-email" style="color: #d1d5db; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
-                        <p id="ebill-phone" style="color: #d1d5db; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
-                        <p id="ebill-address" style="color: #d1d5db; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0; line-height: 1.6; max-width: 300px;"></p>
+                        <p id="ebill-email" style="color: #e5e7eb; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
+                        <p id="ebill-phone" style="color: #e5e7eb; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0;"></p>
+                        <p id="ebill-address" style="color: #e5e7eb; font-size: 12px; font-weight: 300; margin-top: 4px; margin-bottom: 0; line-height: 1.6; max-width: 300px;"></p>
                         <p id="ebill-method-text" style="color: #93A3FF; font-size: 10px; font-weight: 300; margin-top: 12px; letter-spacing: 0.05em;"></p>
                     </div>
                     <div style="margin-bottom: 32px;">
-                        <div style="display: flex; justify-content: space-between; color: #93A3FF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 8px; margin-bottom: 16px; font-weight: 600;">
+                        <div style="display: flex; justify-content: space-between; color: #93A3FF; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 8px; margin-bottom: 16px; font-weight: 600;">
                             <span style="width: 60%;">Item Description</span>
                             <span style="width: 20%; text-align: center;">Qty</span>
                             <span style="width: 20%; text-align: right;">Price</span>
                         </div>
                         <div id="ebill-items" style="display: flex; flex-direction: column; gap: 16px;"></div>
                     </div>
-                    <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-size: 14px; font-weight: 300;">
+                    <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 16px; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-size: 14px; font-weight: 300;">
                         <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px;">
-                            <span style="color: #d1d5db;">Subtotal:</span>
+                            <span style="color: #e5e7eb;">Subtotal:</span>
                             <span id="ebill-subtotal" style="color: white;"></span>
                         </div>
                         <div id="ebill-discount-row" style="display: none; justify-content: space-between; width: 100%; max-width: 250px; color: #93A3FF;">
                             <span>VIP Pass Applied:</span>
                             <span id="ebill-discount"></span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.15); margin-top: 8px;">
+                        <div style="display: flex; justify-content: space-between; width: 100%; max-width: 250px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 8px;">
                             <span style="color: white; letter-spacing: 0.1em; text-transform: uppercase; font-size: 12px; font-weight: 600;">Total Amount:</span>
                             <span id="ebill-total" style="color: #93A3FF; font-size: 18px; font-weight: 600;"></span>
                         </div>
                     </div>
-                    <div style="margin-top: 48px; text-align: center; border-top: 1px solid rgba(147,163,255,0.25); padding-top: 24px;">
+                    <div style="margin-top: 48px; text-align: center; border-top: 1px solid rgba(147,163,255,0.3); padding-top: 24px;">
                         <p style="color: #93A3FF; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; font-style: italic; font-family: 'Cinzel', serif;">Crafted with royal precision. Thank you for choosing DYNAST.</p>
                     </div>
                 </div>
             </div>
-            <div class="p-4 sm:p-6 bg-black border-t border-gold/20 flex gap-3 sm:gap-4">
+            <div class="p-4 sm:p-6 bg-[#03030B] border-t border-gold/30 flex gap-3 sm:gap-4">
                 <button type="button" onclick="downloadBillImage()" class="flex-1 btn-gold py-3 px-1 rounded-sm font-semibold tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 text-center leading-tight">
                     <i class="fa-solid fa-image text-sm"></i>
                     <span>Save Bill <br class="sm:hidden"/>(Photo)</span>
                 </button>
-                <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/20 text-gray-300 py-3 px-1 rounded-sm font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center text-center leading-tight">
+                <button type="button" onclick="closeEbill()" class="flex-1 bg-transparent border border-white/30 text-gray-200 py-3 px-1 rounded-sm font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase text-[10px] sm:text-xs flex flex-col sm:flex-row items-center justify-center text-center leading-tight">
                     <span>Continue <br class="sm:hidden"/>Shopping</span>
                 </button>
             </div>
@@ -504,90 +507,90 @@
 
     <!-- Tracking Modal -->
     <div id="tracking-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)]">
-            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+        <div class="royal-gradient-bg border border-gold/40 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_60px_rgba(41,34,206,0.4)]">
+            <div class="p-6 border-b border-gold/30 flex justify-between items-center bg-[#03030B]/80">
                 <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase">Track Your Order</h4>
                 <button onclick="closeTracking()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-8" id="tracking-input-area">
-                <p class="text-gray-300 text-xs font-light leading-relaxed mb-6">Enter your exclusive DYNAST Order ID to check the delivery status of your timepiece.</p>
+                <p class="text-gray-200 text-xs font-light leading-relaxed mb-6">Enter your exclusive DYNAST Order ID to check the delivery status of your timepiece.</p>
                 <input type="text" id="order-id-input" placeholder="e.g. DY-123456" class="checkout-input mb-6 text-center tracking-widest uppercase font-medium" maxlength="9">
                 <button type="button" onclick="simulateTracking()" class="w-full btn-gold py-4 rounded-sm font-semibold tracking-widest uppercase text-xs">Track Order</button>
             </div>
             <div id="tracking-loading" class="p-12 hidden flex-col items-center justify-center">
-                <i class="fa-solid fa-compass text-3xl text-lightgold animate-spin-slow mb-4 opacity-70"></i>
-                <p class="text-gray-300 text-[10px] tracking-[0.2em] uppercase animate-pulse">Searching Database...</p>
+                <i class="fa-solid fa-compass text-3xl text-lightgold animate-spin-slow mb-4 opacity-80"></i>
+                <p class="text-gray-200 text-[10px] tracking-[0.2em] uppercase animate-pulse">Searching Database...</p>
             </div>
-            <div id="tracking-result" class="p-8 hidden bg-black">
-                <p class="text-white text-xs font-medium mb-6 border-b border-white/10 pb-4 tracking-widest uppercase">Order Ref: <span id="display-order-id" class="text-lightgold ml-2"></span></p>
-                <div id="verification-pending-msg" class="hidden mb-6 p-4 border border-yellow-500/30 bg-yellow-500/10 rounded-sm">
-                    <p class="text-yellow-500 text-[10px] uppercase tracking-widest font-semibold"><i class="fa-solid fa-clock-rotate-left mr-2"></i>UPI Verification Pending</p>
-                    <p class="text-gray-400 text-[10px] mt-2 leading-relaxed">Your payment UTR is currently being verified by our team. The tracker will activate once confirmed.</p>
+            <div id="tracking-result" class="p-8 hidden bg-[#03030B]">
+                <p class="text-white text-xs font-medium mb-6 border-b border-white/15 pb-4 tracking-widest uppercase">Order Ref: <span id="display-order-id" class="text-lightgold ml-2"></span></p>
+                <div id="verification-pending-msg" class="hidden mb-6 p-4 border border-yellow-500/40 bg-yellow-500/15 rounded-sm">
+                    <p class="text-yellow-400 text-[10px] uppercase tracking-widest font-semibold"><i class="fa-solid fa-clock-rotate-left mr-2"></i>UPI Verification Pending</p>
+                    <p class="text-gray-200 text-[10px] mt-2 leading-relaxed">Your payment UTR is currently being verified by our team. The tracker will activate once confirmed.</p>
                 </div>
                 <div class="pl-2" id="timeline-container">
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot absolute left-0 top-1"></div><div class="timeline-line"></div>
                         <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Order Confirmed</h5>
-                        <p class="timeline-desc text-gray-400 text-[10px] font-light">Details verified. Design sent to workshop.</p>
+                        <p class="timeline-desc text-gray-300 text-[10px] font-light">Details verified. Design sent to workshop.</p>
                     </div>
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot absolute left-0 top-1"></div><div class="timeline-line"></div>
                         <h5 class="timeline-title text-white font-medium text-xs tracking-wider uppercase mb-1">Our Workshop, Agra</h5>
-                        <p class="timeline-desc text-gray-400 text-[10px] font-light">Timepiece is undergoing custom assembly & testing.</p>
+                        <p class="timeline-desc text-gray-300 text-[10px] font-light">Timepiece is undergoing custom assembly & testing.</p>
                     </div>
                     <div class="timeline-item relative pl-8 pb-8">
                         <div class="timeline-dot pending absolute left-0 top-1"></div><div class="timeline-line"></div>
-                        <h5 class="timeline-title text-gray-500 font-medium text-xs tracking-wider uppercase mb-1">Shipped</h5>
-                        <p class="timeline-desc text-gray-600 text-[10px] font-light">Courier partner has picked up your package.</p>
+                        <h5 class="timeline-title text-gray-400 font-medium text-xs tracking-wider uppercase mb-1">Shipped</h5>
+                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Courier partner has picked up your package.</p>
                     </div>
                     <div class="timeline-item relative pl-8">
                         <div class="timeline-dot pending absolute left-0 top-1"></div>
-                        <h5 class="timeline-title text-gray-500 font-medium text-xs tracking-wider uppercase mb-1">Delivered</h5>
-                        <p class="timeline-desc text-gray-600 text-[10px] font-light">Package has securely reached your location.</p>
+                        <h5 class="timeline-title text-gray-400 font-medium text-xs tracking-wider uppercase mb-1">Delivered</h5>
+                        <p class="timeline-desc text-gray-500 text-[10px] font-light">Package has securely reached your location.</p>
                     </div>
                 </div>
-                <button type="button" onclick="resetTracking()" class="mt-8 w-full bg-transparent border border-white/20 text-gray-300 py-3 rounded-sm text-[10px] font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase">Track Another</button>
+                <button type="button" onclick="resetTracking()" class="mt-8 w-full bg-transparent border border-white/25 text-gray-200 py-3 rounded-sm text-[10px] font-medium hover:text-white hover:border-gold transition-all tracking-widest uppercase">Track Another</button>
             </div>
         </div>
     </div>
 
     <!-- Policy Modal -->
     <div id="policy-modal" class="fixed inset-0 z-[90] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-3xl max-h-[85vh] overflow-hidden relative flex flex-col shadow-[0_0_50px_rgba(41,34,206,0.3)]">
-            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+        <div class="royal-gradient-bg border border-gold/40 rounded-lg w-full max-w-3xl max-h-[85vh] overflow-hidden relative flex flex-col shadow-[0_0_60px_rgba(41,34,206,0.4)]">
+            <div class="p-6 border-b border-gold/30 flex justify-between items-center bg-[#03030B]/80">
                 <h4 id="policy-title" class="text-white font-bold text-sm tracking-[0.2em] uppercase">Policy Title</h4>
                 <button onclick="closePolicy()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="p-8 overflow-y-auto flex-1 text-gray-200 text-sm font-light leading-relaxed space-y-6" id="policy-content"></div>
+            <div class="p-8 overflow-y-auto flex-1 text-gray-100 text-sm font-light leading-relaxed space-y-6" id="policy-content"></div>
         </div>
     </div>
 
     <!-- Contact Modal -->
     <div id="contact-modal" class="fixed inset-0 z-[60] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity font-sans">
-        <div class="bg-darkgray border border-gold/30 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_50px_rgba(41,34,206,0.3)]">
-            <div class="p-6 border-b border-gold/20 flex justify-between items-center royal-gradient-bg">
+        <div class="royal-gradient-bg border border-gold/40 rounded-lg w-full max-w-md overflow-hidden relative shadow-[0_0_60px_rgba(41,34,206,0.4)]">
+            <div class="p-6 border-b border-gold/30 flex justify-between items-center bg-[#03030B]/80">
                 <h4 class="text-white font-bold text-sm tracking-[0.2em] uppercase">Contact DYNAST</h4>
                 <button onclick="closeContact()" class="text-gray-300 hover:text-white transition-colors text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-8 flex flex-col gap-8">
                 <div class="flex items-start gap-5">
-                    <div class="w-10 h-10 rounded-full border border-gold/40 bg-royal/20 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-phone text-lightgold"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-gold/50 bg-royal/40 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-phone text-lightgold"></i></div>
                     <div>
-                        <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-widest font-semibold">Phone</p>
+                        <p class="text-gray-300 text-[10px] mb-1 uppercase tracking-widest font-semibold">Phone</p>
                         <p class="text-white font-light text-sm">+91 7579942958</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-5">
-                    <div class="w-10 h-10 rounded-full border border-gold/40 bg-royal/20 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-envelope text-lightgold"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-gold/50 bg-royal/40 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-envelope text-lightgold"></i></div>
                     <div>
-                        <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-widest font-semibold">Email</p>
+                        <p class="text-gray-300 text-[10px] mb-1 uppercase tracking-widest font-semibold">Email</p>
                         <a href="mailto:dynast.online.org@gmail.com" class="text-white font-light text-sm hover:text-lightgold transition-colors">dynast.online.org@gmail.com</a>
                     </div>
                 </div>
                 <div class="flex items-start gap-5">
-                    <div class="w-10 h-10 rounded-full border border-gold/40 bg-royal/20 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-location-dot text-lightgold"></i></div>
+                    <div class="w-10 h-10 rounded-full border border-gold/50 bg-royal/40 flex items-center justify-center flex-shrink-0 mt-1"><i class="fa-solid fa-location-dot text-lightgold"></i></div>
                     <div>
-                        <p class="text-gray-400 text-[10px] mb-1 uppercase tracking-widest font-semibold">Our Workshop</p>
+                        <p class="text-gray-300 text-[10px] mb-1 uppercase tracking-widest font-semibold">Our Workshop</p>
                         <p class="text-white font-light text-sm">Agra, Uttar Pradesh, India</p>
                     </div>
                 </div>
@@ -597,12 +600,12 @@
 
     <!-- Alert Modal -->
     <div id="custom-alert-modal" class="fixed inset-0 z-[120] hidden flex-col items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans opacity-0">
-        <div class="bg-darkgray border border-gold/40 rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(41,34,206,0.3)] relative transform scale-95 transition-transform duration-300" id="custom-alert-box">
+        <div class="royal-gradient-bg border border-gold/50 rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_60px_rgba(41,34,206,0.4)] relative transform scale-95 transition-transform duration-300" id="custom-alert-box">
             <div id="alert-icon-container" class="w-12 h-12 rounded-full border flex items-center justify-center mx-auto mb-4">
                 <i id="alert-icon" class="fa-solid text-xl"></i>
             </div>
             <h3 id="alert-title" class="text-white text-lg serif-text tracking-widest mb-2">Notice</h3>
-            <p id="alert-modal-text" class="text-gray-300 text-xs font-light leading-relaxed mb-6"></p>
+            <p id="alert-modal-text" class="text-gray-200 text-xs font-light leading-relaxed mb-6"></p>
             <button onclick="closeCustomAlert()" class="w-full btn-gold py-3 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Okay</button>
         </div>
     </div>
