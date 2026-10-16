@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVESTA | Command Center</title>
+    <title>DYNAST | Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -14,78 +14,97 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     
     <script>
-        tailwind.config = { theme: { extend: { colors: { gold: '#C5A059', black: '#0A0A0A', darkgray: '#141414' }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Cinzel', 'serif'] } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        gold: '#5B6CFA',       /* Royal Sapphire Accent */
+                        royal: '#2922CE',      /* Deep Logo Royal Blue */
+                        black: '#03030B',      /* Deep Midnight Black */
+                        darkgray: '#09091E',   /* Rich Royal Navy-Black */
+                        lightgold: '#93A3FF'   /* Soft Royal Highlight */
+                    }, 
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Cinzel', 'serif'] } 
+                } 
+            } 
+        }
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0A0A0A; color: white; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #020206 0%, #080724 55%, #1A158C 100%);
+            background-attachment: fixed;
+            color: white; 
+        }
         .serif-text { font-family: 'Cinzel', serif; }
-        .glass-panel { background: rgba(20, 20, 20, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(197, 160, 89, 0.2); }
-        .input-gold { background: rgba(255,255,255,0.05); border: 1px solid rgba(197,160,89,0.3); color: white; outline: none; transition: 0.3s; }
-        .input-gold:focus { border-color: #C5A059; background: rgba(255,255,255,0.1); }
+        .glass-panel { background: rgba(9, 9, 30, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(91, 108, 250, 0.3); }
+        .input-gold { background: rgba(255,255,255,0.05); border: 1px solid rgba(91, 108, 250, 0.3); color: white; outline: none; transition: 0.3s; }
+        .input-gold:focus { border-color: #5B6CFA; background: rgba(41, 34, 206, 0.15); box-shadow: 0 0 15px rgba(41, 34, 206, 0.3); }
+        .royal-gradient-bg { background: linear-gradient(90deg, #020206 0%, #0C0A38 50%, #2922CE 100%); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
 
-    <header class="w-full bg-black border-b border-gold/20 py-4 sticky top-0 z-50 shadow-lg">
+    <header class="w-full royal-gradient-bg border-b border-gold/30 py-4 sticky top-0 z-50 shadow-lg">
         <div class="px-4 flex justify-between items-center max-w-3xl mx-auto w-full">
-            <h1 class="text-xl font-bold tracking-widest text-gold serif-text">AVESTA HQ</h1>
-            <button id="logout-btn" onclick="logout()" class="hidden text-gray-400 hover:text-white text-xs tracking-widest uppercase font-semibold border border-gray-700 px-3 py-1 rounded-sm"><i class="fa-solid fa-right-from-bracket mr-1"></i> Exit</button>
+            <h1 class="text-xl font-bold tracking-[0.2em] text-white serif-text drop-shadow-[0_0_10px_rgba(41,34,206,0.6)]">DYNAST HQ</h1>
+            <button id="logout-btn" onclick="logout()" class="hidden text-gray-300 hover:text-white text-xs tracking-widest uppercase font-semibold border border-gold/30 px-3 py-1 rounded-sm bg-royal/20 transition-all"><i class="fa-solid fa-right-from-bracket mr-1"></i> Exit</button>
         </div>
     </header>
 
     <main id="login-section" class="flex-1 flex flex-col items-center justify-center p-4">
-        <div class="glass-panel p-8 rounded-lg w-full max-w-sm text-center shadow-[0_0_40px_rgba(197,160,89,0.05)]">
-            <i class="fa-solid fa-lock text-4xl text-gold/50 mb-4"></i>
+        <div class="glass-panel p-8 rounded-lg w-full max-w-sm text-center shadow-[0_0_50px_rgba(41,34,206,0.3)]">
+            <i class="fa-solid fa-lock text-4xl text-lightgold/70 mb-4"></i>
             <h2 class="text-xl text-white mb-6 serif-text tracking-widest">Restricted Access</h2>
             
             <input type="email" id="admin-email" placeholder="Enter Admin Email" class="input-gold w-full px-4 py-3 rounded-sm mb-3 text-center tracking-widest text-sm" onkeypress="if(event.key === 'Enter') document.getElementById('admin-password').focus()">
             
             <input type="password" id="admin-password" placeholder="Enter Access Code" class="input-gold w-full px-4 py-3 rounded-sm mb-4 text-center tracking-widest text-sm" onkeypress="if(event.key === 'Enter') authenticate()">
             
-            <button onclick="authenticate()" class="w-full bg-gold/10 border border-gold/50 text-gold py-3 rounded-sm text-xs font-bold tracking-[0.2em] uppercase hover:bg-gold hover:text-black transition-colors">Authenticate</button>
+            <button onclick="authenticate()" class="w-full royal-gradient-bg border border-gold/50 text-white py-3 rounded-sm text-xs font-bold tracking-[0.2em] uppercase hover:brightness-125 transition-all shadow-[0_0_20px_rgba(41,34,206,0.4)]">Authenticate</button>
             <p id="login-error" class="text-red-400 text-[10px] uppercase tracking-widest mt-4 hidden">Access Denied. Invalid Credentials.</p>
         </div>
     </main>
 
     <main id="dashboard-section" class="hidden flex-1 flex-col p-4 md:p-8 max-w-3xl mx-auto w-full">
-        <div class="flex justify-between items-end mb-6 border-b border-white/10 pb-4">
+        <div class="flex justify-between items-end mb-6 border-b border-white/15 pb-4">
             <div>
                 <h2 class="text-2xl text-white serif-text tracking-widest">Live Orders</h2>
-                <p class="text-gray-500 text-[10px] uppercase tracking-widest mt-1">Real-time database sync active</p>
+                <p class="text-lightgold text-[10px] uppercase tracking-widest mt-1">Real-time database sync active</p>
             </div>
-            <button onclick="fetchOrders()" class="text-gold hover:text-white text-lg transition-transform hover:rotate-180 duration-500"><i class="fa-solid fa-arrows-rotate"></i></button>
+            <button onclick="fetchOrders()" class="text-lightgold hover:text-white text-lg transition-transform hover:rotate-180 duration-500"><i class="fa-solid fa-arrows-rotate"></i></button>
         </div>
         <div id="loading-spinner" class="flex flex-col items-center justify-center py-20">
-            <i class="fa-solid fa-circle-notch text-gold text-3xl animate-spin mb-4"></i>
-            <p class="text-gray-400 text-[10px] tracking-[0.2em] uppercase animate-pulse">Decrypting Vault Data...</p>
+            <i class="fa-solid fa-circle-notch text-lightgold text-3xl animate-spin mb-4"></i>
+            <p class="text-gray-300 text-[10px] tracking-[0.2em] uppercase animate-pulse">Decrypting Vault Data...</p>
         </div>
         <div id="orders-container" class="space-y-4 hidden pb-10"></div>
     </main>
 
     <!-- Modals -->
     <div id="custom-confirm-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans">
-        <div class="glass-panel border border-red-500/30 bg-[#0a0a0a] rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(239,68,68,0.1)] relative">
+        <div class="glass-panel border border-red-500/30 bg-[#03030B] rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(239,68,68,0.15)] relative">
             <div class="w-12 h-12 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center mx-auto mb-4">
                 <i class="fa-solid fa-triangle-exclamation text-red-500 text-xl"></i>
             </div>
             <h3 class="text-white text-lg serif-text tracking-widest mb-2">Delete Order?</h3>
-            <p id="confirm-modal-text" class="text-gray-400 text-xs font-light leading-relaxed mb-6"></p>
+            <p id="confirm-modal-text" class="text-gray-300 text-xs font-light leading-relaxed mb-6"></p>
             <div class="flex gap-3">
-                <button onclick="closeConfirmModal()" class="flex-1 border border-white/20 text-gray-400 hover:text-white hover:border-white py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Cancel</button>
-                <button onclick="executeDelete()" class="flex-1 bg-red-500/10 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all shadow-lg">Delete</button>
+                <button onclick="closeConfirmModal()" class="flex-1 border border-white/20 text-gray-300 hover:text-white hover:border-white py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Cancel</button>
+                <button onclick="executeDelete()" class="flex-1 bg-red-500/15 border border-red-500/50 text-red-400 hover:bg-red-500 hover:text-white py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all shadow-lg">Delete</button>
             </div>
         </div>
     </div>
 
     <div id="custom-alert-modal" class="fixed inset-0 z-[110] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm transition-opacity font-sans">
-        <div class="glass-panel border border-gold/30 bg-[#0a0a0a] rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(197,160,89,0.1)] relative">
+        <div class="glass-panel border border-gold/40 bg-[#03030B] rounded-lg w-full max-w-sm p-6 text-center shadow-[0_0_50px_rgba(41,34,206,0.3)] relative">
             <div id="alert-icon-container" class="w-12 h-12 rounded-full border flex items-center justify-center mx-auto mb-4">
                 <i id="alert-icon" class="fa-solid text-xl"></i>
             </div>
             <h3 id="alert-title" class="text-white text-lg serif-text tracking-widest mb-2">Notice</h3>
-            <p id="alert-modal-text" class="text-gray-400 text-xs font-light leading-relaxed mb-6"></p>
-            <button onclick="closeAlertModal()" class="w-full bg-gold/10 border border-gold/30 text-gold hover:bg-gold hover:text-black py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Okay</button>
+            <p id="alert-modal-text" class="text-gray-300 text-xs font-light leading-relaxed mb-6"></p>
+            <button onclick="closeAlertModal()" class="w-full royal-gradient-bg border border-gold/40 text-white hover:brightness-125 py-2.5 rounded-sm text-[10px] tracking-widest uppercase font-bold transition-all">Okay</button>
         </div>
     </div>
 
@@ -168,11 +187,11 @@
             const icon = document.getElementById('alert-icon');
             
             if(type === 'success') {
-                iconContainer.className = "w-12 h-12 rounded-full border border-green-500/30 bg-green-500/10 flex items-center justify-center mx-auto mb-4";
+                iconContainer.className = "w-12 h-12 rounded-full border border-green-500/30 bg-green-500/15 flex items-center justify-center mx-auto mb-4";
                 icon.className = "fa-solid fa-check text-green-400 text-xl";
             } else {
-                iconContainer.className = "w-12 h-12 rounded-full border border-red-500/30 bg-red-500/10 flex items-center justify-center mx-auto mb-4";
-                icon.className = "fa-solid fa-xmark text-red-500 text-xl";
+                iconContainer.className = "w-12 h-12 rounded-full border border-red-500/30 bg-red-500/15 flex items-center justify-center mx-auto mb-4";
+                icon.className = "fa-solid fa-xmark text-red-400 text-xl";
             }
 
             document.getElementById('custom-alert-modal').classList.remove('hidden');
@@ -212,7 +231,6 @@
         }
 
         async function updateOrderStatus(orderId) {
-            // Updated to pull from the hidden input field instead of a select tag
             const hiddenInputElement = document.getElementById(`status-${orderId}`);
             const updateBtn = document.getElementById(`btn-${orderId}`);
             
@@ -221,13 +239,13 @@
                 await db.collection("orders").doc(orderId).update({ status: hiddenInputElement.value });
                 
                 updateBtn.innerHTML = '<i class="fa-solid fa-check"></i> Updated';
-                updateBtn.classList.replace("bg-gold/10", "bg-green-500/20");
-                updateBtn.classList.replace("text-gold", "text-green-400");
+                updateBtn.classList.replace("bg-royal/30", "bg-green-500/20");
+                updateBtn.classList.replace("text-white", "text-green-400");
                 
                 setTimeout(() => {
                     updateBtn.innerHTML = 'Update';
-                    updateBtn.classList.replace("bg-green-500/20", "bg-gold/10");
-                    updateBtn.classList.replace("text-green-400", "text-gold");
+                    updateBtn.classList.replace("bg-green-500/20", "bg-royal/30");
+                    updateBtn.classList.replace("text-green-400", "text-white");
                     fetchOrders();
                 }, 2000);
             } catch (error) { 
@@ -246,7 +264,7 @@
                 const container = document.getElementById("orders-container");
                 
                 if (snapshot.empty) {
-                    container.innerHTML = '<div class="text-center text-gray-500 py-10 text-xs tracking-widest uppercase"><i class="fa-solid fa-box-open text-2xl mb-3 block"></i> No orders found</div>';
+                    container.innerHTML = '<div class="text-center text-gray-400 py-10 text-xs tracking-widest uppercase"><i class="fa-solid fa-box-open text-2xl mb-3 block text-lightgold"></i> No orders found</div>';
                 } else {
                     let html = '';
                     snapshot.forEach(doc => {
@@ -261,7 +279,7 @@
                         if(data.items && data.items.length > 0) {
                             data.items.forEach(item => {
                                 let colorText = (item.selectedColor && item.selectedColor !== 'Default') ? ` (${item.selectedColor})` : '';
-                                itemsHTML += `<div class="flex justify-between text-[10px] text-gray-400 mt-2 bg-black p-2 rounded-sm border border-white/5"><span class="truncate pr-2">${item.quantity}x ${item.name}<span class="text-gold">${colorText}</span></span><span class="text-gold">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span></div>`;
+                                itemsHTML += `<div class="flex justify-between text-[10px] text-gray-300 mt-2 bg-black/60 p-2 rounded-sm border border-gold/15"><span class="truncate pr-2">${item.quantity}x ${item.name}<span class="text-lightgold">${colorText}</span></span><span class="text-lightgold">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span></div>`;
                             });
                         }
 
@@ -273,8 +291,8 @@
                         if(data.status === "Delivered") statusColor = "text-green-400";
 
                         let methodBadge = data.paymentMethod === 'COD' 
-                            ? `<span class="bg-blue-500/10 text-blue-400 border border-blue-500/30 px-2 py-1 rounded-sm"><i class="fa-solid fa-truck-fast mr-1"></i> COD</span>`
-                            : `<span class="bg-purple-500/10 text-purple-400 border border-purple-500/30 px-2 py-1 rounded-sm"><i class="fa-solid fa-bolt mr-1"></i> UPI (${data.utr || 'N/A'})</span>`;
+                            ? `<span class="bg-blue-500/15 text-blue-400 border border-blue-500/30 px-2 py-1 rounded-sm"><i class="fa-solid fa-truck-fast mr-1"></i> COD</span>`
+                            : `<span class="bg-purple-500/15 text-purple-400 border border-purple-500/30 px-2 py-1 rounded-sm"><i class="fa-solid fa-bolt mr-1"></i> UPI (${data.utr || 'N/A'})</span>`;
                         
                         let customerAddress = data.address ? data.address : "Address not provided";
                         let customerEmail = data.email ? data.email : "Email not provided";
@@ -283,13 +301,12 @@
                                                 data.status === 'Order Confirmed' ? 'Payment Verified' : 
                                                 data.status || 'New';
 
-                        // Removed overflow-hidden from the main panel so the new dropdown menu doesn't get cut off
                         html += `
-                        <div class="glass-panel p-4 md:p-5 rounded-md relative group hover:border-gold/40 transition-colors">
-                            <div class="flex justify-between items-start mb-3 border-b border-white/10 pb-3">
+                        <div class="glass-panel p-4 md:p-5 rounded-md relative group hover:border-gold/60 transition-colors">
+                            <div class="flex justify-between items-start mb-3 border-b border-white/15 pb-3">
                                 <div>
-                                    <span class="bg-gold/20 text-gold text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-widest uppercase border border-gold/30">#${data.orderId}</span>
-                                    <p class="text-[10px] text-gray-500 mt-2">${dateString}</p>
+                                    <span class="bg-royal/30 text-lightgold text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-widest uppercase border border-gold/40">#${data.orderId}</span>
+                                    <p class="text-[10px] text-gray-400 mt-2">${dateString}</p>
                                 </div>
                                 <div class="text-right">
                                     <p class="text-lg font-medium text-white tracking-wide">₹${(data.totalAmount || 0).toLocaleString('en-IN')}</p>
@@ -298,43 +315,42 @@
                             </div>
                             
                             <div class="pt-1 pb-2">
-                                <p class="text-sm font-medium text-white"><i class="fa-regular fa-user text-gold w-5 text-center"></i> ${data.customerName}</p>
-                                <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-envelope text-gold w-5 text-center"></i> <a href="mailto:${customerEmail}" class="hover:text-gold transition-colors">${customerEmail}</a></p>
-                                <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-phone text-gold w-5 text-center"></i> ${data.phone}</p>
-                                <p class="text-xs text-gray-400 mt-1 leading-relaxed"><i class="fa-solid fa-location-dot text-gold w-5 text-center"></i> ${customerAddress}</p>
+                                <p class="text-sm font-medium text-white"><i class="fa-regular fa-user text-lightgold w-5 text-center"></i> ${data.customerName}</p>
+                                <p class="text-xs text-gray-300 mt-1"><i class="fa-solid fa-envelope text-lightgold w-5 text-center"></i> <a href="mailto:${customerEmail}" class="hover:text-lightgold transition-colors">${customerEmail}</a></p>
+                                <p class="text-xs text-gray-300 mt-1"><i class="fa-solid fa-phone text-lightgold w-5 text-center"></i> ${data.phone}</p>
+                                <p class="text-xs text-gray-300 mt-1 leading-relaxed"><i class="fa-solid fa-location-dot text-lightgold w-5 text-center"></i> ${customerAddress}</p>
                                 <div class="text-[9px] mt-3 tracking-widest uppercase font-bold">${methodBadge}</div>
                             </div>
 
-                            <div class="mt-2 border-t border-white/5 pt-3">
-                                <p class="text-[9px] text-gray-500 uppercase tracking-widest font-semibold mb-1">Purchased Items:</p>
+                            <div class="mt-2 border-t border-white/10 pt-3">
+                                <p class="text-[9px] text-lightgold uppercase tracking-widest font-semibold mb-1">Purchased Items:</p>
                                 ${itemsHTML}
                             </div>
                             
-                            <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between gap-2">
+                            <div class="mt-4 pt-4 border-t border-white/15 flex items-center justify-between gap-2">
                                 
-                                <!-- Custom Stylized Dropdown Menu -->
                                 <div class="relative w-full flex-1" id="dropdown-wrapper-${data.orderId}">
-                                    <button onclick="toggleDropdown(event, '${data.orderId}')" class="w-full bg-[#000] text-[#d1d5db] border border-white/10 px-3 py-[9px] rounded-sm text-[10px] tracking-[0.1em] uppercase text-left flex justify-between items-center hover:border-gold hover:text-white transition-all focus:outline-none focus:border-gold group">
+                                    <button onclick="toggleDropdown(event, '${data.orderId}')" class="w-full bg-[#03030B] text-gray-200 border border-gold/30 px-3 py-[9px] rounded-sm text-[10px] tracking-[0.1em] uppercase text-left flex justify-between items-center hover:border-gold hover:text-white transition-all focus:outline-none focus:border-gold group">
                                         <span id="selected-text-${data.orderId}">${displayStatusText}</span>
-                                        <i class="fa-solid fa-chevron-down text-gold group-hover:rotate-180 transition-transform duration-300 pointer-events-none"></i>
+                                        <i class="fa-solid fa-chevron-down text-lightgold group-hover:rotate-180 transition-transform duration-300 pointer-events-none"></i>
                                     </button>
                                     
-                                    <div id="dropdown-menu-${data.orderId}" class="hidden absolute left-0 bottom-full mb-1 w-full bg-[#0a0a0a] border border-gold/30 rounded-sm shadow-[0_0_20px_rgba(197,160,89,0.15)] z-[60] overflow-hidden backdrop-blur-md">
-                                        <div onclick="selectStatus('${data.orderId}', 'Verification Pending', 'Verify Pending')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">Verify Pending</div>
-                                        <div onclick="selectStatus('${data.orderId}', 'Order Confirmed', 'Payment Verified')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">Payment Verified</div>
-                                        <div onclick="selectStatus('${data.orderId}', 'In Workshop', 'In Workshop')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">In Workshop</div>
-                                        <div onclick="selectStatus('${data.orderId}', 'Shipped', 'Shipped')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer border-b border-white/5 transition-colors">Shipped</div>
-                                        <div onclick="selectStatus('${data.orderId}', 'Delivered', 'Delivered')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-400 hover:bg-gold/20 hover:text-gold cursor-pointer transition-colors">Delivered</div>
+                                    <div id="dropdown-menu-${data.orderId}" class="hidden absolute left-0 bottom-full mb-1 w-full bg-[#07071A] border border-gold/40 rounded-sm shadow-[0_0_20px_rgba(41,34,206,0.5)] z-[60] overflow-hidden backdrop-blur-md">
+                                        <div onclick="selectStatus('${data.orderId}', 'Verification Pending', 'Verify Pending')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-300 hover:bg-royal/40 hover:text-white cursor-pointer border-b border-white/10 transition-colors">Verify Pending</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'Order Confirmed', 'Payment Verified')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-300 hover:bg-royal/40 hover:text-white cursor-pointer border-b border-white/10 transition-colors">Payment Verified</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'In Workshop', 'In Workshop')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-300 hover:bg-royal/40 hover:text-white cursor-pointer border-b border-white/10 transition-colors">In Workshop</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'Shipped', 'Shipped')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-300 hover:bg-royal/40 hover:text-white cursor-pointer border-b border-white/10 transition-colors">Shipped</div>
+                                        <div onclick="selectStatus('${data.orderId}', 'Delivered', 'Delivered')" class="px-3 py-3 text-[10px] tracking-widest uppercase text-gray-300 hover:bg-royal/40 hover:text-white cursor-pointer transition-colors">Delivered</div>
                                     </div>
                                     
                                     <input type="hidden" id="status-${data.orderId}" value="${data.status}">
                                 </div>
                                 
-                                <button id="btn-${data.orderId}" onclick="updateOrderStatus('${data.orderId}')" class="w-24 text-gold bg-gold/10 border border-gold/30 px-3 py-[9px] rounded-sm text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-colors" title="Update Status">
+                                <button id="btn-${data.orderId}" onclick="updateOrderStatus('${data.orderId}')" class="w-24 text-white bg-royal/30 border border-gold/40 px-3 py-[9px] rounded-sm text-[10px] font-bold uppercase tracking-widest hover:brightness-125 transition-colors" title="Update Status">
                                     Update
                                 </button>
 
-                                <button onclick="deleteOrder('${data.orderId}')" class="w-[38px] h-[36px] flex items-center justify-center text-red-400 bg-red-400/10 border border-red-400/30 rounded-sm hover:bg-red-500 hover:text-white transition-colors" title="Delete Order">
+                                <button onclick="deleteOrder('${data.orderId}')" class="w-[38px] h-[36px] flex items-center justify-center text-red-400 bg-red-400/15 border border-red-400/30 rounded-sm hover:bg-red-500 hover:text-white transition-colors" title="Delete Order">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
