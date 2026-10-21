@@ -51,18 +51,20 @@
             overflow-x: hidden;
         }
 
-        @keyframes slowGoldFlow {
-            0%   { transform: translate3d(-4%, -3%, 0) scale(1); opacity: 0.82; }
-            50%  { transform: translate3d(4%, 3%, 0) scale(1.08); opacity: 0.98; }
-            100% { transform: translate3d(-4%, -3%, 0) scale(1); opacity: 0.82; }
+        /* Pure GPU-Accelerated Black & Gold Blending Ambient Background (Zero CPU Lag) */
+        @keyframes ambientGoldBlend {
+            0%   { transform: translate3d(-3%, -2%, 0) scale(1); opacity: 0.85; }
+            50%  { transform: translate3d(3%, 2%, 0) scale(1.06); opacity: 1; }
+            100% { transform: translate3d(-3%, -2%, 0) scale(1); opacity: 0.85; }
         }
 
         .live-gold-aura {
             background:
-                radial-gradient(circle at 18% 22%, rgba(212, 175, 55, 0.26) 0%, rgba(138, 98, 12, 0.10) 32%, transparent 62%),
-                radial-gradient(circle at 82% 76%, rgba(255, 215, 0, 0.22) 0%, rgba(120, 82, 8, 0.09) 35%, transparent 65%),
-                radial-gradient(circle at 50% 48%, rgba(184, 134, 11, 0.16) 0%, rgba(5, 5, 5, 0.92) 70%);
-            animation: slowGoldFlow 14s ease-in-out infinite;
+                radial-gradient(circle at 18% 20%, rgba(212, 175, 55, 0.22) 0%, rgba(138, 98, 12, 0.08) 34%, transparent 64%),
+                radial-gradient(circle at 82% 78%, rgba(255, 215, 0, 0.18) 0%, rgba(120, 82, 8, 0.07) 36%, transparent 66%),
+                radial-gradient(circle at 50% 45%, rgba(184, 134, 11, 0.13) 0%, rgba(4, 4, 4, 0.96) 72%);
+            will-change: transform, opacity;
+            animation: ambientGoldBlend 16s ease-in-out infinite;
         }
 
         .cinzel-decorative {
@@ -76,28 +78,27 @@
         }
 
         .gold-panel {
-            background: linear-gradient(145deg, rgba(18, 15, 10, 0.88), rgba(6, 6, 6, 0.94));
-            backdrop-filter: blur(16px);
+            background: linear-gradient(145deg, rgba(18, 15, 10, 0.92), rgba(6, 6, 6, 0.96));
             border: 1px solid rgba(212, 175, 55, 0.34);
-            box-shadow: 0 22px 55px rgba(0, 0, 0, 0.92), 0 0 35px rgba(212, 175, 55, 0.09);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 28px rgba(212, 175, 55, 0.08);
         }
 
         .btn-gold {
             background: linear-gradient(135deg, #FFE270 0%, #D4AF37 50%, #9A7209 100%);
             color: #050505;
             font-weight: 700;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .btn-gold:hover {
-            box-shadow: 0 0 28px rgba(212, 175, 55, 0.65);
+            box-shadow: 0 0 24px rgba(212, 175, 55, 0.6);
             transform: translateY(-1px);
         }
 
         .option-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 175, 55, 0.22);
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             cursor: pointer;
         }
 
@@ -109,11 +110,11 @@
         .option-card.active {
             border-color: #FFE270;
             background: linear-gradient(145deg, rgba(212, 175, 55, 0.22), rgba(154, 114, 9, 0.09));
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.28);
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
         }
 
         .swatch-btn {
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
         }
 
         .swatch-btn.active {
@@ -123,8 +124,8 @@
         }
 
         .studio-stage {
-            background: radial-gradient(circle at 50% 48%, #1e180d 0%, #080706 58%, #010101 100%);
-            box-shadow: inset 0 0 90px rgba(0,0,0,0.99), 0 0 30px rgba(212, 175, 55, 0.08);
+            background: radial-gradient(circle at 50% 50%, #1c160c 0%, #070605 60%, #010101 100%);
+            box-shadow: inset 0 0 80px rgba(0,0,0,0.98);
         }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -134,10 +135,9 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-gold selection:text-black relative">
 
-    <!-- LIVE SLOWLY BLENDING BLACK & GOLDEN BACKGROUND CANVAS + AURORA -->
+    <!-- GPU-ACCELERATED BLACK & GOLD AMBIENT BACKGROUND -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <canvas id="liveGoldBgCanvas" class="w-full h-full opacity-90"></canvas>
-        <div class="live-gold-aura absolute inset-0"></div>
+        <div class="live-gold-aura absolute -inset-10"></div>
     </div>
 
     <!-- Font Preloaders for Immediate Canvas Typography -->
@@ -146,7 +146,7 @@
     <div style="font-family: 'Great Vibes'; position: absolute; left: -9999px; visibility: hidden;">Hanzalah</div>
 
     <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-40 bg-black/85 backdrop-blur-md border-b border-gold/35 px-4 lg:px-8 py-3.5">
+    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-gold/35 px-4 lg:px-8 py-3.5">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-4">
                 <a href="https://dynast.co.in" class="text-xs text-gold/80 hover:text-lightgold flex items-center gap-1.5 border border-gold/35 px-3 py-1.5 rounded-full transition">
@@ -181,7 +181,7 @@
     <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
         <div id="mainStudioGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-            <!-- LEFT COLUMN: MICRO-PRECISION WATCH CANVAS (NO LOCK ON FIRST SCREEN) -->
+            <!-- LEFT COLUMN: CLOSE-CROPPED MACRO WATCH CANVAS (UNCOMPRESSED) -->
             <div class="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
                 <div class="gold-panel rounded-3xl p-5 relative overflow-hidden">
                     
@@ -199,19 +199,19 @@
                         </div>
                     </div>
 
-                    <!-- PHOTOREALISTIC STUDIO STAGE -->
-                    <div id="watchStageContainer" onmousemove="handleStageLightMove(event)" onmouseleave="resetStageLight()" class="studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 gap-4 items-center justify-items-center cursor-grab active:cursor-grabbing">
+                    <!-- PHOTOREALISTIC STUDIO STAGE (Static Natural Studio Lighting — Zero Cursor Lag) -->
+                    <div id="watchStageContainer" class="studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 gap-4 items-center justify-items-center">
                         
-                        <!-- 1. FRONT WATCH MACRO CANVAS -->
+                        <!-- 1. FRONT WATCH MACRO CANVAS (800x960 Close-Up Portrait Crop — Uncompressed!) -->
                         <div id="frontWatchWrapper" class="w-full flex flex-col items-center">
-                            <canvas id="frontWatchCanvas" width="900" height="1250" class="w-full max-w-[350px] h-auto select-none"></canvas>
-                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Micro-Precision Front Studio View</span>
+                            <canvas id="frontWatchCanvas" width="800" height="960" class="w-full max-w-[355px] h-auto select-none"></canvas>
+                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Macro Studio Front View</span>
                         </div>
 
-                        <!-- 2. BACK CASE MACRO CANVAS -->
+                        <!-- 2. BACK CASE MACRO CANVAS (800x960 Close-Up Portrait Crop) -->
                         <div id="backWatchWrapper" class="w-full flex flex-col items-center hidden">
-                            <canvas id="backWatchCanvas" width="900" height="1250" class="w-full max-w-[350px] h-auto select-none"></canvas>
-                            <span id="backCaseCaption" class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Solid Brushed Steel Caseback</span>
+                            <canvas id="backWatchCanvas" width="800" height="960" class="w-full max-w-[355px] h-auto select-none"></canvas>
+                            <span id="backCaseCaption" class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Solid Brushed Steel Caseback (+₹500)</span>
                         </div>
 
                         <!-- 3. DEDICATED HIGH-RES 3D STRAP LOCK / CLASP MACRO STUDIO WINDOW (Hidden on First Screen) -->
@@ -220,7 +220,7 @@
                                 <span class="text-[10px] uppercase tracking-widest text-lightgold font-bold">
                                     <i class="fa-solid fa-magnifying-glass-plus text-gold mr-1"></i> Live 3D Strap Lock Close-Up
                                 </span>
-                                <span id="liveLockBadgeTitle" class="text-[10px] text-gold font-semibold">Butterfly Deployant Lock</span>
+                                <span id="liveLockBadgeTitle" class="text-[10px] text-gold font-semibold">Butterfly Deployant Lock (+₹650)</span>
                             </div>
                             <canvas id="lockMacroCanvas" width="800" height="340" class="w-full max-w-[360px] rounded-xl border border-gold/25 bg-black/70 shadow-inner select-none"></canvas>
                         </div>
@@ -291,7 +291,7 @@
                 <div class="gold-panel rounded-3xl p-6 border-l-4 border-l-gold">
                     <h1 class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-wider">DYNAST • Bespoke Watch Studio</h1>
                     <p class="text-xs text-gray-300 mt-1 leading-relaxed">
-                        Engineered at micro-level precision with seamless Solid End-Links (SEL), spring-bar tucked leather straps, and compulsory <strong class="text-gold font-serif">DYNAST • LUXURIOUS HOROLOGY</strong> dial branding. Every bespoke component is individually priced below.
+                        Engineered with close-up macro proportions, non-overlapping 5-link Jubilee tolerances, spring-bar tucked Spanish leather straps, and compulsory <strong class="text-gold font-serif">DYNAST • LUXURIOUS HOROLOGY</strong> dial branding.
                     </p>
                 </div>
 
@@ -305,7 +305,7 @@
                         <span id="step1PriceBadge" class="text-xs font-bold text-gold bg-gold/15 border border-gold/30 px-3 py-1 rounded-full">+₹2,300</span>
                     </div>
 
-                    <!-- 1A. Bezel Architecture (Both Priced) -->
+                    <!-- 1A. Bezel Architecture -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Select Case & Bezel Style:</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -333,7 +333,7 @@
                         </div>
                     </div>
 
-                    <!-- 1B. Case Colour (All 6 Priced) -->
+                    <!-- 1B. Case Colour -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">2. Select Watch Case Colour:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="caseColorGrid">
@@ -388,7 +388,7 @@
                         </span>
                     </div>
 
-                    <!-- 1. Select Dial Colour (All 8 Priced) -->
+                    <!-- 1. Select Dial Colour -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Choose Dial Colour:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -442,7 +442,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. Hour Markers / Numeral Layout (All 6 Priced) -->
+                    <!-- 2. Hour Markers / Numeral Layout -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">2. Select Dial Numerals & Markers Style:</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -515,7 +515,7 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                             <div>
                                 <span class="text-[10px] uppercase tracking-wider text-gray-400 block mb-1">Name Font Style:</span>
-                                <select id="customNameFont" onchange="renderWatch()" class="w-full bg-black border border-gold/30 rounded-xl px-3 py-2 text-xs text-white outline-none">
+                                <select id="customNameFont" onchange="renderWatch(true)" class="w-full bg-black border border-gold/30 rounded-xl px-3 py-2 text-xs text-white outline-none">
                                     <option value="Cinzel">Royal Serif (Cinzel)</option>
                                     <option value="Cinzel Decorative">Cinzel Decorative</option>
                                     <option value="Great Vibes">Luxury Script (Cursive)</option>
@@ -825,7 +825,7 @@
             </form>
         </div>
     </div>
-    <!-- MICRO-PRECISION HOROLOGY SHADER ENGINE (100% PRICED + SEAMLESS MONOBLOC LUGS & END-LINKS) -->
+    <!-- ZERO-LAG CACHED HOROLOGY STUDIO ENGINE (800x960 PORTRAIT CROP + NON-OVERLAPPING JUBILEE) -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
@@ -845,7 +845,7 @@
             img.onload = function() {
                 skeletonMovementImg = img;
                 skeletonImgLoaded = true;
-                renderWatch();
+                renderWatch(true);
             };
             img.onerror = function() {
                 preloadInternetSkeletonMovement(index + 1);
@@ -853,70 +853,7 @@
             img.src = SKELETON_MOVEMENT_URLS[index];
         }
 
-        // 2. LIVE SLOWLY BLENDING BLACK & GOLDEN AMBIENT WEBSITE BACKGROUND ENGINE
-        function initLiveGoldBackground() {
-            const bgCanvas = document.getElementById('liveGoldBgCanvas');
-            if (!bgCanvas) return;
-            const bctx = bgCanvas.getContext('2d');
-            let w = bgCanvas.width = window.innerWidth;
-            let h = bgCanvas.height = window.innerHeight;
-
-            window.addEventListener('resize', () => {
-                w = bgCanvas.width = window.innerWidth;
-                h = bgCanvas.height = window.innerHeight;
-            });
-
-            const orbs = [
-                { x: 0.20, y: 0.25, r: 0.48, vx: 0.00022, vy: 0.00018, color: 'rgba(212, 175, 55, 0.22)' },
-                { x: 0.80, y: 0.70, r: 0.52, vx: -0.00019, vy: -0.00021, color: 'rgba(184, 134, 11, 0.19)' },
-                { x: 0.50, y: 0.50, r: 0.60, vx: 0.00015, vy: -0.00016, color: 'rgba(120, 82, 8, 0.16)' },
-                { x: 0.35, y: 0.85, r: 0.42, vx: -0.00024, vy: 0.00014, color: 'rgba(255, 215, 0, 0.14)' }
-            ];
-
-            const dust = Array.from({ length: 40 }, () => ({
-                x: Math.random(),
-                y: Math.random(),
-                r: Math.random() * 1.8 + 0.5,
-                vy: -(Math.random() * 0.00025 + 0.00008),
-                vx: (Math.random() - 0.5) * 0.00015,
-                alpha: Math.random() * 0.45 + 0.15
-            }));
-
-            function animateBg() {
-                bctx.fillStyle = '#030303';
-                bctx.fillRect(0, 0, w, h);
-
-                const maxDim = Math.max(w, h);
-                orbs.forEach(o => {
-                    o.x += o.vx; o.y += o.vy;
-                    if (o.x < 0.05 || o.x > 0.95) o.vx *= -1;
-                    if (o.y < 0.05 || o.y > 0.95) o.vy *= -1;
-                    const cx = o.x * w, cy = o.y * h, rad = o.r * maxDim;
-                    const g = bctx.createRadialGradient(cx, cy, 10, cx, cy, rad);
-                    g.addColorStop(0, o.color);
-                    g.addColorStop(0.5, 'rgba(90, 62, 6, 0.06)');
-                    g.addColorStop(1, 'rgba(3, 3, 3, 0)');
-                    bctx.fillStyle = g;
-                    bctx.fillRect(0, 0, w, h);
-                });
-
-                dust.forEach(p => {
-                    p.x += p.vx; p.y += p.vy;
-                    if (p.y < 0) p.y = 1;
-                    if (p.x < 0) p.x = 1;
-                    if (p.x > 1) p.x = 0;
-                    bctx.beginPath();
-                    bctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
-                    bctx.fillStyle = `rgba(255, 224, 130, ${p.alpha})`;
-                    bctx.fill();
-                });
-
-                requestAnimationFrame(animateBg);
-            }
-            animateBg();
-        }
-
-        // 3. CALIBRATED METALLIC PALETTES (True 904L Oystersteel, 18k Everose, 18k Yellow Gold, Black PVD)
+        // 2. CALIBRATED METALLIC PALETTES (Fixed Natural Studio Lighting)
         const METAL_PALETTES = {
             silver: {
                 rgbJet: [14, 17, 22], rgbShadow: [62, 70, 82], rgbMid: [178, 186, 198], rgbBright: [240, 244, 249], rgbSpec: [255, 255, 255],
@@ -944,25 +881,10 @@
             }
         };
 
-        let lightShiftAngle = 0;
-
-        function handleStageLightMove(e) {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const nx = ((e.clientX - rect.left) / rect.width) - 0.5;
-            lightShiftAngle = nx * 0.55;
-            renderWatch();
-        }
-
-        function resetStageLight() {
-            lightShiftAngle = 0;
-            renderWatch();
-        }
-
         function sampleStudioMirror(angleRad, pal) {
-            const a = angleRad + lightShiftAngle;
-            const w = 0.52 * Math.cos(a * 2 + 0.78)
-                    + 0.33 * Math.sin(a * 3 - 0.42)
-                    + 0.23 * Math.cos(a * 6 + 0.18);
+            const w = 0.52 * Math.cos(angleRad * 2 + 0.78)
+                    + 0.33 * Math.sin(angleRad * 3 - 0.42)
+                    + 0.23 * Math.cos(angleRad * 6 + 0.18);
             let t = Math.max(0, Math.min(1, (w + 0.86) / 1.72));
             t = t * t * (3 - 2 * t);
 
@@ -979,7 +901,7 @@
             return `rgb(${Math.round(c0[0] + (c1[0] - c0[0]) * f)},${Math.round(c0[1] + (c1[1] - c0[1]) * f)},${Math.round(c0[2] + (c1[2] - c0[2]) * f)})`;
         }
 
-        // 4. 100% PRICED CATALOG (EVERY SINGLE ITEM HAS A POSITIVE RUPEE PRICE > 0!)
+        // 3. 100% PRICED CATALOG
         const BEZEL_STYLES = {
             fluted: { name: '48-Flute Luxury Bezel', price: 600 },
             smooth: { name: 'Smooth Mirror Dress Bezel', price: 300 }
@@ -1092,28 +1014,38 @@
         let authMode = 'login';
         let currentUser = JSON.parse(localStorage.getItem('dynast_current_user') || 'null');
 
+        // OFFSCREEN STATIC BUFFER FOR ZERO-LAG REAL-TIME CLOCK TICKING
+        const frontStaticBuffer = document.createElement('canvas');
+        frontStaticBuffer.width = 800;
+        frontStaticBuffer.height = 960;
+        let frontBufferValid = false;
+
         window.addEventListener('DOMContentLoaded', () => {
             const grid = document.getElementById('mainStudioGrid');
             if (grid && grid.children.length > 2) {
                 while (grid.children.length > 2) grid.removeChild(grid.children[1]);
             }
-            initLiveGoldBackground();
             preloadInternetSkeletonMovement(0);
             renderStrapColorSwatches();
             updatePriceBreakdown();
             updateAuthUI();
             if (document.fonts && document.fonts.ready) {
-                document.fonts.ready.then(() => renderWatch());
+                document.fonts.ready.then(() => renderWatch(true));
+            } else {
+                renderWatch(true);
             }
+            // Fast, lightweight 250ms clock tick that ONLY redraws the 3 hands over the cached buffer!
             setInterval(() => {
-                if (state.liveClock) renderWatch();
-            }, 80);
+                if (state.liveClock && (state.viewMode === 'front' || state.viewMode === 'split')) {
+                    drawFrontWatchCanvas(false);
+                }
+            }, 250);
         });
 
         function toggleClockMode() {
             state.liveClock = !state.liveClock;
             document.getElementById('clockModeText').textContent = state.liveClock ? 'Live Real-Time Clock' : 'Studio 10:10 Pose';
-            renderWatch();
+            drawFrontWatchCanvas(false);
         }
 
         function createMetalGradient(ctx, x0, y0, x1, y1, metalKey, highContrast = false) {
@@ -1155,36 +1087,34 @@
             ctx.restore();
         }
 
-        // HELPER: Draw Unified 3D CNC-Machined Monobloc Watch Case & Lugs (Zero Floating or Disconnected Shapes!)
-        // Inner lug span is strictly x = 310 to x = 590 (width = 280px).
-        // The strap/bracelet sits inside x = 310..590, and the inner lug walls (x=310 & x=590) hug the strap with 3D contact shadows!
+        // HELPER: Unified 3D Monobloc Watch Case & Lugs for 800x960 Close-Cropped Portrait Frame (Center: 400, 480)
+        // Inner lug span is x = 260 to x = 540 (width = 280px).
         function drawMonoblocCaseAndLugs(ctx, cx, cy, lugMetalKey, isSmoothDress) {
             const lugPal = METAL_PALETTES[lugMetalKey] || METAL_PALETTES.silver;
 
-            // 1. Cast Deep Studio Drop Shadow from the Entire Monobloc Case Body
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.92)';
-            ctx.shadowBlur = 42;
-            ctx.shadowOffsetY = 16;
+            ctx.shadowBlur = 40;
+            ctx.shadowOffsetY = 14;
 
-            const topLugTipY = isSmoothDress ? 304 : 292;
-            const botLugTipY = isSmoothDress ? 946 : 958;
-            const outerLugTipXLeft = isSmoothDress ? 278 : 266;
-            const outerLugTipXRight = isSmoothDress ? 622 : 634;
-            const caseFlankXLeft = isSmoothDress ? 182 : 168;
-            const caseFlankXRight = isSmoothDress ? 718 : 732;
+            const topLugTipY = isSmoothDress ? 156 : 144;
+            const botLugTipY = isSmoothDress ? 804 : 816;
+            const outerLugTipXLeft = isSmoothDress ? 228 : 216;
+            const outerLugTipXRight = isSmoothDress ? 572 : 584;
+            const caseFlankXLeft = isSmoothDress ? 132 : 118;
+            const caseFlankXRight = isSmoothDress ? 668 : 682;
 
             // Left Monobloc Case Flank + Top-Left & Bottom-Left Hooded Lugs
             ctx.beginPath();
             ctx.moveTo(outerLugTipXLeft, topLugTipY);
-            ctx.lineTo(310, topLugTipY + 3); // Angled CNC Lug Tip Face meeting inner lug wall at x=310
-            ctx.lineTo(310, botLugTipY - 3); // Inner Lug Wall (hugs strap seamlessly at x=310!)
+            ctx.lineTo(260, topLugTipY + 3);
+            ctx.lineTo(260, botLugTipY - 3);
             ctx.lineTo(outerLugTipXLeft, botLugTipY);
-            ctx.bezierCurveTo(222, 868, caseFlankXLeft, 755, caseFlankXLeft, cy);
-            ctx.bezierCurveTo(caseFlankXLeft, 495, 222, 382, outerLugTipXLeft, topLugTipY);
+            ctx.bezierCurveTo(172, 725, caseFlankXLeft, 610, caseFlankXLeft, cy);
+            ctx.bezierCurveTo(caseFlankXLeft, 350, 172, 235, outerLugTipXLeft, topLugTipY);
             ctx.closePath();
 
-            const leftLugGrad = ctx.createLinearGradient(caseFlankXLeft, topLugTipY, 310, botLugTipY);
+            const leftLugGrad = ctx.createLinearGradient(caseFlankXLeft, topLugTipY, 260, botLugTipY);
             leftLugGrad.addColorStop(0.00, lugPal.fluteBright);
             leftLugGrad.addColorStop(0.15, lugPal.fluteLight);
             leftLugGrad.addColorStop(0.32, lugPal.fluteWarm);
@@ -1199,14 +1129,14 @@
             // Right Monobloc Case Flank + Top-Right & Bottom-Right Hooded Lugs
             ctx.beginPath();
             ctx.moveTo(outerLugTipXRight, topLugTipY);
-            ctx.lineTo(590, topLugTipY + 3); // Inner lug wall at x=590
-            ctx.lineTo(590, botLugTipY - 3);
+            ctx.lineTo(540, topLugTipY + 3);
+            ctx.lineTo(540, botLugTipY - 3);
             ctx.lineTo(outerLugTipXRight, botLugTipY);
-            ctx.bezierCurveTo(678, 868, caseFlankXRight, 755, caseFlankXRight, cy);
-            ctx.bezierCurveTo(caseFlankXRight, 495, 678, 382, outerLugTipXRight, topLugTipY);
+            ctx.bezierCurveTo(628, 725, caseFlankXRight, 610, caseFlankXRight, cy);
+            ctx.bezierCurveTo(caseFlankXRight, 350, 628, 235, outerLugTipXRight, topLugTipY);
             ctx.closePath();
 
-            const rightLugGrad = ctx.createLinearGradient(590, topLugTipY, caseFlankXRight, botLugTipY);
+            const rightLugGrad = ctx.createLinearGradient(540, topLugTipY, caseFlankXRight, botLugTipY);
             rightLugGrad.addColorStop(0.00, lugPal.fluteMid);
             rightLugGrad.addColorStop(0.09, lugPal.fluteDark);
             rightLugGrad.addColorStop(0.22, lugPal.fluteBright);
@@ -1219,75 +1149,58 @@
             ctx.fill();
             ctx.restore();
 
-            // 2. Microscopic Vertical Brushed Satin Grain on Top & Bottom Lug Hoods
+            // Vertical Satin Brushed Grain on Lug Hoods + 45° Mirror Chamfers + Inner Lug Wall Shadows
             ctx.save();
             ctx.strokeStyle = 'rgba(255,255,255,0.065)';
-            ctx.lineWidth = 0.9;
-            for (let lx = caseFlankXLeft + 12; lx <= 308; lx += 2.4) {
+            ctx.lineWidth = 1.0;
+            for (let lx = caseFlankXLeft + 12; lx <= 258; lx += 3) {
                 ctx.beginPath(); ctx.moveTo(lx, topLugTipY + 8); ctx.lineTo(lx, botLugTipY - 8); ctx.stroke();
             }
-            for (let rx = 592; rx <= caseFlankXRight - 12; rx += 2.4) {
+            for (let rx = 542; rx <= caseFlankXRight - 12; rx += 3) {
                 ctx.beginPath(); ctx.moveTo(rx, topLugTipY + 8); ctx.lineTo(rx, botLugTipY - 8); ctx.stroke();
             }
 
-            // 3. 3D 45-Degree Mirror-Polished Outer Lug Chamfer Bevel
-            const drawChamfer = (xTip, yTip, xFlank, isLeft) => {
-                ctx.beginPath();
-                ctx.moveTo(xTip, yTip);
-                ctx.bezierCurveTo(isLeft ? 222 : 678, yTip < cy ? 382 : 868, xFlank, yTip < cy ? 495 : 755, xFlank, cy);
-                ctx.lineTo(xFlank + (isLeft ? 7 : -7), cy);
-                ctx.bezierCurveTo(xFlank + (isLeft ? 7 : -7), yTip < cy ? 498 : 752, isLeft ? 229 : 671, yTip < cy ? 385 : 865, xTip + (isLeft ? 7 : -7), yTip + (yTip < cy ? 2 : -2));
-                ctx.closePath();
-                const chG = ctx.createLinearGradient(xTip, yTip, xFlank, cy);
-                chG.addColorStop(0.0, lugPal.fluteBright);
-                chG.addColorStop(0.45, lugPal.fluteLight);
-                chG.addColorStop(0.75, lugPal.fluteDark);
-                chG.addColorStop(1.0, lugPal.fluteBright);
-                ctx.fillStyle = chG;
-                ctx.fill();
-            };
-            drawChamfer(outerLugTipXLeft, topLugTipY, caseFlankXLeft, true);
-            drawChamfer(outerLugTipXLeft, botLugTipY, caseFlankXLeft, true);
-            drawChamfer(outerLugTipXRight, topLugTipY, caseFlankXRight, false);
-            drawChamfer(outerLugTipXRight, botLugTipY, caseFlankXRight, false);
+            // Outer 45° Mirror-Polished Lug Bevel Chamfer
+            ctx.strokeStyle = lugPal.fluteBright;
+            ctx.lineWidth = 3.2;
+            ctx.globalAlpha = 0.88;
+            ctx.beginPath();
+            ctx.moveTo(outerLugTipXLeft + 2, topLugTipY + 3); ctx.bezierCurveTo(175, 238, caseFlankXLeft + 3, 350, caseFlankXLeft + 3, cy);
+            ctx.moveTo(outerLugTipXRight - 2, topLugTipY + 3); ctx.bezierCurveTo(625, 238, caseFlankXRight - 3, 350, caseFlankXRight - 3, cy);
+            ctx.stroke();
 
-            // 4. 3D Inner Lug Wall Thickness & Contact Shadow onto the Strap/SEL (Eliminates Hovering!)
-            // Left inner lug wall at x=310 casts shadow to the right (x=310..320); Right inner lug wall at x=590 casts shadow to the left (x=580..590)
-            const leftWallShadow = ctx.createLinearGradient(310, 0, 322, 0);
+            // 3D Inner Lug Wall Contact Shadows Cast onto the Strap/Bracelet at x=260 & x=540
+            const leftWallShadow = ctx.createLinearGradient(260, 0, 274, 0);
             leftWallShadow.addColorStop(0.0, 'rgba(0,0,0,0.92)');
-            leftWallShadow.addColorStop(0.4, 'rgba(0,0,0,0.45)');
+            leftWallShadow.addColorStop(0.45, 'rgba(0,0,0,0.42)');
             leftWallShadow.addColorStop(1.0, 'rgba(0,0,0,0)');
             ctx.fillStyle = leftWallShadow;
-            ctx.fillRect(310, topLugTipY + 3, 12, 115);
-            ctx.fillRect(310, botLugTipY - 118, 12, 115);
+            ctx.fillRect(260, topLugTipY + 3, 14, 110);
+            ctx.fillRect(260, botLugTipY - 113, 14, 110);
 
-            const rightWallShadow = ctx.createLinearGradient(590, 0, 578, 0);
+            const rightWallShadow = ctx.createLinearGradient(540, 0, 526, 0);
             rightWallShadow.addColorStop(0.0, 'rgba(0,0,0,0.92)');
-            rightWallShadow.addColorStop(0.4, 'rgba(0,0,0,0.45)');
+            rightWallShadow.addColorStop(0.45, 'rgba(0,0,0,0.42)');
             rightWallShadow.addColorStop(1.0, 'rgba(0,0,0,0)');
             ctx.fillStyle = rightWallShadow;
-            ctx.fillRect(578, topLugTipY + 3, 12, 115);
-            ctx.fillRect(578, botLugTipY - 118, 12, 115);
+            ctx.fillRect(526, topLugTipY + 3, 14, 110);
+            ctx.fillRect(526, botLugTipY - 113, 14, 110);
 
-            // Bright Specular Vertical Edge Highlight right on the inner lug lip (x=309.5 & x=590.5)
             ctx.strokeStyle = lugPal.fluteBright;
             ctx.lineWidth = 1.4;
             ctx.globalAlpha = 0.75;
             ctx.beginPath();
-            ctx.moveTo(309.5, topLugTipY + 3); ctx.lineTo(309.5, topLugTipY + 95);
-            ctx.moveTo(590.5, topLugTipY + 3); ctx.lineTo(590.5, topLugTipY + 95);
-            ctx.moveTo(309.5, botLugTipY - 95); ctx.lineTo(309.5, botLugTipY - 3);
-            ctx.moveTo(590.5, botLugTipY - 95); ctx.lineTo(590.5, botLugTipY - 3);
+            ctx.moveTo(259.5, topLugTipY + 3); ctx.lineTo(259.5, topLugTipY + 95);
+            ctx.moveTo(540.5, topLugTipY + 3); ctx.lineTo(540.5, topLugTipY + 95);
+            ctx.moveTo(259.5, botLugTipY - 95); ctx.lineTo(259.5, botLugTipY - 3);
+            ctx.moveTo(540.5, botLugTipY - 95); ctx.lineTo(540.5, botLugTipY - 3);
             ctx.stroke();
             ctx.restore();
         }
-
-        // PHOTOREALISTIC FRONT WATCH RENDERER (900 x 1250, Center: 450, 625)
-        function drawFrontWatchCanvas() {
-            const canvas = document.getElementById('frontWatchCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            const W = 900, H = 1250, CX = 450, CY = 625;
+        // BUILD STATIC FRONT WATCH INTO OFFSCREEN CACHE (Runs ONLY when user clicks an option!)
+        function rebuildFrontStaticBuffer() {
+            const ctx = frontStaticBuffer.getContext('2d');
+            const W = 800, H = 960, CX = 400, CY = 480;
             ctx.clearRect(0, 0, W, H);
 
             const caseObj = CASE_OPTIONS[state.caseColor];
@@ -1297,14 +1210,14 @@
             const bezelPal = METAL_PALETTES[caseObj.bezelMetal];
             const isSmooth = state.bezelStyle === 'smooth';
 
-            // 1. DRAW SEAMLESS STRAP OR SOLID-END-LINK (SEL) 5-LINK JUBILEE BRACELET (Seated inside x=310..590)
-            drawFullRealisticStrap(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.bezelMetal, false);
+            // 1. DRAW CLOSE-CROPPED, NON-OVERLAPPING JUBILEE BRACELET OR STRAP (x = 260..540)
+            drawCroppedRealisticStrap(ctx, CX, CY, state.strapMaterial, strapColorObj);
 
-            // 2. DRAW UNIFIED 3D MONOBLOC CASE & HOODED LUGS (Hugs x=310..590 with zero hovering!)
+            // 2. DRAW UNIFIED 3D MONOBLOC CASE & HOODED LUGS
             drawMonoblocCaseAndLugs(ctx, CX, CY, caseObj.lugMetal, isSmooth);
 
             // 3. DRAW 3D KNURLED TWINLOCK WINDING CROWN AT 3 O'CLOCK
-            const crownX = isSmooth ? 706 : 722;
+            const crownX = isSmooth ? 656 : 672;
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.88)';
             ctx.shadowBlur = 14;
@@ -1324,11 +1237,10 @@
                 ctx.fillRect(crownX + 12, cy + 3.0, 26, 2.0);
             }
 
-            // 4. DRAW BEZEL (48-Flute Luxury Bezel OR 3D Domed Smooth Mirror Dress Bezel)
+            // 4. DRAW BEZEL (48-Flute Luxury Bezel OR Smooth Mirror Dress Bezel)
             const rBezelOuter = isSmooth ? 256 : 270;
             const rBezelInner = 222;
 
-            // Cast Deep Circular Overhang Shadow from Bezel onto the Solid End-Link / Spring-Bar Lip
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.95)';
             ctx.shadowBlur = 28;
@@ -1340,7 +1252,6 @@
             ctx.restore();
 
             if (isSmooth) {
-                // 3D Torus Smooth Mirror-Polished Dress Bezel
                 for (let s = 0; s < 180; s++) {
                     const a1 = (s * 2 * Math.PI) / 180;
                     const a2 = ((s + 1.25) * 2 * Math.PI) / 180;
@@ -1376,7 +1287,6 @@
                 ctx.strokeStyle = bezelPal.rim;
                 ctx.stroke();
             } else {
-                // Stepped Outer Bezel Seat Ring + 48-Flute Sawtooth Prism Bezel
                 const flutes = 48;
                 for (let i = 0; i < flutes; i++) {
                     const a1 = (i * 2 * Math.PI) / flutes;
@@ -1428,7 +1338,7 @@
                 ctx.stroke();
             }
 
-            // 5. DRAW 3D CONCAVE METALLIC REHAUT RING & 1,800-RAY SUNBURST DIAL (rDial = 204)
+            // 5. DRAW 3D CONCAVE METALLIC REHAUT RING & SUNBURST DIAL (rDial = 204)
             const rDial = 204;
             const rehautGrad = ctx.createLinearGradient(CX - rBezelInner, CY - rBezelInner, CX + rBezelInner, CY + rBezelInner);
             rehautGrad.addColorStop(0.0, '#101216');
@@ -1466,7 +1376,7 @@
 
             if (dialObj.sunburst) {
                 if (ctx.createConicGradient) {
-                    const sheen = ctx.createConicGradient(-Math.PI / 3.1 + lightShiftAngle, CX, CY);
+                    const sheen = ctx.createConicGradient(-Math.PI / 3.1, CX, CY);
                     sheen.addColorStop(0.00, dialObj.sheen);
                     sheen.addColorStop(0.13, 'rgba(0,0,0,0.22)');
                     sheen.addColorStop(0.27, 'rgba(0,0,0,0.36)');
@@ -1478,10 +1388,10 @@
                     ctx.fillRect(CX - rDial, CY - rDial, rDial * 2, rDial * 2);
                 }
 
-                for (let r = 0; r < 1600; r++) {
-                    const a = (r * 2 * Math.PI) / 1600;
+                for (let r = 0; r < 900; r++) {
+                    const a = (r * 2 * Math.PI) / 900;
                     ctx.strokeStyle = (r % 2 === 0) ? 'rgba(255,255,255,0.038)' : 'rgba(0,0,0,0.058)';
-                    ctx.lineWidth = 0.55;
+                    ctx.lineWidth = 0.65;
                     ctx.beginPath();
                     ctx.moveTo(CX + 4 * Math.cos(a), CY + 4 * Math.sin(a));
                     ctx.lineTo(CX + rDial * Math.cos(a), CY + rDial * Math.sin(a));
@@ -1531,6 +1441,7 @@
                 ctx.stroke();
             }
             ctx.restore();
+
             // 7. DRAW DIAL MARKERS & NUMERALS
             const romans = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
             const arabics = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
@@ -1679,7 +1590,8 @@
                 ctx.shadowColor = (state.dialColor === 'white' || state.dialColor === 'silver_dial' || state.dialColor === 'champagne') ? 'rgba(0,0,0,0.18)' : 'rgba(0,0,0,0.68)';
                 ctx.shadowBlur = 4;
                 ctx.fillStyle = state.customNameColor;
-                const fontName = state.customNameFont || 'Cinzel';
+                const fontName = document.getElementById('customNameFont') ? document.getElementById('customNameFont').value : (state.customNameFont || 'Cinzel');
+                state.customNameFont = fontName;
                 const fSize = fontName === 'Great Vibes' ? 32 : 21;
                 ctx.font = `600 ${fSize}px "${fontName}", serif`;
                 ctx.textAlign = 'center';
@@ -1717,7 +1629,25 @@
                 ctx.restore();
             }
 
-            // 11. DRAW 3D HANDS (Real-Time Clock Default)
+            frontBufferValid = true;
+        }
+
+        // ULTRA-FAST FRONT WATCH RENDERER (Copies Static Buffer in 0.1ms + Draws Hands!)
+        function drawFrontWatchCanvas(forceRebuild = false) {
+            const canvas = document.getElementById('frontWatchCanvas');
+            if (!canvas) return;
+            if (forceRebuild || !frontBufferValid) {
+                rebuildFrontStaticBuffer();
+            }
+
+            const ctx = canvas.getContext('2d');
+            const W = 800, H = 960, CX = 400, CY = 480, rDial = 204;
+            ctx.clearRect(0, 0, W, H);
+            ctx.drawImage(frontStaticBuffer, 0, 0);
+
+            const caseObj = CASE_OPTIONS[state.caseColor];
+            const bezelPal = METAL_PALETTES[caseObj.bezelMetal];
+
             let hrAngleDeg, minAngleDeg, secAngleDeg;
             if (state.liveClock) {
                 const now = new Date();
@@ -1737,13 +1667,12 @@
             drawDauphineHand(ctx, CX, CY, minAngleDeg * Math.PI / 180, 172, 32, 8.0, bezelPal, state.bezelStyle === 'fluted');
             drawSleekSecondHand(ctx, CX, CY, secAngleDeg * Math.PI / 180, 186, 44, bezelPal);
 
-            // 12. SAPPHIRE CRYSTAL ANTI-REFLECTIVE DOME GLARE
             ctx.save();
             ctx.beginPath();
             ctx.arc(CX, CY, rDial, 0, Math.PI * 2);
             const glare = ctx.createLinearGradient(CX - rDial, CY - rDial, CX + rDial * 0.4, CY + rDial * 0.4);
-            glare.addColorStop(0.0, 'rgba(255,255,255,0.18)');
-            glare.addColorStop(0.42, 'rgba(255,255,255,0.03)');
+            glare.addColorStop(0.0, 'rgba(255,255,255,0.16)');
+            glare.addColorStop(0.42, 'rgba(255,255,255,0.02)');
             glare.addColorStop(0.48, 'rgba(255,255,255,0)');
             ctx.fillStyle = glare;
             ctx.fill();
@@ -1823,110 +1752,60 @@
             ctx.restore();
         }
 
-        // HELPER: Micro-Realistic Solid End-Link (SEL) Jubilee Bracelet & Spring-Bar Tucked Straps (Seated strictly inside x=310..590!)
-        function drawFullRealisticStrap(ctx, cx, cy, matKey, strapColorObj, buckleMetal, isBackView) {
+        // HELPER: Close-Cropped, Non-Overlapping 5-Link Jubilee Bracelet & Spring-Bar Tucked Straps (800 x 960 Frame, x = 260..540)
+        // Only the upper & lower lug sections of the strap are shown—never compressing the watch!
+        // Every Jubilee link is drawn in clean outward steps with a 2.5px gap—ZERO overlapping!
+        function drawCroppedRealisticStrap(ctx, cx, cy, matKey, strapColorObj) {
             if (matKey === 'metal') {
                 const outerPal = METAL_PALETTES[strapColorObj.outer] || METAL_PALETTES.silver;
                 const centerPal = METAL_PALETTES[strapColorObj.center] || METAL_PALETTES.rosegold;
 
-                // 1. Dark Inter-Link Pin Chassis strictly inside lug span (x = 310 to 590)
+                // Dark inter-link pin chassis seated strictly between inner lug walls (x = 260 to 540, width = 280px)
                 ctx.fillStyle = '#050608';
-                ctx.fillRect(310, 20, 280, 385);
-                ctx.fillRect(310, 845, 280, 385);
+                ctx.fillRect(260, 0, 280, 250);
+                ctx.fillRect(260, 710, 280, 250);
 
-                // 2. Custom-Machined Curved Solid End-Links (SEL) at the Lug Junction (y = 298..385 top, y = 865..952 bottom)
-                // Recessed 4px inside the lug tips (y=292 / y=958) just like the real Rolex Datejust 41!
-                const selWOuter = 280 * 0.30;
-                const selWCenter = (280 - selWOuter * 2 - 6) / 3;
+                // Draw 7 non-overlapping rows stepping outward from under the bezel (rBezel=270 => y=210 top, y=750 bottom)
+                const linkH = 32.0;
+                const rowStep = 34.5; // 32px link + 2.5px dark pin gap = ZERO vertical overlap!
 
-                // Top & Bottom SEL Outer Brushed Wings
-                [
-                    { y: 298, h: 85, isTop: true },
-                    { y: 867, h: 85, isTop: false }
-                ].forEach(sel => {
-                    [310, 310 + selWOuter + selWCenter * 3 + 6].forEach(ox => {
-                        const sg = ctx.createLinearGradient(ox, sel.y, ox, sel.y + sel.h);
-                        sg.addColorStop(0.00, outerPal.fluteWarm);
-                        sg.addColorStop(0.28, outerPal.fluteBright);
-                        sg.addColorStop(0.62, outerPal.fluteLight);
-                        sg.addColorStop(0.88, outerPal.fluteMid);
-                        sg.addColorStop(1.00, outerPal.fluteDark);
-                        drawRoundedRect(ctx, ox, sel.y, selWOuter, sel.h, 4);
-                        ctx.fillStyle = sg;
-                        ctx.fill();
-
-                        // Machined SEL horizontal step crease
-                        const creaseY = sel.isTop ? sel.y + 34 : sel.y + sel.h - 34;
-                        ctx.strokeStyle = 'rgba(0,0,0,0.75)';
-                        ctx.lineWidth = 1.6;
-                        ctx.beginPath(); ctx.moveTo(ox + 1, creaseY); ctx.lineTo(ox + selWOuter - 1, creaseY); ctx.stroke();
-                    });
-
-                    // 3 Center Mirror-Polished SEL D-Links Extending Flush Under the Bezel Rim
-                    for (let c = 0; c < 3; c++) {
-                        const cxLink = 310 + selWOuter + 1.5 + c * (selWCenter + 1.5);
-                        const cg = ctx.createLinearGradient(cxLink, sel.y, cxLink, sel.y + sel.h);
-                        cg.addColorStop(0.00, centerPal.fluteDark);
-                        cg.addColorStop(0.20, centerPal.fluteBright);
-                        cg.addColorStop(0.45, centerPal.fluteLight);
-                        cg.addColorStop(0.62, '#070709');
-                        cg.addColorStop(0.84, centerPal.fluteMid);
-                        cg.addColorStop(1.00, centerPal.fluteDark);
-                        drawRoundedRect(ctx, cxLink, sel.y, selWCenter, sel.h, 4);
-                        ctx.fillStyle = cg;
-                        ctx.fill();
-                    }
-                });
-
-                // 3. Articulated 5-Link Jubilee Rows Extending Outward from the SEL (Tapered from 280px at lugs to 232px)
-                const linkH = 31.5, rowStep = 33.5;
                 for (let side = 0; side < 2; side++) {
                     const isTop = side === 0;
-                    for (let i = 0; i < 9; i++) {
-                        const baseY = isTop ? (20 + i * rowStep) : (942 + i * rowStep);
-                        const distFromCase = isTop ? (8 - i) : i;
-                        const taper = distFromCase * 2.6;
-                        const xStart = 310 + taper;
+                    for (let i = 0; i < 7; i++) {
+                        // i=0 is closest to the bezel (tucked under bezel edge); i=6 bleeds off canvas edge
+                        const baseY = isTop ? (198 - i * rowStep) : (730 + i * rowStep);
+                        const taper = Math.max(0, (i - 1) * 2.5);
+                        const xStart = 260 + taper;
                         const totalW = 280 - taper * 2;
                         const wOuter = totalW * 0.30;
-                        const wCenter = (totalW - wOuter * 2 - 6) / 3;
+                        const wCenter = (totalW - wOuter * 2 - 8) / 3;
 
-                        // Outer Brushed Links
-                        [xStart, xStart + wOuter + wCenter * 3 + 6].forEach(ox => {
+                        // 1. Left & Right Brushed Satin Outer Links (Strictly separated in X and Y — zero overlap!)
+                        [xStart, xStart + wOuter + wCenter * 3 + 8].forEach(ox => {
                             const lg = ctx.createLinearGradient(ox, baseY, ox, baseY + linkH);
                             lg.addColorStop(0.00, outerPal.fluteDark);
                             lg.addColorStop(0.22, outerPal.fluteBright);
                             lg.addColorStop(0.55, outerPal.fluteLight);
                             lg.addColorStop(0.84, outerPal.fluteMid);
                             lg.addColorStop(1.00, outerPal.fluteDark);
-                            drawRoundedRect(ctx, ox, baseY, wOuter, linkH, 5.5);
+                            drawRoundedRect(ctx, ox, baseY, wOuter, linkH, 5.0);
                             ctx.fillStyle = lg;
                             ctx.fill();
 
-                            // 3D Horizontal Pillow Bevel
                             const pillowG = ctx.createLinearGradient(ox, baseY, ox + wOuter, baseY);
-                            pillowG.addColorStop(0.00, 'rgba(0,0,0,0.45)');
-                            pillowG.addColorStop(0.15, 'rgba(255,255,255,0.18)');
-                            pillowG.addColorStop(0.85, 'rgba(255,255,255,0.18)');
-                            pillowG.addColorStop(1.00, 'rgba(0,0,0,0.45)');
+                            pillowG.addColorStop(0.00, 'rgba(0,0,0,0.42)');
+                            pillowG.addColorStop(0.15, 'rgba(255,255,255,0.16)');
+                            pillowG.addColorStop(0.85, 'rgba(255,255,255,0.16)');
+                            pillowG.addColorStop(1.00, 'rgba(0,0,0,0.42)');
                             ctx.fillStyle = pillowG;
                             ctx.fill();
-
-                            // Microscopic vertical satin grain
-                            ctx.save();
-                            ctx.strokeStyle = 'rgba(255,255,255,0.065)';
-                            ctx.lineWidth = 0.8;
-                            for (let gx = ox + 4; gx < ox + wOuter - 3; gx += 2.6) {
-                                ctx.beginPath(); ctx.moveTo(gx, baseY + 2); ctx.lineTo(gx, baseY + linkH - 2); ctx.stroke();
-                            }
-                            ctx.restore();
                         });
 
-                        // 3 Staggered Mirror-Polished D-Profile Center Links
-                        const centerY = baseY + (isTop ? 15 : -15);
-                        const isDarkRefRow = (distFromCase === 1 || distFromCase === 4 || distFromCase === 7);
+                        // 2. 3 Mirror-Polished D-Profile Center Links (Staggered by half-step in Y, strictly in their own X columns so they NEVER overlap outer links or each other!)
+                        const centerY = isTop ? (baseY + 14) : (baseY - 14);
+                        const isDarkRefRow = (i === 1 || i === 4);
                         for (let c = 0; c < 3; c++) {
-                            const cxLink = xStart + wOuter + 1.5 + c * (wCenter + 1.5);
+                            const cxLink = xStart + wOuter + 2 + c * (wCenter + 2);
                             const cg = ctx.createLinearGradient(cxLink, centerY, cxLink, centerY + linkH);
                             if (isDarkRefRow) {
                                 cg.addColorStop(0.00, centerPal.fluteDark);
@@ -1943,47 +1822,45 @@
                                 cg.addColorStop(0.86, centerPal.fluteMid);
                                 cg.addColorStop(1.00, centerPal.fluteDark);
                             }
-                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 5.0);
+                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 4.5);
                             ctx.fillStyle = cg;
                             ctx.fill();
 
                             const cPillow = ctx.createLinearGradient(cxLink, centerY, cxLink + wCenter, centerY);
-                            cPillow.addColorStop(0.00, 'rgba(0,0,0,0.48)');
-                            cPillow.addColorStop(0.20, 'rgba(255,255,255,0.22)');
-                            cPillow.addColorStop(0.80, 'rgba(255,255,255,0.22)');
-                            cPillow.addColorStop(1.00, 'rgba(0,0,0,0.48)');
+                            cPillow.addColorStop(0.00, 'rgba(0,0,0,0.46)');
+                            cPillow.addColorStop(0.20, 'rgba(255,255,255,0.20)');
+                            cPillow.addColorStop(0.80, 'rgba(255,255,255,0.20)');
+                            cPillow.addColorStop(1.00, 'rgba(0,0,0,0.46)');
                             ctx.fillStyle = cPillow;
                             ctx.fill();
                         }
                     }
                 }
 
-                // 4. Deep Radial Ambient Occlusion Shadow Cast by the Bezel Overhang onto the SEL
-                const bezelAO = ctx.createRadialGradient(cx, cy, 255, cx, cy, 308);
+                // Deep Under-Bezel Contact Shadow & Top/Bottom Wrist Curvature Vignette
+                const bezelAO = ctx.createRadialGradient(cx, cy, 255, cx, cy, 305);
                 bezelAO.addColorStop(0.0, 'rgba(0,0,0,0.92)');
                 bezelAO.addColorStop(0.5, 'rgba(0,0,0,0.38)');
                 bezelAO.addColorStop(1.0, 'rgba(0,0,0,0)');
                 ctx.fillStyle = bezelAO;
-                ctx.fillRect(308, 290, 284, 670);
+                ctx.fillRect(258, 140, 284, 680);
 
-                // Wrist-Curvature Shadow Vignette at Top & Bottom Ends
-                const topVig = ctx.createLinearGradient(0, 20, 0, 105);
-                topVig.addColorStop(0, 'rgba(0,0,0,0.82)');
+                const topVig = ctx.createLinearGradient(0, 0, 0, 65);
+                topVig.addColorStop(0, 'rgba(0,0,0,0.85)');
                 topVig.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = topVig;
-                ctx.fillRect(300, 20, 300, 85);
+                ctx.fillRect(255, 0, 290, 65);
 
-                const botVig = ctx.createLinearGradient(0, 1145, 0, 1230);
+                const botVig = ctx.createLinearGradient(0, 895, 0, 960);
                 botVig.addColorStop(0, 'rgba(0,0,0,0)');
-                botVig.addColorStop(1, 'rgba(0,0,0,0.82)');
+                botVig.addColorStop(1, 'rgba(0,0,0,0.85)');
                 ctx.fillStyle = botVig;
-                ctx.fillRect(300, 1145, 300, 85);
+                ctx.fillRect(255, 895, 290, 65);
                 return;
             }
 
-            // SPANISH LEATHER (CROCODILE / SMOOTH) OR SPORT RUBBER / SILICONE STRAPS
-            // Seated strictly inside the inner lug walls (x = 310 to 590) with a 3D Spring-Bar Rolled Tube at y = 336 (top) and y = 914 (bottom)
-            const topSg = ctx.createLinearGradient(310, 0, 590, 0);
+            // CLOSE-CROPPED SPANISH LEATHER (CROCODILE / SMOOTH) OR SPORT RUBBER / SILICONE STRAP (x = 260..540)
+            const topSg = ctx.createLinearGradient(260, 0, 540, 0);
             topSg.addColorStop(0.00, '#030304');
             topSg.addColorStop(0.07, strapColorObj.crevice || '#050506');
             topSg.addColorStop(0.18, strapColorObj.hex);
@@ -1992,87 +1869,72 @@
             topSg.addColorStop(0.93, strapColorObj.crevice || '#050506');
             topSg.addColorStop(1.00, '#030304');
 
-            // Dark Spring-Bar Recess & Metallic Spring-Bar Pin Ends Between Lugs (x = 310..590)
+            // Dark Spring-Bar Recess & Exposed Steel Spring-Bar Pins Between Lugs (x = 260..540)
             ctx.fillStyle = '#040406';
-            ctx.fillRect(310, 326, 280, 55);
-            ctx.fillRect(310, 869, 280, 55);
-
-            // Exposed Stainless Steel Spring-Bar Ends at Lug Holes (y = 340 & y = 910)
+            ctx.fillRect(260, 180, 280, 55);
+            ctx.fillRect(260, 725, 280, 55);
             ctx.fillStyle = '#CBD5E1';
-            ctx.fillRect(308, 336, 8, 8); ctx.fillRect(584, 336, 8, 8);
-            ctx.fillRect(308, 906, 8, 8); ctx.fillRect(584, 906, 8, 8);
+            ctx.fillRect(258, 192, 8, 8); ctx.fillRect(534, 192, 8, 8);
+            ctx.fillRect(258, 760, 8, 8); ctx.fillRect(534, 760, 8, 8);
 
-            // 1. Top Strap Segment (y = 22 down to Spring-Bar Rolled Lip at y = 344)
+            // 1. Top Cropped Strap Segment (y = 0 down to Spring-Bar Rolled Lip at y = 196)
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.88)';
-            ctx.shadowBlur = 20;
             ctx.beginPath();
-            ctx.moveTo(324, 22);
-            ctx.lineTo(576, 22);
-            ctx.lineTo(590, 338);
-            ctx.quadraticCurveTo(450, 348, 310, 338); // 3D Rolled Spring-Bar Lip!
+            ctx.moveTo(270, 0);
+            ctx.lineTo(530, 0);
+            ctx.lineTo(540, 194);
+            ctx.quadraticCurveTo(400, 204, 260, 194);
             ctx.closePath();
-            ctx.save();
             ctx.clip();
 
             ctx.fillStyle = topSg;
-            ctx.fillRect(310, 22, 280, 330);
-            drawStrapSurfaceTexture(ctx, 310, 22, 280, 322, matKey, strapColorObj, true);
+            ctx.fillRect(260, 0, 280, 206);
+            drawStrapSurfaceTexture(ctx, 260, 0, 280, 200, matKey, strapColorObj);
 
-            // 3D Cylindrical Spring-Bar Roll Highlight & Under-Bezel Shadow
-            const topRollG = ctx.createLinearGradient(0, 318, 0, 346);
+            const topRollG = ctx.createLinearGradient(0, 174, 0, 202);
             topRollG.addColorStop(0.0, 'rgba(255,255,255,0)');
             topRollG.addColorStop(0.45, 'rgba(255,255,255,0.16)');
             topRollG.addColorStop(1.0, 'rgba(0,0,0,0.92)');
             ctx.fillStyle = topRollG;
-            ctx.fillRect(310, 318, 280, 28);
+            ctx.fillRect(260, 174, 280, 28);
 
-            const topFade = ctx.createLinearGradient(0, 22, 0, 105);
-            topFade.addColorStop(0, 'rgba(0,0,0,0.78)');
+            const topFade = ctx.createLinearGradient(0, 0, 0, 60);
+            topFade.addColorStop(0, 'rgba(0,0,0,0.82)');
             topFade.addColorStop(1, 'rgba(0,0,0,0)');
             ctx.fillStyle = topFade;
-            ctx.fillRect(310, 22, 280, 85);
-            ctx.restore();
+            ctx.fillRect(260, 0, 280, 60);
             ctx.restore();
 
-            // 2. Bottom Strap Segment (Spring-Bar Rolled Lip at y = 912 down to Pointed Spear Tip at y = 1228)
+            // 2. Bottom Cropped Strap Segment (Spring-Bar Rolled Lip at y = 766 down to y = 960)
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.88)';
-            ctx.shadowBlur = 22;
             ctx.beginPath();
-            ctx.moveTo(310, 912);
-            ctx.quadraticCurveTo(450, 902, 590, 912); // 3D Rolled Spring-Bar Lip!
-            ctx.lineTo(570, 1145);
-            ctx.quadraticCurveTo(560, 1192, 450, 1228);
-            ctx.quadraticCurveTo(340, 1192, 330, 1145);
+            ctx.moveTo(260, 766);
+            ctx.quadraticCurveTo(400, 756, 540, 766);
+            ctx.lineTo(530, 960);
+            ctx.lineTo(270, 960);
             ctx.closePath();
-            ctx.save();
             ctx.clip();
 
             ctx.fillStyle = topSg;
-            ctx.fillRect(310, 900, 280, 332);
-            drawStrapSurfaceTexture(ctx, 310, 908, 280, 320, matKey, strapColorObj, false);
+            ctx.fillRect(260, 754, 280, 206);
+            drawStrapSurfaceTexture(ctx, 260, 760, 280, 200, matKey, strapColorObj);
 
-            // 3D Cylindrical Spring-Bar Roll Highlight at Top of Lower Strap
-            const botRollG = ctx.createLinearGradient(0, 904, 0, 932);
+            const botRollG = ctx.createLinearGradient(0, 758, 0, 786);
             botRollG.addColorStop(0.0, 'rgba(0,0,0,0.92)');
             botRollG.addColorStop(0.55, 'rgba(255,255,255,0.16)');
             botRollG.addColorStop(1.0, 'rgba(255,255,255,0)');
             ctx.fillStyle = botRollG;
-            ctx.fillRect(310, 904, 280, 28);
+            ctx.fillRect(260, 758, 280, 28);
 
-            for (let hIdx = 0; hIdx < 6; hIdx++) {
-                const hy = 990 + hIdx * 34;
-                ctx.beginPath(); ctx.arc(cx, hy, 6.8, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.fill();
-                ctx.beginPath(); ctx.arc(cx, hy, 4.8, 0, Math.PI * 2);
-                ctx.fillStyle = '#040405'; ctx.fill();
-            }
-            ctx.restore();
+            const botFade = ctx.createLinearGradient(0, 900, 0, 960);
+            botFade.addColorStop(0, 'rgba(0,0,0,0)');
+            botFade.addColorStop(1, 'rgba(0,0,0,0.82)');
+            ctx.fillStyle = botFade;
+            ctx.fillRect(260, 900, 280, 60);
             ctx.restore();
         }
 
-        function drawStrapSurfaceTexture(ctx, x, y, w, h, matKey, strapColorObj, isTop) {
+        function drawStrapSurfaceTexture(ctx, x, y, w, h, matKey, strapColorObj) {
             const cx = x + w / 2;
 
             const bolsterG = ctx.createLinearGradient(x + 28, 0, x + w - 28, 0);
@@ -2086,10 +1948,10 @@
 
             if (matKey === 'leather') {
                 if (strapColorObj.texture === 'croc') {
-                    let curY = y + 8;
+                    let curY = y + 6;
                     let rowIdx = 0;
-                    while (curY < y + h - 8) {
-                        const tileH = 34 + (rowIdx % 3) * 6;
+                    while (curY < y + h - 4) {
+                        const tileH = 34 + (rowIdx % 3) * 5;
                         const splitX = cx + ((rowIdx % 2 === 0) ? 8 : -8);
 
                         const tiles = [
@@ -2126,26 +1988,11 @@
                         curY += tileH;
                         rowIdx++;
                     }
-                } else {
-                    ctx.fillStyle = 'rgba(255,255,255,0.03)';
-                    for (let py = y + 6; py < y + h - 6; py += 6) {
-                        for (let px = x + 10; px < x + w - 10; px += 8) {
-                            if ((px + py) % 5 === 0) ctx.fillRect(px, py, 2, 2);
-                        }
-                    }
                 }
 
                 const stColor = strapColorObj.stitch || '#D4AF37';
-                const maxStitchY = isTop ? (y + h - 12) : (y + h - 16);
-                for (let sy = y + 10; sy < maxStitchY; sy += 14) {
-                    let lx = x + 16, rx = x + w - 16;
-                    if (!isTop && sy > y + 235) {
-                        const tipProg = (sy - (y + 235)) / 80;
-                        lx += tipProg * 95;
-                        rx -= tipProg * 95;
-                    }
-                    if (rx - lx < 16) break;
-
+                for (let sy = y + 8; sy < y + h - 10; sy += 14) {
+                    const lx = x + 16, rx = x + w - 16;
                     ctx.fillStyle = '#020203';
                     ctx.beginPath(); ctx.arc(lx, sy, 1.8, 0, Math.PI * 2); ctx.fill();
                     ctx.beginPath(); ctx.arc(rx, sy, 1.8, 0, Math.PI * 2); ctx.fill();
@@ -2159,7 +2006,7 @@
                     ctx.stroke();
                 }
             } else {
-                for (let ry = y + 28; ry < y + h - 65; ry += 42) {
+                for (let ry = y + 24; ry < y + h - 24; ry += 40) {
                     drawRoundedRect(ctx, x + 48, ry, w - 96, 16, 6);
                     ctx.fillStyle = 'rgba(0,0,0,0.45)';
                     ctx.fill();
@@ -2355,12 +2202,12 @@
             ctx.restore();
         }
 
-        // PHOTOREALISTIC 3D BACK CASE RENDERER (Unified Monobloc Caseback + Seamless Lug Connection)
+        // PHOTOREALISTIC 3D BACK CASE RENDERER (800 x 960 Close-Cropped Frame)
         function drawBackWatchCanvas() {
             const canvas = document.getElementById('backWatchCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            const W = 900, H = 1250, CX = 450, CY = 625;
+            const W = 800, H = 960, CX = 400, CY = 480;
             ctx.clearRect(0, 0, W, H);
 
             const caseObj = CASE_OPTIONS[state.caseColor];
@@ -2368,19 +2215,14 @@
             const strapColorObj = matObj.colors[state.strapColorIndex] || matObj.colors[0];
             const isSmooth = state.bezelStyle === 'smooth';
 
-            // 1. Draw Seamless Strap / Bracelet Seated Between x = 310..590
-            drawFullRealisticStrap(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.bezelMetal, true);
-
-            // 2. Draw Unified Rear Monobloc Case & Lugs (Hugs x = 310..590 seamlessly!)
+            drawCroppedRealisticStrap(ctx, CX, CY, state.strapMaterial, strapColorObj);
             drawMonoblocCaseAndLugs(ctx, CX, CY, caseObj.lugMetal, isSmooth);
 
-            // 3. Crown on Left Side
-            const crownLeftX = isSmooth ? 154 : 138;
+            const crownLeftX = isSmooth ? 104 : 88;
             drawRoundedRect(ctx, crownLeftX, CY - 38, 30, 76, 8);
             ctx.fillStyle = createMetalGradient(ctx, crownLeftX, CY - 38, crownLeftX, CY + 38, caseObj.bezelMetal, true);
             ctx.fill();
 
-            // 4. 5-Step Machined Screw-Down Caseback Architecture
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.92)';
             ctx.shadowBlur = 24;
@@ -2390,7 +2232,6 @@
             ctx.fill();
             ctx.restore();
 
-            // Screw-Down Fluted/Knurled Caseback Ring (r = 244)
             ctx.save();
             ctx.beginPath();
             ctx.arc(CX, CY, 244, 0, Math.PI * 2);
@@ -2407,7 +2248,6 @@
             }
             ctx.restore();
 
-            // Brushed Steel Perimeter Engraving Track (r = 236)
             ctx.beginPath();
             ctx.arc(CX, CY, 236, 0, Math.PI * 2);
             const rimGrad = ctx.createLinearGradient(CX - 236, CY - 236, CX + 236, CY + 236);
@@ -2427,7 +2267,7 @@
                 ctx.arc(CX, CY, 186, 0, Math.PI * 2);
                 ctx.clip();
                 if (ctx.createConicGradient) {
-                    const cg = ctx.createConicGradient(-Math.PI / 3.2 + lightShiftAngle, CX, CY);
+                    const cg = ctx.createConicGradient(-Math.PI / 3.2, CX, CY);
                     cg.addColorStop(0.00, '#FFFFFF');
                     cg.addColorStop(0.16, '#CBD5E1');
                     cg.addColorStop(0.32, '#7A828E');
@@ -2441,10 +2281,10 @@
                 }
                 ctx.fillRect(CX - 186, CY - 186, 372, 372);
 
-                for (let r = 0; r < 1600; r++) {
-                    const a = (r * 2 * Math.PI) / 1600;
+                for (let r = 0; r < 900; r++) {
+                    const a = (r * 2 * Math.PI) / 900;
                     ctx.strokeStyle = (r % 2 === 0) ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.045)';
-                    ctx.lineWidth = 0.6;
+                    ctx.lineWidth = 0.65;
                     ctx.beginPath();
                     ctx.moveTo(CX + 4 * Math.cos(a), CY + 4 * Math.sin(a));
                     ctx.lineTo(CX + 186 * Math.cos(a), CY + 186 * Math.sin(a));
@@ -2534,14 +2374,20 @@
             ctx.restore();
         }
 
-        function renderWatch() {
-            drawFrontWatchCanvas();
-            drawBackWatchCanvas();
-            drawMacroLockCanvas();
+        function renderWatch(rebuildStatic = true) {
+            if (rebuildStatic) {
+                frontBufferValid = false;
+            }
+            drawFrontWatchCanvas(rebuildStatic);
+            if (state.viewMode === 'back' || state.viewMode === 'split') {
+                drawBackWatchCanvas();
+            }
+            if (!document.getElementById('lockWatchWrapper').classList.contains('hidden')) {
+                drawMacroLockCanvas();
+            }
             updatePriceBreakdown();
         }
 
-        // 100% PRICED ITEMIZED BREAKDOWN (ZERO "INCLUDED" TAGS ANYWHERE!)
         function updatePriceBreakdown() {
             const bezelObj = BEZEL_STYLES[state.bezelStyle];
             const caseObj = CASE_OPTIONS[state.caseColor];
@@ -2594,7 +2440,7 @@
             state.bezelStyle = styleKey;
             document.getElementById('bezelBtn-smooth').classList.toggle('active', styleKey === 'smooth');
             document.getElementById('bezelBtn-fluted').classList.toggle('active', styleKey === 'fluted');
-            renderWatch();
+            renderWatch(true);
         }
 
         function selectCaseColor(colorKey) {
@@ -2602,7 +2448,7 @@
             document.querySelectorAll('#caseColorGrid .option-card').forEach(el => el.classList.remove('active'));
             const btn = document.getElementById(`caseBtn-${colorKey}`);
             if (btn) btn.classList.add('active');
-            renderWatch();
+            renderWatch(true);
         }
 
         function selectDialColor(dialKey) {
@@ -2613,7 +2459,7 @@
             });
             const isLight = (dialKey === 'white' || dialKey === 'silver_dial' || dialKey === 'champagne' || dialKey === 'gold_dial');
             state.customNameColor = isLight ? '#111111' : '#FFF0E8';
-            renderWatch();
+            renderWatch(true);
         }
 
         function selectMarkerStyle(styleKey) {
@@ -2622,23 +2468,23 @@
                 const el = document.getElementById(`markerBtn-${k}`);
                 if (el) el.classList.toggle('active', k === styleKey);
             });
-            renderWatch();
+            renderWatch(true);
         }
 
         function updateCustomNameFromInput() {
             state.customName = document.getElementById('customNameInput').value;
-            renderWatch();
+            renderWatch(true);
         }
 
         function clearCustomName() {
             state.customName = '';
             document.getElementById('customNameInput').value = '';
-            renderWatch();
+            renderWatch(true);
         }
 
         function setCustomNameColor(hex) {
             state.customNameColor = hex;
-            renderWatch();
+            renderWatch(true);
         }
 
         function handleDialPhotoUpload(event) {
@@ -2652,7 +2498,7 @@
                     uploadedPhotoImg = img;
                     document.getElementById('removePhotoBtn').classList.remove('hidden');
                     document.getElementById('photoAdjustControls').classList.remove('hidden');
-                    renderWatch();
+                    renderWatch(true);
                 };
                 img.src = e.target.result;
             };
@@ -2665,7 +2511,7 @@
             state.photoOffsetY = parseInt(document.getElementById('photoOffsetY').value, 10);
             state.photoDimmer = parseInt(document.getElementById('photoDimmerRange').value, 10);
             document.getElementById('zoomVal').textContent = `${state.photoZoom}%`;
-            renderWatch();
+            renderWatch(true);
         }
 
         function removeDialPhoto() {
@@ -2674,7 +2520,7 @@
             document.getElementById('dialPhotoInput').value = '';
             document.getElementById('removePhotoBtn').classList.add('hidden');
             document.getElementById('photoAdjustControls').classList.add('hidden');
-            renderWatch();
+            renderWatch(true);
         }
 
         function selectBackCase(typeKey) {
@@ -2682,7 +2528,6 @@
             document.getElementById('backBtn-solid').classList.toggle('active', typeKey === 'solid');
             document.getElementById('backBtn-skeleton').classList.toggle('active', typeKey === 'skeleton');
             setWatchView('back');
-            renderWatch();
         }
 
         function selectStrapMaterial(matKey) {
@@ -2693,7 +2538,7 @@
             });
             document.getElementById('currentStrapMatLabel').textContent = STRAP_MATERIALS[matKey].name;
             renderStrapColorSwatches();
-            renderWatch();
+            renderWatch(true);
         }
 
         function renderStrapColorSwatches() {
@@ -2711,7 +2556,7 @@
         function selectStrapColor(index) {
             state.strapColorIndex = index;
             renderStrapColorSwatches();
-            renderWatch();
+            renderWatch(true);
         }
 
         function selectStrapLock(lockKey, revealCloseUp = true) {
@@ -2721,8 +2566,9 @@
             });
             if (revealCloseUp) {
                 document.getElementById('lockWatchWrapper').classList.remove('hidden');
+                drawMacroLockCanvas();
             }
-            renderWatch();
+            updatePriceBreakdown();
         }
 
         function setWatchView(mode) {
@@ -2746,16 +2592,20 @@
                 frontWrap.classList.add('hidden');
                 backWrap.classList.remove('hidden');
                 lockWrap.classList.add('hidden');
+                drawBackWatchCanvas();
             } else if (mode === 'lock') {
                 frontWrap.classList.add('hidden');
                 backWrap.classList.add('hidden');
                 lockWrap.classList.remove('hidden');
+                drawMacroLockCanvas();
             } else {
                 frontWrap.classList.remove('hidden');
                 backWrap.classList.remove('hidden');
                 lockWrap.classList.remove('hidden');
+                drawBackWatchCanvas();
+                drawMacroLockCanvas();
             }
-            renderWatch();
+            drawFrontWatchCanvas(false);
         }
 
         function loadPresetEdition(presetKey) {
@@ -2987,7 +2837,7 @@
             selectMarkerStyle(state.markerStyle || 'diamond');
             selectStrapMaterial(state.strapMaterial);
             selectStrapLock(state.strapLock, false);
-            renderWatch();
+            renderWatch(true);
             closeModal('accountModal');
         }
 
