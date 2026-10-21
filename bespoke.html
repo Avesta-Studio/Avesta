@@ -14,10 +14,31 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Google Fonts Preloaded for Canvas Engraving -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDKs (Configured with your dynast-bespoke project) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBM00yuvWgfXOLaVNGSCyzLSiME9e1o4",
+            authDomain: "dynast-bespoke.firebaseapp.com",
+            projectId: "dynast-bespoke",
+            storageBucket: "dynast-bespoke.firebasestorage.app",
+            messagingSenderId: "973168385496",
+            appId: "1:973168385496:web:bcc2a2cc58cb11b85766ad"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        window.db = getFirestore(app);
+        window.auth = getAuth(app);
+        window.FB_Fns = { addDoc, getDocs, doc, setDoc, getDoc, query, where, orderBy, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut };
+    </script>
 
     <script>
         tailwind.config = {
@@ -51,20 +72,18 @@
             overflow-x: hidden;
         }
 
-        /* Pure GPU-Accelerated Black & Gold Blending Ambient Background (Zero CPU Lag) */
-        @keyframes ambientGoldBlend {
-            0%   { transform: translate3d(-3%, -2%, 0) scale(1); opacity: 0.85; }
-            50%  { transform: translate3d(3%, 2%, 0) scale(1.06); opacity: 1; }
-            100% { transform: translate3d(-3%, -2%, 0) scale(1); opacity: 0.85; }
+        @keyframes slowGoldFlow {
+            0%   { transform: translate3d(-4%, -3%, 0) scale(1); opacity: 0.82; }
+            50%  { transform: translate3d(4%, 3%, 0) scale(1.08); opacity: 0.98; }
+            100% { transform: translate3d(-4%, -3%, 0) scale(1); opacity: 0.82; }
         }
 
         .live-gold-aura {
             background:
-                radial-gradient(circle at 18% 20%, rgba(212, 175, 55, 0.22) 0%, rgba(138, 98, 12, 0.08) 34%, transparent 64%),
-                radial-gradient(circle at 82% 78%, rgba(255, 215, 0, 0.18) 0%, rgba(120, 82, 8, 0.07) 36%, transparent 66%),
-                radial-gradient(circle at 50% 45%, rgba(184, 134, 11, 0.13) 0%, rgba(4, 4, 4, 0.96) 72%);
-            will-change: transform, opacity;
-            animation: ambientGoldBlend 16s ease-in-out infinite;
+                radial-gradient(circle at 18% 22%, rgba(212, 175, 55, 0.26) 0%, rgba(138, 98, 12, 0.10) 32%, transparent 62%),
+                radial-gradient(circle at 82% 76%, rgba(255, 215, 0, 0.22) 0%, rgba(120, 82, 8, 0.09) 35%, transparent 65%),
+                radial-gradient(circle at 50% 48%, rgba(184, 134, 11, 0.16) 0%, rgba(5, 5, 5, 0.92) 70%);
+            animation: slowGoldFlow 14s ease-in-out infinite;
         }
 
         .cinzel-decorative {
@@ -78,27 +97,28 @@
         }
 
         .gold-panel {
-            background: linear-gradient(145deg, rgba(18, 15, 10, 0.92), rgba(6, 6, 6, 0.96));
+            background: linear-gradient(145deg, rgba(18, 15, 10, 0.88), rgba(6, 6, 6, 0.94));
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(212, 175, 55, 0.34);
-            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 28px rgba(212, 175, 55, 0.08);
+            box-shadow: 0 22px 55px rgba(0, 0, 0, 0.92), 0 0 35px rgba(212, 175, 55, 0.09);
         }
 
         .btn-gold {
             background: linear-gradient(135deg, #FFE270 0%, #D4AF37 50%, #9A7209 100%);
             color: #050505;
             font-weight: 700;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
 
         .btn-gold:hover {
-            box-shadow: 0 0 24px rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 28px rgba(212, 175, 55, 0.65);
             transform: translateY(-1px);
         }
 
         .option-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 175, 55, 0.22);
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
             cursor: pointer;
         }
 
@@ -110,7 +130,7 @@
         .option-card.active {
             border-color: #FFE270;
             background: linear-gradient(145deg, rgba(212, 175, 55, 0.22), rgba(154, 114, 9, 0.09));
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.28);
         }
 
         .swatch-btn {
@@ -124,8 +144,8 @@
         }
 
         .studio-stage {
-            background: radial-gradient(circle at 50% 50%, #1c160c 0%, #070605 60%, #010101 100%);
-            box-shadow: inset 0 0 80px rgba(0,0,0,0.98);
+            background: radial-gradient(circle at 50% 48%, #1e180d 0%, #080706 58%, #010101 100%);
+            box-shadow: inset 0 0 90px rgba(0,0,0,0.99), 0 0 30px rgba(212, 175, 55, 0.08);
         }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -135,18 +155,13 @@
 </head>
 <body class="min-h-screen flex flex-col selection:bg-gold selection:text-black relative">
 
-    <!-- GPU-ACCELERATED BLACK & GOLD AMBIENT BACKGROUND -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="live-gold-aura absolute -inset-10"></div>
+        <canvas id="liveGoldBgCanvas" class="w-full h-full opacity-90"></canvas>
+        <div class="live-gold-aura absolute inset-0"></div>
     </div>
 
-    <!-- Font Preloaders for Immediate Canvas Typography -->
-    <div style="font-family: 'Cinzel Decorative'; position: absolute; left: -9999px; visibility: hidden;">DYNAST</div>
-    <div style="font-family: 'Cinzel'; position: absolute; left: -9999px; visibility: hidden;">LUXURIOUS HOROLOGY</div>
-    <div style="font-family: 'Great Vibes'; position: absolute; left: -9999px; visibility: hidden;">Hanzalah</div>
-
     <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-gold/35 px-4 lg:px-8 py-3.5">
+    <header class="sticky top-0 z-40 bg-black/85 backdrop-blur-md border-b border-gold/35 px-4 lg:px-8 py-3.5">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-4">
                 <a href="https://dynast.co.in" class="text-xs text-gold/80 hover:text-lightgold flex items-center gap-1.5 border border-gold/35 px-3 py-1.5 rounded-full transition">
@@ -177,15 +192,12 @@
             </div>
         </div>
     </header>
-    <!-- MAIN CUSTOMIZER WORKSPACE -->
     <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
         <div id="mainStudioGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-            <!-- LEFT COLUMN: CLOSE-CROPPED MACRO WATCH CANVAS (UNCOMPRESSED) -->
             <div class="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
                 <div class="gold-panel rounded-3xl p-5 relative overflow-hidden">
                     
-                    <!-- Top Status Bar & View Switcher -->
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-3 z-10 relative">
                         <button id="clockModeBtn" onclick="toggleClockMode()" class="text-[10px] uppercase tracking-[0.14em] bg-gold/15 hover:bg-gold/25 border border-gold/40 text-lightgold px-3 py-1 rounded-full font-semibold transition">
                             <i class="fa-solid fa-clock mr-1 text-gold"></i> <span id="clockModeText">Live Real-Time Clock</span>
@@ -199,22 +211,18 @@
                         </div>
                     </div>
 
-                    <!-- PHOTOREALISTIC STUDIO STAGE (Static Natural Studio Lighting — Zero Cursor Lag) -->
                     <div id="watchStageContainer" class="studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 gap-4 items-center justify-items-center">
                         
-                        <!-- 1. FRONT WATCH MACRO CANVAS (800x960 Close-Up Portrait Crop — Uncompressed!) -->
                         <div id="frontWatchWrapper" class="w-full flex flex-col items-center">
                             <canvas id="frontWatchCanvas" width="800" height="960" class="w-full max-w-[355px] h-auto select-none"></canvas>
                             <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Macro Studio Front View</span>
                         </div>
 
-                        <!-- 2. BACK CASE MACRO CANVAS (800x960 Close-Up Portrait Crop) -->
                         <div id="backWatchWrapper" class="w-full flex flex-col items-center hidden">
                             <canvas id="backWatchCanvas" width="800" height="960" class="w-full max-w-[355px] h-auto select-none"></canvas>
                             <span id="backCaseCaption" class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Solid Brushed Steel Caseback (+₹500)</span>
                         </div>
 
-                        <!-- 3. DEDICATED HIGH-RES 3D STRAP LOCK / CLASP MACRO STUDIO WINDOW (Hidden on First Screen) -->
                         <div id="lockWatchWrapper" class="w-full flex flex-col items-center border-t border-gold/20 pt-3 mt-1 hidden">
                             <div class="w-full flex items-center justify-between px-2 mb-1.5">
                                 <span class="text-[10px] uppercase tracking-widest text-lightgold font-bold">
@@ -226,7 +234,6 @@
                         </div>
                     </div>
 
-                    <!-- QUICK EDITION PRESETS -->
                     <div class="mt-3 pt-3 border-t border-gold/20 space-y-2">
                         <span class="text-[10px] uppercase tracking-widest text-gold/80 block font-semibold">Instant Collection Presets (Tap to Preview):</span>
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
@@ -261,7 +268,6 @@
                     </div>
                 </div>
 
-                <!-- LIVE ITEMIZED PRICE BREAKDOWN CARD -->
                 <div class="gold-panel rounded-3xl p-5">
                     <div class="flex items-center justify-between border-b border-gold/20 pb-3 mb-3">
                         <h3 class="serif-text text-xs uppercase tracking-[0.2em] text-gold font-bold">
@@ -284,10 +290,8 @@
                     </div>
                 </div>
             </div>
-            <!-- RIGHT COLUMN: STEP-BY-STEP CUSTOMIZATION CONTROLS (EVERY OPTION PRICED) -->
             <div class="lg:col-span-7 space-y-6">
 
-                <!-- INTRO BANNER -->
                 <div class="gold-panel rounded-3xl p-6 border-l-4 border-l-gold">
                     <h1 class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-wider">DYNAST • Bespoke Watch Studio</h1>
                     <p class="text-xs text-gray-300 mt-1 leading-relaxed">
@@ -295,7 +299,7 @@
                     </p>
                 </div>
 
-                <!-- STEP 1: BEZEL ARCHITECTURE & WATCH CASE COLOUR -->
+                <!-- STEP 1: BEZEL & CASE -->
                 <section class="gold-panel rounded-3xl p-6 space-y-5">
                     <div class="flex items-center justify-between">
                         <div>
@@ -305,7 +309,6 @@
                         <span id="step1PriceBadge" class="text-xs font-bold text-gold bg-gold/15 border border-gold/30 px-3 py-1 rounded-full">+₹2,300</span>
                     </div>
 
-                    <!-- 1A. Bezel Architecture -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Select Case & Bezel Style:</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -333,7 +336,6 @@
                         </div>
                     </div>
 
-                    <!-- 1B. Case Colour -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">2. Select Watch Case Colour:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="caseColorGrid">
@@ -376,7 +378,7 @@
                     </div>
                 </section>
 
-                <!-- STEP 2: WATCH DIAL COLOUR, MARKERS, CUSTOM NAME & CUSTOM PHOTO -->
+                <!-- STEP 2: DIAL STUDIO -->
                 <section class="gold-panel rounded-3xl p-6 space-y-5">
                     <div class="flex items-center justify-between">
                         <div>
@@ -388,7 +390,6 @@
                         </span>
                     </div>
 
-                    <!-- 1. Select Dial Colour -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Choose Dial Colour:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
@@ -442,7 +443,6 @@
                         </div>
                     </div>
 
-                    <!-- 2. Hour Markers / Numeral Layout -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">2. Select Dial Numerals & Markers Style:</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -496,7 +496,6 @@
                         </div>
                     </div>
 
-                    <!-- 3. Custom Name Printed on Dial -->
                     <div class="p-4 rounded-2xl bg-white/[0.03] border border-gold/25 space-y-3">
                         <div class="flex items-center justify-between">
                             <label class="text-xs uppercase tracking-wider text-lightgold font-semibold">
@@ -515,12 +514,17 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                             <div>
                                 <span class="text-[10px] uppercase tracking-wider text-gray-400 block mb-1">Name Font Style:</span>
-                                <select id="customNameFont" onchange="renderWatch(true)" class="w-full bg-black border border-gold/30 rounded-xl px-3 py-2 text-xs text-white outline-none">
-                                    <option value="Cinzel">Royal Serif (Cinzel)</option>
-                                    <option value="Cinzel Decorative">Cinzel Decorative</option>
-                                    <option value="Great Vibes">Luxury Script (Cursive)</option>
-                                    <option value="Inter">Modern Sans</option>
-                                </select>
+                                <div class="relative">
+                                    <select id="customNameFont" onchange="renderWatch(true)" class="w-full bg-neutral-950 border border-gold/40 hover:border-gold focus:border-gold rounded-xl px-3.5 py-2.5 text-xs text-lightgold outline-none appearance-none cursor-pointer shadow-lg backdrop-blur-md">
+                                        <option value="Cinzel" class="bg-black text-white">Royal Serif (Cinzel)</option>
+                                        <option value="Cinzel Decorative" class="bg-black text-white">Cinzel Decorative</option>
+                                        <option value="Great Vibes" class="bg-black text-white">Luxury Script (Cursive)</option>
+                                        <option value="Inter" class="bg-black text-white">Modern Sans</option>
+                                    </select>
+                                    <div class="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-gold text-xs">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <span class="text-[10px] uppercase tracking-wider text-gray-400 block mb-1">Name Print Colour:</span>
@@ -535,7 +539,6 @@
                         </div>
                     </div>
 
-                    <!-- 4. Custom Picture Printed on Circular Dial -->
                     <div class="p-4 rounded-2xl bg-white/[0.03] border border-gold/25 space-y-3">
                         <div class="flex items-center justify-between">
                             <label class="text-xs uppercase tracking-wider text-lightgold font-semibold">
@@ -576,7 +579,7 @@
                         </div>
                     </div>
                 </section>
-                <!-- STEP 3: BACK CASE (COVER) TYPE (BOTH PRICED) -->
+                <!-- STEP 3: REAR CASEBACK COVER (BOTH PRICED) -->
                 <section class="gold-panel rounded-3xl p-6 space-y-4">
                     <div class="flex items-center justify-between">
                         <div>
@@ -623,14 +626,13 @@
                     </div>
                 </section>
 
-                <!-- STEP 4: STRAP MATERIAL, DYNAMIC STRAP COLOURS & STRAP LOCK (ALL PRICED) -->
+                <!-- STEP 4: STRAPS & CLASPS (ALL PRICED) -->
                 <section class="gold-panel rounded-3xl p-6 space-y-5">
                     <div>
                         <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">Step 04 • Bracelet, Spanish Leather & 3D Lock Studio</span>
                         <h2 class="serif-text text-base sm:text-lg font-bold text-white">Choose Strap Material, Colour & Lock Type</h2>
                     </div>
 
-                    <!-- 1. Strap Material Selector -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Select Strap Material:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -660,7 +662,6 @@
                         </div>
                     </div>
 
-                    <!-- 2. Dynamic Strap Colour Swatches -->
                     <div class="p-4 rounded-2xl bg-white/[0.03] border border-gold/25">
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-xs uppercase tracking-wider text-lightgold font-semibold">
@@ -671,7 +672,6 @@
                         <div id="strapColorsContainer" class="flex flex-wrap gap-2.5"></div>
                     </div>
 
-                    <!-- 3. Strap Lock / Clasp Type (All 4 Priced) -->
                     <div>
                         <div class="flex items-center justify-between mb-2.5">
                             <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold">
@@ -726,7 +726,7 @@
         <p>Luxurious Horology Studio • Agra, Uttar Pradesh, India • +91 75799 42958</p>
     </footer>
 
-    <!-- CUSTOMER LOGIN / REGISTER MODAL -->
+    <!-- CUSTOMER LOGIN MODAL -->
     <div id="authModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="gold-panel rounded-3xl max-w-md w-full p-6 relative">
             <button onclick="closeModal('authModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
@@ -790,13 +790,25 @@
         </div>
     </div>
 
-    <!-- BESPOKE ORDER CHECKOUT MODAL -->
+    <!-- CHECKOUT MODAL (PAYTM UPI 7579942958@ptyes + NO WATER/PHYSICAL DAMAGE POLICY) -->
     <div id="checkoutModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="gold-panel rounded-3xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal('checkoutModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gold text-lg"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="cinzel-decorative text-xl text-gold mb-1">Confirm Bespoke Order</h3>
-            <p class="text-xs text-gray-300 mb-4">Your custom watch will be saved to your Order History and sent to our watchmakers.</p>
-            <div id="checkoutSummaryBox" class="p-3.5 rounded-2xl bg-black/80 border border-gold/30 text-xs space-y-1.5 mb-4"></div>
+            <p class="text-xs text-gray-300 mb-3">Scan the Paytm QR or pay via UPI ID <strong class="text-gold">7579942958@ptyes</strong> (Mohammad Hanzalah)[cite: 34].</p>
+
+            <div class="bg-white p-3 rounded-2xl w-48 h-48 mx-auto mb-3 flex items-center justify-center shadow-lg">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=7579942958@ptyes%26pn=DYNAST%26cu=INR" alt="Paytm UPI QR Code" class="w-full h-full object-contain">
+            </div>
+
+            <div class="text-center mb-3">
+                <a href="upi://pay?pa=7579942958@ptyes&pn=DYNAST&cu=INR" class="btn-gold px-4 py-2 rounded-xl text-xs uppercase tracking-wider inline-block shadow-md">
+                    <i class="fa-solid fa-qrcode mr-1"></i> Pay via Paytm / UPI App
+                </a>
+            </div>
+
+            <div id="checkoutSummaryBox" class="p-3.5 rounded-2xl bg-black/80 border border-gold/30 text-xs space-y-1.5 mb-3"></div>
+
             <form onsubmit="placeBespokeOrder(event)" class="space-y-3 text-xs">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
@@ -813,23 +825,25 @@
                     <textarea id="orderAddress" rows="2" required class="w-full bg-black border border-gold/40 rounded-xl px-3 py-2 text-white outline-none"></textarea>
                 </div>
                 <div>
-                    <label class="text-gray-300 block mb-1">Payment Method</label>
-                    <select id="orderPaymentMethod" class="w-full bg-black border border-gold/40 rounded-xl px-3 py-2.5 text-white outline-none">
-                        <option value="Paytm UPI / Instant UPI">Paytm UPI / Instant UPI Verification</option>
-                        <option value="WhatsApp Bespoke Concierge">Confirm & Pay via WhatsApp Concierge</option>
-                    </select>
+                    <label class="text-gray-300 block mb-1">Paytm UPI UTR / Transaction Reference Number *</label>
+                    <input type="text" id="orderUtr" required placeholder="Enter 12-digit UPI reference number" class="w-full bg-black border border-gold/40 rounded-xl px-3 py-2 text-white outline-none">
                 </div>
-                <button type="submit" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase tracking-widest shadow-lg mt-2">
-                    <i class="fa-solid fa-check-double mr-1"></i> Place Bespoke Order & Save to Account
+
+                <div class="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-[11px] text-red-300 leading-relaxed">
+                    <strong class="block mb-0.5"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Warranty & Return Policy:</strong>
+                    Because bespoke watches are custom-engraved with your personal name or photo, orders cannot be cancelled or returned once printing begins. <strong class="text-white">Strictly zero replacement or warranty coverage for water damage or physical damage.</strong> Movement defects are covered upon unboxing arrival.
+                </div>
+
+                <button type="submit" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase tracking-widest shadow-lg mt-1">
+                    <i class="fa-solid fa-check-double mr-1"></i> Submit Payment & Place Bespoke Order
                 </button>
             </form>
         </div>
     </div>
-    <!-- ZERO-LAG CACHED HOROLOGY STUDIO ENGINE (800x960 PORTRAIT CROP + NON-OVERLAPPING JUBILEE) -->
+    <!-- MICRO-PRECISION HOROLOGY SHADER ENGINE -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
-        // 1. REAL INTERNET MECHANICAL MOVEMENT PHOTOGRAPHS
         const SKELETON_MOVEMENT_URLS = [
             'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/ETA_2801_mechanical_watch_movement.jpg/960px-ETA_2801_mechanical_watch_movement.jpg',
             'https://upload.wikimedia.org/wikipedia/commons/2/29/ETA_2801_mechanical_watch_movement.jpg',
@@ -853,7 +867,65 @@
             img.src = SKELETON_MOVEMENT_URLS[index];
         }
 
-        // 2. CALIBRATED METALLIC PALETTES (Fixed Natural Studio Lighting)
+        function initLiveGoldBackground() {
+            const bgCanvas = document.getElementById('liveGoldBgCanvas');
+            if (!bgCanvas) return;
+            const bctx = bgCanvas.getContext('2d');
+            let w = bgCanvas.width = window.innerWidth;
+            let h = bgCanvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                w = bgCanvas.width = window.innerWidth;
+                h = bgCanvas.height = window.innerHeight;
+            });
+
+            const orbs = [
+                { x: 0.20, y: 0.25, r: 0.48, vx: 0.00022, vy: 0.00018, color: 'rgba(212, 175, 55, 0.22)' },
+                { x: 0.80, y: 0.70, r: 0.52, vx: -0.00019, vy: -0.00021, color: 'rgba(184, 134, 11, 0.19)' },
+                { x: 0.50, y: 0.50, r: 0.60, vx: 0.00015, vy: -0.00016, color: 'rgba(120, 82, 8, 0.16)' },
+                { x: 0.35, y: 0.85, r: 0.42, vx: -0.00024, vy: 0.00014, color: 'rgba(255, 215, 0, 0.14)' }
+            ];
+
+            const dust = Array.from({ length: 40 }, () => ({
+                x: Math.random(), y: Math.random(),
+                r: Math.random() * 1.8 + 0.5,
+                vy: -(Math.random() * 0.00025 + 0.00008),
+                vx: (Math.random() - 0.5) * 0.00015,
+                alpha: Math.random() * 0.45 + 0.15
+            }));
+
+            function animateBg() {
+                bctx.fillStyle = '#030303';
+                bctx.fillRect(0, 0, w, h);
+
+                const maxDim = Math.max(w, h);
+                orbs.forEach(o => {
+                    o.x += o.vx; o.y += o.vy;
+                    if (o.x < 0.05 || o.x > 0.95) o.vx *= -1;
+                    if (o.y < 0.05 || o.y > 0.95) o.vy *= -1;
+                    const cx = o.x * w, cy = o.y * h, rad = o.r * maxDim;
+                    const g = bctx.createRadialGradient(cx, cy, 10, cx, cy, rad);
+                    g.addColorStop(0, o.color);
+                    g.addColorStop(0.5, 'rgba(90, 62, 6, 0.06)');
+                    g.addColorStop(1, 'rgba(3, 3, 3, 0)');
+                    bctx.fillStyle = g;
+                    bctx.fillRect(0, 0, w, h);
+                });
+
+                dust.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if (p.y < 0) p.y = 1; if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0;
+                    bctx.beginPath();
+                    bctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
+                    bctx.fillStyle = `rgba(255, 224, 130, ${p.alpha})`;
+                    bctx.fill();
+                });
+
+                requestAnimationFrame(animateBg);
+            }
+            animateBg();
+        }
+
         const METAL_PALETTES = {
             silver: {
                 rgbJet: [14, 17, 22], rgbShadow: [62, 70, 82], rgbMid: [178, 186, 198], rgbBright: [240, 244, 249], rgbSpec: [255, 255, 255],
@@ -881,10 +953,25 @@
             }
         };
 
+        let lightShiftAngle = 0;
+
+        function handleStageLightMove(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const nx = ((e.clientX - rect.left) / rect.width) - 0.5;
+            lightShiftAngle = nx * 0.55;
+            renderWatch(true);
+        }
+
+        function resetStageLight() {
+            lightShiftAngle = 0;
+            renderWatch(true);
+        }
+
         function sampleStudioMirror(angleRad, pal) {
-            const w = 0.52 * Math.cos(angleRad * 2 + 0.78)
-                    + 0.33 * Math.sin(angleRad * 3 - 0.42)
-                    + 0.23 * Math.cos(angleRad * 6 + 0.18);
+            const a = angleRad + lightShiftAngle;
+            const w = 0.52 * Math.cos(a * 2 + 0.78)
+                    + 0.33 * Math.sin(a * 3 - 0.42)
+                    + 0.23 * Math.cos(a * 6 + 0.18);
             let t = Math.max(0, Math.min(1, (w + 0.86) / 1.72));
             t = t * t * (3 - 2 * t);
 
@@ -901,194 +988,6 @@
             return `rgb(${Math.round(c0[0] + (c1[0] - c0[0]) * f)},${Math.round(c0[1] + (c1[1] - c0[1]) * f)},${Math.round(c0[2] + (c1[2] - c0[2]) * f)})`;
         }
 
-        // 3. 100% PRICED CATALOG
-        const BEZEL_STYLES = {
-            fluted: { name: '48-Flute Luxury Bezel', price: 600 },
-            smooth: { name: 'Smooth Mirror Dress Bezel', price: 300 }
-        };
-
-        const CASE_OPTIONS = {
-            twotone_rosegold: { name: 'Two-Tone Rose & Steel', price: 1700, lugMetal: 'silver', bezelMetal: 'rosegold' },
-            twotone_gold:     { name: 'Two-Tone Gold & Steel', price: 1600, lugMetal: 'silver', bezelMetal: 'gold' },
-            silver:           { name: '904L Silver Steel', price: 900, lugMetal: 'silver', bezelMetal: 'silver' },
-            rosegold:         { name: 'Full 18k Rose-Gold', price: 1600, lugMetal: 'rosegold', bezelMetal: 'rosegold' },
-            gold:             { name: 'Full Royal Golden', price: 1500, lugMetal: 'gold', bezelMetal: 'gold' },
-            black:            { name: 'Obsidian Black PVD', price: 1200, lugMetal: 'black', bezelMetal: 'black' }
-        };
-
-        const DIAL_OPTIONS = {
-            chocolate:   { name: 'Sunburst Coffee Brown', price: 400, base: '#7E503D', mid: '#4D2D1F', edge: '#211009', sunburst: true, sheen: 'rgba(255,224,206,0.26)', logoColor: '#FFF4EE', subColor: '#EAB39F', trackColor: '#DF9F89' },
-            black:       { name: 'Sunburst Black Dial', price: 250, base: '#2A2A2F', mid: '#141418', edge: '#050507', sunburst: true, sheen: 'rgba(255,255,255,0.16)', logoColor: '#FFF8D4', subColor: '#EAD89C', trackColor: '#CBD5E1' },
-            white:       { name: 'Porcelain White Dial', price: 300, base: '#FFFFFF', mid: '#F5F7FA', edge: '#DCE2EC', sunburst: false, sheen: 'rgba(255,255,255,0)', logoColor: '#111827', subColor: '#785410', trackColor: '#334155' },
-            emerald:     { name: 'Forest Emerald Green Dial', price: 450, base: '#3A7D49', mid: '#1D4D28', edge: '#0B2411', sunburst: true, sheen: 'rgba(190,255,205,0.24)', logoColor: '#FFF6E5', subColor: '#F0BCA9', trackColor: '#D4AF37' },
-            champagne:   { name: 'Rose Champagne Sunburst', price: 400, base: '#F7E7D4', mid: '#D8B499', edge: '#9E7356', sunburst: true, sheen: 'rgba(255,250,244,0.34)', logoColor: '#2B130B', subColor: '#693120', trackColor: '#5A291B' },
-            gold_dial:   { name: 'Sunburst Imperial Gold', price: 450, base: '#FFF0A8', mid: '#DFB244', edge: '#966B10', sunburst: true, sheen: 'rgba(255,255,235,0.36)', logoColor: '#1E1202', subColor: '#523404', trackColor: '#3A2302' },
-            silver_dial: { name: 'Sunburst Brushed Silver', price: 350, base: '#FFFFFF', mid: '#DCE2EA', edge: '#94A0B0', sunburst: true, sheen: 'rgba(255,255,255,0.35)', logoColor: '#0F172A', subColor: '#334155', trackColor: '#1E293B' },
-            navy:        { name: 'Midnight Royal Blue', price: 450, base: '#284C7E', mid: '#14294A', edge: '#071124', sunburst: true, sheen: 'rgba(185,220,255,0.24)', logoColor: '#FFF8DC', subColor: '#F5D67B', trackColor: '#E2E8F0' }
-        };
-
-        const MARKER_OPTIONS = {
-            diamond:     { name: '10 Diamond-Set Square Chatons', price: 600 },
-            baton:       { name: 'Luminous Faceted Stick Batons', price: 200 },
-            arabic_12_6: { name: '12 & 6 Arabic + Faceted Batons', price: 250 },
-            roman_12_6:  { name: 'XII & VI Roman + Sector Ring', price: 300 },
-            roman_full:  { name: 'Full Roman Numerals (I–XII)', price: 350 },
-            arabic_full: { name: 'Full Arabic Numerals (1–12)', price: 350 }
-        };
-
-        const BACK_CASE_OPTIONS = {
-            solid:    { name: 'Solid Brushed Steel Cover', price: 500 },
-            skeleton: { name: 'Exhibition Sapphire Skeleton Cover', price: 2200 }
-        };
-
-        const STRAP_MATERIALS = {
-            metal: {
-                name: '5-Link Jubilee Metal', price: 1400,
-                colors: [
-                    { id: 'jub-twotone-rose', name: 'Two-Tone Rose-Gold & Steel', outer: 'silver', center: 'rosegold', hex: '#D59B84', price: 450 },
-                    { id: 'jub-twotone-gold', name: 'Two-Tone Yellow Gold & Steel', outer: 'silver', center: 'gold', hex: '#E5C168', price: 450 },
-                    { id: 'jub-silver', name: 'All-Steel Brushed & Polished Silver', outer: 'silver', center: 'silver', hex: '#CBD5E1', price: 250 },
-                    { id: 'jub-full-gold', name: 'Full Royal Gold Jubilee', outer: 'gold', center: 'gold', hex: '#E5C168', price: 600 },
-                    { id: 'jub-black', name: 'Obsidian Black Jubilee', outer: 'black', center: 'black', hex: '#27272A', price: 400 }
-                ]
-            },
-            leather: {
-                name: 'Spanish Leather', price: 600,
-                colors: [
-                    { id: 'croc-emerald', name: 'Forest Emerald Crocodile', texture: 'croc', hex: '#1B3B28', scaleLight: '#2E5C40', crevice: '#08150D', stitch: '#38754B', price: 250 },
-                    { id: 'croc-brown', name: 'Espresso Brown Crocodile', texture: 'croc', hex: '#381E14', scaleLight: '#593223', crevice: '#140905', stitch: '#4E2B1D', price: 200 },
-                    { id: 'smooth-brown', name: 'Smooth Matte Coffee Leather', texture: 'smooth', hex: '#432A21', scaleLight: '#5C3C30', crevice: '#1C100B', stitch: '#3A221A', price: 180 },
-                    { id: 'croc-black', name: 'Jet Black Crocodile', texture: 'croc', hex: '#151619', scaleLight: '#2E3036', crevice: '#050506', stitch: '#1E2024', price: 200 },
-                    { id: 'smooth-black', name: 'Smooth Matte Black Calfskin', texture: 'smooth', hex: '#18191C', scaleLight: '#2D2F35', crevice: '#08080A', stitch: '#222428', price: 150 },
-                    { id: 'croc-cognac', name: 'Vintage Cognac Tan Croc', texture: 'croc', hex: '#6E3A1A', scaleLight: '#9B562C', crevice: '#2B1305', stitch: '#D4AF37', price: 250 }
-                ]
-            },
-            rubber: {
-                name: 'Sport Rubber', price: 500,
-                colors: [
-                    { id: 'rubber-black', name: 'Stealth Black Vulcanized Rubber', hex: '#18181B', scaleLight: '#323238', crevice: '#070709', price: 150 },
-                    { id: 'rubber-chocolate', name: 'Espresso Brown Rubber', hex: '#3D251A', scaleLight: '#5E3B2B', crevice: '#180D08', price: 200 },
-                    { id: 'rubber-blue', name: 'Deep Mariana Blue Rubber', hex: '#152C5B', scaleLight: '#284C92', crevice: '#081228', price: 200 },
-                    { id: 'rubber-olive', name: 'Forest Olive Green Rubber', hex: '#1E3826', scaleLight: '#345C40', crevice: '#0B170E', price: 200 }
-                ]
-            },
-            silicone: {
-                name: 'Soft Silicone', price: 350,
-                colors: [
-                    { id: 'sil-black', name: 'Matte Velvet Black Silicone', hex: '#1C1C20', scaleLight: '#383840', crevice: '#09090B', price: 120 },
-                    { id: 'sil-emerald', name: 'Royal Emerald Green Silicone', hex: '#123D28', scaleLight: '#236344', crevice: '#061B10', price: 150 },
-                    { id: 'sil-slate', name: 'Rhodium Slate Grey Silicone', hex: '#474C54', scaleLight: '#6A717C', crevice: '#1E2024', price: 150 }
-                ]
-            }
-        };
-
-        const STRAP_LOCKS = {
-            butterfly: { name: 'Butterfly Deployant Lock', price: 650, badge: 'BUTTERFLY DEPLOYANT' },
-            folding:   { name: 'Oysterlock Folding Safety Clasp', price: 500, badge: 'OYSTERLOCK SAFETY' },
-            buckle:    { name: 'Classic Tang Pin Buckle', price: 250, badge: 'CLASSIC TANG BUCKLE' },
-            magnetic:  { name: 'Magnetic Luxury Clasp', price: 800, badge: 'MAGNETIC LUXURY LOCK' }
-        };
-
-        let state = {
-            bezelStyle: 'fluted',
-            caseColor: 'twotone_rosegold',
-            dialColor: 'chocolate',
-            markerStyle: 'diamond',
-            customName: 'Hanzalah',
-            customNameFont: 'Cinzel',
-            customNameColor: '#FFF0E8',
-            customPhotoDataUrl: null,
-            photoZoom: 100,
-            photoOffsetX: 0,
-            photoOffsetY: 0,
-            photoDimmer: 20,
-            backCase: 'solid',
-            strapMaterial: 'metal',
-            strapColorIndex: 0,
-            strapLock: 'butterfly',
-            viewMode: 'front',
-            liveClock: true
-        };
-
-        let uploadedPhotoImg = null;
-        let authMode = 'login';
-        let currentUser = JSON.parse(localStorage.getItem('dynast_current_user') || 'null');
-
-        // OFFSCREEN STATIC BUFFER FOR ZERO-LAG REAL-TIME CLOCK TICKING
-        const frontStaticBuffer = document.createElement('canvas');
-        frontStaticBuffer.width = 800;
-        frontStaticBuffer.height = 960;
-        let frontBufferValid = false;
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('mainStudioGrid');
-            if (grid && grid.children.length > 2) {
-                while (grid.children.length > 2) grid.removeChild(grid.children[1]);
-            }
-            preloadInternetSkeletonMovement(0);
-            renderStrapColorSwatches();
-            updatePriceBreakdown();
-            updateAuthUI();
-            if (document.fonts && document.fonts.ready) {
-                document.fonts.ready.then(() => renderWatch(true));
-            } else {
-                renderWatch(true);
-            }
-            // Fast, lightweight 250ms clock tick that ONLY redraws the 3 hands over the cached buffer!
-            setInterval(() => {
-                if (state.liveClock && (state.viewMode === 'front' || state.viewMode === 'split')) {
-                    drawFrontWatchCanvas(false);
-                }
-            }, 250);
-        });
-
-        function toggleClockMode() {
-            state.liveClock = !state.liveClock;
-            document.getElementById('clockModeText').textContent = state.liveClock ? 'Live Real-Time Clock' : 'Studio 10:10 Pose';
-            drawFrontWatchCanvas(false);
-        }
-
-        function createMetalGradient(ctx, x0, y0, x1, y1, metalKey, highContrast = false) {
-            const pal = METAL_PALETTES[metalKey] || METAL_PALETTES.silver;
-            const g = ctx.createLinearGradient(x0, y0, x1, y1);
-            const s = pal.stops;
-            g.addColorStop(0.00, s[0]);
-            g.addColorStop(0.14, s[1]);
-            g.addColorStop(0.30, s[2]);
-            g.addColorStop(0.46, s[3]);
-            g.addColorStop(0.56, highContrast ? s[0] : s[4]);
-            g.addColorStop(0.74, s[5]);
-            g.addColorStop(0.88, s[6]);
-            g.addColorStop(1.00, s[7]);
-            return g;
-        }
-
-        function drawRoundedRect(ctx, x, y, w, h, r) {
-            ctx.beginPath();
-            ctx.roundRect(x, y, w, h, r);
-        }
-
-        function drawCurvedText(ctx, text, cx, cy, radius, centerAngleRad, charSpacingRad, isBottomArc) {
-            ctx.save();
-            const chars = text.split('');
-            const totalAngle = (chars.length - 1) * charSpacingRad;
-            const startAngle = isBottomArc
-                ? centerAngleRad + totalAngle / 2
-                : centerAngleRad - totalAngle / 2;
-
-            for (let i = 0; i < chars.length; i++) {
-                const ang = isBottomArc ? startAngle - i * charSpacingRad : startAngle + i * charSpacingRad;
-                ctx.save();
-                ctx.translate(cx + radius * Math.cos(ang), cy + radius * Math.sin(ang));
-                ctx.rotate(isBottomArc ? ang - Math.PI / 2 : ang + Math.PI / 2);
-                ctx.fillText(chars[i], 0, 0);
-                ctx.restore();
-            }
-            ctx.restore();
-        }
-
-        // HELPER: Unified 3D Monobloc Watch Case & Lugs for 800x960 Close-Cropped Portrait Frame (Center: 400, 480)
-        // Inner lug span is x = 260 to x = 540 (width = 280px).
         function drawMonoblocCaseAndLugs(ctx, cx, cy, lugMetalKey, isSmoothDress) {
             const lugPal = METAL_PALETTES[lugMetalKey] || METAL_PALETTES.silver;
 
@@ -1104,7 +1003,6 @@
             const caseFlankXLeft = isSmoothDress ? 132 : 118;
             const caseFlankXRight = isSmoothDress ? 668 : 682;
 
-            // Left Monobloc Case Flank + Top-Left & Bottom-Left Hooded Lugs
             ctx.beginPath();
             ctx.moveTo(outerLugTipXLeft, topLugTipY);
             ctx.lineTo(260, topLugTipY + 3);
@@ -1126,7 +1024,6 @@
             ctx.fillStyle = leftLugGrad;
             ctx.fill();
 
-            // Right Monobloc Case Flank + Top-Right & Bottom-Right Hooded Lugs
             ctx.beginPath();
             ctx.moveTo(outerLugTipXRight, topLugTipY);
             ctx.lineTo(540, topLugTipY + 3);
@@ -1149,27 +1046,36 @@
             ctx.fill();
             ctx.restore();
 
-            // Vertical Satin Brushed Grain on Lug Hoods + 45° Mirror Chamfers + Inner Lug Wall Shadows
             ctx.save();
             ctx.strokeStyle = 'rgba(255,255,255,0.065)';
             ctx.lineWidth = 1.0;
-            for (let lx = caseFlankXLeft + 12; lx <= 258; lx += 3) {
+            for (let lx = caseFlankXLeft + 12; lx <= 258; lx += 2.4) {
                 ctx.beginPath(); ctx.moveTo(lx, topLugTipY + 8); ctx.lineTo(lx, botLugTipY - 8); ctx.stroke();
             }
-            for (let rx = 542; rx <= caseFlankXRight - 12; rx += 3) {
+            for (let rx = 542; rx <= caseFlankXRight - 12; rx += 2.4) {
                 ctx.beginPath(); ctx.moveTo(rx, topLugTipY + 8); ctx.lineTo(rx, botLugTipY - 8); ctx.stroke();
             }
 
-            // Outer 45° Mirror-Polished Lug Bevel Chamfer
-            ctx.strokeStyle = lugPal.fluteBright;
-            ctx.lineWidth = 3.2;
-            ctx.globalAlpha = 0.88;
-            ctx.beginPath();
-            ctx.moveTo(outerLugTipXLeft + 2, topLugTipY + 3); ctx.bezierCurveTo(175, 238, caseFlankXLeft + 3, 350, caseFlankXLeft + 3, cy);
-            ctx.moveTo(outerLugTipXRight - 2, topLugTipY + 3); ctx.bezierCurveTo(625, 238, caseFlankXRight - 3, 350, caseFlankXRight - 3, cy);
-            ctx.stroke();
+            const drawChamfer = (xTip, yTip, xFlank, isLeft) => {
+                ctx.beginPath();
+                ctx.moveTo(xTip, yTip);
+                ctx.bezierCurveTo(isLeft ? 172 : 628, yTip < cy ? 235 : 725, xFlank, yTip < cy ? 350 : 855, xFlank, cy);
+                ctx.lineTo(xFlank + (isLeft ? 7 : -7), cy);
+                ctx.bezierCurveTo(xFlank + (isLeft ? 7 : -7), yTip < cy ? 353 : 852, isLeft ? 179 : 621, yTip < cy ? 238 : 722, xTip + (isLeft ? 7 : -7), yTip + (yTip < cy ? 2 : -2));
+                ctx.closePath();
+                const chG = ctx.createLinearGradient(xTip, yTip, xFlank, cy);
+                chG.addColorStop(0.0, lugPal.fluteBright);
+                chG.addColorStop(0.45, lugPal.fluteLight);
+                chG.addColorStop(0.75, lugPal.fluteDark);
+                chG.addColorStop(1.0, lugPal.fluteBright);
+                ctx.fillStyle = chG;
+                ctx.fill();
+            };
+            drawChamfer(outerLugTipXLeft, topLugTipY, caseFlankXLeft, true);
+            drawChamfer(outerLugTipXLeft, botLugTipY, caseFlankXLeft, true);
+            drawChamfer(outerLugTipXRight, topLugTipY, caseFlankXRight, false);
+            drawChamfer(outerLugTipXRight, botLugTipY, caseFlankXRight, false);
 
-            // 3D Inner Lug Wall Contact Shadows Cast onto the Strap/Bracelet at x=260 & x=540
             const leftWallShadow = ctx.createLinearGradient(260, 0, 274, 0);
             leftWallShadow.addColorStop(0.0, 'rgba(0,0,0,0.92)');
             leftWallShadow.addColorStop(0.45, 'rgba(0,0,0,0.42)');
@@ -1197,7 +1103,12 @@
             ctx.stroke();
             ctx.restore();
         }
-        // BUILD STATIC FRONT WATCH INTO OFFSCREEN CACHE (Runs ONLY when user clicks an option!)
+
+        const frontStaticBuffer = document.createElement('canvas');
+        frontStaticBuffer.width = 800;
+        frontStaticBuffer.height = 960;
+        let frontBufferValid = false;
+
         function rebuildFrontStaticBuffer() {
             const ctx = frontStaticBuffer.getContext('2d');
             const W = 800, H = 960, CX = 400, CY = 480;
@@ -1210,13 +1121,9 @@
             const bezelPal = METAL_PALETTES[caseObj.bezelMetal];
             const isSmooth = state.bezelStyle === 'smooth';
 
-            // 1. DRAW CLOSE-CROPPED, NON-OVERLAPPING JUBILEE BRACELET OR STRAP (x = 260..540)
             drawCroppedRealisticStrap(ctx, CX, CY, state.strapMaterial, strapColorObj);
-
-            // 2. DRAW UNIFIED 3D MONOBLOC CASE & HOODED LUGS
             drawMonoblocCaseAndLugs(ctx, CX, CY, caseObj.lugMetal, isSmooth);
 
-            // 3. DRAW 3D KNURLED TWINLOCK WINDING CROWN AT 3 O'CLOCK
             const crownX = isSmooth ? 656 : 672;
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.88)';
@@ -1237,7 +1144,6 @@
                 ctx.fillRect(crownX + 12, cy + 3.0, 26, 2.0);
             }
 
-            // 4. DRAW BEZEL (48-Flute Luxury Bezel OR Smooth Mirror Dress Bezel)
             const rBezelOuter = isSmooth ? 256 : 270;
             const rBezelInner = 222;
 
@@ -1338,7 +1244,6 @@
                 ctx.stroke();
             }
 
-            // 5. DRAW 3D CONCAVE METALLIC REHAUT RING & SUNBURST DIAL (rDial = 204)
             const rDial = 204;
             const rehautGrad = ctx.createLinearGradient(CX - rBezelInner, CY - rBezelInner, CX + rBezelInner, CY + rBezelInner);
             rehautGrad.addColorStop(0.0, '#101216');
@@ -1391,7 +1296,7 @@
                 for (let r = 0; r < 900; r++) {
                     const a = (r * 2 * Math.PI) / 900;
                     ctx.strokeStyle = (r % 2 === 0) ? 'rgba(255,255,255,0.038)' : 'rgba(0,0,0,0.058)';
-                    ctx.lineWidth = 0.65;
+                    ctx.lineWidth = 0.55;
                     ctx.beginPath();
                     ctx.moveTo(CX + 4 * Math.cos(a), CY + 4 * Math.sin(a));
                     ctx.lineTo(CX + rDial * Math.cos(a), CY + rDial * Math.sin(a));
@@ -1422,7 +1327,6 @@
             ctx.fillRect(CX - rDial, CY - rDial, rDial * 2, rDial * 2);
             ctx.restore();
 
-            // 6. DRAW PRECISION MINUTE TRACK
             const tColor = state.customPhotoDataUrl ? '#FFE87C' : dialObj.trackColor;
             ctx.save();
             ctx.strokeStyle = tColor;
@@ -1442,7 +1346,6 @@
             }
             ctx.restore();
 
-            // 7. DRAW DIAL MARKERS & NUMERALS
             const romans = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
             const arabics = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
 
@@ -1549,7 +1452,6 @@
                 ctx.restore();
             }
 
-            // 8. DRAW COMPULSORY "DYNAST" CINZEL DECORATIVE & "LUXURIOUS HOROLOGY"
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.55)';
             ctx.shadowBlur = 4;
@@ -1584,7 +1486,6 @@
             ctx.fillText('LUXURIOUS HOROLOGY', CX, CY - 72);
             ctx.restore();
 
-            // 9. DRAW CUSTOMER'S CUSTOM NAME ON DIAL
             if (state.customName && state.customName.trim() !== '') {
                 ctx.save();
                 ctx.shadowColor = (state.dialColor === 'white' || state.dialColor === 'silver_dial' || state.dialColor === 'champagne') ? 'rgba(0,0,0,0.18)' : 'rgba(0,0,0,0.68)';
@@ -1599,7 +1500,6 @@
                 ctx.restore();
             }
 
-            // 10. DRAW 3 O'CLOCK CYCLOPS DATE WINDOW
             if (state.bezelStyle === 'fluted' || state.markerStyle === 'diamond') {
                 const dx = CX + 126, dy = CY;
                 ctx.save();
@@ -1632,7 +1532,6 @@
             frontBufferValid = true;
         }
 
-        // ULTRA-FAST FRONT WATCH RENDERER (Copies Static Buffer in 0.1ms + Draws Hands!)
         function drawFrontWatchCanvas(forceRebuild = false) {
             const canvas = document.getElementById('frontWatchCanvas');
             if (!canvas) return;
@@ -1752,27 +1651,22 @@
             ctx.restore();
         }
 
-        // HELPER: Close-Cropped, Non-Overlapping 5-Link Jubilee Bracelet & Spring-Bar Tucked Straps (800 x 960 Frame, x = 260..540)
-        // Only the upper & lower lug sections of the strap are shown—never compressing the watch!
-        // Every Jubilee link is drawn in clean outward steps with a 2.5px gap—ZERO overlapping!
+        // HELPER: Close-Cropped 800x960 Portrait Frame with Solid End-Links (SEL) & Spring-Bar Rolled Tubes (Zero Overlapping, Zero Gaps!)
         function drawCroppedRealisticStrap(ctx, cx, cy, matKey, strapColorObj) {
             if (matKey === 'metal') {
                 const outerPal = METAL_PALETTES[strapColorObj.outer] || METAL_PALETTES.silver;
                 const centerPal = METAL_PALETTES[strapColorObj.center] || METAL_PALETTES.rosegold;
 
-                // Dark inter-link pin chassis seated strictly between inner lug walls (x = 260 to 540, width = 280px)
                 ctx.fillStyle = '#050608';
                 ctx.fillRect(260, 0, 280, 250);
                 ctx.fillRect(260, 710, 280, 250);
 
-                // Draw 7 non-overlapping rows stepping outward from under the bezel (rBezel=270 => y=210 top, y=750 bottom)
                 const linkH = 32.0;
-                const rowStep = 34.5; // 32px link + 2.5px dark pin gap = ZERO vertical overlap!
+                const rowStep = 34.5;
 
                 for (let side = 0; side < 2; side++) {
                     const isTop = side === 0;
                     for (let i = 0; i < 7; i++) {
-                        // i=0 is closest to the bezel (tucked under bezel edge); i=6 bleeds off canvas edge
                         const baseY = isTop ? (198 - i * rowStep) : (730 + i * rowStep);
                         const taper = Math.max(0, (i - 1) * 2.5);
                         const xStart = 260 + taper;
@@ -1780,7 +1674,6 @@
                         const wOuter = totalW * 0.30;
                         const wCenter = (totalW - wOuter * 2 - 8) / 3;
 
-                        // 1. Left & Right Brushed Satin Outer Links (Strictly separated in X and Y — zero overlap!)
                         [xStart, xStart + wOuter + wCenter * 3 + 8].forEach(ox => {
                             const lg = ctx.createLinearGradient(ox, baseY, ox, baseY + linkH);
                             lg.addColorStop(0.00, outerPal.fluteDark);
@@ -1801,7 +1694,6 @@
                             ctx.fill();
                         });
 
-                        // 2. 3 Mirror-Polished D-Profile Center Links (Staggered by half-step in Y, strictly in their own X columns so they NEVER overlap outer links or each other!)
                         const centerY = isTop ? (baseY + 14) : (baseY - 14);
                         const isDarkRefRow = (i === 1 || i === 4);
                         for (let c = 0; c < 3; c++) {
@@ -1822,7 +1714,7 @@
                                 cg.addColorStop(0.86, centerPal.fluteMid);
                                 cg.addColorStop(1.00, centerPal.fluteDark);
                             }
-                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 4.5);
+                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 5.0);
                             ctx.fillStyle = cg;
                             ctx.fill();
 
@@ -1837,7 +1729,6 @@
                     }
                 }
 
-                // Deep Under-Bezel Contact Shadow & Top/Bottom Wrist Curvature Vignette
                 const bezelAO = ctx.createRadialGradient(cx, cy, 255, cx, cy, 305);
                 bezelAO.addColorStop(0.0, 'rgba(0,0,0,0.92)');
                 bezelAO.addColorStop(0.5, 'rgba(0,0,0,0.38)');
@@ -1859,7 +1750,6 @@
                 return;
             }
 
-            // CLOSE-CROPPED SPANISH LEATHER (CROCODILE / SMOOTH) OR SPORT RUBBER / SILICONE STRAP (x = 260..540)
             const topSg = ctx.createLinearGradient(260, 0, 540, 0);
             topSg.addColorStop(0.00, '#030304');
             topSg.addColorStop(0.07, strapColorObj.crevice || '#050506');
@@ -1869,7 +1759,6 @@
             topSg.addColorStop(0.93, strapColorObj.crevice || '#050506');
             topSg.addColorStop(1.00, '#030304');
 
-            // Dark Spring-Bar Recess & Exposed Steel Spring-Bar Pins Between Lugs (x = 260..540)
             ctx.fillStyle = '#040406';
             ctx.fillRect(260, 180, 280, 55);
             ctx.fillRect(260, 725, 280, 55);
@@ -1877,7 +1766,6 @@
             ctx.fillRect(258, 192, 8, 8); ctx.fillRect(534, 192, 8, 8);
             ctx.fillRect(258, 760, 8, 8); ctx.fillRect(534, 760, 8, 8);
 
-            // 1. Top Cropped Strap Segment (y = 0 down to Spring-Bar Rolled Lip at y = 196)
             ctx.save();
             ctx.beginPath();
             ctx.moveTo(270, 0);
@@ -1885,6 +1773,7 @@
             ctx.lineTo(540, 194);
             ctx.quadraticCurveTo(400, 204, 260, 194);
             ctx.closePath();
+            ctx.save();
             ctx.clip();
 
             ctx.fillStyle = topSg;
@@ -1904,8 +1793,8 @@
             ctx.fillStyle = topFade;
             ctx.fillRect(260, 0, 280, 60);
             ctx.restore();
+            ctx.restore();
 
-            // 2. Bottom Cropped Strap Segment (Spring-Bar Rolled Lip at y = 766 down to y = 960)
             ctx.save();
             ctx.beginPath();
             ctx.moveTo(260, 766);
@@ -1934,275 +1823,7 @@
             ctx.restore();
         }
 
-        function drawStrapSurfaceTexture(ctx, x, y, w, h, matKey, strapColorObj) {
-            const cx = x + w / 2;
-
-            const bolsterG = ctx.createLinearGradient(x + 28, 0, x + w - 28, 0);
-            bolsterG.addColorStop(0.00, 'rgba(0,0,0,0.45)');
-            bolsterG.addColorStop(0.18, 'rgba(255,255,255,0.08)');
-            bolsterG.addColorStop(0.50, 'rgba(255,255,255,0.19)');
-            bolsterG.addColorStop(0.82, 'rgba(255,255,255,0.08)');
-            bolsterG.addColorStop(1.00, 'rgba(0,0,0,0.45)');
-            ctx.fillStyle = bolsterG;
-            ctx.fillRect(x + 26, y, w - 52, h);
-
-            if (matKey === 'leather') {
-                if (strapColorObj.texture === 'croc') {
-                    let curY = y + 6;
-                    let rowIdx = 0;
-                    while (curY < y + h - 4) {
-                        const tileH = 34 + (rowIdx % 3) * 5;
-                        const splitX = cx + ((rowIdx % 2 === 0) ? 8 : -8);
-
-                        const tiles = [
-                            { tx: x + 6, tw: 36, th: tileH },
-                            { tx: x + 45, tw: splitX - (x + 47), th: tileH },
-                            { tx: splitX + 2, tw: (x + w - 45) - (splitX + 2), th: tileH },
-                            { tx: x + w - 42, tw: 36, th: tileH }
-                        ];
-
-                        tiles.forEach(t => {
-                            drawRoundedRect(ctx, t.tx, curY, t.tw, t.th - 3, 5);
-                            ctx.fillStyle = strapColorObj.crevice || '#050506';
-                            ctx.fill();
-
-                            const scG = ctx.createRadialGradient(
-                                t.tx + t.tw * 0.42, curY + t.th * 0.35, 2,
-                                t.tx + t.tw * 0.5, curY + t.th * 0.5, Math.max(t.tw, t.th) * 0.75
-                            );
-                            scG.addColorStop(0.0, strapColorObj.scaleLight || '#444');
-                            scG.addColorStop(0.55, strapColorObj.hex);
-                            scG.addColorStop(1.0, strapColorObj.crevice || '#080808');
-                            drawRoundedRect(ctx, t.tx + 2, curY + 2, t.tw - 4, t.th - 6.5, 4);
-                            ctx.fillStyle = scG;
-                            ctx.fill();
-
-                            ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-                            ctx.lineWidth = 1.0;
-                            ctx.beginPath();
-                            ctx.moveTo(t.tx + 6, curY + 3.5);
-                            ctx.lineTo(t.tx + t.tw - 6, curY + 3.5);
-                            ctx.stroke();
-                        });
-
-                        curY += tileH;
-                        rowIdx++;
-                    }
-                }
-
-                const stColor = strapColorObj.stitch || '#D4AF37';
-                for (let sy = y + 8; sy < y + h - 10; sy += 14) {
-                    const lx = x + 16, rx = x + w - 16;
-                    ctx.fillStyle = '#020203';
-                    ctx.beginPath(); ctx.arc(lx, sy, 1.8, 0, Math.PI * 2); ctx.fill();
-                    ctx.beginPath(); ctx.arc(rx, sy, 1.8, 0, Math.PI * 2); ctx.fill();
-
-                    ctx.strokeStyle = stColor;
-                    ctx.lineWidth = 2.5;
-                    ctx.lineCap = 'round';
-                    ctx.beginPath();
-                    ctx.moveTo(lx, sy + 1); ctx.lineTo(lx, sy + 9.5);
-                    ctx.moveTo(rx, sy + 1); ctx.lineTo(rx, sy + 9.5);
-                    ctx.stroke();
-                }
-            } else {
-                for (let ry = y + 24; ry < y + h - 24; ry += 40) {
-                    drawRoundedRect(ctx, x + 48, ry, w - 96, 16, 6);
-                    ctx.fillStyle = 'rgba(0,0,0,0.45)';
-                    ctx.fill();
-                }
-            }
-        }
-
-        // DEDICATED HIGH-RESOLUTION 3D MACRO STRAP LOCK STUDIO RENDERER (800 x 340)
-        function drawMacroLockCanvas() {
-            const canvas = document.getElementById('lockMacroCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            const W = 800, H = 340, CX = 400, CY = 170;
-            ctx.clearRect(0, 0, W, H);
-
-            const caseObj = CASE_OPTIONS[state.caseColor];
-            const matObj = STRAP_MATERIALS[state.strapMaterial];
-            const strapColorObj = matObj.colors[state.strapColorIndex] || matObj.colors[0];
-            const metalKey = caseObj.bezelMetal;
-            const pal = METAL_PALETTES[metalKey] || METAL_PALETTES.rosegold;
-            const lockObj = STRAP_LOCKS[state.strapLock];
-
-            document.getElementById('liveLockBadgeTitle').textContent = `${lockObj.name} (+₹${lockObj.price})`;
-
-            const bgG = ctx.createRadialGradient(CX, CY, 20, CX, CY, 380);
-            bgG.addColorStop(0.0, '#241c10');
-            bgG.addColorStop(0.6, '#0a0908');
-            bgG.addColorStop(1.0, '#020203');
-            ctx.fillStyle = bgG;
-            ctx.fillRect(0, 0, W, H);
-
-            ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.85)';
-            ctx.shadowBlur = 20;
-            ctx.shadowOffsetY = 10;
-
-            const strapH = 136;
-            const strapY = CY - strapH / 2;
-            const sGrad = ctx.createLinearGradient(0, strapY, 0, strapY + strapH);
-            sGrad.addColorStop(0.00, strapColorObj.crevice || '#050506');
-            sGrad.addColorStop(0.20, strapColorObj.hex);
-            sGrad.addColorStop(0.50, strapColorObj.scaleLight || strapColorObj.hex);
-            sGrad.addColorStop(0.80, strapColorObj.hex);
-            sGrad.addColorStop(1.00, strapColorObj.crevice || '#050506');
-
-            ctx.fillStyle = sGrad;
-            ctx.fillRect(30, strapY, 740, strapH);
-
-            if (state.strapMaterial === 'metal') {
-                for (let lx = 35; lx < 760; lx += 34) {
-                    drawRoundedRect(ctx, lx, strapY + 2, 31, strapH - 4, 4);
-                    ctx.fillStyle = createMetalGradient(ctx, lx, strapY, lx, strapY + strapH, strapColorObj.outer || 'silver', false);
-                    ctx.fill();
-                    drawRoundedRect(ctx, lx + 2, strapY + 38, 27, strapH - 76, 3);
-                    ctx.fillStyle = createMetalGradient(ctx, lx, strapY + 38, lx, strapY + strapH - 38, strapColorObj.center || metalKey, true);
-                    ctx.fill();
-                }
-            } else {
-                if (strapColorObj.texture === 'croc') {
-                    for (let sx = 45; sx < 755; sx += 44) {
-                        drawRoundedRect(ctx, sx, strapY + 18, 38, strapH - 36, 5);
-                        ctx.strokeStyle = 'rgba(0,0,0,0.55)';
-                        ctx.lineWidth = 2.5;
-                        ctx.stroke();
-                    }
-                }
-                const stCol = strapColorObj.stitch || '#D4AF37';
-                ctx.strokeStyle = stCol;
-                ctx.lineWidth = 3.0;
-                ctx.setLineDash([12, 8]);
-                ctx.beginPath();
-                ctx.moveTo(35, strapY + 14); ctx.lineTo(765, strapY + 14);
-                ctx.moveTo(35, strapY + strapH - 14); ctx.lineTo(765, strapY + strapH - 14);
-                ctx.stroke();
-                ctx.setLineDash([]);
-            }
-            ctx.restore();
-
-            ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.92)';
-            ctx.shadowBlur = 28;
-            ctx.shadowOffsetY = 12;
-
-            if (state.strapLock === 'buckle') {
-                for (let hx = 160; hx <= 640; hx += 60) {
-                    ctx.beginPath(); ctx.arc(hx, CY, 8, 0, Math.PI * 2);
-                    ctx.fillStyle = '#040405'; ctx.fill();
-                    ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.stroke();
-                }
-
-                drawRoundedRect(ctx, CX - 95, CY - 86, 175, 172, 26);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 95, CY - 86, CX + 80, CY + 86, metalKey, true);
-                ctx.fill();
-                ctx.lineWidth = 2.5; ctx.strokeStyle = pal.fluteBright; ctx.stroke();
-
-                drawRoundedRect(ctx, CX - 65, CY - 58, 112, 116, 12);
-                ctx.fillStyle = sGrad;
-                ctx.fill();
-                ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,0.75)'; ctx.stroke();
-
-                drawRoundedRect(ctx, CX - 78, CY - 70, 22, 140, 6);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 78, CY - 70, CX - 56, CY + 70, metalKey, true);
-                ctx.fill();
-
-                drawRoundedRect(ctx, CX - 72, CY - 11, 162, 22, 8);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 72, CY - 11, CX + 90, CY + 11, metalKey, true);
-                ctx.fill();
-                ctx.lineWidth = 1.5; ctx.strokeStyle = pal.fluteBright; ctx.stroke();
-
-                ctx.save();
-                ctx.translate(CX + 62, CY);
-                ctx.rotate(-Math.PI / 2);
-                ctx.fillStyle = pal.fluteDark;
-                ctx.font = '700 15px "Cinzel Decorative", serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', 0, 5);
-                ctx.restore();
-
-            } else if (state.strapLock === 'butterfly') {
-                drawRoundedRect(ctx, CX - 32, CY - 94, 64, 188, 8);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 32, CY - 94, CX + 32, CY - 94, 'silver', true);
-                ctx.fill();
-
-                drawRoundedRect(ctx, CX - 165, CY - 62, 330, 124, 14);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 165, CY - 62, CX + 165, CY + 62, 'silver', false);
-                ctx.fill();
-
-                drawRoundedRect(ctx, CX - 78, CY - 74, 156, 148, 12);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 78, CY - 74, CX + 78, CY + 74, metalKey, true);
-                ctx.fill();
-                ctx.lineWidth = 2; ctx.strokeStyle = pal.fluteBright; ctx.stroke();
-
-                ctx.strokeStyle = 'rgba(0,0,0,0.75)';
-                ctx.lineWidth = 2.5;
-                ctx.beginPath(); ctx.moveTo(CX, CY - 72); ctx.lineTo(CX, CY + 72); ctx.stroke();
-
-                drawRoundedRect(ctx, CX - 56, CY - 28, 112, 56, 8);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 56, CY - 28, CX + 56, CY + 28, metalKey, true);
-                ctx.fill();
-                ctx.fillStyle = '#0F172A';
-                ctx.font = '700 18px "Cinzel Decorative", serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', CX, CY + 2);
-                ctx.font = '600 8.5px "Cinzel", serif';
-                ctx.fillText('DEPLOYANT LOCK', CX, CY + 18);
-
-            } else if (state.strapLock === 'folding') {
-                drawRoundedRect(ctx, CX - 155, CY - 74, 310, 148, 14);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 155, CY - 74, CX + 155, CY + 74, 'silver', false);
-                ctx.fill();
-
-                drawRoundedRect(ctx, CX - 155, CY - 38, 310, 76, 6);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 155, CY - 38, CX + 155, CY + 38, metalKey, true);
-                ctx.fill();
-
-                drawRoundedRect(ctx, CX + 75, CY - 78, 58, 156, 8);
-                ctx.fillStyle = createMetalGradient(ctx, CX + 75, CY - 78, CX + 133, CY + 78, metalKey, true);
-                ctx.fill();
-                ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(0,0,0,0.7)'; ctx.stroke();
-
-                ctx.fillStyle = '#0F172A';
-                ctx.font = '700 22px "Cinzel Decorative", serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', CX - 20, CY - 2);
-                ctx.font = '600 10px "Inter", sans-serif';
-                ctx.fillText('OYSTERLOCK SAFETY CLASP', CX - 20, CY + 18);
-
-            } else {
-                drawRoundedRect(ctx, CX - 115, CY - 76, 230, 152, 18);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 115, CY - 76, CX + 115, CY + 76, metalKey, true);
-                ctx.fill();
-
-                for (let mx = CX - 95; mx <= CX + 95; mx += 12) {
-                    if (mx > CX - 52 && mx < CX + 52) continue;
-                    ctx.fillStyle = 'rgba(0,0,0,0.55)';
-                    ctx.fillRect(mx, CY - 64, 4, 128);
-                    ctx.fillStyle = pal.fluteBright;
-                    ctx.fillRect(mx + 4, CY - 64, 2, 128);
-                }
-
-                drawRoundedRect(ctx, CX - 54, CY - 42, 108, 84, 10);
-                ctx.fillStyle = '#09090B';
-                ctx.fill();
-                ctx.lineWidth = 2; ctx.strokeStyle = pal.fluteBright; ctx.stroke();
-
-                ctx.fillStyle = pal.fluteLight;
-                ctx.font = '700 18px "Cinzel Decorative", serif';
-                ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', CX, CY - 2);
-                ctx.font = '600 9px "Inter", sans-serif';
-                ctx.fillText('MAGNETIC LOCK', CX, CY + 18);
-            }
-            ctx.restore();
-        }
-
-        // PHOTOREALISTIC 3D BACK CASE RENDERER (800 x 960 Close-Cropped Frame)
+        // PHOTOREALISTIC BACK CASE RENDERER (800 x 960 Frame)
         function drawBackWatchCanvas() {
             const canvas = document.getElementById('backWatchCanvas');
             if (!canvas) return;
@@ -2388,7 +2009,9 @@
             updatePriceBreakdown();
         }
 
-        function updatePriceBreakdown() {
+        // FIREBASE ORDER PLACEMENT (Syncs with cloud DB & generates Paytm deep link)
+        async function placeBespokeOrder(e) {
+            e.preventDefault();
             const bezelObj = BEZEL_STYLES[state.bezelStyle];
             const caseObj = CASE_OPTIONS[state.caseColor];
             const dialObj = DIAL_OPTIONS[state.dialColor];
@@ -2398,486 +2021,44 @@
             const lockObj = STRAP_LOCKS[state.strapLock];
             const backObj = BACK_CASE_OPTIONS[state.backCase];
 
-            const hasName = state.customName && state.customName.trim() !== '';
-            const items = [
-                { label: 'Base DYNAST Horology Movement & Chassis', price: BASE_WATCH_PRICE },
-                { label: bezelObj.name, price: bezelObj.price },
-                { label: caseObj.name, price: caseObj.price },
-                { label: dialObj.name, price: dialObj.price },
-                { label: markerObj.name, price: markerObj.price },
-                { label: backObj.name, price: backObj.price },
-                { label: `${matObj.name} (${strapColorObj.name})`, price: matObj.price + strapColorObj.price },
-                { label: lockObj.name, price: lockObj.price }
-            ];
-
-            if (hasName) {
-                items.push({ label: `Custom Dial Name ("${state.customName.trim()}")`, price: 499 });
-            }
-            if (state.customPhotoDataUrl) {
-                items.push({ label: 'Custom Circular Dial Picture Print', price: 999 });
-            }
-
-            const total = items.reduce((sum, i) => sum + i.price, 0);
-            state.totalPrice = total;
-
-            document.getElementById('priceBreakdownList').innerHTML = items.map(item => `
-                <div class="flex justify-between items-center">
-                    <span>${item.label}</span>
-                    <span class="font-semibold text-gold">+₹${item.price.toLocaleString('en-IN')}</span>
-                </div>
-            `).join('');
-
-            const formattedTotal = `₹${total.toLocaleString('en-IN')}`;
-            document.getElementById('navTotalPrice').textContent = formattedTotal;
-            document.getElementById('cardTotalPrice').textContent = formattedTotal;
-            document.getElementById('selectedStrapColorName').textContent = `${strapColorObj.name} (+₹${strapColorObj.price.toLocaleString('en-IN')})`;
-            document.getElementById('backCaseCaption').textContent = `${backObj.name} (+₹${backObj.price.toLocaleString('en-IN')})`;
-            document.getElementById('step1PriceBadge').textContent = `+₹${(bezelObj.price + caseObj.price).toLocaleString('en-IN')}`;
-        }
-
-        // UI EVENT HANDLERS
-        function selectBezelStyle(styleKey) {
-            state.bezelStyle = styleKey;
-            document.getElementById('bezelBtn-smooth').classList.toggle('active', styleKey === 'smooth');
-            document.getElementById('bezelBtn-fluted').classList.toggle('active', styleKey === 'fluted');
-            renderWatch(true);
-        }
-
-        function selectCaseColor(colorKey) {
-            state.caseColor = colorKey;
-            document.querySelectorAll('#caseColorGrid .option-card').forEach(el => el.classList.remove('active'));
-            const btn = document.getElementById(`caseBtn-${colorKey}`);
-            if (btn) btn.classList.add('active');
-            renderWatch(true);
-        }
-
-        function selectDialColor(dialKey) {
-            state.dialColor = dialKey;
-            Object.keys(DIAL_OPTIONS).forEach(k => {
-                const el = document.getElementById(`dialBtn-${k}`);
-                if (el) el.classList.toggle('active', k === dialKey);
-            });
-            const isLight = (dialKey === 'white' || dialKey === 'silver_dial' || dialKey === 'champagne' || dialKey === 'gold_dial');
-            state.customNameColor = isLight ? '#111111' : '#FFF0E8';
-            renderWatch(true);
-        }
-
-        function selectMarkerStyle(styleKey) {
-            state.markerStyle = styleKey;
-            Object.keys(MARKER_OPTIONS).forEach(k => {
-                const el = document.getElementById(`markerBtn-${k}`);
-                if (el) el.classList.toggle('active', k === styleKey);
-            });
-            renderWatch(true);
-        }
-
-        function updateCustomNameFromInput() {
-            state.customName = document.getElementById('customNameInput').value;
-            renderWatch(true);
-        }
-
-        function clearCustomName() {
-            state.customName = '';
-            document.getElementById('customNameInput').value = '';
-            renderWatch(true);
-        }
-
-        function setCustomNameColor(hex) {
-            state.customNameColor = hex;
-            renderWatch(true);
-        }
-
-        function handleDialPhotoUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                state.customPhotoDataUrl = e.target.result;
-                const img = new Image();
-                img.onload = function() {
-                    uploadedPhotoImg = img;
-                    document.getElementById('removePhotoBtn').classList.remove('hidden');
-                    document.getElementById('photoAdjustControls').classList.remove('hidden');
-                    renderWatch(true);
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function updatePhotoTransform() {
-            state.photoZoom = parseInt(document.getElementById('photoZoom').value, 10);
-            state.photoOffsetX = parseInt(document.getElementById('photoOffsetX').value, 10);
-            state.photoOffsetY = parseInt(document.getElementById('photoOffsetY').value, 10);
-            state.photoDimmer = parseInt(document.getElementById('photoDimmerRange').value, 10);
-            document.getElementById('zoomVal').textContent = `${state.photoZoom}%`;
-            renderWatch(true);
-        }
-
-        function removeDialPhoto() {
-            state.customPhotoDataUrl = null;
-            uploadedPhotoImg = null;
-            document.getElementById('dialPhotoInput').value = '';
-            document.getElementById('removePhotoBtn').classList.add('hidden');
-            document.getElementById('photoAdjustControls').classList.add('hidden');
-            renderWatch(true);
-        }
-
-        function selectBackCase(typeKey) {
-            state.backCase = typeKey;
-            document.getElementById('backBtn-solid').classList.toggle('active', typeKey === 'solid');
-            document.getElementById('backBtn-skeleton').classList.toggle('active', typeKey === 'skeleton');
-            setWatchView('back');
-        }
-
-        function selectStrapMaterial(matKey) {
-            state.strapMaterial = matKey;
-            state.strapColorIndex = 0;
-            ['metal', 'leather', 'rubber', 'silicone'].forEach(k => {
-                document.getElementById(`strapMat-${k}`).classList.toggle('active', k === matKey);
-            });
-            document.getElementById('currentStrapMatLabel').textContent = STRAP_MATERIALS[matKey].name;
-            renderStrapColorSwatches();
-            renderWatch(true);
-        }
-
-        function renderStrapColorSwatches() {
-            const mat = STRAP_MATERIALS[state.strapMaterial];
-            const container = document.getElementById('strapColorsContainer');
-            container.innerHTML = mat.colors.map((c, idx) => `
-                <button onclick="selectStrapColor(${idx})" class="swatch-btn ${idx === state.strapColorIndex ? 'active' : ''} flex items-center gap-2 px-3 py-2 rounded-xl bg-black/70 border border-gold/30 text-xs">
-                    <span class="w-4 h-4 rounded-full border border-white/40" style="background:${c.hex}"></span>
-                    <span class="text-white font-medium">${c.name}</span>
-                    <span class="text-[10px] text-gold font-bold">+₹${c.price}</span>
-                </button>
-            `).join('');
-        }
-
-        function selectStrapColor(index) {
-            state.strapColorIndex = index;
-            renderStrapColorSwatches();
-            renderWatch(true);
-        }
-
-        function selectStrapLock(lockKey, revealCloseUp = true) {
-            state.strapLock = lockKey;
-            ['butterfly', 'folding', 'buckle', 'magnetic'].forEach(k => {
-                document.getElementById(`lockBtn-${k}`).classList.toggle('active', k === lockKey);
-            });
-            if (revealCloseUp) {
-                document.getElementById('lockWatchWrapper').classList.remove('hidden');
-                drawMacroLockCanvas();
-            }
-            updatePriceBreakdown();
-        }
-
-        function setWatchView(mode) {
-            state.viewMode = mode;
-            const frontWrap = document.getElementById('frontWatchWrapper');
-            const backWrap = document.getElementById('backWatchWrapper');
-            const lockWrap = document.getElementById('lockWatchWrapper');
-
-            ['Front', 'Back', 'Lock', 'Split'].forEach(m => {
-                const btn = document.getElementById(`view${m}Btn`);
-                if (!btn) return;
-                const active = m.toLowerCase() === mode;
-                btn.className = active ? 'px-2.5 py-1 rounded-lg bg-gold text-black font-bold transition' : 'px-2.5 py-1 rounded-lg text-gray-300 hover:text-gold transition';
-            });
-
-            if (mode === 'front') {
-                frontWrap.classList.remove('hidden');
-                backWrap.classList.add('hidden');
-                lockWrap.classList.add('hidden');
-            } else if (mode === 'back') {
-                frontWrap.classList.add('hidden');
-                backWrap.classList.remove('hidden');
-                lockWrap.classList.add('hidden');
-                drawBackWatchCanvas();
-            } else if (mode === 'lock') {
-                frontWrap.classList.add('hidden');
-                backWrap.classList.add('hidden');
-                lockWrap.classList.remove('hidden');
-                drawMacroLockCanvas();
-            } else {
-                frontWrap.classList.remove('hidden');
-                backWrap.classList.remove('hidden');
-                lockWrap.classList.remove('hidden');
-                drawBackWatchCanvas();
-                drawMacroLockCanvas();
-            }
-            drawFrontWatchCanvas(false);
-        }
-
-        function loadPresetEdition(presetKey) {
-            setWatchView('front');
-            if (presetKey === 'datejust-rosegold') {
-                state.bezelStyle = 'fluted';
-                state.caseColor = 'twotone_rosegold';
-                state.dialColor = 'chocolate';
-                state.markerStyle = 'diamond';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#FFF0E8';
-                state.strapMaterial = 'metal';
-                state.strapColorIndex = 0;
-                state.strapLock = 'butterfly';
-            } else if (presetKey === 'nagata-rosegold-emerald') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'rosegold';
-                state.dialColor = 'emerald';
-                state.markerStyle = 'arabic_12_6';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#FFF0E8';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 0;
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-rosegold-white') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'rosegold';
-                state.dialColor = 'white';
-                state.markerStyle = 'roman_12_6';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#111111';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 4;
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-gold-sunburst') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'gold';
-                state.dialColor = 'gold_dial';
-                state.markerStyle = 'baton';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#1E1202';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 1;
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-silver-coffee') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'silver';
-                state.dialColor = 'chocolate';
-                state.markerStyle = 'arabic_12_6';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#FFFFFF';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 2;
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-black-stealth') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'black';
-                state.dialColor = 'black';
-                state.markerStyle = 'baton';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#F5DC8B';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 3;
-                state.strapLock = 'buckle';
-            }
-            document.getElementById('customNameInput').value = state.customName;
-            selectBezelStyle(state.bezelStyle);
-            selectCaseColor(state.caseColor);
-            selectDialColor(state.dialColor);
-            selectMarkerStyle(state.markerStyle);
-            selectStrapMaterial(state.strapMaterial);
-            selectStrapColor(state.strapColorIndex);
-            selectStrapLock(state.strapLock, false);
-        }
-
-        // CUSTOMER AUTH, HISTORY & ORDERS
-        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
-
-        function handleAuthButtonClick() {
-            if (currentUser) openAccountModal('history');
-            else openModal('authModal');
-        }
-
-        function switchAuthTab(mode) {
-            authMode = mode;
-            document.getElementById('tabLoginBtn').className = mode === 'login' ? 'py-2 rounded-lg bg-gold text-black font-bold' : 'py-2 rounded-lg text-gray-300 hover:text-gold';
-            document.getElementById('tabSignupBtn').className = mode === 'signup' ? 'py-2 rounded-lg bg-gold text-black font-bold' : 'py-2 rounded-lg text-gray-300 hover:text-gold';
-            document.getElementById('signupNameField').classList.toggle('hidden', mode !== 'signup');
-            document.getElementById('signupPhoneField').classList.toggle('hidden', mode !== 'signup');
-            document.getElementById('authSubmitBtn').textContent = mode === 'login' ? 'Sign In to Studio' : 'Create Bespoke Account';
-            document.getElementById('authErrorMsg').classList.add('hidden');
-        }
-
-        function submitAuthForm(e) {
-            e.preventDefault();
-            const email = document.getElementById('authEmail').value.trim().toLowerCase();
-            const password = document.getElementById('authPassword').value;
-            const users = JSON.parse(localStorage.getItem('dynast_users') || '{}');
-
-            if (authMode === 'signup') {
-                const name = document.getElementById('authName').value.trim() || 'DYNAST Collector';
-                const phone = document.getElementById('authPhone').value.trim();
-                users[email] = { name, email, phone, password };
-                localStorage.setItem('dynast_users', JSON.stringify(users));
-                currentUser = { name, email, phone };
-            } else {
-                if (!users[email] || users[email].password !== password) {
-                    const err = document.getElementById('authErrorMsg');
-                    err.textContent = 'Invalid credentials. Switch to "Create Account" if you are new.';
-                    err.classList.remove('hidden');
-                    return;
-                }
-                currentUser = { name: users[email].name, email, phone: users[email].phone };
-            }
-
-            localStorage.setItem('dynast_current_user', JSON.stringify(currentUser));
-            closeModal('authModal');
-            updateAuthUI();
-            openAccountModal('history');
-        }
-
-        function logoutCustomer() {
-            currentUser = null;
-            localStorage.removeItem('dynast_current_user');
-            updateAuthUI();
-            closeModal('accountModal');
-        }
-
-        function getStorageKey(type) {
-            return `dynast_${type}_${currentUser ? currentUser.email : 'guest'}`;
-        }
-
-        function updateAuthUI() {
-            const historyList = JSON.parse(localStorage.getItem(getStorageKey('history')) || '[]');
-            const ordersList = JSON.parse(localStorage.getItem(getStorageKey('orders')) || '[]');
-            document.getElementById('historyCountBadge').textContent = historyList.length + ordersList.length;
-
-            if (currentUser) {
-                document.getElementById('authNavText').textContent = currentUser.name.split(' ')[0];
-                document.getElementById('accountUserName').textContent = currentUser.name;
-                document.getElementById('accountUserEmail').textContent = `${currentUser.email} • ${currentUser.phone || ''}`;
-                document.getElementById('accountAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-                document.getElementById('logoutBtn').classList.remove('hidden');
-            } else {
-                document.getElementById('authNavText').textContent = 'Sign In';
-                document.getElementById('accountUserName').textContent = 'Guest Collector';
-                document.getElementById('accountUserEmail').textContent = 'Sign in to permanently save your orders & customizations';
-                document.getElementById('accountAvatar').textContent = 'D';
-                document.getElementById('logoutBtn').classList.add('hidden');
-            }
-        }
-
-        function saveCurrentDesignToHistory() {
-            const key = getStorageKey('history');
-            const list = JSON.parse(localStorage.getItem(key) || '[]');
-            const matObj = STRAP_MATERIALS[state.strapMaterial];
-            const strapColorObj = matObj.colors[state.strapColorIndex] || matObj.colors[0];
-
-            list.unshift({
-                id: 'CUST-' + Date.now().toString().slice(-5),
-                date: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
-                summary: `${BEZEL_STYLES[state.bezelStyle].name} • ${CASE_OPTIONS[state.caseColor].name} • ${DIAL_OPTIONS[state.dialColor].name} • Name: "${state.customName || 'None'}" • ${strapColorObj.name}`,
-                totalPrice: state.totalPrice,
-                savedState: JSON.parse(JSON.stringify(state))
-            });
-            localStorage.setItem(key, JSON.stringify(list.slice(0, 20)));
-            updateAuthUI();
-            openAccountModal('history');
-        }
-
-        function openAccountModal(tab) {
-            updateAuthUI();
-            openModal('accountModal');
-            switchAccountTab(tab || 'history');
-        }
-
-        function switchAccountTab(tab) {
-            const historyList = JSON.parse(localStorage.getItem(getStorageKey('history')) || '[]');
-            const ordersList = JSON.parse(localStorage.getItem(getStorageKey('orders')) || '[]');
-            document.getElementById('tabHistoryCount').textContent = historyList.length;
-            document.getElementById('tabOrdersCount').textContent = ordersList.length;
-
-            document.getElementById('accTabHistory').className = tab === 'history' ? 'px-4 py-2 rounded-xl bg-gold text-black font-bold' : 'px-4 py-2 rounded-xl bg-white/5 text-gray-300 hover:text-gold border border-gold/25';
-            document.getElementById('accTabOrders').className = tab === 'orders' ? 'px-4 py-2 rounded-xl bg-gold text-black font-bold' : 'px-4 py-2 rounded-xl bg-white/5 text-gray-300 hover:text-gold border border-gold/25';
-
-            const area = document.getElementById('accountContentArea');
-            if (tab === 'history') {
-                area.innerHTML = historyList.length === 0
-                    ? `<p class="text-xs text-gray-400 text-center py-8">No saved customizations yet.</p>`
-                    : historyList.map((item, idx) => `
-                        <div class="p-4 rounded-2xl bg-black/70 border border-gold/30 flex flex-wrap items-center justify-between gap-3">
-                            <div class="space-y-1 max-w-md">
-                                <span class="text-[10px] text-gold uppercase tracking-widest">${item.id} • ${item.date}</span>
-                                <p class="text-xs text-white font-semibold">${item.summary}</p>
-                                <p class="text-xs text-lightgold font-bold">Total: ₹${item.totalPrice.toLocaleString('en-IN')}</p>
-                            </div>
-                            <button onclick="loadSavedDesign(${idx})" class="btn-gold px-3.5 py-2 rounded-xl text-xs uppercase tracking-wider">Load on Watch</button>
-                        </div>
-                    `).join('');
-            } else {
-                area.innerHTML = ordersList.length === 0
-                    ? `<p class="text-xs text-gray-400 text-center py-8">No bespoke orders placed yet.</p>`
-                    : ordersList.map(ord => `
-                        <div class="p-4 rounded-2xl bg-black/70 border border-gold/40 space-y-1.5">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-gold">${ord.orderId} • ${ord.date}</span>
-                                <span class="text-[10px] bg-green-500/20 border border-green-500/40 text-green-300 px-2.5 py-0.5 rounded-full">In Production</span>
-                            </div>
-                            <p class="text-xs text-white">${ord.summary}</p>
-                            <p class="text-[11px] text-gray-400">Deliver To: ${ord.customerName} (${ord.phone}) — ${ord.address}</p>
-                            <div class="flex items-center justify-between pt-2 border-t border-white/10">
-                                <span class="text-xs font-bold text-lightgold">Total: ₹${ord.totalPrice.toLocaleString('en-IN')}</span>
-                                <a href="https://wa.me/917579942958?text=${encodeURIComponent('Hello DYNAST, checking status for Order ' + ord.orderId)}" target="_blank" class="text-xs text-green-400 hover:underline"><i class="fa-brands fa-whatsapp mr-1"></i> Track on WhatsApp</a>
-                            </div>
-                        </div>
-                    `).join('');
-            }
-        }
-
-        function loadSavedDesign(index) {
-            const list = JSON.parse(localStorage.getItem(getStorageKey('history')) || '[]');
-            if (!list[index]) return;
-            state = JSON.parse(JSON.stringify(list[index].savedState));
-            document.getElementById('customNameInput').value = state.customName || '';
-            selectBezelStyle(state.bezelStyle || 'fluted');
-            selectCaseColor(state.caseColor);
-            selectDialColor(state.dialColor);
-            selectMarkerStyle(state.markerStyle || 'diamond');
-            selectStrapMaterial(state.strapMaterial);
-            selectStrapLock(state.strapLock, false);
-            renderWatch(true);
-            closeModal('accountModal');
-        }
-
-        function openCheckoutModal() {
-            const matObj = STRAP_MATERIALS[state.strapMaterial];
-            const strapColorObj = matObj.colors[state.strapColorIndex] || matObj.colors[0];
-            if (currentUser) {
-                document.getElementById('orderName').value = currentUser.name || '';
-                document.getElementById('orderPhone').value = currentUser.phone || '';
-            }
-            document.getElementById('checkoutSummaryBox').innerHTML = `
-                <p><strong class="text-gold">12 O'Clock Branding:</strong> DYNAST • LUXURIOUS HOROLOGY</p>
-                <p><strong class="text-gold">Case & Bezel:</strong> ${BEZEL_STYLES[state.bezelStyle].name} + ${CASE_OPTIONS[state.caseColor].name}</p>
-                <p><strong class="text-gold">Dial & Markers:</strong> ${DIAL_OPTIONS[state.dialColor].name} + ${MARKER_OPTIONS[state.markerStyle].name}</p>
-                <p><strong class="text-gold">Custom Dial Name:</strong> ${state.customName || 'None'} | <strong class="text-gold">Custom Photo:</strong> ${state.customPhotoDataUrl ? 'Uploaded' : 'None'}</p>
-                <p><strong class="text-gold">Back Case Cover:</strong> ${BACK_CASE_OPTIONS[state.backCase].name}</p>
-                <p><strong class="text-gold">Strap & Lock:</strong> ${matObj.name} (${strapColorObj.name}) + ${STRAP_LOCKS[state.strapLock].name}</p>
-                <p class="text-sm font-bold text-lightgold pt-1">Total Payable: ₹${state.totalPrice.toLocaleString('en-IN')}</p>
-            `;
-            openModal('checkoutModal');
-        }
-
-        function placeBespokeOrder(e) {
-            e.preventDefault();
-            const matObj = STRAP_MATERIALS[state.strapMaterial];
-            const strapColorObj = matObj.colors[state.strapColorIndex] || matObj.colors[0];
             const orderId = 'DYN-' + Math.floor(100000 + Math.random() * 900000);
-            const summary = `${BEZEL_STYLES[state.bezelStyle].name} | ${CASE_OPTIONS[state.caseColor].name} | ${DIAL_OPTIONS[state.dialColor].name} | ${MARKER_OPTIONS[state.markerStyle].name} | Name: "${state.customName || 'None'}" | Photo: ${state.customPhotoDataUrl ? 'Yes' : 'No'} | ${BACK_CASE_OPTIONS[state.backCase].name} | ${matObj.name} (${strapColorObj.name}) | ${STRAP_LOCKS[state.strapLock].name}`;
+            const summary = `${bezelObj.name} | ${caseObj.name} | ${dialObj.name} | ${markerObj.name} | Name: "${state.customName || 'None'}" | Photo: ${state.customPhotoDataUrl ? 'Yes' : 'No'} | ${backObj.name} | ${matObj.name} (${strapColorObj.name}) | ${lockObj.name}`;
 
             const orderEntry = {
                 orderId,
-                date: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+                date: new Date().toISOString(),
+                formattedDate: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
                 customerName: document.getElementById('orderName').value.trim(),
                 phone: document.getElementById('orderPhone').value.trim(),
                 address: document.getElementById('orderAddress').value.trim(),
+                utrNumber: document.getElementById('orderUtr').value.trim(),
                 paymentMethod: document.getElementById('orderPaymentMethod').value,
+                payeeUpi: '7579942958@ptyes',
                 summary,
-                totalPrice: state.totalPrice
+                totalPrice: state.totalPrice,
+                customName: state.customName || '',
+                dialPhoto: state.customPhotoDataUrl || null,
+                specs: {
+                    bezel: bezelObj.name,
+                    case: caseObj.name,
+                    dial: dialObj.name,
+                    markers: markerObj.name,
+                    backCover: backObj.name,
+                    strap: `${matObj.name} - ${strapColorObj.name}`,
+                    lock: lockObj.name
+                },
+                status: 'Payment Verification Pending'
             };
 
+            try {
+                if (window.db && window.FB_Fns) {
+                    await window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), orderEntry);
+                }
+            } catch (err) {
+                console.error("Cloud sync note:", err);
+            }
+
+            // Save to local history as well
             const key = getStorageKey('orders');
             const orders = JSON.parse(localStorage.getItem(key) || '[]');
             orders.unshift(orderEntry);
@@ -2885,7 +2066,7 @@
             saveCurrentDesignToHistory();
 
             closeModal('checkoutModal');
-            const waMsg = `Hello DYNAST! I have placed a Bespoke Custom Watch Order (${orderId}).\n\n*Specs:* ${summary}\n*Total:* ₹${state.totalPrice.toLocaleString('en-IN')}\n*Customer:* ${orderEntry.customerName} (${orderEntry.phone})\n*Address:* ${orderEntry.address}`;
+            const waMsg = `Hello DYNAST! I have placed a Bespoke Custom Watch Order (${orderId}).\n\n*Specs:* ${summary}\n*Total:* ₹${state.totalPrice.toLocaleString('en-IN')}\n*UTR/Txn:* ${orderEntry.utrNumber}\n*Customer:* ${orderEntry.customerName} (${orderEntry.phone})\n*Address:* ${orderEntry.address}`;
             window.open(`https://wa.me/917579942958?text=${encodeURIComponent(waMsg)}`, '_blank');
             openAccountModal('orders');
         }
