@@ -6,7 +6,7 @@
     <title>DYNAST | Luxurious Horology Bespoke Studio</title>
     <link rel="canonical" href="https://dynast.co.in/bespoke.html">
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Customize your DYNAST Luxurious Horology timepiece. Choose dress or fluted cases, crocodile or smooth leather straps, custom dials, and 3D macro strap locks.">
+    <meta name="description" content="Customize your DYNAST Luxurious Horology timepiece. Choose fluted or dress cases, Jubilee metal or Spanish leather straps, custom dials, and 3D macro strap locks.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -161,7 +161,7 @@
             <div class="flex items-center gap-2.5 sm:gap-4">
                 <div class="bg-gold/10 border border-gold/40 px-3.5 py-1.5 rounded-xl text-right">
                     <span class="text-[9px] uppercase tracking-widest text-gold/80 block">Live Custom Price</span>
-                    <span id="navTotalPrice" class="serif-text text-sm sm:text-base font-bold text-lightgold">₹6,498</span>
+                    <span id="navTotalPrice" class="serif-text text-sm sm:text-base font-bold text-lightgold">₹9,098</span>
                 </div>
 
                 <button onclick="openAccountModal('history')" class="relative border border-gold/40 bg-white/5 hover:bg-gold/15 text-lightgold px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 transition">
@@ -181,14 +181,14 @@
     <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
         <div id="mainStudioGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-            <!-- LEFT COLUMN: FULL-STRAP MACRO CANVAS + LIVE 3D LOCK CLOSE-UP -->
+            <!-- LEFT COLUMN: MACRO WATCH CANVAS (NO LOCK ON FIRST SCREEN) -->
             <div class="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
                 <div class="gold-panel rounded-3xl p-5 relative overflow-hidden">
                     
                     <!-- Top Status Bar & View Switcher -->
                     <div class="flex flex-wrap items-center justify-between gap-2 mb-3 z-10 relative">
                         <button id="clockModeBtn" onclick="toggleClockMode()" class="text-[10px] uppercase tracking-[0.14em] bg-gold/15 hover:bg-gold/25 border border-gold/40 text-lightgold px-3 py-1 rounded-full font-semibold transition">
-                            <i class="fa-solid fa-clock mr-1 text-gold"></i> <span id="clockModeText">Studio 10:10 Pose</span>
+                            <i class="fa-solid fa-clock mr-1 text-gold"></i> <span id="clockModeText">Live Real-Time Clock</span>
                         </button>
 
                         <div class="flex bg-black/80 border border-gold/30 rounded-xl p-0.5 text-[11px]">
@@ -199,38 +199,42 @@
                         </div>
                     </div>
 
-                    <!-- PHOTOREALISTIC STUDIO STAGE (Move cursor/finger to shift studio lighting!) -->
+                    <!-- PHOTOREALISTIC STUDIO STAGE -->
                     <div id="watchStageContainer" onmousemove="handleStageLightMove(event)" onmouseleave="resetStageLight()" class="studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 gap-4 items-center justify-items-center cursor-grab active:cursor-grabbing">
                         
-                        <!-- 1. FRONT WATCH & FULL LEATHER STRAP / BUCKLE MACRO CANVAS -->
+                        <!-- 1. FRONT WATCH MACRO CANVAS (Straps rendered cleanly without lock hardware) -->
                         <div id="frontWatchWrapper" class="w-full flex flex-col items-center">
-                            <canvas id="frontWatchCanvas" width="900" height="1460" class="w-full max-w-[335px] h-auto select-none"></canvas>
-                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Full Timepiece, Strap & Top Lock View</span>
+                            <canvas id="frontWatchCanvas" width="900" height="1250" class="w-full max-w-[345px] h-auto select-none"></canvas>
+                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">3D Studio-Lit Macro Front View</span>
                         </div>
 
                         <!-- 2. BACK CASE MACRO CANVAS -->
                         <div id="backWatchWrapper" class="w-full flex flex-col items-center hidden">
-                            <canvas id="backWatchCanvas" width="900" height="1460" class="w-full max-w-[335px] h-auto select-none"></canvas>
+                            <canvas id="backWatchCanvas" width="900" height="1250" class="w-full max-w-[345px] h-auto select-none"></canvas>
                             <span id="backCaseCaption" class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Solid Brushed Steel Caseback</span>
                         </div>
 
-                        <!-- 3. DEDICATED HIGH-RES 3D STRAP LOCK / CLASP MACRO STUDIO WINDOW -->
-                        <div id="lockWatchWrapper" class="w-full flex flex-col items-center border-t border-gold/20 pt-3 mt-1">
+                        <!-- 3. DEDICATED HIGH-RES 3D STRAP LOCK / CLASP MACRO STUDIO WINDOW (Hidden on First Screen) -->
+                        <div id="lockWatchWrapper" class="w-full flex flex-col items-center border-t border-gold/20 pt-3 mt-1 hidden">
                             <div class="w-full flex items-center justify-between px-2 mb-1.5">
                                 <span class="text-[10px] uppercase tracking-widest text-lightgold font-bold">
                                     <i class="fa-solid fa-magnifying-glass-plus text-gold mr-1"></i> Live 3D Strap Lock Close-Up
                                 </span>
-                                <span id="liveLockBadgeTitle" class="text-[10px] text-gold font-semibold">Classic Tang Pin Buckle</span>
+                                <span id="liveLockBadgeTitle" class="text-[10px] text-gold font-semibold">Butterfly Deployant Lock</span>
                             </div>
                             <canvas id="lockMacroCanvas" width="800" height="340" class="w-full max-w-[360px] rounded-xl border border-gold/25 bg-black/70 shadow-inner select-none"></canvas>
                         </div>
                     </div>
 
-                    <!-- QUICK EDITION PRESETS (Exact Matches to Your Uploaded Leather & Fluted Watch Photos) -->
+                    <!-- QUICK EDITION PRESETS (Fluted Jubilee Default First + Dress Leather Editions) -->
                     <div class="mt-3 pt-3 border-t border-gold/20 space-y-2">
                         <span class="text-[10px] uppercase tracking-widest text-gold/80 block font-semibold">Instant Collection Presets (Tap to Preview):</span>
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
-                            <button onclick="loadPresetEdition('nagata-rosegold-emerald')" class="text-[10px] bg-gold/15 hover:bg-gold/25 border border-gold/50 text-lightgold px-2 py-1.5 rounded-xl font-medium transition text-left flex items-center gap-1.5">
+                            <button onclick="loadPresetEdition('datejust-rosegold')" class="text-[10px] bg-gold/15 hover:bg-gold/25 border border-gold/50 text-lightgold px-2 py-1.5 rounded-xl font-medium transition text-left flex items-center gap-1.5">
+                                <span class="w-3 h-3 rounded-full bg-[#5A382C] border border-[#E5B5A1] shrink-0"></span>
+                                <span class="truncate">Fluted Jubilee</span>
+                            </button>
+                            <button onclick="loadPresetEdition('nagata-rosegold-emerald')" class="text-[10px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2 py-1.5 rounded-xl font-medium transition text-left flex items-center gap-1.5">
                                 <span class="w-3 h-3 rounded-full bg-[#2E5A36] border border-[#E5B5A1] shrink-0"></span>
                                 <span class="truncate">Emerald Croc Dress</span>
                             </button>
@@ -250,10 +254,6 @@
                                 <span class="w-3 h-3 rounded-full bg-[#141417] border border-gray-500 shrink-0"></span>
                                 <span class="truncate">Black Croc Dress</span>
                             </button>
-                            <button onclick="loadPresetEdition('datejust-rosegold')" class="text-[10px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2 py-1.5 rounded-xl font-medium transition text-left flex items-center gap-1.5">
-                                <span class="w-3 h-3 rounded-full bg-[#5A382C] border border-[#E5B5A1] shrink-0"></span>
-                                <span class="truncate">Fluted Jubilee</span>
-                            </button>
                         </div>
                         <button onclick="downloadWatchSnapshot()" class="w-full text-[11px] bg-white/5 hover:bg-white/10 border border-white/20 text-gray-200 py-2 rounded-xl font-medium transition flex items-center justify-center gap-1.5">
                             <i class="fa-solid fa-download text-gold"></i> Download Ultra-HD Watch Render (PNG)
@@ -272,7 +272,7 @@
                     <div id="priceBreakdownList" class="space-y-2 text-xs text-gray-300"></div>
                     <div class="border-t border-gold/30 mt-3 pt-3 flex items-center justify-between">
                         <span class="uppercase tracking-widest text-xs font-bold text-lightgold">Total Custom Price</span>
-                        <span id="cardTotalPrice" class="cinzel-decorative text-xl text-gold">₹6,498</span>
+                        <span id="cardTotalPrice" class="cinzel-decorative text-xl text-gold">₹9,098</span>
                     </div>
                     <div class="grid grid-cols-2 gap-3 mt-4">
                         <button onclick="saveCurrentDesignToHistory()" class="border border-gold/50 bg-gold/10 hover:bg-gold/20 text-lightgold py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition">
@@ -291,7 +291,7 @@
                 <div class="gold-panel rounded-3xl p-6 border-l-4 border-l-gold">
                     <h1 class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-wider">DYNAST • Bespoke Watch Studio</h1>
                     <p class="text-xs text-gray-300 mt-1 leading-relaxed">
-                        Customize both our <strong class="text-lightgold">Classic Smooth-Bezel Dress Collection</strong> (with crocodile-embossed or smooth Spanish-style leather straps, keeper loops, and top tang buckles) and our <strong class="text-lightgold">48-Flute Luxury Collection</strong>.
+                        Customize our flagship <strong class="text-lightgold">48-Flute Luxury Jubilee Collection</strong> (loaded by default with live real-time movement) or switch to our <strong class="text-lightgold">Classic Smooth-Bezel Dress Collection</strong> with Spanish crocodile and smooth calfskin leather straps.
                     </p>
                 </div>
 
@@ -302,25 +302,14 @@
                             <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">Step 01 • Case Architecture & Finish</span>
                             <h2 class="serif-text text-base sm:text-lg font-bold text-white">Choose Bezel Style & Case Colour</h2>
                         </div>
-                        <span id="step1PriceBadge" class="text-xs font-bold text-gold bg-gold/15 border border-gold/30 px-3 py-1 rounded-full">+₹1,600</span>
+                        <span id="step1PriceBadge" class="text-xs font-bold text-gold bg-gold/15 border border-gold/30 px-3 py-1 rounded-full">+₹1,700</span>
                     </div>
 
-                    <!-- 1A. Bezel Architecture (Smooth Polished Dress Case vs 48-Flute Bezel) -->
+                    <!-- 1A. Bezel Architecture (48-Flute Luxury Bezel Default) -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Select Case & Bezel Style:</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div onclick="selectBezelStyle('smooth')" id="bezelBtn-smooth" class="option-card active rounded-2xl p-3.5 flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <i class="fa-regular fa-circle text-gold text-xl"></i>
-                                    <div>
-                                        <p class="text-xs font-bold text-white">Smooth Mirror Dress Bezel</p>
-                                        <p class="text-[10px] text-gray-400">Classic slim polished bezel & tapered lugs</p>
-                                    </div>
-                                </div>
-                                <span class="text-xs font-bold text-green-400">Included</span>
-                            </div>
-
-                            <div onclick="selectBezelStyle('fluted')" id="bezelBtn-fluted" class="option-card rounded-2xl p-3.5 flex items-center justify-between">
+                            <div onclick="selectBezelStyle('fluted')" id="bezelBtn-fluted" class="option-card active rounded-2xl p-3.5 flex items-center justify-between">
                                 <div class="flex items-center gap-3">
                                     <i class="fa-solid fa-certificate text-gold text-xl"></i>
                                     <div>
@@ -330,14 +319,43 @@
                                 </div>
                                 <span class="text-xs font-bold text-gold">+₹400</span>
                             </div>
+
+                            <div onclick="selectBezelStyle('smooth')" id="bezelBtn-smooth" class="option-card rounded-2xl p-3.5 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-regular fa-circle text-gold text-xl"></i>
+                                    <div>
+                                        <p class="text-xs font-bold text-white">Smooth Mirror Dress Bezel</p>
+                                        <p class="text-[10px] text-gray-400">Classic slim polished bezel & tapered lugs</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-green-400">Included</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- 1B. Case Colour -->
+                    <!-- 1B. Case Colour (Two-Tone Rose & Steel Default) -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">2. Select Watch Case Colour:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="caseColorGrid">
-                            <div onclick="selectCaseColor('rosegold')" id="caseBtn-rosegold" class="option-card active rounded-2xl p-3.5 text-center">
+                            <div onclick="selectCaseColor('twotone_rosegold')" id="caseBtn-twotone_rosegold" class="option-card active rounded-2xl p-3.5 text-center">
+                                <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E4E8EE 45%, #D59B84 55%);"></div>
+                                <p class="text-xs font-semibold text-white">Two-Tone Rose & Steel</p>
+                                <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,700</p>
+                            </div>
+
+                            <div onclick="selectCaseColor('twotone_gold')" id="caseBtn-twotone_gold" class="option-card rounded-2xl p-3.5 text-center">
+                                <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E4E8EE 45%, #E5C168 55%);"></div>
+                                <p class="text-xs font-semibold text-white">Two-Tone Gold & Steel</p>
+                                <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,600</p>
+                            </div>
+
+                            <div onclick="selectCaseColor('silver')" id="caseBtn-silver" class="option-card rounded-2xl p-3.5 text-center">
+                                <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #FFFFFF, #CBD5E1, #64748B);"></div>
+                                <p class="text-xs font-semibold text-white">Polished Silver Steel</p>
+                                <p class="text-[10px] text-green-400 font-medium mt-0.5">Included (+₹0)</p>
+                            </div>
+
+                            <div onclick="selectCaseColor('rosegold')" id="caseBtn-rosegold" class="option-card rounded-2xl p-3.5 text-center">
                                 <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #FFF0E8, #D59B84, #7D4633);"></div>
                                 <p class="text-xs font-semibold text-white">Rose-Gold Case</p>
                                 <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,600</p>
@@ -349,28 +367,10 @@
                                 <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,500</p>
                             </div>
 
-                            <div onclick="selectCaseColor('silver')" id="caseBtn-silver" class="option-card rounded-2xl p-3.5 text-center">
-                                <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #FFFFFF, #CBD5E1, #64748B);"></div>
-                                <p class="text-xs font-semibold text-white">Polished Silver Steel</p>
-                                <p class="text-[10px] text-green-400 font-medium mt-0.5">Included (+₹0)</p>
-                            </div>
-
                             <div onclick="selectCaseColor('black')" id="caseBtn-black" class="option-card rounded-2xl p-3.5 text-center">
                                 <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #52525B, #18181B, #050507);"></div>
                                 <p class="text-xs font-semibold text-white">Obsidian Black Case</p>
                                 <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,200</p>
-                            </div>
-
-                            <div onclick="selectCaseColor('twotone_rosegold')" id="caseBtn-twotone_rosegold" class="option-card rounded-2xl p-3.5 text-center">
-                                <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E4E8EE 45%, #D59B84 55%);"></div>
-                                <p class="text-xs font-semibold text-white">Two-Tone Rose & Steel</p>
-                                <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,700</p>
-                            </div>
-
-                            <div onclick="selectCaseColor('twotone_gold')" id="caseBtn-twotone_gold" class="option-card rounded-2xl p-3.5 text-center">
-                                <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E4E8EE 45%, #E5C168 55%);"></div>
-                                <p class="text-xs font-semibold text-white">Two-Tone Gold & Steel</p>
-                                <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,600</p>
                             </div>
                         </div>
                     </div>
@@ -388,20 +388,26 @@
                         </span>
                     </div>
 
-                    <!-- 1. Select Dial Colour (All 8 Dial Colours from Your Uploaded Photos!) -->
+                    <!-- 1. Select Dial Colour (Coffee Brown / Chocolate Active by Default) -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Choose Dial Colour:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                            <div onclick="selectDialColor('white')" id="dialBtn-white" class="option-card active rounded-2xl p-2.5 text-center">
-                                <div class="w-9 h-9 mx-auto rounded-full bg-gradient-to-br from-white to-slate-200 border-2 border-gold flex items-center justify-center text-[6px] font-bold text-black cinzel-decorative mb-1">DYNAST</div>
-                                <p class="text-[11px] font-bold text-white">Porcelain White</p>
-                                <p class="text-[10px] text-gold">+₹300</p>
+                            <div onclick="selectDialColor('chocolate')" id="dialBtn-chocolate" class="option-card active rounded-2xl p-2.5 text-center">
+                                <div class="w-9 h-9 mx-auto rounded-full bg-[#5A3A2E] border-2 border-[#D59B84] flex items-center justify-center text-[6px] font-bold text-[#FFEAE5] cinzel-decorative mb-1">DYNAST</div>
+                                <p class="text-[11px] font-bold text-white">Coffee Brown</p>
+                                <p class="text-[10px] text-gold">+₹400</p>
                             </div>
 
                             <div onclick="selectDialColor('black')" id="dialBtn-black" class="option-card rounded-2xl p-2.5 text-center">
                                 <div class="w-9 h-9 mx-auto rounded-full bg-gradient-to-br from-neutral-800 to-black border-2 border-gold flex items-center justify-center text-[6px] font-bold text-gold cinzel-decorative mb-1">DYNAST</div>
                                 <p class="text-[11px] font-bold text-white">Sunburst Black</p>
                                 <p class="text-[10px] text-green-400">Included (+₹0)</p>
+                            </div>
+
+                            <div onclick="selectDialColor('white')" id="dialBtn-white" class="option-card rounded-2xl p-2.5 text-center">
+                                <div class="w-9 h-9 mx-auto rounded-full bg-gradient-to-br from-white to-slate-200 border-2 border-gold flex items-center justify-center text-[6px] font-bold text-black cinzel-decorative mb-1">DYNAST</div>
+                                <p class="text-[11px] font-bold text-white">Porcelain White</p>
+                                <p class="text-[10px] text-gold">+₹300</p>
                             </div>
 
                             <div onclick="selectDialColor('emerald')" id="dialBtn-emerald" class="option-card rounded-2xl p-2.5 text-center">
@@ -422,12 +428,6 @@
                                 <p class="text-[10px] text-gold">+₹450</p>
                             </div>
 
-                            <div onclick="selectDialColor('chocolate')" id="dialBtn-chocolate" class="option-card rounded-2xl p-2.5 text-center">
-                                <div class="w-9 h-9 mx-auto rounded-full bg-[#5A3A2E] border-2 border-[#D59B84] flex items-center justify-center text-[6px] font-bold text-[#FFEAE5] cinzel-decorative mb-1">DYNAST</div>
-                                <p class="text-[11px] font-bold text-white">Coffee Brown</p>
-                                <p class="text-[10px] text-gold">+₹400</p>
-                            </div>
-
                             <div onclick="selectDialColor('silver_dial')" id="dialBtn-silver_dial" class="option-card rounded-2xl p-2.5 text-center">
                                 <div class="w-9 h-9 mx-auto rounded-full bg-gradient-to-br from-[#F8FAFC] to-[#94A3B8] border-2 border-white flex items-center justify-center text-[6px] font-bold text-black cinzel-decorative mb-1">DYNAST</div>
                                 <p class="text-[11px] font-bold text-white">Sunburst Silver</p>
@@ -442,11 +442,27 @@
                         </div>
                     </div>
 
-                    <!-- 2. Hour Markers / Numeral Layout (All 6 Styles from Your Photos!) -->
+                    <!-- 2. Hour Markers / Numeral Layout (10 Diamond-Set Square Chatons Active by Default) -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">2. Select Dial Numerals & Markers Style:</label>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                            <div onclick="selectMarkerStyle('arabic_12_6')" id="markerBtn-arabic_12_6" class="option-card active rounded-2xl p-3 flex items-center justify-between">
+                            <div onclick="selectMarkerStyle('diamond')" id="markerBtn-diamond" class="option-card active rounded-2xl p-3 flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs font-bold text-white">10 Diamond-Set Square Chatons</p>
+                                    <p class="text-[10px] text-gray-400">Radially-set diamonds + 3 o'clock date</p>
+                                </div>
+                                <span class="text-xs font-bold text-gold">+₹600</span>
+                            </div>
+
+                            <div onclick="selectMarkerStyle('baton')" id="markerBtn-baton" class="option-card rounded-2xl p-3 flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs font-bold text-white">Minimalist Faceted Stick Batons</p>
+                                    <p class="text-[10px] text-gray-400">Double 12 baton + sleek index markers</p>
+                                </div>
+                                <span class="text-xs font-bold text-green-400">Included</span>
+                            </div>
+
+                            <div onclick="selectMarkerStyle('arabic_12_6')" id="markerBtn-arabic_12_6" class="option-card rounded-2xl p-3 flex items-center justify-between">
                                 <div>
                                     <p class="text-xs font-bold text-white">12 & 6 Arabic + Faceted Batons</p>
                                     <p class="text-[10px] text-gray-400">Metallic 12 & 6 numerals with index bars</p>
@@ -476,22 +492,6 @@
                                     <p class="text-[10px] text-gray-400">Complete 1 to 12 metallic numerals</p>
                                 </div>
                                 <span class="text-xs font-bold text-gold">+₹250</span>
-                            </div>
-
-                            <div onclick="selectMarkerStyle('baton')" id="markerBtn-baton" class="option-card rounded-2xl p-3 flex items-center justify-between">
-                                <div>
-                                    <p class="text-xs font-bold text-white">Minimalist Faceted Stick Batons</p>
-                                    <p class="text-[10px] text-gray-400">Double 12 baton + sleek index markers</p>
-                                </div>
-                                <span class="text-xs font-bold text-green-400">Included</span>
-                            </div>
-
-                            <div onclick="selectMarkerStyle('diamond')" id="markerBtn-diamond" class="option-card rounded-2xl p-3 flex items-center justify-between">
-                                <div>
-                                    <p class="text-xs font-bold text-white">10 Diamond-Set Square Chatons</p>
-                                    <p class="text-[10px] text-gray-400">Radially-set diamonds + 3 o'clock date</p>
-                                </div>
-                                <span class="text-xs font-bold text-gold">+₹600</span>
                             </div>
                         </div>
                     </div>
@@ -525,10 +525,10 @@
                             <div>
                                 <span class="text-[10px] uppercase tracking-wider text-gray-400 block mb-1">Name Print Colour:</span>
                                 <div class="flex items-center gap-2 pt-1">
-                                    <button onclick="setCustomNameColor('#111111')" class="w-6 h-6 rounded-full bg-neutral-900 border border-white/40" title="Jet Black"></button>
                                     <button onclick="setCustomNameColor('#FFF0E8')" class="w-6 h-6 rounded-full bg-[#D59B84] border border-white/40" title="Rose Gold Cream"></button>
                                     <button onclick="setCustomNameColor('#F5DC8B')" class="w-6 h-6 rounded-full bg-[#E5C168] border border-white/40" title="Warm 18k Gold"></button>
                                     <button onclick="setCustomNameColor('#FFFFFF')" class="w-6 h-6 rounded-full bg-white border border-white/40" title="Pure White"></button>
+                                    <button onclick="setCustomNameColor('#111111')" class="w-6 h-6 rounded-full bg-neutral-900 border border-white/40" title="Jet Black"></button>
                                     <button onclick="setCustomNameColor('#B8860B')" class="w-6 h-6 rounded-full bg-[#B8860B] border border-white/40" title="Deep Gold"></button>
                                 </div>
                             </div>
@@ -544,7 +544,7 @@
                             <span class="text-xs font-bold text-gold">+₹999</span>
                         </div>
                         <p class="text-[11px] text-gray-400">
-                            Upload any photo—it is clipped into the circular dial underneath the compulsory <strong class="text-lightgold">DYNAST</strong> emblem, markers, and Dauphine/Baton hands.
+                            Upload any photo—it is clipped into the circular dial underneath the compulsory <strong class="text-lightgold">DYNAST</strong> emblem, markers, and hands.
                         </p>
 
                         <div class="flex flex-wrap items-center gap-3">
@@ -626,24 +626,24 @@
                 <!-- STEP 4: STRAP MATERIAL, DYNAMIC STRAP COLOURS & STRAP LOCK -->
                 <section class="gold-panel rounded-3xl p-6 space-y-5">
                     <div>
-                        <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">Step 04 • Spanish Leather, Bracelet & 3D Lock Studio</span>
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">Step 04 • Bracelet, Spanish Leather & 3D Lock Studio</span>
                         <h2 class="serif-text text-base sm:text-lg font-bold text-white">Choose Strap Material, Colour & Lock Type</h2>
                     </div>
 
-                    <!-- 1. Strap Material Selector -->
+                    <!-- 1. Strap Material Selector (5-Link Jubilee Metal Active by Default) -->
                     <div>
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Select Strap Material:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            <div onclick="selectStrapMaterial('leather')" id="strapMat-leather" class="option-card active rounded-2xl p-3.5 text-center">
-                                <i class="fa-solid fa-scroll text-gold text-lg mb-1"></i>
-                                <p class="text-xs font-bold text-white">Spanish Leather</p>
-                                <p class="text-[10px] text-gold mt-0.5">+₹600</p>
-                            </div>
-
-                            <div onclick="selectStrapMaterial('metal')" id="strapMat-metal" class="option-card rounded-2xl p-3.5 text-center">
+                            <div onclick="selectStrapMaterial('metal')" id="strapMat-metal" class="option-card active rounded-2xl p-3.5 text-center">
                                 <i class="fa-solid fa-link text-gold text-lg mb-1"></i>
                                 <p class="text-xs font-bold text-white">5-Link Jubilee Metal</p>
                                 <p class="text-[10px] text-gold mt-0.5">+₹1,400</p>
+                            </div>
+
+                            <div onclick="selectStrapMaterial('leather')" id="strapMat-leather" class="option-card rounded-2xl p-3.5 text-center">
+                                <i class="fa-solid fa-scroll text-gold text-lg mb-1"></i>
+                                <p class="text-xs font-bold text-white">Spanish Leather</p>
+                                <p class="text-[10px] text-gold mt-0.5">+₹600</p>
                             </div>
 
                             <div onclick="selectStrapMaterial('rubber')" id="strapMat-rubber" class="option-card rounded-2xl p-3.5 text-center">
@@ -660,35 +660,29 @@
                         </div>
                     </div>
 
-                    <!-- 2. Dynamic Strap Colour Swatches (Includes Crocodile Embossed & Smooth Matte Calfskin!) -->
+                    <!-- 2. Dynamic Strap Colour Swatches -->
                     <div class="p-4 rounded-2xl bg-white/[0.03] border border-gold/25">
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-xs uppercase tracking-wider text-lightgold font-semibold">
-                                2. Choose <span id="currentStrapMatLabel">Spanish Leather</span> Finish & Colour:
+                                2. Choose <span id="currentStrapMatLabel">5-Link Jubilee Metal</span> Finish & Colour:
                             </label>
-                            <span id="selectedStrapColorName" class="text-xs text-gold font-bold">Forest Emerald Croc (+₹200)</span>
+                            <span id="selectedStrapColorName" class="text-xs text-gold font-bold">Two-Tone Rose-Gold & Steel (+₹450)</span>
                         </div>
                         <div id="strapColorsContainer" class="flex flex-wrap gap-2.5"></div>
                     </div>
 
-                    <!-- 3. Strap Lock / Clasp Type (Renders Live in 3D Macro Studio Window!) -->
+                    <!-- 3. Strap Lock / Clasp Type (Reveals High-Res 3D Lock Close-Up When Chosen!) -->
                     <div>
                         <div class="flex items-center justify-between mb-2.5">
                             <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold">
-                                3. Choose Strap Lock (Renders Live in 3D Close-Up):
+                                3. Choose Strap Lock (Opens Live 3D Lock Close-Up):
                             </label>
-                            <span class="text-[10px] text-gold"><i class="fa-solid fa-eye mr-1"></i> Live 3D Lock Preview Active</span>
+                            <button onclick="setWatchView('lock')" class="text-[10px] text-gold underline hover:text-lightgold">
+                                <i class="fa-solid fa-magnifying-glass-plus mr-1"></i> View 3D Lock Close-Up
+                            </button>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div onclick="selectStrapLock('buckle')" id="lockBtn-buckle" class="option-card active rounded-2xl p-3.5 flex items-center justify-between">
-                                <div>
-                                    <p class="text-xs font-bold text-white">Classic Tang Pin Buckle</p>
-                                    <p class="text-[10px] text-gray-400">3D polished horseshoe frame & center pin</p>
-                                </div>
-                                <span class="text-xs font-bold text-green-400">Included (+₹0)</span>
-                            </div>
-
-                            <div onclick="selectStrapLock('butterfly')" id="lockBtn-butterfly" class="option-card rounded-2xl p-3.5 flex items-center justify-between">
+                            <div onclick="selectStrapLock('butterfly')" id="lockBtn-butterfly" class="option-card active rounded-2xl p-3.5 flex items-center justify-between">
                                 <div>
                                     <p class="text-xs font-bold text-white">Butterfly Deployant Lock</p>
                                     <p class="text-[10px] text-gray-400">Twin push-button folding wing clasp</p>
@@ -702,6 +696,14 @@
                                     <p class="text-[10px] text-gray-400">Double-lock security flip latch</p>
                                 </div>
                                 <span class="text-xs font-bold text-gold">+₹500</span>
+                            </div>
+
+                            <div onclick="selectStrapLock('buckle')" id="lockBtn-buckle" class="option-card rounded-2xl p-3.5 flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs font-bold text-white">Classic Tang Pin Buckle</p>
+                                    <p class="text-[10px] text-gray-400">3D polished horseshoe frame & center pin</p>
+                                </div>
+                                <span class="text-xs font-bold text-green-400">Included (+₹0)</span>
                             </div>
 
                             <div onclick="selectStrapLock('magnetic')" id="lockBtn-magnetic" class="option-card rounded-2xl p-3.5 flex items-center justify-between">
@@ -823,7 +825,7 @@
             </form>
         </div>
     </div>
-    <!-- PHOTOREALISTIC DRESS & FLUTED HOROLOGY ENGINE -->
+    <!-- PHOTOREALISTIC HOROLOGY STUDIO ENGINE (ROLEX DEFAULT + REAL-TIME CLOCK DEFAULT) -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
@@ -914,7 +916,7 @@
             animateBg();
         }
 
-        // 3. CALIBRATED METALLIC PALETTES (Rose-Gold Copper, Warm 18k Gold, Polished Silver, Obsidian Black)
+        // 3. CALIBRATED METALLIC PALETTES
         const METAL_PALETTES = {
             silver: {
                 rgbJet: [18, 21, 26], rgbShadow: [68, 75, 86], rgbMid: [176, 184, 195], rgbBright: [238, 242, 247], rgbSpec: [255, 255, 255],
@@ -978,38 +980,37 @@
         }
 
         const BEZEL_STYLES = {
-            smooth: { name: 'Smooth Mirror Dress Bezel', price: 0 },
-            fluted: { name: '48-Flute Luxury Bezel', price: 400 }
+            fluted: { name: '48-Flute Luxury Bezel', price: 400 },
+            smooth: { name: 'Smooth Mirror Dress Bezel', price: 0 }
         };
 
         const CASE_OPTIONS = {
+            twotone_rosegold: { name: 'Two-Tone Rose & Steel', price: 1700, lugMetal: 'silver', bezelMetal: 'rosegold' },
+            twotone_gold:     { name: 'Two-Tone Gold & Steel', price: 1600, lugMetal: 'silver', bezelMetal: 'gold' },
+            silver:           { name: 'Polished Silver Steel', price: 0, lugMetal: 'silver', bezelMetal: 'silver' },
             rosegold:         { name: 'Rose-Gold Case', price: 1600, lugMetal: 'rosegold', bezelMetal: 'rosegold' },
             gold:             { name: 'Royal Golden Case', price: 1500, lugMetal: 'gold', bezelMetal: 'gold' },
-            silver:           { name: 'Polished Silver Steel', price: 0, lugMetal: 'silver', bezelMetal: 'silver' },
-            black:            { name: 'Obsidian Black Case', price: 1200, lugMetal: 'black', bezelMetal: 'black' },
-            twotone_rosegold: { name: 'Two-Tone Rose & Steel', price: 1700, lugMetal: 'silver', bezelMetal: 'rosegold' },
-            twotone_gold:     { name: 'Two-Tone Gold & Steel', price: 1600, lugMetal: 'silver', bezelMetal: 'gold' }
+            black:            { name: 'Obsidian Black Case', price: 1200, lugMetal: 'black', bezelMetal: 'black' }
         };
 
-        // All 8 Authentic Dials from Your Uploaded Photos
         const DIAL_OPTIONS = {
-            white:       { name: 'Porcelain White Dial', price: 300, base: '#FFFFFF', mid: '#F5F7FA', edge: '#DCE2EC', sunburst: false, sheen: 'rgba(255,255,255,0)', logoColor: '#111827', subColor: '#785410', trackColor: '#334155' },
+            chocolate:   { name: 'Sunburst Coffee Brown', price: 400, base: '#7E503D', mid: '#4D2D1F', edge: '#211009', sunburst: true, sheen: 'rgba(255,224,206,0.26)', logoColor: '#FFF4EE', subColor: '#EAB39F', trackColor: '#DF9F89' },
             black:       { name: 'Sunburst Black Dial', price: 0, base: '#2A2A2F', mid: '#141418', edge: '#050507', sunburst: true, sheen: 'rgba(255,255,255,0.16)', logoColor: '#FFF8D4', subColor: '#EAD89C', trackColor: '#CBD5E1' },
+            white:       { name: 'Porcelain White Dial', price: 300, base: '#FFFFFF', mid: '#F5F7FA', edge: '#DCE2EC', sunburst: false, sheen: 'rgba(255,255,255,0)', logoColor: '#111827', subColor: '#785410', trackColor: '#334155' },
             emerald:     { name: 'Forest Emerald Green Dial', price: 450, base: '#3A7D49', mid: '#1D4D28', edge: '#0B2411', sunburst: true, sheen: 'rgba(190,255,205,0.24)', logoColor: '#FFF6E5', subColor: '#F0BCA9', trackColor: '#D4AF37' },
             champagne:   { name: 'Rose Champagne Sunburst', price: 400, base: '#F7E7D4', mid: '#D8B499', edge: '#9E7356', sunburst: true, sheen: 'rgba(255,250,244,0.34)', logoColor: '#2B130B', subColor: '#693120', trackColor: '#5A291B' },
             gold_dial:   { name: 'Sunburst Imperial Gold', price: 450, base: '#FFF0A8', mid: '#DFB244', edge: '#966B10', sunburst: true, sheen: 'rgba(255,255,235,0.36)', logoColor: '#1E1202', subColor: '#523404', trackColor: '#3A2302' },
-            chocolate:   { name: 'Sunburst Coffee Brown', price: 400, base: '#7E503D', mid: '#4D2D1F', edge: '#211009', sunburst: true, sheen: 'rgba(255,224,206,0.26)', logoColor: '#FFF4EE', subColor: '#EAB39F', trackColor: '#DF9F89' },
             silver_dial: { name: 'Sunburst Brushed Silver', price: 350, base: '#FFFFFF', mid: '#DCE2EA', edge: '#94A0B0', sunburst: true, sheen: 'rgba(255,255,255,0.35)', logoColor: '#0F172A', subColor: '#334155', trackColor: '#1E293B' },
             navy:        { name: 'Midnight Royal Blue', price: 450, base: '#284C7E', mid: '#14294A', edge: '#071124', sunburst: true, sheen: 'rgba(185,220,255,0.24)', logoColor: '#FFF8DC', subColor: '#F5D67B', trackColor: '#E2E8F0' }
         };
 
         const MARKER_OPTIONS = {
+            diamond:     { name: '10 Diamond-Set Square Chatons', price: 600 },
+            baton:       { name: 'Minimalist Faceted Stick Batons', price: 0 },
             arabic_12_6: { name: '12 & 6 Arabic + Faceted Batons', price: 0 },
             roman_12_6:  { name: 'XII & VI Roman + Sector Ring', price: 200 },
             roman_full:  { name: 'Full Roman Numerals (I–XII)', price: 250 },
-            arabic_full: { name: 'Full Arabic Numerals (1–12)', price: 250 },
-            baton:       { name: 'Minimalist Faceted Stick Batons', price: 0 },
-            diamond:     { name: '10 Diamond-Set Square Chatons', price: 600 }
+            arabic_full: { name: 'Full Arabic Numerals (1–12)', price: 250 }
         };
 
         const BACK_CASE_OPTIONS = {
@@ -1017,8 +1018,17 @@
             skeleton: { name: 'Exhibition Sapphire Skeleton Cover', price: 2200 }
         };
 
-        // Authentic Spanish Leather Straps (Crocodile Embossed & Smooth Matte Calfskin matching your Nagata Spain 22 photos!)
         const STRAP_MATERIALS = {
+            metal: {
+                name: '5-Link Jubilee Metal', price: 1400,
+                colors: [
+                    { id: 'jub-twotone-rose', name: 'Two-Tone Rose-Gold & Steel', outer: 'silver', center: 'rosegold', hex: '#D59B84', price: 450 },
+                    { id: 'jub-twotone-gold', name: 'Two-Tone Yellow Gold & Steel', outer: 'silver', center: 'gold', hex: '#E5C168', price: 450 },
+                    { id: 'jub-silver', name: 'All-Steel Brushed & Polished Silver', outer: 'silver', center: 'silver', hex: '#CBD5E1', price: 0 },
+                    { id: 'jub-full-gold', name: 'Full Royal Gold Jubilee', outer: 'gold', center: 'gold', hex: '#E5C168', price: 600 },
+                    { id: 'jub-black', name: 'Obsidian Black Jubilee', outer: 'black', center: 'black', hex: '#27272A', price: 400 }
+                ]
+            },
             leather: {
                 name: 'Spanish Leather', price: 600,
                 colors: [
@@ -1028,16 +1038,6 @@
                     { id: 'croc-black', name: 'Jet Black Crocodile', texture: 'croc', hex: '#151619', scaleLight: '#2E3036', crevice: '#050506', stitch: '#1E2024', price: 0 },
                     { id: 'smooth-black', name: 'Smooth Matte Black Calfskin', texture: 'smooth', hex: '#18191C', scaleLight: '#2D2F35', crevice: '#08080A', stitch: '#222428', price: 0 },
                     { id: 'croc-cognac', name: 'Vintage Cognac Tan Croc', texture: 'croc', hex: '#6E3A1A', scaleLight: '#9B562C', crevice: '#2B1305', stitch: '#D4AF37', price: 200 }
-                ]
-            },
-            metal: {
-                name: '5-Link Jubilee Metal', price: 1400,
-                colors: [
-                    { id: 'jub-twotone-rose', name: 'Two-Tone Rose-Gold & Steel', outer: 'silver', center: 'rosegold', hex: '#D59B84', price: 450 },
-                    { id: 'jub-twotone-gold', name: 'Two-Tone Yellow Gold & Steel', outer: 'silver', center: 'gold', hex: '#E5C168', price: 450 },
-                    { id: 'jub-silver', name: 'All-Steel Brushed & Polished Silver', outer: 'silver', center: 'silver', hex: '#CBD5E1', price: 0 },
-                    { id: 'jub-full-gold', name: 'Full Royal Gold Jubilee', outer: 'gold', center: 'gold', hex: '#E5C168', price: 600 },
-                    { id: 'jub-black', name: 'Obsidian Black Jubilee', outer: 'black', center: 'black', hex: '#27272A', price: 400 }
                 ]
             },
             rubber: {
@@ -1060,32 +1060,32 @@
         };
 
         const STRAP_LOCKS = {
-            buckle:    { name: 'Classic Tang Pin Buckle', price: 0, badge: 'CLASSIC TANG BUCKLE' },
             butterfly: { name: 'Butterfly Deployant Lock', price: 650, badge: 'BUTTERFLY DEPLOYANT' },
             folding:   { name: 'Oysterlock Folding Safety Clasp', price: 500, badge: 'OYSTERLOCK SAFETY' },
+            buckle:    { name: 'Classic Tang Pin Buckle', price: 0, badge: 'CLASSIC TANG BUCKLE' },
             magnetic:  { name: 'Magnetic Luxury Clasp', price: 800, badge: 'MAGNETIC LUXURY LOCK' }
         };
 
-        // Default to the Rose-Gold + White Dial / Croc Leather or Emerald Dress Watch
+        // DEFAULT STATE: Rolex Datejust 41 Style + Real-Time Clock Enabled by Default!
         let state = {
-            bezelStyle: 'smooth',
-            caseColor: 'rosegold',
-            dialColor: 'white',
-            markerStyle: 'roman_12_6',
+            bezelStyle: 'fluted',
+            caseColor: 'twotone_rosegold',
+            dialColor: 'chocolate',
+            markerStyle: 'diamond',
             customName: 'Hanzalah',
             customNameFont: 'Cinzel',
-            customNameColor: '#111111',
+            customNameColor: '#FFF0E8',
             customPhotoDataUrl: null,
             photoZoom: 100,
             photoOffsetX: 0,
             photoOffsetY: 0,
             photoDimmer: 20,
             backCase: 'solid',
-            strapMaterial: 'leather',
-            strapColorIndex: 1, // Espresso Brown Crocodile
-            strapLock: 'buckle',
+            strapMaterial: 'metal',
+            strapColorIndex: 0, // Two-Tone Rose-Gold & Steel Jubilee
+            strapLock: 'butterfly',
             viewMode: 'front',
-            liveClock: false
+            liveClock: true // Real-time clock active by default!
         };
 
         let uploadedPhotoImg = null;
@@ -1155,13 +1155,12 @@
             ctx.restore();
         }
 
-        // PHOTOREALISTIC FULL-STRAP & WATCH FRONT RENDERER (900 x 1460)
-        // Shows Top Lock/Buckle + Dual Keeper Loops + Watch Head (CY=730) + Pointed Bottom Strap with 7 Punched Holes!
+        // PHOTOREALISTIC FRONT WATCH RENDERER (900 x 1250, Center: 450, 625 — Clean Straps with ZERO Lock on First Screen!)
         function drawFrontWatchCanvas() {
             const canvas = document.getElementById('frontWatchCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            const W = 900, H = 1460, CX = 450, CY = 730;
+            const W = 900, H = 1250, CX = 450, CY = 625;
             ctx.clearRect(0, 0, W, H);
 
             const caseObj = CASE_OPTIONS[state.caseColor];
@@ -1171,7 +1170,7 @@
             const bezelPal = METAL_PALETTES[caseObj.bezelMetal];
             const lugPal = METAL_PALETTES[caseObj.lugMetal];
 
-            // 1. DRAW FULL-LENGTH STRAP (With Top Buckle/Lock, Dual Keeper Loops, Crocodile/Smooth Texture & Punched Holes)
+            // 1. DRAW CLEAN, LOCK-FREE STRAP OR 5-LINK JUBILEE BRACELET
             drawFullRealisticStrap(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.bezelMetal, false);
 
             // 2. DRAW CASE LUGS & CUSHION (Smooth Slim Dress Lugs OR Sculpted Oyster Lugs)
@@ -1181,53 +1180,46 @@
             ctx.shadowOffsetY = 14;
 
             if (state.bezelStyle === 'smooth') {
-                // Classic Slim Curved Dress Lugs (Matching your Nagata Spain HMT-style watch photos!)
-                // Top-Left, Top-Right, Bottom-Left, Bottom-Right tapered lugs
                 const lugPaths = [
-                    // Top-Left Lug
                     () => {
                         ctx.beginPath();
-                        ctx.moveTo(286, 408); ctx.lineTo(318, 408);
-                        ctx.lineTo(318, 520); ctx.lineTo(222, 560);
-                        ctx.bezierCurveTo(242, 495, 268, 445, 286, 408);
+                        ctx.moveTo(286, 303); ctx.lineTo(318, 303);
+                        ctx.lineTo(318, 415); ctx.lineTo(222, 455);
+                        ctx.bezierCurveTo(242, 390, 268, 340, 286, 303);
                         ctx.closePath();
                     },
-                    // Top-Right Lug
                     () => {
                         ctx.beginPath();
-                        ctx.moveTo(614, 408); ctx.lineTo(582, 408);
-                        ctx.lineTo(582, 520); ctx.lineTo(678, 560);
-                        ctx.bezierCurveTo(658, 495, 632, 445, 614, 408);
+                        ctx.moveTo(614, 303); ctx.lineTo(582, 303);
+                        ctx.lineTo(582, 415); ctx.lineTo(678, 455);
+                        ctx.bezierCurveTo(658, 390, 632, 340, 614, 303);
                         ctx.closePath();
                     },
-                    // Bottom-Left Lug
                     () => {
                         ctx.beginPath();
-                        ctx.moveTo(286, 1052); ctx.lineTo(318, 1052);
-                        ctx.lineTo(318, 940); ctx.lineTo(222, 900);
-                        ctx.bezierCurveTo(242, 965, 268, 1015, 286, 1052);
+                        ctx.moveTo(286, 947); ctx.lineTo(318, 947);
+                        ctx.lineTo(318, 835); ctx.lineTo(222, 795);
+                        ctx.bezierCurveTo(242, 860, 268, 910, 286, 947);
                         ctx.closePath();
                     },
-                    // Bottom-Right Lug
                     () => {
                         ctx.beginPath();
-                        ctx.moveTo(614, 1052); ctx.lineTo(582, 1052);
-                        ctx.lineTo(582, 940); ctx.lineTo(678, 900);
-                        ctx.bezierCurveTo(658, 965, 632, 1015, 614, 1052);
+                        ctx.moveTo(614, 947); ctx.lineTo(582, 947);
+                        ctx.lineTo(582, 835); ctx.lineTo(678, 795);
+                        ctx.bezierCurveTo(658, 860, 632, 910, 614, 947);
                         ctx.closePath();
                     }
                 ];
 
                 lugPaths.forEach((buildPath, idx) => {
                     buildPath();
-                    ctx.fillStyle = createMetalGradient(ctx, idx % 2 === 0 ? 220 : 580, 408, idx % 2 === 0 ? 320 : 680, 1052, caseObj.lugMetal, true);
+                    ctx.fillStyle = createMetalGradient(ctx, idx % 2 === 0 ? 220 : 580, 303, idx % 2 === 0 ? 320 : 680, 947, caseObj.lugMetal, true);
                     ctx.fill();
                     ctx.lineWidth = 2.2;
                     ctx.strokeStyle = lugPal.fluteBright;
                     ctx.stroke();
                 });
 
-                // Outer Circular Case Barrel
                 ctx.beginPath();
                 ctx.arc(CX, CY, 256, 0, Math.PI * 2);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 256, CY - 256, CX + 256, CY + 256, caseObj.lugMetal, true);
@@ -1235,19 +1227,19 @@
             } else {
                 // Sculpted Oyster Case & Lugs
                 ctx.beginPath();
-                ctx.moveTo(266, 404); ctx.lineTo(312, 404); ctx.lineTo(312, 1056); ctx.lineTo(266, 1056);
-                ctx.bezierCurveTo(216, 968, 170, 855, 170, 730);
-                ctx.bezierCurveTo(170, 605, 216, 492, 266, 404);
+                ctx.moveTo(262, 294); ctx.lineTo(306, 294); ctx.lineTo(306, 956); ctx.lineTo(262, 956);
+                ctx.bezierCurveTo(212, 868, 165, 752, 165, 625);
+                ctx.bezierCurveTo(165, 498, 212, 382, 262, 294);
                 ctx.closePath();
-                ctx.fillStyle = createMetalGradient(ctx, 170, 404, 312, 1056, caseObj.lugMetal, true);
+                ctx.fillStyle = createMetalGradient(ctx, 165, 294, 306, 956, caseObj.lugMetal, true);
                 ctx.fill();
 
                 ctx.beginPath();
-                ctx.moveTo(634, 404); ctx.lineTo(588, 404); ctx.lineTo(588, 1056); ctx.lineTo(634, 1056);
-                ctx.bezierCurveTo(684, 968, 730, 855, 730, 730);
-                ctx.bezierCurveTo(730, 605, 684, 492, 634, 404);
+                ctx.moveTo(638, 294); ctx.lineTo(594, 294); ctx.lineTo(594, 956); ctx.lineTo(638, 956);
+                ctx.bezierCurveTo(688, 868, 735, 752, 735, 625);
+                ctx.bezierCurveTo(735, 498, 688, 382, 638, 294);
                 ctx.closePath();
-                ctx.fillStyle = createMetalGradient(ctx, 588, 404, 730, 1056, caseObj.lugMetal, true);
+                ctx.fillStyle = createMetalGradient(ctx, 594, 294, 735, 956, caseObj.lugMetal, true);
                 ctx.fill();
             }
             ctx.restore();
@@ -1273,12 +1265,11 @@
                 ctx.fillRect(crownX + 12, cy + 2.8, 24, 1.8);
             }
 
-            // 4. DRAW BEZEL (Smooth Mirror-Polished Dress Bezel OR 48-Flute Luxury Bezel)
-            const rBezelOuter = state.bezelStyle === 'smooth' ? 252 : 266;
-            const rBezelInner = 218;
+            // 4. DRAW BEZEL (48-Flute Luxury Bezel OR Smooth Mirror Dress Bezel)
+            const rBezelOuter = state.bezelStyle === 'smooth' ? 252 : 270;
+            const rBezelInner = 222;
 
             if (state.bezelStyle === 'smooth') {
-                // High-Gloss 3D Domed Mirror Dress Bezel (Exact match to your uploaded Nagata/HMT watch photos!)
                 ctx.save();
                 ctx.shadowColor = 'rgba(0,0,0,0.9)';
                 ctx.shadowBlur = 24;
@@ -1288,7 +1279,6 @@
                 ctx.fill();
                 ctx.restore();
 
-                // Multi-lobe studio mirror reflection around smooth domed bezel
                 for (let s = 0; s < 180; s++) {
                     const a1 = (s * 2 * Math.PI) / 180;
                     const a2 = ((s + 1.2) * 2 * Math.PI) / 180;
@@ -1311,7 +1301,6 @@
                     ctx.fill();
                 }
 
-                // Crisp Outer & Inner Specular Rim Rings
                 ctx.beginPath();
                 ctx.arc(CX, CY, rBezelOuter - 1.5, 0, Math.PI * 2);
                 ctx.lineWidth = 2.2;
@@ -1324,7 +1313,6 @@
                 ctx.strokeStyle = bezelPal.rim;
                 ctx.stroke();
             } else {
-                // 48-Flute Luxury Bezel
                 ctx.save();
                 ctx.shadowColor = 'rgba(0,0,0,0.92)';
                 ctx.shadowBlur = 26;
@@ -1340,9 +1328,9 @@
                     const aPeak = ((i + 0.5) * 2 * Math.PI) / flutes;
                     const a2 = ((i + 1) * 2 * Math.PI) / flutes;
 
-                    const x1o = CX + (rBezelOuter - 3) * Math.cos(a1), y1o = CY + (rBezelOuter - 3) * Math.sin(a1);
-                    const xPo = CX + (rBezelOuter + 3) * Math.cos(aPeak), yPo = CY + (rBezelOuter + 3) * Math.sin(aPeak);
-                    const x2o = CX + (rBezelOuter - 3) * Math.cos(a2), y2o = CY + (rBezelOuter - 3) * Math.sin(a2);
+                    const x1o = CX + (rBezelOuter - 3.2) * Math.cos(a1), y1o = CY + (rBezelOuter - 3.2) * Math.sin(a1);
+                    const xPo = CX + (rBezelOuter + 3.2) * Math.cos(aPeak), yPo = CY + (rBezelOuter + 3.2) * Math.sin(aPeak);
+                    const x2o = CX + (rBezelOuter - 3.2) * Math.cos(a2), y2o = CY + (rBezelOuter - 3.2) * Math.sin(a2);
 
                     const x1i = CX + rBezelInner * Math.cos(a1), y1i = CY + rBezelInner * Math.sin(a1);
                     const xPi = CX + rBezelInner * Math.cos(aPeak), yPi = CY + rBezelInner * Math.sin(aPeak);
@@ -1430,7 +1418,6 @@
                 }
             }
 
-            // Inner Concentric Metallic Sector Ring (Matches the XII & VI Roman watches in Photos 31, 33, 34, 36!)
             if (state.markerStyle === 'roman_12_6') {
                 ctx.beginPath();
                 ctx.arc(CX, CY, 132, 0, Math.PI * 2);
@@ -1473,14 +1460,14 @@
                 ctx.stroke();
             }
             ctx.restore();
-            // 7. DRAW DIAL MARKERS & NUMERALS (All 6 Authentic Layouts from Your Uploaded Photos!)
+            // 7. DRAW DIAL MARKERS & NUMERALS
             const romans = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
             const arabics = ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'];
 
             for (let h = 0; h < 12; h++) {
                 if (state.markerStyle === 'diamond' && (h === 0 || h === 3)) continue;
                 const ang = (h * 30 - 90) * Math.PI / 180;
-                const rPos = 160;
+                const rPos = 156;
                 const mx = CX + rPos * Math.cos(ang);
                 const my = CY + rPos * Math.sin(ang);
 
@@ -1491,7 +1478,6 @@
                 ctx.shadowOffsetY = 2.5;
 
                 if (state.markerStyle === 'arabic_12_6' && (h === 0 || h === 6)) {
-                    // Bold 3D Metallic "12" and "6" Appliqué (Like Photos 31, 34, 35, 37, 38)
                     ctx.font = '700 34px "Inter", sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
@@ -1501,14 +1487,12 @@
                     ctx.strokeStyle = bezelPal.fluteDark;
                     ctx.strokeText(h === 0 ? '12' : '6', mx, my);
                 } else if (state.markerStyle === 'roman_12_6' && (h === 0 || h === 6)) {
-                    // Tall 3D Metallic "XII" and "VI" Appliqué (Like Photos 31, 33, 34, 36)
                     ctx.font = '700 30px "Cinzel", serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillStyle = bezelPal.fluteBright;
                     ctx.fillText(h === 0 ? 'XII' : 'VI', mx, my);
                 } else if (state.markerStyle === 'roman_full') {
-                    // Complete Radially-Angled Roman Numerals I–XII (Like Emerald Gold Watch in Photo 32)
                     ctx.translate(mx, my);
                     ctx.rotate(ang + Math.PI / 2);
                     ctx.font = '700 22px "Cinzel", serif';
@@ -1517,14 +1501,12 @@
                     ctx.fillStyle = bezelPal.fluteBright;
                     ctx.fillText(romans[h], 0, 0);
                 } else if (state.markerStyle === 'arabic_full') {
-                    // Complete Upright Metallic Arabic Numerals 1–12 (Like Silver/Black Watches in Photos 33 & 36)
                     ctx.font = '700 24px "Cinzel", serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillStyle = (state.dialColor === 'white' || state.dialColor === 'silver_dial') ? '#1E293B' : bezelPal.fluteBright;
                     ctx.fillText(arabics[h], mx, my);
                 } else if (state.markerStyle === 'diamond') {
-                    // Radially Rotated 3D Diamond Chaton
                     ctx.translate(mx, my);
                     ctx.rotate(ang + Math.PI / 2);
                     const sOut = 13.5, sIn = 8.2;
@@ -1538,10 +1520,31 @@
                     ctx.fillStyle = bezelPal.fluteDark;
                     ctx.beginPath(); ctx.moveTo(-sOut, sOut); ctx.lineTo(sOut, sOut); ctx.lineTo(sIn, sIn); ctx.lineTo(-sIn, sIn); ctx.closePath(); ctx.fill();
 
-                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fillStyle = '#090D16';
+                    ctx.fillRect(-sIn, -sIn, sIn * 2, sIn * 2);
+
+                    const dGrad = ctx.createRadialGradient(-1.5, -1.5, 1, 0, 0, sIn);
+                    dGrad.addColorStop(0.0, '#FFFFFF');
+                    dGrad.addColorStop(0.45, '#F0F9FF');
+                    dGrad.addColorStop(0.75, '#94A3B8');
+                    dGrad.addColorStop(1.0, '#FFFFFF');
+                    ctx.fillStyle = dGrad;
                     ctx.beginPath(); ctx.arc(0, 0, sIn - 0.4, 0, Math.PI * 2); ctx.fill();
+
+                    ctx.strokeStyle = 'rgba(255,255,255,0.95)';
+                    ctx.lineWidth = 1.0;
+                    ctx.beginPath();
+                    ctx.moveTo(-6, 0); ctx.lineTo(6, 0);
+                    ctx.moveTo(0, -6); ctx.lineTo(0, 6);
+                    ctx.moveTo(-4.2, -4.2); ctx.lineTo(4.2, 4.2);
+                    ctx.moveTo(-4.2, 4.2); ctx.lineTo(4.2, -4.2);
+                    ctx.stroke();
+
+                    ctx.fillStyle = bezelPal.fluteBright;
+                    [[-5.8, -5.8], [5.8, -5.8], [5.8, 5.8], [-5.8, 5.8]].forEach(p => {
+                        ctx.beginPath(); ctx.arc(p[0], p[1], 2.0, 0, Math.PI * 2); ctx.fill();
+                    });
                 } else {
-                    // Sleek 3D Faceted Metallic Dress Baton Stick Marker (Double Baton at 12 in minimalist baton mode!)
                     ctx.translate(mx, my);
                     ctx.rotate(ang + Math.PI / 2);
                     const drawSingleBaton = (offsetX) => {
@@ -1580,8 +1583,7 @@
             ctx.shadowOffsetY = 1.5;
 
             if (state.markerStyle === 'diamond') {
-                // 12 o'clock Coronet Crest when in Diamond mode
-                const crestY = CY - 154;
+                const crestY = CY - 150;
                 [[-13, -5], [-7, -17], [0, -20], [7, -17], [13, -5]].forEach(pt => {
                     ctx.beginPath();
                     ctx.moveTo(CX + pt[0] * 0.4 - 1.4, crestY + 10);
@@ -1592,20 +1594,24 @@
                     ctx.fill();
                     ctx.beginPath(); ctx.arc(CX + pt[0], crestY + pt[1], 2.6, 0, Math.PI * 2); ctx.fill();
                 });
+                ctx.beginPath();
+                ctx.ellipse(CX, crestY + 12, 9.2, 3.8, 0, 0, Math.PI * 2);
+                ctx.fillStyle = createMetalGradient(ctx, CX - 9, crestY + 8, CX + 9, crestY + 16, caseObj.bezelMetal, true);
+                ctx.fill();
             }
 
             const logoFill = state.customPhotoDataUrl ? '#FFE87C' : dialObj.logoColor;
             ctx.fillStyle = logoFill;
             ctx.font = '700 25px "Cinzel Decorative", serif';
             ctx.textAlign = 'center';
-            ctx.fillText('DYNAST', CX, CY - 88);
+            ctx.fillText('DYNAST', CX, CY - 90);
 
             ctx.fillStyle = state.customPhotoDataUrl ? '#FFFFFF' : dialObj.subColor;
             ctx.font = '600 9.5px "Cinzel", serif';
-            ctx.fillText('LUXURIOUS HOROLOGY', CX, CY - 70);
+            ctx.fillText('LUXURIOUS HOROLOGY', CX, CY - 72);
             ctx.restore();
 
-            // 9. DRAW CUSTOMER'S CUSTOM NAME ON DIAL (At 6 o'clock)
+            // 9. DRAW CUSTOMER'S CUSTOM NAME ON DIAL
             if (state.customName && state.customName.trim() !== '') {
                 ctx.save();
                 ctx.shadowColor = (state.dialColor === 'white' || state.dialColor === 'silver_dial' || state.dialColor === 'champagne') ? 'rgba(0,0,0,0.18)' : 'rgba(0,0,0,0.68)';
@@ -1615,7 +1621,7 @@
                 const fSize = fontName === 'Great Vibes' ? 32 : 21;
                 ctx.font = `600 ${fSize}px "${fontName}", serif`;
                 ctx.textAlign = 'center';
-                ctx.fillText(state.customName.trim(), CX, CY + 92);
+                ctx.fillText(state.customName.trim(), CX, CY + 94);
                 ctx.restore();
             }
 
@@ -1623,21 +1629,33 @@
             if (state.bezelStyle === 'fluted' || state.markerStyle === 'diamond') {
                 const dx = CX + 126, dy = CY;
                 ctx.save();
-                drawRoundedRect(ctx, dx - 32, dy - 24, 64, 48, 5);
-                ctx.fillStyle = createMetalGradient(ctx, dx - 32, dy - 24, dx + 32, dy + 24, caseObj.bezelMetal, true);
+                drawRoundedRect(ctx, dx - 34, dy - 26, 68, 52, 5);
+                ctx.fillStyle = createMetalGradient(ctx, dx - 34, dy - 26, dx + 34, dy + 26, caseObj.bezelMetal, true);
                 ctx.fill();
-                drawRoundedRect(ctx, dx - 28, dy - 20, 56, 40, 3);
+                drawRoundedRect(ctx, dx - 30, dy - 22, 60, 44, 3.5);
                 ctx.fillStyle = '#F8FAFC';
                 ctx.fill();
                 ctx.fillStyle = '#0F172A';
-                ctx.font = '700 29px "Inter", sans-serif';
+                ctx.font = '700 31px "Inter", sans-serif';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.fillText('28', dx, dy + 1.5);
+
+                drawRoundedRect(ctx, dx - 44, dy - 34, 88, 68, 22);
+                const cycG = ctx.createLinearGradient(dx - 44, dy - 34, dx + 44, dy + 34);
+                cycG.addColorStop(0.0, 'rgba(255,255,255,0.42)');
+                cycG.addColorStop(0.35, 'rgba(185,225,255,0.06)');
+                cycG.addColorStop(0.75, 'rgba(0,0,0,0.12)');
+                cycG.addColorStop(1.0, 'rgba(255,255,255,0.28)');
+                ctx.fillStyle = cycG;
+                ctx.fill();
+                ctx.lineWidth = 1.5;
+                ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+                ctx.stroke();
                 ctx.restore();
             }
 
-            // 11. DRAW 3D DIAMOND-CUT DAUPHINE / LANCE HANDS (Exact match to Your Uploaded Dress Watch Photos!)
+            // 11. DRAW 3D HANDS (Real-Time Clock Default!)
             let hrAngleDeg, minAngleDeg, secAngleDeg;
             if (state.liveClock) {
                 const now = new Date();
@@ -1648,13 +1666,13 @@
                 minAngleDeg = min * 6;
                 secAngleDeg = sec * 6;
             } else {
-                hrAngleDeg = 305;  // 10:10:31 Studio Pose
+                hrAngleDeg = 305;
                 minAngleDeg = 62;
                 secAngleDeg = 186;
             }
 
-            drawDauphineHand(ctx, CX, CY, hrAngleDeg * Math.PI / 180, 118, 26, 10.5, bezelPal, state.bezelStyle === 'fluted');
-            drawDauphineHand(ctx, CX, CY, minAngleDeg * Math.PI / 180, 172, 32, 8.5, bezelPal, state.bezelStyle === 'fluted');
+            drawDauphineHand(ctx, CX, CY, hrAngleDeg * Math.PI / 180, 118, 26, 9.5, bezelPal, state.bezelStyle === 'fluted');
+            drawDauphineHand(ctx, CX, CY, minAngleDeg * Math.PI / 180, 172, 32, 8.0, bezelPal, state.bezelStyle === 'fluted');
             drawSleekSecondHand(ctx, CX, CY, secAngleDeg * Math.PI / 180, 186, 44, bezelPal);
 
             // 12. SAPPHIRE CRYSTAL ANTI-REFLECTIVE DOME GLARE
@@ -1670,7 +1688,6 @@
             ctx.restore();
         }
 
-        // HELPER: 3D Diamond-Cut Dauphine / Lance Dress Watch Hands (Left Slope Mirror Light, Right Slope Dark Metal)
         function drawDauphineHand(ctx, cx, cy, angleRad, length, tail, halfW, pal, hasLume) {
             ctx.save();
             ctx.translate(cx, cy);
@@ -1691,7 +1708,6 @@
             ctx.fill();
             ctx.restore();
 
-            // Left Mirror Facet
             ctx.beginPath();
             ctx.moveTo(0, tail);
             ctx.lineTo(-halfW, 0);
@@ -1700,7 +1716,6 @@
             ctx.fillStyle = pal.handLight;
             ctx.fill();
 
-            // Right Shadow Facet
             ctx.beginPath();
             ctx.moveTo(0, tail);
             ctx.lineTo(halfW, 0);
@@ -1746,27 +1761,25 @@
             ctx.restore();
         }
 
-        // HELPER: Full-Length Spanish Leather Strap (Crocodile & Smooth Matte) with Top Buckle, 2 Keeper Loops & Pointed Bottom Tip with 7 Holes!
+        // HELPER: Clean, Lock-Free Straps on Main Watch Canvas (No Buckle Shown on First Rendering Screen!)
         function drawFullRealisticStrap(ctx, cx, cy, matKey, strapColorObj, buckleMetal, isBackView) {
-            const bucklePal = METAL_PALETTES[buckleMetal] || METAL_PALETTES.rosegold;
-
             if (matKey === 'metal') {
                 const outerPal = METAL_PALETTES[strapColorObj.outer] || METAL_PALETTES.silver;
                 const centerPal = METAL_PALETTES[strapColorObj.center] || METAL_PALETTES.rosegold;
 
                 ctx.fillStyle = '#050608';
-                ctx.fillRect(312, 65, 276, 420);
-                ctx.fillRect(312, 975, 276, 420);
+                ctx.fillRect(306, 25, 288, 360);
+                ctx.fillRect(306, 865, 288, 360);
 
                 const linkH = 32.5, rowStep = 34.5;
                 for (let side = 0; side < 2; side++) {
                     const isTop = side === 0;
-                    for (let i = 0; i < 12; i++) {
-                        const baseY = isTop ? (65 + i * rowStep) : (980 + i * rowStep);
-                        const distFromCase = isTop ? (11 - i) : i;
-                        const taper = Math.max(0, (distFromCase - 1) * 2.2);
-                        const xStart = 312 + taper;
-                        const totalW = 276 - taper * 2;
+                    for (let i = 0; i < 10; i++) {
+                        const baseY = isTop ? (25 + i * rowStep) : (870 + i * rowStep);
+                        const distFromCase = isTop ? (9 - i) : i;
+                        const taper = Math.max(0, (distFromCase - 1) * 2.5);
+                        const xStart = 306 + taper;
+                        const totalW = 288 - taper * 2;
                         const wOuter = totalW * 0.30;
                         const wCenter = (totalW - wOuter * 2 - 6) / 3;
 
@@ -1777,126 +1790,131 @@
                             lg.addColorStop(0.55, outerPal.fluteLight);
                             lg.addColorStop(0.84, outerPal.fluteMid);
                             lg.addColorStop(1.00, outerPal.fluteDark);
-                            drawRoundedRect(ctx, ox, baseY, wOuter, linkH, 5);
+                            drawRoundedRect(ctx, ox, baseY, wOuter, linkH, 5.5);
                             ctx.fillStyle = lg;
+                            ctx.fill();
+
+                            const pillowG = ctx.createLinearGradient(ox, baseY, ox + wOuter, baseY);
+                            pillowG.addColorStop(0.00, 'rgba(0,0,0,0.42)');
+                            pillowG.addColorStop(0.14, 'rgba(255,255,255,0.16)');
+                            pillowG.addColorStop(0.86, 'rgba(255,255,255,0.16)');
+                            pillowG.addColorStop(1.00, 'rgba(0,0,0,0.42)');
+                            ctx.fillStyle = pillowG;
                             ctx.fill();
                         });
 
-                        const centerY = baseY + (isTop ? 15 : -15);
+                        const centerY = baseY + (isTop ? 16 : -16);
+                        const isDarkRefRow = (distFromCase === 2 || distFromCase === 5 || distFromCase === 8);
                         for (let c = 0; c < 3; c++) {
                             const cxLink = xStart + wOuter + 1.5 + c * (wCenter + 1.5);
                             const cg = ctx.createLinearGradient(cxLink, centerY, cxLink, centerY + linkH);
-                            cg.addColorStop(0.00, centerPal.fluteDark);
-                            cg.addColorStop(0.16, centerPal.fluteBright);
-                            cg.addColorStop(0.40, centerPal.fluteLight);
-                            cg.addColorStop(0.58, '#070709');
-                            cg.addColorStop(0.82, centerPal.fluteMid);
-                            cg.addColorStop(1.00, centerPal.fluteDark);
-                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 4.5);
+                            if (isDarkRefRow) {
+                                cg.addColorStop(0.00, centerPal.fluteDark);
+                                cg.addColorStop(0.18, centerPal.fluteMid);
+                                cg.addColorStop(0.45, '#09090B');
+                                cg.addColorStop(0.75, centerPal.fluteBright);
+                                cg.addColorStop(1.00, centerPal.fluteDark);
+                            } else {
+                                cg.addColorStop(0.00, centerPal.fluteDark);
+                                cg.addColorStop(0.14, centerPal.fluteBright);
+                                cg.addColorStop(0.38, centerPal.fluteLight);
+                                cg.addColorStop(0.54, centerPal.fluteDark);
+                                cg.addColorStop(0.70, '#070709');
+                                cg.addColorStop(0.86, centerPal.fluteMid);
+                                cg.addColorStop(1.00, centerPal.fluteDark);
+                            }
+                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 5.0);
                             ctx.fillStyle = cg;
                             ctx.fill();
                         }
                     }
                 }
+
+                // Under-bezel ambient occlusion & wrist-drop shadow vignette
+                const topCaseAO = ctx.createRadialGradient(cx, cy, 266, cx, cy, 315);
+                topCaseAO.addColorStop(0.0, 'rgba(0,0,0,0.88)');
+                topCaseAO.addColorStop(0.5, 'rgba(0,0,0,0.35)');
+                topCaseAO.addColorStop(1.0, 'rgba(0,0,0,0)');
+                ctx.fillStyle = topCaseAO;
+                ctx.fillRect(304, 290, 292, 670);
+
+                const topVig = ctx.createLinearGradient(0, 25, 0, 115);
+                topVig.addColorStop(0, 'rgba(0,0,0,0.78)');
+                topVig.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = topVig;
+                ctx.fillRect(300, 25, 300, 90);
+
+                const botVig = ctx.createLinearGradient(0, 1135, 0, 1225);
+                botVig.addColorStop(0, 'rgba(0,0,0,0)');
+                botVig.addColorStop(1, 'rgba(0,0,0,0.78)');
+                ctx.fillStyle = botVig;
+                ctx.fillRect(300, 1135, 300, 90);
                 return;
             }
 
-            // SPANISH LEATHER (CROCODILE EMBOSSED OR SMOOTH MATTE CALFSKIN) / RUBBER / SILICONE FULL STRAP
-            // 1. TOP STRAP SEGMENT (y = 82 down to 480)
-            ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.85)';
-            ctx.shadowBlur = 22;
-            ctx.beginPath();
-            ctx.moveTo(332, 85); ctx.lineTo(568, 85);
-            ctx.lineTo(582, 485); ctx.lineTo(318, 485);
-            ctx.closePath();
-            ctx.save();
-            ctx.clip();
-
+            // CLEAN LOCK-FREE SPANISH LEATHER (CROCODILE / SMOOTH) OR SPORT RUBBER / SILICONE STRAPS
             const topSg = ctx.createLinearGradient(318, 0, 582, 0);
             topSg.addColorStop(0.00, strapColorObj.crevice || '#050506');
             topSg.addColorStop(0.14, strapColorObj.hex);
             topSg.addColorStop(0.50, strapColorObj.scaleLight || strapColorObj.hex);
             topSg.addColorStop(0.86, strapColorObj.hex);
             topSg.addColorStop(1.00, strapColorObj.crevice || '#050506');
-            ctx.fillStyle = topSg;
-            ctx.fillRect(310, 80, 280, 410);
 
-            drawStrapSurfaceTexture(ctx, 318, 85, 264, 400, matKey, strapColorObj, true);
-            ctx.restore();
-            ctx.restore();
-
-            // 2. TOP HARDWARE LOCK / TANG PIN BUCKLE AT VERY TOP OF UPPER STRAP (Matches Nagata Spain Photos!)
-            drawTopStrapLockHardware(ctx, cx, 85, 236, state.strapLock, buckleMetal, strapColorObj);
-
-            // 3. TWO 3D LEATHER KEEPER LOOPS ON UPPER STRAP (y = 135 and y = 210, casting real drop shadows!)
-            [132, 206].forEach(ky => {
-                ctx.save();
-                ctx.shadowColor = 'rgba(0,0,0,0.88)';
-                ctx.shadowBlur = 14;
-                ctx.shadowOffsetY = 7;
-                drawRoundedRect(ctx, 314, ky, 272, 34, 7);
-                const kg = ctx.createLinearGradient(314, ky, 586, ky);
-                kg.addColorStop(0.00, strapColorObj.crevice || '#050506');
-                kg.addColorStop(0.20, strapColorObj.hex);
-                kg.addColorStop(0.50, strapColorObj.scaleLight || strapColorObj.hex);
-                kg.addColorStop(0.80, strapColorObj.hex);
-                kg.addColorStop(1.00, strapColorObj.crevice || '#050506');
-                ctx.fillStyle = kg;
-                ctx.fill();
-
-                // Top & Bottom bevel highlight on keeper loop
-                ctx.strokeStyle = 'rgba(255,255,255,0.16)';
-                ctx.lineWidth = 1.2;
-                ctx.stroke();
-                ctx.restore();
-            });
-
-            // 4. BOTTOM STRAP SEGMENT WITH POINTED SPEAR TIP & 7 PUNCHED ADJUSTMENT HOLES (y = 975 to 1435)
+            // 1. Top Strap Segment (y = 25 to 380 — Clean, no buckle or lock hardware on first rendering screen!)
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.88)';
-            ctx.shadowBlur = 24;
+            ctx.shadowColor = 'rgba(0,0,0,0.85)';
+            ctx.shadowBlur = 22;
             ctx.beginPath();
-            ctx.moveTo(318, 975);
-            ctx.lineTo(582, 975);
-            ctx.lineTo(564, 1345);
-            ctx.quadraticCurveTo(558, 1395, 450, 1436); // Pointed Spear Tip at (450, 1436)
-            ctx.quadraticCurveTo(342, 1395, 336, 1345);
+            ctx.moveTo(328, 25); ctx.lineTo(572, 25);
+            ctx.lineTo(582, 380); ctx.lineTo(318, 380);
             ctx.closePath();
             ctx.save();
             ctx.clip();
 
             ctx.fillStyle = topSg;
-            ctx.fillRect(310, 975, 280, 470);
+            ctx.fillRect(310, 25, 280, 360);
+            drawStrapSurfaceTexture(ctx, 318, 25, 264, 355, matKey, strapColorObj, true);
 
-            drawStrapSurfaceTexture(ctx, 318, 975, 264, 460, matKey, strapColorObj, false);
+            const topFade = ctx.createLinearGradient(0, 25, 0, 110);
+            topFade.addColorStop(0, 'rgba(0,0,0,0.75)');
+            topFade.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = topFade;
+            ctx.fillRect(310, 25, 280, 85);
+            ctx.restore();
+            ctx.restore();
 
-            // 7 Punched Circular Adjustment Holes down the Center of Bottom Strap (Just like your photos!)
-            for (let hIdx = 0; hIdx < 7; hIdx++) {
-                const hy = 1135 + hIdx * 36;
-                // Outer Embossed Rim around Hole
-                ctx.beginPath();
-                ctx.arc(cx, hy, 7.2, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,0.12)';
-                ctx.fill();
-                // Deep Dark Punched Hole Core
-                ctx.beginPath();
-                ctx.arc(cx, hy, 5.2, 0, Math.PI * 2);
-                ctx.fillStyle = '#040405';
-                ctx.fill();
-                ctx.lineWidth = 1.2;
-                ctx.strokeStyle = 'rgba(0,0,0,0.9)';
-                ctx.stroke();
+            // 2. Bottom Strap Segment (y = 870 to 1225 with Pointed Tip & Adjustment Holes)
+            ctx.save();
+            ctx.shadowColor = 'rgba(0,0,0,0.88)';
+            ctx.shadowBlur = 24;
+            ctx.beginPath();
+            ctx.moveTo(318, 870);
+            ctx.lineTo(582, 870);
+            ctx.lineTo(566, 1145);
+            ctx.quadraticCurveTo(558, 1190, 450, 1228);
+            ctx.quadraticCurveTo(342, 1190, 334, 1145);
+            ctx.closePath();
+            ctx.save();
+            ctx.clip();
+
+            ctx.fillStyle = topSg;
+            ctx.fillRect(310, 870, 280, 365);
+            drawStrapSurfaceTexture(ctx, 318, 870, 264, 358, matKey, strapColorObj, false);
+
+            for (let hIdx = 0; hIdx < 6; hIdx++) {
+                const hy = 985 + hIdx * 34;
+                ctx.beginPath(); ctx.arc(cx, hy, 6.8, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,0.12)'; ctx.fill();
+                ctx.beginPath(); ctx.arc(cx, hy, 4.8, 0, Math.PI * 2);
+                ctx.fillStyle = '#040405'; ctx.fill();
             }
             ctx.restore();
             ctx.restore();
         }
 
-        // HELPER: Authentic Crocodile-Embossed Scales OR Smooth Padded Calfskin + Side Saddle Stitching
         function drawStrapSurfaceTexture(ctx, x, y, w, h, matKey, strapColorObj, isTop) {
             const cx = x + w / 2;
 
-            // Raised 3D Central Padded Bolster Cushion
             const bolsterG = ctx.createLinearGradient(x + 28, 0, x + w - 28, 0);
             bolsterG.addColorStop(0.00, 'rgba(0,0,0,0.42)');
             bolsterG.addColorStop(0.18, 'rgba(255,255,255,0.08)');
@@ -1908,14 +1926,12 @@
 
             if (matKey === 'leather') {
                 if (strapColorObj.texture === 'croc') {
-                    // AUTHENTIC 3D CROCODILE / ALLIGATOR RECTANGULAR BELLY SCALES & FLANK TILES
                     let curY = y + 8;
                     let rowIdx = 0;
                     while (curY < y + h - 10) {
                         const tileH = 34 + (rowIdx % 3) * 6;
                         const splitX = cx + ((rowIdx % 2 === 0) ? 8 : -8);
 
-                        // Draw Left Belly Scale, Right Belly Scale, and Outer Flank Scales
                         const tiles = [
                             { tx: x + 6, tw: 34, th: tileH },
                             { tx: x + 43, tw: splitX - (x + 45), th: tileH },
@@ -1924,12 +1940,10 @@
                         ];
 
                         tiles.forEach(t => {
-                            // Deep dark scale crevice border
                             drawRoundedRect(ctx, t.tx, curY, t.tw, t.th - 3, 5);
                             ctx.fillStyle = strapColorObj.crevice || '#050506';
                             ctx.fill();
 
-                            // Raised 3D Glossy Scale Pillow
                             const scG = ctx.createRadialGradient(
                                 t.tx + t.tw * 0.42, curY + t.th * 0.35, 2,
                                 t.tx + t.tw * 0.5, curY + t.th * 0.5, Math.max(t.tw, t.th) * 0.75
@@ -1941,7 +1955,6 @@
                             ctx.fillStyle = scG;
                             ctx.fill();
 
-                            // Specular Leather Glaze Highlight on Top Edge of Scale
                             ctx.strokeStyle = 'rgba(255,255,255,0.14)';
                             ctx.lineWidth = 1.0;
                             ctx.beginPath();
@@ -1954,7 +1967,6 @@
                         rowIdx++;
                     }
                 } else {
-                    // SMOOTH MATTE PADDED SPANISH CALFSKIN GRAIN (Like Smooth Brown & Smooth Black Straps in Photos 31, 32, 37, 40)
                     ctx.fillStyle = 'rgba(255,255,255,0.03)';
                     for (let py = y + 6; py < y + h - 6; py += 6) {
                         for (let px = x + 10; px < x + w - 10; px += 8) {
@@ -1963,13 +1975,12 @@
                     }
                 }
 
-                // Recessed Side Stitch Channels & Individual 3D Saddle Stitches (Follows Pointed Tip Contour!)
                 const stColor = strapColorObj.stitch || '#D4AF37';
-                const maxStitchY = isTop ? (y + h - 15) : (y + h - 22);
+                const maxStitchY = isTop ? (y + h - 15) : (y + h - 18);
                 for (let sy = y + 12; sy < maxStitchY; sy += 14) {
                     let lx = x + 16, rx = x + w - 16;
-                    if (!isTop && sy > y + 365) {
-                        const tipProg = (sy - (y + 365)) / 85;
+                    if (!isTop && sy > y + 275) {
+                        const tipProg = (sy - (y + 275)) / 80;
                         lx += tipProg * 95;
                         rx -= tipProg * 95;
                     }
@@ -1988,8 +1999,7 @@
                     ctx.stroke();
                 }
             } else {
-                // Molded Sport Rubber / Silicone Ribs
-                for (let ry = y + 32; ry < y + h - 90; ry += 42) {
+                for (let ry = y + 32; ry < y + h - 70; ry += 42) {
                     drawRoundedRect(ctx, x + 48, ry, w - 96, 16, 6);
                     ctx.fillStyle = 'rgba(0,0,0,0.45)';
                     ctx.fill();
@@ -1997,38 +2007,7 @@
             }
         }
 
-        // HELPER: Render Top Strap Buckle / Lock Hardware at the Top of the Main Watch Strap
-        function drawTopStrapLockHardware(ctx, cx, topY, strapW, lockKey, metalKey, strapColorObj) {
-            ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.88)';
-            ctx.shadowBlur = 16;
-            const halfW = strapW / 2 + 12;
-
-            // 3D Metallic Horseshoe Tang Buckle Frame at Top of Strap (Matches Your Nagata Spain Photos!)
-            ctx.beginPath();
-            ctx.roundRect(cx - halfW, topY - 46, halfW * 2, 62, 12);
-            ctx.fillStyle = createMetalGradient(ctx, cx - halfW, topY - 46, cx + halfW, topY + 16, metalKey, true);
-            ctx.fill();
-
-            // Inner Cutout of Buckle Frame
-            ctx.beginPath();
-            ctx.roundRect(cx - halfW + 14, topY - 32, (halfW - 14) * 2, 36, 6);
-            ctx.fillStyle = '#050507';
-            ctx.fill();
-
-            // Leather Strap Top End Tucked Under Buckle Bar
-            ctx.fillStyle = strapColorObj.hex || '#18181B';
-            ctx.fillRect(cx - halfW + 16, topY - 12, (halfW - 16) * 2, 28);
-
-            // 3D Center Metallic Tang Pin / Tongue Resting Across Buckle Bar
-            drawRoundedRect(ctx, cx - 7, topY - 48, 14, 58, 4);
-            ctx.fillStyle = createMetalGradient(ctx, cx - 7, topY - 48, cx + 7, topY + 10, metalKey, true);
-            ctx.fill();
-            ctx.restore();
-        }
-
         // DEDICATED HIGH-RESOLUTION 3D MACRO STRAP LOCK STUDIO RENDERER (800 x 340)
-        // Renders an ultra-realistic close-up of whichever lock the customer selects!
         function drawMacroLockCanvas() {
             const canvas = document.getElementById('lockMacroCanvas');
             if (!canvas) return;
@@ -2045,7 +2024,6 @@
 
             document.getElementById('liveLockBadgeTitle').textContent = `${lockObj.name} (${caseObj.name.split(' ')[0]} Finish)`;
 
-            // 1. Studio Radial Spotlight Backdrop
             const bgG = ctx.createRadialGradient(CX, CY, 20, CX, CY, 380);
             bgG.addColorStop(0.0, '#241c10');
             bgG.addColorStop(0.6, '#0a0908');
@@ -2053,7 +2031,6 @@
             ctx.fillStyle = bgG;
             ctx.fillRect(0, 0, W, H);
 
-            // 2. Draw Horizontal Left & Right Strap Bands Entering the Lock Close-Up
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.85)';
             ctx.shadowBlur = 20;
@@ -2071,7 +2048,6 @@
             ctx.fillStyle = sGrad;
             ctx.fillRect(30, strapY, 740, strapH);
 
-            // Horizontal Stitching or Metal Links on the Macro Strap
             if (state.strapMaterial === 'metal') {
                 for (let lx = 35; lx < 760; lx += 34) {
                     drawRoundedRect(ctx, lx, strapY + 2, 31, strapH - 4, 4);
@@ -2082,7 +2058,6 @@
                     ctx.fill();
                 }
             } else {
-                // Crocodile scale lines & horizontal top/bottom saddle stitching
                 if (strapColorObj.texture === 'croc') {
                     for (let sx = 45; sx < 755; sx += 44) {
                         drawRoundedRect(ctx, sx, strapY + 18, 38, strapH - 36, 5);
@@ -2103,45 +2078,37 @@
             }
             ctx.restore();
 
-            // 3. RENDER THE SELECTED LOCK MECHANISM IN EXTREME 3D MACRO DETAIL AT (CX, CY)
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.92)';
             ctx.shadowBlur = 28;
             ctx.shadowOffsetY = 12;
 
             if (state.strapLock === 'buckle') {
-                // OPTION 1: CLASSIC 3D TANG PIN BUCKLE + KEEPER LOOP + PUNCHED HOLES
-                // Punched holes on strap
                 for (let hx = 160; hx <= 640; hx += 60) {
                     ctx.beginPath(); ctx.arc(hx, CY, 8, 0, Math.PI * 2);
                     ctx.fillStyle = '#040405'; ctx.fill();
                     ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.stroke();
                 }
 
-                // 3D Sculpted Horseshoe Buckle Frame
                 drawRoundedRect(ctx, CX - 95, CY - 86, 175, 172, 26);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 95, CY - 86, CX + 80, CY + 86, metalKey, true);
                 ctx.fill();
                 ctx.lineWidth = 2.5; ctx.strokeStyle = pal.fluteBright; ctx.stroke();
 
-                // Inner Cutout Revealing Strap Underneath
                 drawRoundedRect(ctx, CX - 65, CY - 58, 112, 116, 12);
                 ctx.fillStyle = sGrad;
                 ctx.fill();
                 ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,0.75)'; ctx.stroke();
 
-                // Vertical Spring-Bar Hinge Cylinder
                 drawRoundedRect(ctx, CX - 78, CY - 70, 22, 140, 6);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 78, CY - 70, CX - 56, CY + 70, metalKey, true);
                 ctx.fill();
 
-                // 3D Tapered Tang Pin / Tongue Engaged in Hole
                 drawRoundedRect(ctx, CX - 72, CY - 11, 162, 22, 8);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 72, CY - 11, CX + 90, CY + 11, metalKey, true);
                 ctx.fill();
                 ctx.lineWidth = 1.5; ctx.strokeStyle = pal.fluteBright; ctx.stroke();
 
-                // Engraved "DYNAST" Hallmark on Buckle Frame Right Bar
                 ctx.save();
                 ctx.translate(CX + 62, CY);
                 ctx.rotate(-Math.PI / 2);
@@ -2152,24 +2119,19 @@
                 ctx.restore();
 
             } else if (state.strapLock === 'butterfly') {
-                // OPTION 2: BUTTERFLY DEPLOYANT CLASP WITH TWIN PUSH-BUTTONS & HINGED WINGS
-                // Twin Top & Bottom Release Push-Buttons
                 drawRoundedRect(ctx, CX - 32, CY - 94, 64, 188, 8);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 32, CY - 94, CX + 32, CY - 94, 'silver', true);
                 ctx.fill();
 
-                // Left & Right Brushed Deployant Wing Blades
                 drawRoundedRect(ctx, CX - 165, CY - 62, 330, 124, 14);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 165, CY - 62, CX + 165, CY + 62, 'silver', false);
                 ctx.fill();
 
-                // Center Mirror-Polished Butterfly Bridge
                 drawRoundedRect(ctx, CX - 78, CY - 74, 156, 148, 12);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 78, CY - 74, CX + 78, CY + 74, metalKey, true);
                 ctx.fill();
                 ctx.lineWidth = 2; ctx.strokeStyle = pal.fluteBright; ctx.stroke();
 
-                // Center Seam & DYNAST Crest
                 ctx.strokeStyle = 'rgba(0,0,0,0.75)';
                 ctx.lineWidth = 2.5;
                 ctx.beginPath(); ctx.moveTo(CX, CY - 72); ctx.lineTo(CX, CY + 72); ctx.stroke();
@@ -2185,17 +2147,14 @@
                 ctx.fillText('DEPLOYANT LOCK', CX, CY + 18);
 
             } else if (state.strapLock === 'folding') {
-                // OPTION 3: OYSTERLOCK DOUBLE-SAFETY FOLDING CLASP (Matching Your Clasp Reference Photo!)
                 drawRoundedRect(ctx, CX - 155, CY - 74, 310, 148, 14);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 155, CY - 74, CX + 155, CY + 74, 'silver', false);
                 ctx.fill();
 
-                // Mirror-Polished Center Stripe
                 drawRoundedRect(ctx, CX - 155, CY - 38, 310, 76, 6);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 155, CY - 38, CX + 155, CY + 38, metalKey, true);
                 ctx.fill();
 
-                // Double-Lock Safety Flip Latch on Right Side
                 drawRoundedRect(ctx, CX + 75, CY - 78, 58, 156, 8);
                 ctx.fillStyle = createMetalGradient(ctx, CX + 75, CY - 78, CX + 133, CY + 78, metalKey, true);
                 ctx.fill();
@@ -2209,12 +2168,10 @@
                 ctx.fillText('OYSTERLOCK SAFETY CLASP', CX - 20, CY + 18);
 
             } else {
-                // OPTION 4: MAGNETIC LUXURY NEODYMIUM CLASP
                 drawRoundedRect(ctx, CX - 115, CY - 76, 230, 152, 18);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 115, CY - 76, CX + 115, CY + 76, metalKey, true);
                 ctx.fill();
 
-                // Micro-Machined Neodymium Magnetic Grip Ridges
                 for (let mx = CX - 95; mx <= CX + 95; mx += 12) {
                     if (mx > CX - 52 && mx < CX + 52) continue;
                     ctx.fillStyle = 'rgba(0,0,0,0.55)';
@@ -2238,45 +2195,41 @@
             ctx.restore();
         }
 
-        // PHOTOREALISTIC 3D BACK CASE RENDERER (900 x 1460)
+        // PHOTOREALISTIC 3D BACK CASE RENDERER (900 x 1250)
         function drawBackWatchCanvas() {
             const canvas = document.getElementById('backWatchCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            const W = 900, H = 1460, CX = 450, CY = 730;
+            const W = 900, H = 1250, CX = 450, CY = 625;
             ctx.clearRect(0, 0, W, H);
 
             const caseObj = CASE_OPTIONS[state.caseColor];
             const matObj = STRAP_MATERIALS[state.strapMaterial];
             const strapColorObj = matObj.colors[state.strapColorIndex] || matObj.colors[0];
-            const lugPal = METAL_PALETTES[caseObj.lugMetal];
 
             drawFullRealisticStrap(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.bezelMetal, true);
 
-            // Crown on Left Side
-            drawRoundedRect(ctx, 162, CY - 34, 28, 68, 7);
-            ctx.fillStyle = createMetalGradient(ctx, 162, CY - 34, 162, CY + 34, caseObj.bezelMetal, true);
+            drawRoundedRect(ctx, 133, CY - 34, 28, 68, 7);
+            ctx.fillStyle = createMetalGradient(ctx, 133, CY - 34, 133, CY + 34, caseObj.bezelMetal, true);
             ctx.fill();
 
-            // Rear Case Body
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.92)';
             ctx.shadowBlur = 42;
             ctx.beginPath();
-            ctx.moveTo(266, 404); ctx.lineTo(314, 404); ctx.lineTo(314, 444);
-            ctx.lineTo(586, 444); ctx.lineTo(586, 404); ctx.lineTo(634, 404);
-            ctx.bezierCurveTo(684, 492, 730, 605, 730, 730);
-            ctx.bezierCurveTo(730, 855, 684, 968, 634, 1056);
-            ctx.lineTo(586, 1056); ctx.lineTo(586, 1016);
-            ctx.lineTo(314, 1016); ctx.lineTo(314, 1056); ctx.lineTo(266, 1056);
-            ctx.bezierCurveTo(216, 968, 170, 855, 170, 730);
-            ctx.bezierCurveTo(170, 605, 216, 492, 266, 404);
+            ctx.moveTo(262, 294); ctx.lineTo(312, 294); ctx.lineTo(312, 336);
+            ctx.lineTo(588, 336); ctx.lineTo(588, 294); ctx.lineTo(638, 294);
+            ctx.bezierCurveTo(688, 382, 735, 498, 735, 625);
+            ctx.bezierCurveTo(735, 752, 688, 868, 638, 956);
+            ctx.lineTo(588, 956); ctx.lineTo(588, 914);
+            ctx.lineTo(312, 914); ctx.lineTo(312, 956); ctx.lineTo(262, 956);
+            ctx.bezierCurveTo(212, 868, 165, 752, 165, 625);
+            ctx.bezierCurveTo(165, 498, 212, 382, 262, 294);
             ctx.closePath();
-            ctx.fillStyle = createMetalGradient(ctx, 170, 404, 730, 1056, caseObj.lugMetal, false);
+            ctx.fillStyle = createMetalGradient(ctx, 165, 294, 735, 956, caseObj.lugMetal, false);
             ctx.fill();
             ctx.restore();
 
-            // Stepped Caseback Rings
             ctx.beginPath();
             ctx.arc(CX, CY, 256, 0, Math.PI * 2);
             ctx.fillStyle = createMetalGradient(ctx, CX - 256, CY - 256, CX + 256, CY + 256, 'silver', true);
@@ -2333,7 +2286,6 @@
                 ctx.fillText(subTxt, CX, CY + 18);
                 ctx.restore();
             } else {
-                // Real Internet Photographic Skeleton Movement + 3D DYNAST Rotor
                 ctx.save();
                 ctx.beginPath();
                 ctx.arc(CX, CY, 184, 0, Math.PI * 2);
@@ -2350,7 +2302,6 @@
                     ctx.restore();
                 }
 
-                // 3D Semi-Circular Skeleton Rotor
                 ctx.beginPath();
                 ctx.arc(CX, CY, 176, 0.05 * Math.PI, 0.95 * Math.PI, false);
                 ctx.lineTo(CX - 94, CY + 12);
@@ -2385,7 +2336,6 @@
                 ctx.stroke();
             }
 
-            // Curved Perimeter Caseback Engravings
             ctx.save();
             ctx.fillStyle = '#1E293B';
             ctx.textAlign = 'center';
@@ -2550,7 +2500,7 @@
         function selectStrapMaterial(matKey) {
             state.strapMaterial = matKey;
             state.strapColorIndex = 0;
-            ['leather', 'metal', 'rubber', 'silicone'].forEach(k => {
+            ['metal', 'leather', 'rubber', 'silicone'].forEach(k => {
                 document.getElementById(`strapMat-${k}`).classList.toggle('active', k === matKey);
             });
             document.getElementById('currentStrapMatLabel').textContent = STRAP_MATERIALS[matKey].name;
@@ -2576,11 +2526,14 @@
             renderWatch();
         }
 
-        function selectStrapLock(lockKey) {
+        function selectStrapLock(lockKey, revealCloseUp = true) {
             state.strapLock = lockKey;
-            ['buckle', 'butterfly', 'folding', 'magnetic'].forEach(k => {
+            ['butterfly', 'folding', 'buckle', 'magnetic'].forEach(k => {
                 document.getElementById(`lockBtn-${k}`).classList.toggle('active', k === lockKey);
             });
+            if (revealCloseUp) {
+                document.getElementById('lockWatchWrapper').classList.remove('hidden');
+            }
             renderWatch();
         }
 
@@ -2600,11 +2553,11 @@
             if (mode === 'front') {
                 frontWrap.classList.remove('hidden');
                 backWrap.classList.add('hidden');
-                lockWrap.classList.remove('hidden');
+                lockWrap.classList.add('hidden'); // Lock hidden on first rendering screen!
             } else if (mode === 'back') {
                 frontWrap.classList.add('hidden');
                 backWrap.classList.remove('hidden');
-                lockWrap.classList.remove('hidden');
+                lockWrap.classList.add('hidden');
             } else if (mode === 'lock') {
                 frontWrap.classList.add('hidden');
                 backWrap.classList.add('hidden');
@@ -2617,60 +2570,9 @@
             renderWatch();
         }
 
-        // Instant Presets Matching Your Uploaded Nagata Spain Dress Watches + Fluted Datejust
         function loadPresetEdition(presetKey) {
             setWatchView('front');
-            if (presetKey === 'nagata-rosegold-emerald') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'rosegold';
-                state.dialColor = 'emerald';
-                state.markerStyle = 'arabic_12_6';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#FFF0E8';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 0; // Forest Emerald Croc
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-rosegold-white') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'rosegold';
-                state.dialColor = 'white';
-                state.markerStyle = 'roman_12_6';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#111111';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 4; // Smooth Matte Black
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-gold-sunburst') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'gold';
-                state.dialColor = 'gold_dial';
-                state.markerStyle = 'baton';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#1E1202';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 1; // Espresso Brown Croc
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-silver-coffee') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'silver';
-                state.dialColor = 'chocolate';
-                state.markerStyle = 'arabic_12_6';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#FFFFFF';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 2; // Smooth Matte Coffee
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'nagata-black-stealth') {
-                state.bezelStyle = 'smooth';
-                state.caseColor = 'black';
-                state.dialColor = 'black';
-                state.markerStyle = 'baton';
-                state.customName = 'Hanzalah';
-                state.customNameColor = '#F5DC8B';
-                state.strapMaterial = 'leather';
-                state.strapColorIndex = 3; // Jet Black Croc
-                state.strapLock = 'buckle';
-            } else if (presetKey === 'datejust-rosegold') {
+            if (presetKey === 'datejust-rosegold') {
                 state.bezelStyle = 'fluted';
                 state.caseColor = 'twotone_rosegold';
                 state.dialColor = 'chocolate';
@@ -2680,6 +2582,56 @@
                 state.strapMaterial = 'metal';
                 state.strapColorIndex = 0;
                 state.strapLock = 'butterfly';
+            } else if (presetKey === 'nagata-rosegold-emerald') {
+                state.bezelStyle = 'smooth';
+                state.caseColor = 'rosegold';
+                state.dialColor = 'emerald';
+                state.markerStyle = 'arabic_12_6';
+                state.customName = 'Hanzalah';
+                state.customNameColor = '#FFF0E8';
+                state.strapMaterial = 'leather';
+                state.strapColorIndex = 0;
+                state.strapLock = 'buckle';
+            } else if (presetKey === 'nagata-rosegold-white') {
+                state.bezelStyle = 'smooth';
+                state.caseColor = 'rosegold';
+                state.dialColor = 'white';
+                state.markerStyle = 'roman_12_6';
+                state.customName = 'Hanzalah';
+                state.customNameColor = '#111111';
+                state.strapMaterial = 'leather';
+                state.strapColorIndex = 4;
+                state.strapLock = 'buckle';
+            } else if (presetKey === 'nagata-gold-sunburst') {
+                state.bezelStyle = 'smooth';
+                state.caseColor = 'gold';
+                state.dialColor = 'gold_dial';
+                state.markerStyle = 'baton';
+                state.customName = 'Hanzalah';
+                state.customNameColor = '#1E1202';
+                state.strapMaterial = 'leather';
+                state.strapColorIndex = 1;
+                state.strapLock = 'buckle';
+            } else if (presetKey === 'nagata-silver-coffee') {
+                state.bezelStyle = 'smooth';
+                state.caseColor = 'silver';
+                state.dialColor = 'chocolate';
+                state.markerStyle = 'arabic_12_6';
+                state.customName = 'Hanzalah';
+                state.customNameColor = '#FFFFFF';
+                state.strapMaterial = 'leather';
+                state.strapColorIndex = 2;
+                state.strapLock = 'buckle';
+            } else if (presetKey === 'nagata-black-stealth') {
+                state.bezelStyle = 'smooth';
+                state.caseColor = 'black';
+                state.dialColor = 'black';
+                state.markerStyle = 'baton';
+                state.customName = 'Hanzalah';
+                state.customNameColor = '#F5DC8B';
+                state.strapMaterial = 'leather';
+                state.strapColorIndex = 3;
+                state.strapLock = 'buckle';
             }
             document.getElementById('customNameInput').value = state.customName;
             selectBezelStyle(state.bezelStyle);
@@ -2688,7 +2640,7 @@
             selectMarkerStyle(state.markerStyle);
             selectStrapMaterial(state.strapMaterial);
             selectStrapColor(state.strapColorIndex);
-            selectStrapLock(state.strapLock);
+            selectStrapLock(state.strapLock, false); // Keep lock hidden on preset load!
         }
 
         // CUSTOMER AUTH, HISTORY & ORDERS
@@ -2841,12 +2793,12 @@
             if (!list[index]) return;
             state = JSON.parse(JSON.stringify(list[index].savedState));
             document.getElementById('customNameInput').value = state.customName || '';
-            selectBezelStyle(state.bezelStyle || 'smooth');
+            selectBezelStyle(state.bezelStyle || 'fluted');
             selectCaseColor(state.caseColor);
             selectDialColor(state.dialColor);
-            selectMarkerStyle(state.markerStyle || 'arabic_12_6');
+            selectMarkerStyle(state.markerStyle || 'diamond');
             selectStrapMaterial(state.strapMaterial);
-            selectStrapLock(state.strapLock);
+            selectStrapLock(state.strapLock, false);
             renderWatch();
             closeModal('accountModal');
         }
