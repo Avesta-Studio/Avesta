@@ -6,7 +6,7 @@
     <title>DYNAST | Luxurious Horology Bespoke Studio</title>
     <link rel="canonical" href="https://dynast.co.in/bespoke.html">
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Customize your DYNAST Luxurious Horology timepiece with exact 1:1 Datejust proportions.">
+    <meta name="description" content="Customize your DYNAST Luxurious Horology timepiece with photorealistic 3D studio lighting and real skeleton movement preview.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,9 +24,9 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: '#FFD700',
-                        lightgold: '#FFE87C',
-                        darkgold: '#B8860B',
+                        gold: '#D4AF37',
+                        lightgold: '#FFE885',
+                        darkgold: '#9A7209',
                         black: '#050505',
                         darkgray: '#101010',
                         cardbg: '#141414'
@@ -45,11 +45,25 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at top, #261c0a 0%, #060606 55%, #020202 100%);
-            background-attachment: fixed;
+            background-color: #030303;
             color: #ffffff;
             margin: 0;
             overflow-x: hidden;
+        }
+
+        /* Live Slowly Blending Black & Golden Ambient Aurora Layer */
+        @keyframes slowGoldFlow {
+            0%   { transform: translate3d(-4%, -3%, 0) scale(1); opacity: 0.78; }
+            50%  { transform: translate3d(4%, 3%, 0) scale(1.08); opacity: 0.95; }
+            100% { transform: translate3d(-4%, -3%, 0) scale(1); opacity: 0.78; }
+        }
+
+        .live-gold-aura {
+            background:
+                radial-gradient(circle at 18% 22%, rgba(212, 175, 55, 0.24) 0%, rgba(138, 98, 12, 0.08) 32%, transparent 62%),
+                radial-gradient(circle at 82% 76%, rgba(255, 215, 0, 0.20) 0%, rgba(120, 82, 8, 0.08) 35%, transparent 65%),
+                radial-gradient(circle at 50% 48%, rgba(184, 134, 11, 0.14) 0%, rgba(5, 5, 5, 0.92) 70%);
+            animation: slowGoldFlow 14s ease-in-out infinite;
         }
 
         .cinzel-decorative {
@@ -63,39 +77,40 @@
         }
 
         .gold-panel {
-            background: linear-gradient(145deg, rgba(20, 20, 20, 0.96), rgba(6, 6, 6, 0.99));
-            border: 1px solid rgba(255, 215, 0, 0.32);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.08);
+            background: linear-gradient(145deg, rgba(18, 15, 10, 0.88), rgba(6, 6, 6, 0.94));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.34);
+            box-shadow: 0 22px 55px rgba(0, 0, 0, 0.92), 0 0 35px rgba(212, 175, 55, 0.09);
         }
 
         .btn-gold {
-            background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
+            background: linear-gradient(135deg, #FFE270 0%, #D4AF37 50%, #9A7209 100%);
             color: #050505;
             font-weight: 700;
             transition: all 0.3s ease;
         }
 
         .btn-gold:hover {
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.65);
+            box-shadow: 0 0 28px rgba(212, 175, 55, 0.65);
             transform: translateY(-1px);
         }
 
         .option-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.22);
             transition: all 0.25s ease;
             cursor: pointer;
         }
 
         .option-card:hover {
-            border-color: rgba(255, 215, 0, 0.6);
-            background: rgba(255, 215, 0, 0.07);
+            border-color: rgba(212, 175, 55, 0.65);
+            background: rgba(212, 175, 55, 0.08);
         }
 
         .option-card.active {
-            border-color: #FFD700;
-            background: rgba(255, 215, 0, 0.16);
-            box-shadow: 0 0 18px rgba(255, 215, 0, 0.25);
+            border-color: #FFE270;
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.20), rgba(154, 114, 9, 0.08));
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.28);
         }
 
         .swatch-btn {
@@ -103,14 +118,14 @@
         }
 
         .swatch-btn.active {
-            outline: 2px solid #FFD700;
+            outline: 2px solid #FFE270;
             outline-offset: 2px;
-            background: rgba(255, 215, 0, 0.18);
+            background: rgba(212, 175, 55, 0.2);
         }
 
         .studio-stage {
-            background: #000000;
-            box-shadow: inset 0 0 90px rgba(0,0,0,1);
+            background: radial-gradient(circle at 50% 46%, #1f190e 0%, #090807 58%, #020202 100%);
+            box-shadow: inset 0 0 85px rgba(0,0,0,0.98), 0 0 30px rgba(212, 175, 55, 0.08);
         }
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -118,7 +133,13 @@
         ::-webkit-scrollbar-thumb { background: #B8860B; border-radius: 3px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-gold selection:text-black">
+<body class="min-h-screen flex flex-col selection:bg-gold selection:text-black relative">
+
+    <!-- LIVE SLOWLY BLENDING BLACK & GOLDEN BACKGROUND CANVAS + AURORA -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <canvas id="liveGoldBgCanvas" class="w-full h-full opacity-90"></canvas>
+        <div class="live-gold-aura absolute inset-0"></div>
+    </div>
 
     <!-- Font Preloaders for Immediate Canvas Typography -->
     <div style="font-family: 'Cinzel Decorative'; position: absolute; left: -9999px; visibility: hidden;">DYNAST</div>
@@ -126,10 +147,10 @@
     <div style="font-family: 'Great Vibes'; position: absolute; left: -9999px; visibility: hidden;">Hanzalah</div>
 
     <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-gold/30 px-4 lg:px-8 py-3.5">
+    <header class="sticky top-0 z-40 bg-black/85 backdrop-blur-md border-b border-gold/35 px-4 lg:px-8 py-3.5">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-4">
-                <a href="https://dynast.co.in" class="text-xs text-gold/80 hover:text-gold flex items-center gap-1.5 border border-gold/30 px-3 py-1.5 rounded-full transition">
+                <a href="https://dynast.co.in" class="text-xs text-gold/80 hover:text-lightgold flex items-center gap-1.5 border border-gold/35 px-3 py-1.5 rounded-full transition">
                     <i class="fa-solid fa-arrow-left"></i> <span class="hidden sm:inline">Main Store</span>
                 </a>
                 <div>
@@ -158,7 +179,7 @@
         </div>
     </header>
     <!-- MAIN CUSTOMIZER WORKSPACE -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
+    <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
         <div id="mainStudioGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
             <!-- LEFT COLUMN: 1:1 RATIO MACRO CANVAS RENDERER -->
@@ -178,13 +199,13 @@
                         </div>
                     </div>
 
-                    <!-- PHOTOREALISTIC BLACK VELVET STUDIO STAGE -->
-                    <div id="watchStageContainer" class="studio-stage rounded-2xl border border-gold/25 p-3 grid grid-cols-1 gap-4 items-center justify-items-center">
+                    <!-- PHOTOREALISTIC STUDIO STAGE (Move cursor/finger to shift studio lighting!) -->
+                    <div id="watchStageContainer" onmousemove="handleStageLightMove(event)" onmouseleave="resetStageLight()" class="studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 gap-4 items-center justify-items-center cursor-grab active:cursor-grabbing">
                         
                         <!-- 1. FRONT WATCH MACRO CANVAS -->
                         <div id="frontWatchWrapper" class="w-full flex flex-col items-center">
                             <canvas id="frontWatchCanvas" width="900" height="1250" class="w-full max-w-[350px] h-auto select-none"></canvas>
-                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">1:1 Datejust 41 Studio Render</span>
+                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">3D Studio-Lit Macro Front View</span>
                         </div>
 
                         <!-- 2. BACK CASE MACRO CANVAS -->
@@ -199,11 +220,11 @@
                         <span class="text-[10px] uppercase tracking-widest text-gold/80 block font-semibold">Instant Reference Editions (Tap to Load):</span>
                         <div class="grid grid-cols-2 gap-2">
                             <button onclick="loadPresetEdition('photo1-rosegold')" class="text-[11px] bg-gold/15 hover:bg-gold/25 border border-gold/50 text-lightgold px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#5A382C] border-2 border-[#E59E8B] shrink-0"></span>
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#5A382C] border-2 border-[#E5B5A1] shrink-0"></span>
                                 <span class="truncate">1. Rose-Gold Chocolate</span>
                             </button>
                             <button onclick="loadPresetEdition('photo2-yellowgold')" class="text-[11px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#111] border-2 border-[#F5C855] shrink-0"></span>
+                                <span class="w-3.5 h-3.5 rounded-full bg-[#111] border-2 border-[#F0D082] shrink-0"></span>
                                 <span class="truncate">2. Gold & Black Diamond</span>
                             </button>
                             <button onclick="loadPresetEdition('photo3-silver')" class="text-[11px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
@@ -251,7 +272,7 @@
                 <div class="gold-panel rounded-3xl p-6 border-l-4 border-l-gold">
                     <h1 class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-wider">DYNAST • Luxurious Horology</h1>
                     <p class="text-xs text-gray-300 mt-1 leading-relaxed">
-                        Engineered to exact 1:1 Datejust 41 horological proportions—48-flute mirror bezel, staggered 5-link Jubilee bracelet, radially angled diamond settings, and compulsory <strong class="text-gold font-serif">DYNAST • LUXURIOUS HOROLOGY</strong> dial branding.
+                        Crafted with natural 18k Everose, 18k Yellow Gold, and 904L Oystersteel studio lighting, 3D curved solid end-links, and an authentic photographic Swiss mechanical exhibition caseback.
                     </p>
                 </div>
 
@@ -267,13 +288,13 @@
 
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="caseColorGrid">
                         <div onclick="selectCaseColor('twotone_rosegold')" id="caseBtn-twotone_rosegold" class="option-card active rounded-2xl p-3.5 text-center">
-                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E2E8F0 45%, #DF9583 55%);"></div>
+                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E4E8EE 45%, #D59B84 55%);"></div>
                             <p class="text-xs font-semibold text-white">Two-Tone Rose-Gold</p>
                             <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,700</p>
                         </div>
 
                         <div onclick="selectCaseColor('twotone_gold')" id="caseBtn-twotone_gold" class="option-card rounded-2xl p-3.5 text-center">
-                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E2E8F0 45%, #F5C754 55%);"></div>
+                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #E4E8EE 45%, #E5C168 55%);"></div>
                             <p class="text-xs font-semibold text-white">Two-Tone Gold & Steel</p>
                             <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,600</p>
                         </div>
@@ -285,13 +306,13 @@
                         </div>
 
                         <div onclick="selectCaseColor('gold')" id="caseBtn-gold" class="option-card rounded-2xl p-3.5 text-center">
-                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #FFF3B0, #FFD700, #B8860B);"></div>
+                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #FFF8D6, #E5C168, #9A7211);"></div>
                             <p class="text-xs font-semibold text-white">Full Royal Golden</p>
                             <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,500</p>
                         </div>
 
                         <div onclick="selectCaseColor('rosegold')" id="caseBtn-rosegold" class="option-card rounded-2xl p-3.5 text-center">
-                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #FFE4E1, #DF9583, #7A4336);"></div>
+                            <div class="w-10 h-10 rounded-full mx-auto mb-2 border border-white/30" style="background: linear-gradient(135deg, #FFF0E8, #D59B84, #7D4633);"></div>
                             <p class="text-xs font-semibold text-white">Full Rose-Gold</p>
                             <p class="text-[10px] text-gold font-medium mt-0.5">+₹1,600</p>
                         </div>
@@ -321,7 +342,7 @@
                         <label class="text-xs uppercase tracking-wider text-gray-300 font-semibold block mb-2.5">1. Choose Dial Colour:</label>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                             <div onclick="selectDialColor('chocolate')" id="dialBtn-chocolate" class="option-card active rounded-2xl p-3 text-center">
-                                <div class="w-10 h-10 mx-auto rounded-full bg-[#5A3A2E] border-2 border-[#DF9583] flex items-center justify-center text-[7px] font-bold text-[#FFEAE5] cinzel-decorative mb-1.5">DYNAST</div>
+                                <div class="w-10 h-10 mx-auto rounded-full bg-[#5A3A2E] border-2 border-[#D59B84] flex items-center justify-center text-[7px] font-bold text-[#FFEAE5] cinzel-decorative mb-1.5">DYNAST</div>
                                 <p class="text-xs font-bold text-white">Sunburst Chocolate</p>
                                 <p class="text-[10px] text-gold">+₹400</p>
                             </div>
@@ -403,8 +424,8 @@
                             <div>
                                 <span class="text-[10px] uppercase tracking-wider text-gray-400 block mb-1">Name Print Colour:</span>
                                 <div class="flex items-center gap-2 pt-1">
-                                    <button onclick="setCustomNameColor('#FFEAE4')" class="w-6 h-6 rounded-full bg-[#DF9583] border border-white/40" title="Rose Gold Cream"></button>
-                                    <button onclick="setCustomNameColor('#FFE87C')" class="w-6 h-6 rounded-full bg-[#FFE87C] border border-white/40" title="Bright Gold"></button>
+                                    <button onclick="setCustomNameColor('#FFF0E8')" class="w-6 h-6 rounded-full bg-[#D59B84] border border-white/40" title="Rose Gold Cream"></button>
+                                    <button onclick="setCustomNameColor('#F5DC8B')" class="w-6 h-6 rounded-full bg-[#E5C168] border border-white/40" title="Warm 18k Gold"></button>
                                     <button onclick="setCustomNameColor('#FFFFFF')" class="w-6 h-6 rounded-full bg-white border border-white/40" title="Pure White"></button>
                                     <button onclick="setCustomNameColor('#111111')" class="w-6 h-6 rounded-full bg-neutral-900 border border-white/40" title="Jet Black"></button>
                                     <button onclick="setCustomNameColor('#B8860B')" class="w-6 h-6 rounded-full bg-[#B8860B] border border-white/40" title="Deep Gold"></button>
@@ -474,7 +495,7 @@
                                     <span class="text-[11px] font-bold text-green-400">Included (+₹0)</span>
                                 </div>
                                 <p class="text-[11px] text-gray-400 leading-relaxed">
-                                    Closed radial satin-brushed stainless steel medallion back with curved perimeter engravings (<strong class="text-gray-200">SAPPHIRE CRYSTAL • STAINLESS STEEL • 10bar</strong>) locked along the circular rim.
+                                    3D machined radial satin-brushed stainless steel medallion caseback with deep stepped bevels, fluted screw notches, and curved perimeter engravings.
                                 </p>
                             </div>
                             <div class="mt-3 pt-2 border-t border-white/10 text-[10px] text-gold flex items-center justify-between">
@@ -490,11 +511,11 @@
                                     <span class="text-[11px] font-bold text-gold">+₹2,200</span>
                                 </div>
                                 <p class="text-[11px] text-gray-400 leading-relaxed">
-                                    Exhibition sapphire crystal window revealing the oscillating balance wheel, ruby jewels, Geneva-striped bridges, and <strong class="text-gray-200">DYNAST</strong> engraved rotor with curved rim markings.
+                                    Authentic high-resolution mechanical watch movement macro photograph under a domed sapphire crystal window with a 3D brushed <strong class="text-gray-200">DYNAST</strong> rotor.
                                 </p>
                             </div>
                             <div class="mt-3 pt-2 border-t border-white/10 text-[10px] text-gold flex items-center justify-between">
-                                <span><i class="fa-solid fa-gears mr-1"></i> Open Mechanical View</span>
+                                <span><i class="fa-solid fa-gears mr-1"></i> Real Movement Macro View</span>
                                 <span>Preview Back →</span>
                             </div>
                         </div>
@@ -592,7 +613,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t border-gold/20 bg-black/80 py-6 px-4 text-center text-xs text-gray-400 mt-12">
+    <footer class="relative z-10 border-t border-gold/25 bg-black/85 backdrop-blur-md py-6 px-4 text-center text-xs text-gray-400 mt-12">
         <p class="cinzel-decorative text-gold text-sm tracking-widest mb-1">DYNAST</p>
         <p>Luxurious Horology Studio • Agra, Uttar Pradesh, India • +91 75799 42958</p>
     </footer>
@@ -696,54 +717,159 @@
             </form>
         </div>
     </div>
-    <!-- EXACT 1:1 ROLEX DATEJUST 41 PROPORTIONAL SHADER ENGINE -->
+    <!-- NATURAL HOROLOGY STUDIO SHADER & LIVE GOLD BACKGROUND ENGINE -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
-        // 1. HIGH-CONTRAST STUDIO MIRROR PALETTES (Calibrated to Reference Photos 10-1, 11-1, 22-1, 22-2)
+        // 1. REAL INTERNET MECHANICAL MOVEMENT PHOTOGRAPHS (Wikimedia Commons Horology Archive, CORS-Enabled)
+        const SKELETON_MOVEMENT_URLS = [
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/ETA_2801_mechanical_watch_movement.jpg/960px-ETA_2801_mechanical_watch_movement.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/2/29/ETA_2801_mechanical_watch_movement.jpg',
+            'https://upload.wikimedia.org/wikipedia/commons/5/5e/Minute_repeater_movement_2.jpg'
+        ];
+        let skeletonMovementImg = null;
+        let skeletonImgLoaded = false;
+
+        function preloadInternetSkeletonMovement(index = 0) {
+            if (index >= SKELETON_MOVEMENT_URLS.length) return;
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                skeletonMovementImg = img;
+                skeletonImgLoaded = true;
+                renderWatch();
+            };
+            img.onerror = function() {
+                preloadInternetSkeletonMovement(index + 1);
+            };
+            img.src = SKELETON_MOVEMENT_URLS[index];
+        }
+
+        // 2. LIVE SLOWLY BLENDING BLACK & GOLDEN AMBIENT WEBSITE BACKGROUND ENGINE
+        function initLiveGoldBackground() {
+            const bgCanvas = document.getElementById('liveGoldBgCanvas');
+            if (!bgCanvas) return;
+            const bctx = bgCanvas.getContext('2d');
+            let w = bgCanvas.width = window.innerWidth;
+            let h = bgCanvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                w = bgCanvas.width = window.innerWidth;
+                h = bgCanvas.height = window.innerHeight;
+            });
+
+            const orbs = [
+                { x: 0.20, y: 0.25, r: 0.48, vx: 0.00022, vy: 0.00018, color: 'rgba(212, 175, 55, 0.22)' },
+                { x: 0.80, y: 0.70, r: 0.52, vx: -0.00019, vy: -0.00021, color: 'rgba(184, 134, 11, 0.19)' },
+                { x: 0.50, y: 0.50, r: 0.60, vx: 0.00015, vy: -0.00016, color: 'rgba(120, 82, 8, 0.16)' },
+                { x: 0.35, y: 0.85, r: 0.42, vx: -0.00024, vy: 0.00014, color: 'rgba(255, 215, 0, 0.14)' }
+            ];
+
+            const dust = Array.from({ length: 42 }, () => ({
+                x: Math.random(),
+                y: Math.random(),
+                r: Math.random() * 1.8 + 0.5,
+                vy: -(Math.random() * 0.00025 + 0.00008),
+                vx: (Math.random() - 0.5) * 0.00015,
+                alpha: Math.random() * 0.45 + 0.15
+            }));
+
+            function animateBg() {
+                bctx.fillStyle = '#030303';
+                bctx.fillRect(0, 0, w, h);
+
+                const maxDim = Math.max(w, h);
+                orbs.forEach(o => {
+                    o.x += o.vx;
+                    o.y += o.vy;
+                    if (o.x < 0.05 || o.x > 0.95) o.vx *= -1;
+                    if (o.y < 0.05 || o.y > 0.95) o.vy *= -1;
+
+                    const cx = o.x * w, cy = o.y * h, rad = o.r * maxDim;
+                    const g = bctx.createRadialGradient(cx, cy, 10, cx, cy, rad);
+                    g.addColorStop(0, o.color);
+                    g.addColorStop(0.5, 'rgba(90, 62, 6, 0.06)');
+                    g.addColorStop(1, 'rgba(3, 3, 3, 0)');
+                    bctx.fillStyle = g;
+                    bctx.fillRect(0, 0, w, h);
+                });
+
+                dust.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.y < 0) p.y = 1;
+                    if (p.x < 0) p.x = 1;
+                    if (p.x > 1) p.x = 0;
+                    bctx.beginPath();
+                    bctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2);
+                    bctx.fillStyle = `rgba(255, 224, 130, ${p.alpha})`;
+                    bctx.fill();
+                });
+
+                requestAnimationFrame(animateBg);
+            }
+            animateBg();
+        }
+
+        // 3. NATURAL & REALISTIC HOROLOGICAL METAL PALETTES (True 904L Steel, 18k Everose & 18k Yellow Gold)
         const METAL_PALETTES = {
             silver: {
-                rgbJet: [10, 12, 16], rgbShadow: [45, 52, 60], rgbMid: [164, 174, 186], rgbBright: [236, 241, 247], rgbSpec: [255, 255, 255],
-                stops: ['#0D1015', '#7B8492', '#FFFFFF', '#DCE3EC', '#222730', '#F8FAFC', '#8D96A5', '#090B0E'],
-                fluteBright: '#FFFFFF', fluteLight: '#E5EBF2', fluteMid: '#94A3B8', fluteDark: '#0C0F14', fluteWarm: '#38414E',
-                handLight: '#FFFFFF', handDark: '#252B35', rim: '#FFFFFF'
+                rgbJet: [18, 21, 26], rgbShadow: [68, 75, 86], rgbMid: [176, 184, 195], rgbBright: [238, 242, 247], rgbSpec: [255, 255, 255],
+                stops: ['#16191E', '#8C94A2', '#FFFFFF', '#DCE2EA', '#38404B', '#F4F7FA', '#98A0AE', '#12151A'],
+                fluteBright: '#FFFFFF', fluteLight: '#E4E9F0', fluteMid: '#9CA4B2', fluteDark: '#161920', fluteWarm: '#495260',
+                handLight: '#FFFFFF', handDark: '#333B46', rim: '#F8FAFC'
             },
             gold: {
-                rgbJet: [18, 10, 1], rgbShadow: [94, 60, 4], rgbMid: [214, 164, 46], rgbBright: [252, 226, 134], rgbSpec: [255, 253, 236],
-                stops: ['#180D00', '#A8770E', '#FFFDF0', '#F2C654', '#3D2502', '#FCE89C', '#C4901E', '#120900'],
-                fluteBright: '#FFFDF2', fluteLight: '#F9D678', fluteMid: '#C89626', fluteDark: '#160B00', fluteWarm: '#684405',
-                handLight: '#FFFCE6', handDark: '#5E3D04', rim: '#FCE288'
+                rgbJet: [26, 17, 3], rgbShadow: [108, 76, 14], rgbMid: [212, 172, 74], rgbBright: [248, 224, 148], rgbSpec: [255, 251, 232],
+                stops: ['#221502', '#B08520', '#FFFDF0', '#EAD89C', '#593D08', '#F7E3A0', '#C69934', '#180E01'],
+                fluteBright: '#FFFDF2', fluteLight: '#F4D88A', fluteMid: '#C89B38', fluteDark: '#231502', fluteWarm: '#785410',
+                handLight: '#FFFCE8', handDark: '#6B4A0B', rim: '#F5DA8A'
             },
             rosegold: {
-                rgbJet: [20, 7, 4], rgbShadow: [98, 44, 30], rgbMid: [208, 130, 108], rgbBright: [248, 194, 178], rgbSpec: [255, 246, 242],
-                stops: ['#1A0804', '#A85E4A', '#FFF7F5', '#E59E8B', '#421B11', '#FAD2C6', '#C27864', '#140603'],
-                fluteBright: '#FFF9F7', fluteLight: '#F5B9A8', fluteMid: '#CA7E6B', fluteDark: '#180703', fluteWarm: '#6B3022',
-                handLight: '#FFF4F0', handDark: '#5C281B', rim: '#F2B5A4'
+                rgbJet: [26, 12, 8], rgbShadow: [110, 58, 42], rgbMid: [204, 140, 118], rgbBright: [244, 198, 182], rgbSpec: [255, 246, 242],
+                stops: ['#220E09', '#AC6A54', '#FFF6F2', '#E2A894', '#56291D', '#F5CEC0', '#C07F6A', '#190A06'],
+                fluteBright: '#FFF8F5', fluteLight: '#F0BCA9', fluteMid: '#C68570', fluteDark: '#210C07', fluteWarm: '#753D2C',
+                handLight: '#FFF4EF', handDark: '#663324', rim: '#EAB39F'
             },
             black: {
-                rgbJet: [2, 2, 3], rgbShadow: [18, 18, 22], rgbMid: [56, 56, 64], rgbBright: [120, 120, 132], rgbSpec: [200, 200, 212],
-                stops: ['#020203', '#242429', '#82828E', '#3B3B42', '#070709', '#52525C', '#202025', '#010102'],
-                fluteBright: '#B4B4C0', fluteLight: '#52525B', fluteMid: '#27272A', fluteDark: '#020203', fluteWarm: '#141418',
-                handLight: '#E4E4E7', handDark: '#18181B', rim: '#71717A'
+                rgbJet: [4, 4, 5], rgbShadow: [24, 24, 29], rgbMid: [64, 64, 72], rgbBright: [128, 128, 140], rgbSpec: [205, 205, 216],
+                stops: ['#040405', '#2A2A30', '#8A8A96', '#3F3F48', '#0B0B0E', '#585862', '#24242A', '#020203'],
+                fluteBright: '#B8B8C4', fluteLight: '#585862', fluteMid: '#2C2C32', fluteDark: '#040405', fluteWarm: '#18181D',
+                handLight: '#E4E4E7', handDark: '#1C1C20', rim: '#71717A'
             }
         };
 
+        let lightShiftAngle = 0;
+
+        function handleStageLightMove(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const nx = ((e.clientX - rect.left) / rect.width) - 0.5;
+            lightShiftAngle = nx * 0.55;
+            renderWatch();
+        }
+
+        function resetStageLight() {
+            lightShiftAngle = 0;
+            renderWatch();
+        }
+
         function sampleStudioMirror(angleRad, pal) {
-            const w = 0.52 * Math.cos(angleRad * 2 + 0.78)
-                    + 0.34 * Math.sin(angleRad * 3 - 0.42)
-                    + 0.24 * Math.cos(angleRad * 6 + 0.18);
-            let t = Math.max(0, Math.min(1, (w + 0.85) / 1.70));
+            const a = angleRad + lightShiftAngle;
+            const w = 0.50 * Math.cos(a * 2 + 0.78)
+                    + 0.32 * Math.sin(a * 3 - 0.42)
+                    + 0.22 * Math.cos(a * 6 + 0.18);
+            let t = Math.max(0, Math.min(1, (w + 0.88) / 1.76));
             t = t * t * (3 - 2 * t);
 
             let c0, c1, f;
-            if (t < 0.22) {
-                c0 = pal.rgbJet; c1 = pal.rgbShadow; f = t / 0.22;
+            if (t < 0.20) {
+                c0 = pal.rgbJet; c1 = pal.rgbShadow; f = t / 0.20;
             } else if (t < 0.48) {
-                c0 = pal.rgbShadow; c1 = pal.rgbMid; f = (t - 0.22) / 0.26;
-            } else if (t < 0.76) {
-                c0 = pal.rgbMid; c1 = pal.rgbBright; f = (t - 0.48) / 0.28;
+                c0 = pal.rgbShadow; c1 = pal.rgbMid; f = (t - 0.20) / 0.28;
+            } else if (t < 0.78) {
+                c0 = pal.rgbMid; c1 = pal.rgbBright; f = (t - 0.48) / 0.30;
             } else {
-                c0 = pal.rgbBright; c1 = pal.rgbSpec; f = (t - 0.76) / 0.24;
+                c0 = pal.rgbBright; c1 = pal.rgbSpec; f = (t - 0.78) / 0.22;
             }
             const r = Math.round(c0[0] + (c1[0] - c0[0]) * f);
             const g = Math.round(c0[1] + (c1[1] - c0[1]) * f);
@@ -761,10 +887,10 @@
         };
 
         const DIAL_OPTIONS = {
-            chocolate: { name: 'Sunburst Chocolate Dial', price: 400, base: '#7A4D3B', mid: '#48291D', edge: '#1C0D07', sunburst: true, sheen: 'rgba(255,222,206,0.28)', logoColor: '#FFF2ED', subColor: '#F3B6A5', trackColor: '#E59F8C' },
-            black:     { name: 'Sunburst Black Dial', price: 0, base: '#28282C', mid: '#101013', edge: '#030304', sunburst: true, sheen: 'rgba(255,255,255,0.15)', logoColor: '#FFF6C4', subColor: '#F5CA5E', trackColor: '#D4AF37' },
-            rhodium:   { name: 'Sunburst Slate Dial', price: 400, base: '#90959E', mid: '#5B6069', edge: '#2B2E34', sunburst: true, sheen: 'rgba(255,255,255,0.28)', logoColor: '#FFFFFF', subColor: '#F1F5F9', trackColor: '#E2E8F0' },
-            white:     { name: 'Porcelain White Dial', price: 300, base: '#FFFFFF', mid: '#F6F8FA', edge: '#DCE3EC', sunburst: false, sheen: 'rgba(255,255,255,0)', logoColor: '#111827', subColor: '#7C5307', trackColor: '#334155' }
+            chocolate: { name: 'Sunburst Chocolate Dial', price: 400, base: '#72493A', mid: '#44281E', edge: '#1B0E09', sunburst: true, sheen: 'rgba(255,226,210,0.25)', logoColor: '#FFF4EE', subColor: '#EAB39F', trackColor: '#DF9F89' },
+            black:     { name: 'Sunburst Black Dial', price: 0, base: '#27272B', mid: '#111114', edge: '#040405', sunburst: true, sheen: 'rgba(255,255,255,0.14)', logoColor: '#FFF8D4', subColor: '#EAD89C', trackColor: '#C89B38' },
+            rhodium:   { name: 'Sunburst Slate Dial', price: 400, base: '#8B9099', mid: '#5A5F68', edge: '#2C2F35', sunburst: true, sheen: 'rgba(255,255,255,0.26)', logoColor: '#FFFFFF', subColor: '#F1F5F9', trackColor: '#E2E8F0' },
+            white:     { name: 'Porcelain White Dial', price: 300, base: '#FFFFFF', mid: '#F4F6F9', edge: '#D5DCE6', sunburst: false, sheen: 'rgba(255,255,255,0)', logoColor: '#111827', subColor: '#785410', trackColor: '#334155' }
         };
 
         const MARKER_OPTIONS = {
@@ -781,37 +907,37 @@
             metal: {
                 name: '5-Link Jubilee Metal', price: 1400,
                 colors: [
-                    { id: 'jub-twotone-rose', name: 'Two-Tone Rose-Gold & Steel', outer: 'silver', center: 'rosegold', hex: '#DF9583', price: 450 },
-                    { id: 'jub-twotone-gold', name: 'Two-Tone Yellow Gold & Steel', outer: 'silver', center: 'gold', hex: '#F4C95D', price: 450 },
+                    { id: 'jub-twotone-rose', name: 'Two-Tone Rose-Gold & Steel', outer: 'silver', center: 'rosegold', hex: '#D59B84', price: 450 },
+                    { id: 'jub-twotone-gold', name: 'Two-Tone Yellow Gold & Steel', outer: 'silver', center: 'gold', hex: '#E5C168', price: 450 },
                     { id: 'jub-silver', name: 'All-Steel Brushed & Polished Silver', outer: 'silver', center: 'silver', hex: '#CBD5E1', price: 0 },
-                    { id: 'jub-full-gold', name: 'Full Royal Gold Jubilee', outer: 'gold', center: 'gold', hex: '#FFD700', price: 600 },
+                    { id: 'jub-full-gold', name: 'Full Royal Gold Jubilee', outer: 'gold', center: 'gold', hex: '#E5C168', price: 600 },
                     { id: 'jub-black', name: 'Obsidian Black Jubilee', outer: 'black', center: 'black', hex: '#27272A', price: 400 }
                 ]
             },
             leather: {
                 name: 'Italian Leather', price: 600,
                 colors: [
-                    { id: 'pitch-black', name: 'Pitch Black Alligator Leather', hex: '#121214', highlight: '#2E2E33', stitch: '#D4AF37', price: 0 },
-                    { id: 'espresso-brown', name: 'Royal Chocolate Leather', hex: '#382119', highlight: '#5C382B', stitch: '#E59F8C', price: 150 },
-                    { id: 'cognac-tan', name: 'Vintage Cognac Tan Leather', hex: '#6E3818', highlight: '#995228', stitch: '#FDE68A', price: 200 },
-                    { id: 'burgundy', name: 'Burgundy Wine Leather', hex: '#451219', highlight: '#6E202B', stitch: '#FFD700', price: 200 }
+                    { id: 'pitch-black', name: 'Pitch Black Alligator Leather', hex: '#141417', highlight: '#2E2E35', edge: '#060608', stitch: '#D4AF37', price: 0 },
+                    { id: 'espresso-brown', name: 'Royal Chocolate Leather', hex: '#3A221A', highlight: '#5E3A2D', edge: '#170C08', stitch: '#EAB39F', price: 150 },
+                    { id: 'cognac-tan', name: 'Vintage Cognac Tan Leather', hex: '#6E3A1A', highlight: '#9B562C', edge: '#2E1506', stitch: '#F5DC8B', price: 200 },
+                    { id: 'burgundy', name: 'Burgundy Wine Leather', hex: '#48141B', highlight: '#70222D', edge: '#1C0609', stitch: '#E5C168', price: 200 }
                 ]
             },
             rubber: {
                 name: 'Sport Rubber', price: 500,
                 colors: [
-                    { id: 'rubber-black', name: 'Stealth Black Vulcanized Rubber', hex: '#161618', highlight: '#323236', price: 0 },
-                    { id: 'rubber-chocolate', name: 'Espresso Brown Rubber', hex: '#3D251A', highlight: '#5E3B2B', price: 150 },
-                    { id: 'rubber-blue', name: 'Deep Mariana Blue Rubber', hex: '#152C5B', highlight: '#26498C', price: 150 },
-                    { id: 'rubber-olive', name: 'Tactical Olive Green Rubber', hex: '#283629', highlight: '#415643', price: 150 }
+                    { id: 'rubber-black', name: 'Stealth Black Vulcanized Rubber', hex: '#18181B', highlight: '#323238', edge: '#070709', price: 0 },
+                    { id: 'rubber-chocolate', name: 'Espresso Brown Rubber', hex: '#3D251A', highlight: '#5E3B2B', edge: '#180D08', price: 150 },
+                    { id: 'rubber-blue', name: 'Deep Mariana Blue Rubber', hex: '#152C5B', highlight: '#284C92', edge: '#081228', price: 150 },
+                    { id: 'rubber-olive', name: 'Tactical Olive Green Rubber', hex: '#283629', highlight: '#425844', edge: '#0F1610', price: 150 }
                 ]
             },
             silicone: {
                 name: 'Soft Silicone', price: 350,
                 colors: [
-                    { id: 'sil-black', name: 'Matte Velvet Black Silicone', hex: '#1B1B1E', highlight: '#36363C', price: 0 },
-                    { id: 'sil-slate', name: 'Rhodium Slate Grey Silicone', hex: '#474C54', highlight: '#686F7A', price: 100 },
-                    { id: 'sil-emerald', name: 'Royal Emerald Green Silicone', hex: '#083D2E', highlight: '#13634C', price: 100 }
+                    { id: 'sil-black', name: 'Matte Velvet Black Silicone', hex: '#1C1C20', highlight: '#383840', edge: '#09090B', price: 0 },
+                    { id: 'sil-slate', name: 'Rhodium Slate Grey Silicone', hex: '#474C54', highlight: '#6A717C', edge: '#1E2024', price: 100 },
+                    { id: 'sil-emerald', name: 'Royal Emerald Green Silicone', hex: '#093D2E', highlight: '#15634C', edge: '#031B14', price: 100 }
                 ]
             }
         };
@@ -829,7 +955,7 @@
             markerStyle: 'diamond',
             customName: 'Hanzalah',
             customNameFont: 'Cinzel',
-            customNameColor: '#FFEAE4',
+            customNameColor: '#FFF0E8',
             customPhotoDataUrl: null,
             photoZoom: 100,
             photoOffsetX: 0,
@@ -846,17 +972,14 @@
         let uploadedPhotoImg = null;
         let authMode = 'login';
         let currentUser = JSON.parse(localStorage.getItem('dynast_current_user') || 'null');
-        let balanceAngle = 0;
-        let balanceDir = 1;
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Auto-heal guard: If user ever accidentally pasted a duplicate column in #mainStudioGrid, remove extras automatically
             const grid = document.getElementById('mainStudioGrid');
             if (grid && grid.children.length > 2) {
-                while (grid.children.length > 2) {
-                    grid.removeChild(grid.children[1]);
-                }
+                while (grid.children.length > 2) grid.removeChild(grid.children[1]);
             }
+            initLiveGoldBackground();
+            preloadInternetSkeletonMovement(0);
             renderStrapColorSwatches();
             updatePriceBreakdown();
             updateAuthUI();
@@ -864,11 +987,7 @@
                 document.fonts.ready.then(() => renderWatch());
             }
             setInterval(() => {
-                balanceAngle += balanceDir * 5.5;
-                if (Math.abs(balanceAngle) > 28) balanceDir *= -1;
-                if (state.liveClock || state.viewMode !== 'front') {
-                    renderWatch();
-                }
+                if (state.liveClock) renderWatch();
             }, 80);
         });
 
@@ -917,13 +1036,7 @@
             ctx.restore();
         }
 
-        // EXACT 1:1 RATIO ROLEX DATEJUST 41 FRONT RENDERER (Canvas: 900 x 1250, Center: 450, 625)
-        // Measured Ratios from 10-1.jpg:
-        // Bezel Outer Radius = 270px (Diameter = 540px, y = 355 to 895)
-        // Bezel Inner Radius = 222px (Bezel Width = 48px = 17.8% of rBezelOuter)
-        // Dial Radius = 204px (Rehaut Width = 18px = 6.6% of rBezelOuter)
-        // Lug-to-Lug Y = 294 to 956 (Height = 662px = 1.225x Bezel Diameter — exact Datejust 41 ratio!)
-        // Bracelet Width at Lugs = 288px (x = 306 to 594 = 53.3% of Bezel Diameter)
+        // PHOTOREALISTIC 1:1 DATEJUST 41 FRONT RENDERER (900 x 1250)
         function drawFrontWatchCanvas() {
             const canvas = document.getElementById('frontWatchCanvas');
             if (!canvas) return;
@@ -938,22 +1051,22 @@
             const bezelPal = METAL_PALETTES[caseObj.bezelMetal];
             const lugPal = METAL_PALETTES[caseObj.lugMetal];
 
-            // 1. DRAW STAGGERED 5-LINK JUBILEE BRACELET OR STRAP (Exact 30% / 40% / 30% link ratio)
+            // 1. DRAW 3D SCULPTED JUBILEE BRACELET OR STRAP
             drawMacroBracelet(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.lugMetal, false);
 
-            // 2. DRAW 1:1 PROPORTIONAL OYSTER CASE & LUGS (Compact lug tips at y=294 & y=956, tight 3/9 case sides at x=165 & x=735)
+            // 2. DRAW 3D OYSTER MONOBLOC CASE & CURVED LUGS WITH AMBIENT OCCLUSION
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.92)';
-            ctx.shadowBlur = 38;
-            ctx.shadowOffsetY = 14;
+            ctx.shadowBlur = 42;
+            ctx.shadowOffsetY = 16;
 
             // Left Oyster Lug & Case Cushion Side
             ctx.beginPath();
-            ctx.moveTo(262, 294); // Top-Left Lug Outer Tip
-            ctx.lineTo(306, 294); // Top-Left Lug Inner Corner (hugs bracelet at x=306)
-            ctx.lineTo(306, 956); // Bottom-Left Lug Inner Corner
-            ctx.lineTo(262, 956); // Bottom-Left Lug Outer Tip
-            ctx.bezierCurveTo(212, 868, 165, 752, 165, 625); // Tight 9 o'clock case side (only 15px outside rBezelOuter=270!)
+            ctx.moveTo(262, 294);
+            ctx.lineTo(306, 294);
+            ctx.lineTo(306, 956);
+            ctx.lineTo(262, 956);
+            ctx.bezierCurveTo(212, 868, 165, 752, 165, 625);
             ctx.bezierCurveTo(165, 498, 212, 382, 262, 294);
             ctx.closePath();
 
@@ -971,11 +1084,11 @@
 
             // Right Oyster Lug & Case Cushion Side
             ctx.beginPath();
-            ctx.moveTo(638, 294); // Top-Right Lug Outer Tip
-            ctx.lineTo(594, 294); // Top-Right Lug Inner Corner (hugs bracelet at x=594)
-            ctx.lineTo(594, 956); // Bottom-Right Lug Inner Corner
-            ctx.lineTo(638, 956); // Bottom-Right Lug Outer Tip
-            ctx.bezierCurveTo(688, 868, 735, 752, 735, 625); // Tight 3 o'clock case side
+            ctx.moveTo(638, 294);
+            ctx.lineTo(594, 294);
+            ctx.lineTo(594, 956);
+            ctx.lineTo(638, 956);
+            ctx.bezierCurveTo(688, 868, 735, 752, 735, 625);
             ctx.bezierCurveTo(735, 498, 688, 382, 638, 294);
             ctx.closePath();
 
@@ -992,20 +1105,19 @@
             ctx.fill();
             ctx.restore();
 
-            // Solid End-Link (SEL) Vertical Seam Lines where Lugs meet Bracelet
+            // 3D Inner Lug Wall Shadow & Outer Mirror Chamfer Bevel
             ctx.save();
-            ctx.strokeStyle = 'rgba(0,0,0,0.82)';
-            ctx.lineWidth = 2.0;
+            ctx.strokeStyle = 'rgba(0,0,0,0.85)';
+            ctx.lineWidth = 2.4;
             ctx.beginPath();
-            ctx.moveTo(306, 294); ctx.lineTo(306, 400);
-            ctx.moveTo(594, 294); ctx.lineTo(594, 400);
-            ctx.moveTo(306, 850); ctx.lineTo(306, 956);
-            ctx.moveTo(594, 850); ctx.lineTo(594, 956);
+            ctx.moveTo(306, 294); ctx.lineTo(306, 405);
+            ctx.moveTo(594, 294); ctx.lineTo(594, 405);
+            ctx.moveTo(306, 845); ctx.lineTo(306, 956);
+            ctx.moveTo(594, 845); ctx.lineTo(594, 956);
             ctx.stroke();
 
-            // Outer Mirror-Polished Bevel Chamfer Along Case Sides
             ctx.strokeStyle = lugPal.fluteBright;
-            ctx.lineWidth = 3.0;
+            ctx.lineWidth = 3.2;
             ctx.globalAlpha = 0.88;
             ctx.beginPath();
             ctx.moveTo(264, 297); ctx.bezierCurveTo(215, 384, 168, 498, 168, 625);
@@ -1013,7 +1125,7 @@
             ctx.stroke();
             ctx.restore();
 
-            // 3. DRAW 1:1 PROPORTIONAL TWINLOCK WINDING CROWN (Compact height = 84px, width = 34px at 3 o'clock)
+            // 3. DRAW 3D TWINLOCK WINDING CROWN (Right Side at 3 o'clock)
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.88)';
             ctx.shadowBlur = 14;
@@ -1033,18 +1145,19 @@
                 ctx.fillRect(736, cy + 3.2, 29, 2.2);
             }
 
-            // 4. DRAW AUTHENTIC 48-FLUTE BEZEL (Exact 4 Flutes per Hour — Wide, Bold Mirror Facets like 10-1.jpg & 22-2.jpg)
+            // 4. DRAW 48-FLUTE 3D BEZEL WITH SPHERICAL STUDIO LIGHTING & UNDER-BEZEL DROP SHADOW
             const rBezelOuter = 270, rBezelInner = 222;
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.92)';
-            ctx.shadowBlur = 24;
+            ctx.shadowColor = 'rgba(0,0,0,0.95)';
+            ctx.shadowBlur = 32;
+            ctx.shadowOffsetY = 12;
             ctx.beginPath();
             ctx.arc(CX, CY, rBezelOuter + 2.5, 0, Math.PI * 2);
             ctx.fillStyle = bezelPal.fluteDark;
             ctx.fill();
             ctx.restore();
 
-            const flutes = 48; // Exact Rolex Datejust flute count (4 per hour)
+            const flutes = 48;
             for (let i = 0; i < flutes; i++) {
                 const a1 = (i * 2 * Math.PI) / flutes;
                 const aPeak = ((i + 0.5) * 2 * Math.PI) / flutes;
@@ -1081,13 +1194,11 @@
                 ctx.fillStyle = gB;
                 ctx.fill();
 
-                // Sharp Specular Ridge Line
                 ctx.strokeStyle = bezelPal.fluteBright;
-                ctx.globalAlpha = 0.7;
+                ctx.globalAlpha = 0.72;
                 ctx.lineWidth = 1.1;
                 ctx.beginPath(); ctx.moveTo(xPi, yPi); ctx.lineTo(xPo, yPo); ctx.stroke();
 
-                // Valley Shadow Line
                 ctx.strokeStyle = bezelPal.fluteDark;
                 ctx.globalAlpha = 0.85;
                 ctx.lineWidth = 0.9;
@@ -1095,21 +1206,20 @@
                 ctx.globalAlpha = 1.0;
             }
 
-            // Inner Bezel Mirror Bevel Ring
             ctx.beginPath();
             ctx.arc(CX, CY, rBezelInner, 0, Math.PI * 2);
-            ctx.lineWidth = 4.0;
+            ctx.lineWidth = 4.2;
             ctx.strokeStyle = bezelPal.rim;
             ctx.stroke();
 
-            // 5. DRAW 3D CONCAVE METALLIC REHAUT RING (r = 222 down to rDial = 204)
+            // 5. DRAW 3D CONCAVE METALLIC REHAUT RING
             const rDial = 204;
             const rehautGrad = ctx.createLinearGradient(CX - rBezelInner, CY - rBezelInner, CX + rBezelInner, CY + rBezelInner);
-            rehautGrad.addColorStop(0.0, '#101216');
+            rehautGrad.addColorStop(0.0, '#12151A');
             rehautGrad.addColorStop(0.25, lugPal.fluteLight);
             rehautGrad.addColorStop(0.50, lugPal.fluteMid);
             rehautGrad.addColorStop(0.78, '#FFFFFF');
-            rehautGrad.addColorStop(1.0, '#101216');
+            rehautGrad.addColorStop(1.0, '#12151A');
             ctx.beginPath();
             ctx.arc(CX, CY, rBezelInner - 2, 0, Math.PI * 2);
             ctx.fillStyle = rehautGrad;
@@ -1126,7 +1236,7 @@
             }
             ctx.restore();
 
-            // 6. DRAW MICRO-BRUSHED SUNBURST DIAL (rDial = 204)
+            // 6. DRAW MICRO-BRUSHED SUNBURST DIAL WITH DYNAMIC STUDIO LIGHT CONE
             ctx.save();
             ctx.beginPath();
             ctx.arc(CX, CY, rDial, 0, Math.PI * 2);
@@ -1141,13 +1251,13 @@
 
             if (dialObj.sunburst) {
                 if (ctx.createConicGradient) {
-                    const sheen = ctx.createConicGradient(-Math.PI / 3.1, CX, CY);
+                    const sheen = ctx.createConicGradient(-Math.PI / 3.1 + lightShiftAngle, CX, CY);
                     sheen.addColorStop(0.00, dialObj.sheen);
-                    sheen.addColorStop(0.13, 'rgba(0,0,0,0.25)');
-                    sheen.addColorStop(0.27, 'rgba(0,0,0,0.40)');
+                    sheen.addColorStop(0.13, 'rgba(0,0,0,0.24)');
+                    sheen.addColorStop(0.27, 'rgba(0,0,0,0.38)');
                     sheen.addColorStop(0.50, dialObj.sheen);
-                    sheen.addColorStop(0.63, 'rgba(0,0,0,0.25)');
-                    sheen.addColorStop(0.77, 'rgba(0,0,0,0.40)');
+                    sheen.addColorStop(0.63, 'rgba(0,0,0,0.24)');
+                    sheen.addColorStop(0.77, 'rgba(0,0,0,0.38)');
                     sheen.addColorStop(1.00, dialObj.sheen);
                     ctx.fillStyle = sheen;
                     ctx.fillRect(CX - rDial, CY - rDial, rDial * 2, rDial * 2);
@@ -1155,7 +1265,7 @@
 
                 for (let r = 0; r < 1400; r++) {
                     const a = (r * 2 * Math.PI) / 1400;
-                    ctx.strokeStyle = (r % 2 === 0) ? 'rgba(255,255,255,0.036)' : 'rgba(0,0,0,0.062)';
+                    ctx.strokeStyle = (r % 2 === 0) ? 'rgba(255,255,255,0.035)' : 'rgba(0,0,0,0.06)';
                     ctx.lineWidth = 0.55;
                     ctx.beginPath();
                     ctx.moveTo(CX + 4 * Math.cos(a), CY + 4 * Math.sin(a));
@@ -1171,15 +1281,15 @@
                 ctx.fillRect(CX - rDial, CY - rDial, rDial * 2, rDial * 2);
             }
 
-            const edgeShadow = ctx.createRadialGradient(CX, CY, rDial - 18, CX, CY, rDial);
+            const edgeShadow = ctx.createRadialGradient(CX, CY, rDial - 20, CX, CY, rDial);
             edgeShadow.addColorStop(0.0, 'rgba(0,0,0,0)');
-            edgeShadow.addColorStop(0.68, 'rgba(0,0,0,0.26)');
-            edgeShadow.addColorStop(1.0, 'rgba(0,0,0,0.85)');
+            edgeShadow.addColorStop(0.68, 'rgba(0,0,0,0.28)');
+            edgeShadow.addColorStop(1.0, 'rgba(0,0,0,0.88)');
             ctx.fillStyle = edgeShadow;
             ctx.fillRect(CX - rDial, CY - rDial, rDial * 2, rDial * 2);
             ctx.restore();
 
-            // 7. DRAW PRECISION RAILWAY MINUTE TRACK (r = 186 to 198)
+            // 7. DRAW PRECISION RAILWAY MINUTE TRACK
             const tColor = state.customPhotoDataUrl ? '#FFE87C' : dialObj.trackColor;
             ctx.save();
             ctx.strokeStyle = tColor;
@@ -1214,44 +1324,38 @@
                 }
             }
             ctx.restore();
-            // 8. DRAW RADIALLY ROTATED 3D DIAMOND CHATONS (10-1.jpg) OR 4-BEVEL LUMINOUS BATONS (22-1.jpg)
+            // 8. DRAW RADIALLY ROTATED 3D DIAMOND CHATONS OR 4-BEVEL LUMINOUS BATONS
             for (let h = 1; h <= 11; h++) {
-                if (h === 3) continue; // 3 o'clock has Cyclops Date Window
+                if (h === 3) continue;
                 const ang = (h * 30 - 90) * Math.PI / 180;
                 const rMarker = state.markerStyle === 'diamond' ? 152 : 154;
                 const mx = CX + rMarker * Math.cos(ang);
                 const my = CY + rMarker * Math.sin(ang);
 
                 ctx.save();
-                ctx.shadowColor = 'rgba(0,0,0,0.68)';
-                ctx.shadowBlur = 6;
-                ctx.shadowOffsetX = 2;
-                ctx.shadowOffsetY = 3;
+                ctx.shadowColor = 'rgba(0,0,0,0.72)';
+                ctx.shadowBlur = 7;
+                ctx.shadowOffsetX = 2.5;
+                ctx.shadowOffsetY = 3.5;
 
-                // Rotate BOTH Diamond Chatons AND Baton Markers radially toward dial center (Exact match to 10-1.jpg & 11-1.jpg!)
                 ctx.translate(mx, my);
                 ctx.rotate(ang + Math.PI / 2);
 
                 if (state.markerStyle === 'diamond') {
                     const sOut = 13.5, sIn = 8.2;
-                    // Top Bevel
                     ctx.fillStyle = bezelPal.fluteBright;
                     ctx.beginPath(); ctx.moveTo(-sOut, -sOut); ctx.lineTo(sOut, -sOut); ctx.lineTo(sIn, -sIn); ctx.lineTo(-sIn, -sIn); ctx.closePath(); ctx.fill();
                     ctx.shadowColor = 'transparent';
-                    // Left Bevel
                     ctx.fillStyle = bezelPal.fluteLight;
                     ctx.beginPath(); ctx.moveTo(-sOut, -sOut); ctx.lineTo(-sIn, -sIn); ctx.lineTo(-sIn, sIn); ctx.lineTo(-sOut, sOut); ctx.closePath(); ctx.fill();
-                    // Right Bevel
                     ctx.fillStyle = bezelPal.fluteWarm;
                     ctx.beginPath(); ctx.moveTo(sOut, -sOut); ctx.lineTo(sOut, sOut); ctx.lineTo(sIn, sIn); ctx.lineTo(sIn, -sIn); ctx.closePath(); ctx.fill();
-                    // Bottom Bevel
                     ctx.fillStyle = bezelPal.fluteDark;
                     ctx.beginPath(); ctx.moveTo(-sOut, sOut); ctx.lineTo(sOut, sOut); ctx.lineTo(sIn, sIn); ctx.lineTo(-sIn, sIn); ctx.closePath(); ctx.fill();
 
                     ctx.fillStyle = '#090D16';
                     ctx.fillRect(-sIn, -sIn, sIn * 2, sIn * 2);
 
-                    // 16-Facet Brilliant Cut Diamond
                     const dGrad = ctx.createRadialGradient(-1.5, -1.5, 1, 0, 0, sIn);
                     dGrad.addColorStop(0.0, '#FFFFFF');
                     dGrad.addColorStop(0.45, '#F0F9FF');
@@ -1269,13 +1373,11 @@
                     ctx.moveTo(-4.2, 4.2); ctx.lineTo(4.2, -4.2);
                     ctx.stroke();
 
-                    // 4 Corner Prongs
                     ctx.fillStyle = bezelPal.fluteBright;
                     [[-5.8, -5.8], [5.8, -5.8], [5.8, 5.8], [-5.8, 5.8]].forEach(p => {
                         ctx.beginPath(); ctx.arc(p[0], p[1], 2.0, 0, Math.PI * 2); ctx.fill();
                     });
                 } else {
-                    // 1:1 Proportional 4-Bevel Chromalight Baton Marker (Exact match to 22-1.jpg & 22-2.jpg)
                     const bw = 7.8, bh = 23.5;
                     const lw = 4.6, lh = 20.0;
 
@@ -1311,7 +1413,7 @@
 
             // 9. DRAW 12 O'CLOCK 3D METALLIC CORONET CREST & EXCLUSIVE "DYNAST / LUXURIOUS HOROLOGY"
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.65)';
+            ctx.shadowColor = 'rgba(0,0,0,0.68)';
             ctx.shadowBlur = 5;
             ctx.shadowOffsetY = 2;
 
@@ -1340,20 +1442,18 @@
             ctx.fillStyle = createMetalGradient(ctx, CX - 9, crestY + 8, CX + 9, crestY + 16, caseObj.bezelMetal, true);
             ctx.fill();
 
-            // Compulsory "DYNAST" in Cinzel Decorative Font
             const logoFill = state.customPhotoDataUrl ? '#FFE87C' : dialObj.logoColor;
             ctx.fillStyle = logoFill;
             ctx.font = '700 25px "Cinzel Decorative", serif';
             ctx.textAlign = 'center';
             ctx.fillText('DYNAST', CX, CY - 92);
 
-            // ONLY "LUXURIOUS HOROLOGY" directly below "DYNAST"
             ctx.fillStyle = state.customPhotoDataUrl ? '#FFFFFF' : dialObj.subColor;
             ctx.font = '600 10px "Cinzel", serif';
             ctx.fillText('LUXURIOUS HOROLOGY', CX, CY - 73);
             ctx.restore();
 
-            // 10. DRAW ONLY THE CUSTOMER'S CUSTOM NAME ON DIAL (At 6 o'clock)
+            // 10. DRAW ONLY THE CUSTOMER'S CUSTOM NAME ON DIAL
             if (state.customName && state.customName.trim() !== '') {
                 ctx.save();
                 ctx.shadowColor = (state.dialColor === 'white' && !state.customPhotoDataUrl) ? 'rgba(0,0,0,0.18)' : 'rgba(0,0,0,0.68)';
@@ -1386,12 +1486,11 @@
             ctx.textBaseline = 'middle';
             ctx.fillText('28', dx, dy + 1.5);
 
-            // Convex Cyclops Magnifying Drop Lens
             drawRoundedRect(ctx, dx - 45, dy - 35, 90, 70, 23);
             const cycG = ctx.createLinearGradient(dx - 45, dy - 35, dx + 45, dy + 35);
-            cycG.addColorStop(0.0, 'rgba(255,255,255,0.42)');
+            cycG.addColorStop(0.0, 'rgba(255,255,255,0.44)');
             cycG.addColorStop(0.35, 'rgba(185,225,255,0.06)');
-            cycG.addColorStop(0.75, 'rgba(0,0,0,0.12)');
+            cycG.addColorStop(0.75, 'rgba(0,0,0,0.14)');
             cycG.addColorStop(1.0, 'rgba(255,255,255,0.28)');
             ctx.fillStyle = cycG;
             ctx.fill();
@@ -1400,7 +1499,7 @@
             ctx.stroke();
             ctx.restore();
 
-            // 12. DRAW 1:1 PROPORTIONAL 3D FACETED BATON HANDS (Exact Match to Photo 10-1 & 22-2)
+            // 12. DRAW 1:1 PROPORTIONAL 3D FACETED BATON HANDS
             let hrAngleDeg, minAngleDeg, secAngleDeg;
             if (state.liveClock) {
                 const now = new Date();
@@ -1411,7 +1510,7 @@
                 minAngleDeg = min * 6;
                 secAngleDeg = sec * 6;
             } else {
-                hrAngleDeg = 305;  // 10:10:31 Studio Pose
+                hrAngleDeg = 305;
                 minAngleDeg = 62;
                 secAngleDeg = 186;
             }
@@ -1420,12 +1519,12 @@
             drawSleekDatejustHand(ctx, CX, CY, minAngleDeg * Math.PI / 180, 172, 32, 7.0, bezelPal);
             drawSleekSecondHand(ctx, CX, CY, secAngleDeg * Math.PI / 180, 186, 45, bezelPal);
 
-            // 13. SAPPHIRE CRYSTAL ANTI-REFLECTIVE DOME GLARE
+            // 13. SPHERICAL SAPPHIRE CRYSTAL ANTI-REFLECTIVE DOME LIGHTING
             ctx.save();
             ctx.beginPath();
             ctx.arc(CX, CY, rDial, 0, Math.PI * 2);
             const glare = ctx.createLinearGradient(CX - rDial, CY - rDial, CX + rDial * 0.35, CY + rDial * 0.35);
-            glare.addColorStop(0.0, 'rgba(255,255,255,0.14)');
+            glare.addColorStop(0.0, 'rgba(255,255,255,0.16)');
             glare.addColorStop(0.42, 'rgba(255,255,255,0.02)');
             glare.addColorStop(0.48, 'rgba(255,255,255,0)');
             ctx.fillStyle = glare;
@@ -1439,10 +1538,10 @@
             ctx.rotate(angleRad);
 
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.62)';
-            ctx.shadowBlur = 8;
-            ctx.shadowOffsetX = 3.5;
-            ctx.shadowOffsetY = 5;
+            ctx.shadowColor = 'rgba(0,0,0,0.68)';
+            ctx.shadowBlur = 9;
+            ctx.shadowOffsetX = 4;
+            ctx.shadowOffsetY = 6;
             ctx.beginPath();
             ctx.moveTo(-halfW * 0.72, tail);
             ctx.lineTo(-halfW, 0);
@@ -1490,7 +1589,7 @@
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(angleRad);
-            ctx.shadowColor = 'rgba(0,0,0,0.65)';
+            ctx.shadowColor = 'rgba(0,0,0,0.68)';
             ctx.shadowBlur = 6;
             ctx.shadowOffsetX = 3;
             ctx.shadowOffsetY = 4;
@@ -1516,21 +1615,19 @@
             ctx.restore();
         }
 
-        // HELPER: True Staggered 5-Link Jubilee Bracelet (Exact 30% / 40% / 30% Width Ratio & Half-Link Vertical Stagger!)
+        // HELPER: 3D Pillowed 5-Link Jubilee Bracelet & 3D Padded Bolster Straps (Eliminates Flatness!)
         function drawMacroBracelet(ctx, cx, cy, matKey, strapColorObj, lugMetal, isBackView) {
             if (matKey === 'metal') {
                 const outerPal = METAL_PALETTES[strapColorObj.outer] || METAL_PALETTES.silver;
                 const centerPal = METAL_PALETTES[strapColorObj.center] || METAL_PALETTES.rosegold;
 
-                // Dark metallic under-chassis between x=306 and x=594 (width = 288px)
-                ctx.fillStyle = '#07090C';
+                ctx.fillStyle = '#050608';
                 ctx.fillRect(306, 25, 288, 360);
                 ctx.fillRect(306, 865, 288, 360);
 
-                const linkH = 33.0;
+                const linkH = 32.5;
                 const rowStep = 34.5;
 
-                // 10 rows top (y=25 to 360) and 10 rows bottom (y=865 to 1200)
                 for (let side = 0; side < 2; side++) {
                     const isTop = side === 0;
                     for (let i = 0; i < 10; i++) {
@@ -1540,107 +1637,222 @@
                         const xStart = 306 + taper;
                         const totalW = 288 - taper * 2;
 
-                        // Exact Rolex Jubilee Width Ratio: Outer links = 30% each, 3 Center links = 40% total (13.3% each)
                         const wOuter = totalW * 0.30;
                         const wCenter = (totalW - wOuter * 2 - 6) / 3;
 
-                        // 1. Draw Left & Right Brushed Outer Links at baseY
+                        // Row-dependent specular shift so the bracelet looks curved in 3D space (not flat!)
+                        const rowSpecularShift = (distFromCase % 3 === 0) ? 0.06 : -0.04;
+
+                        // 1. Draw Left & Right 3D Brushed Satin Outer Links
                         [xStart, xStart + wOuter + wCenter * 3 + 6].forEach(ox => {
                             const lg = ctx.createLinearGradient(ox, baseY, ox, baseY + linkH);
-                            lg.addColorStop(0.00, outerPal.fluteWarm);
-                            lg.addColorStop(0.20, outerPal.fluteBright);
-                            lg.addColorStop(0.55, outerPal.fluteLight);
-                            lg.addColorStop(0.84, outerPal.fluteMid);
+                            lg.addColorStop(0.00, outerPal.fluteDark);
+                            lg.addColorStop(0.18 + rowSpecularShift, outerPal.fluteBright);
+                            lg.addColorStop(0.52, outerPal.fluteLight);
+                            lg.addColorStop(0.82, outerPal.fluteMid);
                             lg.addColorStop(1.00, outerPal.fluteDark);
-                            drawRoundedRect(ctx, ox, baseY, wOuter, linkH, 3.5);
+                            drawRoundedRect(ctx, ox, baseY, wOuter, linkH, 5.5);
                             ctx.fillStyle = lg;
                             ctx.fill();
 
-                            // Satin vertical micro-brush grain on outer links
+                            // 3D Horizontal Pillow Curvature on each outer link
+                            const pillowG = ctx.createLinearGradient(ox, baseY, ox + wOuter, baseY);
+                            pillowG.addColorStop(0.00, 'rgba(0,0,0,0.42)');
+                            pillowG.addColorStop(0.14, 'rgba(255,255,255,0.16)');
+                            pillowG.addColorStop(0.86, 'rgba(255,255,255,0.16)');
+                            pillowG.addColorStop(1.00, 'rgba(0,0,0,0.42)');
+                            ctx.fillStyle = pillowG;
+                            ctx.fill();
+
+                            // Fine vertical brushed steel grain
                             ctx.save();
                             ctx.strokeStyle = 'rgba(255,255,255,0.065)';
                             ctx.lineWidth = 0.8;
-                            for (let gx = ox + 4; gx < ox + wOuter - 3; gx += 3) {
+                            for (let gx = ox + 4; gx < ox + wOuter - 3; gx += 2.8) {
                                 ctx.beginPath(); ctx.moveTo(gx, baseY + 2); ctx.lineTo(gx, baseY + linkH - 2); ctx.stroke();
                             }
                             ctx.restore();
                         });
 
-                        // 2. Draw 3 Mirror-Polished Center Links STAGGERED by half a link height (+17px) just like real Jubilee!
+                        // 2. Draw 3 Staggered Mirror-Polished D-Profile Center Links
                         const centerY = baseY + (isTop ? 16 : -16);
+                        const isDarkRefRow = (distFromCase === 2 || distFromCase === 5 || distFromCase === 8);
                         for (let c = 0; c < 3; c++) {
                             const cxLink = xStart + wOuter + 1.5 + c * (wCenter + 1.5);
                             const cg = ctx.createLinearGradient(cxLink, centerY, cxLink, centerY + linkH);
-                            cg.addColorStop(0.00, centerPal.fluteDark);
-                            cg.addColorStop(0.12, centerPal.fluteBright);
-                            cg.addColorStop(0.35, centerPal.fluteLight);
-                            cg.addColorStop(0.48, centerPal.fluteDark);
-                            cg.addColorStop(0.64, '#050507');
-                            cg.addColorStop(0.78, centerPal.fluteMid);
-                            cg.addColorStop(0.92, centerPal.fluteLight);
-                            cg.addColorStop(1.00, centerPal.fluteDark);
-                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 3.2);
+                            if (isDarkRefRow) {
+                                cg.addColorStop(0.00, centerPal.fluteDark);
+                                cg.addColorStop(0.18, centerPal.fluteMid);
+                                cg.addColorStop(0.45, '#09090B');
+                                cg.addColorStop(0.75, centerPal.fluteBright);
+                                cg.addColorStop(1.00, centerPal.fluteDark);
+                            } else {
+                                cg.addColorStop(0.00, centerPal.fluteDark);
+                                cg.addColorStop(0.14, centerPal.fluteBright);
+                                cg.addColorStop(0.38, centerPal.fluteLight);
+                                cg.addColorStop(0.54, centerPal.fluteDark);
+                                cg.addColorStop(0.70, '#070709');
+                                cg.addColorStop(0.86, centerPal.fluteMid);
+                                cg.addColorStop(1.00, centerPal.fluteDark);
+                            }
+                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 5.0);
                             ctx.fillStyle = cg;
+                            ctx.fill();
+
+                            // 3D Horizontal Pillow Bevel on each center D-link
+                            const cPillow = ctx.createLinearGradient(cxLink, centerY, cxLink + wCenter, centerY);
+                            cPillow.addColorStop(0.00, 'rgba(0,0,0,0.48)');
+                            cPillow.addColorStop(0.20, 'rgba(255,255,255,0.22)');
+                            cPillow.addColorStop(0.80, 'rgba(255,255,255,0.22)');
+                            cPillow.addColorStop(1.00, 'rgba(0,0,0,0.48)');
+                            ctx.fillStyle = cPillow;
                             ctx.fill();
                         }
                     }
                 }
 
-                // Subtle wrist-curve shadow fade at the top & bottom ends of the bracelet
-                const topVig = ctx.createLinearGradient(0, 25, 0, 95);
-                topVig.addColorStop(0, 'rgba(0,0,0,0.65)');
+                // Deep 3D Ambient Occlusion Shadow Cast by the Bezel onto the Solid End-Links
+                const topCaseAO = ctx.createRadialGradient(cx, cy, 266, cx, cy, 315);
+                topCaseAO.addColorStop(0.0, 'rgba(0,0,0,0.88)');
+                topCaseAO.addColorStop(0.5, 'rgba(0,0,0,0.35)');
+                topCaseAO.addColorStop(1.0, 'rgba(0,0,0,0)');
+                ctx.fillStyle = topCaseAO;
+                ctx.fillRect(304, 290, 292, 670);
+
+                // Wrist-Curvature Shadow Vignette at Top & Bottom Ends
+                const topVig = ctx.createLinearGradient(0, 25, 0, 115);
+                topVig.addColorStop(0, 'rgba(0,0,0,0.78)');
                 topVig.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = topVig;
-                ctx.fillRect(300, 25, 300, 70);
+                ctx.fillRect(300, 25, 300, 90);
 
-                const botVig = ctx.createLinearGradient(0, 1155, 0, 1225);
+                const botVig = ctx.createLinearGradient(0, 1135, 0, 1225);
                 botVig.addColorStop(0, 'rgba(0,0,0,0)');
-                botVig.addColorStop(1, 'rgba(0,0,0,0.65)');
+                botVig.addColorStop(1, 'rgba(0,0,0,0.78)');
                 ctx.fillStyle = botVig;
-                ctx.fillRect(300, 1155, 300, 70);
+                ctx.fillRect(300, 1135, 300, 90);
             } else {
-                // Padded Leather / Sport Rubber / Silicone Strap (Flush with x=306..594 lugs)
-                [{ y1: 25, y2: 370, top: true }, { y1: 880, y2: 1225, top: false }].forEach(seg => {
+                // ULTRA-REALISTIC 3D PADDED ITALIAN LEATHER, SPORT RUBBER & SILICONE STRAPS
+                [{ y1: 25, y2: 375, top: true }, { y1: 875, y2: 1225, top: false }].forEach(seg => {
                     ctx.save();
                     ctx.beginPath();
                     if (seg.top) {
-                        ctx.moveTo(320, seg.y1); ctx.lineTo(580, seg.y1);
+                        ctx.moveTo(322, seg.y1); ctx.lineTo(578, seg.y1);
                         ctx.lineTo(594, seg.y2); ctx.lineTo(306, seg.y2);
                     } else {
                         ctx.moveTo(306, seg.y1); ctx.lineTo(594, seg.y1);
-                        ctx.lineTo(580, seg.y2); ctx.lineTo(320, seg.y2);
+                        ctx.lineTo(578, seg.y2); ctx.lineTo(322, seg.y2);
                     }
                     ctx.closePath();
+                    ctx.clip();
+
+                    // 1. Outer Strap Base with Rolled Edge Shadows
                     const sg = ctx.createLinearGradient(306, 0, 594, 0);
-                    sg.addColorStop(0, '#040405');
-                    sg.addColorStop(0.16, strapColorObj.hex);
-                    sg.addColorStop(0.5, strapColorObj.highlight || strapColorObj.hex);
-                    sg.addColorStop(0.84, strapColorObj.hex);
-                    sg.addColorStop(1, '#040405');
+                    sg.addColorStop(0.00, '#030304');
+                    sg.addColorStop(0.08, strapColorObj.edge || '#09090B');
+                    sg.addColorStop(0.22, strapColorObj.hex);
+                    sg.addColorStop(0.50, strapColorObj.highlight || strapColorObj.hex);
+                    sg.addColorStop(0.78, strapColorObj.hex);
+                    sg.addColorStop(0.92, strapColorObj.edge || '#09090B');
+                    sg.addColorStop(1.00, '#030304');
                     ctx.fillStyle = sg;
-                    ctx.fill();
+                    ctx.fillRect(300, seg.y1, 300, seg.y2 - seg.y1);
+
+                    // 2. 3D Raised Center Padded Bolster (Cushion)
+                    const bolsterG = ctx.createLinearGradient(345, 0, 555, 0);
+                    bolsterG.addColorStop(0.00, 'rgba(0,0,0,0.45)');
+                    bolsterG.addColorStop(0.15, 'rgba(255,255,255,0.08)');
+                    bolsterG.addColorStop(0.50, 'rgba(255,255,255,0.18)');
+                    bolsterG.addColorStop(0.85, 'rgba(255,255,255,0.06)');
+                    bolsterG.addColorStop(1.00, 'rgba(0,0,0,0.45)');
+                    ctx.fillStyle = bolsterG;
+                    ctx.fillRect(342, seg.y1, 216, seg.y2 - seg.y1);
 
                     if (matKey === 'leather') {
-                        ctx.strokeStyle = strapColorObj.stitch || '#D4AF37';
-                        ctx.lineWidth = 3.0;
-                        ctx.setLineDash([10, 6]);
+                        // Subtle Horizontal Alligator Scale Contours with 3D Crease Shadows
+                        for (let sy = seg.y1 + 28; sy < seg.y2 - 20; sy += 38) {
+                            ctx.strokeStyle = 'rgba(0,0,0,0.42)';
+                            ctx.lineWidth = 2.2;
+                            ctx.beginPath();
+                            ctx.moveTo(312, sy);
+                            ctx.quadraticCurveTo(450, sy + (seg.top ? -6 : 6), 588, sy);
+                            ctx.stroke();
+
+                            ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+                            ctx.lineWidth = 1.0;
+                            ctx.beginPath();
+                            ctx.moveTo(312, sy + 2.2);
+                            ctx.quadraticCurveTo(450, sy + (seg.top ? -3.8 : 8.2), 588, sy + 2.2);
+                            ctx.stroke();
+                        }
+
+                        // Recessed Stitch Grooves & Individual 3D Saddle Stitches
+                        ctx.strokeStyle = 'rgba(0,0,0,0.65)';
+                        ctx.lineWidth = 4.5;
                         ctx.beginPath();
-                        ctx.moveTo(332, seg.y1 + 16); ctx.lineTo(320, seg.y2 - 16);
-                        ctx.moveTo(568, seg.y1 + 16); ctx.lineTo(580, seg.y2 - 16);
+                        ctx.moveTo(330, seg.y1); ctx.lineTo(322, seg.y2);
+                        ctx.moveTo(570, seg.y1); ctx.lineTo(578, seg.y2);
                         ctx.stroke();
+
+                        const stColor = strapColorObj.stitch || '#D4AF37';
+                        for (let sty = seg.y1 + 14; sty < seg.y2 - 18; sty += 15) {
+                            const tProg = (sty - seg.y1) / (seg.y2 - seg.y1);
+                            const lx = seg.top ? (334 - tProg * 12) : (322 + tProg * 12);
+                            const rx = seg.top ? (566 + tProg * 12) : (578 - tProg * 12);
+
+                            // Stitch Hole Shadows
+                            ctx.fillStyle = '#000000';
+                            ctx.beginPath(); ctx.arc(lx, sty, 2.0, 0, Math.PI * 2); ctx.fill();
+                            ctx.beginPath(); ctx.arc(rx, sty, 2.0, 0, Math.PI * 2); ctx.fill();
+
+                            // 3D Angled Thread Segment
+                            ctx.strokeStyle = stColor;
+                            ctx.lineWidth = 2.6;
+                            ctx.lineCap = 'round';
+                            ctx.beginPath();
+                            ctx.moveTo(lx - 0.8, sty + 1); ctx.lineTo(lx + 0.8, sty + 10);
+                            ctx.moveTo(rx + 0.8, sty + 1); ctx.lineTo(rx - 0.8, sty + 10);
+                            ctx.stroke();
+                        }
                     } else {
-                        ctx.fillStyle = 'rgba(0,0,0,0.4)';
-                        for (let ry = seg.y1 + 40; ry < seg.y2 - 50; ry += 50) {
-                            drawRoundedRect(ctx, 340, ry, 220, 18, 8);
+                        // 3D Molded Sport Rubber / Silicone Longitudinal Channels & Recessed Ribs
+                        [365, 535].forEach(cxLine => {
+                            ctx.fillStyle = 'rgba(0,0,0,0.48)';
+                            ctx.fillRect(cxLine - 4, seg.y1, 8, seg.y2 - seg.y1);
+                            ctx.fillStyle = 'rgba(255,255,255,0.12)';
+                            ctx.fillRect(cxLine + 4, seg.y1, 2, seg.y2 - seg.y1);
+                        });
+                        for (let ry = seg.y1 + 36; ry < seg.y2 - 46; ry += 46) {
+                            drawRoundedRect(ctx, 376, ry, 148, 18, 7);
+                            ctx.fillStyle = 'rgba(0,0,0,0.45)';
                             ctx.fill();
+                            ctx.strokeStyle = 'rgba(255,255,255,0.10)';
+                            ctx.lineWidth = 1.2;
+                            ctx.stroke();
                         }
                     }
+
+                    // Vertical Wrist-Drop Shadow & Under-Bezel Ambient Occlusion
+                    const vFade = ctx.createLinearGradient(0, seg.y1, 0, seg.y2);
+                    if (seg.top) {
+                        vFade.addColorStop(0.00, 'rgba(0,0,0,0.72)');
+                        vFade.addColorStop(0.35, 'rgba(0,0,0,0)');
+                        vFade.addColorStop(0.82, 'rgba(0,0,0,0.15)');
+                        vFade.addColorStop(1.00, 'rgba(0,0,0,0.85)');
+                    } else {
+                        vFade.addColorStop(0.00, 'rgba(0,0,0,0.85)');
+                        vFade.addColorStop(0.18, 'rgba(0,0,0,0.15)');
+                        vFade.addColorStop(0.65, 'rgba(0,0,0,0)');
+                        vFade.addColorStop(1.00, 'rgba(0,0,0,0.72)');
+                    }
+                    ctx.fillStyle = vFade;
+                    ctx.fillRect(300, seg.y1, 300, seg.y2 - seg.y1);
                     ctx.restore();
                 });
             }
         }
 
-        // PHOTOREALISTIC BACK CASE RENDERER (1:1 Proportions + Curved Rim Text)
+        // PHOTOREALISTIC 3D MACHINED BACK CASE RENDERER (Real Internet Movement Photo + 3D Stepped Steel Architecture)
         function drawBackWatchCanvas() {
             const canvas = document.getElementById('backWatchCanvas');
             if (!canvas) return;
@@ -1651,189 +1863,311 @@
             const caseObj = CASE_OPTIONS[state.caseColor];
             const matObj = STRAP_MATERIALS[state.strapMaterial];
             const strapColorObj = matObj.colors[state.strapColorIndex] || matObj.colors[0];
+            const lugPal = METAL_PALETTES[caseObj.lugMetal];
 
+            // 1. Draw 3D Bracelet / Strap
             drawMacroBracelet(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.lugMetal, true);
 
-            // Crown on Left Side (Reversed for Rear View)
+            // 2. Draw 3D Fluted Winding Crown on Left Side (Reversed for Rear View)
+            ctx.save();
+            ctx.shadowColor = 'rgba(0,0,0,0.88)';
+            ctx.shadowBlur = 14;
+            drawRoundedRect(ctx, 162, 594, 14, 62, 2);
+            ctx.fillStyle = createMetalGradient(ctx, 162, 594, 162, 656, caseObj.bezelMetal, true);
+            ctx.fill();
             drawRoundedRect(ctx, 133, 583, 33, 84, 9);
             ctx.fillStyle = createMetalGradient(ctx, 133, 583, 133, 667, caseObj.bezelMetal, true);
             ctx.fill();
+            ctx.restore();
 
+            for (let cy = 591; cy <= 658; cy += 7.5) {
+                ctx.fillStyle = METAL_PALETTES[caseObj.bezelMetal].fluteDark;
+                ctx.fillRect(135, cy, 29, 3.2);
+                ctx.fillStyle = METAL_PALETTES[caseObj.bezelMetal].fluteBright;
+                ctx.fillRect(135, cy + 3.2, 29, 2.2);
+            }
+
+            // 3. Draw 3D Sculpted Rear Oyster/Barrel Case with Recessed End-Link Hoods & Brushed Planes (Matching Photos 11 & 12)
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.9)';
-            ctx.shadowBlur = 40;
+            ctx.shadowColor = 'rgba(0,0,0,0.92)';
+            ctx.shadowBlur = 45;
+            ctx.shadowOffsetY = 18;
             ctx.beginPath();
-            ctx.moveTo(262, 294); ctx.lineTo(306, 294); ctx.lineTo(306, 340);
-            ctx.lineTo(594, 340); ctx.lineTo(594, 294); ctx.lineTo(638, 294);
+            ctx.moveTo(262, 294); ctx.lineTo(312, 294); ctx.lineTo(312, 336);
+            ctx.lineTo(588, 336); ctx.lineTo(588, 294); ctx.lineTo(638, 294);
             ctx.bezierCurveTo(688, 382, 735, 498, 735, 625);
             ctx.bezierCurveTo(735, 752, 688, 868, 638, 956);
-            ctx.lineTo(594, 956); ctx.lineTo(594, 910);
-            ctx.lineTo(306, 910); ctx.lineTo(306, 956); ctx.lineTo(262, 956);
+            ctx.lineTo(588, 956); ctx.lineTo(588, 914);
+            ctx.lineTo(312, 914); ctx.lineTo(312, 956); ctx.lineTo(262, 956);
             ctx.bezierCurveTo(212, 868, 165, 752, 165, 625);
             ctx.bezierCurveTo(165, 498, 212, 382, 262, 294);
             ctx.closePath();
-            ctx.fillStyle = createMetalGradient(ctx, 165, 294, 735, 956, caseObj.lugMetal, false);
+
+            const rearCaseGrad = ctx.createLinearGradient(165, 294, 735, 956);
+            rearCaseGrad.addColorStop(0.00, lugPal.fluteBright);
+            rearCaseGrad.addColorStop(0.18, lugPal.fluteLight);
+            rearCaseGrad.addColorStop(0.38, lugPal.fluteMid);
+            rearCaseGrad.addColorStop(0.52, lugPal.fluteDark);
+            rearCaseGrad.addColorStop(0.72, lugPal.fluteBright);
+            rearCaseGrad.addColorStop(0.88, lugPal.fluteMid);
+            rearCaseGrad.addColorStop(1.00, lugPal.fluteDark);
+            ctx.fillStyle = rearCaseGrad;
             ctx.fill();
             ctx.restore();
 
+            // Fine Satin Brushed Grain + 3D Chamfered Bevel Edges on Rear Case
+            ctx.save();
+            ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+            ctx.lineWidth = 1;
+            for (let by = 300; by <= 950; by += 3) {
+                ctx.beginPath(); ctx.moveTo(170, by); ctx.lineTo(730, by); ctx.stroke();
+            }
+            ctx.strokeStyle = lugPal.fluteBright;
+            ctx.lineWidth = 3.2;
+            ctx.globalAlpha = 0.85;
             ctx.beginPath();
-            ctx.arc(CX, CY, 266, 0, Math.PI * 2);
-            ctx.fillStyle = createMetalGradient(ctx, CX - 266, CY - 266, CX + 266, CY + 266, 'silver', true);
+            ctx.moveTo(264, 297); ctx.bezierCurveTo(215, 384, 168, 498, 168, 625);
+            ctx.moveTo(636, 297); ctx.bezierCurveTo(685, 384, 732, 498, 732, 625);
+            ctx.stroke();
+            ctx.restore();
+
+            // 4. Draw 5-Step 3D Machined Caseback Bezel Rings (With Specular Highlights, Screw Flutes & Deep Drop Shadows)
+            // Step 1: Outer Recessed Groove (r = 264)
+            ctx.save();
+            ctx.shadowColor = 'rgba(0,0,0,0.85)';
+            ctx.shadowBlur = 18;
+            ctx.beginPath();
+            ctx.arc(CX, CY, 264, 0, Math.PI * 2);
+            ctx.fillStyle = '#0F1217';
+            ctx.fill();
+            ctx.restore();
+
+            // Step 2: Sloped 3D Mirror-Polished Bevel Ring (r = 260)
+            ctx.beginPath();
+            ctx.arc(CX, CY, 260, 0, Math.PI * 2);
+            const step2Grad = ctx.createLinearGradient(CX - 260, CY - 260, CX + 260, CY + 260);
+            step2Grad.addColorStop(0.00, '#FFFFFF');
+            step2Grad.addColorStop(0.25, '#CBD5E1');
+            step2Grad.addColorStop(0.50, '#333B48');
+            step2Grad.addColorStop(0.78, '#F8FAFC');
+            step2Grad.addColorStop(1.00, '#1E242B');
+            ctx.fillStyle = step2Grad;
             ctx.fill();
 
+            // Step 3: Screw-Down Caseback Knurled/Notched Ring (r = 244)
+            ctx.save();
             ctx.beginPath();
-            ctx.arc(CX, CY, 238, 0, Math.PI * 2);
-            const rimGrad = ctx.createLinearGradient(CX - 238, CY - 238, CX + 238, CY + 238);
-            rimGrad.addColorStop(0.0, '#CBD5E1');
-            rimGrad.addColorStop(0.35, '#F8FAFC');
-            rimGrad.addColorStop(0.7, '#94A3B8');
-            rimGrad.addColorStop(1.0, '#E2E8F0');
+            ctx.arc(CX, CY, 244, 0, Math.PI * 2);
+            ctx.fillStyle = '#1E232A';
+            ctx.fill();
+            for (let k = 0; k < 120; k++) {
+                const ka = (k * 3) * Math.PI / 180;
+                ctx.strokeStyle = (k % 2 === 0) ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.75)';
+                ctx.lineWidth = 1.8;
+                ctx.beginPath();
+                ctx.moveTo(CX + 236 * Math.cos(ka), CY + 236 * Math.sin(ka));
+                ctx.lineTo(CX + 244 * Math.cos(ka), CY + 244 * Math.sin(ka));
+                ctx.stroke();
+            }
+            ctx.restore();
+
+            // Step 4: Flat Brushed Steel Perimeter Engraving Ring (r = 236 down to 188)
+            ctx.beginPath();
+            ctx.arc(CX, CY, 236, 0, Math.PI * 2);
+            const rimGrad = ctx.createLinearGradient(CX - 236, CY - 236, CX + 236, CY + 236);
+            rimGrad.addColorStop(0.00, '#E2E8F0');
+            rimGrad.addColorStop(0.30, '#FFFFFF');
+            rimGrad.addColorStop(0.62, '#94A3B8');
+            rimGrad.addColorStop(0.85, '#CBD5E1');
+            rimGrad.addColorStop(1.00, '#64748B');
             ctx.fillStyle = rimGrad;
             ctx.fill();
-            ctx.lineWidth = 3.0;
-            ctx.strokeStyle = '#64748B';
+            ctx.lineWidth = 2.0;
+            ctx.strokeStyle = '#FFFFFF';
             ctx.stroke();
 
             if (state.backCase === 'solid') {
+                // OPTION A: SOLID 1,800-RAY BRUSHED STAINLESS STEEL MEDALLION (Matching Reference Photo 11)
                 ctx.save();
                 ctx.beginPath();
-                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
+                ctx.arc(CX, CY, 188, 0, Math.PI * 2);
                 ctx.clip();
+
                 if (ctx.createConicGradient) {
-                    const cg = ctx.createConicGradient(0, CX, CY);
-                    cg.addColorStop(0.00, '#94A3B8');
-                    cg.addColorStop(0.16, '#FFFFFF');
-                    cg.addColorStop(0.34, '#CBD5E1');
-                    cg.addColorStop(0.50, '#64748B');
-                    cg.addColorStop(0.68, '#F8FAFC');
-                    cg.addColorStop(0.84, '#94A3B8');
-                    cg.addColorStop(1.00, '#94A3B8');
+                    const cg = ctx.createConicGradient(-Math.PI / 3.2 + lightShiftAngle, CX, CY);
+                    cg.addColorStop(0.00, '#FFFFFF');
+                    cg.addColorStop(0.14, '#CBD5E1');
+                    cg.addColorStop(0.28, '#7A828E');
+                    cg.addColorStop(0.50, '#F8FAFC');
+                    cg.addColorStop(0.64, '#CBD5E1');
+                    cg.addColorStop(0.78, '#7A828E');
+                    cg.addColorStop(1.00, '#FFFFFF');
                     ctx.fillStyle = cg;
                 } else {
                     ctx.fillStyle = '#CBD5E1';
                 }
-                ctx.fillRect(CX - 184, CY - 184, 368, 368);
+                ctx.fillRect(CX - 188, CY - 188, 376, 376);
 
-                for (let cr = 18; cr < 180; cr += 4) {
-                    ctx.beginPath(); ctx.arc(CX, CY, cr, 0, Math.PI * 2);
-                    ctx.strokeStyle = (cr % 8 === 0) ? 'rgba(255,255,255,0.16)' : 'rgba(0,0,0,0.05)';
-                    ctx.lineWidth = 1; ctx.stroke();
+                // 1,600 Microscopic Radial Brushed Steel Filaments
+                for (let r = 0; r < 1600; r++) {
+                    const a = (r * 2 * Math.PI) / 1600;
+                    ctx.strokeStyle = (r % 2 === 0) ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.045)';
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(CX + 4 * Math.cos(a), CY + 4 * Math.sin(a));
+                    ctx.lineTo(CX + 188 * Math.cos(a), CY + 188 * Math.sin(a));
+                    ctx.stroke();
                 }
+
+                // Inner Step Recessed Rim Shadow
+                const medShadow = ctx.createRadialGradient(CX, CY, 168, CX, CY, 188);
+                medShadow.addColorStop(0, 'rgba(0,0,0,0)');
+                medShadow.addColorStop(1, 'rgba(0,0,0,0.45)');
+                ctx.fillStyle = medShadow;
+                ctx.fillRect(CX - 188, CY - 188, 376, 376);
                 ctx.restore();
 
                 ctx.beginPath();
-                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
-                ctx.lineWidth = 3.0;
-                ctx.strokeStyle = '#94A3B8';
+                ctx.arc(CX, CY, 188, 0, Math.PI * 2);
+                ctx.lineWidth = 2.5;
+                ctx.strokeStyle = '#64748B';
                 ctx.stroke();
 
+                // Stamped Center Hallmark
                 ctx.save();
-                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.fillStyle = 'rgba(255,255,255,0.75)';
                 ctx.font = '700 27px "Cinzel Decorative", serif';
                 ctx.textAlign = 'center';
                 ctx.fillText('DYNAST', CX + 1, CY - 8);
-                ctx.fillStyle = '#334155';
+                ctx.fillStyle = '#1E293B';
                 ctx.fillText('DYNAST', CX, CY - 9);
 
                 const subTxt = state.customName ? `${state.customName.toUpperCase()}` : 'LUXURIOUS HOROLOGY';
                 ctx.font = '600 13px "Cinzel", serif';
-                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.fillStyle = 'rgba(255,255,255,0.75)';
                 ctx.fillText(subTxt, CX + 1, CY + 19);
-                ctx.fillStyle = '#475569';
+                ctx.fillStyle = '#334155';
                 ctx.fillText(subTxt, CX, CY + 18);
                 ctx.restore();
             } else {
+                // OPTION B: REAL INTERNET PHOTOGRAPHIC MECHANICAL SKELETON MOVEMENT + 3D DYNAST ROTOR (Matching Photo 12)
                 ctx.save();
                 ctx.beginPath();
-                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
+                ctx.arc(CX, CY, 188, 0, Math.PI * 2);
                 ctx.clip();
 
-                ctx.fillStyle = '#141418';
-                ctx.fillRect(CX - 184, CY - 184, 368, 368);
+                ctx.fillStyle = '#0F1115';
+                ctx.fillRect(CX - 188, CY - 188, 376, 376);
 
-                ctx.fillStyle = '#64748B';
-                ctx.beginPath(); ctx.arc(CX - 46, CY - 38, 96, 0, Math.PI * 2); ctx.fill();
-                ctx.beginPath(); ctx.arc(CX + 55, CY - 26, 86, 0, Math.PI * 2); ctx.fill();
+                if (skeletonImgLoaded && skeletonMovementImg) {
+                    // Draw Real High-Resolution Mechanical Movement Photograph from the Internet!
+                    ctx.save();
+                    ctx.translate(CX, CY);
+                    ctx.rotate(-0.18);
+                    ctx.drawImage(skeletonMovementImg, -225, -225, 450, 450);
+                    ctx.restore();
 
-                ctx.strokeStyle = '#E5B842';
-                ctx.lineWidth = 9;
-                ctx.setLineDash([8, 5]);
-                ctx.beginPath(); ctx.arc(CX - 48, CY - 55, 42, 0, Math.PI * 2); ctx.stroke();
-                ctx.beginPath(); ctx.arc(CX + 52, CY - 45, 32, 0, Math.PI * 2); ctx.stroke();
-                ctx.setLineDash([]);
+                    // Subtle Horological Contrast & Depth Grading over Internet Photo
+                    const gradeG = ctx.createRadialGradient(CX, CY, 30, CX, CY, 188);
+                    gradeG.addColorStop(0.0, 'rgba(0,0,0,0.05)');
+                    gradeG.addColorStop(0.75, 'rgba(0,0,0,0.28)');
+                    gradeG.addColorStop(1.0, 'rgba(0,0,0,0.82)');
+                    ctx.fillStyle = gradeG;
+                    ctx.fillRect(CX - 188, CY - 188, 376, 376);
+                }
 
+                // 3D Machined Semi-Circular Skeleton Automatic Rotor Over Bottom Half (Matching Reference Photo 12)
                 ctx.save();
-                ctx.translate(CX, CY - 106);
-                ctx.rotate((balanceAngle * Math.PI) / 180);
-                ctx.strokeStyle = '#FFD700';
-                ctx.lineWidth = 6.0;
-                ctx.beginPath(); ctx.arc(0, 0, 38, 0, Math.PI * 2); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(-38, 0); ctx.lineTo(38, 0); ctx.moveTo(0, -38); ctx.lineTo(0, 38); ctx.stroke();
+                ctx.shadowColor = 'rgba(0,0,0,0.85)';
+                ctx.shadowBlur = 16;
+                ctx.shadowOffsetY = -4;
+                ctx.beginPath();
+                ctx.arc(CX, CY, 180, 0.05 * Math.PI, 0.95 * Math.PI, false);
+                ctx.lineTo(CX - 96, CY + 14);
+                ctx.lineTo(CX - 68, CY + 58);
+                ctx.lineTo(CX + 68, CY + 58);
+                ctx.lineTo(CX + 96, CY + 14);
+                ctx.closePath();
+                ctx.fillStyle = createMetalGradient(ctx, CX - 180, CY, CX + 180, CY + 180, 'silver', true);
+                ctx.fill();
                 ctx.restore();
 
-                [[CX, CY - 106], [CX - 48, CY - 55], [CX + 52, CY - 45]].forEach(pt => {
-                    ctx.beginPath(); ctx.arc(pt[0], pt[1], 8, 0, Math.PI * 2);
-                    ctx.fillStyle = '#E11D48'; ctx.fill();
-                    ctx.lineWidth = 2.0; ctx.strokeStyle = '#FFD700'; ctx.stroke();
-                });
+                // Geneva Waves (Côtes de Genève) on Rotor Surface
+                ctx.save();
+                for (let gx = CX - 160; gx <= CX + 160; gx += 12) {
+                    ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath(); ctx.moveTo(gx, CY + 58); ctx.lineTo(gx, CY + 175); ctx.stroke();
+                }
+                ctx.restore();
 
-                ctx.beginPath();
-                ctx.arc(CX, CY, 176, 0, Math.PI, false);
-                ctx.lineTo(CX - 92, CY);
-                ctx.lineTo(CX - 66, CY + 55);
-                ctx.lineTo(CX + 66, CY + 55);
-                ctx.lineTo(CX + 92, CY);
-                ctx.closePath();
-                ctx.fillStyle = createMetalGradient(ctx, CX - 176, CY, CX + 176, CY + 176, 'silver', true);
-                ctx.fill();
-                ctx.lineWidth = 2.2;
-                ctx.strokeStyle = '#475569';
-                ctx.stroke();
-
+                // Central Rotor Ball-Bearing Hub
                 ctx.beginPath(); ctx.arc(CX, CY, 36, 0, Math.PI * 2);
-                ctx.fillStyle = '#E2E8F0'; ctx.fill(); ctx.stroke();
-                ctx.beginPath(); ctx.arc(CX, CY, 16, 0, Math.PI * 2);
-                ctx.fillStyle = '#E5B842'; ctx.fill();
+                ctx.fillStyle = createMetalGradient(ctx, CX - 36, CY - 36, CX + 36, CY + 36, 'silver', true);
+                ctx.fill();
+                ctx.lineWidth = 1.8; ctx.strokeStyle = '#334155'; ctx.stroke();
 
-                drawRoundedRect(ctx, CX - 74, CY + 68, 148, 48, 4);
-                ctx.fillStyle = 'rgba(255,255,255,0.45)';
+                ctx.beginPath(); ctx.arc(CX, CY, 15, 0, Math.PI * 2);
+                ctx.fillStyle = createMetalGradient(ctx, CX - 15, CY - 15, CX + 15, CY + 15, 'gold', true);
+                ctx.fill();
+
+                // Engraved DYNAST Cartouche on Rotor
+                drawRoundedRect(ctx, CX - 76, CY + 72, 152, 48, 4);
+                ctx.fillStyle = 'rgba(241, 245, 249, 0.88)';
                 ctx.fill();
                 ctx.strokeStyle = '#475569';
-                ctx.lineWidth = 1.8;
+                ctx.lineWidth = 1.6;
                 ctx.stroke();
+
                 ctx.fillStyle = '#0F172A';
                 ctx.font = '700 19px "Cinzel Decorative", serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', CX, CY + 91);
-                ctx.font = '600 10px "Cinzel", serif';
-                ctx.fillText('LUXURIOUS HOROLOGY', CX, CY + 109);
+                ctx.fillText('DYNAST', CX, CY + 94);
+                ctx.font = '600 9.5px "Cinzel", serif';
+                ctx.fillText('LUXURIOUS HOROLOGY', CX, CY + 111);
+
+                // Deep 3D Inner Movement Wall Shadow & Sapphire Crystal Specular Glare
+                const innerWallAO = ctx.createRadialGradient(CX, CY, 162, CX, CY, 188);
+                innerWallAO.addColorStop(0.0, 'rgba(0,0,0,0)');
+                innerWallAO.addColorStop(0.6, 'rgba(0,0,0,0.35)');
+                innerWallAO.addColorStop(1.0, 'rgba(0,0,0,0.92)');
+                ctx.fillStyle = innerWallAO;
+                ctx.fillRect(CX - 188, CY - 188, 376, 376);
+
+                const sapphGlare = ctx.createLinearGradient(CX - 188, CY - 188, CX + 90, CY + 90);
+                sapphGlare.addColorStop(0.0, 'rgba(255,255,255,0.22)');
+                sapphGlare.addColorStop(0.42, 'rgba(190,230,255,0.04)');
+                sapphGlare.addColorStop(0.50, 'rgba(255,255,255,0)');
+                ctx.fillStyle = sapphGlare;
+                ctx.fillRect(CX - 188, CY - 188, 376, 376);
                 ctx.restore();
 
+                // Inner Polished Chamfer Rim around Sapphire Window
                 ctx.beginPath();
-                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
-                ctx.lineWidth = 4.5;
+                ctx.arc(CX, CY, 188, 0, Math.PI * 2);
+                ctx.lineWidth = 4.0;
                 ctx.strokeStyle = '#475569';
                 ctx.stroke();
             }
 
-            // CURVED PERIMETER CASEBACK ENGRAVINGS (Locked along Radius 211 of the Steel Rim)
+            // 5. CURVED PERIMETER CASEBACK ENGRAVINGS (Locked along Radius 212 of the Brushed Steel Track)
             ctx.save();
             ctx.fillStyle = '#1E293B';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
             ctx.font = '700 15px "Cinzel Decorative", serif';
-            drawCurvedText(ctx, 'DYNAST', CX, CY, 211, -Math.PI / 2, 0.082, false);
+            drawCurvedText(ctx, 'DYNAST', CX, CY, 212, -Math.PI / 2, 0.082, false);
 
-            ctx.font = '600 12px "Inter", sans-serif';
-            drawCurvedText(ctx, 'SAPPHIRE CRYSTAL', CX, CY, 211, -Math.PI * 0.78, 0.052, false);
-            drawCurvedText(ctx, 'STAINLESS STEEL', CX, CY, 211, -Math.PI * 0.22, 0.052, false);
-            drawCurvedText(ctx, 'DYN-410A', CX, CY, 211, Math.PI, 0.052, false);
-            drawCurvedText(ctx, '987 BLV 123', CX, CY, 211, 0, 0.052, false);
-            drawCurvedText(ctx, 'WATER-RESISTANT 10bar (100m / 330ft)', CX, CY, 211, Math.PI / 2, 0.046, true);
+            ctx.font = '600 11.5px "Inter", sans-serif';
+            drawCurvedText(ctx, 'SAPPHIRE CRYSTAL', CX, CY, 212, -Math.PI * 0.78, 0.052, false);
+            drawCurvedText(ctx, 'STAINLESS STEEL', CX, CY, 212, -Math.PI * 0.22, 0.052, false);
+            drawCurvedText(ctx, 'DYN-410A', CX, CY, 212, Math.PI, 0.052, false);
+            drawCurvedText(ctx, '987 BLV 123', CX, CY, 212, 0, 0.052, false);
+            drawCurvedText(ctx, 'WATER-RESISTANT 10bar (100m / 330ft)', CX, CY, 212, Math.PI / 2, 0.046, true);
             ctx.restore();
 
-            // REALISTIC CLASP / STRAP LOCK ON REAR BRACELET
+            // 6. REALISTIC 3D CLASP / STRAP LOCK ON REAR BRACELET
             const centerMetal = (state.strapMaterial === 'metal' && strapColorObj.center) ? strapColorObj.center : caseObj.bezelMetal;
             const outerMetal = (state.strapMaterial === 'metal' && strapColorObj.outer) ? strapColorObj.outer : caseObj.lugMetal;
 
@@ -1851,8 +2185,8 @@
                 ctx.restore();
             } else {
                 ctx.save();
-                ctx.shadowColor = 'rgba(0,0,0,0.85)';
-                ctx.shadowBlur = 16;
+                ctx.shadowColor = 'rgba(0,0,0,0.88)';
+                ctx.shadowBlur = 18;
                 drawRoundedRect(ctx, CX - 118, 1005, 236, 124, 10);
                 ctx.fillStyle = createMetalGradient(ctx, CX - 118, 1005, CX + 118, 1005, outerMetal, false);
                 ctx.fill();
@@ -1933,7 +2267,7 @@
             ['chocolate', 'black', 'rhodium', 'white'].forEach(k => {
                 document.getElementById(`dialBtn-${k}`).classList.toggle('active', k === dialKey);
             });
-            state.customNameColor = dialKey === 'white' ? '#111111' : (dialKey === 'chocolate' ? '#FFEAE4' : '#FFE87C');
+            state.customNameColor = dialKey === 'white' ? '#111111' : (dialKey === 'chocolate' ? '#FFF0E8' : '#F5DC8B');
             renderWatch();
         }
 
@@ -2054,15 +2388,15 @@
             });
 
             if (mode === 'front') {
-                stage.className = 'studio-stage rounded-2xl border border-gold/25 p-3 grid grid-cols-1 gap-4 items-center justify-items-center';
+                stage.className = 'studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 gap-4 items-center justify-items-center cursor-grab active:cursor-grabbing';
                 frontWrap.classList.remove('hidden');
                 backWrap.classList.add('hidden');
             } else if (mode === 'back') {
-                stage.className = 'studio-stage rounded-2xl border border-gold/25 p-3 grid grid-cols-1 gap-4 items-center justify-items-center';
+                stage.className = 'studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 gap-4 items-center justify-items-center cursor-grab active:cursor-grabbing';
                 frontWrap.classList.add('hidden');
                 backWrap.classList.remove('hidden');
             } else {
-                stage.className = 'studio-stage rounded-2xl border border-gold/25 p-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center justify-items-center';
+                stage.className = 'studio-stage rounded-2xl border border-gold/30 p-3 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center justify-items-center cursor-grab active:cursor-grabbing';
                 frontWrap.classList.remove('hidden');
                 backWrap.classList.remove('hidden');
             }
@@ -2076,7 +2410,7 @@
                 state.dialColor = 'chocolate';
                 state.markerStyle = 'diamond';
                 state.customName = 'Hanzalah';
-                state.customNameColor = '#FFEAE4';
+                state.customNameColor = '#FFF0E8';
                 state.strapMaterial = 'metal';
                 state.strapColorIndex = 0;
             } else if (presetKey === 'photo2-yellowgold') {
@@ -2084,7 +2418,7 @@
                 state.dialColor = 'black';
                 state.markerStyle = 'diamond';
                 state.customName = 'Hanzalah';
-                state.customNameColor = '#FFE87C';
+                state.customNameColor = '#F5DC8B';
                 state.strapMaterial = 'metal';
                 state.strapColorIndex = 1;
             } else if (presetKey === 'photo3-silver') {
