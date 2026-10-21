@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYNAST | Bespoke Command Center & Print Studio</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDK (Connected to dynast-bespoke) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, doc, updateDoc, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBM00yuvWgfXOLaVNGSCyzLSiME9e1o4",
+            authDomain: "dynast-bespoke.firebaseapp.com",
+            projectId: "dynast-bespoke",
+            storageBucket: "dynast-bespoke.firebasestorage.app",
+            messagingSenderId: "973168385496",
+            appId: "1:973168385496:web:bcc2a2cc58cb11b85766ad"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        window.db = getFirestore(app);
+        window.AdminFB = { collection, onSnapshot, doc, updateDoc, deleteDoc, addDoc };
+        window.dispatchEvent(new Event('firebase-ready'));
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        lightgold: '#FFE885',
+                        darkgold: '#9A7209',
+                        black: '#050505'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Cinzel', 'serif'],
+                        'decorative': ['Cinzel Decorative', 'cursive'],
+                        'script': ['Great Vibes', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #030303;
+            color: #ffffff;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        @keyframes ambientGoldBlend {
+            0%   { transform: translate3d(-3%, -2%, 0) scale(1); opacity: 0.85; }
+            50%  { transform: translate3d(3%, 2%, 0) scale(1.06); opacity: 1; }
+            100% { transform: translate3d(-3%, -2%, 0) scale(1); opacity: 0.85; }
+        }
+
+        .live-gold-aura {
+            background:
+                radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.22) 0%, rgba(138, 98, 12, 0.08) 34%, transparent 64%),
+                radial-gradient(circle at 85% 80%, rgba(255, 215, 0, 0.18) 0%, rgba(120, 82, 8, 0.07) 36%, transparent 66%),
+                radial-gradient(circle at 50% 45%, rgba(184, 134, 11, 0.13) 0%, rgba(4, 4, 4, 0.96) 72%);
+            will-change: transform, opacity;
+            animation: ambientGoldBlend 16s ease-in-out infinite;
+        }
+
+        .cinzel-decorative {
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .serif-text {
+            font-family: 'Cinzel', serif;
+        }
+
+        .gold-panel {
+            background: linear-gradient(145deg, rgba(18, 15, 10, 0.92), rgba(6, 6, 6, 0.96));
+            border: 1px solid rgba(212, 175, 55, 0.34);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 28px rgba(212, 175, 55, 0.08);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #FFE270 0%, #D4AF37 50%, #9A7209 100%);
+            color: #050505;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 0 24px rgba(212, 175, 55, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* Custom Luxury Dropdown Menu Styling */
+        .lux-dropdown-menu {
+            background: linear-gradient(160deg, #16120a 0%, #070707 100%);
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(212, 175, 55, 0.18);
+        }
+
+        /* 1:1 True Physical Millimeter Print Sheet Rules */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 10mm;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            #printableA4Sheet {
+                display: block !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+                width: 190mm;
+                margin: 0 auto;
+            }
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #070707; }
+        ::-webkit-scrollbar-thumb { background: #B8860B; border-radius: 3px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-gold selection:text-black relative">
+
+    <!-- GPU-ACCELERATED BLACK & GOLD AMBIENT BACKGROUND -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden no-print">
+        <div class="live-gold-aura absolute -inset-10"></div>
+    </div>
+
+    <!-- 1. ADMIN PIN LOCK OVERLAY -->
+    <div id="adminPinOverlay" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 no-print">
+        <div class="gold-panel rounded-3xl max-w-md w-full p-7 text-center space-y-5">
+            <div>
+                <span class="cinzel-decorative text-2xl sm:text-3xl text-lightgold tracking-widest block">DYNAST</span>
+                <span class="text-[10px] uppercase tracking-[0.3em] text-gold block mt-1">Bespoke Command Center</span>
+            </div>
+            <p class="text-xs text-gray-400">Enter your Master Horology PIN to manage bespoke orders, verify Paytm UTRs, and generate 1:1 dial print sheets.</p>
+            <form onsubmit="unlockAdminPanel(event)" class="space-y-4">
+                <input type="password" id="adminPinInput" placeholder="Enter Admin PIN (Default: 7579)" required class="w-full bg-black border border-gold/40 focus:border-gold rounded-2xl px-4 py-3 text-center text-lg tracking-[0.4em] text-lightgold outline-none">
+                <p id="pinErrorMsg" class="text-xs text-red-400 hidden">Incorrect PIN. Default PIN is 7579.</p>
+                <button type="submit" class="btn-gold w-full py-3.5 rounded-2xl text-xs uppercase tracking-widest shadow-lg">
+                    <i class="fa-solid fa-unlock-keyhole mr-1.5"></i> Unlock Command Center
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-gold/35 px-4 lg:px-8 py-3.5 no-print">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-4">
+                <a href="bespoke.html" class="text-xs text-gold/80 hover:text-lightgold flex items-center gap-1.5 border border-gold/35 px-3 py-1.5 rounded-full transition">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span class="hidden sm:inline">Bespoke Studio</span>
+                </a>
+                <div>
+                    <span class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-widest block leading-none">DYNAST</span>
+                    <span class="text-[9px] uppercase tracking-[0.28em] text-gold/80 block mt-0.5">Bespoke Order & Print Sizing Admin</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <div class="hidden md:flex items-center gap-2 bg-gold/10 border border-gold/30 px-3.5 py-1.5 rounded-xl text-xs">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span class="text-gray-300">Paytm UPI:</span>
+                    <strong class="text-lightgold">7579942958@ptyes</strong>
+                </div>
+                <button onclick="createSampleTestOrder()" class="border border-gold/40 bg-white/5 hover:bg-gold/15 text-lightgold px-3.5 py-2 rounded-xl text-xs font-medium transition">
+                    <i class="fa-solid fa-plus text-gold mr-1"></i> Create Test Order
+                </button>
+                <button onclick="lockAdminPanel()" class="border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 text-red-300 px-3 py-2 rounded-xl text-xs transition" title="Lock Admin">
+                    <i class="fa-solid fa-lock"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. MAIN ADMIN WORKSPACE -->
+    <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 space-y-6 no-print">
+
+        <!-- ANALYTICS SUMMARY CARDS -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="gold-panel rounded-2xl p-4">
+                <span class="text-[10px] uppercase tracking-widest text-gray-400 block">Total Bespoke Orders</span>
+                <span id="statTotalOrders" class="cinzel-decorative text-2xl text-white mt-1 block">0</span>
+            </div>
+            <div class="gold-panel rounded-2xl p-4">
+                <span class="text-[10px] uppercase tracking-widest text-gray-400 block">Total Bespoke Value</span>
+                <span id="statTotalRevenue" class="cinzel-decorative text-2xl text-lightgold mt-1 block">₹0</span>
+            </div>
+            <div class="gold-panel rounded-2xl p-4">
+                <span class="text-[10px] uppercase tracking-widest text-amber-300/80 block">Pending UTR Verification</span>
+                <span id="statPendingUtr" class="cinzel-decorative text-2xl text-amber-400 mt-1 block">0</span>
+            </div>
+            <div class="gold-panel rounded-2xl p-4">
+                <span class="text-[10px] uppercase tracking-widest text-emerald-300/80 block">Custom Photo Dials to Print</span>
+                <span id="statPhotoOrders" class="cinzel-decorative text-2xl text-emerald-400 mt-1 block">0</span>
+            </div>
+        </div>
+
+        <!-- MASTER PRINT REFERENCE GUIDE BANNER -->
+        <div class="gold-panel rounded-3xl p-5 border-l-4 border-l-gold">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="serif-text text-sm sm:text-base font-bold text-lightgold uppercase tracking-wider">
+                        <i class="fa-solid fa-ruler-combined text-gold mr-1.5"></i> Master Watch Dial & Waterslide Decal Print Reference
+                    </h2>
+                    <p class="text-xs text-gray-300 mt-1">
+                        Every order card below automatically calculates the exact physical print size in <strong class="text-white">millimeters (mm)</strong>, <strong class="text-white">centimeters (cm)</strong>, and <strong class="text-white">600 DPI pixels</strong>. You can also adjust the caliper millimeter box on any order if your dial blank differs.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3 text-xs">
+                    <div class="bg-black/80 border border-gold/30 px-3.5 py-2 rounded-xl">
+                        <span class="text-[10px] uppercase tracking-wider text-gold block font-bold">48-Flute Luxury Case (41mm)</span>
+                        <span class="text-white font-semibold">Dial Print: <strong>28.5 mm</strong> (2.85 cm • 673×673 px)</span>
+                    </div>
+                    <div class="bg-black/80 border border-gold/30 px-3.5 py-2 rounded-xl">
+                        <span class="text-[10px] uppercase tracking-wider text-gold block font-bold">Smooth Dress Case (40mm)</span>
+                        <span class="text-white font-semibold">Dial Print: <strong>32.0 mm</strong> (3.20 cm • 756×756 px)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEARCH & LUXURY CUSTOM DROPDOWN FILTER BAR -->
+        <div class="gold-panel rounded-2xl p-4 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <!-- Search Input -->
+            <div class="relative flex-1">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gold/70 text-xs"></i>
+                <input type="text" id="searchOrderInput" oninput="renderOrdersList()" placeholder="Search by Order ID, Customer Name, Phone, Dial Name, or 12-Digit UTR..." class="w-full bg-black/90 border border-gold/35 focus:border-gold rounded-xl pl-9 pr-4 py-2.5 text-xs text-white outline-none">
+            </div>
+
+            <!-- Custom Luxury Glassmorphic Status Filter Dropdown -->
+            <div class="relative min-w-[250px]" id="filterDropdownContainer">
+                <button type="button" onclick="toggleLuxuryDropdown('filterMenu')" class="w-full bg-black/90 border border-gold/40 hover:border-gold rounded-xl px-3.5 py-2.5 text-xs text-left flex items-center justify-between transition">
+                    <span><i class="fa-solid fa-filter text-gold mr-1.5"></i> Status: <strong id="filterSelectedLabel" class="text-lightgold">All Bespoke Orders</strong></span>
+                    <i class="fa-solid fa-chevron-down text-gold text-[10px]"></i>
+                </button>
+                <div id="filterMenu" class="lux-dropdown-menu hidden absolute right-0 mt-1.5 w-full rounded-2xl p-1.5 z-50 space-y-1 text-xs">
+                    <button type="button" onclick="setOrderFilter('ALL', 'All Bespoke Orders')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-white flex items-center justify-between">
+                        <span>All Bespoke Orders</span><i class="fa-solid fa-layer-group text-gold"></i>
+                    </button>
+                    <button type="button" onclick="setOrderFilter('Payment Verification Pending', 'Payment Verification Pending')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-amber-300 flex items-center justify-between">
+                        <span>Payment Verification Pending</span><i class="fa-solid fa-clock"></i>
+                    </button>
+                    <button type="button" onclick="setOrderFilter('Payment Verified • In Dial Printing', 'Payment Verified • In Dial Printing')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-sky-300 flex items-center justify-between">
+                        <span>Payment Verified • In Dial Printing</span><i class="fa-solid fa-print"></i>
+                    </button>
+                    <button type="button" onclick="setOrderFilter('Assembling & Acrylic Sealing', 'Assembling & Acrylic Sealing')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-purple-300 flex items-center justify-between">
+                        <span>Assembling & Acrylic Sealing</span><i class="fa-solid fa-screwdriver-wrench"></i>
+                    </button>
+                    <button type="button" onclick="setOrderFilter('Shipped / Dispatched', 'Shipped / Dispatched')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-emerald-300 flex items-center justify-between">
+                        <span>Shipped / Dispatched</span><i class="fa-solid fa-truck-fast"></i>
+                    </button>
+                    <button type="button" onclick="setOrderFilter('Delivered', 'Delivered')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-green-400 flex items-center justify-between">
+                        <span>Delivered</span><i class="fa-solid fa-circle-check"></i>
+                    </button>
+                    <button type="button" onclick="setOrderFilter('Cancelled', 'Cancelled')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-red-400 flex items-center justify-between">
+                        <span>Cancelled</span><i class="fa-solid fa-ban"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ORDERS LIST CONTAINER -->
+        <div id="ordersListContainer" class="space-y-5">
+            <div class="gold-panel rounded-3xl p-10 text-center text-xs text-gray-400">
+                <i class="fa-solid fa-spinner fa-spin text-gold text-xl mb-2"></i>
+                <p>Connecting to DYNAST-Bespoke Firebase Vault...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 4. DEDICATED 1:1 TRUE-SCALE PRINTABLE A4 SHEET (VISIBLE WHEN PRINTING OR IN PRINT PREVIEW MODAL) -->
+    <div id="printPreviewModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4 no-print">
+        <div class="gold-panel rounded-3xl max-w-4xl w-full p-6 relative max-h-[92vh] flex flex-col">
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-gold/25">
+                <div>
+                    <h3 class="cinzel-decorative text-lg text-lightgold">1:1 True-Scale Dial & Waterslide Decal Print Studio</h3>
+                    <p class="text-xs text-gray-400">Print this sheet on A4 paper or Waterslide Decal paper with Printer Scaling set to <strong class="text-gold">"100% / Actual Size"</strong>.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.print()" class="btn-gold px-4 py-2 rounded-xl text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-lg">
+                        <i class="fa-solid fa-print"></i> Print 1:1 Sheet Now
+                    </button>
+                    <button onclick="closePrintStudio()" class="border border-white/20 bg-white/5 hover:bg-white/10 text-gray-300 px-3 py-2 rounded-xl text-xs">
+                        <i class="fa-solid fa-xmark"></i> Close
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto py-4">
+                <div id="modalSheetPreviewContainer" class="bg-white text-black p-6 rounded-2xl mx-auto max-w-[210mm] shadow-2xl">
+                    <!-- Cloned into #printableA4Sheet for physical printing -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTUAL PRINT TARGET FOR WINDOW.PRINT() -->
+    <div id="printableA4Sheet" class="hidden"></div>
+
+    <!-- 5. COMPLETE ADMIN & PRINT CALIBRATION ENGINE -->
+    <script>
+        const ADMIN_MASTER_PIN = '7579';
+        let allOrders = [];
+        let currentStatusFilter = 'ALL';
+        let customDialMmOverrides = {}; // Stores custom caliper mm per order docId
+
+        const ORDER_STATUS_OPTIONS = [
+            { label: 'Payment Verification Pending', badgeClass: 'bg-amber-500/20 border-amber-500/50 text-amber-300' },
+            { label: 'Payment Verified • In Dial Printing', badgeClass: 'bg-sky-500/20 border-sky-500/50 text-sky-300' },
+            { label: 'Assembling & Acrylic Sealing', badgeClass: 'bg-purple-500/20 border-purple-500/50 text-purple-300' },
+            { label: 'Shipped / Dispatched', badgeClass: 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300' },
+            { label: 'Delivered', badgeClass: 'bg-green-500/20 border-green-500/50 text-green-300' },
+            { label: 'Cancelled', badgeClass: 'bg-red-500/20 border-red-500/50 text-red-300' }
+        ];
+
+        // 1. PIN AUTHENTICATION
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('dynast_bespoke_admin_unlocked') === 'true') {
+                document.getElementById('adminPinOverlay').classList.add('hidden');
+            }
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#filterDropdownContainer')) {
+                    document.getElementById('filterMenu').classList.add('hidden');
+                }
+                if (!e.target.closest('.order-status-dropdown-wrap')) {
+                    document.querySelectorAll('.order-status-menu').forEach(el => el.classList.add('hidden'));
+                }
+            });
+        });
+
+        function unlockAdminPanel(e) {
+            e.preventDefault();
+            const val = document.getElementById('adminPinInput').value.trim();
+            if (val === ADMIN_MASTER_PIN) {
+                sessionStorage.setItem('dynast_bespoke_admin_unlocked', 'true');
+                document.getElementById('adminPinOverlay').classList.add('hidden');
+                document.getElementById('pinErrorMsg').classList.add('hidden');
+            } else {
+                document.getElementById('pinErrorMsg').classList.remove('hidden');
+            }
+        }
+
+        function lockAdminPanel() {
+            sessionStorage.removeItem('dynast_bespoke_admin_unlocked');
+            document.getElementById('adminPinInput').value = '';
+            document.getElementById('adminPinOverlay').classList.remove('hidden');
+        }
+
+        // 2. LUXURY CUSTOM DROPDOWN HANDLERS
+        function toggleLuxuryDropdown(menuId) {
+            const el = document.getElementById(menuId);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function setOrderFilter(statusVal, labelText) {
+            currentStatusFilter = statusVal;
+            document.getElementById('filterSelectedLabel').textContent = labelText;
+            document.getElementById('filterMenu').classList.add('hidden');
+            renderOrdersList();
+        }
+
+        // 3. FIREBASE REAL-TIME LISTENER
+        window.addEventListener('firebase-ready', () => {
+            const { collection, onSnapshot } = window.AdminFB;
+            onSnapshot(collection(window.db, 'bespoke_orders'), (snapshot) => {
+                const fetched = [];
+                snapshot.forEach(docSnap => {
+                    fetched.push({ docId: docSnap.id, ...docSnap.data() });
+                });
+                fetched.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+                allOrders = fetched;
+                updateAnalytics();
+                renderOrdersList();
+            }, (err) => {
+                console.error('Firestore listener error:', err);
+                document.getElementById('ordersListContainer').innerHTML = `
+                    <div class="gold-panel rounded-3xl p-8 text-center text-xs text-red-300">
+                        <p class="font-bold text-sm mb-1">Database Connection Notice</p>
+                        <p>Ensure Cloud Firestore is created and Rules are published in your <strong>dynast-bespoke</strong> Firebase Console.</p>
+                    </div>
+                `;
+            });
+        });
+
+        function updateAnalytics() {
+            const activeOrders = allOrders.filter(o => o.status !== 'Cancelled');
+            const revenue = activeOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+            const pendingUtr = allOrders.filter(o => !o.status || o.status === 'Payment Verification Pending').length;
+            const photoOrders = activeOrders.filter(o => o.dialPhoto).length;
+
+            document.getElementById('statTotalOrders').textContent = allOrders.length;
+            document.getElementById('statTotalRevenue').textContent = `₹${revenue.toLocaleString('en-IN')}`;
+            document.getElementById('statPendingUtr').textContent = pendingUtr;
+            document.getElementById('statPhotoOrders').textContent = photoOrders;
+        }
+
+        // 4. AUTOMATIC HOROLOGICAL PRINT-SIZE CALCULATOR
+        // Calculates exact mm, cm, inches, 300 DPI px, 600 DPI px, and waterslide decal sizes!
+        function getWatchPrintSpecifications(order, overrideMm = null) {
+            const bezelName = (order.specs && order.specs.bezel) ? order.specs.bezel : (order.summary || '');
+            const isFluted = bezelName.toLowerCase().includes('flute');
+
+            // Default physical dial opening diameter:
+            // 48-Flute Luxury Case (41mm outer) -> 28.5 mm dial plate
+            // Smooth Mirror Dress Case (40mm outer) -> 32.0 mm dial plate
+            const defaultDialMm = isFluted ? 28.5 : 32.0;
+            const dialMm = overrideMm ? Number(overrideMm) : (customDialMmOverrides[order.docId] || defaultDialMm);
+            const dialCm = (dialMm / 10).toFixed(2);
+            const dialIn = (dialMm / 25.4).toFixed(3);
+
+            // Pixel conversions: pixels = (mm / 25.4) * DPI
+            const px300 = Math.round((dialMm / 25.4) * 300);
+            const px600 = Math.round((dialMm / 25.4) * 600);
+
+            // Proportional Waterslide Decal Sizes (Top Compulsory DYNAST Logo + Bottom Customer Name)
+            const logoWidthMm = (dialMm * 0.435).toFixed(1);
+            const logoHeightMm = (dialMm * 0.132).toFixed(1);
+            const nameWidthMm = (dialMm * 0.40).toFixed(1);
+            const nameHeightMm = (dialMm * 0.098).toFixed(1);
+
+            return {
+                caseTypeLabel: isFluted ? '48-Flute Luxury Case (41mm Outer)' : 'Smooth Mirror Dress Case (40mm Outer)',
+                dialMm: dialMm.toFixed(1),
+                dialCm,
+                dialIn,
+                px300,
+                px600,
+                centerHoleMm: '1.8',
+                bleedTrimMm: (dialMm + 1.0).toFixed(1),
+                logoWidthMm,
+                logoHeightMm,
+                nameWidthMm,
+                nameHeightMm
+            };
+        }
+
+        function updateOrderCaliperMm(docId, newMmValue) {
+            const val = parseFloat(newMmValue);
+            if (!isNaN(val) && val >= 18 && val <= 45) {
+                customDialMmOverrides[docId] = val;
+                renderOrdersList();
+            }
+        }
+
+        // 5. RENDER ORDERS LIST WITH PRINT SIZING & LUXURY DROPDOWNS
+        function renderOrdersList() {
+            const container = document.getElementById('ordersListContainer');
+            const searchQ = (document.getElementById('searchOrderInput').value || '').trim().toLowerCase();
+
+            const filtered = allOrders.filter(ord => {
+                const matchesStatus = (currentStatusFilter === 'ALL') || ((ord.status || 'Payment Verification Pending') === currentStatusFilter);
+                const blob = `${ord.orderId} ${ord.customerName} ${ord.phone} ${ord.utrNumber} ${ord.customName} ${ord.summary}`.toLowerCase();
+                return matchesStatus && blob.includes(searchQ);
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="gold-panel rounded-3xl p-10 text-center text-xs text-gray-400">
+                        <i class="fa-solid fa-box-open text-gold text-2xl mb-2"></i>
+                        <p>No matching bespoke orders found.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map((ord, idx) => {
+                const statusLabel = ord.status || 'Payment Verification Pending';
+                const statusObj = ORDER_STATUS_OPTIONS.find(s => s.label === statusLabel) || ORDER_STATUS_OPTIONS[0];
+                const ps = getWatchPrintSpecifications(ord);
+                const hasPhoto = Boolean(ord.dialPhoto);
+                const hasCustomName = Boolean(ord.customName && ord.customName.trim() !== '');
+
+                return `
+                <div class="gold-panel rounded-3xl p-5 sm:p-6 space-y-5 border border-gold/30">
+                    <!-- Top Order Header -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/20 pb-4">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="cinzel-decorative text-base sm:text-lg text-lightgold">${ord.orderId || 'DYN-ORDER'}</span>
+                            <span class="text-xs text-gray-400"><i class="fa-regular fa-calendar mr-1 text-gold"></i>${ord.formattedDate || ord.date || 'Recent'}</span>
+                            <span class="text-[11px] px-3 py-1 rounded-full border font-semibold ${statusObj.badgeClass}">
+                                ${statusLabel}
+                            </span>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <span class="cinzel-decorative text-lg text-gold mr-2">₹${Number(ord.totalPrice || 0).toLocaleString('en-IN')}</span>
+
+                            <!-- Custom Luxury Status Picker Dropdown -->
+                            <div class="relative order-status-dropdown-wrap">
+                                <button type="button" onclick="toggleLuxuryDropdown('statusMenu-${idx}')" class="bg-black border border-gold/40 hover:border-gold px-3.5 py-2 rounded-xl text-xs text-lightgold flex items-center gap-2 transition">
+                                    <span>Update Status</span>
+                                    <i class="fa-solid fa-chevron-down text-[10px] text-gold"></i>
+                                </button>
+                                <div id="statusMenu-${idx}" class="order-status-menu lux-dropdown-menu hidden absolute right-0 mt-1.5 w-64 rounded-2xl p-1.5 z-50 space-y-1 text-xs">
+                                    ${ORDER_STATUS_OPTIONS.map(opt => `
+                                        <button type="button" onclick="updateOrderStatus('${ord.docId}', '${opt.label}')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-gold/20 text-gray-200 hover:text-white flex items-center justify-between">
+                                            <span>${opt.label}</span>${statusLabel === opt.label ? '<i class="fa-solid fa-check text-gold"></i>' : ''}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <button onclick="deleteOrder('${ord.docId}')" class="border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-300 px-3 py-2 rounded-xl text-xs transition" title="Delete Order">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Middle Grid: Customer & Paytm UTR + Watch Specs -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+                        
+                        <!-- Customer & Paytm UPI Verification -->
+                        <div class="lg:col-span-5 bg-black/60 border border-gold/20 rounded-2xl p-4 space-y-2.5 text-xs">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                                <span class="text-[10px] uppercase tracking-widest text-gold font-bold">Customer & Payment</span>
+                                <a href="https://wa.me/${(ord.phone || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hello ${ord.customerName}, update from DYNAST Luxurious Horology regarding your Bespoke Watch Order (${ord.orderId}): Your order status is now "${statusLabel}".`)}" target="_blank" class="text-emerald-400 hover:underline font-semibold flex items-center gap-1">
+                                    <i class="fa-brands fa-whatsapp"></i> WhatsApp Customer
+                                </a>
+                            </div>
+                            <p><strong class="text-gray-400">Customer:</strong> <span class="text-white font-semibold">${ord.customerName || 'N/A'}</span> (${ord.phone || 'N/A'})</p>
+                            <p><strong class="text-gray-400">Delivery Address:</strong> <span class="text-gray-200">${ord.address || 'N/A'}</span></p>
+                            <div class="p-2.5 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-wider text-gold block">Paytm UPI UTR / Ref (7579942958@ptyes)</span>
+                                    <span class="font-mono text-sm font-bold text-lightgold">${ord.utrNumber || 'Not Provided'}</span>
+                                </div>
+                                <span class="text-[10px] bg-black/80 text-gray-300 px-2.5 py-1 rounded-lg border border-white/10">${ord.paymentMethod || 'Paytm UPI'}</span>
+                            </div>
+                            <p class="text-[11px] text-gray-400 pt-1"><strong class="text-gold">Full Configuration:</strong> ${ord.summary || ''}</p>
+                        </div>
+
+                        <!-- EXACT MILLIMETER PRINT SIZING & DECAL STUDIO BOX -->
+                        <div class="lg:col-span-7 bg-gradient-to-br from-[#19140a] to-[#080808] border border-gold/40 rounded-2xl p-4 flex flex-col justify-between space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gold/25 pb-2.5">
+                                <div>
+                                    <span class="text-[10px] uppercase tracking-[0.2em] text-gold font-bold block">
+                                        <i class="fa-solid fa-ruler-horizontal mr-1"></i> Exact Dial & Decal Print Specifications
+                                    </span>
+                                    <span class="text-xs text-gray-300">${ps.caseTypeLabel}</span>
+                                </div>
+
+                                <!-- Live Caliper Millimeter Override Input -->
+                                <div class="flex items-center gap-2 bg-black/90 border border-gold/40 px-3 py-1.5 rounded-xl text-xs">
+                                    <label class="text-[10px] uppercase tracking-wider text-gray-400">Caliper Dial Size (mm):</label>
+                                    <input type="number" step="0.1" min="18" max="45" value="${ps.dialMm}" onchange="updateOrderCaliperMm('${ord.docId}', this.value)" class="w-16 bg-gold/15 border border-gold/50 rounded-lg px-2 py-0.5 text-center font-bold text-lightgold outline-none">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+                                <!-- Circular Dial Photo Preview Thumbnail -->
+                                <div class="sm:col-span-4 flex flex-col items-center justify-center p-2 bg-black/80 border border-gold/25 rounded-2xl">
+                                    ${hasPhoto ? `
+                                        <div class="relative w-24 h-24 rounded-full overflow-hidden border-2 border-gold shadow-lg">
+                                            <img src="${ord.dialPhoto}" alt="Customer Dial Photo" class="w-full h-full object-cover">
+                                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-red-500 border border-white" title="1.8mm Center Hand Hole"></span>
+                                            </div>
+                                        </div>
+                                        <span class="text-[10px] text-emerald-400 font-semibold mt-1.5"><i class="fa-solid fa-camera mr-1"></i>Custom Photo Uploaded</span>
+                                    ` : `
+                                        <div class="w-20 h-20 rounded-full bg-white/5 border border-dashed border-gold/40 flex flex-col items-center justify-center text-center p-2">
+                                            <i class="fa-solid fa-ban text-gray-500 text-sm mb-1"></i>
+                                            <span class="text-[9px] text-gray-400 leading-tight">No Photo (Solid Dial)</span>
+                                        </div>
+                                    `}
+                                </div>
+
+                                <!-- Exact Millimeter & Pixel Print Measurements Table -->
+                                <div class="sm:col-span-8 space-y-2 text-xs">
+                                    <div class="p-2.5 rounded-xl bg-black/80 border border-gold/30 flex items-center justify-between">
+                                        <span class="text-gray-300"><i class="fa-regular fa-circle-dot text-gold mr-1.5"></i><strong>Circular Photo Print Size:</strong></span>
+                                        <span class="text-lightgold font-bold text-sm">${ps.dialMm} mm <span class="text-xs font-normal text-gray-300">(${ps.dialCm} cm / ${ps.dialIn} in)</span></span>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-2 text-[11px]">
+                                        <div class="p-2 rounded-xl bg-white/[0.03] border border-white/10">
+                                            <span class="text-gray-400 block">Resolution @ 600 DPI:</span>
+                                            <strong class="text-white">${ps.px600} × ${ps.px600} px</strong>
+                                        </div>
+                                        <div class="p-2 rounded-xl bg-white/[0.03] border border-white/10">
+                                            <span class="text-gray-400 block">With +1mm Bleed Line:</span>
+                                            <strong class="text-white">${ps.bleedTrimMm} mm (${ps.px300} px @ 300DPI)</strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-2.5 rounded-xl bg-white/[0.03] border border-gold/20 space-y-1 text-[11px]">
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-400">12 O'Clock <strong>"DYNAST"</strong> Logo Decal:</span>
+                                            <strong class="text-gold">${ps.logoWidthMm} mm × ${ps.logoHeightMm} mm</strong>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-400">6 O'Clock Name (<strong>"${hasCustomName ? ord.customName : 'None'}"</strong>):</span>
+                                            <strong class="text-lightgold">${hasCustomName ? `${ps.nameWidthMm} mm × ${ps.nameHeightMm} mm` : 'No Custom Name'}</strong>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-400">Center Hand-Shaft Punch Hole:</span>
+                                            <strong class="text-white">${ps.centerHoleMm} mm diameter</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons: Download 600 DPI PNG or Print 1:1 True-Scale A4 Sheet -->
+                            <div class="flex flex-wrap items-center justify-end gap-2.5 pt-2 border-t border-gold/20">
+                                ${hasPhoto ? `
+                                    <button onclick="downloadExactDialPhotoPng('${ord.docId}')" class="border border-gold/50 bg-gold/15 hover:bg-gold/25 text-lightgold px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition">
+                                        <i class="fa-solid fa-crop-simple text-gold"></i> Download ${ps.dialMm}mm (600 DPI) Circular PNG
+                                    </button>
+                                ` : ''}
+                                <button onclick="openPrintStudio('${ord.docId}')" class="btn-gold px-4 py-2 rounded-xl text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-md">
+                                    <i class="fa-solid fa-print"></i> Print 1:1 True-Scale Sheet (A4)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // 6. UPDATE STATUS & DELETE ORDER IN FIREBASE
+        async function updateOrderStatus(docId, newStatus) {
+            try {
+                const { doc, updateDoc } = window.AdminFB;
+                await updateDoc(doc(window.db, 'bespoke_orders', docId), { status: newStatus });
+            } catch (err) {
+                alert('Failed to update status: ' + err.message);
+            }
+        }
+
+        async function deleteOrder(docId) {
+            if (!confirm('Are you sure you want to permanently delete this bespoke order?')) return;
+            try {
+                const { doc, deleteDoc } = window.AdminFB;
+                await deleteDoc(doc(window.db, 'bespoke_orders', docId));
+            } catch (err) {
+                alert('Error deleting order: ' + err.message);
+            }
+        }
+
+        // 7. DOWNLOAD 600 DPI CIRCULAR DIAL PHOTO PNG (WITH CENTER SHAFT HOLE CROSSHAIR)
+        function downloadExactDialPhotoPng(docId) {
+            const ord = allOrders.find(o => o.docId === docId);
+            if (!ord || !ord.dialPhoto) return;
+            const ps = getWatchPrintSpecifications(ord);
+            const pxSize = ps.px600;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = pxSize;
+            canvas.height = pxSize;
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                const r = pxSize / 2;
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(r, r, r - 2, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.drawImage(img, 0, 0, pxSize, pxSize);
+                ctx.restore();
+
+                // Outer precision cut ring
+                ctx.beginPath();
+                ctx.arc(r, r, r - 2, 0, Math.PI * 2);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#000000';
+                ctx.stroke();
+
+                // 1.8mm Center Hand-Shaft Punch Hole Guide
+                const holeRadiusPx = ((1.8 / 2) / 25.4) * 600;
+                ctx.beginPath();
+                ctx.arc(r, r, holeRadiusPx, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#ff0000';
+                ctx.stroke();
+
+                const a = document.createElement('a');
+                a.download = `${ord.orderId}_Dial_${ps.dialMm}mm_600DPI.png`;
+                a.href = canvas.toDataURL('image/png');
+                a.click();
+            };
+            img.src = ord.dialPhoto;
+        }
+
+        // 8. GENERATE 1:1 TRUE-SCALE PRINTABLE A4 SHEET (EXACT PHYSICAL MILLIMETERS)
+        function openPrintStudio(docId) {
+            const ord = allOrders.find(o => o.docId === docId);
+            if (!ord) return;
+            const ps = getWatchPrintSpecifications(ord);
+            const hasPhoto = Boolean(ord.dialPhoto);
+            const customName = (ord.customName && ord.customName.trim() !== '') ? ord.customName.trim() : 'Hanzalah';
+
+            const sheetHtml = `
+                <div style="font-family: 'Inter', sans-serif; color: #000; padding: 4mm;">
+                    <!-- Header -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #000; padding-bottom: 3mm; margin-bottom: 5mm;">
+                        <div>
+                            <h1 style="font-family: 'Cinzel Decorative', serif; font-size: 18pt; font-weight: 700; margin: 0;">DYNAST BESPOKE PRINT SHEET</h1>
+                            <p style="font-size: 9pt; margin: 1mm 0 0 0;">Order: <strong>${ord.orderId}</strong> | Customer: <strong>${ord.customerName}</strong> | Case: <strong>${ps.caseTypeLabel}</strong></p>
+                        </div>
+                        <div style="text-align: right; font-size: 8.5pt;">
+                            <strong>PRINTER SETTING REQUIRED:</strong><br>
+                            Scale: <strong>100% (Actual Size / Do Not Fit to Page)</strong>
+                        </div>
+                    </div>
+
+                    <!-- 50mm Physical Calibration Ruler -->
+                    <div style="margin-bottom: 6mm; padding: 3mm; border: 1px solid #000; background: #f9fafb;">
+                        <p style="font-size: 8pt; font-weight: 700; margin: 0 0 2mm 0;">50 mm (5.0 cm) PHYSICAL CALIBRATION RULER — Measure this bar after printing to confirm 1:1 scale:</p>
+                        <div style="width: 50mm; height: 4mm; background: #000; position: relative;"></div>
+                        <div style="display: flex; justify-content: space-between; width: 50mm; font-size: 7pt; font-weight: 700; margin-top: 1mm;">
+                            <span>0 mm</span><span>10 mm</span><span>20 mm</span><span>30 mm</span><span>40 mm</span><span>50 mm</span>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 1: 1:1 True-Scale Circular Dial Prints (Exact ${ps.dialMm} mm diameter) -->
+                    <h2 style="font-size: 10pt; font-weight: 700; text-transform: uppercase; margin-bottom: 2mm;">
+                        1. Circular Watch Dial Face Prints — Exact Diameter: ${ps.dialMm} mm (${ps.dialCm} cm) | Center Hole: ${ps.centerHoleMm} mm
+                    </h2>
+                    <p style="font-size: 8pt; color: #333; margin-top: 0; margin-bottom: 4mm;">
+                        Includes 3 print spares (1 Primary + 2 Workshop Backups). Dashed outer ring is +1.0 mm bleed (${ps.bleedTrimMm} mm); solid circle is exact ${ps.dialMm} mm trim line.
+                    </p>
+
+                    <div style="display: flex; gap: 10mm; align-items: center; margin-bottom: 8mm;">
+                        ${[1, 2, 3].map(copyNum => `
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <!-- Outer +1mm Bleed Guide (${ps.bleedTrimMm}mm) -->
+                                <div style="width: ${ps.bleedTrimMm}mm; height:${ps.bleedTrimMm}mm; border: 0.3mm dashed #666; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                    <!-- Exact ${ps.dialMm}mm Dial Cut Line -->
+                                    <div style="width: ${ps.dialMm}mm; height:${ps.dialMm}mm; border: 0.35mm solid #000; border-radius: 50%; overflow: hidden; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;">
+                                        ${hasPhoto ? `<img src="${ord.dialPhoto}" style="width: 100%; height: 100%; object-fit: cover;">` : ''}
+                                        <!-- Compulsory Top DYNAST Logo on Dial -->
+                                        <div style="position: absolute; top: 18%; left: 0; right: 0; text-align: center; pointer-events: none;">
+                                            <div style="font-family: 'Cinzel Decorative', serif; font-size: 6.5pt; font-weight: 700; letter-spacing: 0.4mm; color: ${hasPhoto ? '#FFD700' : '#000'}; text-shadow: ${hasPhoto ? '0 0 2px #000' : 'none'};">DYNAST</div>
+                                            <div style="font-family: 'Cinzel', serif; font-size: 3.2pt; letter-spacing: 0.2mm; color: ${hasPhoto ? '#FFF' : '#444'};">LUXURIOUS HOROLOGY</div>
+                                        </div>
+                                        <!-- Customer Custom Name at 6 O'Clock -->
+                                        <div style="position: absolute; bottom: 20%; left: 0; right: 0; text-align: center; pointer-events: none;">
+                                            <div style="font-family: 'Cinzel', serif; font-size: 5.5pt; font-weight: 600; color: ${hasPhoto ? '#FFF' : '#000'}; text-shadow: ${hasPhoto ? '0 0 2px #000' : 'none'};">${customName}</div>
+                                        </div>
+                                        <!-- Exact 1.8mm Center Hand-Shaft Punch Hole -->
+                                        <div style="width: 1.8mm; height: 1.8mm; border: 0.25mm solid #e11d48; background: #fff; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                                    </div>
+                                </div>
+                                <span style="font-size: 7.5pt; font-weight: 600; margin-top: 2mm;">Copy #${copyNum} (${ps.dialMm} mm)</span>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- SECTION 2: 1:1 Waterslide Decal Strips (For Metallic/Sunburst Dials) -->
+                    <h2 style="font-size: 10pt; font-weight: 700; text-transform: uppercase; margin-bottom: 2mm;">
+                        2. Standalone Clear Waterslide Decal Strips (1:1 Scale for Sunburst Dials)
+                    </h2>
+                    <p style="font-size: 8pt; color: #333; margin-top: 0; margin-bottom: 4mm;">
+                        Top Logo Box: <strong>${ps.logoWidthMm} mm × ${ps.logoHeightMm} mm</strong> | Customer Name Box: <strong>${ps.nameWidthMm} mm × ${ps.nameHeightMm} mm</strong> (4 Spares Included)
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; margin-bottom: 6mm;">
+                        ${[1, 2, 3, 4].map(() => `
+                            <div style="border: 0.25mm dashed #888; padding: 3mm; text-align: center; background: #fff;">
+                                <!-- Top DYNAST Logo Decal -->
+                                <div style="width: ${ps.logoWidthMm}mm; height:${ps.logoHeightMm}mm; margin: 0 auto 3mm auto; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 0.15mm dotted #ccc;">
+                                    <span style="font-family: 'Cinzel Decorative', serif; font-size: 6.5pt; font-weight: 700; letter-spacing: 0.35mm; line-height: 1;">DYNAST</span>
+                                    <span style="font-family: 'Cinzel', serif; font-size: 3.1pt; letter-spacing: 0.18mm; margin-top: 0.5mm;">LUXURIOUS HOROLOGY</span>
+                                </div>
+                                <!-- Bottom Customer Name Decal -->
+                                <div style="width: ${ps.nameWidthMm}mm; height:${ps.nameHeightMm}mm; margin: 0 auto; display: flex; justify-content: center; align-items: center; border: 0.15mm dotted #ccc;">
+                                    <span style="font-family: 'Cinzel', serif; font-size: 5.5pt; font-weight: 600; line-height: 1;">${customName}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modalSheetPreviewContainer').innerHTML = sheetHtml;
+            document.getElementById('printableA4Sheet').innerHTML = sheetHtml;
+            document.getElementById('printPreviewModal').classList.remove('hidden');
+        }
+
+        function closePrintStudio() {
+            document.getElementById('printPreviewModal').classList.add('hidden');
+        }
+
+        // 9. CREATE SAMPLE TEST ORDER (FOR INSTANT TESTING OF PRINT SIZING)
+        async function createSampleTestOrder() {
+            // Generate a sample circular gradient test image so you can test the 600 DPI download & 1:1 A4 sheet right away
+            const c = document.createElement('canvas');
+            c.width = 600; c.height = 600;
+            const cx = c.getContext('2d');
+            const g = cx.createRadialGradient(300, 300, 20, 300, 300, 300);
+            g.addColorStop(0, '#5A382C');
+            g.addColorStop(1, '#1A0D08');
+            cx.fillStyle = g;
+            cx.fillRect(0, 0, 600, 600);
+
+            const sampleOrder = {
+                orderId: 'DYN-' + Math.floor(100000 + Math.random() * 900000),
+                date: new Date().toISOString(),
+                formattedDate: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+                customerName: 'Mohammad Hanzalah (Test)',
+                phone: '+91 7579942958',
+                address: 'Hari Parvat Zone, Agra, Uttar Pradesh',
+                utrNumber: '629518403921',
+                paymentMethod: 'Paytm UPI / Instant UPI Verification',
+                payeeUpi: '7579942958@ptyes',
+                summary: '48-Flute Luxury Bezel | Two-Tone Rose & Steel | Sunburst Coffee Brown | 10 Diamond-Set Square Chatons | Name: "Hanzalah" | Photo: Yes | Solid Brushed Steel Cover | 5-Link Jubilee Metal (Two-Tone Rose-Gold & Steel) | Butterfly Deployant Lock',
+                totalPrice: 10797,
+                customName: 'Hanzalah',
+                dialPhoto: c.toDataURL('image/jpeg', 0.85),
+                specs: {
+                    bezel: '48-Flute Luxury Bezel',
+                    case: 'Two-Tone Rose & Steel',
+                    dial: 'Sunburst Coffee Brown',
+                    markers: '10 Diamond-Set Square Chatons',
+                    backCover: 'Solid Brushed Steel Cover',
+                    strap: '5-Link Jubilee Metal - Two-Tone Rose-Gold & Steel',
+                    lock: 'Butterfly Deployant Lock'
+                },
+                status: 'Payment Verification Pending'
+            };
+
+            try {
+                const { addDoc, collection } = window.AdminFB;
+                await addDoc(collection(window.db, 'bespoke_orders'), sampleOrder);
+            } catch (err) {
+                alert('Error creating test order: ' + err.message);
+            }
+        }
+    </script>
+</body>
+</html>
