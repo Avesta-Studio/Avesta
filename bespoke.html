@@ -6,7 +6,7 @@
     <title>DYNAST | Luxurious Horology Bespoke Studio</title>
     <link rel="canonical" href="https://dynast.co.in/bespoke.html">
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Customize your DYNAST Luxurious Horology timepiece in photorealistic macro studio quality.">
+    <meta name="description" content="Customize your DYNAST Luxurious Horology timepiece with exact 1:1 Datejust proportions.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -109,7 +109,7 @@
         }
 
         .studio-stage {
-            background: radial-gradient(circle at 50% 50%, #101014 0%, #040406 60%, #000000 100%);
+            background: #000000;
             box-shadow: inset 0 0 90px rgba(0,0,0,1);
         }
 
@@ -141,7 +141,7 @@
             <div class="flex items-center gap-2.5 sm:gap-4">
                 <div class="bg-gold/10 border border-gold/40 px-3.5 py-1.5 rounded-xl text-right">
                     <span class="text-[9px] uppercase tracking-widest text-gold/80 block">Live Custom Price</span>
-                    <span id="navTotalPrice" class="serif-text text-sm sm:text-base font-bold text-lightgold">₹6,948</span>
+                    <span id="navTotalPrice" class="serif-text text-sm sm:text-base font-bold text-lightgold">₹8,698</span>
                 </div>
 
                 <button onclick="openAccountModal('history')" class="relative border border-gold/40 bg-white/5 hover:bg-gold/15 text-lightgold px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 transition">
@@ -159,9 +159,9 @@
     </header>
     <!-- MAIN CUSTOMIZER WORKSPACE -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div id="mainStudioGrid" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-            <!-- LEFT COLUMN: ULTRA-REALISTIC MACRO CANVAS RENDERER -->
+            <!-- LEFT COLUMN: 1:1 RATIO MACRO CANVAS RENDERER -->
             <div class="lg:col-span-5 lg:sticky lg:top-24 space-y-4">
                 <div class="gold-panel rounded-3xl p-5 relative overflow-hidden">
                     
@@ -183,13 +183,13 @@
                         
                         <!-- 1. FRONT WATCH MACRO CANVAS -->
                         <div id="frontWatchWrapper" class="w-full flex flex-col items-center">
-                            <canvas id="frontWatchCanvas" width="900" height="1280" class="w-full max-w-[350px] h-auto select-none"></canvas>
-                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Macro Studio Photograph Render</span>
+                            <canvas id="frontWatchCanvas" width="900" height="1250" class="w-full max-w-[350px] h-auto select-none"></canvas>
+                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">1:1 Datejust 41 Studio Render</span>
                         </div>
 
                         <!-- 2. BACK CASE MACRO CANVAS -->
                         <div id="backWatchWrapper" class="w-full flex flex-col items-center hidden">
-                            <canvas id="backWatchCanvas" width="900" height="1280" class="w-full max-w-[350px] h-auto select-none"></canvas>
+                            <canvas id="backWatchCanvas" width="900" height="1250" class="w-full max-w-[350px] h-auto select-none"></canvas>
                             <span id="backCaseCaption" class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Solid Brushed Steel Caseback</span>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                             </button>
                             <button onclick="loadPresetEdition('hanzalah-white')" class="text-[11px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
                                 <span class="w-3.5 h-3.5 rounded-full bg-white border-2 border-gold shrink-0"></span>
-                                <span class="truncate">4. "Hanzalah" White Baton</span>
+                                <span class="truncate">4. "Hanzalah" White Dial</span>
                             </button>
                         </div>
                         <button onclick="downloadWatchSnapshot()" class="w-full text-[11px] bg-white/5 hover:bg-white/10 border border-white/20 text-gray-200 py-2 rounded-xl font-medium transition flex items-center justify-center gap-1.5">
@@ -232,93 +232,7 @@
                     <div id="priceBreakdownList" class="space-y-2 text-xs text-gray-300"></div>
                     <div class="border-t border-gold/30 mt-3 pt-3 flex items-center justify-between">
                         <span class="uppercase tracking-widest text-xs font-bold text-lightgold">Total Custom Price</span>
-                        <span id="cardTotalPrice" class="cinzel-decorative text-xl text-gold">₹6,948</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 mt-4">
-                        <button onclick="saveCurrentDesignToHistory()" class="border border-gold/50 bg-gold/10 hover:bg-gold/20 text-lightgold py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition">
-                            <i class="fa-solid fa-bookmark"></i> Save to History
-                        </button>
-                        <button onclick="openCheckoutModal()" class="btn-gold py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
-                            <i class="fa-solid fa-bag-shopping"></i> Order Custom Watch
-                        </button>
-                    </div>
-                </div>
-            </div><!-- MAIN CUSTOMIZER WORKSPACE -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-            <!-- LEFT COLUMN: ULTRA-REALISTIC MACRO CANVAS RENDERER -->
-            <div class="lg:col-span-5 lg:sticky lg:top-24 space-y-4">
-                <div class="gold-panel rounded-3xl p-5 relative overflow-hidden">
-                    
-                    <!-- Top Status Bar & View Switcher -->
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 z-10 relative">
-                        <button id="clockModeBtn" onclick="toggleClockMode()" class="text-[10px] uppercase tracking-[0.15em] bg-gold/15 hover:bg-gold/25 border border-gold/40 text-lightgold px-3 py-1 rounded-full font-semibold transition">
-                            <i class="fa-solid fa-clock mr-1 text-gold"></i> <span id="clockModeText">Studio 10:10 Pose</span>
-                        </button>
-
-                        <div class="flex bg-black/80 border border-gold/30 rounded-xl p-0.5 text-[11px]">
-                            <button id="viewFrontBtn" onclick="setWatchView('front')" class="px-2.5 py-1 rounded-lg bg-gold text-black font-bold transition">Front Dial</button>
-                            <button id="viewBackBtn" onclick="setWatchView('back')" class="px-2.5 py-1 rounded-lg text-gray-300 hover:text-gold transition">Back Case</button>
-                            <button id="viewSplitBtn" onclick="setWatchView('split')" class="px-2.5 py-1 rounded-lg text-gray-300 hover:text-gold transition">Both</button>
-                        </div>
-                    </div>
-
-                    <!-- PHOTOREALISTIC BLACK VELVET STUDIO STAGE -->
-                    <div id="watchStageContainer" class="studio-stage rounded-2xl border border-gold/25 p-3 grid grid-cols-1 gap-4 items-center justify-items-center">
-                        
-                        <!-- 1. FRONT WATCH MACRO CANVAS -->
-                        <div id="frontWatchWrapper" class="w-full flex flex-col items-center">
-                            <canvas id="frontWatchCanvas" width="900" height="1280" class="w-full max-w-[350px] h-auto select-none"></canvas>
-                            <span class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Macro Studio Photograph Render</span>
-                        </div>
-
-                        <!-- 2. BACK CASE MACRO CANVAS -->
-                        <div id="backWatchWrapper" class="w-full flex flex-col items-center hidden">
-                            <canvas id="backWatchCanvas" width="900" height="1280" class="w-full max-w-[350px] h-auto select-none"></canvas>
-                            <span id="backCaseCaption" class="text-[10px] text-gold/80 uppercase tracking-[0.22em] mt-1 font-semibold">Solid Brushed Steel Caseback</span>
-                        </div>
-                    </div>
-
-                    <!-- QUICK EDITION PRESETS (Exact Matches to Your Reference Photos + Hanzalah White Dial) -->
-                    <div class="mt-3 pt-3 border-t border-gold/20 space-y-2">
-                        <span class="text-[10px] uppercase tracking-widest text-gold/80 block font-semibold">Instant Reference Editions (Tap to Load):</span>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="loadPresetEdition('photo1-rosegold')" class="text-[11px] bg-gold/15 hover:bg-gold/25 border border-gold/50 text-lightgold px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#5A382C] border-2 border-[#E59E8B] shrink-0"></span>
-                                <span class="truncate">1. Rose-Gold Chocolate</span>
-                            </button>
-                            <button onclick="loadPresetEdition('photo2-yellowgold')" class="text-[11px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#111] border-2 border-[#F5C855] shrink-0"></span>
-                                <span class="truncate">2. Gold & Black Diamond</span>
-                            </button>
-                            <button onclick="loadPresetEdition('photo3-silver')" class="text-[11px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
-                                <span class="w-3.5 h-3.5 rounded-full bg-[#686D75] border-2 border-white shrink-0"></span>
-                                <span class="truncate">3. Silver Slate Baton</span>
-                            </button>
-                            <button onclick="loadPresetEdition('hanzalah-white')" class="text-[11px] bg-white/5 hover:bg-gold/15 border border-gold/30 text-gray-200 px-2.5 py-2 rounded-xl font-medium transition text-left flex items-center gap-2">
-                                <span class="w-3.5 h-3.5 rounded-full bg-white border-2 border-gold shrink-0"></span>
-                                <span class="truncate">4. "Hanzalah" White Baton</span>
-                            </button>
-                        </div>
-                        <button onclick="downloadWatchSnapshot()" class="w-full text-[11px] bg-white/5 hover:bg-white/10 border border-white/20 text-gray-200 py-2 rounded-xl font-medium transition flex items-center justify-center gap-1.5">
-                            <i class="fa-solid fa-download text-gold"></i> Download Ultra-HD Watch Render (PNG)
-                        </button>
-                    </div>
-                </div>
-
-                <!-- LIVE ITEMIZED PRICE BREAKDOWN CARD -->
-                <div class="gold-panel rounded-3xl p-5">
-                    <div class="flex items-center justify-between border-b border-gold/20 pb-3 mb-3">
-                        <h3 class="serif-text text-xs uppercase tracking-[0.2em] text-gold font-bold">
-                            <i class="fa-solid fa-receipt mr-1.5"></i> Itemized Customization Price
-                        </h3>
-                        <span class="text-[10px] text-gray-400">Inclusive of Taxes</span>
-                    </div>
-                    <div id="priceBreakdownList" class="space-y-2 text-xs text-gray-300"></div>
-                    <div class="border-t border-gold/30 mt-3 pt-3 flex items-center justify-between">
-                        <span class="uppercase tracking-widest text-xs font-bold text-lightgold">Total Custom Price</span>
-                        <span id="cardTotalPrice" class="cinzel-decorative text-xl text-gold">₹6,948</span>
+                        <span id="cardTotalPrice" class="cinzel-decorative text-xl text-gold">₹8,698</span>
                     </div>
                     <div class="grid grid-cols-2 gap-3 mt-4">
                         <button onclick="saveCurrentDesignToHistory()" class="border border-gold/50 bg-gold/10 hover:bg-gold/20 text-lightgold py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition">
@@ -337,7 +251,7 @@
                 <div class="gold-panel rounded-3xl p-6 border-l-4 border-l-gold">
                     <h1 class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-wider">DYNAST • Luxurious Horology</h1>
                     <p class="text-xs text-gray-300 mt-1 leading-relaxed">
-                        Precision-rendered with seamless solid end-links, high-contrast mirror fluted bezels, 4-facet Chromalight baton markers, and diamond chatons—exclusively bearing <strong class="text-gold font-serif">DYNAST</strong> and <strong class="text-gold font-serif">LUXURIOUS HOROLOGY</strong>.
+                        Engineered to exact 1:1 Datejust 41 horological proportions—48-flute mirror bezel, staggered 5-link Jubilee bracelet, radially angled diamond settings, and compulsory <strong class="text-gold font-serif">DYNAST • LUXURIOUS HOROLOGY</strong> dial branding.
                     </p>
                 </div>
 
@@ -345,7 +259,7 @@
                 <section class="gold-panel rounded-3xl p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div>
-                            <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">Step 01 • Oyster Case & Fluted Bezel</span>
+                            <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">Step 01 • Oyster Case & 48-Flute Bezel</span>
                             <h2 class="serif-text text-base sm:text-lg font-bold text-white">Choose Watch Case Colour</h2>
                         </div>
                         <span id="step1PriceBadge" class="text-xs font-bold text-gold bg-gold/15 border border-gold/30 px-3 py-1 rounded-full">+₹1,700</span>
@@ -440,8 +354,8 @@
                                 <div class="flex items-center gap-2.5">
                                     <i class="fa-regular fa-gem text-gold text-lg"></i>
                                     <div>
-                                        <p class="text-xs font-bold text-white">10 Diamond-Set Square Chatons</p>
-                                        <p class="text-[10px] text-gray-400">4-prong bevelled settings + Roman track</p>
+                                        <p class="text-xs font-bold text-white">10 Radially-Set Diamond Chatons</p>
+                                        <p class="text-[10px] text-gray-400">Angled gold settings + Roman track</p>
                                     </div>
                                 </div>
                                 <span class="text-xs font-bold text-gold">+₹600</span>
@@ -782,26 +696,26 @@
             </form>
         </div>
     </div>
-    <!-- HIGH-CONTRAST RAY-TRACED STUDIO SHADER ENGINE -->
+    <!-- EXACT 1:1 ROLEX DATEJUST 41 PROPORTIONAL SHADER ENGINE -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
-        // 1. ULTRA-HIGH-CONTRAST MIRROR METAL PALETTES (Black-Room + Softbox Studio Reflections)
+        // 1. HIGH-CONTRAST STUDIO MIRROR PALETTES (Calibrated to Reference Photos 10-1, 11-1, 22-1, 22-2)
         const METAL_PALETTES = {
             silver: {
-                rgbJet: [8, 10, 14], rgbShadow: [42, 48, 56], rgbMid: [158, 168, 180], rgbBright: [232, 238, 245], rgbSpec: [255, 255, 255],
+                rgbJet: [10, 12, 16], rgbShadow: [45, 52, 60], rgbMid: [164, 174, 186], rgbBright: [236, 241, 247], rgbSpec: [255, 255, 255],
                 stops: ['#0D1015', '#7B8492', '#FFFFFF', '#DCE3EC', '#222730', '#F8FAFC', '#8D96A5', '#090B0E'],
-                fluteBright: '#FFFFFF', fluteLight: '#E2E8F0', fluteMid: '#94A3B8', fluteDark: '#0B0D12', fluteWarm: '#333B48',
-                handLight: '#FFFFFF', handDark: '#262C36', rim: '#FFFFFF'
+                fluteBright: '#FFFFFF', fluteLight: '#E5EBF2', fluteMid: '#94A3B8', fluteDark: '#0C0F14', fluteWarm: '#38414E',
+                handLight: '#FFFFFF', handDark: '#252B35', rim: '#FFFFFF'
             },
             gold: {
-                rgbJet: [18, 10, 1], rgbShadow: [92, 58, 4], rgbMid: [212, 162, 44], rgbBright: [252, 224, 130], rgbSpec: [255, 253, 235],
+                rgbJet: [18, 10, 1], rgbShadow: [94, 60, 4], rgbMid: [214, 164, 46], rgbBright: [252, 226, 134], rgbSpec: [255, 253, 236],
                 stops: ['#180D00', '#A8770E', '#FFFDF0', '#F2C654', '#3D2502', '#FCE89C', '#C4901E', '#120900'],
                 fluteBright: '#FFFDF2', fluteLight: '#F9D678', fluteMid: '#C89626', fluteDark: '#160B00', fluteWarm: '#684405',
                 handLight: '#FFFCE6', handDark: '#5E3D04', rim: '#FCE288'
             },
             rosegold: {
-                rgbJet: [20, 7, 4], rgbShadow: [96, 42, 28], rgbMid: [206, 128, 106], rgbBright: [248, 192, 176], rgbSpec: [255, 246, 242],
+                rgbJet: [20, 7, 4], rgbShadow: [98, 44, 30], rgbMid: [208, 130, 108], rgbBright: [248, 194, 178], rgbSpec: [255, 246, 242],
                 stops: ['#1A0804', '#A85E4A', '#FFF7F5', '#E59E8B', '#421B11', '#FAD2C6', '#C27864', '#140603'],
                 fluteBright: '#FFF9F7', fluteLight: '#F5B9A8', fluteMid: '#CA7E6B', fluteDark: '#180703', fluteWarm: '#6B3022',
                 handLight: '#FFF4F0', handDark: '#5C281B', rim: '#F2B5A4'
@@ -814,12 +728,10 @@
             }
         };
 
-        // High-Contrast Studio Reflection Lookup (Produces stark dark-and-bright mirror facets like 10-1.jpg & 22-2.jpg)
         function sampleStudioMirror(angleRad, pal) {
-            const w = 0.52 * Math.cos(angleRad * 2 + 0.75)
-                    + 0.34 * Math.sin(angleRad * 3 - 0.45)
-                    + 0.24 * Math.cos(angleRad * 6 + 0.20);
-            // Apply S-curve contrast so mirror facets snap sharply between dark shadow, rich metal, and white specular
+            const w = 0.52 * Math.cos(angleRad * 2 + 0.78)
+                    + 0.34 * Math.sin(angleRad * 3 - 0.42)
+                    + 0.24 * Math.cos(angleRad * 6 + 0.18);
             let t = Math.max(0, Math.min(1, (w + 0.85) / 1.70));
             t = t * t * (3 - 2 * t);
 
@@ -856,7 +768,7 @@
         };
 
         const MARKER_OPTIONS = {
-            diamond: { name: '10 Diamond-Set Square Chatons', price: 600 },
+            diamond: { name: '10 Radially-Set Diamond Chatons', price: 600 },
             baton:   { name: 'Luminous Baton Stick Markers', price: 0 }
         };
 
@@ -928,7 +840,7 @@
             strapColorIndex: 0,
             strapLock: 'butterfly',
             viewMode: 'front',
-            liveClock: false // Defaults to 10:10:31 Studio Pose so hands never block customer's name
+            liveClock: false
         };
 
         let uploadedPhotoImg = null;
@@ -938,6 +850,13 @@
         let balanceDir = 1;
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Auto-heal guard: If user ever accidentally pasted a duplicate column in #mainStudioGrid, remove extras automatically
+            const grid = document.getElementById('mainStudioGrid');
+            if (grid && grid.children.length > 2) {
+                while (grid.children.length > 2) {
+                    grid.removeChild(grid.children[1]);
+                }
+            }
             renderStrapColorSwatches();
             updatePriceBreakdown();
             updateAuthUI();
@@ -998,12 +917,18 @@
             ctx.restore();
         }
 
-        // PHOTOREALISTIC MACRO FRONT WATCH ENGINE (900 x 1280)
+        // EXACT 1:1 RATIO ROLEX DATEJUST 41 FRONT RENDERER (Canvas: 900 x 1250, Center: 450, 625)
+        // Measured Ratios from 10-1.jpg:
+        // Bezel Outer Radius = 270px (Diameter = 540px, y = 355 to 895)
+        // Bezel Inner Radius = 222px (Bezel Width = 48px = 17.8% of rBezelOuter)
+        // Dial Radius = 204px (Rehaut Width = 18px = 6.6% of rBezelOuter)
+        // Lug-to-Lug Y = 294 to 956 (Height = 662px = 1.225x Bezel Diameter — exact Datejust 41 ratio!)
+        // Bracelet Width at Lugs = 288px (x = 306 to 594 = 53.3% of Bezel Diameter)
         function drawFrontWatchCanvas() {
             const canvas = document.getElementById('frontWatchCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            const W = 900, H = 1280, CX = 450, CY = 640;
+            const W = 900, H = 1250, CX = 450, CY = 625;
             ctx.clearRect(0, 0, W, H);
 
             const caseObj = CASE_OPTIONS[state.caseColor];
@@ -1013,53 +938,52 @@
             const bezelPal = METAL_PALETTES[caseObj.bezelMetal];
             const lugPal = METAL_PALETTES[caseObj.lugMetal];
 
-            // 1. DRAW SEAMLESS 5-LINK JUBILEE BRACELET OR STRAP (Extends deep under the bezel—ZERO black gap!)
+            // 1. DRAW STAGGERED 5-LINK JUBILEE BRACELET OR STRAP (Exact 30% / 40% / 30% link ratio)
             drawMacroBracelet(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.lugMetal, false);
 
-            // 2. DRAW SCULPTED OYSTER MONOBLOC CASE & MIRROR-POLISHED LUGS (Flush at x=278 & x=622—ZERO lug gap!)
+            // 2. DRAW 1:1 PROPORTIONAL OYSTER CASE & LUGS (Compact lug tips at y=294 & y=956, tight 3/9 case sides at x=165 & x=735)
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.92)';
-            ctx.shadowBlur = 42;
-            ctx.shadowOffsetY = 16;
+            ctx.shadowBlur = 38;
+            ctx.shadowOffsetY = 14;
 
-            // Left Half of Oyster Case & Top-Left / Bottom-Left Lugs
+            // Left Oyster Lug & Case Cushion Side
             ctx.beginPath();
-            ctx.moveTo(246, 218);
-            ctx.lineTo(278, 218); // Hugs bracelet at x=278
-            ctx.lineTo(278, 1062);
-            ctx.lineTo(246, 1062);
-            ctx.bezierCurveTo(196, 938, 128, 795, 128, 640);
-            ctx.bezierCurveTo(128, 485, 196, 342, 246, 218);
+            ctx.moveTo(262, 294); // Top-Left Lug Outer Tip
+            ctx.lineTo(306, 294); // Top-Left Lug Inner Corner (hugs bracelet at x=306)
+            ctx.lineTo(306, 956); // Bottom-Left Lug Inner Corner
+            ctx.lineTo(262, 956); // Bottom-Left Lug Outer Tip
+            ctx.bezierCurveTo(212, 868, 165, 752, 165, 625); // Tight 9 o'clock case side (only 15px outside rBezelOuter=270!)
+            ctx.bezierCurveTo(165, 498, 212, 382, 262, 294);
             ctx.closePath();
 
-            // Realistic Studio Mirror Reflection on Left Lugs (Bright top-left hood, dark studio reflection band, bright lower-left lug)
-            const leftLugGrad = ctx.createLinearGradient(128, 218, 278, 1062);
+            const leftLugGrad = ctx.createLinearGradient(165, 294, 306, 956);
             leftLugGrad.addColorStop(0.00, lugPal.fluteBright);
-            leftLugGrad.addColorStop(0.14, lugPal.fluteLight);
-            leftLugGrad.addColorStop(0.28, lugPal.fluteWarm);
-            leftLugGrad.addColorStop(0.45, lugPal.fluteDark);
+            leftLugGrad.addColorStop(0.16, lugPal.fluteLight);
+            leftLugGrad.addColorStop(0.32, lugPal.fluteWarm);
+            leftLugGrad.addColorStop(0.48, lugPal.fluteDark);
             leftLugGrad.addColorStop(0.68, lugPal.fluteMid);
             leftLugGrad.addColorStop(0.84, lugPal.fluteBright);
-            leftLugGrad.addColorStop(0.94, lugPal.fluteDark);
+            leftLugGrad.addColorStop(0.93, lugPal.fluteDark);
             leftLugGrad.addColorStop(1.00, lugPal.fluteMid);
             ctx.fillStyle = leftLugGrad;
             ctx.fill();
 
-            // Right Half of Oyster Case & Top-Right / Bottom-Right Lugs
+            // Right Oyster Lug & Case Cushion Side
             ctx.beginPath();
-            ctx.moveTo(654, 218);
-            ctx.lineTo(622, 218); // Hugs bracelet at x=622
-            ctx.lineTo(622, 1062);
-            ctx.lineTo(654, 1062);
-            ctx.bezierCurveTo(704, 938, 772, 795, 772, 640);
-            ctx.bezierCurveTo(772, 485, 704, 342, 654, 218);
+            ctx.moveTo(638, 294); // Top-Right Lug Outer Tip
+            ctx.lineTo(594, 294); // Top-Right Lug Inner Corner (hugs bracelet at x=594)
+            ctx.lineTo(594, 956); // Bottom-Right Lug Inner Corner
+            ctx.lineTo(638, 956); // Bottom-Right Lug Outer Tip
+            ctx.bezierCurveTo(688, 868, 735, 752, 735, 625); // Tight 3 o'clock case side
+            ctx.bezierCurveTo(735, 498, 688, 382, 638, 294);
             ctx.closePath();
 
-            const rightLugGrad = ctx.createLinearGradient(622, 218, 772, 1062);
+            const rightLugGrad = ctx.createLinearGradient(594, 294, 735, 956);
             rightLugGrad.addColorStop(0.00, lugPal.fluteMid);
             rightLugGrad.addColorStop(0.08, lugPal.fluteDark);
-            rightLugGrad.addColorStop(0.20, lugPal.fluteBright);
-            rightLugGrad.addColorStop(0.38, lugPal.fluteLight);
+            rightLugGrad.addColorStop(0.22, lugPal.fluteBright);
+            rightLugGrad.addColorStop(0.40, lugPal.fluteLight);
             rightLugGrad.addColorStop(0.56, lugPal.fluteDark);
             rightLugGrad.addColorStop(0.76, lugPal.fluteBright);
             rightLugGrad.addColorStop(0.90, lugPal.fluteMid);
@@ -1068,80 +992,77 @@
             ctx.fill();
             ctx.restore();
 
-            // Curved Solid End-Link (SEL) Contour Line where Bracelet meets Case
+            // Solid End-Link (SEL) Vertical Seam Lines where Lugs meet Bracelet
             ctx.save();
-            ctx.strokeStyle = 'rgba(0,0,0,0.75)';
-            ctx.lineWidth = 2.2;
+            ctx.strokeStyle = 'rgba(0,0,0,0.82)';
+            ctx.lineWidth = 2.0;
             ctx.beginPath();
-            ctx.moveTo(278, 218); ctx.lineTo(278, 355);
-            ctx.moveTo(622, 218); ctx.lineTo(622, 355);
-            ctx.moveTo(278, 925); ctx.lineTo(278, 1062);
-            ctx.moveTo(622, 925); ctx.lineTo(622, 1062);
+            ctx.moveTo(306, 294); ctx.lineTo(306, 400);
+            ctx.moveTo(594, 294); ctx.lineTo(594, 400);
+            ctx.moveTo(306, 850); ctx.lineTo(306, 956);
+            ctx.moveTo(594, 850); ctx.lineTo(594, 956);
             ctx.stroke();
 
-            // Outer Mirror-Polished Bevel Rim Along Case Flanks
+            // Outer Mirror-Polished Bevel Chamfer Along Case Sides
             ctx.strokeStyle = lugPal.fluteBright;
-            ctx.lineWidth = 3.5;
-            ctx.globalAlpha = 0.9;
+            ctx.lineWidth = 3.0;
+            ctx.globalAlpha = 0.88;
             ctx.beginPath();
-            ctx.moveTo(248, 222); ctx.bezierCurveTo(199, 344, 132, 486, 132, 640);
-            ctx.moveTo(652, 222); ctx.bezierCurveTo(701, 344, 768, 486, 768, 640);
+            ctx.moveTo(264, 297); ctx.bezierCurveTo(215, 384, 168, 498, 168, 625);
+            ctx.moveTo(636, 297); ctx.bezierCurveTo(685, 384, 732, 498, 732, 625);
             ctx.stroke();
             ctx.restore();
 
-            // 3. DRAW 3D FLUTED TWINLOCK WINDING CROWN (Right Side at 3 o'clock)
+            // 3. DRAW 1:1 PROPORTIONAL TWINLOCK WINDING CROWN (Compact height = 84px, width = 34px at 3 o'clock)
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.88)';
-            ctx.shadowBlur = 16;
-            drawRoundedRect(ctx, 754, 598, 18, 84, 3);
-            ctx.fillStyle = createMetalGradient(ctx, 754, 598, 754, 682, caseObj.bezelMetal, true);
+            ctx.shadowBlur = 14;
+            drawRoundedRect(ctx, 724, 594, 14, 62, 2);
+            ctx.fillStyle = createMetalGradient(ctx, 724, 594, 724, 656, caseObj.bezelMetal, true);
             ctx.fill();
 
-            drawRoundedRect(ctx, 766, 578, 40, 124, 12);
-            ctx.fillStyle = createMetalGradient(ctx, 766, 578, 766, 702, caseObj.bezelMetal, true);
+            drawRoundedRect(ctx, 734, 583, 33, 84, 9);
+            ctx.fillStyle = createMetalGradient(ctx, 734, 583, 734, 667, caseObj.bezelMetal, true);
             ctx.fill();
             ctx.restore();
 
-            for (let cy = 588; cy <= 690; cy += 9.5) {
+            for (let cy = 591; cy <= 658; cy += 7.5) {
                 ctx.fillStyle = bezelPal.fluteDark;
-                ctx.fillRect(769, cy, 34, 4.2);
+                ctx.fillRect(736, cy, 29, 3.2);
                 ctx.fillStyle = bezelPal.fluteBright;
-                ctx.fillRect(769, cy + 4.2, 34, 2.8);
+                ctx.fillRect(736, cy + 3.2, 29, 2.2);
             }
 
-            // 4. DRAW 72-FACET SAWTOOTH FLUTED BEZEL (High-Contrast Black/Bright Prism Reflections)
-            const rBezelOuter = 316, rBezelInner = 258;
+            // 4. DRAW AUTHENTIC 48-FLUTE BEZEL (Exact 4 Flutes per Hour — Wide, Bold Mirror Facets like 10-1.jpg & 22-2.jpg)
+            const rBezelOuter = 270, rBezelInner = 222;
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.92)';
-            ctx.shadowBlur = 28;
+            ctx.shadowBlur = 24;
             ctx.beginPath();
-            ctx.arc(CX, CY, rBezelOuter + 3, 0, Math.PI * 2);
+            ctx.arc(CX, CY, rBezelOuter + 2.5, 0, Math.PI * 2);
             ctx.fillStyle = bezelPal.fluteDark;
             ctx.fill();
             ctx.restore();
 
-            const flutes = 72;
+            const flutes = 48; // Exact Rolex Datejust flute count (4 per hour)
             for (let i = 0; i < flutes; i++) {
                 const a1 = (i * 2 * Math.PI) / flutes;
                 const aPeak = ((i + 0.5) * 2 * Math.PI) / flutes;
                 const a2 = ((i + 1) * 2 * Math.PI) / flutes;
 
-                // Sharp zig-zag outer sawtooth edge & circular inner rim
-                const x1o = CX + (rBezelOuter - 3.5) * Math.cos(a1), y1o = CY + (rBezelOuter - 3.5) * Math.sin(a1);
-                const xPo = CX + (rBezelOuter + 3.5) * Math.cos(aPeak), yPo = CY + (rBezelOuter + 3.5) * Math.sin(aPeak);
-                const x2o = CX + (rBezelOuter - 3.5) * Math.cos(a2), y2o = CY + (rBezelOuter - 3.5) * Math.sin(a2);
+                const x1o = CX + (rBezelOuter - 3.2) * Math.cos(a1), y1o = CY + (rBezelOuter - 3.2) * Math.sin(a1);
+                const xPo = CX + (rBezelOuter + 3.2) * Math.cos(aPeak), yPo = CY + (rBezelOuter + 3.2) * Math.sin(aPeak);
+                const x2o = CX + (rBezelOuter - 3.2) * Math.cos(a2), y2o = CY + (rBezelOuter - 3.2) * Math.sin(a2);
 
                 const x1i = CX + rBezelInner * Math.cos(a1), y1i = CY + rBezelInner * Math.sin(a1);
                 const xPi = CX + rBezelInner * Math.cos(aPeak), yPi = CY + rBezelInner * Math.sin(aPeak);
                 const x2i = CX + rBezelInner * Math.cos(a2), y2i = CY + rBezelInner * Math.sin(a2);
 
-                // Angled mirror planes (+0.52 rad vs -0.52 rad) create the stark alternating light/dark triangles!
-                const colA1 = sampleStudioMirror(aPeak + 0.54, bezelPal);
-                const colA2 = sampleStudioMirror(aPeak + 0.36, bezelPal);
-                const colB1 = sampleStudioMirror(aPeak - 0.54, bezelPal);
-                const colB2 = sampleStudioMirror(aPeak - 0.36, bezelPal);
+                const colA1 = sampleStudioMirror(aPeak + 0.55, bezelPal);
+                const colA2 = sampleStudioMirror(aPeak + 0.35, bezelPal);
+                const colB1 = sampleStudioMirror(aPeak - 0.55, bezelPal);
+                const colB2 = sampleStudioMirror(aPeak - 0.35, bezelPal);
 
-                // Flute Face A
                 const gA = ctx.createLinearGradient(x1i, y1i, xPo, yPo);
                 gA.addColorStop(0, colA2);
                 gA.addColorStop(1, colA1);
@@ -1151,7 +1072,6 @@
                 ctx.fillStyle = gA;
                 ctx.fill();
 
-                // Flute Face B
                 const gB = ctx.createLinearGradient(xPi, yPi, x2o, y2o);
                 gB.addColorStop(0, colB1);
                 gB.addColorStop(1, colB2);
@@ -1163,8 +1083,8 @@
 
                 // Sharp Specular Ridge Line
                 ctx.strokeStyle = bezelPal.fluteBright;
-                ctx.globalAlpha = 0.65;
-                ctx.lineWidth = 1.0;
+                ctx.globalAlpha = 0.7;
+                ctx.lineWidth = 1.1;
                 ctx.beginPath(); ctx.moveTo(xPi, yPi); ctx.lineTo(xPo, yPo); ctx.stroke();
 
                 // Valley Shadow Line
@@ -1178,12 +1098,12 @@
             // Inner Bezel Mirror Bevel Ring
             ctx.beginPath();
             ctx.arc(CX, CY, rBezelInner, 0, Math.PI * 2);
-            ctx.lineWidth = 4.5;
+            ctx.lineWidth = 4.0;
             ctx.strokeStyle = bezelPal.rim;
             ctx.stroke();
 
-            // 5. DRAW 3D CONCAVE METALLIC REHAUT RING ("DYNAST" Laser-Engraved on Inner Wall)
-            const rDial = 238;
+            // 5. DRAW 3D CONCAVE METALLIC REHAUT RING (r = 222 down to rDial = 204)
+            const rDial = 204;
             const rehautGrad = ctx.createLinearGradient(CX - rBezelInner, CY - rBezelInner, CX + rBezelInner, CY + rBezelInner);
             rehautGrad.addColorStop(0.0, '#101216');
             rehautGrad.addColorStop(0.25, lugPal.fluteLight);
@@ -1196,17 +1116,17 @@
             ctx.fill();
 
             ctx.save();
-            ctx.fillStyle = 'rgba(15,23,42,0.52)';
-            ctx.font = '700 8.5px "Cinzel", serif';
+            ctx.fillStyle = 'rgba(15,23,42,0.48)';
+            ctx.font = '700 7.5px "Cinzel", serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             for (let rAng = 0; rAng < 360; rAng += 30) {
                 const rad = (rAng - 90) * Math.PI / 180;
-                drawCurvedText(ctx, 'DYNAST', CX, CY, 247, rad, 0.032, rAng > 90 && rAng < 270);
+                drawCurvedText(ctx, 'DYNAST', CX, CY, 212.5, rad, 0.032, rAng > 90 && rAng < 270);
             }
             ctx.restore();
 
-            // 6. DRAW MICRO-BRUSHED SUNBURST DIAL
+            // 6. DRAW MICRO-BRUSHED SUNBURST DIAL (rDial = 204)
             ctx.save();
             ctx.beginPath();
             ctx.arc(CX, CY, rDial, 0, Math.PI * 2);
@@ -1236,9 +1156,9 @@
                 for (let r = 0; r < 1400; r++) {
                     const a = (r * 2 * Math.PI) / 1400;
                     ctx.strokeStyle = (r % 2 === 0) ? 'rgba(255,255,255,0.036)' : 'rgba(0,0,0,0.062)';
-                    ctx.lineWidth = 0.6;
+                    ctx.lineWidth = 0.55;
                     ctx.beginPath();
-                    ctx.moveTo(CX + 5 * Math.cos(a), CY + 5 * Math.sin(a));
+                    ctx.moveTo(CX + 4 * Math.cos(a), CY + 4 * Math.sin(a));
                     ctx.lineTo(CX + rDial * Math.cos(a), CY + rDial * Math.sin(a));
                     ctx.stroke();
                 }
@@ -1251,7 +1171,7 @@
                 ctx.fillRect(CX - rDial, CY - rDial, rDial * 2, rDial * 2);
             }
 
-            const edgeShadow = ctx.createRadialGradient(CX, CY, rDial - 22, CX, CY, rDial);
+            const edgeShadow = ctx.createRadialGradient(CX, CY, rDial - 18, CX, CY, rDial);
             edgeShadow.addColorStop(0.0, 'rgba(0,0,0,0)');
             edgeShadow.addColorStop(0.68, 'rgba(0,0,0,0.26)');
             edgeShadow.addColorStop(1.0, 'rgba(0,0,0,0.85)');
@@ -1259,15 +1179,15 @@
             ctx.fillRect(CX - rDial, CY - rDial, rDial * 2, rDial * 2);
             ctx.restore();
 
-            // 7. DRAW PRECISION RAILWAY MINUTE TRACK WITH ROMAN NUMERALS OR 05–60 NUMBERS
+            // 7. DRAW PRECISION RAILWAY MINUTE TRACK (r = 186 to 198)
             const tColor = state.customPhotoDataUrl ? '#FFE87C' : dialObj.trackColor;
             ctx.save();
             ctx.strokeStyle = tColor;
             ctx.fillStyle = tColor;
-            ctx.lineWidth = 1.1;
+            ctx.lineWidth = 1.0;
             ctx.globalAlpha = 0.85;
-            ctx.beginPath(); ctx.arc(CX, CY, 231, 0, Math.PI * 2); ctx.stroke();
-            ctx.beginPath(); ctx.arc(CX, CY, 217, 0, Math.PI * 2); ctx.stroke();
+            ctx.beginPath(); ctx.arc(CX, CY, 198, 0, Math.PI * 2); ctx.stroke();
+            ctx.beginPath(); ctx.arc(CX, CY, 186, 0, Math.PI * 2); ctx.stroke();
 
             const romans = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
             const mins = ['60', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'];
@@ -1279,111 +1199,102 @@
                     const idx = m / 5;
                     const label = state.markerStyle === 'diamond' ? romans[idx] : mins[idx];
                     ctx.save();
-                    ctx.translate(CX + 224 * Math.cos(ang), CY + 224 * Math.sin(ang));
+                    ctx.translate(CX + 192 * Math.cos(ang), CY + 192 * Math.sin(ang));
                     ctx.rotate(ang + Math.PI / 2);
-                    ctx.font = '600 8.5px "Cinzel", serif';
+                    ctx.font = '600 7.5px "Cinzel", serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(label, 0, 0);
                     ctx.restore();
                 } else {
                     ctx.beginPath();
-                    ctx.moveTo(CX + 217 * Math.cos(ang), CY + 217 * Math.sin(ang));
-                    ctx.lineTo(CX + 231 * Math.cos(ang), CY + 231 * Math.sin(ang));
+                    ctx.moveTo(CX + 186 * Math.cos(ang), CY + 186 * Math.sin(ang));
+                    ctx.lineTo(CX + 198 * Math.cos(ang), CY + 198 * Math.sin(ang));
                     ctx.stroke();
                 }
             }
             ctx.restore();
-            // 8. DRAW 3D DIAMOND CHATONS (Photo 10-3) OR 4-BEVEL CHROMALIGHT BATON STICK MARKERS (Photo 22-2)
+            // 8. DRAW RADIALLY ROTATED 3D DIAMOND CHATONS (10-1.jpg) OR 4-BEVEL LUMINOUS BATONS (22-1.jpg)
             for (let h = 1; h <= 11; h++) {
                 if (h === 3) continue; // 3 o'clock has Cyclops Date Window
                 const ang = (h * 30 - 90) * Math.PI / 180;
-                const mx = CX + 178 * Math.cos(ang);
-                const my = CY + 178 * Math.sin(ang);
+                const rMarker = state.markerStyle === 'diamond' ? 152 : 154;
+                const mx = CX + rMarker * Math.cos(ang);
+                const my = CY + rMarker * Math.sin(ang);
 
                 ctx.save();
-                ctx.shadowColor = 'rgba(0,0,0,0.65)';
-                ctx.shadowBlur = 7;
-                ctx.shadowOffsetX = 2.5;
-                ctx.shadowOffsetY = 3.5;
+                ctx.shadowColor = 'rgba(0,0,0,0.68)';
+                ctx.shadowBlur = 6;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 3;
+
+                // Rotate BOTH Diamond Chatons AND Baton Markers radially toward dial center (Exact match to 10-1.jpg & 11-1.jpg!)
+                ctx.translate(mx, my);
+                ctx.rotate(ang + Math.PI / 2);
 
                 if (state.markerStyle === 'diamond') {
-                    // 4-Facet Bevelled Metallic Square Chaton + 16-Facet Brilliant Diamond
-                    const sOut = 15.5, sIn = 9.5;
-                    ctx.translate(mx, my);
+                    const sOut = 13.5, sIn = 8.2;
+                    // Top Bevel
                     ctx.fillStyle = bezelPal.fluteBright;
                     ctx.beginPath(); ctx.moveTo(-sOut, -sOut); ctx.lineTo(sOut, -sOut); ctx.lineTo(sIn, -sIn); ctx.lineTo(-sIn, -sIn); ctx.closePath(); ctx.fill();
                     ctx.shadowColor = 'transparent';
+                    // Left Bevel
                     ctx.fillStyle = bezelPal.fluteLight;
                     ctx.beginPath(); ctx.moveTo(-sOut, -sOut); ctx.lineTo(-sIn, -sIn); ctx.lineTo(-sIn, sIn); ctx.lineTo(-sOut, sOut); ctx.closePath(); ctx.fill();
-                    ctx.fillStyle = bezelPal.fluteMid;
+                    // Right Bevel
+                    ctx.fillStyle = bezelPal.fluteWarm;
                     ctx.beginPath(); ctx.moveTo(sOut, -sOut); ctx.lineTo(sOut, sOut); ctx.lineTo(sIn, sIn); ctx.lineTo(sIn, -sIn); ctx.closePath(); ctx.fill();
+                    // Bottom Bevel
                     ctx.fillStyle = bezelPal.fluteDark;
                     ctx.beginPath(); ctx.moveTo(-sOut, sOut); ctx.lineTo(sOut, sOut); ctx.lineTo(sIn, sIn); ctx.lineTo(-sIn, sIn); ctx.closePath(); ctx.fill();
 
                     ctx.fillStyle = '#090D16';
                     ctx.fillRect(-sIn, -sIn, sIn * 2, sIn * 2);
 
-                    const dGrad = ctx.createRadialGradient(-2, -2, 1, 0, 0, sIn);
+                    // 16-Facet Brilliant Cut Diamond
+                    const dGrad = ctx.createRadialGradient(-1.5, -1.5, 1, 0, 0, sIn);
                     dGrad.addColorStop(0.0, '#FFFFFF');
                     dGrad.addColorStop(0.45, '#F0F9FF');
                     dGrad.addColorStop(0.75, '#94A3B8');
                     dGrad.addColorStop(1.0, '#FFFFFF');
                     ctx.fillStyle = dGrad;
-                    ctx.beginPath(); ctx.arc(0, 0, sIn - 0.5, 0, Math.PI * 2); ctx.fill();
+                    ctx.beginPath(); ctx.arc(0, 0, sIn - 0.4, 0, Math.PI * 2); ctx.fill();
 
                     ctx.strokeStyle = 'rgba(255,255,255,0.95)';
-                    ctx.lineWidth = 1.1;
+                    ctx.lineWidth = 1.0;
                     ctx.beginPath();
-                    ctx.moveTo(-7, 0); ctx.lineTo(7, 0);
-                    ctx.moveTo(0, -7); ctx.lineTo(0, 7);
-                    ctx.moveTo(-5, -5); ctx.lineTo(5, 5);
-                    ctx.moveTo(-5, 5); ctx.lineTo(5, -5);
+                    ctx.moveTo(-6, 0); ctx.lineTo(6, 0);
+                    ctx.moveTo(0, -6); ctx.lineTo(0, 6);
+                    ctx.moveTo(-4.2, -4.2); ctx.lineTo(4.2, 4.2);
+                    ctx.moveTo(-4.2, 4.2); ctx.lineTo(4.2, -4.2);
                     ctx.stroke();
 
+                    // 4 Corner Prongs
                     ctx.fillStyle = bezelPal.fluteBright;
-                    [[-6.5, -6.5], [6.5, -6.5], [6.5, 6.5], [-6.5, 6.5]].forEach(p => {
-                        ctx.beginPath(); ctx.arc(p[0], p[1], 2.2, 0, Math.PI * 2); ctx.fill();
+                    [[-5.8, -5.8], [5.8, -5.8], [5.8, 5.8], [-5.8, 5.8]].forEach(p => {
+                        ctx.beginPath(); ctx.arc(p[0], p[1], 2.0, 0, Math.PI * 2); ctx.fill();
                     });
                 } else {
-                    // AUTHENTIC 4-BEVEL CHROMALIGHT BATON STICK MARKER (Exact Macro Geometry from Photo 22-2)
-                    // Positioned radially from r=150 to r=204 (length = 54px, width = 18px)
-                    ctx.translate(mx, my);
-                    ctx.rotate(ang + Math.PI / 2);
+                    // 1:1 Proportional 4-Bevel Chromalight Baton Marker (Exact match to 22-1.jpg & 22-2.jpg)
+                    const bw = 7.8, bh = 23.5;
+                    const lw = 4.6, lh = 20.0;
 
-                    const bw = 9.0, bh = 27.0;   // Outer metallic frame half-width (18px) & half-length (54px)
-                    const lw = 5.4, lh = 23.2;   // Inner white Chromalight lume half-width & half-length
-
-                    // Outer dark micro-outline for crispness on white & dark dials
                     ctx.fillStyle = bezelPal.fluteDark;
-                    ctx.fillRect(-bw - 0.6, -bh - 0.6, (bw + 0.6) * 2, (bh + 0.6) * 2);
+                    ctx.fillRect(-bw - 0.5, -bh - 0.5, (bw + 0.5) * 2, (bh + 0.5) * 2);
                     ctx.shadowColor = 'transparent';
 
-                    // Top Mitered Bevel Facet (Bright Specular)
                     ctx.fillStyle = bezelPal.fluteBright;
-                    ctx.beginPath();
-                    ctx.moveTo(-bw, -bh); ctx.lineTo(bw, -bh); ctx.lineTo(lw, -lh); ctx.lineTo(-lw, -lh);
-                    ctx.closePath(); ctx.fill();
+                    ctx.beginPath(); ctx.moveTo(-bw, -bh); ctx.lineTo(bw, -bh); ctx.lineTo(lw, -lh); ctx.lineTo(-lw, -lh); ctx.closePath(); ctx.fill();
 
-                    // Left Mitered Bevel Facet (Light Metallic)
                     ctx.fillStyle = bezelPal.fluteLight;
-                    ctx.beginPath();
-                    ctx.moveTo(-bw, -bh); ctx.lineTo(-lw, -lh); ctx.lineTo(-lw, lh); ctx.lineTo(-bw, bh);
-                    ctx.closePath(); ctx.fill();
+                    ctx.beginPath(); ctx.moveTo(-bw, -bh); ctx.lineTo(-lw, -lh); ctx.lineTo(-lw, lh); ctx.lineTo(-bw, bh); ctx.closePath(); ctx.fill();
 
-                    // Right Mitered Bevel Facet (Contrasting Mid/Dark Metallic Slope)
                     ctx.fillStyle = bezelPal.fluteWarm;
-                    ctx.beginPath();
-                    ctx.moveTo(bw, -bh); ctx.lineTo(bw, bh); ctx.lineTo(lw, lh); ctx.lineTo(lw, -lh);
-                    ctx.closePath(); ctx.fill();
+                    ctx.beginPath(); ctx.moveTo(bw, -bh); ctx.lineTo(bw, bh); ctx.lineTo(lw, lh); ctx.lineTo(lw, -lh); ctx.closePath(); ctx.fill();
 
-                    // Bottom Mitered Bevel Facet (Deep Metallic Shadow)
                     ctx.fillStyle = bezelPal.fluteDark;
-                    ctx.beginPath();
-                    ctx.moveTo(-bw, bh); ctx.lineTo(bw, bh); ctx.lineTo(lw, lh); ctx.lineTo(-lw, lh);
-                    ctx.closePath(); ctx.fill();
+                    ctx.beginPath(); ctx.moveTo(-bw, bh); ctx.lineTo(bw, bh); ctx.lineTo(lw, lh); ctx.lineTo(-lw, lh); ctx.closePath(); ctx.fill();
 
-                    // Crisp Inner Recessed Pure-White Chromalight Lume Core
                     const lumeGrad = ctx.createLinearGradient(-lw, 0, lw, 0);
                     lumeGrad.addColorStop(0.0, '#F1F5F9');
                     lumeGrad.addColorStop(0.5, '#FFFFFF');
@@ -1391,9 +1302,8 @@
                     ctx.fillStyle = lumeGrad;
                     ctx.fillRect(-lw, -lh, lw * 2, lh * 2);
 
-                    // Razor-sharp inner bezel seam around white lume
                     ctx.strokeStyle = 'rgba(15,23,42,0.35)';
-                    ctx.lineWidth = 0.7;
+                    ctx.lineWidth = 0.6;
                     ctx.strokeRect(-lw, -lh, lw * 2, lh * 2);
                 }
                 ctx.restore();
@@ -1405,96 +1315,92 @@
             ctx.shadowBlur = 5;
             ctx.shadowOffsetY = 2;
 
-            // 12 O'Clock 3D Faceted 5-Prong Coronet Emblem (Like Reference Photos)
-            const crestY = CY - 175;
-            const prongs = [[-16, -6], [-8.5, -21], [0, -25], [8.5, -21], [16, -6]];
+            const crestY = CY - 150;
+            const prongs = [[-14, -5], [-7.5, -18], [0, -21], [7.5, -18], [14, -5]];
             prongs.forEach((pt, idx) => {
-                // Left bright half & right dark half of each prong
                 ctx.beginPath();
-                ctx.moveTo(CX + pt[0] * 0.42 - 1.8, crestY + 12);
+                ctx.moveTo(CX + pt[0] * 0.42 - 1.5, crestY + 10);
                 ctx.lineTo(CX + pt[0], crestY + pt[1]);
-                ctx.lineTo(CX + pt[0] * 0.42 + 1.8, crestY + 12);
+                ctx.lineTo(CX + pt[0] * 0.42 + 1.5, crestY + 10);
                 ctx.closePath();
                 ctx.fillStyle = (idx % 2 === 0) ? bezelPal.fluteBright : bezelPal.fluteLight;
                 ctx.fill();
 
-                // 3D Sphere tip on each prong
-                const spG = ctx.createRadialGradient(CX + pt[0] - 1, crestY + pt[1] - 1, 0.5, CX + pt[0], crestY + pt[1], 3.5);
+                const spG = ctx.createRadialGradient(CX + pt[0] - 0.8, crestY + pt[1] - 0.8, 0.4, CX + pt[0], crestY + pt[1], 3.0);
                 spG.addColorStop(0, '#FFFFFF');
                 spG.addColorStop(0.6, bezelPal.fluteLight);
                 spG.addColorStop(1, bezelPal.fluteDark);
                 ctx.beginPath();
-                ctx.arc(CX + pt[0], crestY + pt[1], 3.4, 0, Math.PI * 2);
+                ctx.arc(CX + pt[0], crestY + pt[1], 2.9, 0, Math.PI * 2);
                 ctx.fillStyle = spG;
                 ctx.fill();
             });
-            // Coronet Base Band
             ctx.beginPath();
-            ctx.ellipse(CX, crestY + 14, 10.5, 4.5, 0, 0, Math.PI * 2);
-            ctx.fillStyle = createMetalGradient(ctx, CX - 11, crestY + 10, CX + 11, crestY + 18, caseObj.bezelMetal, true);
+            ctx.ellipse(CX, crestY + 12, 9.2, 3.8, 0, 0, Math.PI * 2);
+            ctx.fillStyle = createMetalGradient(ctx, CX - 9, crestY + 8, CX + 9, crestY + 16, caseObj.bezelMetal, true);
             ctx.fill();
 
             // Compulsory "DYNAST" in Cinzel Decorative Font
             const logoFill = state.customPhotoDataUrl ? '#FFE87C' : dialObj.logoColor;
             ctx.fillStyle = logoFill;
-            ctx.font = '700 30px "Cinzel Decorative", serif';
+            ctx.font = '700 25px "Cinzel Decorative", serif';
             ctx.textAlign = 'center';
-            ctx.fillText('DYNAST', CX, CY - 108);
+            ctx.fillText('DYNAST', CX, CY - 92);
 
             // ONLY "LUXURIOUS HOROLOGY" directly below "DYNAST"
             ctx.fillStyle = state.customPhotoDataUrl ? '#FFFFFF' : dialObj.subColor;
-            ctx.font = '600 11.5px "Cinzel", serif';
-            ctx.fillText('LUXURIOUS HOROLOGY', CX, CY - 86);
+            ctx.font = '600 10px "Cinzel", serif';
+            ctx.fillText('LUXURIOUS HOROLOGY', CX, CY - 73);
             ctx.restore();
 
-            // 10. DRAW ONLY THE CUSTOMER'S CUSTOM NAME ON DIAL (At 6 o'clock, clearly visible!)
+            // 10. DRAW ONLY THE CUSTOMER'S CUSTOM NAME ON DIAL (At 6 o'clock)
             if (state.customName && state.customName.trim() !== '') {
                 ctx.save();
                 ctx.shadowColor = (state.dialColor === 'white' && !state.customPhotoDataUrl) ? 'rgba(0,0,0,0.18)' : 'rgba(0,0,0,0.68)';
                 ctx.shadowBlur = 4;
                 ctx.fillStyle = state.customNameColor;
                 const fontName = state.customNameFont || 'Cinzel';
-                const fSize = fontName === 'Great Vibes' ? 38 : 26;
+                const fSize = fontName === 'Great Vibes' ? 32 : 22;
                 ctx.font = `600 ${fSize}px "${fontName}", serif`;
                 ctx.textAlign = 'center';
-                ctx.fillText(state.customName.trim(), CX, CY + 112);
+                ctx.fillText(state.customName.trim(), CX, CY + 96);
                 ctx.restore();
             }
 
             // 11. DRAW 3 O'CLOCK CHAMFERED DATE WINDOW & MAGNIFIED CYCLOPS LENS ("28")
-            const dx = CX + 148, dy = CY;
+            const dx = CX + 126, dy = CY;
             ctx.save();
-            drawRoundedRect(ctx, dx - 39, dy - 30, 78, 60, 6);
-            ctx.fillStyle = createMetalGradient(ctx, dx - 39, dy - 30, dx + 39, dy + 30, caseObj.bezelMetal, true);
+            drawRoundedRect(ctx, dx - 34, dy - 26, 68, 52, 5);
+            ctx.fillStyle = createMetalGradient(ctx, dx - 34, dy - 26, dx + 34, dy + 26, caseObj.bezelMetal, true);
             ctx.fill();
-            drawRoundedRect(ctx, dx - 35, dy - 26, 70, 52, 4);
+            drawRoundedRect(ctx, dx - 30, dy - 22, 60, 44, 3.5);
             ctx.fillStyle = '#F8FAFC';
             ctx.fill();
             ctx.strokeStyle = 'rgba(0,0,0,0.42)';
-            ctx.lineWidth = 2.2;
+            ctx.lineWidth = 2.0;
             ctx.stroke();
 
             ctx.fillStyle = '#0F172A';
-            ctx.font = '700 37px "Inter", sans-serif';
+            ctx.font = '700 32px "Inter", sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText('28', dx, dy + 2);
+            ctx.fillText('28', dx, dy + 1.5);
 
             // Convex Cyclops Magnifying Drop Lens
-            drawRoundedRect(ctx, dx - 52, dy - 41, 104, 82, 27);
-            const cycG = ctx.createLinearGradient(dx - 52, dy - 41, dx + 52, dy + 41);
+            drawRoundedRect(ctx, dx - 45, dy - 35, 90, 70, 23);
+            const cycG = ctx.createLinearGradient(dx - 45, dy - 35, dx + 45, dy + 35);
             cycG.addColorStop(0.0, 'rgba(255,255,255,0.42)');
             cycG.addColorStop(0.35, 'rgba(185,225,255,0.06)');
             cycG.addColorStop(0.75, 'rgba(0,0,0,0.12)');
             cycG.addColorStop(1.0, 'rgba(255,255,255,0.28)');
             ctx.fillStyle = cycG;
             ctx.fill();
-            ctx.lineWidth = 1.8;
+            ctx.lineWidth = 1.6;
             ctx.strokeStyle = 'rgba(255,255,255,0.72)';
             ctx.stroke();
             ctx.restore();
 
-            // 12. DRAW SLEEK, RAZOR-SHARP 3D FACETED BATON HANDS (Exact Match to Photo 22-2 & 10-3)
+            // 12. DRAW 1:1 PROPORTIONAL 3D FACETED BATON HANDS (Exact Match to Photo 10-1 & 22-2)
             let hrAngleDeg, minAngleDeg, secAngleDeg;
             if (state.liveClock) {
                 const now = new Date();
@@ -1505,15 +1411,14 @@
                 minAngleDeg = min * 6;
                 secAngleDeg = sec * 6;
             } else {
-                // Classic 10:10:31 Luxury Watchmaker Studio Pose (Frames Logo & Name Perfectly!)
-                hrAngleDeg = 305;  // ~10 o'clock
-                minAngleDeg = 62;  // ~2 o'clock
-                secAngleDeg = 186; // ~6:01 sweep
+                hrAngleDeg = 305;  // 10:10:31 Studio Pose
+                minAngleDeg = 62;
+                secAngleDeg = 186;
             }
 
-            drawSleekDatejustHand(ctx, CX, CY, hrAngleDeg * Math.PI / 180, 138, 30, 9.5, bezelPal);
-            drawSleekDatejustHand(ctx, CX, CY, minAngleDeg * Math.PI / 180, 198, 36, 8.0, bezelPal);
-            drawSleekSecondHand(ctx, CX, CY, secAngleDeg * Math.PI / 180, 214, 52, bezelPal);
+            drawSleekDatejustHand(ctx, CX, CY, hrAngleDeg * Math.PI / 180, 116, 26, 8.2, bezelPal);
+            drawSleekDatejustHand(ctx, CX, CY, minAngleDeg * Math.PI / 180, 172, 32, 7.0, bezelPal);
+            drawSleekSecondHand(ctx, CX, CY, secAngleDeg * Math.PI / 180, 186, 45, bezelPal);
 
             // 13. SAPPHIRE CRYSTAL ANTI-REFLECTIVE DOME GLARE
             ctx.save();
@@ -1528,23 +1433,21 @@
             ctx.restore();
         }
 
-        // HELPER: Sleek 3D Ridge-Bevelled Datejust Baton Hand with White Chromalight Inlay (Like Photo 22-2)
         function drawSleekDatejustHand(ctx, cx, cy, angleRad, length, tail, halfW, pal) {
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(angleRad);
 
-            // Soft Cast Shadow onto Dial
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.62)';
-            ctx.shadowBlur = 9;
-            ctx.shadowOffsetX = 4;
-            ctx.shadowOffsetY = 6;
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 3.5;
+            ctx.shadowOffsetY = 5;
             ctx.beginPath();
             ctx.moveTo(-halfW * 0.72, tail);
             ctx.lineTo(-halfW, 0);
             ctx.lineTo(-halfW * 0.78, -length);
-            ctx.lineTo(0, -length - 4);
+            ctx.lineTo(0, -length - 3.5);
             ctx.lineTo(halfW * 0.78, -length);
             ctx.lineTo(halfW, 0);
             ctx.lineTo(halfW * 0.72, tail);
@@ -1553,35 +1456,32 @@
             ctx.fill();
             ctx.restore();
 
-            // Left 3D Mirror Facet (Blinding Specular Highlight)
             ctx.beginPath();
             ctx.moveTo(0, tail);
             ctx.lineTo(-halfW * 0.72, tail);
             ctx.lineTo(-halfW, 0);
             ctx.lineTo(-halfW * 0.78, -length);
-            ctx.lineTo(0, -length - 4);
+            ctx.lineTo(0, -length - 3.5);
             ctx.closePath();
             ctx.fillStyle = pal.handLight;
             ctx.fill();
 
-            // Right 3D Mirror Facet (High-Contrast Dark Metallic Reflection)
             ctx.beginPath();
             ctx.moveTo(0, tail);
             ctx.lineTo(halfW * 0.72, tail);
             ctx.lineTo(halfW, 0);
             ctx.lineTo(halfW * 0.78, -length);
-            ctx.lineTo(0, -length - 4);
+            ctx.lineTo(0, -length - 3.5);
             ctx.closePath();
             ctx.fillStyle = pal.handDark;
             ctx.fill();
 
-            // Crisp White Chromalight Luminous Inlay Strip (Like Photo 10-1, 11-1, 22-2)
             const lumeW = halfW * 0.34;
             ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(-lumeW, -length + 14, lumeW * 2, length - 34);
+            ctx.fillRect(-lumeW, -length + 12, lumeW * 2, length - 30);
             ctx.strokeStyle = 'rgba(0,0,0,0.35)';
-            ctx.lineWidth = 0.6;
-            ctx.strokeRect(-lumeW, -length + 14, lumeW * 2, length - 34);
+            ctx.lineWidth = 0.5;
+            ctx.strokeRect(-lumeW, -length + 12, lumeW * 2, length - 30);
 
             ctx.restore();
         }
@@ -1595,126 +1495,123 @@
             ctx.shadowOffsetX = 3;
             ctx.shadowOffsetY = 4;
 
-            // Tapered Counterweight Tail & Needle Blade
             ctx.beginPath();
-            ctx.moveTo(-2.4, tail);
-            ctx.lineTo(2.4, tail);
-            ctx.lineTo(1.1, -length);
-            ctx.lineTo(-1.1, -length);
+            ctx.moveTo(-2.1, tail);
+            ctx.lineTo(2.1, tail);
+            ctx.lineTo(1.0, -length);
+            ctx.lineTo(-1.0, -length);
             ctx.closePath();
             ctx.fillStyle = pal.fluteBright;
             ctx.fill();
 
-            // Precision Small Center Pinion Cap (r = 7.5px, matching Photo 22-2 & 10-3)
-            const capG = ctx.createRadialGradient(-2, -2, 1, 0, 0, 8);
+            const capG = ctx.createRadialGradient(-1.5, -1.5, 0.8, 0, 0, 7);
             capG.addColorStop(0.0, '#FFFFFF');
             capG.addColorStop(0.5, pal.fluteLight);
             capG.addColorStop(1.0, pal.fluteDark);
-            ctx.beginPath(); ctx.arc(0, 0, 7.8, 0, Math.PI * 2);
+            ctx.beginPath(); ctx.arc(0, 0, 6.8, 0, Math.PI * 2);
             ctx.fillStyle = capG; ctx.fill();
 
-            ctx.beginPath(); ctx.arc(0, 0, 2.2, 0, Math.PI * 2);
+            ctx.beginPath(); ctx.arc(0, 0, 2.0, 0, Math.PI * 2);
             ctx.fillStyle = pal.fluteDark; ctx.fill();
             ctx.restore();
         }
 
-        // HELPER: Seamless 5-Link Jubilee Bracelet with Interlocking Links & Mirror Center Bars (Zero Gaps!)
+        // HELPER: True Staggered 5-Link Jubilee Bracelet (Exact 30% / 40% / 30% Width Ratio & Half-Link Vertical Stagger!)
         function drawMacroBracelet(ctx, cx, cy, matKey, strapColorObj, lugMetal, isBackView) {
             if (matKey === 'metal') {
                 const outerPal = METAL_PALETTES[strapColorObj.outer] || METAL_PALETTES.silver;
                 const centerPal = METAL_PALETTES[strapColorObj.center] || METAL_PALETTES.rosegold;
 
-                // Dark metallic under-chassis behind bracelet links (between x=278 and x=622)
-                ctx.fillStyle = '#090B0E';
-                ctx.fillRect(278, 16, 344, 360);
-                ctx.fillRect(278, 904, 344, 360);
+                // Dark metallic under-chassis between x=306 and x=594 (width = 288px)
+                ctx.fillStyle = '#07090C';
+                ctx.fillRect(306, 25, 288, 360);
+                ctx.fillRect(306, 865, 288, 360);
 
-                // 10 tightly interlocking rows on Top (y=16 to 356) and 10 rows on Bottom (y=924 to 1264)
-                const rows = [];
-                for (let i = 0; i < 10; i++) rows.push({ y: 16 + i * 34, isTop: true, idx: i });
-                for (let i = 0; i < 10; i++) rows.push({ y: 924 + i * 34, isTop: false, idx: i });
+                const linkH = 33.0;
+                const rowStep = 34.5;
 
-                rows.forEach(r => {
-                    // Links near the case (bottom of top strap / top of bottom strap) are exactly 344px wide (x=278 to 622)
-                    const distFromCase = r.isTop ? (9 - r.idx) : r.idx;
-                    const taper = Math.max(0, (distFromCase - 2) * 3.0);
-                    const xStart = 278 + taper;
-                    const totalW = 344 - taper * 2;
-                    const wOuter = totalW * 0.285;
-                    const wCenter = (totalW - wOuter * 2 - 6) / 3;
-                    const h = 32.8;
+                // 10 rows top (y=25 to 360) and 10 rows bottom (y=865 to 1200)
+                for (let side = 0; side < 2; side++) {
+                    const isTop = side === 0;
+                    for (let i = 0; i < 10; i++) {
+                        const baseY = isTop ? (25 + i * rowStep) : (870 + i * rowStep);
+                        const distFromCase = isTop ? (9 - i) : i;
+                        const taper = Math.max(0, (distFromCase - 1) * 2.5);
+                        const xStart = 306 + taper;
+                        const totalW = 288 - taper * 2;
 
-                    const links = [
-                        { x: xStart, w: wOuter, pal: outerPal, polished: false },
-                        { x: xStart + wOuter + 1.5, w: wCenter, pal: centerPal, polished: true },
-                        { x: xStart + wOuter + wCenter + 3.0, w: wCenter, pal: centerPal, polished: true },
-                        { x: xStart + wOuter + wCenter * 2 + 4.5, w: wCenter, pal: centerPal, polished: true },
-                        { x: xStart + wOuter + wCenter * 3 + 6.0, w: wOuter, pal: outerPal, polished: false }
-                    ];
+                        // Exact Rolex Jubilee Width Ratio: Outer links = 30% each, 3 Center links = 40% total (13.3% each)
+                        const wOuter = totalW * 0.30;
+                        const wCenter = (totalW - wOuter * 2 - 6) / 3;
 
-                    links.forEach(lk => {
-                        const lg = ctx.createLinearGradient(lk.x, r.y, lk.x, r.y + h);
-                        if (lk.polished) {
-                            // High-contrast mirror reflection on the 3 center Jubilee links (Stark black bar + bright gold/white bar like 10-1.jpg)
-                            lg.addColorStop(0.00, lk.pal.fluteDark);
-                            lg.addColorStop(0.12, lk.pal.fluteBright);
-                            lg.addColorStop(0.35, lk.pal.fluteLight);
-                            lg.addColorStop(0.48, lk.pal.fluteDark);
-                            lg.addColorStop(0.64, '#050507');
-                            lg.addColorStop(0.78, lk.pal.fluteMid);
-                            lg.addColorStop(0.92, lk.pal.fluteLight);
-                            lg.addColorStop(1.00, lk.pal.fluteDark);
-                        } else {
-                            // Brushed satin steel outer links
-                            lg.addColorStop(0.00, lk.pal.fluteWarm);
-                            lg.addColorStop(0.20, lk.pal.fluteBright);
-                            lg.addColorStop(0.52, lk.pal.fluteLight);
-                            lg.addColorStop(0.82, lk.pal.fluteMid);
-                            lg.addColorStop(1.00, lk.pal.fluteDark);
-                        }
-                        drawRoundedRect(ctx, lk.x, r.y, lk.w, h, 3.5);
-                        ctx.fillStyle = lg;
-                        ctx.fill();
+                        // 1. Draw Left & Right Brushed Outer Links at baseY
+                        [xStart, xStart + wOuter + wCenter * 3 + 6].forEach(ox => {
+                            const lg = ctx.createLinearGradient(ox, baseY, ox, baseY + linkH);
+                            lg.addColorStop(0.00, outerPal.fluteWarm);
+                            lg.addColorStop(0.20, outerPal.fluteBright);
+                            lg.addColorStop(0.55, outerPal.fluteLight);
+                            lg.addColorStop(0.84, outerPal.fluteMid);
+                            lg.addColorStop(1.00, outerPal.fluteDark);
+                            drawRoundedRect(ctx, ox, baseY, wOuter, linkH, 3.5);
+                            ctx.fillStyle = lg;
+                            ctx.fill();
 
-                        // Subtle micro-brushed vertical grain on outer satin links
-                        if (!lk.polished) {
+                            // Satin vertical micro-brush grain on outer links
                             ctx.save();
-                            ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+                            ctx.strokeStyle = 'rgba(255,255,255,0.065)';
                             ctx.lineWidth = 0.8;
-                            for (let gx = lk.x + 4; gx < lk.x + lk.w - 3; gx += 3) {
-                                ctx.beginPath(); ctx.moveTo(gx, r.y + 2); ctx.lineTo(gx, r.y + h - 2); ctx.stroke();
+                            for (let gx = ox + 4; gx < ox + wOuter - 3; gx += 3) {
+                                ctx.beginPath(); ctx.moveTo(gx, baseY + 2); ctx.lineTo(gx, baseY + linkH - 2); ctx.stroke();
                             }
                             ctx.restore();
-                        }
-                    });
-                });
+                        });
 
-                // Subtle wrist-curve shadow fade at the very ends of the bracelet
-                const topVig = ctx.createLinearGradient(0, 16, 0, 105);
-                topVig.addColorStop(0, 'rgba(0,0,0,0.68)');
+                        // 2. Draw 3 Mirror-Polished Center Links STAGGERED by half a link height (+17px) just like real Jubilee!
+                        const centerY = baseY + (isTop ? 16 : -16);
+                        for (let c = 0; c < 3; c++) {
+                            const cxLink = xStart + wOuter + 1.5 + c * (wCenter + 1.5);
+                            const cg = ctx.createLinearGradient(cxLink, centerY, cxLink, centerY + linkH);
+                            cg.addColorStop(0.00, centerPal.fluteDark);
+                            cg.addColorStop(0.12, centerPal.fluteBright);
+                            cg.addColorStop(0.35, centerPal.fluteLight);
+                            cg.addColorStop(0.48, centerPal.fluteDark);
+                            cg.addColorStop(0.64, '#050507');
+                            cg.addColorStop(0.78, centerPal.fluteMid);
+                            cg.addColorStop(0.92, centerPal.fluteLight);
+                            cg.addColorStop(1.00, centerPal.fluteDark);
+                            drawRoundedRect(ctx, cxLink, centerY, wCenter, linkH, 3.2);
+                            ctx.fillStyle = cg;
+                            ctx.fill();
+                        }
+                    }
+                }
+
+                // Subtle wrist-curve shadow fade at the top & bottom ends of the bracelet
+                const topVig = ctx.createLinearGradient(0, 25, 0, 95);
+                topVig.addColorStop(0, 'rgba(0,0,0,0.65)');
                 topVig.addColorStop(1, 'rgba(0,0,0,0)');
                 ctx.fillStyle = topVig;
-                ctx.fillRect(275, 16, 350, 90);
+                ctx.fillRect(300, 25, 300, 70);
 
-                const botVig = ctx.createLinearGradient(0, 1175, 0, 1264);
+                const botVig = ctx.createLinearGradient(0, 1155, 0, 1225);
                 botVig.addColorStop(0, 'rgba(0,0,0,0)');
-                botVig.addColorStop(1, 'rgba(0,0,0,0.68)');
+                botVig.addColorStop(1, 'rgba(0,0,0,0.65)');
                 ctx.fillStyle = botVig;
-                ctx.fillRect(275, 1175, 350, 90);
+                ctx.fillRect(300, 1155, 300, 70);
             } else {
-                // Padded Alligator Leather / Sport Rubber / Silicone Strap (Flush with x=278..622 lugs)
-                [{ y1: 18, y2: 365, top: true }, { y1: 915, y2: 1262, top: false }].forEach(seg => {
+                // Padded Leather / Sport Rubber / Silicone Strap (Flush with x=306..594 lugs)
+                [{ y1: 25, y2: 370, top: true }, { y1: 880, y2: 1225, top: false }].forEach(seg => {
                     ctx.save();
                     ctx.beginPath();
                     if (seg.top) {
-                        ctx.moveTo(296, seg.y1); ctx.lineTo(604, seg.y1);
-                        ctx.lineTo(622, seg.y2); ctx.lineTo(278, seg.y2);
+                        ctx.moveTo(320, seg.y1); ctx.lineTo(580, seg.y1);
+                        ctx.lineTo(594, seg.y2); ctx.lineTo(306, seg.y2);
                     } else {
-                        ctx.moveTo(278, seg.y1); ctx.lineTo(622, seg.y1);
-                        ctx.lineTo(604, seg.y2); ctx.lineTo(296, seg.y2);
+                        ctx.moveTo(306, seg.y1); ctx.lineTo(594, seg.y1);
+                        ctx.lineTo(580, seg.y2); ctx.lineTo(320, seg.y2);
                     }
                     ctx.closePath();
-                    const sg = ctx.createLinearGradient(278, 0, 622, 0);
+                    const sg = ctx.createLinearGradient(306, 0, 594, 0);
                     sg.addColorStop(0, '#040405');
                     sg.addColorStop(0.16, strapColorObj.hex);
                     sg.addColorStop(0.5, strapColorObj.highlight || strapColorObj.hex);
@@ -1725,16 +1622,16 @@
 
                     if (matKey === 'leather') {
                         ctx.strokeStyle = strapColorObj.stitch || '#D4AF37';
-                        ctx.lineWidth = 3.2;
-                        ctx.setLineDash([11, 7]);
+                        ctx.lineWidth = 3.0;
+                        ctx.setLineDash([10, 6]);
                         ctx.beginPath();
-                        ctx.moveTo(308, seg.y1 + 16); ctx.lineTo(294, seg.y2 - 16);
-                        ctx.moveTo(592, seg.y1 + 16); ctx.lineTo(606, seg.y2 - 16);
+                        ctx.moveTo(332, seg.y1 + 16); ctx.lineTo(320, seg.y2 - 16);
+                        ctx.moveTo(568, seg.y1 + 16); ctx.lineTo(580, seg.y2 - 16);
                         ctx.stroke();
                     } else {
                         ctx.fillStyle = 'rgba(0,0,0,0.4)';
-                        for (let ry = seg.y1 + 40; ry < seg.y2 - 50; ry += 52) {
-                            drawRoundedRect(ctx, 320, ry, 260, 20, 9);
+                        for (let ry = seg.y1 + 40; ry < seg.y2 - 50; ry += 50) {
+                            drawRoundedRect(ctx, 340, ry, 220, 18, 8);
                             ctx.fill();
                         }
                     }
@@ -1743,12 +1640,12 @@
             }
         }
 
-        // PHOTOREALISTIC BACK CASE RENDERER (FIXED CURVED PERIMETER TEXT & REALISTIC CLASP)
+        // PHOTOREALISTIC BACK CASE RENDERER (1:1 Proportions + Curved Rim Text)
         function drawBackWatchCanvas() {
             const canvas = document.getElementById('backWatchCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            const W = 900, H = 1280, CX = 450, CY = 640;
+            const W = 900, H = 1250, CX = 450, CY = 625;
             ctx.clearRect(0, 0, W, H);
 
             const caseObj = CASE_OPTIONS[state.caseColor];
@@ -1757,49 +1654,50 @@
 
             drawMacroBracelet(ctx, CX, CY, state.strapMaterial, strapColorObj, caseObj.lugMetal, true);
 
-            drawRoundedRect(ctx, 94, 578, 38, 124, 11);
-            ctx.fillStyle = createMetalGradient(ctx, 94, 578, 94, 702, caseObj.bezelMetal, true);
+            // Crown on Left Side (Reversed for Rear View)
+            drawRoundedRect(ctx, 133, 583, 33, 84, 9);
+            ctx.fillStyle = createMetalGradient(ctx, 133, 583, 133, 667, caseObj.bezelMetal, true);
             ctx.fill();
 
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.9)';
-            ctx.shadowBlur = 45;
+            ctx.shadowBlur = 40;
             ctx.beginPath();
-            ctx.moveTo(246, 218); ctx.lineTo(278, 218); ctx.lineTo(278, 275);
-            ctx.lineTo(622, 275); ctx.lineTo(622, 218); ctx.lineTo(654, 218);
-            ctx.bezierCurveTo(704, 342, 772, 485, 772, 640);
-            ctx.bezierCurveTo(772, 795, 704, 938, 654, 1062);
-            ctx.lineTo(622, 1062); ctx.lineTo(622, 1005);
-            ctx.lineTo(278, 1005); ctx.lineTo(278, 1062); ctx.lineTo(246, 1062);
-            ctx.bezierCurveTo(196, 938, 128, 795, 128, 640);
-            ctx.bezierCurveTo(128, 485, 196, 342, 246, 218);
+            ctx.moveTo(262, 294); ctx.lineTo(306, 294); ctx.lineTo(306, 340);
+            ctx.lineTo(594, 340); ctx.lineTo(594, 294); ctx.lineTo(638, 294);
+            ctx.bezierCurveTo(688, 382, 735, 498, 735, 625);
+            ctx.bezierCurveTo(735, 752, 688, 868, 638, 956);
+            ctx.lineTo(594, 956); ctx.lineTo(594, 910);
+            ctx.lineTo(306, 910); ctx.lineTo(306, 956); ctx.lineTo(262, 956);
+            ctx.bezierCurveTo(212, 868, 165, 752, 165, 625);
+            ctx.bezierCurveTo(165, 498, 212, 382, 262, 294);
             ctx.closePath();
-            ctx.fillStyle = createMetalGradient(ctx, 128, 218, 772, 1062, caseObj.lugMetal, false);
+            ctx.fillStyle = createMetalGradient(ctx, 165, 294, 735, 956, caseObj.lugMetal, false);
             ctx.fill();
             ctx.restore();
 
             ctx.beginPath();
-            ctx.arc(CX, CY, 296, 0, Math.PI * 2);
-            ctx.fillStyle = createMetalGradient(ctx, CX - 296, CY - 296, CX + 296, CY + 296, 'silver', true);
+            ctx.arc(CX, CY, 266, 0, Math.PI * 2);
+            ctx.fillStyle = createMetalGradient(ctx, CX - 266, CY - 266, CX + 266, CY + 266, 'silver', true);
             ctx.fill();
 
             ctx.beginPath();
-            ctx.arc(CX, CY, 264, 0, Math.PI * 2);
-            const rimGrad = ctx.createLinearGradient(CX - 264, CY - 264, CX + 264, CY + 264);
+            ctx.arc(CX, CY, 238, 0, Math.PI * 2);
+            const rimGrad = ctx.createLinearGradient(CX - 238, CY - 238, CX + 238, CY + 238);
             rimGrad.addColorStop(0.0, '#CBD5E1');
             rimGrad.addColorStop(0.35, '#F8FAFC');
             rimGrad.addColorStop(0.7, '#94A3B8');
             rimGrad.addColorStop(1.0, '#E2E8F0');
             ctx.fillStyle = rimGrad;
             ctx.fill();
-            ctx.lineWidth = 3.5;
+            ctx.lineWidth = 3.0;
             ctx.strokeStyle = '#64748B';
             ctx.stroke();
 
             if (state.backCase === 'solid') {
                 ctx.save();
                 ctx.beginPath();
-                ctx.arc(CX, CY, 204, 0, Math.PI * 2);
+                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
                 ctx.clip();
                 if (ctx.createConicGradient) {
                     const cg = ctx.createConicGradient(0, CX, CY);
@@ -1814,9 +1712,9 @@
                 } else {
                     ctx.fillStyle = '#CBD5E1';
                 }
-                ctx.fillRect(CX - 204, CY - 204, 408, 408);
+                ctx.fillRect(CX - 184, CY - 184, 368, 368);
 
-                for (let cr = 20; cr < 200; cr += 4) {
+                for (let cr = 18; cr < 180; cr += 4) {
                     ctx.beginPath(); ctx.arc(CX, CY, cr, 0, Math.PI * 2);
                     ctx.strokeStyle = (cr % 8 === 0) ? 'rgba(255,255,255,0.16)' : 'rgba(0,0,0,0.05)';
                     ctx.lineWidth = 1; ctx.stroke();
@@ -1824,115 +1722,115 @@
                 ctx.restore();
 
                 ctx.beginPath();
-                ctx.arc(CX, CY, 204, 0, Math.PI * 2);
-                ctx.lineWidth = 3.5;
+                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
+                ctx.lineWidth = 3.0;
                 ctx.strokeStyle = '#94A3B8';
                 ctx.stroke();
 
                 ctx.save();
                 ctx.fillStyle = 'rgba(255,255,255,0.7)';
-                ctx.font = '700 30px "Cinzel Decorative", serif';
+                ctx.font = '700 27px "Cinzel Decorative", serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', CX + 1, CY - 9);
+                ctx.fillText('DYNAST', CX + 1, CY - 8);
                 ctx.fillStyle = '#334155';
-                ctx.fillText('DYNAST', CX, CY - 10);
+                ctx.fillText('DYNAST', CX, CY - 9);
 
                 const subTxt = state.customName ? `${state.customName.toUpperCase()}` : 'LUXURIOUS HOROLOGY';
-                ctx.font = '600 14px "Cinzel", serif';
+                ctx.font = '600 13px "Cinzel", serif';
                 ctx.fillStyle = 'rgba(255,255,255,0.7)';
-                ctx.fillText(subTxt, CX + 1, CY + 21);
+                ctx.fillText(subTxt, CX + 1, CY + 19);
                 ctx.fillStyle = '#475569';
-                ctx.fillText(subTxt, CX, CY + 20);
+                ctx.fillText(subTxt, CX, CY + 18);
                 ctx.restore();
             } else {
                 ctx.save();
                 ctx.beginPath();
-                ctx.arc(CX, CY, 204, 0, Math.PI * 2);
+                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
                 ctx.clip();
 
                 ctx.fillStyle = '#141418';
-                ctx.fillRect(CX - 204, CY - 204, 408, 408);
+                ctx.fillRect(CX - 184, CY - 184, 368, 368);
 
                 ctx.fillStyle = '#64748B';
-                ctx.beginPath(); ctx.arc(CX - 52, CY - 42, 108, 0, Math.PI * 2); ctx.fill();
-                ctx.beginPath(); ctx.arc(CX + 62, CY - 30, 96, 0, Math.PI * 2); ctx.fill();
+                ctx.beginPath(); ctx.arc(CX - 46, CY - 38, 96, 0, Math.PI * 2); ctx.fill();
+                ctx.beginPath(); ctx.arc(CX + 55, CY - 26, 86, 0, Math.PI * 2); ctx.fill();
 
                 ctx.strokeStyle = '#E5B842';
-                ctx.lineWidth = 10;
-                ctx.setLineDash([9, 6]);
-                ctx.beginPath(); ctx.arc(CX - 55, CY - 62, 48, 0, Math.PI * 2); ctx.stroke();
-                ctx.beginPath(); ctx.arc(CX + 58, CY - 50, 36, 0, Math.PI * 2); ctx.stroke();
+                ctx.lineWidth = 9;
+                ctx.setLineDash([8, 5]);
+                ctx.beginPath(); ctx.arc(CX - 48, CY - 55, 42, 0, Math.PI * 2); ctx.stroke();
+                ctx.beginPath(); ctx.arc(CX + 52, CY - 45, 32, 0, Math.PI * 2); ctx.stroke();
                 ctx.setLineDash([]);
 
                 ctx.save();
-                ctx.translate(CX, CY - 118);
+                ctx.translate(CX, CY - 106);
                 ctx.rotate((balanceAngle * Math.PI) / 180);
                 ctx.strokeStyle = '#FFD700';
-                ctx.lineWidth = 6.5;
-                ctx.beginPath(); ctx.arc(0, 0, 42, 0, Math.PI * 2); ctx.stroke();
-                ctx.beginPath(); ctx.moveTo(-42, 0); ctx.lineTo(42, 0); ctx.moveTo(0, -42); ctx.lineTo(0, 42); ctx.stroke();
+                ctx.lineWidth = 6.0;
+                ctx.beginPath(); ctx.arc(0, 0, 38, 0, Math.PI * 2); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(-38, 0); ctx.lineTo(38, 0); ctx.moveTo(0, -38); ctx.lineTo(0, 38); ctx.stroke();
                 ctx.restore();
 
-                [[CX, CY - 118], [CX - 55, CY - 62], [CX + 58, CY - 50]].forEach(pt => {
-                    ctx.beginPath(); ctx.arc(pt[0], pt[1], 9, 0, Math.PI * 2);
+                [[CX, CY - 106], [CX - 48, CY - 55], [CX + 52, CY - 45]].forEach(pt => {
+                    ctx.beginPath(); ctx.arc(pt[0], pt[1], 8, 0, Math.PI * 2);
                     ctx.fillStyle = '#E11D48'; ctx.fill();
-                    ctx.lineWidth = 2.2; ctx.strokeStyle = '#FFD700'; ctx.stroke();
+                    ctx.lineWidth = 2.0; ctx.strokeStyle = '#FFD700'; ctx.stroke();
                 });
 
                 ctx.beginPath();
-                ctx.arc(CX, CY, 196, 0, Math.PI, false);
-                ctx.lineTo(CX - 102, CY);
-                ctx.lineTo(CX - 74, CY + 62);
-                ctx.lineTo(CX + 74, CY + 62);
-                ctx.lineTo(CX + 102, CY);
+                ctx.arc(CX, CY, 176, 0, Math.PI, false);
+                ctx.lineTo(CX - 92, CY);
+                ctx.lineTo(CX - 66, CY + 55);
+                ctx.lineTo(CX + 66, CY + 55);
+                ctx.lineTo(CX + 92, CY);
                 ctx.closePath();
-                ctx.fillStyle = createMetalGradient(ctx, CX - 196, CY, CX + 196, CY + 196, 'silver', true);
+                ctx.fillStyle = createMetalGradient(ctx, CX - 176, CY, CX + 176, CY + 176, 'silver', true);
                 ctx.fill();
-                ctx.lineWidth = 2.5;
+                ctx.lineWidth = 2.2;
                 ctx.strokeStyle = '#475569';
                 ctx.stroke();
 
-                ctx.beginPath(); ctx.arc(CX, CY, 40, 0, Math.PI * 2);
+                ctx.beginPath(); ctx.arc(CX, CY, 36, 0, Math.PI * 2);
                 ctx.fillStyle = '#E2E8F0'; ctx.fill(); ctx.stroke();
-                ctx.beginPath(); ctx.arc(CX, CY, 18, 0, Math.PI * 2);
+                ctx.beginPath(); ctx.arc(CX, CY, 16, 0, Math.PI * 2);
                 ctx.fillStyle = '#E5B842'; ctx.fill();
 
-                drawRoundedRect(ctx, CX - 82, CY + 78, 164, 54, 4);
+                drawRoundedRect(ctx, CX - 74, CY + 68, 148, 48, 4);
                 ctx.fillStyle = 'rgba(255,255,255,0.45)';
                 ctx.fill();
                 ctx.strokeStyle = '#475569';
-                ctx.lineWidth = 2;
+                ctx.lineWidth = 1.8;
                 ctx.stroke();
                 ctx.fillStyle = '#0F172A';
-                ctx.font = '700 22px "Cinzel Decorative", serif';
+                ctx.font = '700 19px "Cinzel Decorative", serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', CX, CY + 103);
-                ctx.font = '600 11px "Cinzel", serif';
-                ctx.fillText('LUXURIOUS HOROLOGY', CX, CY + 123);
+                ctx.fillText('DYNAST', CX, CY + 91);
+                ctx.font = '600 10px "Cinzel", serif';
+                ctx.fillText('LUXURIOUS HOROLOGY', CX, CY + 109);
                 ctx.restore();
 
                 ctx.beginPath();
-                ctx.arc(CX, CY, 204, 0, Math.PI * 2);
-                ctx.lineWidth = 5;
+                ctx.arc(CX, CY, 184, 0, Math.PI * 2);
+                ctx.lineWidth = 4.5;
                 ctx.strokeStyle = '#475569';
                 ctx.stroke();
             }
 
-            // CURVED PERIMETER CASEBACK ENGRAVINGS (Locked along Radius 235 of the Steel Rim)
+            // CURVED PERIMETER CASEBACK ENGRAVINGS (Locked along Radius 211 of the Steel Rim)
             ctx.save();
             ctx.fillStyle = '#1E293B';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
-            ctx.font = '700 17px "Cinzel Decorative", serif';
-            drawCurvedText(ctx, 'DYNAST', CX, CY, 235, -Math.PI / 2, 0.082, false);
+            ctx.font = '700 15px "Cinzel Decorative", serif';
+            drawCurvedText(ctx, 'DYNAST', CX, CY, 211, -Math.PI / 2, 0.082, false);
 
-            ctx.font = '600 13.5px "Inter", sans-serif';
-            drawCurvedText(ctx, 'SAPPHIRE CRYSTAL', CX, CY, 235, -Math.PI * 0.78, 0.052, false);
-            drawCurvedText(ctx, 'STAINLESS STEEL', CX, CY, 235, -Math.PI * 0.22, 0.052, false);
-            drawCurvedText(ctx, 'DYN-410A', CX, CY, 235, Math.PI, 0.052, false);
-            drawCurvedText(ctx, '987 BLV 123', CX, CY, 235, 0, 0.052, false);
-            drawCurvedText(ctx, 'WATER-RESISTANT 10bar (100m / 330ft)', CX, CY, 235, Math.PI / 2, 0.046, true);
+            ctx.font = '600 12px "Inter", sans-serif';
+            drawCurvedText(ctx, 'SAPPHIRE CRYSTAL', CX, CY, 211, -Math.PI * 0.78, 0.052, false);
+            drawCurvedText(ctx, 'STAINLESS STEEL', CX, CY, 211, -Math.PI * 0.22, 0.052, false);
+            drawCurvedText(ctx, 'DYN-410A', CX, CY, 211, Math.PI, 0.052, false);
+            drawCurvedText(ctx, '987 BLV 123', CX, CY, 211, 0, 0.052, false);
+            drawCurvedText(ctx, 'WATER-RESISTANT 10bar (100m / 330ft)', CX, CY, 211, Math.PI / 2, 0.046, true);
             ctx.restore();
 
             // REALISTIC CLASP / STRAP LOCK ON REAR BRACELET
@@ -1943,34 +1841,34 @@
                 ctx.save();
                 ctx.shadowColor = 'rgba(0,0,0,0.85)';
                 ctx.shadowBlur = 12;
-                drawRoundedRect(ctx, CX - 26, 1092, 52, 42, 6);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 26, 1092, CX + 26, 1134, centerMetal, true);
+                drawRoundedRect(ctx, CX - 24, 1045, 48, 38, 5);
+                ctx.fillStyle = createMetalGradient(ctx, CX - 24, 1045, CX + 24, 1083, centerMetal, true);
                 ctx.fill();
                 ctx.fillStyle = '#09090B';
-                ctx.font = '700 13px "Cinzel Decorative", serif';
+                ctx.font = '700 12px "Cinzel Decorative", serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('D', CX, 1119);
+                ctx.fillText('D', CX, 1069);
                 ctx.restore();
             } else {
                 ctx.save();
                 ctx.shadowColor = 'rgba(0,0,0,0.85)';
-                ctx.shadowBlur = 18;
-                drawRoundedRect(ctx, CX - 132, 1048, 264, 136, 12);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 132, 1048, CX + 132, 1048, outerMetal, false);
+                ctx.shadowBlur = 16;
+                drawRoundedRect(ctx, CX - 118, 1005, 236, 124, 10);
+                ctx.fillStyle = createMetalGradient(ctx, CX - 118, 1005, CX + 118, 1005, outerMetal, false);
                 ctx.fill();
-                drawRoundedRect(ctx, CX - 64, 1048, 128, 136, 4);
-                ctx.fillStyle = createMetalGradient(ctx, CX - 64, 1048, CX + 64, 1184, centerMetal, true);
+                drawRoundedRect(ctx, CX - 56, 1005, 112, 124, 4);
+                ctx.fillStyle = createMetalGradient(ctx, CX - 56, 1005, CX + 56, 1129, centerMetal, true);
                 ctx.fill();
                 ctx.strokeStyle = 'rgba(0,0,0,0.65)';
-                ctx.lineWidth = 3;
-                ctx.beginPath(); ctx.moveTo(CX - 130, 1142); ctx.lineTo(CX + 130, 1142); ctx.stroke();
+                ctx.lineWidth = 2.5;
+                ctx.beginPath(); ctx.moveTo(CX - 116, 1092); ctx.lineTo(CX + 116, 1092); ctx.stroke();
 
                 ctx.fillStyle = '#0F172A';
-                ctx.font = '700 17px "Cinzel Decorative", serif';
+                ctx.font = '700 15px "Cinzel Decorative", serif';
                 ctx.textAlign = 'center';
-                ctx.fillText('DYNAST', CX, 1104);
-                ctx.font = '600 11px "Inter", sans-serif';
-                ctx.fillText(STRAP_LOCKS[state.strapLock].badge, CX, 1126);
+                ctx.fillText('DYNAST', CX, 1055);
+                ctx.font = '600 10px "Inter", sans-serif';
+                ctx.fillText(STRAP_LOCKS[state.strapLock].badge, CX, 1076);
                 ctx.restore();
             }
         }
