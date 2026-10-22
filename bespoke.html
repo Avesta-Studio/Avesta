@@ -794,11 +794,11 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5" id="strapSelectionGrid">
                 <div onclick="selectStrapItem('strap_01')" id="strapCard-strap_01" data-cat="jubilee_curved" class="option-card rounded-2xl p-4 text-center space-y-3">
                     <div class="square-photo-box"><img src="straps/WhatsApp Image 2026-10-22 at 1.37.24 AM.jpeg" alt="Strap 1"></div>
-                    <p class="text-xs sm:text-sm font-bold text-white">Two-Tone Rose &amp; Steel Jubilee</p><p class="text-xs sm:text-sm text-gold font-bold">+₹1,850</p>
+                    <p class="text-xs sm:text-sm font-bold text-white">Two-Tone Rose &amp; Steel Curved Jubilee</p><p class="text-xs sm:text-sm text-gold font-bold">+₹1,850</p>
                 </div>
                 <div onclick="selectStrapItem('strap_02')" id="strapCard-strap_02" data-cat="jubilee_curved" class="option-card rounded-2xl p-4 text-center space-y-3">
                     <div class="square-photo-box"><img src="straps/WhatsApp Image 2026-10-22 at 1.37.24 AM (1).jpeg" alt="Strap 2"></div>
-                    <p class="text-xs sm:text-sm font-bold text-white">Two-Tone Gold &amp; Steel Jubilee</p><p class="text-xs sm:text-sm text-gold font-bold">+₹1,850</p>
+                    <p class="text-xs sm:text-sm font-bold text-white">Two-Tone Gold &amp; Steel Curved Jubilee</p><p class="text-xs sm:text-sm text-gold font-bold">+₹1,850</p>
                 </div>
                 <div onclick="selectStrapItem('strap_03')" id="strapCard-strap_03" data-cat="jubilee_curved" class="option-card rounded-2xl p-4 text-center space-y-3">
                     <div class="square-photo-box"><img src="straps/WhatsApp Image 2026-10-22 at 1.37.25 AM (1).jpeg" alt="Strap 3"></div>
@@ -806,7 +806,7 @@
                 </div>
                 <div onclick="selectStrapItem('strap_04')" id="strapCard-strap_04" data-cat="jubilee_curved" class="option-card rounded-2xl p-4 text-center space-y-3">
                     <div class="square-photo-box"><img src="straps/WhatsApp Image 2026-10-22 at 1.37.25 AM.jpeg" alt="Strap 4"></div>
-                    <p class="text-xs sm:text-sm font-bold text-white">Two-Tone Black &amp; Steel Jubilee</p><p class="text-xs sm:text-sm text-gold font-bold">+₹1,750</p>
+                    <p class="text-xs sm:text-sm font-bold text-white">Two-Tone Black &amp; Steel Curved Jubilee</p><p class="text-xs sm:text-sm text-gold font-bold">+₹1,750</p>
                 </div>
                 <div onclick="selectStrapItem('strap_05')" id="strapCard-strap_05" data-cat="jubilee_curved" class="option-card rounded-2xl p-4 text-center space-y-3">
                     <div class="square-photo-box"><img src="straps/WhatsApp Image 2026-10-22 at 1.37.26 AM (1).jpeg" alt="Strap 5"></div>
@@ -1752,7 +1752,7 @@
         }
 
         // ============================================================================
-        // UPGRADED 3D PHOTOREALISTIC MACRO WATCH HEAD RENDERER (FULLY 3D & CONNECTED)
+        // REFACTORED 3D PHOTOREALISTIC MACRO WATCH HEAD RENDERER (SEAMLESSLY FUSED LUGS)
         // ============================================================================
         function createLinearMetallicGrad(ctx, x0, y0, x1, y1, metalKey) {
             const pal = METAL_PALETTES[metalKey] || METAL_PALETTES.silver;
@@ -1796,7 +1796,6 @@
             const caseObj = CASE_MODELS[state.caseModel] || CASE_MODELS.fluted_rosegold;
             const dialObj = DIAL_OPTIONS[state.dialColor] || DIAL_OPTIONS.chocolate;
 
-            // 1. Soft Studio Spotlight & Ambient 3D Drop Shadow
             ctx.save();
             const bgGlow = ctx.createRadialGradient(cx, cy, 80, cx, cy, 440);
             bgGlow.addColorStop(0, 'rgba(20,18,14,0.98)');
@@ -1806,55 +1805,34 @@
             ctx.fillRect(0, 0, W, H);
             ctx.restore();
 
-            // 2. Upgraded 3D Connected Horological Case Chassis & Spring Bars
-            drawThreeDimensionalCaseAndLugs(ctx, cx, cy, caseObj);
+            drawFusedThreeDimensionalCaseAndLugs(ctx, cx, cy, caseObj);
 
-            // 3. Precision Bezel (120-Facet Micro-Fluted / Smooth / Tachymetre / Sub-Diver)
             const outerBezelR = 304;
             const innerDialR = 248;
             drawPhotorealisticBezel(ctx, cx, cy, outerBezelR, innerDialR, caseObj);
 
-            // 4. Deep Metallic Rehaut (Inner Wall) + 3D Cast Shadow
             drawDeepRehautWall(ctx, cx, cy, innerDialR, innerDialR - 14, caseObj.bezelMetal);
 
-            // 5. Full-Bleed Dial Plate + Applied 3D Markers + Date Window
             drawPhotorealisticDial(ctx, cx, cy, innerDialR - 14, dialObj, caseObj);
         }
 
-        function drawThreeDimensionalCaseAndLugs(ctx, cx, cy, caseObj) {
+        function drawFusedThreeDimensionalCaseAndLugs(ctx, cx, cy, caseObj) {
             ctx.save();
             const pal = METAL_PALETTES[caseObj.lugMetal] || METAL_PALETTES.silver;
             const lugGrad = createLinearMetallicGrad(ctx, cx - 350, cy - 420, cx + 350, cy + 420, caseObj.lugMetal);
 
-            // Deep 3D Outer Case Shadow
+            // Large cast shadow beneath entire watch head
             ctx.beginPath();
-            ctx.arc(cx, cy, 332, 0, Math.PI * 2);
+            ctx.arc(cx, cy, 326, 0, Math.PI * 2);
             ctx.shadowColor = 'rgba(0,0,0,0.95)';
             ctx.shadowBlur = 45;
-            ctx.shadowOffsetY = 18;
+            ctx.shadowOffsetY = 16;
             ctx.fillStyle = lugGrad;
             ctx.fill();
             ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
 
-            // Authentic 3D Spring Bars seamlessly connected between the lugs
-            [cy - 378, cy + 370].forEach(barY => {
-                const sbGrad = ctx.createLinearGradient(cx - 150, barY, cx - 150, barY + 14);
-                sbGrad.addColorStop(0, '#090D16');
-                sbGrad.addColorStop(0.35, '#334155');
-                sbGrad.addColorStop(0.65, '#FFFFFF');
-                sbGrad.addColorStop(0.85, '#64748B');
-                sbGrad.addColorStop(1, '#020617');
-                ctx.fillStyle = sbGrad;
-                ctx.fillRect(cx - 150, barY, 300, 14);
-                
-                // Beveled metallic caps on spring bar terminals
-                ctx.fillStyle = pal.fluteBright;
-                ctx.fillRect(cx - 154, barY - 1, 6, 16);
-                ctx.fillRect(cx + 148, barY - 1, 6, 16);
-            });
-
-            // Draw 4 Robust, Fully Connected 3D Tapered Lugs
+            // 1. Draw 4 Fused Lugs FIRST (extending from behind the mid-case ring)
             const lugConfigs = [
                 { sx: -1, sy: -1 },
                 { sx: 1,  sy: -1 },
@@ -1867,52 +1845,61 @@
                 ctx.translate(cx, cy);
                 ctx.scale(cfg.sx, cfg.sy);
 
-                // Main 3D Lug Body with gradient shading
+                // Seamlessly anchored lug body overlapping into the case core (no gap)
                 ctx.beginPath();
-                ctx.moveTo(130, 215);
-                ctx.lineTo(136, 396);
-                ctx.quadraticCurveTo(158, 404, 184, 388);
-                ctx.quadraticCurveTo(262, 322, 304, 172);
+                ctx.moveTo(110, 180);
+                ctx.lineTo(136, 402);
+                ctx.quadraticCurveTo(158, 412, 188, 394);
+                ctx.quadraticCurveTo(270, 320, 312, 168);
+                ctx.lineTo(210, 140);
                 ctx.closePath();
                 ctx.fillStyle = lugGrad;
                 ctx.fill();
 
-                // 3D Beveled Mirror Chamfer Edge on Lug
+                // Beveled mirror chamfer edge
                 ctx.beginPath();
-                ctx.moveTo(168, 392);
-                ctx.quadraticCurveTo(248, 326, 292, 172);
-                ctx.lineTo(304, 172);
-                ctx.quadraticCurveTo(262, 322, 184, 388);
+                ctx.moveTo(168, 396);
+                ctx.quadraticCurveTo(252, 326, 300, 168);
+                ctx.lineTo(312, 168);
+                ctx.quadraticCurveTo(270, 320, 188, 394);
                 ctx.closePath();
                 ctx.fillStyle = pal.fluteBright;
                 ctx.fill();
 
-                // Inner Lug Ridge Wall Shadow
-                ctx.beginPath();
-                ctx.moveTo(130, 215);
-                ctx.lineTo(136, 396);
-                ctx.lineWidth = 3.5;
-                ctx.strokeStyle = pal.fluteDark;
-                ctx.stroke();
-
                 ctx.restore();
             });
 
-            // Circular Monobloc Mid-Case Flanks with 3D Bevel Edge
+            // 2. Monobloc Mid-Case Ring drawn OVER the inner lug joints so they fuse as one solid piece of steel
             ctx.beginPath();
-            ctx.arc(cx, cy, 324, 0, Math.PI * 2);
+            ctx.arc(cx, cy, 322, 0, Math.PI * 2);
             ctx.fillStyle = lugGrad;
             ctx.fill();
             ctx.lineWidth = 4;
-            ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+            ctx.strokeStyle = 'rgba(255,255,255,0.75)';
             ctx.stroke();
 
-            // Chronograph Pushers (for Tachymetre models)
+            // 3. Top and Bottom Spring Bars connecting smoothly between lug tips
+            [cy - 384, cy + 376].forEach(barY => {
+                const sbGrad = ctx.createLinearGradient(cx - 150, barY, cx - 150, barY + 14);
+                sbGrad.addColorStop(0, '#090D16');
+                sbGrad.addColorStop(0.35, '#334155');
+                sbGrad.addColorStop(0.65, '#FFFFFF');
+                sbGrad.addColorStop(0.85, '#64748B');
+                sbGrad.addColorStop(1, '#020617');
+                ctx.fillStyle = sbGrad;
+                ctx.fillRect(cx - 150, barY, 300, 14);
+                
+                ctx.fillStyle = pal.fluteBright;
+                ctx.fillRect(cx - 154, barY - 1, 6, 16);
+                ctx.fillRect(cx + 148, barY - 1, 6, 16);
+            });
+
+            // 4. Chronograph Pushers
             if (caseObj.bezelType === 'tachymetre') {
                 const pusherGrad = createLinearMetallicGrad(ctx, cx + 290, cy - 180, cx + 370, cy + 180, caseObj.crownMetal);
                 [ { angle: -0.45, yOff: -145 }, { angle: 0.45, yOff: 145 } ].forEach(p => {
                     ctx.save();
-                    ctx.translate(cx + 300, cy + p.yOff);
+                    ctx.translate(cx + 298, cy + p.yOff);
                     ctx.rotate(p.angle);
                     ctx.fillStyle = pusherGrad;
                     ctx.fillRect(0, -16, 40, 32);
@@ -1926,7 +1913,7 @@
                 });
             }
 
-            // Sculpted 3D Crown Guards (for Sub-Diver & Tachymetre models)
+            // 5. Crown Guards
             if (caseObj.bezelType === 'diver' || caseObj.bezelType === 'tachymetre') {
                 ctx.fillStyle = lugGrad;
                 ctx.beginPath();
@@ -1948,7 +1935,7 @@
                 ctx.stroke();
             }
 
-            // Knurled Screw-Down Winding Crown at 3 o'clock
+            // 6. Screw-Down Crown
             const crownPal = METAL_PALETTES[caseObj.crownMetal] || METAL_PALETTES.silver;
             const cGrad = ctx.createLinearGradient(cx + 316, cy - 46, cx + 316, cy + 46);
             cGrad.addColorStop(0, crownPal.fluteDark);
@@ -1957,11 +1944,9 @@
             cGrad.addColorStop(0.8, crownPal.fluteMid);
             cGrad.addColorStop(1, crownPal.fluteDark);
 
-            // Crown Tube Collar
             ctx.fillStyle = crownPal.fluteMid;
             ctx.fillRect(cx + 310, cy - 28, 14, 56);
 
-            // Main 3D Knurled Crown
             ctx.fillStyle = cGrad;
             ctx.beginPath();
             ctx.roundRect(cx + 318, cy - 45, 46, 90, 10);
@@ -1983,8 +1968,6 @@
         function drawPhotorealisticBezel(ctx, cx, cy, outerR, innerR, caseObj) {
             ctx.save();
             const pal = METAL_PALETTES[caseObj.bezelMetal] || METAL_PALETTES.rosegold;
-
-            // Outer Polished Bezel Base Ring with 3D Bevel Shadow
             const outerRingG = createLinearMetallicGrad(ctx, cx - outerR, cy - outerR, cx + outerR, cy + outerR, caseObj.bezelMetal);
             ctx.beginPath();
             ctx.arc(cx, cy, outerR + 9, 0, Math.PI * 2);
@@ -2754,7 +2737,7 @@
         }
 
         // ============================================================================
-        // NON-BLOCKING ORDER PLACEMENT + TRACKING ID + CONFIRMATION EMAIL
+        // NON-BLOCKING ORDER PLACEMENT + TRACKING ID + CONFIRMATION EMAIL + PHOTO TRANSMISSION
         // ============================================================================
         async function placeBespokeOrder(e) {
             e.preventDefault();
@@ -2797,6 +2780,7 @@
                 strapLock: lObj.name,
                 customName: state.customName || 'None',
                 hasCustomPhoto: Boolean(state.customPhotoDataUrl),
+                dialPhoto: state.customPhotoDataUrl || null, // <--- TRANSOPRTS UPLOADED PHOTO LOSSLESSLY TO ADMIN
                 totalPrice: state.totalPrice,
                 status: 'Order Confirmed • In Bespoke Crafting Queue (Agra Studio)'
             };
