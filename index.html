@@ -241,11 +241,11 @@
     <section id="custom" class="py-20 md:py-32 gold-black-shade relative border-t border-gold/30">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div class="w-full md:w-1/2" data-aos="fade-right">
-                <div onclick="showCustomAlert('Coming Soon', 'Our 3D Customization Studio is launching soon! Stay tuned.', 'info')" class="aspect-square bg-black/75 border border-gold/40 rounded-sm relative flex items-center justify-center overflow-hidden group cursor-pointer shadow-[0_0_50px_rgba(229,184,91,0.2)]">
+                <a href="bespoke.html" class="aspect-square bg-black/75 border border-gold/40 rounded-sm relative flex items-center justify-center overflow-hidden group cursor-pointer shadow-[0_0_50px_rgba(229,184,91,0.2)] block">
                     <div class="absolute inset-0 bg-gradient-to-tr from-gold/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     <i class="fa-regular fa-clock text-6xl text-gold/50 group-hover:text-lightgold transition-colors duration-500 transform group-hover:rotate-12 group-hover:scale-110"></i>
-                    <p class="absolute bottom-10 text-gray-300 text-[10px] md:text-xs tracking-widest uppercase group-hover:text-white transition-colors duration-300 font-sans">Interactive 3D Studio Coming Soon</p>
-                </div>
+                    <p class="absolute bottom-10 text-gray-300 text-[10px] md:text-xs tracking-widest uppercase group-hover:text-white transition-colors duration-300 font-sans">Enter Bespoke Studio</p>
+                </a>
             </div>
             <div class="w-full md:w-1/2" data-aos="fade-left">
                 <h3 class="text-lightgold text-xs tracking-[0.2em] uppercase mb-4 font-sans">The <span class="cinzel-decorative text-xs">DYNAST</span> Custom Experience</h3>
@@ -256,11 +256,10 @@
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> Case, Dial & Strap Customization</li>
                     <li class="flex items-center gap-4"><i class="fa-solid fa-check text-lightgold"></i> 360° Real-time 3D View</li>
                 </ul>
-                <button type="button" onclick="showCustomAlert('Coming Soon', 'Our 3D Customization Studio is launching soon! Stay tuned.', 'info')" class="inline-flex items-center gap-2 text-lightgold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-lightgold pb-1 font-sans">Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i></button>
+                <a href="bespoke.html" class="inline-flex items-center gap-2 text-lightgold hover:text-white transition-colors tracking-widest uppercase text-[10px] md:text-xs font-semibold border-b border-lightgold pb-1 font-sans">Enter the Studio <i class="fa-solid fa-arrow-right-long ml-2"></i></a>
             </div>
         </div>
     </section>
-
     <!-- Collection Section (Black & Golden Shaded Gradient) -->
     <section id="collection" class="py-20 gold-black-shade-soft relative border-t border-gold/30 flex-grow">
         <div class="max-w-7xl mx-auto px-4">
@@ -330,10 +329,14 @@
                         <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-lightgold"></i> Agra, India</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-lightgold"></i> +91 7579942958</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-envelope text-lightgold"></i> dynast.online.org@gmail.com</li>
-                        <li class="mt-6 pt-6 border-t border-white/15">
+                        <li class="mt-6 pt-6 border-t border-white/15 space-y-3">
                             <a href="https://instagram.com/dynast_luxury" target="_blank" class="text-white hover:text-lightgold transition-colors flex items-center gap-3 group">
                                 <i class="fa-brands fa-instagram text-xl group-hover:scale-110 transition-transform"></i>
                                 <span class="font-medium tracking-wide">@dynast_luxury</span>
+                            </a>
+                            <a href="card.html" target="_blank" class="text-white hover:text-lightgold transition-colors flex items-center gap-3 group">
+                                <i class="fa-solid fa-id-card text-xl group-hover:scale-110 transition-transform"></i>
+                                <span class="font-medium tracking-wide">Digital Business Card</span>
                             </a>
                         </li>
                     </ul>
@@ -463,7 +466,6 @@
             </form>
         </div>
     </div>
-
     <!-- Ebill Modal -->
     <div id="ebill-modal" class="fixed inset-0 z-[110] hidden flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-xl transition-opacity font-sans">
         <div class="gold-black-shade border border-gold/40 rounded-lg w-full max-w-2xl overflow-hidden relative shadow-[0_0_50px_rgba(229,184,91,0.2)] flex flex-col max-h-[90vh]">
@@ -1126,9 +1128,9 @@
 
         // --- CART & CHECKOUT FUNCTIONS ---
         function addToCart(id, color = 'Default') { 
-            const product = products.find(p => p.id === id); 
+            const product = products.find(p =>.id === id); 
             const cartItemId = `${id}-${color}`; 
-            const existingItem = cart.find(i => i.cartItemId === cartItemId); 
+            const existingItem = cart.find(i =>.cartItemId === cartItemId); 
             if (existingItem) existingItem.quantity++;
             else cart.push({ ...product, cartItemId: cartItemId, selectedColor: color, quantity: 1 }); 
             updateCartUI(); 
