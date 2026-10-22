@@ -2,411 +2,824 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DYNAST | Master Administration Atelier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYNAST | Bespoke Command & Order Admin</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="robots" content="noindex, nofollow">
-    
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Firebase SDKs (Live Connection to dynast-bespoke) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBM00yuvWgfXOLaVNGSCyzLSiME9e1o4",
+            authDomain: "dynast-bespoke.firebaseapp.com",
+            projectId: "dynast-bespoke",
+            storageBucket: "dynast-bespoke.firebasestorage.app",
+            messagingSenderId: "973168385496",
+            appId: "1:973168385496:web:bcc2a2cc58cb11b85766ad"
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            window.db = getFirestore(app);
+            window.auth = getAuth(app);
+            window.FB_Admin = {
+                collection, addDoc, getDocs, doc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy,
+                signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged
+            };
+            window.dispatchEvent(new Event('admin-fb-ready'));
+        } catch (err) {
+            console.warn("Firebase initialization warning:", err);
+        }
+    </script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        gold: '#E5B85B',
-                        darkgold: '#B8892E',
-                        black: '#070707',
-                        darkgray: '#14110B',
-                        lightgold: '#FBE09C'
+                        gold: '#E5C158',
+                        lightgold: '#FFF3B0',
+                        darkgold: '#8C6214',
+                        black: '#070709',
+                        darkgray: '#16161B'
                     },
-                    fontFamily: { 
-                        'sans': ['Inter', 'sans-serif'], 
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
                         'serif': ['Cinzel', 'serif'],
-                        'decorative': ['"Cinzel Decorative"', 'serif']
+                        'decorative': ['Cinzel Decorative', 'cursive']
                     }
                 }
             }
         }
     </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(90deg, #050505 0%, #171207 40%, #4A3712 78%, #8C6820 100%);
-            background-attachment: fixed;
-            color: white;
+            background-color: #050507;
+            color: #F8FAFC;
             margin: 0;
             overflow-x: hidden;
         }
-        h1, h2, h3, .serif-text { font-family: 'Cinzel', serif; }
+
+        .live-gold-aura {
+            background:
+                radial-gradient(circle at 15% 20%, rgba(229, 193, 88, 0.22) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(255, 243, 176, 0.16) 0%, transparent 55%),
+                radial-gradient(circle at 50% 50%, rgba(18, 14, 6, 0.98) 0%, #050507 100%);
+        }
+
         .cinzel-decorative {
-            font-family: 'Cinzel Decorative', serif !important;
+            font-family: 'Cinzel Decorative', cursive;
             font-weight: 700;
-            letter-spacing: 0.18em;
-            color: #FBE09C;
-            text-shadow: 0 0 20px rgba(229, 184, 91, 0.35);
+            letter-spacing: 0.14em;
         }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #070707; }
-        ::-webkit-scrollbar-thumb { background: #E5B85B; border-radius: 10px; }
-        .gold-black-shade {
-            background: linear-gradient(90deg, #060606 0%, #1C1508 42%, #594114 82%, #8A651F 100%);
+
+        .serif-text {
+            font-family: 'Cinzel', serif;
         }
-        .btn-gold { 
-            background: rgba(229, 184, 91, 0.14); 
-            color: #FBE09C; 
-            border: 1px solid #E5B85B; 
-            position: relative; 
-            overflow: hidden; 
-            transition: all 0.4s ease; 
-            cursor: pointer;
+
+        .gold-panel {
+            background: linear-gradient(145deg, rgba(28, 28, 36, 0.95), rgba(12, 12, 16, 0.98));
+            border: 1px solid rgba(229, 193, 88, 0.4);
+            box-shadow: 0 24px 54px rgba(0, 0, 0, 0.85), 0 0 32px rgba(229, 193, 88, 0.12);
         }
-        .btn-gold:hover { 
-            background: linear-gradient(90deg, #B8892E 0%, #E5B85B 100%); 
-            color: #070707; 
-            border-color: #FBE09C; 
-            box-shadow: 0 0 25px rgba(229, 184, 91, 0.55); 
+
+        .btn-gold {
+            background: linear-gradient(135deg, #FFF3B0 0%, #E5C158 50%, #8C6214 100%);
+            color: #070709;
+            font-weight: 700;
+            transition: all 0.22s ease;
         }
-        .admin-input { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(229, 184, 91, 0.3); color: white; padding: 0.5rem 0.75rem; border-radius: 0.375rem; outline: none; transition: all 0.3s; }
-        .admin-input:focus { border-color: #E5B85B; background: rgba(229, 184, 91, 0.1); box-shadow: 0 0 10px rgba(229, 184, 91, 0.2); }
+
+        .btn-gold:hover {
+            box-shadow: 0 0 28px rgba(229, 193, 88, 0.75);
+            transform: translateY(-1px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #070709; }
+        ::-webkit-scrollbar-thumb { background: #E5C158; border-radius: 4px; }
     </style>
 </head>
-<body class="antialiased selection:bg-gold selection:text-black flex flex-col min-h-screen">
+<body class="min-h-screen flex flex-col selection:bg-gold selection:text-black relative">
 
-    <!-- Admin Navbar -->
-    <header class="fixed top-0 w-full z-50 border-b border-gold/30 bg-black/90 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto h-20 px-4 md:px-8 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="text-left">
-                    <h1 class="text-xl md:text-2xl font-bold cinzel-decorative">DYNAST</h1>
-                    <p class="text-[7px] tracking-[0.3em] text-lightgold uppercase font-sans">Master Administration Atelier</p>
+    <div class="fixed inset-0 pointer-events-none z-0 live-gold-aura"></div>
+
+    <!-- TOAST BANNER -->
+    <div id="adminToast" class="fixed top-20 right-4 z-50 hidden bg-black/95 border-2 border-gold text-lightgold px-5 py-3.5 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="adminToastText">Updated</span>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- FIREBASE ADMIN LOGIN GATE (dynast.co.in@gmail.com / Dynast@Hanzalah)       -->
+    <!-- ========================================================================= -->
+    <div id="adminLoginGate" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4">
+        <div class="gold-panel rounded-3xl max-w-md w-full p-8 space-y-6 border-2 border-gold/70 relative shadow-2xl">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 rounded-2xl bg-gold/20 border border-gold/60 flex items-center justify-center text-gold text-2xl mx-auto mb-3 shadow-lg">
+                    <i class="fa-solid fa-user-shield"></i>
                 </div>
+                <span class="cinzel-decorative text-2xl text-lightgold block">DYNAST</span>
+                <h1 class="serif-text text-xs uppercase tracking-[0.28em] text-gold font-bold">Bespoke Command &amp; Order Admin</h1>
+                <p class="text-xs text-gray-300">Sign in with your Firebase Admin Email &amp; Password</p>
             </div>
-            <div class="flex items-center gap-4">
-                <div id="auth-status" class="hidden md:flex items-center gap-2 text-xs text-lightgold bg-gold/10 px-3 py-1.5 rounded-sm border border-gold/30">
-                    <i class="fa-solid fa-shield-halved"></i> Cloud Sync Active
+
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="text-gray-200 font-semibold block mb-1.5">Admin Email Address</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope text-gold/80 absolute left-3.5 top-3.5"></i>
+                        <input type="email" id="adminEmailInput" required placeholder="dynast.co.in@gmail.com" class="w-full bg-black border border-gold/50 focus:border-gold rounded-xl pl-10 pr-4 py-3 text-white outline-none">
+                    </div>
                 </div>
-                <a href="index.html" class="bg-white/10 hover:bg-white hover:text-black text-white px-4 py-2 rounded-sm text-xs font-semibold uppercase tracking-widest transition-all">
-                    <i class="fa-solid fa-store mr-2"></i> View Storefront
-                </a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Main Container -->
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 pt-28 pb-16">
-        
-        <!-- Dashboard Statistics Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <div class="gold-black-shade border border-gold/30 p-6 rounded-sm shadow-lg">
-                <p class="text-lightgold text-xs uppercase tracking-widest font-semibold mb-2">Total Orders</p>
-                <h3 id="stat-total" class="text-3xl font-bold text-white serif-text">0</h3>
-            </div>
-            <div class="gold-black-shade border border-gold/30 p-6 rounded-sm shadow-lg">
-                <p class="text-yellow-400 text-xs uppercase tracking-widest font-semibold mb-2">Verification Pending</p>
-                <h3 id="stat-pending" class="text-3xl font-bold text-yellow-400 serif-text">0</h3>
-            </div>
-            <div class="gold-black-shade border border-gold/30 p-6 rounded-sm shadow-lg">
-                <p class="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">In Workshop</p>
-                <h3 id="stat-workshop" class="text-3xl font-bold text-blue-400 serif-text">0</h3>
-            </div>
-            <div class="gold-black-shade border border-gold/30 p-6 rounded-sm shadow-lg">
-                <p class="text-green-400 text-xs uppercase tracking-widest font-semibold mb-2">Completed Revenue</p>
-                <h3 id="stat-revenue" class="text-3xl font-bold text-green-400 serif-text">₹0</h3>
-            </div>
-        </div>
+                <div>
+                    <label class="text-gray-200 font-semibold block mb-1.5">Admin Password</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-key text-gold/80 absolute left-3.5 top-3.5"></i>
+                        <input type="password" id="adminPasswordInput" required placeholder="••••••••••••••" class="w-full bg-black border border-gold/50 focus:border-gold rounded-xl pl-10 pr-10 py-3 text-white outline-none">
+                        <button type="button" onclick="toggleAdminPassVis()" class="absolute right-3.5 top-3 text-gray-400 hover:text-gold">
+                            <i id="passEyeIcon" class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
 
-        <!-- Filter & Search Controls -->
-        <div class="gold-black-shade border border-gold/30 p-4 md:p-6 rounded-sm mb-8 flex flex-col md:flex-row justify-between items-center gap-4 shadow-lg">
-            <div class="flex items-center gap-3 w-full md:w-auto">
-                <button onclick="switchTab('store')" id="tab-store-btn" class="px-6 py-2.5 rounded-sm text-xs font-bold tracking-widest uppercase btn-gold transition-all">Store Orders</button>
-                <button onclick="switchTab('bespoke')" id="tab-bespoke-btn" class="px-6 py-2.5 rounded-sm text-xs font-bold tracking-widest uppercase bg-white/5 border border-gold/30 text-gray-300 hover:text-white transition-all">Bespoke Custom Orders</button>
-            </div>
-            <div class="flex items-center gap-3 w-full md:w-auto">
-                <input type="text" id="search-input" oninput="filterOrders()" placeholder="Search Order ID, Name..." class="admin-input text-xs w-full md:w-64">
-                <button onclick="loadOrdersFromCloud()" class="bg-gold/20 hover:bg-gold hover:text-black text-lightgold border border-gold/40 px-4 py-2 rounded-sm text-xs font-semibold tracking-widest uppercase transition-all whitespace-nowrap">
-                    <i class="fa-solid fa-rotate mr-2"></i> Refresh
+                <p id="adminLoginError" class="hidden text-red-400 text-xs font-semibold bg-red-500/15 border border-red-500/40 rounded-xl p-3 text-center"></p>
+
+                <button type="submit" id="adminLoginBtn" class="btn-gold w-full py-4 rounded-xl text-xs uppercase tracking-widest shadow-2xl flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-unlock-keyhole"></i> Sign In to Admin Command
                 </button>
-            </div>
-        </div>
+            </form>
 
-        <!-- Orders Table Container -->
-        <div class="gold-black-shade border border-gold/30 rounded-sm overflow-hidden shadow-2xl">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-black/60 border-b border-gold/30 text-lightgold text-[10px] uppercase tracking-widest">
-                            <th class="p-4">Order Ref / Date</th>
-                            <th class="p-4">Client Details</th>
-                            <th class="p-4">Items / Specifications</th>
-                            <th class="p-4">Payment & Amount</th>
-                            <th class="p-4">Fulfillment Status</th>
-                            <th class="p-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orders-table-body" class="divide-y divide-white/10 text-xs font-light text-gray-200">
-                        <!-- Populated dynamically via script -->
-                    </tbody>
-                </table>
-            </div>
-            <div id="no-orders-box" class="hidden text-center py-16">
-                <i class="fa-solid fa-folder-open text-4xl text-lightgold/40 mb-3"></i>
-                <p class="text-gray-300 text-xs tracking-widest uppercase font-light">No records found in cloud database.</p>
-            </div>
-        </div>
-    </main>
-
-    <!-- Order Detail & Custom Dial Image Inspection Modal -->
-    <div id="order-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-md">
-        <div class="gold-black-shade border border-gold/40 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 relative shadow-[0_0_50px_rgba(229,184,91,0.2)]">
-            <button onclick="closeOrderModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl leading-none"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="text-lightgold font-bold text-sm tracking-[0.2em] uppercase mb-4 border-b border-gold/30 pb-3">Order Specification Dossier</h3>
-            <div id="modal-body-content" class="space-y-4 text-xs font-light text-gray-100">
-                <!-- Injected dynamically -->
+            <div class="text-center pt-3 border-t border-gold/30">
+                <a href="bespoke.html" class="text-xs text-gray-300 hover:text-gold transition font-medium">
+                    <i class="fa-solid fa-arrow-left mr-1.5"></i> Return to Bespoke Customer Studio
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- Firebase & Admin Controller Script -->
+    <!-- ========================================================================= -->
+    <!-- MAIN ADMIN DASHBOARD                                                      -->
+    <!-- ========================================================================= -->
+    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-gold/40 px-4 lg:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <a href="bespoke.html" class="text-xs text-gold hover:text-lightgold flex items-center gap-1.5 border border-gold/40 bg-gold/10 px-4 py-2 rounded-xl transition">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> <span>Bespoke Studio</span>
+                </a>
+                <div>
+                    <span class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-widest block leading-none">DYNAST</span>
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gold/90 block mt-1">Bespoke Order &amp; Print Sizing Admin</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 bg-emerald-500/15 border border-emerald-500/40 px-4 py-2 rounded-xl text-xs shadow-md">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-gray-200">Paytm UPI: <strong class="text-white font-mono">7579942958@ptyes</strong></span>
+                </div>
+
+                <button type="button" onclick="syncAllLocalAndCloudOrders(true)" class="border border-gold/50 bg-white/5 hover:bg-gold/20 text-lightgold px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md">
+                    <i class="fa-solid fa-arrows-rotate text-gold"></i> <span>Sync Orders</span>
+                </button>
+
+                <button type="button" onclick="createSampleTestOrder()" class="border border-gold/50 bg-gold/20 hover:bg-gold/30 text-lightgold px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md">
+                    <i class="fa-solid fa-plus text-gold"></i> <span>Create Test Order</span>
+                </button>
+
+                <button type="button" onclick="logoutAdmin()" title="Sign Out of Admin" class="border border-red-500/50 bg-red-500/15 hover:bg-red-500/30 text-red-300 px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md">
+                    <i class="fa-solid fa-lock"></i> <span class="hidden md:inline">Sign Out</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-8 space-y-8">
+
+        <!-- 4 KPI METRIC CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="gold-panel rounded-2xl p-6 shadow-xl">
+                <span class="text-[10px] uppercase tracking-widest text-gray-300 font-bold block">Total Bespoke Orders</span>
+                <p id="kpiTotalOrders" class="serif-text text-3xl font-bold text-white mt-2">0</p>
+            </div>
+
+            <div class="gold-panel rounded-2xl p-6 shadow-xl">
+                <span class="text-[10px] uppercase tracking-widest text-gray-300 font-bold block">Total Bespoke Value</span>
+                <p id="kpiTotalRevenue" class="serif-text text-3xl font-bold text-lightgold mt-2">₹0</p>
+            </div>
+
+            <div class="gold-panel rounded-2xl p-6 shadow-xl">
+                <span class="text-[10px] uppercase tracking-widest text-amber-400 font-bold block">Pending UTR Verification</span>
+                <p id="kpiPendingUtr" class="serif-text text-3xl font-bold text-amber-400 mt-2">0</p>
+            </div>
+
+            <div class="gold-panel rounded-2xl p-6 shadow-xl">
+                <span class="text-[10px] uppercase tracking-widest text-emerald-400 font-bold block">Custom Photo Dials to Print</span>
+                <p id="kpiPhotoDials" class="serif-text text-3xl font-bold text-emerald-400 mt-2">0</p>
+            </div>
+        </div>
+
+        <!-- MASTER WATCH DIAL & WATERSLIDE DECAL PRINT REFERENCE -->
+        <section class="gold-panel rounded-3xl p-6 sm:p-8 border-l-4 border-l-gold space-y-4 shadow-2xl">
+            <div>
+                <h2 class="serif-text text-sm sm:text-base font-bold text-lightgold flex items-center gap-2.5">
+                    <i class="fa-solid fa-ruler-combined text-gold"></i>
+                    <span>MASTER WATCH DIAL &amp; WATERSLIDE DECAL PRINT REFERENCE</span>
+                </h2>
+                <p class="text-xs sm:text-sm text-gray-300 mt-1.5 leading-relaxed">
+                    Every order card below automatically calculates the exact physical print size in <strong>millimeters (mm), centimeters (cm), and 600 DPI pixels</strong>. You can also adjust the caliper millimeter box on any order if your dial blank differs.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                <div class="p-4 rounded-2xl bg-black/80 border border-gold/30">
+                    <span class="text-[11px] uppercase tracking-wider text-gold font-bold block">48-Flute / 120-Flute Luxury Case (41mm)</span>
+                    <p class="font-bold text-white mt-1">Dial Print: 28.5 mm (2.85 cm • 673×673 px)</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-black/80 border border-gold/30">
+                    <span class="text-[11px] uppercase tracking-wider text-gold font-bold block">Smooth Dress Case (40mm)</span>
+                    <p class="font-bold text-white mt-1">Dial Print: 32.0 mm (3.20 cm • 756×756 px)</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-black/80 border border-gold/30">
+                    <span class="text-[11px] uppercase tracking-wider text-gold font-bold block">Tachymetre / Sub-Diver Case (40mm)</span>
+                    <p class="font-bold text-white mt-1">Dial Print: 29.0 mm (2.90 cm • 685×685 px)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEARCH & FILTER BAR -->
+        <section class="gold-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center gap-4 shadow-xl">
+            <div class="relative flex-1 w-full">
+                <i class="fa-solid fa-magnifying-glass text-gold/80 absolute left-4 top-3.5 text-xs"></i>
+                <input type="text" id="searchOrdersInput" oninput="renderAdminOrders()" placeholder="Search by Order ID, Track ID, Customer Name, Phone, Email, Dial Name, or 12-Digit UTR..." class="w-full bg-black/90 border border-gold/40 focus:border-gold rounded-xl pl-11 pr-4 py-3 text-xs text-white outline-none">
+            </div>
+
+            <div class="w-full md:w-72 shrink-0">
+                <select id="statusFilterSelect" onchange="renderAdminOrders()" class="w-full bg-black/90 border border-gold/40 focus:border-gold rounded-xl px-4 py-3 text-xs text-lightgold outline-none font-semibold">
+                    <option value="ALL">Status: All Bespoke Orders</option>
+                    <option value="PENDING">Pending / Order Confirmed</option>
+                    <option value="VERIFIED">UTR Verified • Printing Dial</option>
+                    <option value="SHIPPED">Dispatched / Shipped</option>
+                    <option value="COMPLETED">Delivered / Completed</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- ORDERS CONTAINER -->
+        <section id="ordersListContainer" class="space-y-6 pb-20"></section>
+
+    </main>
+
     <script>
-        const firebaseConfig = {
-          apiKey: "AIzaSyAN3SStrczNH5cwhU9o5Whg0QVbaRAlUpg",
-          authDomain: "avesta-web-6ab30.firebaseapp.com",
-          projectId: "avesta-web-6ab30",
-          storageBucket: "avesta-web-6ab30.firebasestorage.app",
-          messagingSenderId: "682614492313",
-          appId: "1:682614492313:web:c81a3b9cf8ed0fa0affc08",
-          measurementId: "G-CYFB840ML9"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+        // AUTHORIZED FIREBASE ADMIN CREDENTIALS
+        const ADMIN_MASTER_EMAIL = "dynast.co.in@gmail.com";
+        const ADMIN_MASTER_PASS  = "Dynast@Hanzalah";
 
-        let currentActiveTab = 'store'; // 'store' or 'bespoke'
-        let cachedStoreOrders = [];
-        let cachedBespokeOrders = [];
+        let allOrders = [];
+        let unsubscribeSnapshot = null;
 
-        // Load both collections on initial boot
-        window.addEventListener('DOMContentLoaded', () => {
-            loadOrdersFromCloud();
-        });
-
-        function loadOrdersFromCloud() {
-            // Fetch Store Orders
-            db.collection("orders").orderBy("timestamp", "desc").get().then((snapshot) => {
-                cachedStoreOrders = [];
-                snapshot.forEach((doc) => {
-                    cachedStoreOrders.push({ id: doc.id, ...doc.data() });
-                });
-                if (currentActiveTab === 'store') renderTable(cachedStoreOrders);
-                updateStats();
-            }).catch(err => console.error("Store orders fetch error:", err));
-
-            // Fetch Bespoke Custom Orders
-            db.collection("bespoke_orders").orderBy("timestamp", "desc").get().then((snapshot) => {
-                cachedBespokeOrders = [];
-                snapshot.forEach((doc) => {
-                    cachedBespokeOrders.push({ id: doc.id, ...doc.data() });
-                });
-                if (currentActiveTab === 'bespoke') renderTable(cachedBespokeOrders);
-                updateStats();
-            }).catch(err => console.error("Bespoke orders fetch error:", err));
+        function showAdminToast(msg) {
+            const el = document.getElementById('adminToast');
+            const txt = document.getElementById('adminToastText');
+            if (!el || !txt) return;
+            txt.textContent = msg;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 3500);
         }
 
-        function switchTab(tab) {
-            currentActiveTab = tab;
-            const storeBtn = document.getElementById('tab-store-btn');
-            const bespokeBtn = document.getElementById('tab-bespoke-btn');
-
-            if (tab === 'store') {
-                storeBtn.className = "px-6 py-2.5 rounded-sm text-xs font-bold tracking-widest uppercase btn-gold transition-all";
-                bespokeBtn.className = "px-6 py-2.5 rounded-sm text-xs font-bold tracking-widest uppercase bg-white/5 border border-gold/30 text-gray-300 hover:text-white transition-all";
-                renderTable(cachedStoreOrders);
+        function toggleAdminPassVis() {
+            const inp = document.getElementById('adminPasswordInput');
+            const icon = document.getElementById('passEyeIcon');
+            if (inp.type === 'password') {
+                inp.type = 'text';
+                icon.className = 'fa-regular fa-eye-slash';
             } else {
-                bespokeBtn.className = "px-6 py-2.5 rounded-sm text-xs font-bold tracking-widest uppercase btn-gold transition-all";
-                storeBtn.className = "px-6 py-2.5 rounded-sm text-xs font-bold tracking-widest uppercase bg-white/5 border border-gold/30 text-gray-300 hover:text-white transition-all";
-                renderTable(cachedBespokeOrders);
+                inp.type = 'password';
+                icon.className = 'fa-regular fa-eye';
             }
         }
 
-        function updateStats() {
-            const allOrders = [...cachedStoreOrders, ...cachedBespokeOrders];
-            document.getElementById('stat-total').innerText = allOrders.length;
-            
-            const pendingCount = allOrders.filter(o => (o.status || "").toLowerCase().includes("pending")).length;
-            document.getElementById('stat-pending').innerText = pendingCount;
+        // CHECK SESSION ON PAGE LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            const isAuthed = sessionStorage.getItem('dynast_admin_authed') === 'true' ||
+                             localStorage.getItem('dynast_admin_authed_email') === ADMIN_MASTER_EMAIL;
+            if (isAuthed) {
+                unlockAdminDashboard();
+            }
+        });
 
-            const workshopCount = allOrders.filter(o => (o.status || "").toLowerCase().includes("workshop")).length;
-            document.getElementById('stat-workshop').innerText = workshopCount;
+        window.addEventListener('admin-fb-ready', () => {
+            const isAuthed = sessionStorage.getItem('dynast_admin_authed') === 'true' ||
+                             localStorage.getItem('dynast_admin_authed_email') === ADMIN_MASTER_EMAIL;
+            if (isAuthed) {
+                autoSignInFirebaseAdmin();
+            }
+        });
 
-            const totalRevenue = allOrders.reduce((acc, o) => acc + (o.total || o.totalAmount || 0), 0);
-            document.getElementById('stat-revenue').innerText = '₹' + totalRevenue.toLocaleString('en-IN');
+        async function autoSignInFirebaseAdmin() {
+            if (!window.auth || !window.FB_Admin) return;
+            try {
+                await window.FB_Admin.signInWithEmailAndPassword(window.auth, ADMIN_MASTER_EMAIL, ADMIN_MASTER_PASS);
+            } catch (e) {}
+            startRealtimeFirestoreListener();
+            syncAllLocalAndCloudOrders(false);
         }
 
-        function renderTable(dataList) {
-            const tbody = document.getElementById('orders-table-body');
-            const noBox = document.getElementById('no-orders-box');
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmailInput').value.trim().toLowerCase();
+            const pass = document.getElementById('adminPasswordInput').value.trim();
+            const errBox = document.getElementById('adminLoginError');
+            const btn = document.getElementById('adminLoginBtn');
 
-            if (!dataList || dataList.length === 0) {
-                tbody.innerHTML = '';
-                noBox.classList.remove('hidden');
+            errBox.classList.add('hidden');
+
+            if (email !== ADMIN_MASTER_EMAIL.toLowerCase() || pass !== ADMIN_MASTER_PASS) {
+                errBox.textContent = "Invalid admin credentials. Please sign in with dynast.co.in@gmail.com and your admin password.";
+                errBox.classList.remove('hidden');
                 return;
             }
 
-            noBox.classList.add('hidden');
-            tbody.innerHTML = dataList.map(order => {
-                const orderId = order.orderId || order.id || 'N/A';
-                const clientName = order.name || order.customerName || 'Guest Client';
-                const clientPhone = order.phone || order.customerPhone || 'No Phone';
-                const clientEmail = order.email || order.customerEmail || 'No Email';
-                const clientAddress = order.address || order.deliveryAddress || 'No Address Provided';
-                const totalAmt = order.total || order.totalAmount || 0;
-                const payMethod = order.method || order.paymentMethod || 'UPI';
-                const status = order.status || 'Order Confirmed';
-                const dateStr = order.date || 'Recent';
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1.5"></i> Verifying Firebase Admin...`;
 
-                let specsHtml = '';
-                if (currentActiveTab === 'store') {
-                    const items = order.items || [];
-                    specsHtml = items.map(i => `${i.quantity}x ${i.name} ${i.selectedColor && i.selectedColor !== 'Default' ? `(${i.selectedColor})` : ''}`).join('<br>');
-                } else {
-                    // Bespoke Custom Watch Specs including Custom Dial Image check
-                    const caseFinish = order.caseFinish || order.case || 'Standard';
-                    const dialColor = order.dialColor || order.dial || 'Standard';
-                    const strapType = order.strapType || order.strap || 'Standard';
-                    const engravingText = order.engravingText || order.engraving || 'None';
-                    const customImage = order.customImage || order.dialImage || order.uploadedImage || null;
+            if (window.auth && window.FB_Admin) {
+                try {
+                    const loginPromise = window.FB_Admin.signInWithEmailAndPassword(window.auth, ADMIN_MASTER_EMAIL, ADMIN_MASTER_PASS)
+                        .catch(async (err) => {
+                            if (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
+                                return await window.FB_Admin.createUserWithEmailAndPassword(window.auth, ADMIN_MASTER_EMAIL, ADMIN_MASTER_PASS);
+                            }
+                        });
+                    await Promise.race([loginPromise, new Promise(res => setTimeout(res, 2200))]);
+                } catch (err) {}
+            }
 
-                    specsHtml = `
-                        <strong class="text-lightgold">Bespoke Specs:</strong><br>
-                        Case: ${caseFinish} | Dial: ${dialColor}<br>
-                        Strap: ${strapType}<br>
-                        Engraving: "${engravingText}"<br>
-                        ${customImage ? `<a href="${customImage}" target="_blank" class="text-lightgold underline font-bold mt-1 inline-block"><i class="fa-solid fa-image mr-1"></i> View Custom Dial Image</a>` : '<span class="text-gray-400 italic">No custom image uploaded</span>'}
-                    `;
+            sessionStorage.setItem('dynast_admin_authed', 'true');
+            localStorage.setItem('dynast_admin_authed_email', ADMIN_MASTER_EMAIL);
+
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-unlock-keyhole"></i> Sign In to Admin Command`;
+
+            unlockAdminDashboard();
+            showAdminToast("Signed in as DYNAST Master Admin");
+        }
+
+        function unlockAdminDashboard() {
+            document.getElementById('adminLoginGate').classList.add('hidden');
+            syncAllLocalAndCloudOrders(false);
+            startRealtimeFirestoreListener();
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('dynast_admin_authed');
+            localStorage.removeItem('dynast_admin_authed_email');
+            if (window.auth && window.FB_Admin) {
+                try { window.FB_Admin.signOut(window.auth); } catch (e) {}
+            }
+            document.getElementById('adminPasswordInput').value = '';
+            document.getElementById('adminLoginGate').classList.remove('hidden');
+        }
+
+        // =========================================================================
+        // UNIFIED ORDER COLLECTOR (SCANS ALL LOCALSTORAGE KEYS + FIREBASE FIRESTORE)
+        // =========================================================================
+        function collectAllLocalBrowserOrders() {
+            const map = new Map();
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('dynast_orders')) {
+                    try {
+                        const arr = JSON.parse(localStorage.getItem(key) || '[]');
+                        if (Array.isArray(arr)) {
+                            arr.forEach(o => {
+                                if (o && o.orderId) {
+                                    map.set(o.orderId, normalizeOrderObject(o));
+                                }
+                            });
+                        }
+                    } catch (e) {}
                 }
+            }
+            return Array.from(map.values());
+        }
+
+        function normalizeOrderObject(o) {
+            const caseStr = o.caseModel || o.caseColor || 'Two-Tone Rose-Gold Fluted Case';
+            let defaultMm = 28.5;
+            if (caseStr.toLowerCase().includes('smooth')) defaultMm = 32.0;
+            else if (caseStr.toLowerCase().includes('tachy') || caseStr.toLowerCase().includes('diver')) defaultMm = 29.0;
+
+            return {
+                docId: o.docId || null,
+                orderId: o.orderId || ('DYN-' + Math.floor(100000 + Math.random() * 900000)),
+                trackId: o.trackId || ('TRK-DYN-' + String(o.orderId || '408032').replace(/\D/g, '') + '951'),
+                date: o.date || new Date().toISOString(),
+                formattedDate: o.formattedDate || new Date(o.date || Date.now()).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+                customerName: o.customerName || 'Collector',
+                customerEmail: o.customerEmail || 'dynast.co.in@gmail.com',
+                phone: o.phone || '7579942958',
+                address: o.address || 'Agra, Uttar Pradesh',
+                utrNumber: o.utrNumber || 'Pending',
+                caseModel: caseStr,
+                dialColor: o.dialColor || 'Sunburst Coffee Brown Dial',
+                markerStyle: o.markerStyle || '10 Diamond-Set Square Chatons',
+                backCase: o.backCase || 'Solid Brushed Steel Cover',
+                strapItem: o.strapItem || o.strapMaterial || 'Two-Tone Rose & Steel Curved Jubilee',
+                strapLock: o.strapLock || 'DYNAST Butterfly Deployant Lock',
+                customName: o.customName || 'None',
+                hasCustomPhoto: Boolean(o.hasCustomPhoto || o.dialPhoto),
+                dialPhoto: o.dialPhoto || null,
+                totalPrice: Number(o.totalPrice || 9198),
+                dialMm: Number(o.dialMm || defaultMm),
+                status: o.status || 'Order Confirmed • In Bespoke Crafting Queue (Agra Studio)'
+            };
+        }
+
+        async function syncAllLocalAndCloudOrders(showFeedback = false) {
+            const mergedMap = new Map();
+
+            // 1. Load all orders from every dynast_orders_* key in localStorage
+            const localOrders = collectAllLocalBrowserOrders();
+            localOrders.forEach(o => mergedMap.set(o.orderId, o));
+
+            // 2. Fetch all cloud orders from Firebase Firestore (bespoke_orders)
+            if (window.db && window.FB_Admin) {
+                try {
+                    const snapPromise = window.FB_Admin.getDocs(window.FB_Admin.collection(window.db, 'bespoke_orders'));
+                    const snap = await Promise.race([snapPromise, new Promise(res => setTimeout(() => res(null), 2500))]);
+                    if (snap && snap.forEach) {
+                        snap.forEach(docSnap => {
+                            const data = docSnap.data();
+                            if (data && data.orderId) {
+                                const norm = normalizeOrderObject({ ...data, docId: docSnap.id });
+                                mergedMap.set(norm.orderId, norm);
+                            }
+                        });
+                    }
+
+                    // 3. Backfill any local-only orders up to Firestore
+                    for (const locOrder of localOrders) {
+                        const existing = mergedMap.get(locOrder.orderId);
+                        if (existing && !existing.docId) {
+                            try {
+                                const docRef = await window.FB_Admin.addDoc(window.FB_Admin.collection(window.db, 'bespoke_orders'), locOrder);
+                                existing.docId = docRef.id;
+                            } catch (e) {}
+                        }
+                    }
+                } catch (err) {}
+            }
+
+            allOrders = Array.from(mergedMap.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
+            saveMasterOrdersToLocal(allOrders);
+            renderAdminOrders();
+
+            if (showFeedback) {
+                showAdminToast(`Synced ${allOrders.length} bespoke order(s)`);
+            }
+        }
+
+        function startRealtimeFirestoreListener() {
+            if (!window.db || !window.FB_Admin || unsubscribeSnapshot) return;
+            try {
+                const colRef = window.FB_Admin.collection(window.db, 'bespoke_orders');
+                unsubscribeSnapshot = window.FB_Admin.onSnapshot(colRef, (snapshot) => {
+                    const map = new Map();
+                    collectAllLocalBrowserOrders().forEach(o => map.set(o.orderId, o));
+                    snapshot.forEach(docSnap => {
+                        const d = docSnap.data();
+                        if (d && d.orderId) {
+                            map.set(d.orderId, normalizeOrderObject({ ...d, docId: docSnap.id }));
+                        }
+                    });
+                    allOrders = Array.from(map.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
+                    renderAdminOrders();
+                });
+            } catch (e) {}
+        }
+
+        function saveMasterOrdersToLocal(ordersArray) {
+            localStorage.setItem('dynast_orders_admin_master', JSON.stringify(ordersArray));
+            for (let i = 0; i < localStorage.length; i++) {
+                const k = localStorage.key(i);
+                if (k && k.startsWith('dynast_orders_')) {
+                    localStorage.setItem(k, JSON.stringify(ordersArray));
+                }
+            }
+        }
+
+        // =========================================================================
+        // RENDER KPI METRICS & ORDER CARDS WITH 600 DPI DIAL SIZING CALCULATOR
+        // =========================================================================
+        function renderAdminOrders() {
+            const totalCount = allOrders.length;
+            const totalValue = allOrders.reduce((sum, o) => sum + (Number(o.totalPrice) || 0), 0);
+            const pendingCount = allOrders.filter(o => {
+                const st = (o.status || '').toUpperCase();
+                return !st.includes('VERIFIED') && !st.includes('SHIPPED') && !st.includes('COMPLETED');
+            }).length;
+            const photoCount = allOrders.filter(o => o.hasCustomPhoto).length;
+
+            document.getElementById('kpiTotalOrders').textContent = String(totalCount);
+            document.getElementById('kpiTotalRevenue').textContent = `₹${totalValue.toLocaleString('en-IN')}`;
+            document.getElementById('kpiPendingUtr').textContent = String(pendingCount);
+            document.getElementById('kpiPhotoDials').textContent = String(photoCount);
+
+            const q = (document.getElementById('searchOrdersInput').value || '').trim().toLowerCase();
+            const filterVal = document.getElementById('statusFilterSelect').value;
+
+            const filtered = allOrders.filter(o => {
+                const hay = `${o.orderId} ${o.trackId} ${o.customerName} ${o.customerEmail} ${o.phone} ${o.customName} ${o.utrNumber} ${o.caseModel} ${o.dialColor}`.toLowerCase();
+                if (q && !hay.includes(q)) return false;
+
+                const st = (o.status || '').toUpperCase();
+                if (filterVal === 'PENDING') return !st.includes('VERIFIED') && !st.includes('SHIPPED') && !st.includes('COMPLETED');
+                if (filterVal === 'VERIFIED') return st.includes('VERIFIED');
+                if (filterVal === 'SHIPPED') return st.includes('SHIPPED') || st.includes('DISPATCHED');
+                if (filterVal === 'COMPLETED') return st.includes('COMPLETED') || st.includes('DELIVERED');
+                return true;
+            });
+
+            const container = document.getElementById('ordersListContainer');
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="gold-panel rounded-3xl p-12 text-center space-y-3">
+                        <i class="fa-solid fa-box-open text-gold text-3xl"></i>
+                        <p class="text-sm text-gray-200 font-semibold">No matching bespoke orders found.</p>
+                        <p class="text-xs text-gray-400">Click "Sync Orders" or "+ Create Test Order" in the top bar to test the workflow.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map((o, idx) => {
+                const mm = Number(o.dialMm || 28.5).toFixed(1);
+                const cm = (mm / 10).toFixed(2);
+                const px600 = Math.round((mm / 25.4) * 600);
 
                 return `
-                    <tr class="hover:bg-white/5 transition-colors border-b border-white/5">
-                        <td class="p-4 align-top">
-                            <span class="font-bold text-lightgold">${orderId}</span><br>
-                            <span class="text-[10px] text-gray-400">${dateStr}</span>
-                        </td>
-                        <td class="p-4 align-top">
-                            <strong class="text-white">${clientName}</strong><br>
-                            <span>${clientPhone}</span><br>
-                            <span class="text-[10px] text-gray-400">${clientEmail}</span>
-                        </td>
-                        <td class="p-4 align-top max-w-xs leading-relaxed">
-                            ${specsHtml}
-                        </td>
-                        <td class="p-4 align-top">
-                            <span class="font-bold text-white">₹${totalAmt.toLocaleString('en-IN')}</span><br>
-                            <span class="text-[10px] text-lightgold uppercase px-1.5 py-0.5 rounded bg-gold/15 border border-gold/30">${payMethod}</span>
-                            ${order.utr ? `<br><span class="text-[9px] text-gray-300">UTR: ${order.utr}</span>` : ''}
-                        </td>
-                        <td class="p-4 align-top">
-                            <select onchange="updateOrderStatus('${orderId}', this.value, '${currentActiveTab}')" class="admin-input text-[10px] uppercase font-semibold">
-                                <option value="Verification Pending" ${status === 'Verification Pending' ? 'selected' : ''}>Verification Pending</option>
-                                <option value="Order Confirmed" ${status === 'Order Confirmed' ? 'selected' : ''}>Order Confirmed</option>
-                                <option value="In Workshop" ${status === 'In Workshop' ? 'selected' : ''}>In Workshop</option>
-                                <option value="Shipped" ${status === 'Shipped' ? 'selected' : ''}>Shipped</option>
-                                <option value="Delivered" ${status === 'Delivered' ? 'selected' : ''}>Delivered</option>
-                            </select>
-                        </td>
-                        <td class="p-4 align-top text-right space-x-2">
-                            <button onclick="inspectOrder('${orderId}', '${currentActiveTab}')" class="text-gray-300 hover:text-white p-1.5 rounded bg-white/5 hover:bg-gold/20 transition-all" title="Inspect Full Details"><i class="fa-solid fa-eye"></i></button>
-                            <button onclick="deleteOrder('${orderId}', '${currentActiveTab}')" class="text-red-400 hover:text-red-300 p-1.5 rounded bg-red-500/10 hover:bg-red-500/20 transition-all" title="Delete Record"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>
+                    <div class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6 border border-gold/40 shadow-xl">
+                        <!-- Top Row: Order ID, Track ID, Timestamp, Total & Status Selector -->
+                        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gold/30 pb-4">
+                            <div class="space-y-1">
+                                <div class="flex flex-wrap items-center gap-3">
+                                    <span class="cinzel-decorative text-lg sm:text-xl text-lightgold">${o.orderId}</span>
+                                    <span class="px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 font-mono text-xs font-bold shadow-sm">
+                                        Track ID: ${o.trackId}
+                                    </span>
+                                    <span class="px-3 py-1 rounded-lg bg-gold/20 border border-gold/50 text-gold font-mono text-xs font-bold shadow-sm">
+                                        UTR: ${o.utrNumber}
+                                    </span>
+                                </div>
+                                <p class="text-xs text-gray-300">
+                                    <i class="fa-regular fa-calendar mr-1.5 text-gold"></i> Placed: ${o.formattedDate}
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-4">
+                                <div class="text-right">
+                                    <span class="text-[10px] uppercase tracking-widest text-gray-400 block">Order Total</span>
+                                    <span class="cinzel-decorative text-2xl sm:text-3xl text-gold">₹${Number(o.totalPrice).toLocaleString('en-IN')}</span>
+                                </div>
+
+                                <select onchange="updateOrderStatus('${o.orderId}', this.value)" class="bg-black border border-gold/60 rounded-xl px-4 py-2.5 text-xs text-lightgold font-semibold outline-none shadow-md">
+                                    <option value="Order Confirmed • In Bespoke Crafting Queue" ${o.status.includes('Confirmed') ? 'selected' : ''}>Order Confirmed (Pending UTR)</option>
+                                    <option value="UTR Verified • Printing Custom Dial" ${o.status.includes('Verified') ? 'selected' : ''}>UTR Verified • Printing Dial</option>
+                                    <option value="Dispatched / Shipped via Courier" ${o.status.includes('Shipped') || o.status.includes('Dispatched') ? 'selected' : ''}>Dispatched / Shipped</option>
+                                    <option value="Delivered / Completed" ${o.status.includes('Completed') || o.status.includes('Delivered') ? 'selected' : ''}>Delivered / Completed</option>
+                                </select>
+
+                                <button type="button" onclick="deleteBespokeOrder('${o.orderId}')" title="Delete Order" class="px-3.5 py-2.5 rounded-xl bg-red-500/15 hover:bg-red-500/30 border border-red-500/50 text-red-300 text-xs transition shadow-md">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Middle Grid: Customer Info + 5-Step Watch Spec + Caliper Print Calculator -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 text-xs">
+
+                            <!-- 1. Customer & Delivery Details -->
+                            <div class="p-5 rounded-2xl bg-black/80 border border-gold/30 space-y-2.5 shadow-md">
+                                <span class="text-[10px] uppercase tracking-widest text-gold font-bold block">
+                                    <i class="fa-solid fa-user mr-1.5"></i> Customer &amp; Delivery Details
+                                </span>
+                                <p class="text-white font-bold text-sm">${o.customerName}</p>
+                                <p class="text-gray-200"><i class="fa-solid fa-phone text-gold mr-2"></i> ${o.phone}</p>
+                                <p class="text-lightgold truncate"><i class="fa-solid fa-envelope text-gold mr-2"></i> ${o.customerEmail}</p>
+                                <p class="text-gray-300 leading-relaxed pt-2 border-t border-white/10">
+                                    <i class="fa-solid fa-location-dot text-gold mr-1.5"></i> ${o.address}
+                                </p>
+
+                                <div class="flex flex-wrap gap-2 pt-2.5">
+                                    <a href="https://wa.me/91${String(o.phone).replace(/\D/g, '').slice(-10)}?text=${encodeURIComponent(`Hello ${o.customerName}, your DYNAST Bespoke Order (${o.orderId}) with Tracking ID ${o.trackId} is currently: ${o.status}.`)}" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-500/25 hover:bg-emerald-500/40 border border-emerald-500/50 text-emerald-200 font-semibold inline-flex items-center gap-1.5 shadow-sm">
+                                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Update
+                                    </a>
+                                    <a href="mailto:${o.customerEmail}?subject=${encodeURIComponent(`DYNAST Order Update (${o.orderId}) | Track ID: ${o.trackId}`)}&body=${encodeURIComponent(`Dear ${o.customerName},\n\nYour DYNAST Bespoke Timepiece Order (${o.orderId}) status has been updated:\n\n• Live Tracking ID: ${o.trackId}\n• Current Status: ${o.status}\n• Case: ${o.caseModel}\n• Dial: ${o.dialColor} (${o.markerStyle})\n• Custom Name: ${o.customName}\n• Total Paid: Rs. ${o.totalPrice}\n\nThank you for choosing DYNAST Luxurious Horology (Agra, UP).`)}" class="px-3.5 py-2 rounded-xl bg-gold/20 hover:bg-gold/35 border border-gold/50 text-lightgold font-semibold inline-flex items-center gap-1.5 shadow-sm">
+                                        <i class="fa-solid fa-paper-plane"></i> Email Track ID
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- 2. 5-Step Watch Component Build Sheet -->
+                            <div class="p-5 rounded-2xl bg-black/80 border border-gold/30 space-y-2 shadow-md">
+                                <span class="text-[10px] uppercase tracking-widest text-gold font-bold block mb-1">
+                                    <i class="fa-solid fa-gears mr-1.5"></i> 5-Step Watch Build Specification
+                                </span>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 01 (Case):</span><strong class="text-white text-right">${o.caseModel}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 02 (Dial):</span><strong class="text-white text-right">${o.dialColor}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Markers:</span><strong class="text-white text-right">${o.markerStyle}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Custom Name:</span><strong class="text-lightgold text-right">${o.customName}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Custom Photo:</span><strong class="${o.hasCustomPhoto ? 'text-emerald-400' : 'text-gray-400'} text-right">${o.hasCustomPhoto ? 'YES (Print Required)' : 'No'}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 03 (Back):</span><strong class="text-white text-right">${o.backCase}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 04 (Strap):</span><strong class="text-white text-right">${o.strapItem}</strong></div>
+                                <div class="flex justify-between py-0.5"><span class="text-gray-400">Step 05 (Lock):</span><strong class="text-white text-right">${o.strapLock}</strong></div>
+                            </div>
+
+                            <!-- 3. Caliper Millimeter & Waterslide Decal Print Sizing -->
+                            <div class="p-5 rounded-2xl bg-black/80 border border-gold/30 space-y-4 flex flex-col justify-between shadow-md">
+                                <div class="space-y-3">
+                                    <span class="text-[10px] uppercase tracking-widest text-gold font-bold block">
+                                        <i class="fa-solid fa-print mr-1.5"></i> Waterslide Decal &amp; Dial Print Sizing
+                                    </span>
+                                    <div class="flex items-center justify-between gap-3 bg-white/5 p-3 rounded-xl border border-gold/30">
+                                        <label class="text-gray-200 font-semibold">Dial Diameter (mm):</label>
+                                        <input type="number" step="0.1" min="20" max="42" value="${mm}" onchange="updateOrderDialMm('${o.orderId}', this.value)" class="w-24 bg-black border border-gold/60 rounded-xl px-3 py-1.5 text-center text-lightgold font-bold outline-none text-sm">
+                                    </div>
+                                    <div class="text-xs space-y-1.5 text-gray-200">
+                                        <div class="flex justify-between"><span>Physical Size (mm):</span><strong class="text-white">${mm} mm × ${mm} mm</strong></div>
+                                        <div class="flex justify-between"><span>Physical Size (cm):</span><strong class="text-white">${cm} cm × ${cm} cm</strong></div>
+                                        <div class="flex justify-between"><span>600 DPI Print Resolution:</span><strong class="text-gold font-mono">${px600} × ${px600} px</strong></div>
+                                    </div>
+                                </div>
+
+                                <button type="button" onclick="openPrintableDecalSheet('${o.orderId}')" class="btn-gold w-full py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
+                                    <i class="fa-solid fa-print"></i> Print 1:1 Scale Dial Decal (${mm} mm)
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
                 `;
             }).join('');
         }
 
-        function filterOrders() {
-            const query = document.getElementById('search-input').value.toLowerCase();
-            const targetList = currentActiveTab === 'store' ? cachedStoreOrders : cachedBespokeOrders;
-            
-            const filtered = targetList.filter(o => {
-                const id = (o.orderId || o.id || '').toLowerCase();
-                const name = (o.name || o.customerName || '').toLowerCase();
-                const phone = (o.phone || o.customerPhone || '').toLowerCase();
-                return id.includes(query) || name.includes(query) || phone.includes(query);
-            });
-            renderTable(filtered);
-        }
+        async function updateOrderStatus(orderId, newStatus) {
+            const target = allOrders.find(o => o.orderId === orderId);
+            if (!target) return;
+            target.status = newStatus;
+            saveMasterOrdersToLocal(allOrders);
+            renderAdminOrders();
 
-        function updateOrderStatus(orderId, newStatus, tabType) {
-            const collectionName = tabType === 'store' ? 'orders' : 'bespoke_orders';
-            db.collection(collectionName).doc(orderId).update({ status: newStatus })
-            .then(() => {
-                console.log(`Order ${orderId} status updated to ${newStatus}`);
-                loadOrdersFromCloud();
-            })
-            .catch(err => alert("Failed to update status: " + err.message));
-        }
-
-        function deleteOrder(orderId, tabType) {
-            if (!confirm(`Are you sure you want to delete order ${orderId}?`)) return;
-            const collectionName = tabType === 'store' ? 'orders' : 'bespoke_orders';
-            db.collection(collectionName).doc(orderId).delete()
-            .then(() => {
-                loadOrdersFromCloud();
-            })
-            .catch(err => alert("Failed to delete record: " + err.message));
-        }
-
-        function inspectOrder(orderId, tabType) {
-            const targetList = tabType === 'store' ? cachedStoreOrders : cachedBespokeOrders;
-            const order = targetList.find(o => (o.orderId || o.id) === orderId);
-            if (!order) return;
-
-            const modalContent = document.getElementById('modal-body-content');
-            let customImgBlock = '';
-            
-            if (tabType === 'bespoke') {
-                const imgUrl = order.customImage || order.dialImage || order.uploadedImage;
-                if (imgUrl) {
-                    customImgBlock = `
-                        <div class="mt-4 p-4 border border-gold/40 bg-black/50 rounded text-center">
-                            <p class="text-lightgold text-xs uppercase tracking-widest font-bold mb-2">Customer Uploaded Dial Customization Image:</p>
-                            <img src="${imgUrl}" alt="Custom Dial Image" class="max-h-64 mx-auto rounded border border-gold/30 object-contain">
-                            <a href="${imgUrl}" target="_blank" class="mt-3 inline-block btn-gold px-4 py-2 text-[10px] uppercase font-bold tracking-widest rounded">Open Full Resolution Image</a>
-                        </div>
-                    `;
-                } else {
-                    customImgBlock = `<p class="text-gray-400 italic mt-3">No custom image file attached to this bespoke configuration.</p>`;
-                }
+            if (window.db && window.FB_Admin && target.docId) {
+                try {
+                    await window.FB_Admin.updateDoc(window.FB_Admin.doc(window.db, 'bespoke_orders', target.docId), { status: newStatus });
+                } catch (e) {}
             }
-
-            modalContent.innerHTML = `
-                <div class="grid grid-cols-2 gap-4 border-b border-white/10 pb-4">
-                    <div><span class="text-gray-400">Order Ref:</span> <strong class="text-lightgold">${order.orderId || order.id}</strong></div>
-                    <div><span class="text-gray-400">Timestamp:</span> <span class="text-white">${order.date || 'N/A'}</span></div>
-                    <div><span class="text-gray-400">Client Name:</span> <strong class="text-white">${order.name || order.customerName}</strong></div>
-                    <div><span class="text-gray-400">Contact Phone:</span> <span class="text-white">${order.phone || order.customerPhone}</span></div>
-                    <div class="col-span-2"><span class="text-gray-400">Email Address:</span> <span class="text-white">${order.email || order.customerEmail}</span></div>
-                    <div class="col-span-2"><span class="text-gray-400">Delivery Address:</span> <p class="text-white font-light mt-1">${order.address || order.deliveryAddress}</p></div>
-                </div>
-                <div class="pt-2">
-                    <span class="text-gray-400 block mb-2">Order Line Items & Specifications:</span>
-                    <pre class="bg-black/60 p-4 rounded border border-gold/20 text-xs text-lightgold whitespace-pre-wrap font-sans">${JSON.stringify(order, null, 2)}</pre>
-                </div>
-                ${customImgBlock}
-            `;
-
-            document.getElementById('order-modal').classList.remove('hidden');
-            document.getElementById('order-modal').classList.add('flex');
+            showAdminToast(`Order ${orderId} status updated!`);
         }
 
-        function closeOrderModal() {
-            document.getElementById('order-modal').classList.add('hidden');
-            document.getElementById('order-modal').classList.remove('flex');
+        function updateOrderDialMm(orderId, newMm) {
+            const target = allOrders.find(o => o.orderId === orderId);
+            if (!target) return;
+            target.dialMm = parseFloat(newMm) || 28.5;
+            saveMasterOrdersToLocal(allOrders);
+            renderAdminOrders();
+            showAdminToast(`Updated dial print diameter to ${target.dialMm.toFixed(1)} mm`);
+        }
+
+        async function deleteBespokeOrder(orderId) {
+            if (!confirm(`Are you sure you want to delete bespoke order ${orderId}?`)) return;
+            const target = allOrders.find(o => o.orderId === orderId);
+            allOrders = allOrders.filter(o => o.orderId !== orderId);
+            saveMasterOrdersToLocal(allOrders);
+            renderAdminOrders();
+
+            if (window.db && window.FB_Admin && target && target.docId) {
+                try {
+                    await window.FB_Admin.deleteDoc(window.FB_Admin.doc(window.db, 'bespoke_orders', target.docId));
+                } catch (e) {}
+            }
+            showAdminToast(`Deleted order ${orderId}`);
+        }
+
+        async function createSampleTestOrder() {
+            const orderId = 'DYN-' + Math.floor(100000 + Math.random() * 900000);
+            const trackId = 'TRK-DYN-' + Math.floor(10000000 + Math.random() * 90000000);
+            const testOrder = normalizeOrderObject({
+                orderId,
+                trackId,
+                date: new Date().toISOString(),
+                formattedDate: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+                customerName: 'Mohammad Hanzalah',
+                customerEmail: 'dynast.co.in@gmail.com',
+                phone: '7579942958',
+                address: 'Agra, Uttar Pradesh',
+                utrNumber: '429581234567',
+                caseModel: 'Two-Tone Rose-Gold Fluted Case',
+                dialColor: 'Sunburst Coffee Brown Dial',
+                markerStyle: '10 Diamond-Set Square Chatons',
+                backCase: 'Solid Brushed Steel Cover',
+                strapItem: 'Two-Tone Rose & Steel Curved Jubilee',
+                strapLock: 'DYNAST Butterfly Deployant Lock',
+                customName: 'Hanzalah',
+                hasCustomPhoto: false,
+                totalPrice: 9198,
+                status: 'Order Confirmed • In Bespoke Crafting Queue'
+            });
+
+            allOrders.unshift(testOrder);
+            saveMasterOrdersToLocal(allOrders);
+            renderAdminOrders();
+
+            if (window.db && window.FB_Admin) {
+                try {
+                    const ref = await window.FB_Admin.addDoc(window.FB_Admin.collection(window.db, 'bespoke_orders'), testOrder);
+                    testOrder.docId = ref.id;
+                } catch (e) {}
+            }
+            showAdminToast(`Created test order ${orderId}`);
+        }
+
+        // GENERATES EXACT 1:1 MILLIMETER PRINT SHEET FOR WATERSLIDE DECAL PAPER
+        function openPrintableDecalSheet(orderId) {
+            const o = allOrders.find(x => x.orderId === orderId);
+            if (!o) return;
+            const mm = Number(o.dialMm || 28.5).toFixed(1);
+            const win = window.open('', '_blank');
+            win.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>DYNAST 1:1 Dial Decal Print Sheet - ${o.orderId}</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+                    <style>
+                        @page { size: A4; margin: 15mm; }
+                        body { font-family: Arial, sans-serif; color: #111; margin: 0; padding: 20px; }
+                        .header { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+                        .decal-grid { display: flex; gap: 15mm; align-items: center; flex-wrap: wrap; margin-top: 20px; }
+                        .dial-circle {
+                            width: ${mm}mm;
+                            height: ${mm}mm;
+                            border: 0.25mm dashed #555;
+                            border-radius: 50%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 3.2mm 0;
+                            box-sizing: border-box;
+                            text-align: center;
+                            position: relative;
+                            overflow: hidden;
+                        }
+                        .brand { font-family: 'Cinzel Decorative', serif; font-size: 2.6mm; font-weight: 700; letter-spacing: 0.3mm; }
+                        .sub { font-family: 'Cinzel', serif; font-size: 1.05mm; letter-spacing: 0.25mm; }
+                        .cname { font-family: 'Cinzel', serif; font-size: 2.1mm; font-weight: 700; }
+                        @media print { .no-print { display: none; } }
+                    </style>
+                </head>
+                <body>
+                    <div class="no-print" style="margin-bottom:20px;">
+                        <button onclick="window.print()" style="padding:10px 20px;font-weight:bold;cursor:pointer;">Print at 100% Actual Scale (Do Not Fit to Page)</button>
+                    </div>
+                    <div class="header">
+                        <h2 style="margin:0;">DYNAST • 1:1 Waterslide Decal &amp; Dial Print Sheet (${mm} mm)</h2>
+                        <p style="margin:5px 0 0 0;font-size:12px;">Order: <strong>${o.orderId}</strong> | Track ID: <strong>${o.trackId}</strong> | Customer: <strong>${o.customerName}</strong> | Case: <strong>${o.caseModel}</strong></p>
+                    </div>
+                    <p style="font-size:12px;">Includes 4 copies at exact <strong>${mm} mm</strong> diameter for clear waterslide decal transfer:</p>
+                    <div class="decal-grid">
+                        ${[1, 2, 3, 4].map(() => `
+                            <div class="dial-circle">
+                                <div>
+                                    <div class="brand">DYNAST</div>
+                                    <div class="sub">LUXURIOUS HOROLOGY</div>
+                                </div>
+                                <div class="cname">${o.customName && o.customName !== 'None' ? o.customName : ''}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </body>
+                </html>
+            `);
+            win.document.close();
         }
     </script>
 </body>
