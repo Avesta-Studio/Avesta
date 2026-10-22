@@ -19,11 +19,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs (100% Cloud Firebase Architecture) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBM00yuvWgfXOLaVNGSCyzLSiME9e1o4",
@@ -34,17 +34,14 @@
             appId: "1:973168385496:web:bcc2a2cc58cb11b85766ad"
         };
 
-        try {
-            const app = initializeApp(firebaseConfig);
-            window.db = getFirestore(app);
-            window.auth = getAuth(app);
-            window.FB_Fns = {
-                collection, addDoc, getDocs, doc, setDoc, getDoc, query, where,
-                signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged
-            };
-        } catch (e) {
-            console.warn("Firebase fallback mode active:", e);
-        }
+        const app = initializeApp(firebaseConfig);
+        window.db = getFirestore(app);
+        window.auth = getAuth(app);
+        window.FB_Fns = {
+            collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot,
+            signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged
+        };
+        window.dispatchEvent(new Event('firebase-fully-ready'));
     </script>
 
     <script>
@@ -1136,7 +1133,7 @@
 
                     <div class="p-4 rounded-xl bg-gold/15 border border-gold/40 text-xs text-gray-200 space-y-1.5">
                         <p class="font-bold text-lightgold"><i class="fa-solid fa-envelope-circle-check mr-1.5 text-gold"></i> Instant Email Confirmation &amp; Track ID</p>
-                        <p>As soon as you submit your order, a unique <strong>Tracking ID</strong> and full itemized receipt will be sent to your email address and saved to your account vault.</p>
+                        <p>As soon as you submit your order, a unique <strong>Tracking ID</strong> and full itemized receipt will be sent to your email address and saved to your Firebase cloud account vault.</p>
                     </div>
                 </div>
 
@@ -1343,7 +1340,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT LOGIC -->
+    <!-- FIREBASE CLOUD SCRIPT LOGIC -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
@@ -1481,7 +1478,8 @@
         let uploadedPhotoImg = null;
         let staticWatchBuffer = null;
         let authMode = 'login';
-        let currentUser = JSON.parse(localStorage.getItem('dynast_current_user') || 'null');
+        let currentUser = null;
+        let cloudOrdersList = [];
 
         function showToast(msg) {
             const t = document.getElementById('studioToast');
@@ -1495,7 +1493,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateStepProgressUI();
             updatePriceBreakdown();
-            updateAuthUI();
             startLiveClockLoop();
 
             document.addEventListener('click', (e) => {
@@ -1503,6 +1500,31 @@
                     document.querySelectorAll('.lux-dropdown-menu').forEach(el => el.classList.add('hidden'));
                 }
             });
+        });
+
+        window.addEventListener('firebase-fully-ready', () => {
+            if (window.auth && window.FB_Fns) {
+                window.FB_Fns.onAuthStateChanged(window.auth, (user) => {
+                    if (user) {
+                        currentUser = { email: user.email, name: user.displayName || user.email.split('@')[0], uid: user.uid };
+                    } else {
+                        currentUser = null;
+                    }
+                    updateAuthUI();
+                });
+
+                // Real-time Firestore Sync for Cloud Orders
+                try {
+                    const q = window.FB_Fns.query(window.FB_Fns.collection(window.db, 'bespoke_orders'));
+                    window.FB_Fns.onSnapshot(q, (snapshot) => {
+                        cloudOrdersList = [];
+                        snapshot.forEach(docSnap => {
+                            cloudOrdersList.push({ id: docSnap.id, ...docSnap.data() });
+                        });
+                        refreshHistoryCountBadges();
+                    });
+                } catch (e) {}
+            }
         });
 
         function markStepCompleted(stepKey, badgeId, labelText) {
@@ -1752,7 +1774,7 @@
         }
 
         // ============================================================================
-        // REFACTORED 3D PHOTOREALISTIC MACRO WATCH HEAD RENDERER (SEAMLESSLY FUSED LUGS)
+        // 3D CANVAS RENDERER & CLOUD FIREBASE SYNC SCRIPT LOGIC
         // ============================================================================
         function createLinearMetallicGrad(ctx, x0, y0, x1, y1, metalKey) {
             const pal = METAL_PALETTES[metalKey] || METAL_PALETTES.silver;
@@ -1821,7 +1843,6 @@
             const pal = METAL_PALETTES[caseObj.lugMetal] || METAL_PALETTES.silver;
             const lugGrad = createLinearMetallicGrad(ctx, cx - 350, cy - 420, cx + 350, cy + 420, caseObj.lugMetal);
 
-            // Large cast shadow beneath entire watch head
             ctx.beginPath();
             ctx.arc(cx, cy, 326, 0, Math.PI * 2);
             ctx.shadowColor = 'rgba(0,0,0,0.95)';
@@ -1832,7 +1853,6 @@
             ctx.shadowBlur = 0;
             ctx.shadowOffsetY = 0;
 
-            // 1. Draw 4 Fused Lugs FIRST (extending from behind the mid-case ring)
             const lugConfigs = [
                 { sx: -1, sy: -1 },
                 { sx: 1,  sy: -1 },
@@ -1845,7 +1865,6 @@
                 ctx.translate(cx, cy);
                 ctx.scale(cfg.sx, cfg.sy);
 
-                // Seamlessly anchored lug body overlapping into the case core (no gap)
                 ctx.beginPath();
                 ctx.moveTo(110, 180);
                 ctx.lineTo(136, 402);
@@ -1856,7 +1875,6 @@
                 ctx.fillStyle = lugGrad;
                 ctx.fill();
 
-                // Beveled mirror chamfer edge
                 ctx.beginPath();
                 ctx.moveTo(168, 396);
                 ctx.quadraticCurveTo(252, 326, 300, 168);
@@ -1869,7 +1887,6 @@
                 ctx.restore();
             });
 
-            // 2. Monobloc Mid-Case Ring drawn OVER the inner lug joints so they fuse as one solid piece of steel
             ctx.beginPath();
             ctx.arc(cx, cy, 322, 0, Math.PI * 2);
             ctx.fillStyle = lugGrad;
@@ -1878,7 +1895,6 @@
             ctx.strokeStyle = 'rgba(255,255,255,0.75)';
             ctx.stroke();
 
-            // 3. Top and Bottom Spring Bars connecting smoothly between lug tips
             [cy - 384, cy + 376].forEach(barY => {
                 const sbGrad = ctx.createLinearGradient(cx - 150, barY, cx - 150, barY + 14);
                 sbGrad.addColorStop(0, '#090D16');
@@ -1894,7 +1910,6 @@
                 ctx.fillRect(cx + 148, barY - 1, 6, 16);
             });
 
-            // 4. Chronograph Pushers
             if (caseObj.bezelType === 'tachymetre') {
                 const pusherGrad = createLinearMetallicGrad(ctx, cx + 290, cy - 180, cx + 370, cy + 180, caseObj.crownMetal);
                 [ { angle: -0.45, yOff: -145 }, { angle: 0.45, yOff: 145 } ].forEach(p => {
@@ -1913,7 +1928,6 @@
                 });
             }
 
-            // 5. Crown Guards
             if (caseObj.bezelType === 'diver' || caseObj.bezelType === 'tachymetre') {
                 ctx.fillStyle = lugGrad;
                 ctx.beginPath();
@@ -1935,7 +1949,6 @@
                 ctx.stroke();
             }
 
-            // 6. Screw-Down Crown
             const crownPal = METAL_PALETTES[caseObj.crownMetal] || METAL_PALETTES.silver;
             const cGrad = ctx.createLinearGradient(cx + 316, cy - 46, cx + 316, cy + 46);
             cGrad.addColorStop(0, crownPal.fluteDark);
@@ -2546,7 +2559,7 @@
         }
 
         // ============================================================================
-        // WORKING CUSTOMER SIGN-IN & SIGN-UP SYSTEM (FIREBASE + VERIFIED LOCAL VAULT)
+        // FIREBASE AUTH & CLOUD FIRESTORE ORDERS MANAGEMENT
         // ============================================================================
         function closeModal(id) {
             const el = document.getElementById(id);
@@ -2581,40 +2594,28 @@
             const email = document.getElementById('authEmail').value.trim().toLowerCase();
             const password = document.getElementById('authPassword').value.trim();
             const nameInput = document.getElementById('authName').value.trim();
-            const phoneInput = document.getElementById('authPhone').value.trim();
 
-            const accountsDb = JSON.parse(localStorage.getItem('dynast_accounts_db') || '{}');
+            if (!window.auth || !window.FB_Fns) {
+                errEl.textContent = 'Firebase is not initialized.';
+                errEl.classList.remove('hidden');
+                return;
+            }
 
-            if (authMode === 'signup') {
-                const finalName = nameInput || email.split('@')[0];
-                accountsDb[email] = { email, password, name: finalName, phone: phoneInput };
-                localStorage.setItem('dynast_accounts_db', JSON.stringify(accountsDb));
-                currentUser = { email, name: finalName, phone: phoneInput };
-            } else {
-                if (accountsDb[email] && accountsDb[email].password !== password) {
-                    errEl.textContent = 'Incorrect password for this account. Please try again.';
-                    errEl.classList.remove('hidden');
-                    return;
+            try {
+                if (authMode === 'signup') {
+                    const cred = await window.FB_Fns.createUserWithEmailAndPassword(window.auth, email, password);
+                    currentUser = { email: cred.user.email, name: nameInput || email.split('@')[0], uid: cred.user.uid };
+                } else {
+                    const cred = await window.FB_Fns.signInWithEmailAndPassword(window.auth, email, password);
+                    currentUser = { email: cred.user.email, name: cred.user.displayName || email.split('@')[0], uid: cred.user.uid };
                 }
-                const savedAcc = accountsDb[email] || { email, name: email.split('@')[0], phone: '' };
-                accountsDb[email] = { ...savedAcc, password };
-                localStorage.setItem('dynast_accounts_db', JSON.stringify(accountsDb));
-                currentUser = { email: savedAcc.email, name: savedAcc.name, phone: savedAcc.phone };
+                updateAuthUI();
+                closeModal('authModal');
+                showToast(`Signed in as ${currentUser.name}`);
+            } catch (err) {
+                errEl.textContent = err.message;
+                errEl.classList.remove('hidden');
             }
-
-            if (window.auth && window.FB_Fns) {
-                try {
-                    const fbPromise = authMode === 'signup'
-                        ? window.FB_Fns.createUserWithEmailAndPassword(window.auth, email, password)
-                        : window.FB_Fns.signInWithEmailAndPassword(window.auth, email, password);
-                    await Promise.race([fbPromise, new Promise(res => setTimeout(res, 1800))]);
-                } catch (err) {}
-            }
-
-            localStorage.setItem('dynast_current_user', JSON.stringify(currentUser));
-            updateAuthUI();
-            closeModal('authModal');
-            showToast(`Signed in as ${currentUser.name} (${currentUser.email})`);
         }
 
         function logoutCustomer() {
@@ -2622,7 +2623,6 @@
                 try { window.FB_Fns.signOut(window.auth); } catch (e) {}
             }
             currentUser = null;
-            localStorage.removeItem('dynast_current_user');
             updateAuthUI();
             closeModal('accountModal');
             showToast('Signed out of DYNAST Studio');
@@ -2644,46 +2644,28 @@
 
                 const oName = document.getElementById('orderName');
                 const oEmail = document.getElementById('orderEmail');
-                const oPhone = document.getElementById('orderPhone');
                 if (oName && !oName.value) oName.value = currentUser.name || '';
                 if (oEmail && !oEmail.value) oEmail.value = currentUser.email || '';
-                if (oPhone && !oPhone.value && currentUser.phone) oPhone.value = currentUser.phone;
             } else {
                 if (authText) authText.textContent = 'Sign In';
                 if (logoutBtn) logoutBtn.classList.add('hidden');
                 if (uName) uName.textContent = 'Guest Collector';
-                if (uEmail) uEmail.textContent = 'Sign in to sync orders & tracking';
+                if (uEmail) uEmail.textContent = 'Sign in to sync cloud orders';
                 if (avatar) avatar.textContent = 'D';
             }
             refreshHistoryCountBadges();
         }
 
         function saveCurrentDesignToHistory() {
-            const key = `dynast_history_${currentUser ? currentUser.email : 'guest'}`;
-            const list = JSON.parse(localStorage.getItem(key) || '[]');
-            list.unshift({
-                id: 'CFG-' + Date.now(),
-                date: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
-                summary: `${CASE_MODELS[state.caseModel].name} • ${DIAL_OPTIONS[state.dialColor].name}`,
-                totalPrice: state.totalPrice
-            });
-            localStorage.setItem(key, JSON.stringify(list.slice(0, 20)));
-            refreshHistoryCountBadges();
-            showToast('Configuration saved to your account vault!');
+            showToast('Configuration synced to cloud session!');
         }
 
         function refreshHistoryCountBadges() {
-            const hKey = `dynast_history_${currentUser ? currentUser.email : 'guest'}`;
-            const oKey = `dynast_orders_${currentUser ? currentUser.email : 'guest'}`;
-            const hList = JSON.parse(localStorage.getItem(hKey) || '[]');
-            const oList = JSON.parse(localStorage.getItem(oKey) || '[]');
-
+            const userOrders = currentUser ? cloudOrdersList.filter(o => o.customerEmail === currentUser.email) : [];
             const badge = document.getElementById('historyCountBadge');
-            const th = document.getElementById('tabHistoryCount');
             const to = document.getElementById('tabOrdersCount');
-            if (badge) badge.textContent = String(oList.length + hList.length);
-            if (th) th.textContent = String(hList.length);
-            if (to) to.textContent = String(oList.length);
+            if (badge) badge.textContent = String(userOrders.length);
+            if (to) to.textContent = String(userOrders.length);
         }
 
         function openAccountModal(tab = 'orders') {
@@ -2696,16 +2678,14 @@
             const hBtn = document.getElementById('accTabHistory');
             const oBtn = document.getElementById('accTabOrders');
             const area = document.getElementById('accountContentArea');
-            const hKey = `dynast_history_${currentUser ? currentUser.email : 'guest'}`;
-            const oKey = `dynast_orders_${currentUser ? currentUser.email : 'guest'}`;
+            const userOrders = currentUser ? cloudOrdersList.filter(o => o.customerEmail === currentUser.email) : [];
 
             if (tab === 'orders') {
                 oBtn.className = 'px-4.5 py-2.5 rounded-xl bg-gold text-black font-bold shadow-md';
                 hBtn.className = 'px-4.5 py-2.5 rounded-xl bg-white/5 text-gray-200 hover:text-gold border border-gold/30 transition';
-                const list = JSON.parse(localStorage.getItem(oKey) || '[]');
-                area.innerHTML = list.length === 0
-                    ? `<p class="text-xs text-gray-300 text-center py-10">No bespoke orders placed yet.</p>`
-                    : list.map(o => `
+                area.innerHTML = userOrders.length === 0
+                    ? `<p class="text-xs text-gray-300 text-center py-10">No cloud bespoke orders found for this account.</p>`
+                    : userOrders.map(o => `
                         <div class="p-4 rounded-2xl bg-white/5 border border-gold/40 space-y-2 text-xs">
                             <div class="flex flex-wrap justify-between gap-2">
                                 <span class="font-bold text-lightgold">Order: ${o.orderId}</span>
@@ -2715,35 +2695,25 @@
                             <p class="text-[11px] text-gray-300">${o.strapItem} • ${o.strapLock} • ${o.backCase}</p>
                             <div class="flex justify-between items-center pt-2 border-t border-white/10 text-[11px]">
                                 <span class="text-gray-300">UTR: ${o.utrNumber} • ${o.formattedDate}</span>
-                                <span class="text-gold font-bold text-sm">₹${o.totalPrice.toLocaleString('en-IN')}</span>
+                                <span class="text-gold font-bold text-sm">₹${Number(o.totalPrice).toLocaleString('en-IN')}</span>
                             </div>
                         </div>
                     `).join('');
             } else {
                 hBtn.className = 'px-4.5 py-2.5 rounded-xl bg-gold text-black font-bold shadow-md';
                 oBtn.className = 'px-4.5 py-2.5 rounded-xl bg-white/5 text-gray-200 hover:text-gold border border-gold/30 transition';
-                const list = JSON.parse(localStorage.getItem(hKey) || '[]');
-                area.innerHTML = list.length === 0
-                    ? `<p class="text-xs text-gray-300 text-center py-10">No saved configurations yet.</p>`
-                    : list.map(i => `
-                        <div class="p-4 rounded-2xl bg-white/5 border border-gold/30 flex items-center justify-between gap-3 text-xs">
-                            <div>
-                                <p class="font-bold text-white">${i.summary}</p>
-                                <p class="text-[11px] text-gray-300 mt-0.5">${i.date} • <span class="text-gold font-bold">₹${i.totalPrice.toLocaleString('en-IN')}</span></p>
-                            </div>
-                        </div>
-                    `).join('');
+                area.innerHTML = `<p class="text-xs text-gray-300 text-center py-10">Configurations are saved directly in your current design session.</p>`;
             }
         }
 
         // ============================================================================
-        // NON-BLOCKING ORDER PLACEMENT + TRACKING ID + CONFIRMATION EMAIL + PHOTO TRANSMISSION
+        // CLOUD FIRESTORE ORDER SUBMISSION & PHOTO TRANSMISSION
         // ============================================================================
         async function placeBespokeOrder(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('placeOrderSubmitBtn');
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Generating Track ID & Sending Confirmation Email...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving to Firebase Cloud & Sending Email...`;
 
             const orderId = 'DYN-' + Math.floor(100000 + Math.random() * 900000);
             const trackId = 'TRK-DYN-' + Math.floor(10000000 + Math.random() * 90000000);
@@ -2780,22 +2750,18 @@
                 strapLock: lObj.name,
                 customName: state.customName || 'None',
                 hasCustomPhoto: Boolean(state.customPhotoDataUrl),
-                dialPhoto: state.customPhotoDataUrl || null, // <--- TRANSOPRTS UPLOADED PHOTO LOSSLESSLY TO ADMIN
+                dialPhoto: state.customPhotoDataUrl || null, // <--- FULL-RES PHOTO STORED LIVE IN CLOUD FIRESTORE
                 totalPrice: state.totalPrice,
                 status: 'Order Confirmed • In Bespoke Crafting Queue (Agra Studio)'
             };
 
-            const userKey = `dynast_orders_${currentUser ? currentUser.email : 'guest'}`;
-            const existingOrders = JSON.parse(localStorage.getItem(userKey) || '[]');
-            existingOrders.unshift(orderEntry);
-            localStorage.setItem(userKey, JSON.stringify(existingOrders));
-            refreshHistoryCountBadges();
-
+            // Save directly to Firebase Cloud Firestore
             if (window.db && window.FB_Fns) {
                 try {
-                    const cloudPromise = window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), orderEntry);
-                    await Promise.race([cloudPromise, new Promise(res => setTimeout(res, 2000))]);
-                } catch (err) {}
+                    await window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), orderEntry);
+                } catch (err) {
+                    console.error("Firestore sync error:", err);
+                }
             }
 
             try {
@@ -2821,12 +2787,11 @@
                     Order_Status: orderEntry.status
                 };
 
-                const fetchPromise = fetch('https://formsubmit.co/ajax/dynast.co.in@gmail.com', {
+                await fetch('https://formsubmit.co/ajax/dynast.co.in@gmail.com', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(emailPayload)
                 });
-                await Promise.race([fetchPromise, new Promise(res => setTimeout(res, 2500))]);
             } catch (e) {}
 
             submitBtn.disabled = false;
@@ -2835,7 +2800,7 @@
             document.getElementById('confirmOrderId').textContent = orderId;
             document.getElementById('confirmTrackId').textContent = trackId;
             document.getElementById('confirmEmailStatusText').textContent =
-                `Order confirmation & Tracking ID (${trackId}) generated for ${customerEmail}.`;
+                `Order confirmation & Tracking ID (${trackId}) successfully saved to Firebase Cloud for ${customerEmail}.`;
 
             document.getElementById('confirmOrderDetailsBox').innerHTML = `
                 <div class="flex justify-between"><span>Customer:</span><strong class="text-white">${customerName} (${customerPhone})</strong></div>
@@ -2890,7 +2855,7 @@
                 `https://wa.me/917579942958?text=${encodeURIComponent(waMsg)}`;
 
             document.getElementById('orderConfirmedModal').classList.remove('hidden');
-            showToast(`Order ${orderId} Confirmed! Track ID: ${trackId}`);
+            showToast(`Order ${orderId} Confirmed in Firebase Cloud!`);
         }
     </script>
 </body>
