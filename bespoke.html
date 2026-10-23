@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DYNAST | Luxurious Horology Bespoke Studio</title>
+    <title>DYNAST | Premium Timepieces & Bespoke Horology Studio</title>
     <link rel="canonical" href="https://dynast.co.in/bespoke.html">
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Customize your DYNAST Luxurious Horology timepiece at micro-level studio quality in Agra, Uttar Pradesh.">
+    <meta name="description" content="Experience royal watchmaking with DYNAST. Custom-engineered luxury timepieces personalized to your exact specifications in Agra, Uttar Pradesh.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,13 +17,23 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Firebase SDKs (100% Cloud Firebase Architecture) -->
+    <!-- EmailJS Browser SDK (Autonomous Customer Order Confirmation Emails) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init({
+                publicKey: "_fpanrTUxPG_S9y47"
+            });
+        })();
+    </script>
+
+    <!-- Firebase SDKs (Cloud Firestore + Cloud Storage for Uncompressed Admin Dial Photos) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getStorage, ref as storageRef, uploadString, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBM00yuvWgfXOLaVNGSCyzLSiME9e1o4",
@@ -36,10 +46,10 @@
 
         const app = initializeApp(firebaseConfig);
         window.db = getFirestore(app);
-        window.auth = getAuth(app);
+        window.storage = getStorage(app);
         window.FB_Fns = {
             collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot,
-            signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged
+            storageRef, uploadString, uploadBytes, getDownloadURL
         };
         window.dispatchEvent(new Event('firebase-fully-ready'));
     </script>
@@ -59,6 +69,7 @@
                     fontFamily: {
                         'sans': ['Inter', 'sans-serif'],
                         'serif': ['Cinzel', 'serif'],
+                        'italicserif': ['Cormorant Garamond', 'Cinzel', 'serif'],
                         'decorative': ['Cinzel Decorative', 'cursive'],
                         'script': ['Great Vibes', 'cursive']
                     }
@@ -83,13 +94,31 @@
             100% { transform: translate3d(-3%, -2%, 0) scale(1); opacity: 0.9; }
         }
 
+        @keyframes slowGearSpin {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .live-gold-aura {
             background:
-                radial-gradient(circle at 18% 20%, rgba(229, 193, 88, 0.26) 0%, rgba(140, 98, 20, 0.1) 36%, transparent 66%),
-                radial-gradient(circle at 82% 78%, rgba(255, 243, 176, 0.22) 0%, rgba(120, 82, 8, 0.08) 38%, transparent 68%),
-                radial-gradient(circle at 50% 45%, rgba(184, 134, 11, 0.16) 0%, rgba(7, 7, 9, 0.95) 75%);
+                radial-gradient(circle at 18% 20%, rgba(229, 193, 88, 0.22) 0%, rgba(140, 98, 20, 0.08) 36%, transparent 66%),
+                radial-gradient(circle at 82% 78%, rgba(255, 243, 176, 0.18) 0%, rgba(120, 82, 8, 0.06) 38%, transparent 68%),
+                radial-gradient(circle at 50% 45%, rgba(184, 134, 11, 0.14) 0%, rgba(7, 7, 9, 0.96) 75%);
             will-change: transform, opacity;
             animation: ambientGoldBlend 16s ease-in-out infinite;
+        }
+
+        /* Royal Watchmaking Hero Background matching dynast.co.in */
+        .royal-hero-stage {
+            position: relative;
+            background:
+                radial-gradient(circle at 50% 42%, rgba(74, 52, 16, 0.52) 0%, rgba(20, 15, 8, 0.88) 55%, rgba(7, 7, 9, 0.98) 100%);
+            overflow: hidden;
+        }
+
+        .royal-gear-watermark {
+            animation: slowGearSpin 140s linear infinite;
+            transform-origin: center center;
         }
 
         .cinzel-decorative {
@@ -121,6 +150,30 @@
         .btn-gold:hover {
             box-shadow: 0 0 28px rgba(229, 193, 88, 0.75);
             transform: translateY(-1px);
+        }
+
+        .btn-royal-primary {
+            background: rgba(112, 82, 24, 0.45);
+            border: 1px solid #E5C158;
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+        }
+
+        .btn-royal-primary:hover {
+            background: rgba(229, 193, 88, 0.28);
+            box-shadow: 0 0 24px rgba(229, 193, 88, 0.35);
+        }
+
+        .btn-royal-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+            transition: all 0.25s ease;
+        }
+
+        .btn-royal-secondary:hover {
+            border-color: rgba(229, 193, 88, 0.65);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .option-card {
@@ -203,66 +256,116 @@
         <span id="studioToastText">Action completed</span>
     </div>
 
-    <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-gold/40 px-4 lg:px-8 py-4">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <a href="https://dynast.co.in" class="text-xs text-gold hover:text-lightgold flex items-center justify-center gap-1.5 border border-gold/40 px-3.5 py-2 rounded-xl transition">
-                    <i class="fa-solid fa-arrow-left flex items-center justify-center"></i> <span class="hidden sm:inline">Main Store</span>
-                </a>
-                <a href="https://dynast.co.in/card" target="_blank" class="text-xs text-lightgold hover:text-white flex items-center justify-center gap-1.5 bg-gold/15 border border-gold/50 px-3.5 py-2 rounded-xl transition shadow-md">
-                    <i class="fa-solid fa-id-card text-gold flex items-center justify-center"></i> <span class="hidden sm:inline">NFC Card</span>
-                </a>
-                <div>
-                    <a href="https://dynast.co.in" class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-widest block leading-none">DYNAST</a>
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gold/90 block mt-1">Luxurious Horology Studio</span>
-                </div>
+    <!-- TOP NAVIGATION BAR (MATCHING DYNAST.CO.IN HEADER) -->
+    <header class="sticky top-0 z-40 bg-[#0A0A0C]/95 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Left: TRACK button -->
+            <div class="flex items-center gap-4 w-1/4">
+                <button type="button" onclick="openTrackOrderModal()" class="text-xs sm:text-sm uppercase tracking-[0.2em] text-white hover:text-gold font-medium transition">
+                    TRACK
+                </button>
             </div>
 
-            <div class="flex items-center gap-2.5 sm:gap-4">
-                <div class="hidden md:flex items-center justify-center gap-2 bg-white/5 border border-gold/30 px-3.5 py-2 rounded-xl text-xs">
-                    <span class="text-gray-300">Progress:</span>
-                    <strong id="navStepProgress" class="text-lightgold">0 / 5 Steps</strong>
-                </div>
+            <!-- Center: DYNAST PREMIUM TIMEPIECES -->
+            <div class="text-center flex-1">
+                <a href="https://dynast.co.in" class="cinzel-decorative text-2xl sm:text-3xl text-gold tracking-[0.18em] block leading-none">
+                    DYNAST
+                </a>
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.32em] text-gray-300 block mt-1.5">
+                    PREMIUM TIMEPIECES
+                </span>
+            </div>
 
-                <div class="bg-gold/15 border border-gold/50 px-4 py-2 rounded-xl text-right">
-                    <span class="text-[10px] uppercase tracking-widest text-gold block">Live Custom Price</span>
-                    <span id="navTotalPrice" class="serif-text text-sm sm:text-base font-bold text-lightgold">₹9,798</span>
-                </div>
-
-                <button type="button" onclick="requestViewRenderedWatch()" class="btn-gold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider hidden sm:flex items-center justify-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-eye flex items-center justify-center"></i>
-                    <span>View 3D Case &amp; Dial Render</span>
-                </button>
-
-                <button type="button" onclick="openAccountModal('orders')" class="relative border border-gold/50 bg-white/5 hover:bg-gold/20 text-lightgold px-3.5 py-2.5 rounded-xl text-xs font-medium flex items-center justify-center gap-2 transition">
-                    <i class="fa-solid fa-clock-rotate-left text-gold flex items-center justify-center"></i>
-                    <span class="hidden lg:inline">Orders &amp; Track</span>
-                    <span id="historyCountBadge" class="bg-gold text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full flex items-center justify-center">0</span>
-                </button>
-
-                <button type="button" id="authNavBtn" onclick="handleAuthButtonClick()" class="border border-gold/60 bg-gold/20 hover:bg-gold/30 text-lightgold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition">
-                    <i class="fa-solid fa-user text-gold flex items-center justify-center"></i>
-                    <span id="authNavText">Sign In</span>
-                </button>
+            <!-- Right: Envelope & Bag Icon with Step/Live Price Trigger -->
+            <div class="flex items-center justify-end gap-4 sm:gap-5 w-1/4">
+                <a href="#policiesSection" title="Horology Policies" class="text-white hover:text-gold text-lg sm:text-xl transition flex items-center justify-center">
+                    <i class="fa-regular fa-envelope"></i>
+                </a>
+                <a href="#finalPaymentSection" title="Jump to Bespoke Summary & Checkout" class="relative text-white hover:text-gold text-lg sm:text-xl transition flex items-center justify-center">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="headerBagStepCount" class="absolute -top-2 -right-2.5 w-5 h-5 rounded-full bg-gold text-black text-[10px] font-bold flex items-center justify-center shadow-md">
+                        0
+                    </span>
+                </a>
             </div>
         </div>
     </header>
 
+    <!-- UPPER HERO SECTION (MATCHING DYNAST.CO.IN "CRAFT YOUR TIMEPIECE" SCREENSHOT) -->
+    <section class="royal-hero-stage relative z-10 border-b border-gold/25 px-4 py-16 sm:py-24 flex flex-col items-center justify-center text-center min-h-[78vh]">
+        <!-- Subtle Mechanical Movement Background SVG -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 overflow-hidden">
+            <svg class="royal-gear-watermark w-[560px] sm:w-[760px] h-[560px] sm:h-[760px] text-gold" viewBox="0 0 200 200" fill="none">
+                <circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4"/>
+                <circle cx="100" cy="100" r="72" stroke="currentColor" stroke-width="4" stroke-dasharray="12 8"/>
+                <circle cx="100" cy="100" r="52" stroke="currentColor" stroke-width="2"/>
+                <circle cx="100" cy="100" r="28" stroke="currentColor" stroke-width="6" stroke-dasharray="8 6"/>
+                <line x1="100" y1="12" x2="100" y2="188" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="12" y1="100" x2="188" y2="100" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="38" y1="38" x2="162" y2="162" stroke="currentColor" stroke-width="1"/>
+                <line x1="162" y1="38" x2="38" y2="162" stroke="currentColor" stroke-width="1"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-xl mx-auto space-y-6 px-2">
+            <p class="text-[11px] sm:text-xs uppercase tracking-[0.35em] text-gold font-semibold">
+                WELCOME TO THE ROYAL ERA
+            </p>
+
+            <div class="space-y-1">
+                <h1 class="serif-text text-4xl sm:text-6xl font-bold text-white tracking-wider uppercase leading-tight">
+                    CRAFT YOUR
+                </h1>
+                <p class="font-italicserif italic text-4xl sm:text-6xl text-gold tracking-wide leading-tight">
+                    TIMEPIECE
+                </p>
+            </div>
+
+            <p class="text-xs sm:text-base text-gray-200 leading-relaxed font-light max-w-lg mx-auto pt-1">
+                Experience royal watchmaking with <span class="cinzel-decorative text-lightgold">DYNAST</span>. Custom-engineered luxury timepieces, personalized to your exact specifications and built to last generations.
+            </p>
+
+            <!-- Live Custom Price & Progress Pill -->
+            <div class="inline-flex flex-wrap items-center justify-center gap-3 bg-black/75 border border-gold/40 px-5 py-2.5 rounded-full text-xs shadow-xl">
+                <span class="text-gray-300"> Progress: <strong id="navStepProgress" class="text-lightgold">0 / 5 Steps</strong></span>
+                <span class="text-gold/50">•</span>
+                <span class="text-gray-300">Live Custom Price: <strong id="navTotalPrice" class="serif-text text-gold text-sm">₹9,798</strong></span>
+            </div>
+
+            <!-- Action Buttons Matching Screenshot -->
+            <div class="pt-4 space-y-3.5 max-w-md mx-auto w-full">
+                <a href="#step1Section" class="btn-royal-primary w-full py-4 text-xs sm:text-sm uppercase tracking-[0.22em] font-semibold block text-center">
+                    DESIGN YOUR TIMEPIECE
+                </a>
+                <a href="https://dynast.co.in" class="btn-royal-secondary w-full py-4 text-xs sm:text-sm uppercase tracking-[0.22em] font-medium block text-center">
+                    EXPLORE COLLECTION
+                </a>
+            </div>
+
+            <!-- Discover More Indicator -->
+            <div class="pt-10 flex flex-col items-center justify-center gap-3 opacity-85">
+                <a href="#step1Section" class="text-[10px] uppercase tracking-[0.3em] text-gray-300 hover:text-gold transition">
+                    DISCOVER MORE
+                </a>
+                <div class="w-[1px] h-10 bg-gradient-to-b from-gold to-transparent"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- ALWAYS-VISIBLE FLOATING BOTTOM BAR -->
-    <div class="fixed bottom-0 left-0 right-0 z-40 bg-black/95 backdrop-blur-xl border-t border-gold/50 px-4 py-4 shadow-2xl">
-        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center gap-3.5">
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-black/95 backdrop-blur-xl border-t border-gold/50 px-4 py-3.5 shadow-2xl">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
                 <div id="floatingStepBadge" class="w-10 h-10 rounded-xl bg-gold/20 border border-gold/50 flex items-center justify-center text-lightgold font-bold text-xs">
                     0/5
                 </div>
                 <div>
                     <p id="floatingStatusTitle" class="text-xs sm:text-sm font-bold text-white">Select Your 5 Watch Components</p>
-                    <p id="floatingStatusSub" class="text-[11px] text-gray-300">Complete selections to unlock the hyper-realistic 3D Case &amp; Dial Studio Render</p>
+                    <p id="floatingStatusSub" class="text-[11px] text-gray-300">Complete selections to unlock the 3D Render &amp; Live Dial Customizer</p>
                 </div>
             </div>
-            <div class="flex items-center justify-center gap-3">
-                <button type="button" onclick="requestViewRenderedWatch()" class="btn-gold px-6 py-3 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl">
+            <div class="flex items-center justify-center gap-3 w-full sm:w-auto">
+                <button type="button" onclick="requestViewRenderedWatch()" class="btn-gold w-full sm:w-auto px-6 py-3 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl">
                     <i class="fa-solid fa-wand-magic-sparkles flex items-center justify-center"></i>
                     <span>View 3D Case &amp; Dial Render</span>
                 </button>
@@ -279,9 +382,9 @@
                     <span class="text-[10px] uppercase tracking-widest text-gold font-bold bg-gold/15 px-3 py-1 rounded-full border border-gold/40 flex items-center justify-center gap-1"><i class="fa-solid fa-crown flex items-center justify-center"></i> Bespoke Studio Atelier</span>
                     <a href="https://dynast.co.in/card" target="_blank" class="text-[10px] uppercase tracking-widest text-lightgold font-semibold bg-white/10 hover:bg-gold/20 px-3 py-1 rounded-full border border-gold/30 transition flex items-center justify-center gap-1"><i class="fa-solid fa-id-card text-gold flex items-center justify-center"></i> NFC Business Card</a>
                 </div>
-                <h1 class="cinzel-decorative text-xl sm:text-2xl lg:text-3xl text-lightgold tracking-wider">DYNAST • Bespoke Horology Studio</h1>
+                <h2 class="cinzel-decorative text-xl sm:text-2xl lg:text-3xl text-lightgold tracking-wider">DYNAST • Bespoke Horology Studio</h2>
                 <p class="text-xs sm:text-sm text-gray-200 leading-relaxed max-w-3xl">
-                    Select your genuine watch components step by step below. Click <strong class="text-gold">"View 3D Case &amp; Dial Render"</strong> at any time to preview your custom dial mounted inside your chosen watch case at hyper-realistic 3D macro resolution.
+                    Select your genuine watch components step by step below. Click <strong class="text-gold">"View 3D Case &amp; Dial Render"</strong> to preview your timepiece and live-adjust your custom dial name and photograph directly below the 3D render screen.
                 </p>
             </div>
             <div class="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3">
@@ -294,7 +397,7 @@
             </div>
         </div>
 
-        <!-- STEP 01: WATCH CASE & BEZEL ARCHITECTURE (ALL 10 SQUARE CASE PHOTOS FROM case/ FOLDER) -->
+        <!-- STEP 01: WATCH CASE & BEZEL ARCHITECTURE -->
         <section id="step1Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
@@ -437,12 +540,13 @@
                 </div>
             </div>
         </section>
-        <!-- STEP 02: BESPOKE DIAL STUDIO -->
+
+        <!-- STEP 02: BESPOKE DIAL BASE & HOUR MARKERS -->
         <section id="step2Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 02 of 05 • Bespoke Dial &amp; Typography Studio</span>
-                    <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Choose Dial Colour, Numerals, Custom Name &amp; Photo</h2>
+                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 02 of 05 • Bespoke Dial Plate &amp; Indices</span>
+                    <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Choose Dial Base Colour &amp; Hour Markers</h2>
                 </div>
                 <div class="flex items-center gap-3">
                     <span id="step2StatusBadge" class="text-[11px] uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-300 font-semibold flex items-center justify-center gap-1.5 shadow-md">
@@ -473,8 +577,8 @@
                     </div>
                     <div>
                         <span class="text-[11px] uppercase tracking-widest text-gold font-bold flex items-center gap-1.5"><i class="fa-solid fa-compass flex items-center justify-center"></i> Component Reference: Watch Dial &amp; Indices</span>
-                        <p class="text-xs sm:text-sm text-white font-semibold mt-1">Sunburst Metallic Enamel Dials, Applied 3D Chatons &amp; Full-Bleed Circular Photo Print</p>
-                        <p class="text-xs text-gray-300 mt-1">Select your dial finish, hour marker architecture, optional 6 o'clock custom name, and optional full circular dial photograph.</p>
+                        <p class="text-xs sm:text-sm text-white font-semibold mt-1">Sunburst Metallic Enamel Dials &amp; Applied 3D Chatons</p>
+                        <p class="text-xs text-gray-300 mt-1">Select your dial finish and hour markers here. Your <strong class="text-lightgold">Custom Name &amp; Custom Dial Photo</strong> can be added and live-positioned directly below the 3D Render Studio screen.</p>
                     </div>
                 </div>
                 <span id="step2PriceBadge" class="text-xs sm:text-sm font-bold text-gold bg-gold/20 border border-gold/40 px-4 py-2 rounded-xl shrink-0">+₹1,499</span>
@@ -599,7 +703,7 @@
                             <p class="text-xs sm:text-sm font-bold text-white">12 &amp; 6 Arabic + Stick Batons</p>
                             <p class="text-[11px] text-gray-300 mt-0.5">Applied 3D 12 &amp; 6 numerals + index bars</p>
                         </div>
-                        <span class="text-xs sm:text-sm font-bold text-gold shrink-0 ml-3">+₹250</span>
+                        <span class="text-xs sm:text-sm text-gold shrink-0 ml-3">+₹250</span>
                     </div>
 
                     <div onclick="selectMarkerStyle('roman_12_6')" id="markerBtn-roman_12_6" class="option-card rounded-2xl p-4 flex items-center justify-between">
@@ -628,103 +732,23 @@
                 </div>
             </div>
 
-            <!-- 3. Custom Name Printed on Dial -->
-            <div class="p-5 rounded-2xl bg-white/[0.05] border border-gold/40 space-y-4">
-                <div class="flex items-center justify-between">
-                    <label class="text-xs uppercase tracking-wider text-lightgold font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-signature text-gold flex items-center justify-center"></i> 3. Print Custom Name on Dial (Optional)
-                    </label>
-                    <span class="text-xs sm:text-sm font-bold text-gold">+₹499</span>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="customNameInput" value="Hanzalah" maxlength="18" oninput="updateCustomNameFromInput()" placeholder="Enter custom name (e.g., Hanzalah)" class="flex-1 bg-black/90 border border-gold/50 focus:border-gold rounded-xl px-4 py-3 text-sm text-white outline-none">
-                    <button type="button" onclick="clearCustomName()" class="px-4 py-3 rounded-xl border border-white/20 bg-white/10 hover:bg-red-500/20 hover:border-red-500/50 text-xs text-gray-200 transition">
-                        Clear Name (-₹499)
-                    </button>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                    <div class="relative lux-dropdown-wrap">
-                        <span class="text-[11px] uppercase tracking-wider text-gray-300 block mb-1.5">Name Typography Style:</span>
-                        <input type="hidden" id="customNameFont" value="Cinzel">
-                        <button type="button" onclick="toggleLuxDropdown('fontLuxMenu')" class="w-full bg-black/90 border border-gold/50 hover:border-gold rounded-xl px-4 py-3 text-xs text-lightgold flex items-center justify-between transition shadow-md">
-                            <span id="fontLuxLabel" class="font-serif">Royal Serif (Cinzel)</span>
-                            <i class="fa-solid fa-chevron-down text-gold text-[10px] flex items-center justify-center"></i>
-                        </button>
-                        <div id="fontLuxMenu" class="lux-dropdown-menu hidden absolute left-0 right-0 mt-2 rounded-2xl p-2 z-50 space-y-1 text-xs">
-                            <button type="button" onclick="selectLuxuryFont('Cinzel', 'Royal Serif (Cinzel)')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-white font-serif flex items-center justify-between">
-                                <span>Royal Serif (Cinzel)</span><i class="fa-solid fa-crown text-gold text-[10px] flex items-center justify-center"></i>
-                            </button>
-                            <button type="button" onclick="selectLuxuryFont('Cinzel Decorative', 'Cinzel Decorative')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-lightgold cinzel-decorative flex items-center justify-between">
-                                <span>Cinzel Decorative</span><i class="fa-solid fa-wand-magic-sparkles text-gold text-[10px] flex items-center justify-center"></i>
-                            </button>
-                            <button type="button" onclick="selectLuxuryFont('Great Vibes', 'Luxury Script (Cursive)')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-white font-script text-base flex items-center justify-between">
-                                <span>Luxury Script (Cursive)</span><i class="fa-solid fa-feather-pointed text-gold text-[10px] flex items-center justify-center"></i>
-                            </button>
-                            <button type="button" onclick="selectLuxuryFont('Inter', 'Modern Minimalist Sans')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-gray-200 font-sans flex items-center justify-between">
-                                <span>Modern Minimalist Sans</span><i class="fa-solid fa-font text-gold text-[10px] flex items-center justify-center"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div>
-                        <span class="text-[11px] uppercase tracking-wider text-gray-300 block mb-1.5">Name Print Metallic Ink Colour:</span>
-                        <div class="flex items-center gap-3 pt-2">
-                            <button type="button" onclick="setCustomNameColor('#FFF0E8')" class="w-7 h-7 rounded-full bg-[#D59B84] border-2 border-white/70 hover:scale-110 transition shadow-md" title="Rose-Gold Cream"></button>
-                            <button type="button" onclick="setCustomNameColor('#F5DC8B')" class="w-7 h-7 rounded-full bg-[#E5C168] border-2 border-white/70 hover:scale-110 transition shadow-md" title="18k Warm Gold"></button>
-                            <button type="button" onclick="setCustomNameColor('#FFFFFF')" class="w-7 h-7 rounded-full bg-white border-2 border-white/70 hover:scale-110 transition shadow-md" title="Pure White"></button>
-                            <button type="button" onclick="setCustomNameColor('#111111')" class="w-7 h-7 rounded-full bg-neutral-900 border-2 border-white/70 hover:scale-110 transition shadow-md" title="Jet Black"></button>
-                            <button type="button" onclick="setCustomNameColor('#E5C158')" class="w-7 h-7 rounded-full bg-[#E5C158] border-2 border-white/70 hover:scale-110 transition shadow-md" title="Deep Imperial Gold"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Custom Picture Printed on Circular Dial -->
-            <div class="p-5 rounded-2xl bg-white/[0.05] border border-gold/40 space-y-4">
-                <div class="flex items-center justify-between">
-                    <label class="text-xs uppercase tracking-wider text-lightgold font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-camera-retro text-gold flex items-center justify-center"></i> 4. Print Custom Photograph Inside Circular Dial (Optional)
-                    </label>
-                    <span class="text-xs sm:text-sm font-bold text-gold">+₹999</span>
-                </div>
-                <p class="text-xs text-gray-300 leading-relaxed">
-                    Upload a personal photo to be precision-fitted across 100% of the circular dial plate beneath the sapphire crystal, applied hour markers, hands, and compulsory <strong class="text-lightgold">DYNAST</strong> emblem.
-                </p>
-
-                <div class="flex flex-wrap items-center gap-3.5">
-                    <label class="btn-gold px-4.5 py-3 rounded-xl text-xs uppercase tracking-wider cursor-pointer inline-flex items-center gap-2 shadow-lg">
-                        <i class="fa-solid fa-upload flex items-center justify-center"></i> Upload Dial Photo
-                        <input type="file" id="dialPhotoInput" accept="image/*" onchange="handleDialPhotoUpload(event)" class="hidden">
-                    </label>
-                    <button type="button" id="removePhotoBtn" onclick="removeDialPhoto()" class="hidden px-4 py-3 rounded-xl border border-red-500/50 bg-red-500/15 text-red-300 text-xs hover:bg-red-500/25 transition shadow-md">
-                        <i class="fa-solid fa-trash-can mr-1.5"></i> Remove Photo (-₹999)
-                    </button>
-                    <span id="photoUploadedBadge" class="hidden text-xs text-emerald-400 font-semibold items-center gap-1.5">
-                        <i class="fa-solid fa-circle-check flex items-center justify-center"></i> Full-Bleed Circular Photo Loaded
-                    </span>
-                </div>
-
-                <div id="photoAdjustControls" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gold/30 text-xs">
-                    <div>
-                        <label class="text-gray-300 block mb-1.5">Photo Zoom (<span id="zoomVal" class="text-gold font-bold">100%</span>)</label>
-                        <input type="range" id="photoZoom" min="100" max="240" value="100" oninput="updatePhotoTransform()" class="w-full accent-gold">
+            <!-- Pointer to Live Name & Photo Studio Controls Below 3D Render -->
+            <div class="p-4 rounded-2xl bg-gold/10 border border-gold/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gold/20 border border-gold/50 flex items-center justify-center text-gold shrink-0">
+                        <i class="fa-solid fa-sliders"></i>
                     </div>
                     <div>
-                        <label class="text-gray-300 block mb-1.5">Horizontal / Vertical Shift</label>
-                        <div class="flex gap-2">
-                            <input type="range" id="photoOffsetX" min="-120" max="120" value="0" oninput="updatePhotoTransform()" class="w-1/2 accent-gold">
-                            <input type="range" id="photoOffsetY" min="-120" max="120" value="0" oninput="updatePhotoTransform()" class="w-1/2 accent-gold">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-gray-300 block mb-1.5">Dial Contrast Shading</label>
-                        <input type="range" id="photoDimmerRange" min="0" max="70" value="15" oninput="updatePhotoTransform()" class="w-full accent-gold">
+                        <p class="text-xs sm:text-sm font-bold text-lightgold">Want a Custom Name or Custom Photograph on Your Dial?</p>
+                        <p class="text-[11px] text-gray-300">We placed the Custom Name Font Selector (+₹499) and Photo Size/Position Adjuster (+₹999) directly beneath the 3D Render screen so you can position them live!</p>
                     </div>
                 </div>
+                <button type="button" onclick="autoCompleteRemainingAndRender()" class="btn-gold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider shrink-0">
+                    Open 3D Dial Studio
+                </button>
             </div>
         </section>
+
         <!-- STEP 03: REAR CASEBACK COVER -->
         <section id="step3Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
@@ -960,12 +984,12 @@
             </div>
         </section>
 
-        <!-- UNLOCKED PHOTOREALISTIC 3D CASE & DIAL STUDIO RENDER STAGE -->
-        <section id="renderedStudioSection" class="hidden gold-panel rounded-3xl p-6 sm:p-10 space-y-6 border-2 border-gold shadow-2xl">
+        <!-- PHOTOREALISTIC 3D CASE & DIAL STUDIO RENDER STAGE + LIVE NAME & PHOTO CONTROLS DIRECTLY BELOW -->
+        <section id="renderedStudioSection" class="hidden gold-panel rounded-3xl p-6 sm:p-10 space-y-8 border-2 border-gold shadow-2xl">
             <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gold/40 pb-5">
                 <div>
                     <span class="text-[11px] uppercase tracking-[0.3em] text-emerald-400 font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-check flex items-center justify-center"></i> 3D Macro Horology Head Render • Fully Connected Chassis
+                        <i class="fa-solid fa-circle-check flex items-center justify-center"></i> 3D Macro Horology Head Render • Live Interactive Dial Studio
                     </span>
                     <h2 class="cinzel-decorative text-xl sm:text-2xl text-lightgold mt-1">DYNAST • 3D Photorealistic Studio Preview</h2>
                 </div>
@@ -983,20 +1007,125 @@
                 <span id="frontCaseCaption" class="text-xs sm:text-sm text-gold/90 uppercase tracking-[0.22em] mt-4 font-bold text-center">3D Macro Studio Case &amp; Dial Head Render</span>
             </div>
 
-            <div class="flex flex-wrap items-center justify-between gap-4 pt-3">
+            <!-- LIVE DIAL CUSTOMIZATION CONTROLS (PLACED DIRECTLY BELOW THE 3D RENDER SCREEN) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+
+                <!-- 1. Custom Name Printed on Dial (Live Preview Above) -->
+                <div class="p-6 rounded-2xl bg-black/80 border border-gold/40 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between border-b border-gold/25 pb-3">
+                        <label class="text-xs uppercase tracking-wider text-lightgold font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-signature text-gold"></i> 1. Custom Dial Name Engraving (Optional)
+                        </label>
+                        <span class="text-xs sm:text-sm font-bold text-gold bg-gold/15 px-3 py-1 rounded-full border border-gold/30">+₹499</span>
+                    </div>
+
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Type your name or initials below and choose your preferred font and metallic ink colour while watching the 3D dial render above update in real time.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="customNameInput" value="Hanzalah" maxlength="18" oninput="updateCustomNameFromInput()" placeholder="Enter custom name (e.g., Hanzalah)" class="flex-1 bg-black border border-gold/50 focus:border-gold rounded-xl px-4 py-3 text-sm text-white outline-none">
+                        <button type="button" onclick="clearCustomName()" class="px-4 py-3 rounded-xl border border-white/20 bg-white/10 hover:bg-red-500/20 hover:border-red-500/50 text-xs text-gray-200 transition shrink-0">
+                            Clear Name (-₹499)
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                        <div class="relative lux-dropdown-wrap">
+                            <span class="text-[11px] uppercase tracking-wider text-gray-300 block mb-1.5">Name Typography Style:</span>
+                            <input type="hidden" id="customNameFont" value="Cinzel">
+                            <button type="button" onclick="toggleLuxDropdown('fontLuxMenu')" class="w-full bg-black border border-gold/50 hover:border-gold rounded-xl px-4 py-3 text-xs text-lightgold flex items-center justify-between transition shadow-md">
+                                <span id="fontLuxLabel" class="font-serif">Royal Serif (Cinzel)</span>
+                                <i class="fa-solid fa-chevron-down text-gold text-[10px]"></i>
+                            </button>
+                            <div id="fontLuxMenu" class="lux-dropdown-menu hidden absolute left-0 right-0 mt-2 rounded-2xl p-2 z-50 space-y-1 text-xs">
+                                <button type="button" onclick="selectLuxuryFont('Cinzel', 'Royal Serif (Cinzel)')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-white font-serif flex items-center justify-between">
+                                    <span>Royal Serif (Cinzel)</span><i class="fa-solid fa-crown text-gold text-[10px]"></i>
+                                </button>
+                                <button type="button" onclick="selectLuxuryFont('Cinzel Decorative', 'Cinzel Decorative')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-lightgold cinzel-decorative flex items-center justify-between">
+                                    <span>Cinzel Decorative</span><i class="fa-solid fa-wand-magic-sparkles text-gold text-[10px]"></i>
+                                </button>
+                                <button type="button" onclick="selectLuxuryFont('Great Vibes', 'Luxury Script (Cursive)')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-white font-script text-base flex items-center justify-between">
+                                    <span>Luxury Script (Cursive)</span><i class="fa-solid fa-feather-pointed text-gold text-[10px]"></i>
+                                </button>
+                                <button type="button" onclick="selectLuxuryFont('Inter', 'Modern Minimalist Sans')" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-gold/25 text-gray-200 font-sans flex items-center justify-between">
+                                    <span>Modern Minimalist Sans</span><i class="fa-solid fa-font text-gold text-[10px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-[11px] uppercase tracking-wider text-gray-300 block mb-1.5">Metallic Ink Colour:</span>
+                            <div class="flex items-center gap-3 pt-2">
+                                <button type="button" onclick="setCustomNameColor('#FFF0E8')" class="w-7 h-7 rounded-full bg-[#D59B84] border-2 border-white/70 hover:scale-110 transition shadow-md" title="Rose-Gold Cream"></button>
+                                <button type="button" onclick="setCustomNameColor('#F5DC8B')" class="w-7 h-7 rounded-full bg-[#E5C168] border-2 border-white/70 hover:scale-110 transition shadow-md" title="18k Warm Gold"></button>
+                                <button type="button" onclick="setCustomNameColor('#FFFFFF')" class="w-7 h-7 rounded-full bg-white border-2 border-white/70 hover:scale-110 transition shadow-md" title="Pure White"></button>
+                                <button type="button" onclick="setCustomNameColor('#111111')" class="w-7 h-7 rounded-full bg-neutral-900 border-2 border-white/70 hover:scale-110 transition shadow-md" title="Jet Black"></button>
+                                <button type="button" onclick="setCustomNameColor('#E5C158')" class="w-7 h-7 rounded-full bg-[#E5C158] border-2 border-white/70 hover:scale-110 transition shadow-md" title="Deep Imperial Gold"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Custom Picture Printed on Circular Dial + Live Position & Size Sliders -->
+                <div class="p-6 rounded-2xl bg-black/80 border border-gold/40 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between border-b border-gold/25 pb-3">
+                        <label class="text-xs uppercase tracking-wider text-lightgold font-bold flex items-center gap-2">
+                            <i class="fa-solid fa-camera-retro text-gold"></i> 2. Custom Dial Photograph &amp; Position (Optional)
+                        </label>
+                        <span class="text-xs sm:text-sm font-bold text-gold bg-gold/15 px-3 py-1 rounded-full border border-gold/30">+₹999</span>
+                    </div>
+
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Upload a personal photo and adjust its zoom, horizontal/vertical alignment, and contrast right below the 3D dial. Your full-resolution photo is preserved for our master watchmakers.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-3">
+                        <label class="btn-gold px-4.5 py-3 rounded-xl text-xs uppercase tracking-wider cursor-pointer inline-flex items-center gap-2 shadow-lg">
+                            <i class="fa-solid fa-upload"></i> Upload Dial Photo
+                            <input type="file" id="dialPhotoInput" accept="image/*" onchange="handleDialPhotoUpload(event)" class="hidden">
+                        </label>
+                        <button type="button" id="removePhotoBtn" onclick="removeDialPhoto()" class="hidden px-4 py-3 rounded-xl border border-red-500/50 bg-red-500/15 text-red-300 text-xs hover:bg-red-500/25 transition shadow-md">
+                            <i class="fa-solid fa-trash-can mr-1.5"></i> Remove Photo (-₹999)
+                        </button>
+                        <span id="photoUploadedBadge" class="hidden text-xs text-emerald-400 font-semibold items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i> Original HD Photo Loaded
+                        </span>
+                    </div>
+
+                    <!-- Always-Accessible Sliders Once Photo Is Uploaded -->
+                    <div id="photoAdjustControls" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-gold/30 text-xs">
+                        <div>
+                            <label class="text-gray-300 block mb-1.5">Photo Zoom (<span id="zoomVal" class="text-gold font-bold">100%</span>)</label>
+                            <input type="range" id="photoZoom" min="100" max="250" value="100" oninput="updatePhotoTransform()" class="w-full accent-gold cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="text-gray-300 block mb-1.5">Left/Right &amp; Up/Down Shift</label>
+                            <div class="flex gap-2">
+                                <input type="range" id="photoOffsetX" min="-140" max="140" value="0" oninput="updatePhotoTransform()" title="Horizontal Position" class="w-1/2 accent-gold cursor-pointer">
+                                <input type="range" id="photoOffsetY" min="-140" max="140" value="0" oninput="updatePhotoTransform()" title="Vertical Position" class="w-1/2 accent-gold cursor-pointer">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-gray-300 block mb-1.5">Dial Contrast Shading</label>
+                            <input type="range" id="photoDimmerRange" min="0" max="70" value="15" oninput="updatePhotoTransform()" class="w-full accent-gold cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-gold/30">
                 <div class="flex flex-wrap gap-3">
                     <button type="button" onclick="downloadWatchSnapshot()" class="px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-gold/40 text-xs text-lightgold font-semibold flex items-center justify-center gap-2 transition shadow-md">
-                        <i class="fa-solid fa-download text-gold flex items-center justify-center"></i> Download 3D Render PNG
-                    </button>
-                    <button type="button" onclick="saveCurrentDesignToHistory()" class="px-5 py-3 rounded-xl bg-white/5 hover:bg-gold/20 border border-gold/40 text-xs text-white font-semibold flex items-center justify-center gap-2 transition shadow-md">
-                        <i class="fa-solid fa-bookmark text-gold flex items-center justify-center"></i> Save Configuration
+                        <i class="fa-solid fa-download text-gold"></i> Download 3D Render PNG
                     </button>
                     <a href="https://dynast.co.in/card" target="_blank" class="px-5 py-3 rounded-xl bg-gold/20 hover:bg-gold/30 border border-gold/50 text-xs text-lightgold font-semibold flex items-center justify-center gap-2 transition shadow-md">
-                        <i class="fa-solid fa-id-card text-gold flex items-center justify-center"></i> NFC Business Card
+                        <i class="fa-solid fa-id-card text-gold"></i> NFC Business Card
                     </a>
                 </div>
                 <a href="#finalPaymentSection" class="btn-gold px-7 py-3 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl">
-                    <i class="fa-solid fa-lock flex items-center justify-center"></i> Proceed to Final Checkout
+                    <i class="fa-solid fa-lock"></i> Proceed to Final Checkout
                 </a>
             </div>
         </section>
@@ -1054,64 +1183,12 @@
                         <div class="w-6 h-6 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
                             <i class="fa-solid fa-clock-rotate-left text-gold text-xs"></i>
                         </div>
-                        <span>4. Hand-Assembly Timeline &amp; Tracking</span>
+                        <span>4. Hand-Assembly Timeline &amp; Autonomous Email Tracking</span>
                     </div>
                     <p class="text-gray-200 leading-relaxed text-xs">
-                        Bespoke watches require <strong class="text-white">4 to 7 business days</strong> for custom dial printing, sealing, and regulation in Agra before dispatch. A live Tracking ID is emailed immediately upon order placement.
+                        Bespoke watches require <strong class="text-white">4 to 7 business days</strong> for custom dial printing, sealing, and regulation in Agra before dispatch. An automated confirmation email with your live Tracking ID is sent immediately upon order placement.
                     </p>
                 </div>
-            </div>
-        </section>
-
-        <!-- OFFICIAL CONTACT SECTION -->
-        <section id="contactSection" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
-            <div class="border-b border-gold/30 pb-4 flex flex-wrap items-center justify-between gap-3">
-                <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Direct Concierge &amp; Atelier Support</span>
-                    <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Contact DYNAST Luxurious Horology</h2>
-                </div>
-                <div class="flex items-center gap-3">
-                    <a href="https://dynast.co.in/card" target="_blank" class="text-xs text-lightgold bg-gold/20 hover:bg-gold/30 border border-gold/50 px-3.5 py-1.5 rounded-xl transition font-semibold flex items-center justify-center gap-1.5"><i class="fa-solid fa-id-card text-gold flex items-center justify-center"></i> NFC Card</a>
-                    <span class="text-xs text-lightgold font-semibold flex items-center justify-center gap-1.5"><i class="fa-solid fa-location-dot text-gold flex items-center justify-center"></i> Agra, UP</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
-                <a href="https://wa.me/917579942958" target="_blank" class="p-4.5 rounded-2xl bg-white/[0.05] hover:bg-gold/20 border border-gold/40 transition flex items-start gap-4">
-                    <div class="w-11 h-11 rounded-xl bg-gold/25 border border-gold/60 flex items-center justify-center text-gold text-lg shrink-0"><i class="fa-brands fa-whatsapp flex items-center justify-center"></i></div>
-                    <div>
-                        <span class="text-[10px] uppercase tracking-wider text-gray-300 block">Phone &amp; WhatsApp</span>
-                        <p class="text-sm font-bold text-white mt-0.5">+91 75799 42958</p>
-                        <span class="text-[11px] text-gold mt-1 inline-block font-semibold">Chat on WhatsApp &rarr;</span>
-                    </div>
-                </a>
-
-                <a href="mailto:dynast.co.in@gmail.com" class="p-4.5 rounded-2xl bg-white/[0.05] hover:bg-gold/20 border border-gold/40 transition flex items-start gap-4">
-                    <div class="w-11 h-11 rounded-xl bg-gold/25 border border-gold/60 flex items-center justify-center text-gold text-lg shrink-0"><i class="fa-solid fa-envelope flex items-center justify-center"></i></div>
-                    <div class="overflow-hidden">
-                        <span class="text-[10px] uppercase tracking-wider text-gray-300 block">Official Email</span>
-                        <p class="text-xs font-bold text-white mt-0.5 truncate">dynast.co.in@gmail.com</p>
-                        <span class="text-[11px] text-gold mt-1 inline-block font-semibold">Send Email &rarr;</span>
-                    </div>
-                </a>
-
-                <a href="https://instagram.com/dynast_luxury" target="_blank" class="p-4.5 rounded-2xl bg-white/[0.05] hover:bg-gold/20 border border-gold/40 transition flex items-start gap-4">
-                    <div class="w-11 h-11 rounded-xl bg-gold/25 border border-gold/60 flex items-center justify-center text-gold text-lg shrink-0"><i class="fa-brands fa-instagram flex items-center justify-center"></i></div>
-                    <div>
-                        <span class="text-[10px] uppercase tracking-wider text-gray-300 block">Official Instagram</span>
-                        <p class="text-sm font-bold text-white mt-0.5">@dynast_luxury</p>
-                        <span class="text-[11px] text-gold mt-1 inline-block font-semibold">Follow Builds &rarr;</span>
-                    </div>
-                </a>
-
-                <a href="https://dynast.co.in/card" target="_blank" class="p-4.5 rounded-2xl bg-white/[0.05] hover:bg-gold/20 border border-gold/40 transition flex items-start gap-4">
-                    <div class="w-11 h-11 rounded-xl bg-gold/25 border border-gold/60 flex items-center justify-center text-gold text-lg shrink-0"><i class="fa-solid fa-id-card flex items-center justify-center"></i></div>
-                    <div>
-                        <span class="text-[10px] uppercase tracking-wider text-gray-300 block">Digital Business Card</span>
-                        <p class="text-sm font-bold text-white mt-0.5">dynast.co.in/card</p>
-                        <span class="text-[11px] text-gold mt-1 inline-block font-semibold">View NFC Card &rarr;</span>
-                    </div>
-                </a>
             </div>
         </section>
 
@@ -1123,7 +1200,7 @@
                     <h2 class="cinzel-decorative text-xl sm:text-2xl text-lightgold mt-1">Itemized Price &amp; Instant UPI Checkout</h2>
                 </div>
                 <button type="button" onclick="requestViewRenderedWatch()" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-eye flex items-center justify-center"></i> Preview 3D Render
+                    <i class="fa-solid fa-eye flex items-center justify-center"></i> Preview 3D Render &amp; Dial Studio
                 </button>
             </div>
 
@@ -1145,8 +1222,8 @@
                     </div>
 
                     <div class="p-4 rounded-xl bg-gold/15 border border-gold/40 text-xs text-gray-200 space-y-1.5">
-                        <p class="font-bold text-lightgold flex items-center gap-1.5"><i class="fa-solid fa-file-invoice-dollar text-gold flex items-center justify-center"></i> Instant E-Bill &amp; Tracking ID</p>
-                        <p>Upon order placement, your unique <strong>Tracking ID</strong> is generated and you can instantly download your official <strong>Digital E-Bill Statement</strong>.</p>
+                        <p class="font-bold text-lightgold flex items-center gap-1.5"><i class="fa-solid fa-envelope-circle-check text-gold flex items-center justify-center"></i> Autonomous Confirmation Email &amp; E-Bill</p>
+                        <p>Upon submitting your order, an official confirmation email with your <strong>Order ID</strong> and <strong>Live Tracking ID</strong> is automatically dispatched to your email address, and your printable <strong>Digital E-Bill Statement</strong> is generated immediately.</p>
                     </div>
                 </div>
 
@@ -1184,13 +1261,13 @@
                                 <input type="text" id="orderName" required placeholder="Enter your full name" class="w-full bg-black border border-gold/50 focus:border-gold rounded-xl px-4 py-3 text-white outline-none">
                             </div>
                             <div>
-                                <label class="text-gray-200 block mb-1.5 font-medium">WhatsApp / Phone Number *</label>
+                                <label class="text-gray-200 block mb-1.5 font-medium">Phone Number *</label>
                                 <input type="tel" id="orderPhone" required placeholder="+91 98765 43210" class="w-full bg-black border border-gold/50 focus:border-gold rounded-xl px-4 py-3 text-white outline-none">
                             </div>
                         </div>
 
                         <div>
-                            <label class="text-gray-200 block mb-1.5 font-medium">Customer Email Address *</label>
+                            <label class="text-gray-200 block mb-1.5 font-medium">Customer Email Address (For Automated Order &amp; Tracking Email) *</label>
                             <input type="email" id="orderEmail" required placeholder="yourname@gmail.com" class="w-full bg-black border border-gold/50 focus:border-gold rounded-xl px-4 py-3 text-white outline-none">
                         </div>
 
@@ -1212,7 +1289,7 @@
                         </label>
 
                         <button type="submit" id="placeOrderSubmitBtn" class="btn-gold w-full py-4 rounded-xl text-xs uppercase tracking-widest shadow-2xl mt-3 flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-check-double text-sm flex items-center justify-center"></i> Submit Payment &amp; Generate E-Bill
+                            <i class="fa-solid fa-check-double text-sm flex items-center justify-center"></i> Submit Payment &amp; Send Confirmation Email
                         </button>
                     </form>
                 </div>
@@ -1225,10 +1302,9 @@
     <footer class="relative z-10 border-t border-gold/30 bg-black/95 backdrop-blur-md py-10 px-4 text-center text-xs text-gray-300 mt-12">
         <p class="cinzel-decorative text-gold text-lg tracking-widest mb-2">DYNAST</p>
         <p class="text-white font-medium">Luxurious Horology Bespoke Studio • Agra, Uttar Pradesh, India</p>
-        <p class="text-xs text-gray-300 mt-2 space-x-2">
-            <a href="https://dynast.co.in/card" class="text-gold hover:underline font-semibold flex items-center justify-center gap-1 inline-flex"><i class="fa-solid fa-id-card flex items-center justify-center"></i> NFC Card</a> •
-            Phone/WhatsApp: <a href="https://wa.me/917579942958" class="text-gold hover:underline font-semibold">+91 75799 42958</a> •
-            Email: <a href="mailto:dynast.co.in@gmail.com" class="text-gold hover:underline font-semibold">dynast.co.in@gmail.com</a> •
+        <p class="text-xs text-gray-400 mt-2 space-x-2">
+            <a href="https://dynast.co.in" class="text-gold hover:underline font-semibold">Main Store</a> •
+            <a href="https://dynast.co.in/card" target="_blank" class="text-gold hover:underline font-semibold inline-flex items-center gap-1"><i class="fa-solid fa-id-card"></i> NFC Card</a> •
             Instagram: <a href="https://instagram.com/dynast_luxury" target="_blank" class="text-gold hover:underline font-semibold">@dynast_luxury</a>
         </p>
     </footer>
@@ -1236,34 +1312,34 @@
     <!-- INCOMPLETE CUSTOMIZATION GATE MODAL -->
     <div id="incompleteGateModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="gold-panel rounded-3xl max-w-lg w-full p-7 relative space-y-5 border-2 border-gold shadow-2xl">
-            <button type="button" onclick="closeModal('incompleteGateModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark flex items-center justify-center"></i></button>
+            <button type="button" onclick="closeModal('incompleteGateModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <div class="flex items-center gap-3.5">
-                <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-300 text-xl shrink-0"><i class="fa-solid fa-list-check flex items-center justify-center"></i></div>
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-300 text-xl shrink-0"><i class="fa-solid fa-list-check"></i></div>
                 <div>
                     <span class="text-[10px] uppercase tracking-widest text-gold font-bold block">Bespoke Studio Checklist</span>
                     <h3 class="serif-text text-base font-bold text-white">Complete Your Customization First</h3>
                 </div>
             </div>
-            <p class="text-xs text-gray-200 leading-relaxed">Please complete your selections below before viewing the rendered watch:</p>
+            <p class="text-xs text-gray-200 leading-relaxed">Please complete your selections below before viewing the rendered watch, or click <strong>"Use Studio Defaults &amp; View Render"</strong> to jump straight to the 3D dial studio:</p>
             <div id="missingStepsList" class="space-y-2.5 text-xs"></div>
             <div class="flex flex-col sm:flex-row gap-3 pt-3 border-t border-gold/30">
-                <button type="button" id="jumpToFirstMissingBtn" class="btn-gold flex-1 py-3.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-1.5"><i class="fa-solid fa-arrow-right flex items-center justify-center"></i> Complete Next Step</button>
+                <button type="button" id="jumpToFirstMissingBtn" class="btn-gold flex-1 py-3.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-1.5"><i class="fa-solid fa-arrow-right"></i> Complete Next Step</button>
                 <button type="button" onclick="autoCompleteRemainingAndRender()" class="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-gold/20 border border-gold/50 text-xs text-lightgold font-semibold transition">Use Studio Defaults &amp; View Render</button>
             </div>
         </div>
     </div>
 
-    <!-- ORDER CONFIRMED & E-BILL DOWNLOAD MODAL -->
+    <!-- ORDER CONFIRMED & E-BILL DOWNLOAD MODAL (AUTONOMOUS EMAIL ONLY) -->
     <div id="orderConfirmedModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="gold-panel rounded-3xl max-w-xl w-full p-7 sm:p-8 relative space-y-5 border-2 border-gold max-h-[92vh] overflow-y-auto shadow-2xl">
-            <button type="button" onclick="closeModal('orderConfirmedModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark flex items-center justify-center"></i></button>
+            <button type="button" onclick="closeModal('orderConfirmedModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
             <div class="text-center space-y-2">
                 <div class="w-14 h-14 rounded-full bg-emerald-500/20 border-2 border-emerald-400 text-emerald-300 flex items-center justify-center text-2xl mx-auto shadow-lg">
-                    <i class="fa-solid fa-check flex items-center justify-center"></i>
+                    <i class="fa-solid fa-check"></i>
                 </div>
                 <span class="text-[10px] uppercase tracking-[0.28em] text-emerald-400 font-bold block">Bespoke Order Confirmed</span>
                 <h3 class="cinzel-decorative text-xl sm:text-2xl text-lightgold">Thank You for Your Order!</h3>
-                <p id="confirmEmailStatusText" class="text-xs text-gray-200">Your order has been saved securely to Firebase Cloud.</p>
+                <p id="confirmEmailStatusText" class="text-xs text-emerald-300 font-medium">Sending autonomous confirmation email to your inbox...</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-black/85 border border-gold/40 rounded-2xl p-4.5 text-xs">
@@ -1280,79 +1356,43 @@
             <div id="confirmOrderDetailsBox" class="bg-white/[0.05] border border-gold/30 rounded-2xl p-4.5 space-y-2 text-xs text-gray-200"></div>
 
             <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                <button type="button" id="downloadEBillBtn" onclick="downloadOrderEBill()" class="btn-gold flex-1 py-3.5 rounded-xl text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-file-arrow-down flex items-center justify-center"></i> Download Official E-Bill Statement
+                <button type="button" id="downloadEBillBtn" onclick="downloadOrderEBill()" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase tracking-wider text-center flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-file-arrow-down"></i> Download Official E-Bill Statement
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- CUSTOMER LOGIN & SIGN UP MODAL -->
-    <div id="authModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="gold-panel rounded-3xl max-w-md w-full p-7 relative shadow-2xl">
-            <button type="button" onclick="closeModal('authModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark flex items-center justify-center"></i></button>
-            <div class="text-center mb-5">
-                <span class="cinzel-decorative text-2xl text-gold">DYNAST</span>
-                <h3 class="serif-text text-sm uppercase tracking-widest text-white mt-1">Collector Account Portal</h3>
+    <!-- TRACK ORDER MODAL (NO LOGIN REQUIRED - TRIGGERED BY HEADER "TRACK" BUTTON) -->
+    <div id="trackOrderModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="gold-panel rounded-3xl max-w-xl w-full p-7 relative max-h-[88vh] flex flex-col space-y-5 border-2 border-gold shadow-2xl">
+            <button type="button" onclick="closeModal('trackOrderModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <div>
+                <span class="text-[10px] uppercase tracking-[0.28em] text-gold font-bold block">Live Bespoke Order Tracker</span>
+                <h3 class="serif-text text-lg font-bold text-white mt-1">Track Your DYNAST Timepiece</h3>
+                <p class="text-xs text-gray-300 mt-1">Enter your Order ID (e.g., <span class="text-lightgold font-mono">DYN-123456</span>), Tracking ID, or Email Address below.</p>
             </div>
-            <div class="grid grid-cols-2 gap-2.5 bg-black/70 p-1.5 rounded-xl border border-gold/30 mb-5 text-xs">
-                <button type="button" id="tabLoginBtn" onclick="switchAuthTab('login')" class="py-2.5 rounded-lg bg-gold text-black font-bold">Sign In</button>
-                <button type="button" id="tabSignupBtn" onclick="switchAuthTab('signup')" class="py-2.5 rounded-lg text-gray-200 hover:text-gold font-medium">Create Account</button>
+
+            <div class="flex gap-2.5">
+                <input type="text" id="trackLookupInput" placeholder="Enter Order ID, Track ID, or Email..." class="flex-1 bg-black border border-gold/50 focus:border-gold rounded-xl px-4 py-3 text-xs text-white outline-none">
+                <button type="button" onclick="searchOrderTracking()" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-wider shrink-0">
+                    Search
+                </button>
             </div>
-            <form id="authForm" onsubmit="submitAuthForm(event)" class="space-y-4 text-xs">
-                <div id="signupNameField" class="hidden">
-                    <label class="text-gray-200 block mb-1.5 font-medium">Full Name *</label>
-                    <input type="text" id="authName" placeholder="e.g., Mohammad Hanzalah" class="w-full bg-black border border-gold/50 rounded-xl px-4 py-3 text-white outline-none">
-                </div>
-                <div id="signupPhoneField" class="hidden">
-                    <label class="text-gray-200 block mb-1.5 font-medium">WhatsApp / Phone Number *</label>
-                    <input type="tel" id="authPhone" placeholder="e.g., +91 7579942958" class="w-full bg-black border border-gold/50 rounded-xl px-4 py-3 text-white outline-none">
-                </div>
-                <div>
-                    <label class="text-gray-200 block mb-1.5 font-medium">Email Address *</label>
-                    <input type="email" id="authEmail" required placeholder="you@example.com" class="w-full bg-black border border-gold/50 rounded-xl px-4 py-3 text-white outline-none">
-                </div>
-                <div>
-                    <label class="text-gray-200 block mb-1.5 font-medium">Password (min 6 characters) *</label>
-                    <input type="password" id="authPassword" required minlength="6" placeholder="••••••••" class="w-full bg-black border border-gold/50 rounded-xl px-4 py-3 text-white outline-none">
-                </div>
-                <p id="authErrorMsg" class="text-red-400 text-xs hidden font-semibold"></p>
-                <button type="submit" id="authSubmitBtn" class="btn-gold w-full py-3.5 rounded-xl text-xs uppercase tracking-widest mt-2 shadow-lg flex items-center justify-center gap-1.5"><i class="fa-solid fa-right-to-bracket flex items-center justify-center"></i> Sign In to Studio</button>
-            </form>
+
+            <div id="trackResultsArea" class="flex-1 overflow-y-auto space-y-3 pr-1 text-xs">
+                <p class="text-gray-400 text-center py-6">Enter your Order ID, Tracking ID, or Email above to view live crafting status.</p>
+            </div>
         </div>
     </div>
 
-    <!-- ACCOUNT HISTORY, ORDERS & TRACKING MODAL -->
-    <div id="accountModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="gold-panel rounded-3xl max-w-2xl w-full p-7 relative max-h-[88vh] flex flex-col shadow-2xl">
-            <button type="button" onclick="closeModal('accountModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark flex items-center justify-center"></i></button>
-            <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-gold/30">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-12 h-12 rounded-full bg-gold/25 border border-gold flex items-center justify-center text-gold font-bold cinzel-decorative text-lg shadow-md" id="accountAvatar">D</div>
-                    <div>
-                        <h3 id="accountUserName" class="serif-text text-base font-bold text-white">Guest Collector</h3>
-                        <p id="accountUserEmail" class="text-xs text-gold/90">Sign in to sync your bespoke vault</p>
-                    </div>
-                </div>
-                <button type="button" id="logoutBtn" onclick="logoutCustomer()" class="hidden text-xs border border-red-500/50 bg-red-500/15 text-red-300 px-3.5 py-2 rounded-xl hover:bg-red-500/25 transition items-center gap-1.5">
-                    <i class="fa-solid fa-right-from-bracket flex items-center justify-center"></i> Sign Out
-                </button>
-            </div>
-            <div class="flex gap-2.5 my-4 text-xs">
-                <button type="button" id="accTabOrders" onclick="switchAccountTab('orders')" class="px-4.5 py-2.5 rounded-xl bg-gold text-black font-bold shadow-md flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-box-open flex items-center justify-center"></i> Orders &amp; Track ID (<span id="tabOrdersCount">0</span>)
-                </button>
-                <button type="button" id="accTabHistory" onclick="switchAccountTab('history')" class="px-4.5 py-2.5 rounded-xl bg-white/5 text-gray-200 hover:text-gold border border-gold/30 transition flex items-center justify-center gap-1.5">
-                    <i class="fa-solid fa-wand-magic-sparkles flex items-center justify-center"></i> Saved Designs (<span id="tabHistoryCount">0</span>)
-                </button>
-            </div>
-            <div id="accountContentArea" class="flex-1 overflow-y-auto space-y-3.5 pr-1"></div>
-        </div>
-    </div>
-
-    <!-- FIREBASE CLOUD SCRIPT LOGIC -->
+    <!-- COMPLETE STUDIO JAVASCRIPT, 3D CANVAS ENGINE, UNCOMPRESSED ADMIN PHOTO UPLOAD & AUTONOMOUS EMAILJS -->
     <script>
         const BASE_WATCH_PRICE = 2999;
+
+        const EMAILJS_SERVICE_ID = "service_n368ztv";
+        const EMAILJS_TEMPLATE_ID = "template_8aiicmc";
+        const EMAILJS_PUBLIC_KEY = "_fpanrTUxPG_S9y47";
 
         const METAL_PALETTES = {
             silver: {
@@ -1465,6 +1505,7 @@
             customNameFont: 'Cinzel',
             customNameColor: '#FFF0E8',
             customPhotoDataUrl: null,
+            rawPhotoFile: null,
             photoZoom: 100,
             photoOffsetX: 0,
             photoOffsetY: 0,
@@ -1473,7 +1514,7 @@
             strapItem: 'strap_01',
             strapLock: 'butterfly',
             liveClock: true,
-            totalPrice: 9799
+            totalPrice: 9798
         };
 
         let completedSteps = {
@@ -1487,8 +1528,6 @@
         let renderUnlocked = false;
         let uploadedPhotoImg = null;
         let staticWatchBuffer = null;
-        let authMode = 'login';
-        let currentUser = null;
         let cloudOrdersList = [];
         let lastPlacedOrder = null;
 
@@ -1514,16 +1553,7 @@
         });
 
         window.addEventListener('firebase-fully-ready', () => {
-            if (window.auth && window.FB_Fns) {
-                window.FB_Fns.onAuthStateChanged(window.auth, (user) => {
-                    if (user) {
-                        currentUser = { email: user.email, name: user.displayName || user.email.split('@')[0], uid: user.uid };
-                    } else {
-                        currentUser = null;
-                    }
-                    updateAuthUI();
-                });
-
+            if (window.db && window.FB_Fns) {
                 try {
                     const q = window.FB_Fns.query(window.FB_Fns.collection(window.db, 'bespoke_orders'));
                     window.FB_Fns.onSnapshot(q, (snapshot) => {
@@ -1531,9 +1561,10 @@
                         snapshot.forEach(docSnap => {
                             cloudOrdersList.push({ id: docSnap.id, ...docSnap.data() });
                         });
-                        refreshHistoryCountBadges();
                     });
-                } catch (e) {}
+                } catch (e) {
+                    console.error("Order listener error:", e);
+                }
             }
         });
 
@@ -1550,17 +1581,19 @@
         function updateStepProgressUI() {
             const count = Object.values(completedSteps).filter(Boolean).length;
             const navProg = document.getElementById('navStepProgress');
+            const bagCount = document.getElementById('headerBagStepCount');
             const floatBadge = document.getElementById('floatingStepBadge');
             const floatTitle = document.getElementById('floatingStatusTitle');
             const floatSub = document.getElementById('floatingStatusSub');
 
             if (navProg) navProg.textContent = `${count} / 5 Steps`;
+            if (bagCount) bagCount.textContent = String(count);
             if (floatBadge) floatBadge.textContent = `${count}/5`;
 
             if (count === 5) {
                 if (floatBadge) floatBadge.className = 'w-10 h-10 rounded-xl bg-emerald-500/25 border border-emerald-400 flex items-center justify-center text-emerald-300 font-bold text-xs shadow-md';
                 if (floatTitle) floatTitle.textContent = 'All 5 Customization Steps Completed!';
-                if (floatSub) floatSub.textContent = 'Click "View 3D Case & Dial Render" to launch your hyper-realistic 3D preview';
+                if (floatSub) floatSub.textContent = 'Click "View 3D Case & Dial Render" to customize your name & photo live on the dial';
             } else {
                 const remaining = 5 - count;
                 if (floatTitle) floatTitle.textContent = `${count} of 5 Components Selected (${remaining} Remaining)`;
@@ -1641,9 +1674,12 @@
             if (renderUnlocked) renderFrontWatch(true);
         }
 
+        // Preserve 100% original image quality & file reference for Admin Panel
         function handleDialPhotoUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
+            state.rawPhotoFile = file;
+
             const reader = new FileReader();
             reader.onload = function(e) {
                 state.customPhotoDataUrl = e.target.result;
@@ -1652,10 +1688,12 @@
                     uploadedPhotoImg = img;
                     document.getElementById('removePhotoBtn').classList.remove('hidden');
                     document.getElementById('photoUploadedBadge').classList.remove('hidden');
+                    document.getElementById('photoUploadedBadge').classList.add('inline-flex');
                     document.getElementById('photoAdjustControls').classList.remove('hidden');
                     markStepCompleted('step2_dial', 'step2StatusBadge', 'Custom Photo Dial Set');
                     updatePriceBreakdown();
                     if (renderUnlocked) renderFrontWatch(true);
+                    showToast('Full-resolution dial photo loaded! Adjust position below the render.');
                 };
                 img.src = e.target.result;
             };
@@ -1664,10 +1702,12 @@
 
         function removeDialPhoto() {
             state.customPhotoDataUrl = null;
+            state.rawPhotoFile = null;
             uploadedPhotoImg = null;
             document.getElementById('dialPhotoInput').value = '';
             document.getElementById('removePhotoBtn').classList.add('hidden');
             document.getElementById('photoUploadedBadge').classList.add('hidden');
+            document.getElementById('photoUploadedBadge').classList.remove('inline-flex');
             document.getElementById('photoAdjustControls').classList.add('hidden');
             updatePriceBreakdown();
             if (renderUnlocked) renderFrontWatch(true);
@@ -1744,7 +1784,7 @@
                     const done = completedSteps[s.key];
                     return `
                         <div onclick="jumpToStepFromModal('${s.sectionId}')" class="p-3.5 rounded-xl border ${done ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300' : 'border-amber-500/50 bg-amber-500/15 text-amber-200'} flex items-center justify-between cursor-pointer hover:bg-white/10 transition shadow-sm">
-                            <span class="font-semibold flex items-center gap-2"><i class="fa-solid ${done ? 'fa-circle-check text-emerald-400' : 'fa-circle-exclamation text-amber-400'} flex items-center justify-center"></i>${s.title}</span>
+                            <span class="font-semibold flex items-center gap-2"><i class="fa-solid ${done ? 'fa-circle-check text-emerald-400' : 'fa-circle-exclamation text-amber-400'}"></i>${s.title}</span>
                             <span class="text-[10px] uppercase tracking-wider font-bold">${done ? 'Completed' : 'Tap to Select &rarr;'}</span>
                         </div>
                     `;
@@ -1870,7 +1910,6 @@
                 { sx: 1,  sy: 1  }
             ];
 
-            // 1. Draw 4 Lugs extending completely UNDER and INTO the case core so no gap/hover exists
             lugConfigs.forEach(cfg => {
                 ctx.save();
                 ctx.translate(cx, cy);
@@ -1898,7 +1937,6 @@
                 ctx.restore();
             });
 
-            // 2. Monobloc Mid-Case Ring drawn seamlessly over the lugs
             ctx.beginPath();
             ctx.arc(cx, cy, 322, 0, Math.PI * 2);
             ctx.fillStyle = lugGrad;
@@ -1907,7 +1945,6 @@
             ctx.strokeStyle = 'rgba(255,255,255,0.75)';
             ctx.stroke();
 
-            // 3. Spring Bars
             [cy - 384, cy + 376].forEach(barY => {
                 const sbGrad = ctx.createLinearGradient(cx - 150, barY, cx - 150, barY + 14);
                 sbGrad.addColorStop(0, '#090D16');
@@ -1917,7 +1954,7 @@
                 sbGrad.addColorStop(1, '#020617');
                 ctx.fillStyle = sbGrad;
                 ctx.fillRect(cx - 150, barY, 300, 14);
-                
+
                 ctx.fillStyle = pal.fluteBright;
                 ctx.fillRect(cx - 154, barY - 1, 6, 16);
                 ctx.fillRect(cx + 148, barY - 1, 6, 16);
@@ -2571,159 +2608,122 @@
             link.click();
         }
 
-        // ============================================================================
-        // FIREBASE CLOUD ORDERS & INSTANT E-BILL GENERATOR
-        // ============================================================================
         function closeModal(id) {
             const el = document.getElementById(id);
             if (el) el.classList.add('hidden');
         }
 
-        function handleAuthButtonClick() {
-            if (currentUser) {
-                openAccountModal('orders');
-            } else {
-                document.getElementById('authErrorMsg').classList.add('hidden');
-                document.getElementById('authModal').classList.remove('hidden');
-            }
+        // ============================================================================
+        // ORDER TRACKER MODAL (HEADER "TRACK" BUTTON - NO SIGN-IN REQUIRED)
+        // ============================================================================
+        function openTrackOrderModal() {
+            document.getElementById('trackOrderModal').classList.remove('hidden');
         }
 
-        function switchAuthTab(mode) {
-            authMode = mode;
-            const isSignup = mode === 'signup';
-            document.getElementById('signupNameField').classList.toggle('hidden', !isSignup);
-            document.getElementById('signupPhoneField').classList.toggle('hidden', !isSignup);
-            document.getElementById('authErrorMsg').classList.add('hidden');
-            document.getElementById('tabLoginBtn').className = !isSignup ? 'py-2.5 rounded-lg bg-gold text-black font-bold' : 'py-2.5 rounded-lg text-gray-200 hover:text-gold font-medium';
-            document.getElementById('tabSignupBtn').className = isSignup ? 'py-2.5 rounded-lg bg-gold text-black font-bold' : 'py-2.5 rounded-lg text-gray-200 hover:text-gold font-medium';
-            document.getElementById('authSubmitBtn').textContent = isSignup ? 'Create Bespoke Account' : 'Sign In to Studio';
-        }
-
-        async function submitAuthForm(e) {
-            e.preventDefault();
-            const errEl = document.getElementById('authErrorMsg');
-            errEl.classList.add('hidden');
-
-            const email = document.getElementById('authEmail').value.trim().toLowerCase();
-            const password = document.getElementById('authPassword').value.trim();
-            const nameInput = document.getElementById('authName').value.trim();
-
-            if (!window.auth || !window.FB_Fns) {
-                errEl.textContent = 'Firebase is not initialized.';
-                errEl.classList.remove('hidden');
+        function searchOrderTracking() {
+            const queryText = (document.getElementById('trackLookupInput').value || '').trim().toLowerCase();
+            const area = document.getElementById('trackResultsArea');
+            if (!queryText) {
+                area.innerHTML = `<p class="text-amber-300 text-center py-6">Please enter an Order ID, Tracking ID, or Email Address.</p>`;
                 return;
             }
 
-            try {
-                if (authMode === 'signup') {
-                    const cred = await window.FB_Fns.createUserWithEmailAndPassword(window.auth, email, password);
-                    currentUser = { email: cred.user.email, name: nameInput || email.split('@')[0], uid: cred.user.uid };
-                } else {
-                    const cred = await window.FB_Fns.signInWithEmailAndPassword(window.auth, email, password);
-                    currentUser = { email: cred.user.email, name: cred.user.displayName || email.split('@')[0], uid: cred.user.uid };
+            const matches = cloudOrdersList.filter(o =>
+                (o.orderId && o.orderId.toLowerCase().includes(queryText)) ||
+                (o.trackId && o.trackId.toLowerCase().includes(queryText)) ||
+                (o.customerEmail && o.customerEmail.toLowerCase() === queryText)
+            );
+
+            if (matches.length === 0) {
+                area.innerHTML = `<p class="text-gray-300 text-center py-8">No matching bespoke orders found for "<strong>${queryText}</strong>".</p>`;
+                return;
+            }
+
+            area.innerHTML = matches.map(o => `
+                <div class="p-4 rounded-2xl bg-white/5 border border-gold/40 space-y-2 text-xs">
+                    <div class="flex flex-wrap justify-between gap-2">
+                        <span class="font-bold text-lightgold">Order: ${o.orderId}</span>
+                        <span class="font-mono text-emerald-300 font-bold">Track ID: ${o.trackId}</span>
+                    </div>
+                    <p class="text-white font-semibold">${o.caseModel} • ${o.dialColor}</p>
+                    <p class="text-[11px] text-gray-300">${o.strapItem} • ${o.strapLock} • ${o.backCase}</p>
+                    <p class="text-[11px] text-gold font-semibold">Status: ${o.status || 'In Bespoke Crafting Queue'}</p>
+                    <div class="flex justify-between items-center pt-2 border-t border-white/10 text-[11px]">
+                        <span class="text-gray-300">${o.formattedDate || ''}</span>
+                        <span class="text-gold font-bold text-sm">₹${Number(o.totalPrice).toLocaleString('en-IN')}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================================================
+        // UNCOMPRESSED ADMIN PHOTO HELPER + FIREBASE ORDER SAVE + AUTONOMOUS EMAILJS
+        // ============================================================================
+        async function prepareUncompressedAdminPhoto(orderId) {
+            if (!state.customPhotoDataUrl) {
+                return { dialPhoto: null, dialPhotoStorageUrl: null, isChunkedInSubcollection: false };
+            }
+
+            let storageDownloadUrl = null;
+
+            // 1. Upload original untouched file/DataURL to Firebase Cloud Storage so 100% original pixels are preserved
+            if (window.storage && window.FB_Fns && window.FB_Fns.storageRef) {
+                try {
+                    const ext = state.rawPhotoFile && state.rawPhotoFile.name ? state.rawPhotoFile.name : 'dial_photo.png';
+                    const fileRef = window.FB_Fns.storageRef(window.storage, `bespoke_dial_photos/${orderId}_${ext}`);
+                    if (state.rawPhotoFile && window.FB_Fns.uploadBytes) {
+                        await window.FB_Fns.uploadBytes(fileRef, state.rawPhotoFile);
+                    } else {
+                        await window.FB_Fns.uploadString(fileRef, state.customPhotoDataUrl, 'data_url');
+                    }
+                    storageDownloadUrl = await window.FB_Fns.getDownloadURL(fileRef);
+                } catch (storageErr) {
+                    console.warn("Firebase Storage direct upload fallback to Firestore:", storageErr);
                 }
-                updateAuthUI();
-                closeModal('authModal');
-                showToast(`Signed in as ${currentUser.name}`);
-            } catch (err) {
-                errEl.textContent = err.message;
-                errEl.classList.remove('hidden');
             }
-        }
 
-        function logoutCustomer() {
-            if (window.auth && window.FB_Fns) {
-                try { window.FB_Fns.signOut(window.auth); } catch (e) {}
+            // 2. If the raw DataURL fits safely inside a single Firestore document (< 750 KB), store the exact untouched DataURL directly
+            if (state.customPhotoDataUrl.length <= 750000) {
+                return {
+                    dialPhoto: state.customPhotoDataUrl,
+                    dialPhotoStorageUrl: storageDownloadUrl || state.customPhotoDataUrl,
+                    isChunkedInSubcollection: false
+                };
             }
-            currentUser = null;
-            updateAuthUI();
-            closeModal('accountModal');
-            showToast('Signed out of DYNAST Studio');
-        }
 
-        function updateAuthUI() {
-            const authText = document.getElementById('authNavText');
-            const logoutBtn = document.getElementById('logoutBtn');
-            const uName = document.getElementById('accountUserName');
-            const uEmail = document.getElementById('accountUserEmail');
-            const avatar = document.getElementById('accountAvatar');
-
-            if (currentUser) {
-                if (authText) authText.textContent = currentUser.name.split(' ')[0];
-                if (logoutBtn) logoutBtn.classList.remove('hidden');
-                if (uName) uName.textContent = currentUser.name;
-                if (uEmail) uEmail.textContent = currentUser.email;
-                if (avatar) avatar.textContent = currentUser.name.charAt(0).toUpperCase();
-
-                const oName = document.getElementById('orderName');
-                const oEmail = document.getElementById('orderEmail');
-                if (oName && !oName.value) oName.value = currentUser.name || '';
-                if (oEmail && !oEmail.value) oEmail.value = currentUser.email || '';
-            } else {
-                if (authText) authText.textContent = 'Sign In';
-                if (logoutBtn) logoutBtn.classList.add('hidden');
-                if (uName) uName.textContent = 'Guest Collector';
-                if (uEmail) uEmail.textContent = 'Sign in to sync cloud orders';
-                if (avatar) avatar.textContent = 'D';
+            // 3. If the raw DataURL is very large (> 750 KB) and Storage URL is available, use the full-resolution Storage URL
+            if (storageDownloadUrl) {
+                return {
+                    dialPhoto: storageDownloadUrl,
+                    dialPhotoStorageUrl: storageDownloadUrl,
+                    isChunkedInSubcollection: false
+                };
             }
-            refreshHistoryCountBadges();
-        }
 
-        function saveCurrentDesignToHistory() {
-            showToast('Configuration synced to cloud session!');
-        }
+            // 4. Fallback if file > 750 KB and Firebase Storage is not enabled: keep a high-definition 1600px PNG/JPEG (98% quality) for main doc + save raw chunks in subcollection
+            const hdCanvas = document.createElement('canvas');
+            const maxDim = 1600;
+            const scale = Math.min(1, maxDim / Math.max(uploadedPhotoImg.width, uploadedPhotoImg.height));
+            hdCanvas.width = Math.round(uploadedPhotoImg.width * scale);
+            hdCanvas.height = Math.round(uploadedPhotoImg.height * scale);
+            const hctx = hdCanvas.getContext('2d');
+            hctx.imageSmoothingEnabled = true;
+            hctx.imageSmoothingQuality = 'high';
+            hctx.drawImage(uploadedPhotoImg, 0, 0, hdCanvas.width, hdCanvas.height);
+            const highResDataUrl = hdCanvas.toDataURL('image/jpeg', 0.96);
 
-        function refreshHistoryCountBadges() {
-            const userOrders = currentUser ? cloudOrdersList.filter(o => o.customerEmail === currentUser.email) : [];
-            const badge = document.getElementById('historyCountBadge');
-            const to = document.getElementById('tabOrdersCount');
-            if (badge) badge.textContent = String(userOrders.length);
-            if (to) to.textContent = String(userOrders.length);
-        }
-
-        function openAccountModal(tab = 'orders') {
-            refreshHistoryCountBadges();
-            switchAccountTab(tab);
-            document.getElementById('accountModal').classList.remove('hidden');
-        }
-
-        function switchAccountTab(tab) {
-            const hBtn = document.getElementById('accTabHistory');
-            const oBtn = document.getElementById('accTabOrders');
-            const area = document.getElementById('accountContentArea');
-            const userOrders = currentUser ? cloudOrdersList.filter(o => o.customerEmail === currentUser.email) : [];
-
-            if (tab === 'orders') {
-                oBtn.className = 'px-4.5 py-2.5 rounded-xl bg-gold text-black font-bold shadow-md flex items-center justify-center gap-1.5';
-                hBtn.className = 'px-4.5 py-2.5 rounded-xl bg-white/5 text-gray-200 hover:text-gold border border-gold/30 transition flex items-center justify-center gap-1.5';
-                area.innerHTML = userOrders.length === 0
-                    ? `<p class="text-xs text-gray-300 text-center py-10">No cloud bespoke orders found for this account.</p>`
-                    : userOrders.map(o => `
-                        <div class="p-4 rounded-2xl bg-white/5 border border-gold/40 space-y-2 text-xs">
-                            <div class="flex flex-wrap justify-between gap-2">
-                                <span class="font-bold text-lightgold">Order: ${o.orderId}</span>
-                                <span class="font-mono text-emerald-300 font-bold">Track ID: ${o.trackId}</span>
-                            </div>
-                            <p class="text-white font-semibold">${o.caseModel} • ${o.dialColor}</p>
-                            <p class="text-[11px] text-gray-300">${o.strapItem} • ${o.strapLock} • ${o.backCase}</p>
-                            <div class="flex justify-between items-center pt-2 border-t border-white/10 text-[11px]">
-                                <span class="text-gray-300">UTR: ${o.utrNumber} • ${o.formattedDate}</span>
-                                <span class="text-gold font-bold text-sm">₹${Number(o.totalPrice).toLocaleString('en-IN')}</span>
-                            </div>
-                        </div>
-                    `).join('');
-            } else {
-                hBtn.className = 'px-4.5 py-2.5 rounded-xl bg-gold text-black font-bold shadow-md flex items-center justify-center gap-1.5';
-                oBtn.className = 'px-4.5 py-2.5 rounded-xl bg-white/5 text-gray-200 hover:text-gold border border-gold/30 transition flex items-center justify-center gap-1.5';
-                area.innerHTML = `<p class="text-xs text-gray-300 text-center py-10">Configurations are saved directly in your current design session.</p>`;
-            }
+            return {
+                dialPhoto: highResDataUrl,
+                dialPhotoStorageUrl: highResDataUrl,
+                isChunkedInSubcollection: true
+            };
         }
 
         async function placeBespokeOrder(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('placeOrderSubmitBtn');
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving Order to Firebase Cloud...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving Order &amp; Sending Confirmation Email...`;
 
             const orderId = 'DYN-' + Math.floor(100000 + Math.random() * 900000);
             const trackId = 'TRK-DYN-' + Math.floor(10000000 + Math.random() * 90000000);
@@ -2740,6 +2740,9 @@
             const customerEmail = document.getElementById('orderEmail').value.trim();
             const customerAddress = document.getElementById('orderAddress').value.trim();
             const utrNumber = document.getElementById('orderUtr').value.trim();
+
+            // Prepare full-detail customer dial photo for Admin Panel
+            const photoPayload = await prepareUncompressedAdminPhoto(orderId);
 
             const orderEntry = {
                 orderId,
@@ -2758,46 +2761,106 @@
                 backCase: bObj.name,
                 strapItem: sObj.name,
                 strapLock: lObj.name,
-                customName: state.customName || 'None',
+                customName: state.customName && state.customName.trim() !== '' ? state.customName.trim() : 'None',
+                customNameFont: state.customNameFont || 'Cinzel',
+                customNameColor: state.customNameColor || '#FFF0E8',
                 hasCustomPhoto: Boolean(state.customPhotoDataUrl),
-                dialPhoto: state.customPhotoDataUrl || null,
+                dialPhoto: photoPayload.dialPhoto,
+                dialPhotoOriginalUrl: photoPayload.dialPhotoStorageUrl,
+                photoTransform: {
+                    zoom: state.photoZoom,
+                    offsetX: state.photoOffsetX,
+                    offsetY: state.photoOffsetY,
+                    dimmer: state.photoDimmer
+                },
                 totalPrice: state.totalPrice,
                 status: 'Order Confirmed • In Bespoke Crafting Queue (Agra Studio)'
             };
 
-            lastPlacedOrder = orderEntry;
+            lastPlacedOrder = {
+                ...orderEntry,
+                dialPhoto: state.customPhotoDataUrl || photoPayload.dialPhoto
+            };
 
+            // 1. Save Order to Firebase Cloud Firestore (and raw photo chunks if > 750KB without Storage)
             if (window.db && window.FB_Fns) {
                 try {
-                    await window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), orderEntry);
+                    const docRef = await window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), orderEntry);
+
+                    if (photoPayload.isChunkedInSubcollection && state.customPhotoDataUrl) {
+                        const rawStr = state.customPhotoDataUrl;
+                        const chunkSize = 500000;
+                        for (let i = 0, idx = 0; i < rawStr.length; i += chunkSize, idx++) {
+                            await window.FB_Fns.addDoc(
+                                window.FB_Fns.collection(window.db, `bespoke_orders/${docRef.id}/raw_photo_chunks`),
+                                { index: idx, data: rawStr.slice(i, i + chunkSize) }
+                            );
+                        }
+                    }
                 } catch (err) {
                     console.error("Firestore sync error:", err);
                 }
             }
 
+            // 2. Send Autonomous Confirmation Email to Customer via EmailJS
+            const emailStatusEl = document.getElementById('confirmEmailStatusText');
+            const templateParams = {
+                email: customerEmail,
+                customer_name: customerName,
+                order_id: orderId,
+                track_id: trackId,
+                case_model: cObj.name,
+                dial_color: `${dObj.name} (${mObj.name})`,
+                custom_name: orderEntry.customName,
+                has_photo_tick: orderEntry.hasCustomPhoto ? '✓ Provided' : 'Not Provided',
+                back_case: bObj.name,
+                strap_item: sObj.name,
+                strap_lock: lObj.name,
+                total_price: `₹${state.totalPrice.toLocaleString('en-IN')}`,
+                customer_address: customerAddress,
+                utr_number: utrNumber
+            };
+
+            try {
+                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, {
+                    publicKey: EMAILJS_PUBLIC_KEY
+                });
+                if (emailStatusEl) {
+                    emailStatusEl.textContent = `Confirmation email & Tracking ID (${trackId}) automatically sent to ${customerEmail}.`;
+                }
+            } catch (emailErr) {
+                console.error("EmailJS error:", emailErr);
+                if (emailStatusEl) {
+                    emailStatusEl.textContent = `Order saved to Cloud! Please download your E-Bill below (Track ID: ${trackId}).`;
+                }
+            }
+
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `<i class="fa-solid fa-check-double"></i> Submit Payment &amp; Generate E-Bill`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-check-double"></i> Submit Payment &amp; Send Confirmation Email`;
 
             document.getElementById('confirmOrderId').textContent = orderId;
             document.getElementById('confirmTrackId').textContent = trackId;
-            document.getElementById('confirmEmailStatusText').textContent =
-                `Order & Tracking ID (${trackId}) successfully saved to Firebase Cloud for ${customerEmail}.`;
 
             document.getElementById('confirmOrderDetailsBox').innerHTML = `
                 <div class="flex justify-between"><span>Customer:</span><strong class="text-white">${customerName} (${customerPhone})</strong></div>
-                <div class="flex justify-between"><span>Email:</span><strong class="text-lightgold">${customerEmail}</strong></div>
+                <div class="flex justify-between"><span>Customer Email:</span><strong class="text-lightgold">${customerEmail}</strong></div>
                 <div class="flex justify-between"><span>Watch Case:</span><strong class="text-white">${orderEntry.caseModel}</strong></div>
                 <div class="flex justify-between"><span>Watch Dial:</span><strong class="text-white">${orderEntry.dialColor} (${orderEntry.markerStyle})</strong></div>
                 <div class="flex justify-between"><span>Custom Dial Name:</span><strong class="text-white">${orderEntry.customName}</strong></div>
+                <div class="flex justify-between items-center">
+                    <span>Custom Dial Image Print:</span>
+                    <strong class="${orderEntry.hasCustomPhoto ? 'text-emerald-400 flex items-center gap-1' : 'text-gray-400'}">
+                        ${orderEntry.hasCustomPhoto ? '<i class="fa-solid fa-circle-check"></i> ✓ Provided' : 'Not Provided'}
+                    </strong>
+                </div>
                 <div class="flex justify-between"><span>Back Cover &amp; Lock:</span><strong class="text-white">${orderEntry.backCase} • ${orderEntry.strapLock}</strong></div>
                 <div class="flex justify-between"><span>Strap / Bracelet:</span><strong class="text-white">${orderEntry.strapItem}</strong></div>
                 <div class="flex justify-between"><span>UPI UTR Number:</span><strong class="text-gold font-mono">${utrNumber}</strong></div>
                 <div class="flex justify-between border-t border-gold/30 pt-2 text-sm"><span>Total Paid:</span><strong class="text-gold">₹${state.totalPrice.toLocaleString('en-IN')}</strong></div>
-                ${orderEntry.hasCustomPhoto ? '<div class="pt-1 text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i> Custom Dial Photo Included</div>' : ''}
             `;
 
             document.getElementById('orderConfirmedModal').classList.remove('hidden');
-            showToast(`Order ${orderId} Confirmed in Firebase Cloud!`);
+            showToast(`Order ${orderId} Confirmed & Email Sent!`);
         }
 
         function downloadOrderEBill() {
@@ -2865,16 +2928,16 @@
                         <table>
                             <tr>
                                 <th>Bespoke Specification Item</th>
-                                <th style="text-align:right;">Amount</th>
+                                <th style="text-align:right;">Details</th>
                             </tr>
                             <tr><td>Base Horology Movement &amp; Assembly</td><td style="text-align:right;">₹2,999</td></tr>
-                            <tr><td>Case: ${o.caseModel}</td><td style="text-align:right;">Included</td></tr>
-                            <tr><td>Dial: ${o.dialColor} (${o.markerStyle})</td><td style="text-align:right;">Included</td></tr>
-                            <tr><td>Rear Caseback: ${o.backCase}</td><td style="text-align:right;">Included</td></tr>
-                            <tr><td>Strap / Bracelet: ${o.strapItem}</td><td style="text-align:right;">Included</td></tr>
-                            <tr><td>Strap Lock: ${o.strapLock}</td><td style="text-align:right;">Included</td></tr>
-                            <tr><td>Custom Name Print ("${o.customName}")</td><td style="text-align:right;">Included</td></tr>
-                            ${o.hasCustomPhoto ? '<tr><td>Custom Circular Dial Photo Print</td><td style="text-align:right;">Included</td></tr>' : ''}
+                            <tr><td>Watch Case &amp; Bezel</td><td style="text-align:right;">${o.caseModel}</td></tr>
+                            <tr><td>Dial &amp; Hour Markers</td><td style="text-align:right;">${o.dialColor} (${o.markerStyle})</td></tr>
+                            <tr><td>Custom Name Print</td><td style="text-align:right;">${o.customName}</td></tr>
+                            <tr><td>Custom Circular Dial Photo Print</td><td style="text-align:right; font-weight:bold; color:${o.hasCustomPhoto ? '#059669' : '#555'};">${o.hasCustomPhoto ? '✓ Provided' : 'Not Provided'}</td></tr>
+                            <tr><td>Rear Caseback Cover</td><td style="text-align:right;">${o.backCase}</td></tr>
+                            <tr><td>Strap / Bracelet</td><td style="text-align:right;">${o.strapItem}</td></tr>
+                            <tr><td>Engraved Strap Lock</td><td style="text-align:right;">${o.strapLock}</td></tr>
                             <tr class="total-row">
                                 <td>Total Paid (Inclusive of Taxes)</td>
                                 <td style="text-align:right; color:#9A7209; font-size:15px;">₹${Number(o.totalPrice).toLocaleString('en-IN')}</td>
@@ -2889,7 +2952,7 @@
                         ` : ''}
 
                         <div class="footer">
-                            <p style="margin:0;">Thank you for choosing DYNAST Luxurious Horology. For support, contact support@dynast.co.in or WhatsApp +91 75799 42958.</p>
+                            <p style="margin:0;">Thank you for choosing DYNAST Luxurious Horology • Agra, Uttar Pradesh, India.</p>
                         </div>
                     </div>
                 </body>
