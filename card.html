@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DYNAST | Official Digital Business Card</title>
+    <title>DYNAST | Official NFC Digital Concierge & Bespoke Studio</title>
     <link rel="canonical" href="https://dynast.co.in/card.html">
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="description" content="Connect with DYNAST - Custom Luxury Timepieces & Bespoke Watchmaking in Agra, Uttar Pradesh.">
+    <meta name="description" content="Connect with DYNAST - Custom Luxury Timepieces & Bespoke Watchmaking Studio in Agra, Uttar Pradesh.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,20 +14,26 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        gold: '#FFD700',
-                        lightgold: '#FFE87C',
-                        darkgold: '#C5A059',
-                        black: '#030303',
-                        cardbg: '#0F0F0F'
+                        gold: '#E5C158',
+                        lightgold: '#FFF3B0',
+                        darkgold: '#8C6214',
+                        black: '#070709',
+                        cardbg: '#121217'
                     },
                     fontFamily: {
                         'sans': ['Inter', 'sans-serif'],
                         'serif': ['Cinzel', 'serif'],
+                        'italicserif': ['Cormorant Garamond', 'serif'],
                         'decorative': ['Cinzel Decorative', 'cursive']
                     }
                 }
@@ -36,23 +42,49 @@
     </script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at top, #2b210e 0%, #050505 60%, #020202 100%);
+            background:
+                radial-gradient(circle at 20% 15%, rgba(229, 193, 88, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 80% 85%, rgba(140, 98, 20, 0.16) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, #261c0a 0%, #070709 65%, #030304 100%);
             background-attachment: fixed;
             color: #ffffff;
             margin: 0;
             overflow-x: hidden;
         }
 
+        @keyframes slowGearRotate {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes goldShimmer {
+            0%   { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .gear-spin {
+            animation: slowGearRotate 110s linear infinite;
+            transform-origin: center center;
+        }
+
+        .cinzel-decorative-logo {
+            font-family: 'Cinzel Decorative', cursive;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            background: linear-gradient(90deg, #FFF3B0 0%, #E5C158 35%, #FFFFFF 50%, #E5C158 65%, #FFF3B0 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: goldShimmer 7s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(229, 193, 88, 0.35));
+        }
+
         .cinzel-decorative {
             font-family: 'Cinzel Decorative', cursive;
             font-weight: 700;
-            letter-spacing: 0.18em;
-            color: #FFE87C;
-            text-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+            letter-spacing: 0.16em;
         }
 
         .serif-text {
@@ -60,229 +92,572 @@
         }
 
         .gold-border-card {
-            background: linear-gradient(145deg, rgba(22, 22, 22, 0.95), rgba(5, 5, 5, 0.98));
-            border: 1px solid rgba(255, 215, 0, 0.45);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 215, 0, 0.15);
+            background: linear-gradient(155deg, rgba(24, 24, 32, 0.96), rgba(8, 8, 12, 0.99));
+            border: 1px solid rgba(229, 193, 88, 0.45);
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(229, 193, 88, 0.14);
         }
 
         .btn-gold {
-            background: linear-gradient(135deg, #FFD700 0%, #C5A059 100%);
-            color: #030303;
+            background: linear-gradient(135deg, #FFF3B0 0%, #E5C158 50%, #8C6214 100%);
+            color: #070709;
             font-weight: 700;
-            transition: all 0.3s ease;
+            transition: all 0.28s ease;
         }
 
         .btn-gold:hover {
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 28px rgba(229, 193, 88, 0.75);
+            transform: translateY(-2px);
+        }
+
+        .bespoke-spotlight {
+            background: linear-gradient(135deg, rgba(229, 193, 88, 0.22) 0%, rgba(28, 22, 10, 0.92) 55%, rgba(12, 12, 16, 0.98) 100%);
+            border: 1.5px solid rgba(255, 243, 176, 0.65);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75), inset 0 0 24px rgba(229, 193, 88, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .bespoke-spotlight:hover {
+            border-color: #FFF3B0;
+            box-shadow: 0 0 32px rgba(229, 193, 88, 0.45);
             transform: translateY(-2px);
         }
 
         .contact-row {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.28);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(229, 193, 88, 0.25);
+            transition: all 0.25s ease;
         }
 
         .contact-row:hover, .contact-row:active {
-            background: rgba(255, 215, 0, 0.12);
-            border-color: #FFD700;
+            background: rgba(229, 193, 88, 0.11);
+            border-color: rgba(229, 193, 88, 0.8);
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(229, 193, 88, 0.18);
+        }
+
+        .tab-btn {
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #FFF3B0 0%, #E5C158 55%, #8C6214 100%);
+            color: #070709;
+            font-weight: 700;
+            box-shadow: 0 0 18px rgba(229, 193, 88, 0.45);
+        }
+
+        .step-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(229, 193, 88, 0.28);
+            transition: all 0.22s ease;
+            cursor: pointer;
+        }
+
+        .step-pill.active, .step-pill:hover {
+            background: rgba(229, 193, 88, 0.2);
+            border-color: #FFF3B0;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 py-8 antialiased selection:bg-gold selection:text-black">
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-6 py-8 antialiased selection:bg-gold selection:text-black">
 
-    <!-- Main E-Business Card Container -->
+    <!-- Luxury Toast Notification -->
+    <div id="cardToast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-black/95 border-2 border-gold text-lightgold px-5 py-3 rounded-2xl shadow-2xl text-xs font-semibold flex items-center gap-2.5 whitespace-nowrap">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+        <span id="cardToastText">Copied to clipboard</span>
+    </div>
+
+    <!-- Main NFC Digital Business Card Container -->
     <main class="w-full max-w-md gold-border-card rounded-3xl overflow-hidden relative">
-        
-        <!-- Top Gold Accent Banner -->
-        <div class="h-28 bg-gradient-to-r from-black via-[#3a2c0d] to-black relative flex items-center justify-center border-b border-gold/30">
-            <div class="absolute inset-0 opacity-25 bg-[radial-gradient(#FFD700_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            <span class="text-[11px] uppercase tracking-[0.35em] text-lightgold border border-gold/40 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-black/40 shadow-md">
-                <i class="fa-solid fa-crown mr-1.5 text-gold"></i> Official NFC Concierge
-            </span>
-        </div>
 
-        <!-- Brand Emblem & Header -->
-        <div class="px-6 pb-8 -mt-12 text-center relative z-10">
-            <div class="w-24 h-24 mx-auto rounded-full bg-black border-2 border-gold flex items-center justify-center shadow-[0_0_30px_rgba(255,215,0,0.4)] mb-4">
-                <span class="cinzel-decorative text-4xl">D</span>
+        <!-- HERO HEADER WITH "DYNAST" CINZEL DECORATIVE WORDMARK LOGO -->
+        <div class="relative pt-7 pb-7 px-6 text-center bg-gradient-to-b from-[#2b200c]/90 via-[#12100b]/95 to-transparent border-b border-gold/30 overflow-hidden">
+            <!-- Rotating Mechanical Horology Gear Watermark -->
+            <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-15">
+                <svg class="gear-spin w-72 h-72 text-gold" viewBox="0 0 200 200" fill="none">
+                    <circle cx="100" cy="100" r="86" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 4"/>
+                    <circle cx="100" cy="100" r="68" stroke="currentColor" stroke-width="4" stroke-dasharray="10 7"/>
+                    <circle cx="100" cy="100" r="46" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="100" cy="100" r="22" stroke="currentColor" stroke-width="5" stroke-dasharray="7 5"/>
+                    <line x1="100" y1="14" x2="100" y2="186" stroke="currentColor" stroke-width="1.2"/>
+                    <line x1="14" y1="100" x2="186" y2="100" stroke="currentColor" stroke-width="1.2"/>
+                </svg>
             </div>
 
-            <h1 class="cinzel-decorative text-3xl sm:text-4xl tracking-widest mb-1">DYNAST</h1>
-            <p class="serif-text text-xs uppercase tracking-[0.25em] text-lightgold mb-4 font-semibold">Custom Timepieces & Horology</p>
-            
-            <p class="text-xs text-gray-200 leading-relaxed max-w-xs mx-auto font-light">
-                Crafting bespoke, custom-engineered luxury watches tailored to your personal legacy. Designed with timeless royal elegance and precision craftsmanship.
+            <!-- Top Status Pill -->
+            <div class="relative z-10 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-lightgold border border-gold/40 px-3.5 py-1 rounded-full backdrop-blur-md bg-black/60 shadow-md mb-5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Official NFC Royal Concierge</span>
+            </div>
+
+            <!-- OFFICIAL "DYNAST" CINZEL DECORATIVE WORDMARK LOGO -->
+            <div class="relative z-10 py-3 px-4 mx-auto rounded-2xl bg-black/65 border border-gold/45 shadow-[0_0_35px_rgba(229,193,88,0.2)]">
+                <div class="flex items-center justify-center gap-2 text-gold/70 text-[10px] tracking-[0.4em] uppercase mb-1">
+                    <span class="w-8 h-[1px] bg-gradient-to-r from-transparent to-gold"></span>
+                    <i class="fa-solid fa-crown text-gold text-xs"></i>
+                    <span class="w-8 h-[1px] bg-gradient-to-l from-transparent to-gold"></span>
+                </div>
+
+                <a href="https://dynast.co.in" class="cinzel-decorative-logo text-3xl sm:text-4xl block leading-tight select-none">
+                    DYNAST
+                </a>
+
+                <p class="serif-text text-[10px] uppercase tracking-[0.32em] text-lightgold/90 mt-1.5 font-semibold">
+                    Premium Timepieces &amp; Horology
+                </p>
+            </div>
+
+            <!-- Brand Tagline -->
+            <p class="relative z-10 text-xs text-gray-200 leading-relaxed max-w-xs mx-auto font-light mt-4">
+                Custom-engineered luxury timepieces personalized to your exact specifications and handcrafted in Agra, Uttar Pradesh.
             </p>
 
-            <!-- Primary Action Buttons -->
-            <div class="grid grid-cols-2 gap-3 mt-6">
-                <button onclick="saveContact()" class="btn-gold py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
+            <!-- Primary Quick Actions: Save Contact + Share Card -->
+            <div class="relative z-10 grid grid-cols-2 gap-3 mt-5">
+                <button type="button" onclick="saveContact()" class="btn-gold py-3 px-4 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
                     <i class="fa-solid fa-user-plus"></i> Save Contact
                 </button>
-                <a href="https://dynast.co.in" target="_blank" class="border border-gold/60 bg-gold/15 text-lightgold hover:bg-gold/25 py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition shadow-md">
-                    <i class="fa-solid fa-globe"></i> Visit Store
-                </a>
+                <button type="button" onclick="shareCard()" class="border border-gold/60 bg-white/5 hover:bg-gold/20 text-lightgold py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition shadow-md">
+                    <i class="fa-solid fa-share-nodes text-gold"></i> Share Card
+                </button>
+            </div>
+        </div>
+
+        <!-- INTERACTIVE NAVIGATION TABS -->
+        <div class="px-6 pt-5">
+            <div class="grid grid-cols-3 gap-1.5 bg-black/80 p-1.5 rounded-2xl border border-gold/30 text-[11px] uppercase tracking-wider">
+                <button type="button" onclick="switchCardTab('concierge')" id="tabBtn-concierge" class="tab-btn active py-2.5 rounded-xl flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-compass"></i> <span>Concierge</span>
+                </button>
+                <button type="button" onclick="switchCardTab('bespoke')" id="tabBtn-bespoke" class="tab-btn text-gray-300 hover:text-lightgold py-2.5 rounded-xl flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-gold"></i> <span>Bespoke</span>
+                </button>
+                <button type="button" onclick="switchCardTab('qr')" id="tabBtn-qr" class="tab-btn text-gray-300 hover:text-lightgold py-2.5 rounded-xl flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-qrcode text-gold"></i> <span>QR Pass</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT AREA -->
+        <div class="p-6 space-y-6">
+
+            <!-- ========================================================= -->
+            <!-- TAB 1: CONCIERGE & FLAGSHIP EXPERIENCES (DEFAULT ACTIVE) -->
+            <!-- ========================================================= -->
+            <div id="tabPanel-concierge" class="space-y-5">
+
+                <!-- SECTION A: FLAGSHIP EXPERIENCES (BESPOKE STUDIO + MAIN STORE) -->
+                <div class="space-y-2.5">
+                    <div class="flex items-center justify-between px-1">
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">
+                            <i class="fa-solid fa-sparkles mr-1"></i> Flagship Experiences
+                        </span>
+                        <span class="text-[10px] text-emerald-400 font-semibold">Live Online</span>
+                    </div>
+
+                    <!-- 1. FEATURED BESPOKE STUDIO PORTAL (dynast.co.in/bespoke) -->
+                    <a href="https://dynast.co.in/bespoke" target="_blank" class="bespoke-spotlight block p-4 rounded-2xl relative overflow-hidden group">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-gold/25 border border-lightgold/60 flex items-center justify-center text-lightgold text-xl shrink-0 group-hover:scale-105 transition shadow-md">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div class="flex-1 text-left">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[9px] uppercase tracking-widest bg-gold text-black font-extrabold px-2 py-0.5 rounded-full">3D Customizer</span>
+                                    <span class="text-[10px] text-lightgold font-mono">dynast.co.in/bespoke</span>
+                                </div>
+                                <h2 class="serif-text text-sm font-bold text-white mt-1">Craft Your Bespoke Timepiece</h2>
+                                <p class="text-[11px] text-gray-300 leading-snug mt-0.5">
+                                    Customize Case, Dial, Strap, Custom Name &amp; Photo in 6 interactive steps.
+                                </p>
+                            </div>
+                            <div class="w-8 h-8 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center text-lightgold group-hover:bg-gold group-hover:text-black transition shrink-0">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 2. OFFICIAL MAIN WATCH COLLECTION STORE (dynast.co.in) -->
+                    <a href="https://dynast.co.in" target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
+                        <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition shrink-0">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <div class="ml-3.5 flex-1 text-left">
+                            <p class="text-[10px] uppercase tracking-widest text-gold font-semibold">Official Main Store</p>
+                            <p class="text-sm font-semibold text-white">Explore Ready Timepieces</p>
+                            <p class="text-[11px] text-gray-400 font-mono">www.dynast.co.in</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gold group-hover:translate-x-0.5 transition"></i>
+                    </a>
+                </div>
+
+                <!-- SECTION B: DIRECT ROYAL CONCIERGE CHANNELS -->
+                <div class="space-y-2.5 pt-1">
+                    <div class="flex items-center justify-between px-1">
+                        <span class="text-[10px] uppercase tracking-[0.25em] text-gold font-bold">
+                            <i class="fa-solid fa-headset mr-1"></i> Direct Concierge Channels
+                        </span>
+                        <span class="text-[10px] text-gray-400">Tap to Connect</span>
+                    </div>
+
+                    <!-- 1. WhatsApp Concierge -->
+                    <a href="https://wa.me/917579942958?text=Hello%20DYNAST,%20I%20tapped%20your%20official%20NFC%20card%20and%20would%20like%20to%20inquire%20about%20a%20timepiece." target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xl group-hover:bg-emerald-500 group-hover:text-black transition shrink-0">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div class="ml-3.5 flex-1 text-left">
+                            <p class="text-[10px] uppercase tracking-widest text-emerald-400 font-semibold">WhatsApp Concierge</p>
+                            <p class="text-sm font-semibold text-white">Instant Custom Order Chat</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-gold group-hover:translate-x-1 transition"></i>
+                    </a>
+
+                    <!-- 2. Direct Phone Call + Copy Button -->
+                    <div class="contact-row flex items-center p-3.5 rounded-2xl group">
+                        <a href="tel:+917579942958" class="flex items-center flex-1">
+                            <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="ml-3.5 flex-1 text-left">
+                                <p class="text-[10px] uppercase tracking-widest text-gold/80 font-semibold">Call Studio Directly</p>
+                                <p class="text-sm font-semibold text-white">+91 75799 42958</p>
+                            </div>
+                        </a>
+                        <button type="button" onclick="copyTextValue('+917579942958', 'Phone number copied!')" title="Copy Phone Number" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-gold/25 border border-gold/30 text-lightgold flex items-center justify-center text-xs transition ml-2">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <!-- 3. Instagram Official -->
+                    <a href="https://www.instagram.com/dynast_luxury/" target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
+                        <div class="w-11 h-11 rounded-xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-pink-400 text-xl group-hover:bg-gradient-to-tr group-hover:from-yellow-500 group-hover:via-pink-500 group-hover:to-purple-600 group-hover:text-white transition shrink-0">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div class="ml-3.5 flex-1 text-left">
+                            <p class="text-[10px] uppercase tracking-widest text-pink-400 font-semibold">Instagram Official</p>
+                            <p class="text-sm font-semibold text-white">@dynast_luxury</p>
+                        </div>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gold group-hover:translate-x-0.5 transition"></i>
+                    </a>
+
+                    <!-- 4. Official Email + Copy Button -->
+                    <div class="contact-row flex items-center p-3.5 rounded-2xl group">
+                        <a href="mailto:dynast.co.in@gmail.com?subject=Custom%20Watch%20Inquiry%20-%20DYNAST" class="flex items-center flex-1 overflow-hidden">
+                            <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="ml-3.5 flex-1 text-left overflow-hidden">
+                                <p class="text-[10px] uppercase tracking-widest text-gold/80 font-semibold">Official Email</p>
+                                <p class="text-sm font-semibold text-white truncate">dynast.co.in@gmail.com</p>
+                            </div>
+                        </a>
+                        <button type="button" onclick="copyTextValue('dynast.co.in@gmail.com', 'Email address copied!')" title="Copy Email" class="w-9 h-9 rounded-xl bg-white/5 hover:bg-gold/25 border border-gold/30 text-lightgold flex items-center justify-center text-xs transition ml-2 shrink-0">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <!-- 5. Studio Location -->
+                    <a href="https://maps.google.com/?q=Agra,+Uttar+Pradesh,+India" target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
+                        <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div class="ml-3.5 flex-1 text-left">
+                            <p class="text-[10px] uppercase tracking-widest text-gold/80 font-semibold">Horology Studio Location</p>
+                            <p class="text-sm font-semibold text-white">Agra, Uttar Pradesh, India</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-xs text-gold group-hover:translate-x-1 transition"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- TAB 2: INTERACTIVE 6-STEP BESPOKE STUDIO PREVIEW          -->
+            <!-- ========================================================= -->
+            <div id="tabPanel-bespoke" class="hidden space-y-5 text-left">
+                <div class="p-4 rounded-2xl bg-black/80 border border-gold/40 space-y-2">
+                    <span class="text-[10px] uppercase tracking-widest text-gold font-bold block">
+                        <i class="fa-solid fa-crown mr-1"></i> How DYNAST Bespoke Works
+                    </span>
+                    <h3 class="serif-text text-sm font-bold text-white">6-Step Custom Watch Architecture</h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Tap any step below to preview how we engineer your personalized timepiece at <strong class="text-lightgold">dynast.co.in/bespoke</strong>:
+                    </p>
+                </div>
+
+                <!-- Interactive Step Selector Pills -->
+                <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
+                    <div onclick="previewBespokeStep(1)" id="bStepBtn-1" class="step-pill active p-2.5 rounded-xl">
+                        <span class="text-gold font-bold block">Step 01</span>
+                        <span class="text-white text-[10px]">Case &amp; Bezel</span>
+                    </div>
+                    <div onclick="previewBespokeStep(2)" id="bStepBtn-2" class="step-pill p-2.5 rounded-xl">
+                        <span class="text-gold font-bold block">Step 02</span>
+                        <span class="text-white text-[10px]">Dial &amp; Indices</span>
+                    </div>
+                    <div onclick="previewBespokeStep(3)" id="bStepBtn-3" class="step-pill p-2.5 rounded-xl">
+                        <span class="text-gold font-bold block">Step 03</span>
+                        <span class="text-white text-[10px]">Back Cover</span>
+                    </div>
+                    <div onclick="previewBespokeStep(4)" id="bStepBtn-4" class="step-pill p-2.5 rounded-xl">
+                        <span class="text-gold font-bold block">Step 04</span>
+                        <span class="text-white text-[10px]">32+ Straps</span>
+                    </div>
+                    <div onclick="previewBespokeStep(5)" id="bStepBtn-5" class="step-pill p-2.5 rounded-xl">
+                        <span class="text-gold font-bold block">Step 05</span>
+                        <span class="text-white text-[10px]">Engraved Lock</span>
+                    </div>
+                    <div onclick="previewBespokeStep(6)" id="bStepBtn-6" class="step-pill p-2.5 rounded-xl">
+                        <span class="text-gold font-bold block">Step 06</span>
+                        <span class="text-white text-[10px]">Name &amp; Photo</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Step Detail Card -->
+                <div id="bespokeStepDetailBox" class="p-5 rounded-2xl bg-gradient-to-br from-[#231b0c] to-black border border-gold/50 space-y-2 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <span id="bStepBadge" class="text-[10px] uppercase tracking-widest text-black bg-gold font-extrabold px-2.5 py-0.5 rounded-full">Step 01 of 06</span>
+                        <span id="bStepPrice" class="text-xs font-bold text-lightgold">+₹1,200 to ₹1,950</span>
+                    </div>
+                    <h4 id="bStepTitle" class="serif-text text-sm font-bold text-white pt-1">Watch Case &amp; Bezel Architecture</h4>
+                    <p id="bStepDesc" class="text-xs text-gray-200 leading-relaxed">
+                        Choose from 10 genuine 316L/904L steel &amp; two-tone chassis: 120-Facet Fluted Bezels, Smooth Mirror Dress Cases, Tachymetre Chronographs, or Ceramic Sub-Divers.
+                    </p>
+                </div>
+
+                <!-- Direct Launch Buttons -->
+                <div class="space-y-2.5 pt-1">
+                    <a href="https://dynast.co.in/bespoke" target="_blank" class="btn-gold w-full py-3.5 px-5 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Open 3D Bespoke Studio Now
+                    </a>
+                    <a href="https://dynast.co.in" target="_blank" class="border border-gold/50 bg-white/5 hover:bg-gold/15 text-lightgold w-full py-3 px-5 rounded-xl text-xs uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition">
+                        <i class="fa-solid fa-globe text-gold"></i> Visit Main Collection (dynast.co.in)
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- TAB 3: LIVE QR PASS SWITCHER (BESPOKE / CARD / STORE)     -->
+            <!-- ========================================================= -->
+            <div id="tabPanel-qr" class="hidden space-y-5 text-center">
+                <div class="space-y-1">
+                    <span class="text-[10px] uppercase tracking-widest text-gold font-bold block">Instant In-Person Scan</span>
+                    <h3 id="qrModeTitle" class="serif-text text-sm font-bold text-white">DYNAST Bespoke Studio QR</h3>
+                    <p id="qrModeSub" class="text-xs text-gray-300">Scan to open <span class="text-lightgold font-mono">dynast.co.in/bespoke</span></p>
+                </div>
+
+                <!-- QR Code Frame -->
+                <div class="bg-white p-4 rounded-3xl w-52 h-52 mx-auto flex items-center justify-center border-4 border-gold shadow-[0_0_35px_rgba(229,193,88,0.3)]">
+                    <img id="dynamicQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https%3A%2F%2Fdynast.co.in%2Fbespoke" alt="DYNAST QR Code" class="w-full h-full object-contain">
+                </div>
+
+                <!-- Switch QR Destination Buttons -->
+                <div class="grid grid-cols-3 gap-2 text-[10px] uppercase tracking-wider">
+                    <button type="button" onclick="setQrDestination('bespoke')" id="qrBtn-bespoke" class="step-pill active py-2.5 px-2 rounded-xl font-bold text-lightgold">
+                        Bespoke Studio
+                    </button>
+                    <button type="button" onclick="setQrDestination('card')" id="qrBtn-card" class="step-pill py-2.5 px-2 rounded-xl font-semibold text-gray-300">
+                        Digital Card
+                    </button>
+                    <button type="button" onclick="setQrDestination('store')" id="qrBtn-store" class="step-pill py-2.5 px-2 rounded-xl font-semibold text-gray-300">
+                        Main Store
+                    </button>
+                </div>
+
+                <div class="flex gap-2.5 pt-1">
+                    <button type="button" onclick="copyTextValue('https://dynast.co.in/bespoke', 'Bespoke Studio link copied!')" class="flex-1 py-3 rounded-xl bg-white/5 hover:bg-gold/20 border border-gold/40 text-xs text-lightgold font-semibold flex items-center justify-center gap-2 transition">
+                        <i class="fa-regular fa-copy text-gold"></i> Copy Bespoke Link
+                    </button>
+                    <button type="button" onclick="copyTextValue('https://dynast.co.in/card', 'Digital Card link copied!')" class="flex-1 py-3 rounded-xl bg-white/5 hover:bg-gold/20 border border-gold/40 text-xs text-lightgold font-semibold flex items-center justify-center gap-2 transition">
+                        <i class="fa-solid fa-link text-gold"></i> Copy Card Link
+                    </button>
+                </div>
             </div>
 
             <!-- Highlights Pills -->
-            <div class="flex flex-wrap justify-center gap-2 mt-5">
-                <span class="text-[10px] bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-full text-lightgold font-medium">⌚ Custom Name Dials</span>
-                <span class="text-[10px] bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-full text-lightgold font-medium">✨ Bespoke Finishes</span>
+            <div class="flex flex-wrap justify-center gap-2 pt-2 border-t border-gold/20">
+                <span class="text-[10px] bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-full text-lightgold font-medium">⌚ Custom Name &amp; Photo Dials</span>
+                <span class="text-[10px] bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-full text-lightgold font-medium">✨ 3D Live Render</span>
                 <span class="text-[10px] bg-gold/10 border border-gold/30 px-2.5 py-1 rounded-full text-lightgold font-medium">📦 Pan-India Delivery</span>
             </div>
 
-            <div class="my-6 border-t border-gold/25"></div>
-
-            <!-- Interactive Contact Links -->
-            <div class="space-y-3 text-left">
-                
-                <!-- 1. Phone Number -->
-                <a href="tel:+917579942958" class="contact-row flex items-center p-3.5 rounded-2xl group">
-                    <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition">
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                    <div class="ml-4 flex-1">
-                        <p class="text-[10px] uppercase tracking-widest text-gold/80 font-semibold">Call Us Directly</p>
-                        <p class="text-sm font-semibold text-white">+91 75799 42958</p>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-gold group-hover:translate-x-1 transition"></i>
-                </a>
-
-                <!-- 2. WhatsApp Direct Chat -->
-                <a href="https://wa.me/917579942958?text=Hello%20DYNAST,%20I%20would%20like%20to%20inquire%20about%20a%20custom%20timepiece." target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
-                    <div class="w-11 h-11 rounded-xl bg-green-500/20 border border-green-500/40 flex items-center justify-center text-green-400 text-xl group-hover:bg-green-500 group-hover:text-black transition">
-                        <i class="fa-brands fa-whatsapp"></i>
-                    </div>
-                    <div class="ml-4 flex-1">
-                        <p class="text-[10px] uppercase tracking-widest text-green-400 font-semibold">WhatsApp Concierge</p>
-                        <p class="text-sm font-semibold text-white">Chat for Custom Orders</p>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-gold group-hover:translate-x-1 transition"></i>
-                </a>
-
-                <!-- 3. Instagram Profile -->
-                <a href="https://www.instagram.com/dynast_luxury/" target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
-                    <div class="w-11 h-11 rounded-xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center text-pink-400 text-xl group-hover:bg-gradient-to-tr group-hover:from-yellow-500 group-hover:via-pink-500 group-hover:to-purple-600 group-hover:text-white transition">
-                        <i class="fa-brands fa-instagram"></i>
-                    </div>
-                    <div class="ml-4 flex-1">
-                        <p class="text-[10px] uppercase tracking-widest text-pink-400 font-semibold">Instagram Official</p>
-                        <p class="text-sm font-semibold text-white">@dynast_luxury</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gold group-hover:translate-x-1 transition"></i>
-                </a>
-
-                <!-- 4. Email Address (Updated to dynast.co.in@gmail.com) -->
-                <a href="mailto:dynast.co.in@gmail.com?subject=Custom%20Watch%20Inquiry%20-%20DYNAST" class="contact-row flex items-center p-3.5 rounded-2xl group">
-                    <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition">
-                        <i class="fa-solid fa-envelope"></i>
-                    </div>
-                    <div class="ml-4 flex-1 overflow-hidden">
-                        <p class="text-[10px] uppercase tracking-widest text-gold/80 font-semibold">Official Email</p>
-                        <p class="text-sm font-semibold text-white truncate">dynast.co.in@gmail.com</p>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-gold group-hover:translate-x-1 transition"></i>
-                </a>
-
-                <!-- 5. Official Store -->
-                <a href="https://dynast.co.in" target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
-                    <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition">
-                        <i class="fa-solid fa-shop"></i>
-                    </div>
-                    <div class="ml-4 flex-1">
-                        <p class="text-[10px] uppercase tracking-widest text-gold/80 font-semibold">Official Store</p>
-                        <p class="text-sm font-semibold text-white">www.dynast.co.in</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gold group-hover:translate-x-1 transition"></i>
-                </a>
-
-                <!-- 6. Studio Location -->
-                <a href="https://maps.google.com/?q=Agra,+Uttar+Pradesh,+India" target="_blank" class="contact-row flex items-center p-3.5 rounded-2xl group">
-                    <div class="w-11 h-11 rounded-xl bg-gold/20 border border-gold/40 flex items-center justify-center text-lightgold text-lg group-hover:bg-gold group-hover:text-black transition">
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
-                    <div class="ml-4 flex-1">
-                        <p class="text-[10px] uppercase tracking-widest text-gold/80 font-semibold">Studio Location</p>
-                        <p class="text-sm font-semibold text-white">Agra, Uttar Pradesh, India</p>
-                    </div>
-                    <i class="fa-solid fa-chevron-right text-xs text-gold group-hover:translate-x-1 transition"></i>
-                </a>
-
-            </div>
-
-            <!-- Share Card Button -->
-            <button onclick="shareCard()" class="mt-6 w-full py-3.5 rounded-xl border border-gold/40 bg-gold/10 hover:bg-gold/20 text-xs uppercase tracking-widest text-lightgold font-bold flex items-center justify-center gap-2 transition shadow-md">
-                <i class="fa-solid fa-share-nodes text-gold"></i> Share Digital Card
-            </button>
-
             <!-- Store Policies Links -->
-            <div class="mt-6 pt-4 border-t border-gold/20 flex flex-wrap justify-center gap-3 text-[11px]">
-                <button onclick="openModal('privacyModal')" class="text-gold/80 hover:text-lightgold underline">Privacy Policy</button>
+            <div class="pt-3 border-t border-gold/20 flex flex-wrap justify-center gap-3 text-[11px]">
+                <button type="button" onclick="openModal('privacyModal')" class="text-gold/80 hover:text-lightgold underline">Privacy Policy</button>
                 <span class="text-gold/40">•</span>
-                <button onclick="openModal('termsModal')" class="text-gold/80 hover:text-lightgold underline">Terms & Conditions</button>
+                <button type="button" onclick="openModal('termsModal')" class="text-gold/80 hover:text-lightgold underline">Terms &amp; Conditions</button>
                 <span class="text-gold/40">•</span>
-                <button onclick="openModal('shippingModal')" class="text-gold/80 hover:text-lightgold underline">Shipping Policy</button>
+                <button type="button" onclick="openModal('shippingModal')" class="text-gold/80 hover:text-lightgold underline">Shipping Policy</button>
                 <span class="text-gold/40">•</span>
-                <button onclick="openModal('refundModal')" class="text-gold/80 hover:text-lightgold underline">Refund Policy</button>
+                <button type="button" onclick="openModal('refundModal')" class="text-gold/80 hover:text-lightgold underline">Warranty &amp; Refund</button>
             </div>
 
             <!-- Footer -->
-            <p class="mt-5 text-[10px] uppercase tracking-[0.2em] text-gray-400">
-                © 2026 DYNAST Timepieces. All Rights Reserved.
+            <p class="text-center text-[10px] uppercase tracking-[0.22em] text-gray-400 pt-1">
+                © 2026 <span class="cinzel-decorative text-gold">DYNAST</span> Timepieces. All Rights Reserved.
             </p>
         </div>
     </main>
 
     <!-- POLICY MODALS -->
     <!-- Privacy Modal -->
-    <div id="privacyModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-[#121212] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto">
+    <div id="privacyModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#121217] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto shadow-2xl">
             <h3 class="cinzel-decorative text-lg text-gold mb-3">Privacy Policy</h3>
-            <p class="text-xs text-gray-300 leading-relaxed space-y-2 mb-4">
-                At DYNAST, accessible from dynast.co.in, we respect your privacy. This Privacy Policy outlines how we collect, use, and protect your personal information when you interact with our luxury watch store and digital business card. We collect contact information solely for order fulfillment, custom watch consultations, and customer service inquiries. We never sell or share your data with third parties.
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                At DYNAST, accessible from dynast.co.in and dynast.co.in/bespoke, we respect your privacy. This Privacy Policy outlines how we collect, use, and protect your personal information when you interact with our luxury watch store, bespoke customizer, and digital business card. We collect contact information and custom dial uploads solely for bespoke order fulfillment, tracking updates, and customer service inquiries. We never sell or share your data with third parties.
             </p>
-            <button onclick="closeModal('privacyModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
+            <button type="button" onclick="closeModal('privacyModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
         </div>
     </div>
 
     <!-- Terms Modal -->
-    <div id="termsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-[#121212] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto">
-            <h3 class="cinzel-decorative text-lg text-gold mb-3">Terms & Conditions</h3>
-            <p class="text-xs text-gray-300 leading-relaxed space-y-2 mb-4">
-                Welcome to DYNAST. By accessing our website or using our NFC business cards, you agree to comply with and be bound by these terms. All content, logos, custom watch designs, and typography (Cinzel Decorative) are the exclusive intellectual property of DYNAST. Custom timepieces are handcrafted to order, and specifications must be confirmed prior to production.
+    <div id="termsModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#121217] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto shadow-2xl">
+            <h3 class="cinzel-decorative text-lg text-gold mb-3">Terms &amp; Conditions</h3>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                Welcome to DYNAST. By accessing our website, 3D Bespoke Studio, or NFC business cards, you agree to comply with and be bound by these terms. All content, custom watch designs, and the DYNAST wordmark in Cinzel Decorative typography are the exclusive intellectual property of DYNAST. Every bespoke timepiece is hand-assembled to order in Agra, and specifications are confirmed upon checkout.
             </p>
-            <button onclick="closeModal('termsModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
+            <button type="button" onclick="closeModal('termsModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
         </div>
     </div>
 
     <!-- Shipping Modal -->
-    <div id="shippingModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-[#121212] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto">
-            <h3 class="cinzel-decorative text-lg text-gold mb-3">Shipping & Delivery Policy</h3>
-            <p class="text-xs text-gray-300 leading-relaxed space-y-2 mb-4">
-                DYNAST offers secure pan-India shipping on all luxury and custom timepieces. Because our watches undergo meticulous personalization, quality control, and precision testing, orders are dispatched within standard processing windows. All shipments are insured and tracked via premier logistics partners to ensure safe delivery to your doorstep.
+    <div id="shippingModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#121217] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto shadow-2xl">
+            <h3 class="cinzel-decorative text-lg text-gold mb-3">Shipping &amp; Delivery Policy</h3>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                DYNAST offers secure pan-India shipping on all luxury and bespoke timepieces. Custom-printed dials and bespoke builds require 4 to 7 business days for printing, sealing, and regulation in Agra prior to dispatch. All shipments include a live Tracking ID dispatched automatically to your email.
             </p>
-            <button onclick="closeModal('shippingModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
+            <button type="button" onclick="closeModal('shippingModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
         </div>
     </div>
 
-    <!-- Refund Modal -->
-    <div id="refundModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-[#121212] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto">
-            <h3 class="cinzel-decorative text-lg text-gold mb-3">Refund & Cancellation Policy</h3>
-            <p class="text-xs text-gray-300 leading-relaxed space-y-2 mb-4">
-                Due to the bespoke and custom-engineered nature of DYNAST timepieces featuring personalized dials or engravings, cancellations are only accepted within 24 hours of order placement. Returns or exchanges are accepted strictly in the rare event of transit damage or manufacturing defects reported within 48 hours of delivery with unboxing proof.
+    <!-- Refund & Warranty Modal -->
+    <div id="refundModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-[#121217] border border-gold/50 rounded-2xl max-w-md w-full p-6 text-left relative max-h-[80vh] overflow-y-auto shadow-2xl">
+            <h3 class="cinzel-decorative text-lg text-gold mb-3">Warranty &amp; Refund Policy</h3>
+            <p class="text-xs text-gray-300 leading-relaxed mb-4">
+                Because bespoke timepieces with custom names or custom photographs are permanently crafted exclusively for you, all custom orders are final sale once production begins. Strictly no warranty, free repair, or replacement is provided on water damage, moisture ingress, or physical/accidental damage. For any courier transit claim, a continuous, unedited 360° parcel unboxing video within 24 hours of delivery is mandatory.
             </p>
-            <button onclick="closeModal('refundModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
+            <button type="button" onclick="closeModal('refundModal')" class="btn-gold w-full py-2.5 rounded-xl text-xs uppercase">Close</button>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Interactive Scripts -->
     <script>
+        const BESPOKE_STEPS_DATA = {
+            1: {
+                badge: 'Step 01 of 06',
+                price: '+₹1,200 to ₹1,950',
+                title: 'Watch Case & Bezel Architecture',
+                desc: 'Choose from 10 genuine 316L/904L steel & two-tone chassis: 120-Facet Fluted Bezels, Smooth Mirror Dress Cases, Tachymetre Chronographs, or Ceramic Sub-Divers.'
+            },
+            2: {
+                badge: 'Step 02 of 06',
+                price: '+₹450 to ₹1,050',
+                title: 'Sunburst Dial Base & Hour Markers',
+                desc: 'Select from 8 sunburst & porcelain enamel dial colours paired with 10 Diamond-Set Square Chatons, Luminous Stick Batons, Roman, or Arabic numerals.'
+            },
+            3: {
+                badge: 'Step 03 of 06',
+                price: '+₹500 to ₹2,200',
+                title: 'Rear Caseback Cover',
+                desc: 'Choose between our Solid Satin-Brushed Engraved Steel Medallion Cover or the Transparent Exhibition Sapphire Skeleton Caseback.'
+            },
+            4: {
+                badge: 'Step 04 of 06',
+                price: '+₹650 to ₹1,950',
+                title: '32 Bracelets, Leather & FKM Straps',
+                desc: 'Pair your timepiece with Curved or Straight 5-Link Jubilee bracelets, 3-Link Oyster steel/gold bracelets, Italian Croc Leather, or FKM Sport Rubber.'
+            },
+            5: {
+                badge: 'Step 05 of 06',
+                price: '+₹250 to ₹800',
+                title: 'Engraved DYNAST Clasp & Lock',
+                desc: 'Secure your strap with an engraved DYNAST Brushed Glidelock Clasp, Butterfly Deployant Lock, Classic Tang Buckle, or Oysterlock Safety Clasp.'
+            },
+            6: {
+                badge: 'Step 06 of 06',
+                price: '+₹499 Name / +₹999 Photo',
+                title: 'Custom Dial Name, Photo & 3D Studio',
+                desc: 'Type your custom name on the dial, upload a personal photograph, and preview your exact watch in our live 3D Monobloc Render Studio.'
+            }
+        };
+
+        function showCardToast(msg) {
+            const toast = document.getElementById('cardToast');
+            const text = document.getElementById('cardToastText');
+            if (!toast || !text) return;
+            text.textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        function copyTextValue(val, message) {
+            navigator.clipboard.writeText(val);
+            showCardToast(message || 'Copied to clipboard!');
+        }
+
+        function switchCardTab(tabKey) {
+            ['concierge', 'bespoke', 'qr'].forEach(k => {
+                const panel = document.getElementById(`tabPanel-${k}`);
+                const btn = document.getElementById(`tabBtn-${k}`);
+                if (panel) panel.classList.toggle('hidden', k !== tabKey);
+                if (btn) {
+                    if (k === tabKey) {
+                        btn.classList.add('active');
+                        btn.classList.remove('text-gray-300');
+                    } else {
+                        btn.classList.remove('active');
+                        btn.classList.add('text-gray-300');
+                    }
+                }
+            });
+        }
+
+        function previewBespokeStep(stepNum) {
+            const d = BESPOKE_STEPS_DATA[stepNum];
+            if (!d) return;
+            for (let i = 1; i <= 6; i++) {
+                const el = document.getElementById(`bStepBtn-${i}`);
+                if (el) el.classList.toggle('active', i === stepNum);
+            }
+            document.getElementById('bStepBadge').textContent = d.badge;
+            document.getElementById('bStepPrice').textContent = d.price;
+            document.getElementById('bStepTitle').textContent = d.title;
+            document.getElementById('bStepDesc').textContent = d.desc;
+        }
+
+        function setQrDestination(destKey) {
+            const qrImg = document.getElementById('dynamicQrImg');
+            const title = document.getElementById('qrModeTitle');
+            const sub = document.getElementById('qrModeSub');
+
+            ['bespoke', 'card', 'store'].forEach(k => {
+                const b = document.getElementById(`qrBtn-${k}`);
+                if (b) {
+                    b.classList.toggle('active', k === destKey);
+                    b.classList.toggle('text-lightgold', k === destKey);
+                    b.classList.toggle('font-bold', k === destKey);
+                    b.classList.toggle('text-gray-300', k !== destKey);
+                }
+            });
+
+            if (destKey === 'bespoke') {
+                title.textContent = 'DYNAST 3D Bespoke Studio QR';
+                sub.innerHTML = 'Scan to open <span class="text-lightgold font-mono">dynast.co.in/bespoke</span>';
+                qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=' + encodeURIComponent('https://dynast.co.in/bespoke');
+            } else if (destKey === 'card') {
+                title.textContent = 'DYNAST Digital NFC Card QR';
+                sub.innerHTML = 'Scan to open <span class="text-lightgold font-mono">dynast.co.in/card</span>';
+                qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=' + encodeURIComponent('https://dynast.co.in/card');
+            } else {
+                title.textContent = 'DYNAST Main Collection Store QR';
+                sub.innerHTML = 'Scan to open <span class="text-lightgold font-mono">dynast.co.in</span>';
+                qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=' + encodeURIComponent('https://dynast.co.in');
+            }
+        }
+
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');
         }
@@ -296,13 +671,15 @@
                 'BEGIN:VCARD',
                 'VERSION:3.0',
                 'FN:DYNAST Custom Timepieces',
-                'ORG:DYNAST Luxury Watches',
+                'ORG:DYNAST Luxurious Horology',
                 'TITLE:Bespoke Watchmaking & Custom Timepieces',
                 'TEL;TYPE=WORK,VOICE:+917579942958',
                 'EMAIL;TYPE=PREF,INTERNET:dynast.co.in@gmail.com',
                 'URL:https://dynast.co.in',
+                'ITEM1.URL:https://dynast.co.in/bespoke',
+                'ITEM1.X-ABLabel:3D Bespoke Watch Studio',
                 'ADR;TYPE=WORK:;;Agra;Uttar Pradesh;;India',
-                'NOTE:Official Contact for DYNAST Custom Luxury Timepieces. Instagram: @dynast_luxury',
+                'NOTE:Official Contact for DYNAST Custom Luxury Timepieces. Bespoke Studio: https://dynast.co.in/bespoke | Instagram: @dynast_luxury',
                 'END:VCARD'
             ].join('\n');
 
@@ -314,21 +691,21 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            showCardToast('DYNAST Contact Card downloaded!');
         }
 
         function shareCard() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'DYNAST | Custom Timepieces',
-                    text: 'Check out DYNAST Custom Luxury Timepieces:',
+                    title: 'DYNAST | Custom Timepieces & Bespoke Studio',
+                    text: 'Explore DYNAST Custom Luxury Timepieces & 3D Bespoke Watch Studio (dynast.co.in/bespoke):',
                     url: window.location.href
                 });
             } else {
                 navigator.clipboard.writeText(window.location.href);
-                alert('Card link copied to clipboard!');
+                showCardToast('Digital Card link copied to clipboard!');
             }
         }
     </script>
 </body>
-                </html>
-                
+</html>
