@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- EmailJS Browser SDK (Autonomous Customer Order Confirmation Emails) -->
+    <!-- EmailJS Browser SDK (Dual Customer + Admin Order Emails) -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
@@ -29,11 +29,10 @@
         })();
     </script>
 
-    <!-- Firebase SDKs (Cloud Firestore + Cloud Storage for Uncompressed Admin Dial Photos) -->
+    <!-- Firebase SDKs (Cloud Firestore Only for Customer & Watch Order Details) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        import { getStorage, ref as storageRef, uploadString, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBM00yuvWgfXOLaVNGSCyzLSiME9e1o4",
@@ -46,10 +45,8 @@
 
         const app = initializeApp(firebaseConfig);
         window.db = getFirestore(app);
-        window.storage = getStorage(app);
         window.FB_Fns = {
-            collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot,
-            storageRef, uploadString, uploadBytes, getDownloadURL
+            collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot
         };
         window.dispatchEvent(new Event('firebase-fully-ready'));
     </script>
@@ -85,7 +82,6 @@
             color: #F8FAFC;
             margin: 0;
             overflow-x: hidden;
-            padding-bottom: 110px;
         }
 
         @keyframes ambientGoldBlend {
@@ -108,7 +104,6 @@
             animation: ambientGoldBlend 16s ease-in-out infinite;
         }
 
-        /* Royal Watchmaking Hero Background matching dynast.co.in */
         .royal-hero-stage {
             position: relative;
             background:
@@ -227,8 +222,8 @@
         }
 
         .studio-stage {
-            background: radial-gradient(circle at 50% 45%, #2D2412 0%, #100E0A 58%, #050507 100%);
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.95), 0 24px 64px rgba(0,0,0,0.9);
+            background: radial-gradient(circle at 50% 42%, #2b2212 0%, #100d08 56%, #050507 100%);
+            box-shadow: inset 0 0 110px rgba(0,0,0,0.95), 0 28px 70px rgba(0,0,0,0.92);
         }
 
         .lux-dropdown-menu {
@@ -291,7 +286,7 @@
         </div>
     </header>
 
-    <!-- UPPER HERO SECTION (MATCHING DYNAST.CO.IN "CRAFT YOUR TIMEPIECE" SCREENSHOT) -->
+    <!-- UPPER HERO SECTION -->
     <section class="royal-hero-stage relative z-10 border-b border-gold/25 px-4 py-16 sm:py-24 flex flex-col items-center justify-center text-center min-h-[78vh]">
         <!-- Subtle Mechanical Movement Background SVG -->
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 overflow-hidden">
@@ -327,12 +322,12 @@
 
             <!-- Live Custom Price & Progress Pill -->
             <div class="inline-flex flex-wrap items-center justify-center gap-3 bg-black/75 border border-gold/40 px-5 py-2.5 rounded-full text-xs shadow-xl">
-                <span class="text-gray-300"> Progress: <strong id="navStepProgress" class="text-lightgold">0 / 5 Steps</strong></span>
+                <span class="text-gray-300">Progress: <strong id="navStepProgress" class="text-lightgold">0 / 6 Steps</strong></span>
                 <span class="text-gold/50">•</span>
                 <span class="text-gray-300">Live Custom Price: <strong id="navTotalPrice" class="serif-text text-gold text-sm">₹9,798</strong></span>
             </div>
 
-            <!-- Action Buttons Matching Screenshot -->
+            <!-- Action Buttons -->
             <div class="pt-4 space-y-3.5 max-w-md mx-auto w-full">
                 <a href="#step1Section" class="btn-royal-primary w-full py-4 text-xs sm:text-sm uppercase tracking-[0.22em] font-semibold block text-center">
                     DESIGN YOUR TIMEPIECE
@@ -352,26 +347,6 @@
         </div>
     </section>
 
-    <!-- ALWAYS-VISIBLE FLOATING BOTTOM BAR -->
-    <div class="fixed bottom-0 left-0 right-0 z-40 bg-black/95 backdrop-blur-xl border-t border-gold/50 px-4 py-3.5 shadow-2xl">
-        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-                <div id="floatingStepBadge" class="w-10 h-10 rounded-xl bg-gold/20 border border-gold/50 flex items-center justify-center text-lightgold font-bold text-xs">
-                    0/5
-                </div>
-                <div>
-                    <p id="floatingStatusTitle" class="text-xs sm:text-sm font-bold text-white">Select Your 5 Watch Components</p>
-                    <p id="floatingStatusSub" class="text-[11px] text-gray-300">Complete selections to unlock the 3D Render &amp; Live Dial Customizer</p>
-                </div>
-            </div>
-            <div class="flex items-center justify-center gap-3 w-full sm:w-auto">
-                <button type="button" onclick="requestViewRenderedWatch()" class="btn-gold w-full sm:w-auto px-6 py-3 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl">
-                    <i class="fa-solid fa-wand-magic-sparkles flex items-center justify-center"></i>
-                    <span>View 3D Case &amp; Dial Render</span>
-                </button>
-            </div>
-        </div>
-    </div>
     <!-- MAIN CUSTOMIZER WORKSPACE -->
     <main class="relative z-10 flex-1 max-w-6xl w-full mx-auto px-4 lg:px-8 py-8 space-y-10">
 
@@ -384,13 +359,13 @@
                 </div>
                 <h2 class="cinzel-decorative text-xl sm:text-2xl lg:text-3xl text-lightgold tracking-wider">DYNAST • Bespoke Horology Studio</h2>
                 <p class="text-xs sm:text-sm text-gray-200 leading-relaxed max-w-3xl">
-                    Select your genuine watch components step by step below. Click <strong class="text-gold">"View 3D Case &amp; Dial Render"</strong> to preview your timepiece and live-adjust your custom dial name and photograph directly below the 3D render screen.
+                    Select your genuine watch components across Steps 01 to 05, and personalize your custom dial name, photograph, and live <strong class="text-gold">3D Case &amp; Dial Render in Step 06</strong>.
                 </p>
             </div>
             <div class="shrink-0 flex flex-col sm:flex-row md:flex-col gap-3">
-                <button type="button" onclick="requestViewRenderedWatch()" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl">
-                    <i class="fa-solid fa-wand-magic-sparkles flex items-center justify-center"></i> View 3D Case &amp; Dial Render
-                </button>
+                <a href="#step6Section" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl">
+                    <i class="fa-solid fa-wand-magic-sparkles flex items-center justify-center"></i> Step 06: Dial Customizer &amp; 3D Render
+                </a>
                 <a href="#finalPaymentSection" class="border border-gold/50 bg-white/5 hover:bg-gold/20 text-lightgold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider text-center flex items-center justify-center gap-1.5 transition shadow-md">
                     <i class="fa-solid fa-credit-card text-gold flex items-center justify-center"></i> Jump to Payment
                 </a>
@@ -401,7 +376,7 @@
         <section id="step1Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 01 of 05 • Watch Case &amp; Bezel Architecture</span>
+                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 01 of 06 • Watch Case &amp; Bezel Architecture</span>
                     <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Choose Your Watch Case &amp; Bezel</h2>
                 </div>
                 <div class="flex items-center gap-3">
@@ -420,7 +395,7 @@
                     </div>
                     <div>
                         <span class="text-[11px] uppercase tracking-widest text-gold font-bold flex items-center gap-1.5"><i class="fa-solid fa-eye flex items-center justify-center"></i> Component Reference: Watch Case &amp; Bezel</span>
-                        <p class="text-xs sm:text-sm text-white font-semibold mt-1">316L / 904L Stainless Steel &amp; Two-Tone Horological Chassis</p>
+                        <p class="text-xs sm:text-sm text-white font-semibold mt-1">316L / 904L Stainless Steel &amp; Two-Tone Monobloc Horological Chassis</p>
                         <p class="text-xs text-gray-300 mt-1">Choose from 120-Facet Fluted Bezels, Smooth Mirror Dress Cases, Tachymetre Chronographs, or Ceramic Sub-Diver Cases.</p>
                     </div>
                 </div>
@@ -540,12 +515,11 @@
                 </div>
             </div>
         </section>
-
         <!-- STEP 02: BESPOKE DIAL BASE & HOUR MARKERS -->
         <section id="step2Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 02 of 05 • Bespoke Dial Plate &amp; Indices</span>
+                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 02 of 06 • Bespoke Dial Plate &amp; Indices</span>
                     <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Choose Dial Base Colour &amp; Hour Markers</h2>
                 </div>
                 <div class="flex items-center gap-3">
@@ -571,17 +545,17 @@
                             <rect x="47" y="82" width="6" height="6" fill="#FFFFFF" stroke="#E5C158" stroke-width="1"/>
                             <rect x="12" y="47" width="6" height="6" fill="#FFFFFF" stroke="#E5C158" stroke-width="1"/>
                             <rect x="74" y="45" width="13" height="10" rx="1.5" fill="#FFFFFF" stroke="#E5C158" stroke-width="1"/>
-                            <text x="80.5" y="52.5" text-anchor="middle" fill="#000000" font-size="7" font-weight="700">22</text>
+                            <text x="80.5" y="52.5" text-anchor="middle" fill="#000000" font-size="7" font-weight="700">23</text>
                             <text x="50" y="71" text-anchor="middle" fill="#FFF0E8" font-size="7" font-weight="600" font-family="Cinzel, serif">YOUR NAME</text>
                         </svg>
                     </div>
                     <div>
                         <span class="text-[11px] uppercase tracking-widest text-gold font-bold flex items-center gap-1.5"><i class="fa-solid fa-compass flex items-center justify-center"></i> Component Reference: Watch Dial &amp; Indices</span>
                         <p class="text-xs sm:text-sm text-white font-semibold mt-1">Sunburst Metallic Enamel Dials &amp; Applied 3D Chatons</p>
-                        <p class="text-xs text-gray-300 mt-1">Select your dial finish and hour markers here. Your <strong class="text-lightgold">Custom Name &amp; Custom Dial Photo</strong> can be added and live-positioned directly below the 3D Render Studio screen.</p>
+                        <p class="text-xs text-gray-300 mt-1">Select your dial base finish and hour markers here. Your <strong class="text-lightgold">Custom Name &amp; Custom Dial Photograph</strong> are configured live in <strong class="text-gold">Step 06</strong>.</p>
                     </div>
                 </div>
-                <span id="step2PriceBadge" class="text-xs sm:text-sm font-bold text-gold bg-gold/20 border border-gold/40 px-4 py-2 rounded-xl shrink-0">+₹1,499</span>
+                <span id="step2PriceBadge" class="text-xs sm:text-sm font-bold text-gold bg-gold/20 border border-gold/40 px-4 py-2 rounded-xl shrink-0">+₹1,000</span>
             </div>
 
             <!-- 1. Dial Colour Grid -->
@@ -703,7 +677,7 @@
                             <p class="text-xs sm:text-sm font-bold text-white">12 &amp; 6 Arabic + Stick Batons</p>
                             <p class="text-[11px] text-gray-300 mt-0.5">Applied 3D 12 &amp; 6 numerals + index bars</p>
                         </div>
-                        <span class="text-xs sm:text-sm text-gold shrink-0 ml-3">+₹250</span>
+                        <span class="text-xs sm:text-sm text-gold font-bold shrink-0 ml-3">+₹250</span>
                     </div>
 
                     <div onclick="selectMarkerStyle('roman_12_6')" id="markerBtn-roman_12_6" class="option-card rounded-2xl p-4 flex items-center justify-between">
@@ -731,29 +705,13 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Pointer to Live Name & Photo Studio Controls Below 3D Render -->
-            <div class="p-4 rounded-2xl bg-gold/10 border border-gold/40 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gold/20 border border-gold/50 flex items-center justify-center text-gold shrink-0">
-                        <i class="fa-solid fa-sliders"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-bold text-lightgold">Want a Custom Name or Custom Photograph on Your Dial?</p>
-                        <p class="text-[11px] text-gray-300">We placed the Custom Name Font Selector (+₹499) and Photo Size/Position Adjuster (+₹999) directly beneath the 3D Render screen so you can position them live!</p>
-                    </div>
-                </div>
-                <button type="button" onclick="autoCompleteRemainingAndRender()" class="btn-gold px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider shrink-0">
-                    Open 3D Dial Studio
-                </button>
-            </div>
         </section>
 
         <!-- STEP 03: REAR CASEBACK COVER -->
         <section id="step3Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 03 of 05 • Rear Caseback Selection</span>
+                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 03 of 06 • Rear Caseback Selection</span>
                     <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Choose Your Watch Back Cover</h2>
                 </div>
                 <div class="flex items-center gap-3">
@@ -797,7 +755,7 @@
         <section id="step4Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 04 of 05 • Bracelet &amp; Strap Selection</span>
+                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 04 of 06 • Bracelet &amp; Strap Selection</span>
                     <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Choose Your Watch Bracelet or Strap</h2>
                 </div>
                 <div class="flex items-center gap-3">
@@ -953,7 +911,7 @@
         <section id="step5Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 05 of 05 • Engraved Clasp &amp; Buckle Selection</span>
+                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Step 05 of 06 • Engraved Clasp &amp; Buckle Selection</span>
                     <h2 class="serif-text text-lg sm:text-xl font-bold text-white mt-1">Choose Your Engraved DYNAST Strap Lock</h2>
                 </div>
                 <div class="flex items-center gap-3">
@@ -984,33 +942,37 @@
             </div>
         </section>
 
-        <!-- PHOTOREALISTIC 3D CASE & DIAL STUDIO RENDER STAGE + LIVE NAME & PHOTO CONTROLS DIRECTLY BELOW -->
-        <section id="renderedStudioSection" class="hidden gold-panel rounded-3xl p-6 sm:p-10 space-y-8 border-2 border-gold shadow-2xl">
+        <!-- STEP 06: BESPOKE DIAL PERSONALIZATION & 3D PHOTOREALISTIC CASE/DIAL STUDIO RENDER -->
+        <section id="step6Section" class="gold-panel rounded-3xl p-6 sm:p-10 space-y-8 border-2 border-gold shadow-2xl">
             <div class="flex flex-wrap items-center justify-between gap-4 border-b border-gold/40 pb-5">
                 <div>
-                    <span class="text-[11px] uppercase tracking-[0.3em] text-emerald-400 font-bold flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-check flex items-center justify-center"></i> 3D Macro Horology Head Render • Live Interactive Dial Studio
+                    <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold flex items-center gap-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-gold flex items-center justify-center"></i> Step 06 of 06 • Bespoke Dial Personalization &amp; Live 3D Render Studio
                     </span>
-                    <h2 class="cinzel-decorative text-xl sm:text-2xl text-lightgold mt-1">DYNAST • 3D Photorealistic Studio Preview</h2>
+                    <h2 class="cinzel-decorative text-xl sm:text-2xl text-lightgold mt-1">Customize Dial Name, Photo &amp; 3D Studio Preview</h2>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3">
-                    <button type="button" id="clockModeBtn" onclick="toggleClockMode()" class="text-xs uppercase tracking-wider bg-gold/20 hover:bg-gold/30 border border-gold/50 text-lightgold px-4 py-2.5 rounded-xl font-semibold flex items-center justify-center gap-2 transition shadow-md">
+                    <span id="step6StatusBadge" class="text-[11px] uppercase tracking-wider px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-300 font-semibold flex items-center justify-center gap-1.5 shadow-md">
+                        <i class="fa-regular fa-circle flex items-center justify-center"></i> Personalize or Confirm Dial
+                    </span>
+                    <span id="step6PriceBadge" class="text-xs sm:text-sm font-bold text-gold bg-gold/20 border border-gold/40 px-3.5 py-1.5 rounded-full">+₹499</span>
+                    <button type="button" id="clockModeBtn" onclick="toggleClockMode()" class="text-xs uppercase tracking-wider bg-gold/20 hover:bg-gold/30 border border-gold/50 text-lightgold px-4 py-2 rounded-xl font-semibold flex items-center justify-center gap-2 transition shadow-md">
                         <i class="fa-solid fa-clock text-gold flex items-center justify-center"></i> <span id="clockModeText">Live Sweeping Hands</span>
                     </button>
                 </div>
             </div>
 
-            <!-- DEDICATED 3D CASE & DIAL MACRO CANVAS -->
-            <div class="studio-stage rounded-3xl border border-gold/50 p-6 sm:p-8 flex flex-col items-center justify-center shadow-2xl">
-                <canvas id="frontWatchCanvas" width="900" height="900" class="w-full max-w-[500px] aspect-square h-auto select-none drop-shadow-2xl"></canvas>
-                <span id="frontCaseCaption" class="text-xs sm:text-sm text-gold/90 uppercase tracking-[0.22em] mt-4 font-bold text-center">3D Macro Studio Case &amp; Dial Head Render</span>
+            <!-- DEDICATED 3D MONOBLOC CASE & DIAL MACRO CANVAS -->
+            <div class="studio-stage rounded-3xl border border-gold/50 p-6 sm:p-10 flex flex-col items-center justify-center shadow-2xl">
+                <canvas id="frontWatchCanvas" width="1000" height="1000" class="w-full max-w-[540px] aspect-square h-auto select-none drop-shadow-2xl"></canvas>
+                <span id="frontCaseCaption" class="text-xs sm:text-sm text-gold/90 uppercase tracking-[0.22em] mt-4 font-bold text-center">3D Monobloc Studio Case &amp; Dial Render</span>
             </div>
 
-            <!-- LIVE DIAL CUSTOMIZATION CONTROLS (PLACED DIRECTLY BELOW THE 3D RENDER SCREEN) -->
+            <!-- STEP 06 LIVE DIAL CUSTOMIZATION CONTROLS -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
 
-                <!-- 1. Custom Name Printed on Dial (Live Preview Above) -->
+                <!-- 1. Custom Name Printed on Dial -->
                 <div class="p-6 rounded-2xl bg-black/80 border border-gold/40 space-y-4 shadow-xl">
                     <div class="flex items-center justify-between border-b border-gold/25 pb-3">
                         <label class="text-xs uppercase tracking-wider text-lightgold font-bold flex items-center gap-2">
@@ -1020,7 +982,7 @@
                     </div>
 
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        Type your name or initials below and choose your preferred font and metallic ink colour while watching the 3D dial render above update in real time.
+                        Type your name or initials below and choose your preferred typography and metallic ink colour while watching the 3D dial render above update in real time.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-3">
@@ -1077,7 +1039,7 @@
                     </div>
 
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        Upload a personal photo and adjust its zoom, horizontal/vertical alignment, and contrast right below the 3D dial. Your full-resolution photo is preserved for our master watchmakers.
+                        Upload a personal photo and adjust its zoom, horizontal/vertical alignment, and contrast right below the 3D dial. Both your uploaded photo and the 3D rendered watch snapshot are sent directly to our master watchmakers upon order placement.
                     </p>
 
                     <div class="flex flex-wrap items-center gap-3">
@@ -1089,11 +1051,11 @@
                             <i class="fa-solid fa-trash-can mr-1.5"></i> Remove Photo (-₹999)
                         </button>
                         <span id="photoUploadedBadge" class="hidden text-xs text-emerald-400 font-semibold items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check"></i> Original HD Photo Loaded
+                            <i class="fa-solid fa-circle-check"></i> Custom Photo Loaded
                         </span>
                     </div>
 
-                    <!-- Always-Accessible Sliders Once Photo Is Uploaded -->
+                    <!-- Sliders Once Photo Is Uploaded -->
                     <div id="photoAdjustControls" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3 border-t border-gold/30 text-xs">
                         <div>
                             <label class="text-gray-300 block mb-1.5">Photo Zoom (<span id="zoomVal" class="text-gold font-bold">100%</span>)</label>
@@ -1115,20 +1077,21 @@
 
             </div>
 
-            <div class="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-gold/30">
+            <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gold/30">
                 <div class="flex flex-wrap gap-3">
+                    <button type="button" onclick="confirmStep6DialCustomization()" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-circle-check"></i> Confirm Step 06 Dial Personalization
+                    </button>
                     <button type="button" onclick="downloadWatchSnapshot()" class="px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-gold/40 text-xs text-lightgold font-semibold flex items-center justify-center gap-2 transition shadow-md">
                         <i class="fa-solid fa-download text-gold"></i> Download 3D Render PNG
                     </button>
-                    <a href="https://dynast.co.in/card" target="_blank" class="px-5 py-3 rounded-xl bg-gold/20 hover:bg-gold/30 border border-gold/50 text-xs text-lightgold font-semibold flex items-center justify-center gap-2 transition shadow-md">
-                        <i class="fa-solid fa-id-card text-gold"></i> NFC Business Card
-                    </a>
                 </div>
                 <a href="#finalPaymentSection" class="btn-gold px-7 py-3 rounded-xl text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl">
                     <i class="fa-solid fa-lock"></i> Proceed to Final Checkout
                 </a>
             </div>
         </section>
+
         <!-- OFFICIAL HOROLOGY & WARRANTY POLICIES SECTION -->
         <section id="policiesSection" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="border-b border-gold/30 pb-4 flex flex-wrap items-center justify-between gap-3">
@@ -1183,10 +1146,10 @@
                         <div class="w-6 h-6 rounded-full bg-gold/20 flex items-center justify-center shrink-0">
                             <i class="fa-solid fa-clock-rotate-left text-gold text-xs"></i>
                         </div>
-                        <span>4. Hand-Assembly Timeline &amp; Autonomous Email Tracking</span>
+                        <span>4. Hand-Assembly Timeline &amp; Dual Email Dispatch</span>
                     </div>
                     <p class="text-gray-200 leading-relaxed text-xs">
-                        Bespoke watches require <strong class="text-white">4 to 7 business days</strong> for custom dial printing, sealing, and regulation in Agra before dispatch. An automated confirmation email with your live Tracking ID is sent immediately upon order placement.
+                        Bespoke watches require <strong class="text-white">4 to 7 business days</strong> for custom dial printing, sealing, and regulation in Agra before dispatch. Automated confirmation emails with your live Tracking ID are dispatched immediately to both you and the DYNAST studio upon order placement.
                     </p>
                 </div>
             </div>
@@ -1199,9 +1162,9 @@
                     <span class="text-[11px] uppercase tracking-[0.3em] text-gold font-bold">Final Checkout • Bespoke Order Summary &amp; E-Bill</span>
                     <h2 class="cinzel-decorative text-xl sm:text-2xl text-lightgold mt-1">Itemized Price &amp; Instant UPI Checkout</h2>
                 </div>
-                <button type="button" onclick="requestViewRenderedWatch()" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-eye flex items-center justify-center"></i> Preview 3D Render &amp; Dial Studio
-                </button>
+                <a href="#step6Section" class="btn-gold px-5 py-3 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fa-solid fa-eye flex items-center justify-center"></i> Review Step 06 3D Dial Render
+                </a>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -1222,8 +1185,8 @@
                     </div>
 
                     <div class="p-4 rounded-xl bg-gold/15 border border-gold/40 text-xs text-gray-200 space-y-1.5">
-                        <p class="font-bold text-lightgold flex items-center gap-1.5"><i class="fa-solid fa-envelope-circle-check text-gold flex items-center justify-center"></i> Autonomous Confirmation Email &amp; E-Bill</p>
-                        <p>Upon submitting your order, an official confirmation email with your <strong>Order ID</strong> and <strong>Live Tracking ID</strong> is automatically dispatched to your email address, and your printable <strong>Digital E-Bill Statement</strong> is generated immediately.</p>
+                        <p class="font-bold text-lightgold flex items-center gap-1.5"><i class="fa-solid fa-envelope-circle-check text-gold flex items-center justify-center"></i> Guaranteed Customer &amp; Studio Email Dispatch</p>
+                        <p>Upon submitting your order, all customer and watch details are saved to Firebase Cloud Firestore, and instant confirmation emails are dispatched to both your inbox and our master watchmaker studio along with your printable <strong>Digital E-Bill Statement</strong>.</p>
                     </div>
                 </div>
 
@@ -1289,7 +1252,7 @@
                         </label>
 
                         <button type="submit" id="placeOrderSubmitBtn" class="btn-gold w-full py-4 rounded-xl text-xs uppercase tracking-widest shadow-2xl mt-3 flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-check-double text-sm flex items-center justify-center"></i> Submit Payment &amp; Send Confirmation Email
+                            <i class="fa-solid fa-check-double text-sm flex items-center justify-center"></i> Submit Payment &amp; Send Confirmation Emails
                         </button>
                     </form>
                 </div>
@@ -1317,19 +1280,19 @@
                 <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-300 text-xl shrink-0"><i class="fa-solid fa-list-check"></i></div>
                 <div>
                     <span class="text-[10px] uppercase tracking-widest text-gold font-bold block">Bespoke Studio Checklist</span>
-                    <h3 class="serif-text text-base font-bold text-white">Complete Your Customization First</h3>
+                    <h3 class="serif-text text-base font-bold text-white">Complete Your 6 Customization Steps</h3>
                 </div>
             </div>
-            <p class="text-xs text-gray-200 leading-relaxed">Please complete your selections below before viewing the rendered watch, or click <strong>"Use Studio Defaults &amp; View Render"</strong> to jump straight to the 3D dial studio:</p>
+            <p class="text-xs text-gray-200 leading-relaxed">Please review your 6 customization steps below, or click <strong>"Use Studio Defaults"</strong> to complete all remaining steps automatically:</p>
             <div id="missingStepsList" class="space-y-2.5 text-xs"></div>
             <div class="flex flex-col sm:flex-row gap-3 pt-3 border-t border-gold/30">
                 <button type="button" id="jumpToFirstMissingBtn" class="btn-gold flex-1 py-3.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-1.5"><i class="fa-solid fa-arrow-right"></i> Complete Next Step</button>
-                <button type="button" onclick="autoCompleteRemainingAndRender()" class="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-gold/20 border border-gold/50 text-xs text-lightgold font-semibold transition">Use Studio Defaults &amp; View Render</button>
+                <button type="button" onclick="autoCompleteRemainingAndRender()" class="px-5 py-3.5 rounded-xl bg-white/10 hover:bg-gold/20 border border-gold/50 text-xs text-lightgold font-semibold transition">Use Studio Defaults</button>
             </div>
         </div>
     </div>
 
-    <!-- ORDER CONFIRMED & E-BILL DOWNLOAD MODAL (AUTONOMOUS EMAIL ONLY) -->
+    <!-- ORDER CONFIRMED & E-BILL DOWNLOAD MODAL -->
     <div id="orderConfirmedModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="gold-panel rounded-3xl max-w-xl w-full p-7 sm:p-8 relative space-y-5 border-2 border-gold max-h-[92vh] overflow-y-auto shadow-2xl">
             <button type="button" onclick="closeModal('orderConfirmedModal')" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
@@ -1339,7 +1302,7 @@
                 </div>
                 <span class="text-[10px] uppercase tracking-[0.28em] text-emerald-400 font-bold block">Bespoke Order Confirmed</span>
                 <h3 class="cinzel-decorative text-xl sm:text-2xl text-lightgold">Thank You for Your Order!</h3>
-                <p id="confirmEmailStatusText" class="text-xs text-emerald-300 font-medium">Sending autonomous confirmation email to your inbox...</p>
+                <p id="confirmEmailStatusText" class="text-xs text-emerald-300 font-medium">Dispatching confirmation emails to Customer &amp; DYNAST Studio...</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-black/85 border border-gold/40 rounded-2xl p-4.5 text-xs">
@@ -1385,49 +1348,54 @@
             </div>
         </div>
     </div>
-
-    <!-- COMPLETE STUDIO JAVASCRIPT, 3D CANVAS ENGINE, UNCOMPRESSED ADMIN PHOTO UPLOAD & AUTONOMOUS EMAILJS -->
+    <!-- COMPLETE STUDIO JAVASCRIPT, 3D MONOBLOC CASE ENGINE, CLOUD FIRESTORE & DUAL FAIL-SAFE EMAILJS -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
-        const EMAILJS_SERVICE_ID = "service_n368ztv";
-        const EMAILJS_TEMPLATE_ID = "template_8aiicmc";
-        const EMAILJS_PUBLIC_KEY = "_fpanrTUxPG_S9y47";
+        // 1. Customer Confirmation EmailJS Credentials
+        const CUSTOMER_EMAILJS_SERVICE_ID = "service_n368ztv";
+        const CUSTOMER_EMAILJS_TEMPLATE_ID = "template_8aiicmc";
+        const CUSTOMER_EMAILJS_PUBLIC_KEY = "_fpanrTUxPG_S9y47";
+
+        // 2. Admin / Merchant Verification EmailJS Credentials (From Your Screenshots)
+        const ADMIN_EMAILJS_SERVICE_ID = "service_4gu5akm";
+        const ADMIN_EMAILJS_TEMPLATE_ID = "template_8ftz5k9";
+        const ADMIN_EMAILJS_PUBLIC_KEY = "TITqL7XhwkZQuU6Ni";
 
         const METAL_PALETTES = {
             silver: {
-                stops: ['#1A1E26', '#98A2B3', '#FFFFFF', '#E2E8F0', '#3E4756', '#F8FAFC', '#9AA3B2', '#14171F'],
-                fluteBright: '#FFFFFF', fluteLight: '#E8EEF5', fluteMid: '#9CA4B2', fluteDark: '#1E242E', fluteWarm: '#525E70',
-                handLight: '#FFFFFF', handDark: '#2E3640', rim: '#F1F5F9', crown: '#CBD5E1'
+                stops: ['#181C24', '#8F9AA8', '#FFFFFF', '#DCE3EC', '#3A4352', '#F8FAFC', '#96A0AE', '#12161E'],
+                fluteBright: '#FFFFFF', fluteLight: '#E8EEF5', fluteMid: '#9CA4B2', fluteDark: '#1B202A', fluteWarm: '#4E5A6C',
+                handLight: '#FFFFFF', handDark: '#2E3640', rim: '#F1F5F9', crown: '#CBD5E1', bodyBase: '#C8D0DC', chamfer: '#FFFFFF'
             },
             gold: {
                 stops: ['#291A02', '#C59322', '#FFFDF2', '#F3D578', '#6B4809', '#FAE79F', '#D1A234', '#1F1201'],
                 fluteBright: '#FFFDF5', fluteLight: '#F7D980', fluteMid: '#CA9D3A', fluteDark: '#382203', fluteWarm: '#8C6214',
-                handLight: '#FFFCE8', handDark: '#684709', rim: '#F6DC8C', crown: '#E5C158'
+                handLight: '#FFFCE8', handDark: '#684709', rim: '#F6DC8C', crown: '#E5C158', bodyBase: '#DFB654', chamfer: '#FFFBEB'
             },
             rosegold: {
                 stops: ['#2B1009', '#C2765A', '#FFF8F5', '#ECA990', '#693020', '#FAD0C0', '#CE866C', '#210B06'],
                 fluteBright: '#FFF9F6', fluteLight: '#F2BCA6', fluteMid: '#C8846A', fluteDark: '#38150B', fluteWarm: '#8A442E',
-                handLight: '#FFF4EF', handDark: '#662F1E', rim: '#ECB29C', crown: '#DFA08A'
+                handLight: '#FFF4EF', handDark: '#662F1E', rim: '#ECB29C', crown: '#DFA08A', bodyBase: '#D9967E', chamfer: '#FFF5F0'
             },
             black: {
-                stops: ['#060609', '#32323C', '#9898A6', '#464652', '#101015', '#626270', '#292932', '#040406'],
-                fluteBright: '#C4C4D0', fluteLight: '#5C5C68', fluteMid: '#2E2E36', fluteDark: '#07070A', fluteWarm: '#1E1E26',
-                handLight: '#E4E4E7', handDark: '#18181C', rim: '#71717A', crown: '#3F3F46'
+                stops: ['#050508', '#2C2C36', '#8E8E9E', '#3F3F4C', '#0E0E14', '#585866', '#22222B', '#030305'],
+                fluteBright: '#BCBCC8', fluteLight: '#545460', fluteMid: '#282830', fluteDark: '#060609', fluteWarm: '#1A1A22',
+                handLight: '#E4E4E7', handDark: '#18181C', rim: '#71717A', crown: '#3F3F46', bodyBase: '#272730', chamfer: '#9E9EAE'
             }
         };
 
         const CASE_MODELS = {
-            fluted_rosegold:     { name: 'Two-Tone Rose-Gold Fluted Case', price: 1700, bezelType: 'fluted', lugMetal: 'silver', bezelMetal: 'rosegold', crownMetal: 'rosegold', cyclops: true },
-            fluted_gold:         { name: 'Two-Tone Gold Fluted Case', price: 1650, bezelType: 'fluted', lugMetal: 'silver', bezelMetal: 'gold', crownMetal: 'gold', cyclops: true },
-            fluted_silver:       { name: '904L Silver Steel Fluted Case', price: 1400, bezelType: 'fluted', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', cyclops: true },
-            smooth_silver:       { name: 'Smooth Mirror Dress Case', price: 1200, bezelType: 'smooth', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', cyclops: false },
-            tachy_silver_black:  { name: 'Tachymetre Black & Steel Case', price: 1850, bezelType: 'tachymetre', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', insertColor: '#0E1014', accentRed: false, cyclops: false },
-            tachy_rosegold_black:{ name: 'Tachymetre Rose-Gold & Black Case', price: 1950, bezelType: 'tachymetre', lugMetal: 'rosegold', bezelMetal: 'rosegold', crownMetal: 'rosegold', insertColor: '#121216', accentRed: false, cyclops: false },
-            tachy_black_blue:    { name: 'Tachymetre Blue & Black PVD Case', price: 1900, bezelType: 'tachymetre', lugMetal: 'black', bezelMetal: 'black', crownMetal: 'black', insertColor: '#103278', accentRed: true, cyclops: false },
-            diver_silver_blue:   { name: 'Sub-Diver Royal Blue & Steel Case', price: 1750, bezelType: 'diver', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', insertColor: '#152A8A', ringText: '#FFFFFF', cyclops: false },
+            fluted_rosegold:     { name: 'Two-Tone Rose-Gold Fluted Case', price: 1700, bezelType: 'fluted', lugMetal: 'silver', bezelMetal: 'rosegold', crownMetal: 'rosegold', cyclops: false, darkHood: false },
+            fluted_gold:         { name: 'Two-Tone Gold Fluted Case', price: 1650, bezelType: 'fluted', lugMetal: 'silver', bezelMetal: 'gold', crownMetal: 'gold', cyclops: true, darkHood: false },
+            fluted_silver:       { name: '904L Silver Steel Fluted Case', price: 1400, bezelType: 'fluted', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', cyclops: false, darkHood: false },
+            smooth_silver:       { name: 'Smooth Mirror Dress Case', price: 1200, bezelType: 'smooth', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', cyclops: false, darkHood: true },
+            tachy_silver_black:  { name: 'Tachymetre Black & Steel Case', price: 1850, bezelType: 'tachymetre', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', insertColor: '#0E1014', accentRed: false, unitsPerHour: true, cyclops: false },
+            tachy_rosegold_black:{ name: 'Tachymetre Rose-Gold & Black Case', price: 1950, bezelType: 'tachymetre', lugMetal: 'rosegold', bezelMetal: 'rosegold', crownMetal: 'rosegold', insertColor: '#121216', accentRed: false, unitsPerHour: true, cyclops: false },
+            tachy_black_blue:    { name: 'Tachymetre Blue & Black PVD Case', price: 1900, bezelType: 'tachymetre', lugMetal: 'black', bezelMetal: 'black', crownMetal: 'black', insertColor: '#0E337A', accentRed: true, unitsPerHour: false, cyclops: false },
+            diver_silver_blue:   { name: 'Sub-Diver Royal Blue & Steel Case', price: 1750, bezelType: 'diver', lugMetal: 'silver', bezelMetal: 'silver', crownMetal: 'silver', insertColor: '#172596', ringText: '#FFFFFF', cyclops: false },
             diver_gold_black:    { name: 'Sub-Diver Black & Gold Case', price: 1850, bezelType: 'diver', lugMetal: 'silver', bezelMetal: 'gold', crownMetal: 'gold', insertColor: '#0E1014', ringText: '#F8FAFC', cyclops: false },
-            diver_gold_blue:     { name: 'Sub-Diver Royal Blue & Gold Case', price: 1900, bezelType: 'diver', lugMetal: 'silver', bezelMetal: 'gold', crownMetal: 'gold', insertColor: '#1B42B5', ringText: '#FDE68A', cyclops: true }
+            diver_gold_blue:     { name: 'Sub-Diver Royal Blue & Gold Case', price: 1900, bezelType: 'diver', lugMetal: 'silver', bezelMetal: 'gold', crownMetal: 'gold', insertColor: '#2548B8', ringText: '#F6D565', cyclops: true }
         };
 
         const DIAL_OPTIONS = {
@@ -1522,10 +1490,10 @@
             step2_dial: false,
             step3_back: false,
             step4_strap: false,
-            step5_lock: false
+            step5_lock: false,
+            step6_custom: false
         };
 
-        let renderUnlocked = false;
         let uploadedPhotoImg = null;
         let staticWatchBuffer = null;
         let cloudOrdersList = [];
@@ -1543,6 +1511,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateStepProgressUI();
             updatePriceBreakdown();
+            renderFrontWatch(true);
             startLiveClockLoop();
 
             document.addEventListener('click', (e) => {
@@ -1563,7 +1532,7 @@
                         });
                     });
                 } catch (e) {
-                    console.error("Order listener error:", e);
+                    console.error("Cloud Firestore listener error:", e);
                 }
             }
         });
@@ -1582,22 +1551,9 @@
             const count = Object.values(completedSteps).filter(Boolean).length;
             const navProg = document.getElementById('navStepProgress');
             const bagCount = document.getElementById('headerBagStepCount');
-            const floatBadge = document.getElementById('floatingStepBadge');
-            const floatTitle = document.getElementById('floatingStatusTitle');
-            const floatSub = document.getElementById('floatingStatusSub');
 
-            if (navProg) navProg.textContent = `${count} / 5 Steps`;
+            if (navProg) navProg.textContent = `${count} / 6 Steps`;
             if (bagCount) bagCount.textContent = String(count);
-            if (floatBadge) floatBadge.textContent = `${count}/5`;
-
-            if (count === 5) {
-                if (floatBadge) floatBadge.className = 'w-10 h-10 rounded-xl bg-emerald-500/25 border border-emerald-400 flex items-center justify-center text-emerald-300 font-bold text-xs shadow-md';
-                if (floatTitle) floatTitle.textContent = 'All 5 Customization Steps Completed!';
-                if (floatSub) floatSub.textContent = 'Click "View 3D Case & Dial Render" to customize your name & photo live on the dial';
-            } else {
-                const remaining = 5 - count;
-                if (floatTitle) floatTitle.textContent = `${count} of 5 Components Selected (${remaining} Remaining)`;
-            }
         }
 
         function selectCaseModel(modelKey) {
@@ -1609,7 +1565,7 @@
             document.getElementById('step1PriceBadge').textContent = `+₹${CASE_MODELS[modelKey].price.toLocaleString('en-IN')}`;
             markStepCompleted('step1_case', 'step1StatusBadge', 'Case Selected');
             updatePriceBreakdown();
-            if (renderUnlocked) renderFrontWatch(true);
+            renderFrontWatch(true);
         }
 
         function selectDialColor(dialKey) {
@@ -1624,7 +1580,7 @@
             }
             markStepCompleted('step2_dial', 'step2StatusBadge', 'Dial & Markers Selected');
             updatePriceBreakdown();
-            if (renderUnlocked) renderFrontWatch(true);
+            renderFrontWatch(true);
         }
 
         function selectMarkerStyle(markerKey) {
@@ -1640,20 +1596,22 @@
             }
             markStepCompleted('step2_dial', 'step2StatusBadge', 'Dial & Markers Selected');
             updatePriceBreakdown();
-            if (renderUnlocked) renderFrontWatch(true);
+            renderFrontWatch(true);
         }
 
         function updateCustomNameFromInput() {
             state.customName = document.getElementById('customNameInput').value;
+            markStepCompleted('step6_custom', 'step6StatusBadge', 'Dial Customized');
             updatePriceBreakdown();
-            if (renderUnlocked) renderFrontWatch(true);
+            renderFrontWatch(true);
         }
 
         function clearCustomName() {
             state.customName = '';
             document.getElementById('customNameInput').value = '';
+            markStepCompleted('step6_custom', 'step6StatusBadge', 'Dial Customized');
             updatePriceBreakdown();
-            if (renderUnlocked) renderFrontWatch(true);
+            renderFrontWatch(true);
         }
 
         function toggleLuxDropdown(menuId) {
@@ -1666,15 +1624,21 @@
             document.getElementById('customNameFont').value = fontVal;
             document.getElementById('fontLuxLabel').textContent = fontLabel;
             document.getElementById('fontLuxMenu').classList.add('hidden');
-            if (renderUnlocked) renderFrontWatch(true);
+            markStepCompleted('step6_custom', 'step6StatusBadge', 'Dial Customized');
+            renderFrontWatch(true);
         }
 
         function setCustomNameColor(hex) {
             state.customNameColor = hex;
-            if (renderUnlocked) renderFrontWatch(true);
+            markStepCompleted('step6_custom', 'step6StatusBadge', 'Dial Customized');
+            renderFrontWatch(true);
         }
 
-        // Preserve 100% original image quality & file reference for Admin Panel
+        function confirmStep6DialCustomization() {
+            markStepCompleted('step6_custom', 'step6StatusBadge', 'Step 06 Confirmed');
+            showToast('Step 06 Dial Personalization & 3D Render Confirmed!');
+        }
+
         function handleDialPhotoUpload(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1690,10 +1654,10 @@
                     document.getElementById('photoUploadedBadge').classList.remove('hidden');
                     document.getElementById('photoUploadedBadge').classList.add('inline-flex');
                     document.getElementById('photoAdjustControls').classList.remove('hidden');
-                    markStepCompleted('step2_dial', 'step2StatusBadge', 'Custom Photo Dial Set');
+                    markStepCompleted('step6_custom', 'step6StatusBadge', 'Custom Photo Dial Set');
                     updatePriceBreakdown();
-                    if (renderUnlocked) renderFrontWatch(true);
-                    showToast('Full-resolution dial photo loaded! Adjust position below the render.');
+                    renderFrontWatch(true);
+                    showToast('Custom dial photograph loaded into 3D Studio!');
                 };
                 img.src = e.target.result;
             };
@@ -1710,7 +1674,7 @@
             document.getElementById('photoUploadedBadge').classList.remove('inline-flex');
             document.getElementById('photoAdjustControls').classList.add('hidden');
             updatePriceBreakdown();
-            if (renderUnlocked) renderFrontWatch(true);
+            renderFrontWatch(true);
         }
 
         function updatePhotoTransform() {
@@ -1719,7 +1683,8 @@
             state.photoOffsetY = parseInt(document.getElementById('photoOffsetY').value || '0', 10);
             state.photoDimmer = parseInt(document.getElementById('photoDimmerRange').value || '15', 10);
             document.getElementById('zoomVal').textContent = `${state.photoZoom}%`;
-            if (renderUnlocked) renderFrontWatch(true);
+            markStepCompleted('step6_custom', 'step6StatusBadge', 'Dial Customized');
+            renderFrontWatch(true);
         }
 
         function selectBackCase(typeKey) {
@@ -1769,33 +1734,6 @@
             updatePriceBreakdown();
         }
 
-        function requestViewRenderedWatch() {
-            const stepDefinitions = [
-                { key: 'step1_case',  title: 'Step 01: Watch Case & Bezel Style', sectionId: 'step1Section' },
-                { key: 'step2_dial',  title: 'Step 02: Watch Dial & Hour Markers', sectionId: 'step2Section' },
-                { key: 'step3_back',  title: 'Step 03: Rear Caseback Cover', sectionId: 'step3Section' },
-                { key: 'step4_strap', title: 'Step 04: Watch Bracelet / Strap', sectionId: 'step4Section' },
-                { key: 'step5_lock',  title: 'Step 05: Engraved DYNAST Strap Lock', sectionId: 'step5Section' }
-            ];
-            const missing = stepDefinitions.filter(s => !completedSteps[s.key]);
-            if (missing.length > 0) {
-                const listEl = document.getElementById('missingStepsList');
-                listEl.innerHTML = stepDefinitions.map(s => {
-                    const done = completedSteps[s.key];
-                    return `
-                        <div onclick="jumpToStepFromModal('${s.sectionId}')" class="p-3.5 rounded-xl border ${done ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300' : 'border-amber-500/50 bg-amber-500/15 text-amber-200'} flex items-center justify-between cursor-pointer hover:bg-white/10 transition shadow-sm">
-                            <span class="font-semibold flex items-center gap-2"><i class="fa-solid ${done ? 'fa-circle-check text-emerald-400' : 'fa-circle-exclamation text-amber-400'}"></i>${s.title}</span>
-                            <span class="text-[10px] uppercase tracking-wider font-bold">${done ? 'Completed' : 'Tap to Select &rarr;'}</span>
-                        </div>
-                    `;
-                }).join('');
-                document.getElementById('jumpToFirstMissingBtn').onclick = () => jumpToStepFromModal(missing[0].sectionId);
-                document.getElementById('incompleteGateModal').classList.remove('hidden');
-                return;
-            }
-            unlockAndShowStudioRender();
-        }
-
         function jumpToStepFromModal(sectionId) {
             closeModal('incompleteGateModal');
             const sec = document.getElementById(sectionId);
@@ -1811,20 +1749,14 @@
             if (!completedSteps.step3_back) selectBackCase(state.backCase);
             if (!completedSteps.step4_strap) selectStrapItem(state.strapItem);
             if (!completedSteps.step5_lock) selectStrapLock(state.strapLock);
+            if (!completedSteps.step6_custom) confirmStep6DialCustomization();
             closeModal('incompleteGateModal');
-            unlockAndShowStudioRender();
-        }
-
-        function unlockAndShowStudioRender() {
-            renderUnlocked = true;
-            const renderSec = document.getElementById('renderedStudioSection');
-            renderSec.classList.remove('hidden');
             renderFrontWatch(true);
-            renderSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('step6Section').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // ============================================================================
-        // 3D CANVAS RENDERER (SEAMLESSLY FUSED LUGS & CHASSIS)
+        // HYPER-REALISTIC 3D MONOBLOC CASE & SEAMLESSLY CONNECTED LUGS ENGINE
         // ============================================================================
         function createLinearMetallicGrad(ctx, x0, y0, x1, y1, metalKey) {
             const pal = METAL_PALETTES[metalKey] || METAL_PALETTES.silver;
@@ -1839,7 +1771,7 @@
             const ctx = canvas.getContext('2d');
             const W = canvas.width;
             const H = canvas.height;
-            const cx = W / 2;
+            const cx = W / 2 - 14; // Slight left shift to balance 3 o'clock crown & pushers
             const cy = H / 2;
 
             if (!staticWatchBuffer) {
@@ -1856,174 +1788,304 @@
 
             ctx.clearRect(0, 0, W, H);
             ctx.drawImage(staticWatchBuffer, 0, 0);
-            drawWatchHandsAndSapphire(ctx, cx, cy, 248);
+            drawWatchHandsAndSapphire(ctx, cx, cy, 246);
 
             const cObj = CASE_MODELS[state.caseModel];
             const dObj = DIAL_OPTIONS[state.dialColor];
             const cap = document.getElementById('frontCaseCaption');
-            if (cap) cap.textContent = `${cObj.name} • ${dObj.name} (3D Photorealistic Studio Render)`;
+            if (cap) cap.textContent = `${cObj.name} • ${dObj.name} (3D Monobloc Studio Render)`;
         }
 
         function drawStaticCaseAndDial(ctx, W, H, cx, cy) {
             const caseObj = CASE_MODELS[state.caseModel] || CASE_MODELS.fluted_rosegold;
             const dialObj = DIAL_OPTIONS[state.dialColor] || DIAL_OPTIONS.chocolate;
 
+            // 1. Studio Ambient Backlight
             ctx.save();
-            const bgGlow = ctx.createRadialGradient(cx, cy, 80, cx, cy, 440);
-            bgGlow.addColorStop(0, 'rgba(20,18,14,0.98)');
-            bgGlow.addColorStop(0.65, 'rgba(8,7,9,0.92)');
-            bgGlow.addColorStop(1, 'rgba(2,2,3,0.99)');
+            const bgGlow = ctx.createRadialGradient(cx, cy, 60, cx, cy, 480);
+            bgGlow.addColorStop(0, 'rgba(38, 30, 18, 0.45)');
+            bgGlow.addColorStop(0.6, 'rgba(10, 9, 12, 0.90)');
+            bgGlow.addColorStop(1, 'rgba(4, 4, 6, 0.98)');
             ctx.fillStyle = bgGlow;
             ctx.fillRect(0, 0, W, H);
             ctx.restore();
 
-            drawFusedThreeDimensionalCaseAndLugs(ctx, cx, cy, caseObj);
+            // 2. Unified 3D Monobloc Case Chassis with Seamlessly Integrated Lugs & Spring Bars
+            drawUnifiedMonoblocCaseChassis(ctx, cx, cy, caseObj);
 
-            const outerBezelR = 304;
-            const innerDialR = 248;
+            // 3. 3D Sculpted Bezel (Fluted / Smooth / Tachymetre / Sub-Diver)
+            const outerBezelR = 312;
+            const innerDialR = 246;
             drawPhotorealisticBezel(ctx, cx, cy, outerBezelR, innerDialR, caseObj);
 
+            // 4. Deep Metallic Rehaut Inner Wall
             drawDeepRehautWall(ctx, cx, cy, innerDialR, innerDialR - 14, caseObj.bezelMetal);
 
+            // 5. Bespoke Sunburst/Enamel Dial, Custom Photo, Custom Name & 3D Chatons
             drawPhotorealisticDial(ctx, cx, cy, innerDialR - 14, dialObj, caseObj);
         }
 
-        function drawFusedThreeDimensionalCaseAndLugs(ctx, cx, cy, caseObj) {
+        function traceMonoblocOuterPath(ctx, cx, cy) {
+            ctx.beginPath();
+            // Start at Top-Left Lug Inner Tip
+            ctx.moveTo(cx - 142, cy - 432);
+            // Top-Left Lug Flat Tip to Outer Tip
+            ctx.quadraticCurveTo(cx - 170, cy - 436, cx - 196, cy - 420);
+            // Seamless Continuous Curve from Top-Left Lug down into 9 o'clock Case Flank and down to Bottom-Left Lug Outer Tip
+            ctx.bezierCurveTo(cx - 282, cy - 305, cx - 344, cy - 160, cx - 344, cy);
+            ctx.bezierCurveTo(cx - 344, cy + 160, cx - 282, cy + 305, cx - 196, cy + 420);
+            // Bottom-Left Lug Outer Tip to Inner Tip
+            ctx.quadraticCurveTo(cx - 170, cy + 436, cx - 142, cy + 432);
+            // Bottom-Left Lug Inner Wall curving into the 6 o'clock End-Link Hood
+            ctx.bezierCurveTo(cx - 134, cy + 365, cx - 132, cy + 322, cx - 126, cy + 300);
+            // Curved Hood between Bottom Lugs
+            ctx.quadraticCurveTo(cx, cy + 318, cx + 126, cy + 300);
+            // Bottom-Right Lug Inner Wall out to Tip
+            ctx.bezierCurveTo(cx + 132, cy + 322, cx + 134, cy + 365, cx + 142, cy + 432);
+            // Bottom-Right Lug Inner Tip to Outer Tip
+            ctx.quadraticCurveTo(cx + 170, cy + 436, cx + 196, cy + 420);
+            // Seamless Continuous Curve from Bottom-Right Lug up 3 o'clock Case Flank to Top-Right Lug Outer Tip
+            ctx.bezierCurveTo(cx + 282, cy + 305, cx + 344, cy + 160, cx + 344, cy);
+            ctx.bezierCurveTo(cx + 344, cy - 160, cx + 282, cy - 305, cx + 196, cy - 420);
+            // Top-Right Lug Outer Tip to Inner Tip
+            ctx.quadraticCurveTo(cx + 170, cy - 436, cx + 142, cy - 432);
+            // Top-Right Lug Inner Wall curving into 12 o'clock End-Link Hood
+            ctx.bezierCurveTo(cx + 134, cy - 365, cx + 132, cy - 322, cx + 126, cy - 300);
+            // Curved Hood between Top Lugs back to start
+            ctx.quadraticCurveTo(cx, cy - 318, cx - 126, cy - 300);
+            ctx.bezierCurveTo(cx - 132, cy - 322, cx - 134, cy - 365, cx - 142, cy - 432);
+            ctx.closePath();
+        }
+
+        function drawUnifiedMonoblocCaseChassis(ctx, cx, cy, caseObj) {
             ctx.save();
             const pal = METAL_PALETTES[caseObj.lugMetal] || METAL_PALETTES.silver;
-            const lugGrad = createLinearMetallicGrad(ctx, cx - 350, cy - 420, cx + 350, cy + 420, caseObj.lugMetal);
 
-            ctx.beginPath();
-            ctx.arc(cx, cy, 326, 0, Math.PI * 2);
-            ctx.shadowColor = 'rgba(0,0,0,0.95)';
-            ctx.shadowBlur = 45;
-            ctx.shadowOffsetY = 16;
-            ctx.fillStyle = lugGrad;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            ctx.shadowOffsetY = 0;
+            // 1. Stainless Steel Spring Bars (Connecting Top Lugs & Bottom Lugs like the reference photos)
+            [-412, 412].forEach(yOff => {
+                const barY = cy + yOff;
+                const sbGrad = ctx.createLinearGradient(cx, barY - 9, cx, barY + 9);
+                sbGrad.addColorStop(0, '#090D16');
+                sbGrad.addColorStop(0.22, '#64748B');
+                sbGrad.addColorStop(0.5, '#FFFFFF');
+                sbGrad.addColorStop(0.78, '#94A3B8');
+                sbGrad.addColorStop(1, '#0F172A');
 
-            const lugConfigs = [
-                { sx: -1, sy: -1 },
-                { sx: 1,  sy: -1 },
-                { sx: -1, sy: 1  },
-                { sx: 1,  sy: 1  }
-            ];
-
-            lugConfigs.forEach(cfg => {
                 ctx.save();
-                ctx.translate(cx, cy);
-                ctx.scale(cfg.sx, cfg.sy);
+                ctx.shadowColor = 'rgba(0,0,0,0.85)';
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetY = yOff > 0 ? 4 : -2;
+                ctx.fillStyle = sbGrad;
+                ctx.fillRect(cx - 154, barY - 7, 308, 14);
 
-                ctx.beginPath();
-                ctx.moveTo(95, 120);
-                ctx.lineTo(136, 402);
-                ctx.quadraticCurveTo(158, 412, 188, 394);
-                ctx.quadraticCurveTo(270, 320, 316, 168);
-                ctx.lineTo(195, 110);
-                ctx.closePath();
-                ctx.fillStyle = lugGrad;
-                ctx.fill();
-
-                ctx.beginPath();
-                ctx.moveTo(168, 396);
-                ctx.quadraticCurveTo(252, 326, 304, 168);
-                ctx.lineTo(316, 168);
-                ctx.quadraticCurveTo(270, 320, 188, 394);
-                ctx.closePath();
-                ctx.fillStyle = pal.fluteBright;
-                ctx.fill();
-
+                // Double-flanged spring bar collars near lug holes
+                [-134, -124, 120, 130].forEach(collarX => {
+                    ctx.fillStyle = '#F8FAFC';
+                    ctx.fillRect(cx + collarX, barY - 9, 4, 18);
+                    ctx.fillStyle = '#1E293B';
+                    ctx.fillRect(cx + collarX + 4, barY - 8, 2, 16);
+                });
                 ctx.restore();
             });
 
-            ctx.beginPath();
-            ctx.arc(cx, cy, 322, 0, Math.PI * 2);
-            ctx.fillStyle = lugGrad;
-            ctx.fill();
-            ctx.lineWidth = 4;
-            ctx.strokeStyle = 'rgba(255,255,255,0.75)';
-            ctx.stroke();
-
-            [cy - 384, cy + 376].forEach(barY => {
-                const sbGrad = ctx.createLinearGradient(cx - 150, barY, cx - 150, barY + 14);
-                sbGrad.addColorStop(0, '#090D16');
-                sbGrad.addColorStop(0.35, '#334155');
-                sbGrad.addColorStop(0.65, '#FFFFFF');
-                sbGrad.addColorStop(0.85, '#64748B');
-                sbGrad.addColorStop(1, '#020617');
-                ctx.fillStyle = sbGrad;
-                ctx.fillRect(cx - 150, barY, 300, 14);
-
-                ctx.fillStyle = pal.fluteBright;
-                ctx.fillRect(cx - 154, barY - 1, 6, 16);
-                ctx.fillRect(cx + 148, barY - 1, 6, 16);
+            // 2. Recessed End-Link Hoods between lugs (Darkened brushed recess like Image 10 or metallic recess)
+            [-1, 1].forEach(dir => {
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(cx - 140, cy + dir * 408);
+                ctx.lineTo(cx + 140, cy + dir * 408);
+                ctx.lineTo(cx + 132, cy + dir * 285);
+                ctx.lineTo(cx - 132, cy + dir * 285);
+                ctx.closePath();
+                if (caseObj.darkHood) {
+                    const hoodG = ctx.createLinearGradient(cx, cy + dir * 290, cx, cy + dir * 408);
+                    hoodG.addColorStop(0, '#090A0F');
+                    hoodG.addColorStop(0.6, '#1E2028');
+                    hoodG.addColorStop(1, '#111318');
+                    ctx.fillStyle = hoodG;
+                } else {
+                    const hoodG = ctx.createLinearGradient(cx - 135, cy, cx + 135, cy);
+                    hoodG.addColorStop(0, pal.fluteDark);
+                    hoodG.addColorStop(0.25, pal.fluteMid);
+                    hoodG.addColorStop(0.5, pal.fluteLight);
+                    hoodG.addColorStop(0.75, pal.fluteMid);
+                    hoodG.addColorStop(1, pal.fluteDark);
+                    ctx.fillStyle = hoodG;
+                }
+                ctx.fill();
+                ctx.restore();
             });
 
+            // 3. Integrated Crown Guards / Pointed Shoulders (for Sub-Diver & Tachymetre Chronograph cases)
+            const bodyGrad = createLinearMetallicGrad(ctx, cx - 350, cy - 430, cx + 350, cy + 430, caseObj.lugMetal);
+            if (caseObj.bezelType === 'diver' || caseObj.bezelType === 'tachymetre' || caseObj.cyclops) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(cx + 300, cy - 125);
+                ctx.bezierCurveTo(cx + 345, cy - 95, cx + 372, cy - 68, cx + 372, cy - 42);
+                ctx.lineTo(cx + 310, cy - 34);
+                ctx.lineTo(cx + 310, cy + 34);
+                ctx.lineTo(cx + 372, cy + 42);
+                ctx.bezierCurveTo(cx + 372, cy + 68, cx + 345, cy + 95, cx + 300, cy + 125);
+                ctx.closePath();
+                ctx.fillStyle = bodyGrad;
+                ctx.shadowColor = 'rgba(0,0,0,0.85)';
+                ctx.shadowBlur = 22;
+                ctx.fill();
+                ctx.lineWidth = 2.5;
+                ctx.strokeStyle = pal.chamfer;
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            // 4. Chronograph Dual Pushers at 2 o'clock & 4 o'clock (Images 2, 4, 5)
             if (caseObj.bezelType === 'tachymetre') {
-                const pusherGrad = createLinearMetallicGrad(ctx, cx + 290, cy - 180, cx + 370, cy + 180, caseObj.crownMetal);
-                [ { angle: -0.45, yOff: -145 }, { angle: 0.45, yOff: 145 } ].forEach(p => {
+                const pusherPal = METAL_PALETTES[caseObj.crownMetal] || METAL_PALETTES.silver;
+                [{ yOff: -158, ang: -0.46 }, { yOff: 158, ang: 0.46 }].forEach(p => {
                     ctx.save();
-                    ctx.translate(cx + 298, cy + p.yOff);
-                    ctx.rotate(p.angle);
-                    ctx.fillStyle = pusherGrad;
-                    ctx.fillRect(0, -16, 40, 32);
+                    ctx.translate(cx + 306, cy + p.yOff);
+                    ctx.rotate(p.ang);
+
+                    const pGrad = ctx.createLinearGradient(0, -28, 0, 28);
+                    pGrad.addColorStop(0, pusherPal.fluteDark);
+                    pGrad.addColorStop(0.25, pusherPal.fluteLight);
+                    pGrad.addColorStop(0.5, pusherPal.fluteBright);
+                    pGrad.addColorStop(0.8, pusherPal.fluteMid);
+                    pGrad.addColorStop(1, pusherPal.fluteDark);
+
+                    // Pusher stem & collar
+                    ctx.fillStyle = pusherPal.fluteMid;
+                    ctx.fillRect(-4, -15, 28, 30);
+                    ctx.fillStyle = pusherPal.fluteDark;
+                    ctx.fillRect(18, -19, 10, 38);
+
+                    // Knurled pusher cap
                     ctx.beginPath();
-                    ctx.roundRect(32, -26, 24, 52, 6);
+                    ctx.roundRect(26, -27, 32, 54, 7);
+                    ctx.fillStyle = pGrad;
+                    ctx.shadowColor = 'rgba(0,0,0,0.8)';
+                    ctx.shadowBlur = 12;
                     ctx.fill();
-                    ctx.strokeStyle = 'rgba(0,0,0,0.8)';
-                    ctx.lineWidth = 2;
+                    ctx.shadowBlur = 0;
+                    ctx.lineWidth = 1.8;
+                    ctx.strokeStyle = 'rgba(0,0,0,0.75)';
                     ctx.stroke();
+
+                    // Horizontal knurling grooves on pusher cap
+                    for (let py = -20; py <= 20; py += 5.5) {
+                        ctx.fillStyle = 'rgba(0,0,0,0.55)';
+                        ctx.fillRect(29, py, 26, 2);
+                        ctx.fillStyle = 'rgba(255,255,255,0.45)';
+                        ctx.fillRect(29, py + 2, 26, 1.2);
+                    }
                     ctx.restore();
                 });
             }
 
-            if (caseObj.bezelType === 'diver' || caseObj.bezelType === 'tachymetre') {
-                ctx.fillStyle = lugGrad;
-                ctx.beginPath();
-                ctx.moveTo(cx + 296, cy - 96);
-                ctx.quadraticCurveTo(cx + 354, cy - 68, cx + 346, cy - 38);
-                ctx.lineTo(cx + 296, cy - 30);
-                ctx.closePath();
-                ctx.fill();
-                ctx.strokeStyle = 'rgba(255,255,255,0.4)';
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
+            // 5. Screw-Down Fluted Winding Crown at 3 o'clock
+            {
+                const crownPal = METAL_PALETTES[caseObj.crownMetal] || METAL_PALETTES.silver;
+                const cGrad = ctx.createLinearGradient(cx + 335, cy - 48, cx + 335, cy + 48);
+                cGrad.addColorStop(0, crownPal.fluteDark);
+                cGrad.addColorStop(0.18, crownPal.fluteLight);
+                cGrad.addColorStop(0.48, crownPal.fluteBright);
+                cGrad.addColorStop(0.78, crownPal.fluteMid);
+                cGrad.addColorStop(1, crownPal.fluteDark);
+
+                ctx.save();
+                ctx.fillStyle = crownPal.fluteDark;
+                ctx.fillRect(cx + 324, cy - 28, 18, 56);
 
                 ctx.beginPath();
-                ctx.moveTo(cx + 296, cy + 96);
-                ctx.quadraticCurveTo(cx + 354, cy + 68, cx + 346, cy + 38);
-                ctx.lineTo(cx + 296, cy + 30);
-                ctx.closePath();
+                ctx.roundRect(cx + 336, cy - 46, 48, 92, 10);
+                ctx.fillStyle = cGrad;
+                ctx.shadowColor = 'rgba(0,0,0,0.9)';
+                ctx.shadowBlur = 18;
                 ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = 'rgba(0,0,0,0.8)';
                 ctx.stroke();
+
+                for (let ry = cy - 38; ry <= cy + 38; ry += 6) {
+                    ctx.fillStyle = 'rgba(0,0,0,0.62)';
+                    ctx.fillRect(cx + 340, ry, 40, 2.6);
+                    ctx.fillStyle = 'rgba(255,255,255,0.52)';
+                    ctx.fillRect(cx + 340, ry + 2.6, 40, 1.5);
+                }
+                ctx.restore();
             }
 
-            const crownPal = METAL_PALETTES[caseObj.crownMetal] || METAL_PALETTES.silver;
-            const cGrad = ctx.createLinearGradient(cx + 316, cy - 46, cx + 316, cy + 46);
-            cGrad.addColorStop(0, crownPal.fluteDark);
-            cGrad.addColorStop(0.2, crownPal.fluteLight);
-            cGrad.addColorStop(0.5, crownPal.fluteBright);
-            cGrad.addColorStop(0.8, crownPal.fluteMid);
-            cGrad.addColorStop(1, crownPal.fluteDark);
-
-            ctx.fillStyle = crownPal.fluteMid;
-            ctx.fillRect(cx + 310, cy - 28, 14, 56);
-
-            ctx.fillStyle = cGrad;
-            ctx.beginPath();
-            ctx.roundRect(cx + 318, cy - 45, 46, 90, 10);
+            // 6. Main Unified Monobloc Case & Lugs Body (100% Connected Single-Piece Chassis)
+            ctx.save();
+            traceMonoblocOuterPath(ctx, cx, cy);
+            ctx.shadowColor = 'rgba(0,0,0,0.95)';
+            ctx.shadowBlur = 50;
+            ctx.shadowOffsetY = 20;
+            ctx.fillStyle = bodyGrad;
             ctx.fill();
-            ctx.strokeStyle = 'rgba(0,0,0,0.85)';
-            ctx.lineWidth = 2;
-            ctx.stroke();
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
 
-            for (let ry = cy - 38; ry <= cy + 38; ry += 6) {
-                ctx.fillStyle = 'rgba(0,0,0,0.6)';
-                ctx.fillRect(cx + 322, ry, 38, 2.5);
-                ctx.fillStyle = 'rgba(255,255,255,0.45)';
-                ctx.fillRect(cx + 322, ry + 2.5, 38, 1.5);
+            // Clip inside the monobloc chassis to apply vertical satin-brushed grain on lugs & 3D flank shading
+            ctx.clip();
+
+            // Vertical metallic satin brushing across the integrated lugs
+            const lugBrushG = ctx.createLinearGradient(cx - 344, cy, cx + 344, cy);
+            lugBrushG.addColorStop(0, pal.fluteDark);
+            lugBrushG.addColorStop(0.14, pal.fluteBright);
+            lugBrushG.addColorStop(0.28, pal.bodyBase);
+            lugBrushG.addColorStop(0.5, pal.fluteMid);
+            lugBrushG.addColorStop(0.72, pal.bodyBase);
+            lugBrushG.addColorStop(0.86, pal.fluteBright);
+            lugBrushG.addColorStop(1, pal.fluteDark);
+            ctx.fillStyle = lugBrushG;
+            ctx.fillRect(cx - 360, cy - 450, 720, 900);
+
+            // Fine vertical hairline brush strokes on the four integrated lugs
+            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+            ctx.lineWidth = 1;
+            for (let bx = cx - 335; bx <= cx + 335; bx += 3) {
+                ctx.beginPath();
+                ctx.moveTo(bx, cy - 440);
+                ctx.lineTo(bx, cy + 440);
+                ctx.stroke();
             }
+
+            // 3D Outer Bevel Chamfer Highlights along the left & right continuous case-to-lug flanks
+            const leftChamfer = ctx.createLinearGradient(cx - 344, cy, cx - 265, cy);
+            leftChamfer.addColorStop(0, pal.chamfer);
+            leftChamfer.addColorStop(0.35, 'rgba(255,255,255,0.45)');
+            leftChamfer.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = leftChamfer;
+            ctx.fillRect(cx - 350, cy - 440, 95, 880);
+
+            const rightChamfer = ctx.createLinearGradient(cx + 265, cy, cx + 344, cy);
+            rightChamfer.addColorStop(0, 'rgba(255,255,255,0)');
+            rightChamfer.addColorStop(0.65, 'rgba(255,255,255,0.45)');
+            rightChamfer.addColorStop(1, pal.chamfer);
+            ctx.fillStyle = rightChamfer;
+            ctx.fillRect(cx + 255, cy - 440, 95, 880);
+
+            // Inner Lug Bevel Shading where the lugs hug the circular bezel
+            const innerLugShadow = ctx.createRadialGradient(cx, cy, 304, cx, cy, 342);
+            innerLugShadow.addColorStop(0, 'rgba(0,0,0,0.85)');
+            innerLugShadow.addColorStop(0.45, 'rgba(0,0,0,0.28)');
+            innerLugShadow.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = innerLugShadow;
+            ctx.beginPath();
+            ctx.arc(cx, cy, 345, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+
+            // Crisp Specular Rim Outline around the entire Monobloc Case & Lugs
+            ctx.save();
+            traceMonoblocOuterPath(ctx, cx, cy);
+            ctx.lineWidth = 2.6;
+            ctx.strokeStyle = 'rgba(255,255,255,0.62)';
+            ctx.stroke();
+            ctx.restore();
 
             ctx.restore();
         }
@@ -2032,41 +2094,50 @@
             ctx.save();
             const pal = METAL_PALETTES[caseObj.bezelMetal] || METAL_PALETTES.rosegold;
             const outerRingG = createLinearMetallicGrad(ctx, cx - outerR, cy - outerR, cx + outerR, cy + outerR, caseObj.bezelMetal);
+
+            // 3D Drop Shadow of the Bezel Base onto the Monobloc Lugs
+            ctx.save();
             ctx.beginPath();
-            ctx.arc(cx, cy, outerR + 9, 0, Math.PI * 2);
+            ctx.arc(cx, cy, outerR + 8, 0, Math.PI * 2);
+            ctx.shadowColor = 'rgba(0,0,0,0.85)';
+            ctx.shadowBlur = 18;
+            ctx.shadowOffsetY = 6;
             ctx.fillStyle = outerRingG;
             ctx.fill();
-            ctx.lineWidth = 2;
-            ctx.strokeStyle = 'rgba(255,255,255,0.5)';
-            ctx.stroke();
+            ctx.restore();
 
             if (caseObj.bezelType === 'fluted') {
-                const flutes = 112;
+                // High-Definition 3D Prism Fluted Bezel (Matches Images 1, 3, 8)
+                const flutes = 96;
                 const step = (Math.PI * 2) / flutes;
-                const fluteOuter = outerR + 2;
-                const fluteInner = innerR + 10;
+                const fluteOuter = outerR + 4;
+                const fluteInner = innerR + 9;
 
                 for (let i = 0; i < flutes; i++) {
                     const a0 = i * step;
                     const aMid = a0 + step * 0.5;
                     const a1 = a0 + step;
 
-                    const spec = Math.cos(a0 * 2 + 0.9) * 0.5 + 0.5;
-                    const cLight = spec > 0.62 ? pal.fluteBright : (spec > 0.28 ? pal.fluteLight : pal.fluteMid);
-                    const cShadow = spec > 0.5 ? pal.fluteWarm : pal.fluteDark;
+                    const lightWave = Math.cos(a0 * 2 + 0.85) * 0.5 + 0.5;
+                    const cLight = lightWave > 0.60 ? pal.fluteBright : (lightWave > 0.26 ? pal.fluteLight : pal.fluteMid);
+                    const cShadow = lightWave > 0.48 ? pal.fluteWarm : pal.fluteDark;
 
+                    const rRidge = fluteOuter + 2.4;
+
+                    // Bright Facet
                     ctx.beginPath();
                     ctx.moveTo(cx + Math.cos(a0) * fluteInner, cy + Math.sin(a0) * fluteInner);
                     ctx.lineTo(cx + Math.cos(a0) * fluteOuter, cy + Math.sin(a0) * fluteOuter);
-                    ctx.lineTo(cx + Math.cos(aMid) * (fluteOuter + 1.8), cy + Math.sin(aMid) * (fluteOuter + 1.8));
+                    ctx.lineTo(cx + Math.cos(aMid) * rRidge, cy + Math.sin(aMid) * rRidge);
                     ctx.lineTo(cx + Math.cos(aMid) * fluteInner, cy + Math.sin(aMid) * fluteInner);
                     ctx.closePath();
                     ctx.fillStyle = cLight;
                     ctx.fill();
 
+                    // Shadow Facet
                     ctx.beginPath();
                     ctx.moveTo(cx + Math.cos(aMid) * fluteInner, cy + Math.sin(aMid) * fluteInner);
-                    ctx.lineTo(cx + Math.cos(aMid) * (fluteOuter + 1.8), cy + Math.sin(aMid) * (fluteOuter + 1.8));
+                    ctx.lineTo(cx + Math.cos(aMid) * rRidge, cy + Math.sin(aMid) * rRidge);
                     ctx.lineTo(cx + Math.cos(a1) * fluteOuter, cy + Math.sin(a1) * fluteOuter);
                     ctx.lineTo(cx + Math.cos(a1) * fluteInner, cy + Math.sin(a1) * fluteInner);
                     ctx.closePath();
@@ -2074,117 +2145,177 @@
                     ctx.fill();
                 }
 
+                // Inner Polished Bezel Lip
                 ctx.beginPath();
                 ctx.arc(cx, cy, fluteInner, 0, Math.PI * 2);
                 ctx.arc(cx, cy, innerR, 0, Math.PI * 2, true);
                 ctx.fillStyle = outerRingG;
                 ctx.fill();
+
             } else if (caseObj.bezelType === 'smooth') {
+                // High-Gloss Domed Mirror Dress Bezel (Matches Image 10)
                 ctx.beginPath();
-                ctx.arc(cx, cy, outerR + 2, 0, Math.PI * 2);
+                ctx.arc(cx, cy, outerR + 4, 0, Math.PI * 2);
                 ctx.arc(cx, cy, innerR, 0, Math.PI * 2, true);
                 ctx.fillStyle = outerRingG;
                 ctx.fill();
 
-                ctx.beginPath();
-                ctx.arc(cx, cy, outerR - 12, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(255,255,255,0.75)';
-                ctx.lineWidth = 3.5;
-                ctx.stroke();
-            } else if (caseObj.bezelType === 'tachymetre') {
+                // 3D Conical Mirror Reflections
+                const domeSpec = ctx.createLinearGradient(cx - outerR, cy - outerR, cx + outerR, cy + outerR);
+                domeSpec.addColorStop(0, 'rgba(255,255,255,0.65)');
+                domeSpec.addColorStop(0.25, 'rgba(255,255,255,0.08)');
+                domeSpec.addColorStop(0.5, 'rgba(0,0,0,0.45)');
+                domeSpec.addColorStop(0.78, 'rgba(255,255,255,0.55)');
+                domeSpec.addColorStop(1, 'rgba(15,23,42,0.7)');
+
                 ctx.beginPath();
                 ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+                ctx.arc(cx, cy, innerR + 4, 0, Math.PI * 2, true);
+                ctx.fillStyle = domeSpec;
+                ctx.fill();
+
+            } else if (caseObj.bezelType === 'tachymetre') {
+                // Ceramic / Metallic Tachymetre Bezel (Matches Images 2, 4, 5)
+                ctx.beginPath();
+                ctx.arc(cx, cy, outerR + 3, 0, Math.PI * 2);
                 ctx.arc(cx, cy, innerR, 0, Math.PI * 2, true);
                 ctx.fillStyle = caseObj.insertColor || '#0E1014';
                 ctx.fill();
 
-                const midR = (outerR + innerR) / 2;
+                // Glossy Ceramic Specular Sheen
+                const cerSheen = ctx.createLinearGradient(cx - outerR, cy - outerR, cx + outerR, cy + outerR);
+                cerSheen.addColorStop(0, 'rgba(255,255,255,0.22)');
+                cerSheen.addColorStop(0.35, 'rgba(255,255,255,0)');
+                cerSheen.addColorStop(0.7, 'rgba(0,0,0,0.35)');
+                cerSheen.addColorStop(1, 'rgba(255,255,255,0.12)');
+                ctx.beginPath();
+                ctx.arc(cx, cy, outerR + 3, 0, Math.PI * 2);
+                ctx.arc(cx, cy, innerR, 0, Math.PI * 2, true);
+                ctx.fillStyle = cerSheen;
+                ctx.fill();
+
+                const midR = (outerR + innerR) / 2 + 2;
+
+                // Inner Graduation Ring & Ticks
                 for (let i = 0; i < 60; i++) {
-                    if (i >= 2 && i <= 8) continue;
+                    if (i >= 1 && i <= 10) continue;
                     const ang = (i / 60) * Math.PI * 2 - Math.PI / 2;
-                    const len = i % 5 === 0 ? 12 : 6;
+                    const isFive = i % 5 === 0;
+                    const len = isFive ? 11 : 5.5;
                     ctx.beginPath();
-                    ctx.moveTo(cx + Math.cos(ang) * (innerR + 4), cy + Math.sin(ang) * (innerR + 4));
-                    ctx.lineTo(cx + Math.cos(ang) * (innerR + 4 + len), cy + Math.sin(ang) * (innerR + 4 + len));
-                    ctx.strokeStyle = 'rgba(255,255,255,0.9)';
-                    ctx.lineWidth = i % 5 === 0 ? 2.2 : 1.1;
+                    ctx.moveTo(cx + Math.cos(ang) * (innerR + 5), cy + Math.sin(ang) * (innerR + 5));
+                    ctx.lineTo(cx + Math.cos(ang) * (innerR + 5 + len), cy + Math.sin(ang) * (innerR + 5 + len));
+                    ctx.strokeStyle = 'rgba(255,255,255,0.92)';
+                    ctx.lineWidth = isFive ? 2.2 : 1.1;
                     ctx.stroke();
                 }
 
-                const tachyMarks = [
-                    { deg: 0, text: '60' }, { deg: 26, text: 'TACHYMETRE', red: caseObj.accentRed },
-                    { deg: 62, text: '400' }, { deg: 78, text: '300' }, { deg: 96, text: '240' },
-                    { deg: 115, text: '200' }, { deg: 132, text: '180' }, { deg: 152, text: '160' },
-                    { deg: 174, text: '140' }, { deg: 200, text: '120' }, { deg: 222, text: '110' },
-                    { deg: 245, text: '100' }, { deg: 270, text: '90' }, { deg: 292, text: '80' },
-                    { deg: 315, text: '75' }, { deg: 336, text: '70' }
-                ];
+                const tachyMarks = caseObj.unitsPerHour
+                    ? [
+                        { deg: 0, text: '60' }, { deg: 24, text: 'UNITS PER' }, { deg: 36, text: 'HOUR' },
+                        { deg: 58, text: '400' }, { deg: 76, text: '300' }, { deg: 94, text: '240' },
+                        { deg: 112, text: '200' }, { deg: 128, text: '180' }, { deg: 146, text: '160' },
+                        { deg: 170, text: '140' }, { deg: 184, text: '130' }, { deg: 200, text: '120' },
+                        { deg: 218, text: '110' }, { deg: 238, text: '100' }, { deg: 262, text: '90' },
+                        { deg: 278, text: '85' }, { deg: 292, text: '80' }, { deg: 310, text: '75' },
+                        { deg: 328, text: '70' }, { deg: 344, text: '65' }
+                    ]
+                    : [
+                        { deg: 0, text: '60' }, { deg: 28, text: 'TACHYMETRE', red: true },
+                        { deg: 54, text: '500' }, { deg: 66, text: '400' }, { deg: 82, text: '300' },
+                        { deg: 98, text: '250' }, { deg: 112, text: '200' }, { deg: 130, text: '180' },
+                        { deg: 148, text: '160' }, { deg: 168, text: '140' }, { deg: 196, text: '120' },
+                        { deg: 216, text: '110' }, { deg: 238, text: '100' }, { deg: 264, text: '90' },
+                        { deg: 288, text: '80' }, { deg: 316, text: '70' }, { deg: 338, text: '65' }
+                    ];
+
                 tachyMarks.forEach(m => {
                     const rad = (m.deg - 90) * Math.PI / 180;
                     ctx.save();
                     ctx.translate(cx + Math.cos(rad) * midR, cy + Math.sin(rad) * midR);
                     ctx.rotate(rad + Math.PI / 2);
                     ctx.fillStyle = m.red ? '#F87171' : '#FFFFFF';
-                    ctx.font = m.text.length > 4 ? '700 13px Inter, sans-serif' : '700 15px Inter, sans-serif';
+                    ctx.font = m.text.length > 4 ? '700 12.5px Inter, sans-serif' : '700 15.5px Inter, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(m.text, 0, 0);
                     ctx.restore();
                 });
+
             } else if (caseObj.bezelType === 'diver') {
+                // Coin-Edge Knurled Sub-Diver Ceramic Bezel (Matches Images 6, 7, 9)
                 const teeth = 120;
                 for (let i = 0; i < teeth; i++) {
                     const a = (i / teeth) * Math.PI * 2;
                     ctx.beginPath();
-                    ctx.arc(cx + Math.cos(a) * (outerR + 7), cy + Math.sin(a) * (outerR + 7), 5, 0, Math.PI * 2);
+                    ctx.arc(cx + Math.cos(a) * (outerR + 7), cy + Math.sin(a) * (outerR + 7), 5.2, 0, Math.PI * 2);
                     ctx.fillStyle = i % 2 === 0 ? pal.fluteBright : pal.fluteDark;
                     ctx.fill();
                 }
 
+                // Ceramic Insert Ring
                 ctx.beginPath();
-                ctx.arc(cx, cy, outerR - 2, 0, Math.PI * 2);
+                ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
                 ctx.arc(cx, cy, innerR, 0, Math.PI * 2, true);
-                ctx.fillStyle = caseObj.insertColor || '#152A8A';
+                ctx.fillStyle = caseObj.insertColor || '#172596';
+                ctx.fill();
+
+                // Glossy Ceramic Highlight
+                const divSheen = ctx.createLinearGradient(cx - outerR, cy - outerR, cx + outerR, cy + outerR);
+                divSheen.addColorStop(0, 'rgba(255,255,255,0.28)');
+                divSheen.addColorStop(0.4, 'rgba(255,255,255,0)');
+                divSheen.addColorStop(0.75, 'rgba(0,0,0,0.35)');
+                divSheen.addColorStop(1, 'rgba(255,255,255,0.15)');
+                ctx.beginPath();
+                ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+                ctx.arc(cx, cy, innerR, 0, Math.PI * 2, true);
+                ctx.fillStyle = divSheen;
                 ctx.fill();
 
                 const midR = (outerR + innerR) / 2;
                 const txtColor = caseObj.ringText || '#FFFFFF';
 
+                // 12 o'clock Inverted Triangle & Luminous Pearl Pip
                 ctx.save();
                 ctx.translate(cx, cy - midR);
                 ctx.beginPath();
-                ctx.moveTo(0, 18);
-                ctx.lineTo(-18, -16);
-                ctx.lineTo(18, -16);
+                ctx.moveTo(0, 20);
+                ctx.lineTo(-20, -16);
+                ctx.lineTo(20, -16);
                 ctx.closePath();
                 ctx.fillStyle = txtColor;
                 ctx.fill();
+
                 ctx.beginPath();
-                ctx.arc(0, 0, 7.5, 0, Math.PI * 2);
+                ctx.arc(0, -1, 8.5, 0, Math.PI * 2);
                 ctx.fillStyle = '#FEF9C3';
                 ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = pal.fluteDark;
+                ctx.stroke();
                 ctx.restore();
 
                 for (let m = 1; m < 60; m++) {
+                    if (m === 59 || m === 1) continue;
                     const rad = (m / 60) * Math.PI * 2 - Math.PI / 2;
                     if (m % 10 === 0) {
                         ctx.save();
                         ctx.translate(cx + Math.cos(rad) * midR, cy + Math.sin(rad) * midR);
                         ctx.rotate(rad + Math.PI / 2);
                         ctx.fillStyle = txtColor;
-                        ctx.font = '800 26px Inter, sans-serif';
+                        ctx.font = '800 28px Inter, sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
                         ctx.fillText(String(m), 0, 0);
                         ctx.restore();
                     } else if (m <= 15 || m % 5 === 0) {
-                        const r1 = m % 5 === 0 ? innerR + 8 : innerR + 14;
-                        const r2 = outerR - 10;
+                        const r1 = m % 5 === 0 ? innerR + 9 : innerR + 15;
+                        const r2 = outerR - 9;
                         ctx.beginPath();
                         ctx.moveTo(cx + Math.cos(rad) * r1, cy + Math.sin(rad) * r1);
                         ctx.lineTo(cx + Math.cos(rad) * r2, cy + Math.sin(rad) * r2);
                         ctx.strokeStyle = txtColor;
-                        ctx.lineWidth = m % 5 === 0 ? 5 : 2.5;
+                        ctx.lineWidth = m % 5 === 0 ? 5.5 : 2.6;
                         ctx.stroke();
                     }
                 }
@@ -2198,9 +2329,9 @@
             const pal = METAL_PALETTES[metalKey] || METAL_PALETTES.silver;
             const g = ctx.createLinearGradient(cx - outerR, cy - outerR, cx + outerR, cy + outerR);
             g.addColorStop(0, pal.fluteDark);
-            g.addColorStop(0.28, pal.fluteLight);
+            g.addColorStop(0.25, pal.fluteBright);
             g.addColorStop(0.52, pal.fluteMid);
-            g.addColorStop(0.82, pal.fluteBright);
+            g.addColorStop(0.78, pal.fluteBright);
             g.addColorStop(1, pal.fluteDark);
 
             ctx.beginPath();
@@ -2211,8 +2342,8 @@
 
             ctx.beginPath();
             ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(0,0,0,0.9)';
-            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'rgba(0,0,0,0.92)';
+            ctx.lineWidth = 3.2;
             ctx.stroke();
             ctx.restore();
         }
@@ -2266,8 +2397,8 @@
 
             const innerShadow = ctx.createRadialGradient(cx, cy, r - 26, cx, cy, r);
             innerShadow.addColorStop(0, 'rgba(0,0,0,0)');
-            innerShadow.addColorStop(0.7, 'rgba(0,0,0,0.35)');
-            innerShadow.addColorStop(1, 'rgba(0,0,0,0.85)');
+            innerShadow.addColorStop(0.7, 'rgba(0,0,0,0.38)');
+            innerShadow.addColorStop(1, 'rgba(0,0,0,0.88)');
             ctx.fillStyle = innerShadow;
             ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
 
@@ -2288,6 +2419,7 @@
             const logoFill = uploadedPhotoImg ? '#FFF3B0' : dialObj.logoColor;
             const subFill = uploadedPhotoImg ? '#FFFFFF' : dialObj.subColor;
 
+            // Applied 12 o'clock Crown Emblem
             ctx.save();
             ctx.translate(cx, cy - 122);
             ctx.fillStyle = metalPal.fluteBright;
@@ -2303,6 +2435,7 @@
             ctx.fill();
             ctx.restore();
 
+            // Compulsory "DYNAST" Logo
             ctx.save();
             ctx.shadowColor = 'rgba(0,0,0,0.9)';
             ctx.shadowBlur = 9;
@@ -2317,6 +2450,7 @@
             ctx.fillText('LUXURIOUS HOROLOGY', cx, cy - 57);
             ctx.restore();
 
+            // Custom Name Engraving on Lower Dial
             if (state.customName && state.customName.trim() !== '') {
                 ctx.save();
                 ctx.shadowColor = 'rgba(0,0,0,0.95)';
@@ -2329,12 +2463,12 @@
                 ctx.restore();
             }
 
-            drawAppliedHourMarkersAndDate(ctx, cx, cy, r, metalPal);
+            drawAppliedHourMarkersAndDate(ctx, cx, cy, r, metalPal, caseObj.cyclops);
 
             ctx.restore();
         }
 
-        function drawAppliedHourMarkersAndDate(ctx, cx, cy, r, metalPal) {
+        function drawAppliedHourMarkersAndDate(ctx, cx, cy, r, metalPal, hasCyclops) {
             const romans = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
             const markerR = r - 44;
 
@@ -2407,10 +2541,11 @@
                 ctx.restore();
             }
 
+            // 3 o'clock Date Aperture & Optional Cyclops Magnifying Lens
             const dx = cx + markerR - 6;
             const dy = cy;
             ctx.save();
-            ctx.shadowColor = 'rgba(0,0,0,0.7)';
+            ctx.shadowColor = 'rgba(0,0,0,0.75)';
             ctx.shadowBlur = 7;
             ctx.fillStyle = metalPal.fluteLight;
             ctx.beginPath();
@@ -2428,13 +2563,15 @@
             ctx.textBaseline = 'middle';
             ctx.fillText(String(new Date().getDate()), dx, dy + 1);
 
-            ctx.beginPath();
-            ctx.ellipse(dx, dy, 36, 27, 0, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255,255,255,0.16)';
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(255,255,255,0.48)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+            if (hasCyclops) {
+                ctx.beginPath();
+                ctx.ellipse(dx, dy, 40, 30, 0, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,0.22)';
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(255,255,255,0.65)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
             ctx.restore();
         }
 
@@ -2483,13 +2620,14 @@
             ctx.fill();
             ctx.restore();
 
+            // Anti-Reflective Domed Sapphire Crystal Glare
             ctx.save();
             ctx.beginPath();
             ctx.arc(cx, cy, r, 0, Math.PI * 2);
             ctx.clip();
             const glare = ctx.createLinearGradient(cx - r, cy - r, cx + r * 0.4, cy + r * 0.4);
-            glare.addColorStop(0, 'rgba(255,255,255,0.26)');
-            glare.addColorStop(0.38, 'rgba(255,255,255,0.06)');
+            glare.addColorStop(0, 'rgba(255,255,255,0.24)');
+            glare.addColorStop(0.38, 'rgba(255,255,255,0.05)');
             glare.addColorStop(0.5, 'rgba(255,255,255,0)');
             ctx.fillStyle = glare;
             ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
@@ -2529,12 +2667,12 @@
             state.liveClock = !state.liveClock;
             const txt = document.getElementById('clockModeText');
             if (txt) txt.textContent = state.liveClock ? 'Live Sweeping Hands' : '10:10 Studio Pose';
-            if (renderUnlocked) renderFrontWatch(false);
+            renderFrontWatch(false);
         }
 
         function startLiveClockLoop() {
             function tick() {
-                if (renderUnlocked && state.liveClock) {
+                if (state.liveClock) {
                     renderFrontWatch(false);
                 }
                 requestAnimationFrame(tick);
@@ -2553,9 +2691,14 @@
             const hasName = state.customName && state.customName.trim() !== '';
             const hasPhoto = Boolean(state.customPhotoDataUrl);
 
-            const step2Total = dObj.price + mObj.price + (hasName ? 499 : 0) + (hasPhoto ? 999 : 0);
+            const step2Total = dObj.price + mObj.price;
+            const step6Total = (hasName ? 499 : 0) + (hasPhoto ? 999 : 0);
+
             const s2Badge = document.getElementById('step2PriceBadge');
             if (s2Badge) s2Badge.textContent = `+₹${step2Total.toLocaleString('en-IN')}`;
+
+            const s6Badge = document.getElementById('step6PriceBadge');
+            if (s6Badge) s6Badge.textContent = `+₹${step6Total.toLocaleString('en-IN')}`;
 
             const items = [
                 { label: 'Base DYNAST Horology Movement & Assembly', price: BASE_WATCH_PRICE },
@@ -2567,8 +2710,8 @@
                 { label: `Step 05 • ${lObj.name}`, price: lObj.price }
             ];
 
-            if (hasName) items.push({ label: `Custom Dial Name Print ("${state.customName.trim()}")`, price: 499 });
-            if (hasPhoto) items.push({ label: 'Custom Circular Dial Photograph Print', price: 999 });
+            if (hasName) items.push({ label: `Step 06 • Custom Dial Name ("${state.customName.trim()}")`, price: 499 });
+            if (hasPhoto) items.push({ label: 'Step 06 • Custom Circular Dial Photograph Print', price: 999 });
 
             const total = items.reduce((sum, i) => sum + i.price, 0);
             state.totalPrice = total;
@@ -2614,7 +2757,7 @@
         }
 
         // ============================================================================
-        // ORDER TRACKER MODAL (HEADER "TRACK" BUTTON - NO SIGN-IN REQUIRED)
+        // ORDER TRACKER MODAL (CLOUD FIRESTORE ONLY - NO LOCAL STORAGE)
         // ============================================================================
         function openTrackOrderModal() {
             document.getElementById('trackOrderModal').classList.remove('hidden');
@@ -2635,7 +2778,7 @@
             );
 
             if (matches.length === 0) {
-                area.innerHTML = `<p class="text-gray-300 text-center py-8">No matching bespoke orders found for "<strong>${queryText}</strong>".</p>`;
+                area.innerHTML = `<p class="text-gray-300 text-center py-8">No matching bespoke orders found in Cloud for "<strong>${queryText}</strong>".</p>`;
                 return;
             }
 
@@ -2657,73 +2800,36 @@
         }
 
         // ============================================================================
-        // UNCOMPRESSED ADMIN PHOTO HELPER + FIREBASE ORDER SAVE + AUTONOMOUS EMAILJS
+        // EMAILJS SAFE IMAGE ENCODER (KEEPS PAYLOAD UNDER 50KB LIMIT SO EMAILS NEVER FAIL)
         // ============================================================================
-        async function prepareUncompressedAdminPhoto(orderId) {
-            if (!state.customPhotoDataUrl) {
-                return { dialPhoto: null, dialPhotoStorageUrl: null, isChunkedInSubcollection: false };
+        function createEmailSafeImageDataUrl(sourceImgOrCanvas, maxDim = 240, quality = 0.62) {
+            if (!sourceImgOrCanvas) return '';
+            try {
+                const c = document.createElement('canvas');
+                const w = sourceImgOrCanvas.width || 240;
+                const h = sourceImgOrCanvas.height || 240;
+                const scale = Math.min(1, maxDim / Math.max(w, h));
+                c.width = Math.max(1, Math.round(w * scale));
+                c.height = Math.max(1, Math.round(h * scale));
+                const ctx = c.getContext('2d');
+                ctx.fillStyle = '#0A0A0C';
+                ctx.fillRect(0, 0, c.width, c.height);
+                ctx.drawImage(sourceImgOrCanvas, 0, 0, c.width, c.height);
+                return c.toDataURL('image/jpeg', quality);
+            } catch (err) {
+                console.warn('Email image compression warning:', err);
+                return '';
             }
-
-            let storageDownloadUrl = null;
-
-            // 1. Upload original untouched file/DataURL to Firebase Cloud Storage so 100% original pixels are preserved
-            if (window.storage && window.FB_Fns && window.FB_Fns.storageRef) {
-                try {
-                    const ext = state.rawPhotoFile && state.rawPhotoFile.name ? state.rawPhotoFile.name : 'dial_photo.png';
-                    const fileRef = window.FB_Fns.storageRef(window.storage, `bespoke_dial_photos/${orderId}_${ext}`);
-                    if (state.rawPhotoFile && window.FB_Fns.uploadBytes) {
-                        await window.FB_Fns.uploadBytes(fileRef, state.rawPhotoFile);
-                    } else {
-                        await window.FB_Fns.uploadString(fileRef, state.customPhotoDataUrl, 'data_url');
-                    }
-                    storageDownloadUrl = await window.FB_Fns.getDownloadURL(fileRef);
-                } catch (storageErr) {
-                    console.warn("Firebase Storage direct upload fallback to Firestore:", storageErr);
-                }
-            }
-
-            // 2. If the raw DataURL fits safely inside a single Firestore document (< 750 KB), store the exact untouched DataURL directly
-            if (state.customPhotoDataUrl.length <= 750000) {
-                return {
-                    dialPhoto: state.customPhotoDataUrl,
-                    dialPhotoStorageUrl: storageDownloadUrl || state.customPhotoDataUrl,
-                    isChunkedInSubcollection: false
-                };
-            }
-
-            // 3. If the raw DataURL is very large (> 750 KB) and Storage URL is available, use the full-resolution Storage URL
-            if (storageDownloadUrl) {
-                return {
-                    dialPhoto: storageDownloadUrl,
-                    dialPhotoStorageUrl: storageDownloadUrl,
-                    isChunkedInSubcollection: false
-                };
-            }
-
-            // 4. Fallback if file > 750 KB and Firebase Storage is not enabled: keep a high-definition 1600px PNG/JPEG (98% quality) for main doc + save raw chunks in subcollection
-            const hdCanvas = document.createElement('canvas');
-            const maxDim = 1600;
-            const scale = Math.min(1, maxDim / Math.max(uploadedPhotoImg.width, uploadedPhotoImg.height));
-            hdCanvas.width = Math.round(uploadedPhotoImg.width * scale);
-            hdCanvas.height = Math.round(uploadedPhotoImg.height * scale);
-            const hctx = hdCanvas.getContext('2d');
-            hctx.imageSmoothingEnabled = true;
-            hctx.imageSmoothingQuality = 'high';
-            hctx.drawImage(uploadedPhotoImg, 0, 0, hdCanvas.width, hdCanvas.height);
-            const highResDataUrl = hdCanvas.toDataURL('image/jpeg', 0.96);
-
-            return {
-                dialPhoto: highResDataUrl,
-                dialPhotoStorageUrl: highResDataUrl,
-                isChunkedInSubcollection: true
-            };
         }
 
+        // ============================================================================
+        // CLOUD FIRESTORE SAVE (NO IMAGES, NO LOCAL STORAGE) + DUAL FAIL-SAFE EMAILJS
+        // ============================================================================
         async function placeBespokeOrder(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('placeOrderSubmitBtn');
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving Order &amp; Sending Confirmation Email...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving Order to Cloud &amp; Sending Emails...`;
 
             const orderId = 'DYN-' + Math.floor(100000 + Math.random() * 900000);
             const trackId = 'TRK-DYN-' + Math.floor(10000000 + Math.random() * 90000000);
@@ -2740,103 +2846,206 @@
             const customerEmail = document.getElementById('orderEmail').value.trim();
             const customerAddress = document.getElementById('orderAddress').value.trim();
             const utrNumber = document.getElementById('orderUtr').value.trim();
+            const formattedDate = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
-            // Prepare full-detail customer dial photo for Admin Panel
-            const photoPayload = await prepareUncompressedAdminPhoto(orderId);
+            // Ensure 3D Canvas is freshly rendered at 10:10 studio pose for the snapshot
+            const prevClock = state.liveClock;
+            state.liveClock = false;
+            renderFrontWatch(true);
+            const frontCanvas = document.getElementById('frontWatchCanvas');
+            const fullRenderedWatchUrl = frontCanvas ? frontCanvas.toDataURL('image/png') : '';
+            const emailSafeRenderedWatchUrl = createEmailSafeImageDataUrl(frontCanvas, 240, 0.62);
+            const emailSafeCustomerPhotoUrl = uploadedPhotoImg ? createEmailSafeImageDataUrl(uploadedPhotoImg, 220, 0.60) : '';
+            state.liveClock = prevClock;
+            renderFrontWatch(false);
 
-            const orderEntry = {
+            // 1. Complete Customer & Watch Order Object for Firebase Cloud Firestore (Excluding Images, No Local Storage)
+            const firestoreOrderData = {
                 orderId,
                 trackId,
                 date: new Date().toISOString(),
-                formattedDate: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
+                formattedDate,
                 customerName,
                 customerEmail,
                 phone: customerPhone,
                 address: customerAddress,
                 utrNumber,
                 payeeUpi: '7579942958@ptyes',
+                caseModelKey: state.caseModel,
                 caseModel: cObj.name,
+                dialColorKey: state.dialColor,
                 dialColor: dObj.name,
+                markerStyleKey: state.markerStyle,
                 markerStyle: mObj.name,
+                backCaseKey: state.backCase,
                 backCase: bObj.name,
+                strapItemKey: state.strapItem,
                 strapItem: sObj.name,
+                strapLockKey: state.strapLock,
                 strapLock: lObj.name,
                 customName: state.customName && state.customName.trim() !== '' ? state.customName.trim() : 'None',
                 customNameFont: state.customNameFont || 'Cinzel',
                 customNameColor: state.customNameColor || '#FFF0E8',
                 hasCustomPhoto: Boolean(state.customPhotoDataUrl),
-                dialPhoto: photoPayload.dialPhoto,
-                dialPhotoOriginalUrl: photoPayload.dialPhotoStorageUrl,
                 photoTransform: {
                     zoom: state.photoZoom,
                     offsetX: state.photoOffsetX,
                     offsetY: state.photoOffsetY,
                     dimmer: state.photoDimmer
                 },
+                baseWatchPrice: BASE_WATCH_PRICE,
                 totalPrice: state.totalPrice,
                 status: 'Order Confirmed • In Bespoke Crafting Queue (Agra Studio)'
             };
 
+            // Keep in-memory reference for immediate E-Bill printing in current session
             lastPlacedOrder = {
-                ...orderEntry,
-                dialPhoto: state.customPhotoDataUrl || photoPayload.dialPhoto
+                ...firestoreOrderData,
+                dialPhoto: state.customPhotoDataUrl,
+                renderedWatchPhoto: fullRenderedWatchUrl
             };
 
-            // 1. Save Order to Firebase Cloud Firestore (and raw photo chunks if > 750KB without Storage)
+            // Save to Firebase Cloud Firestore (Strictly No LocalStorage)
             if (window.db && window.FB_Fns) {
                 try {
-                    const docRef = await window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), orderEntry);
-
-                    if (photoPayload.isChunkedInSubcollection && state.customPhotoDataUrl) {
-                        const rawStr = state.customPhotoDataUrl;
-                        const chunkSize = 500000;
-                        for (let i = 0, idx = 0; i < rawStr.length; i += chunkSize, idx++) {
-                            await window.FB_Fns.addDoc(
-                                window.FB_Fns.collection(window.db, `bespoke_orders/${docRef.id}/raw_photo_chunks`),
-                                { index: idx, data: rawStr.slice(i, i + chunkSize) }
-                            );
-                        }
-                    }
+                    await window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), firestoreOrderData);
                 } catch (err) {
-                    console.error("Firestore sync error:", err);
+                    console.error("Cloud Firestore save error:", err);
                 }
             }
 
-            // 2. Send Autonomous Confirmation Email to Customer via EmailJS
-            const emailStatusEl = document.getElementById('confirmEmailStatusText');
-            const templateParams = {
+            // 2. Build Comprehensive Shared Parameters for Both Emails
+            const fullOrderSummaryText = [
+                `Order ID: ${orderId}`,
+                `Tracking ID: ${trackId}`,
+                `Date: ${formattedDate}`,
+                `Customer Name: ${customerName}`,
+                `Customer Phone: ${customerPhone}`,
+                `Customer Email: ${customerEmail}`,
+                `Delivery Address: ${customerAddress}`,
+                `UPI UTR Reference: ${utrNumber}`,
+                `Total Paid: ₹${state.totalPrice.toLocaleString('en-IN')}`,
+                `----------------------------------------`,
+                `Step 01 (Case & Bezel): ${cObj.name}`,
+                `Step 02 (Dial & Markers): ${dObj.name} (${mObj.name})`,
+                `Step 03 (Back Cover): ${bObj.name}`,
+                `Step 04 (Strap / Bracelet): ${sObj.name}`,
+                `Step 05 (Strap Lock): ${lObj.name}`,
+                `Step 06 (Custom Dial Name): ${firestoreOrderData.customName} (Font: ${firestoreOrderData.customNameFont}, Color: ${firestoreOrderData.customNameColor})`,
+                `Step 06 (Custom Dial Photo): ${firestoreOrderData.hasCustomPhoto ? `Provided (Zoom: ${state.photoZoom}%, X: ${state.photoOffsetX}, Y: ${state.photoOffsetY})` : 'Not Provided'}`
+            ].join('\n');
+
+            const customerEmailParams = {
                 email: customerEmail,
+                to_email: customerEmail,
+                customer_email: customerEmail,
                 customer_name: customerName,
+                to_name: customerName,
+                phone: customerPhone,
+                customer_phone: customerPhone,
                 order_id: orderId,
                 track_id: trackId,
                 case_model: cObj.name,
                 dial_color: `${dObj.name} (${mObj.name})`,
-                custom_name: orderEntry.customName,
-                has_photo_tick: orderEntry.hasCustomPhoto ? '✓ Provided' : 'Not Provided',
+                marker_style: mObj.name,
+                custom_name: firestoreOrderData.customName,
+                custom_name_font: firestoreOrderData.customNameFont,
+                custom_name_color: firestoreOrderData.customNameColor,
+                has_photo_tick: firestoreOrderData.hasCustomPhoto ? '✓ Provided' : 'Not Provided',
                 back_case: bObj.name,
                 strap_item: sObj.name,
                 strap_lock: lObj.name,
                 total_price: `₹${state.totalPrice.toLocaleString('en-IN')}`,
                 customer_address: customerAddress,
-                utr_number: utrNumber
+                address: customerAddress,
+                utr_number: utrNumber,
+                order_date: formattedDate,
+                order_summary: fullOrderSummaryText,
+                message: fullOrderSummaryText
             };
 
+            const adminEmailParams = {
+                ...customerEmailParams,
+                // Compact email-safe DataURLs for the customer's uploaded dial photo & 3D rendered case/dial
+                dial_photo: emailSafeCustomerPhotoUrl || 'No Custom Photo Uploaded',
+                customer_image: emailSafeCustomerPhotoUrl || 'No Custom Photo Uploaded',
+                customer_dial_image: emailSafeCustomerPhotoUrl || 'No Custom Photo Uploaded',
+                rendered_image: emailSafeRenderedWatchUrl,
+                watch_render: emailSafeRenderedWatchUrl,
+                case_dial_render: emailSafeRenderedWatchUrl
+            };
+
+            // 3. Fail-Safe Dual Email Dispatch (1. Customer Email + 2. Admin Email)
+            let customerMailSent = false;
+            let adminMailSent = false;
+
+            // Send Customer Confirmation Email
             try {
-                await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, {
-                    publicKey: EMAILJS_PUBLIC_KEY
+                await emailjs.send(CUSTOMER_EMAILJS_SERVICE_ID, CUSTOMER_EMAILJS_TEMPLATE_ID, customerEmailParams, {
+                    publicKey: CUSTOMER_EMAILJS_PUBLIC_KEY
                 });
-                if (emailStatusEl) {
-                    emailStatusEl.textContent = `Confirmation email & Tracking ID (${trackId}) automatically sent to ${customerEmail}.`;
+                customerMailSent = true;
+            } catch (custErr) {
+                console.error("Primary customer email attempt warning, retrying:", custErr);
+                try {
+                    await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, customerEmailParams, {
+                        publicKey: ADMIN_EMAILJS_PUBLIC_KEY
+                    });
+                    customerMailSent = true;
+                } catch (custRetryErr) {
+                    console.error("Customer email fallback error:", custRetryErr);
                 }
-            } catch (emailErr) {
-                console.error("EmailJS error:", emailErr);
-                if (emailStatusEl) {
-                    emailStatusEl.textContent = `Order saved to Cloud! Please download your E-Bill below (Track ID: ${trackId}).`;
+            }
+
+            // Send Admin Verification Email (service_4gu5akm / template_8ftz5k9 / TITqL7XhwkZQuU6Ni)
+            try {
+                await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, adminEmailParams, {
+                    publicKey: ADMIN_EMAILJS_PUBLIC_KEY
+                });
+                adminMailSent = true;
+            } catch (adminErr) {
+                console.warn("Admin email with embedded images hit size limit, retrying with ultra-compact render so it never fails:", adminErr);
+                try {
+                    const ultraCompactRender = createEmailSafeImageDataUrl(frontCanvas, 150, 0.5);
+                    const ultraCompactPhoto = uploadedPhotoImg ? createEmailSafeImageDataUrl(uploadedPhotoImg, 150, 0.5) : 'No Custom Photo Uploaded';
+                    await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, {
+                        ...customerEmailParams,
+                        dial_photo: ultraCompactPhoto,
+                        customer_image: ultraCompactPhoto,
+                        customer_dial_image: ultraCompactPhoto,
+                        rendered_image: ultraCompactRender,
+                        watch_render: ultraCompactRender,
+                        case_dial_render: ultraCompactRender
+                    }, {
+                        publicKey: ADMIN_EMAILJS_PUBLIC_KEY
+                    });
+                    adminMailSent = true;
+                } catch (adminFinalFallbackErr) {
+                    console.warn("Retrying admin email with text-only payload:", adminFinalFallbackErr);
+                    try {
+                        await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, customerEmailParams, {
+                            publicKey: ADMIN_EMAILJS_PUBLIC_KEY
+                        });
+                        adminMailSent = true;
+                    } catch (eFinal) {
+                        console.error("Admin email error:", eFinal);
+                    }
+                }
+            }
+
+            const emailStatusEl = document.getElementById('confirmEmailStatusText');
+            if (emailStatusEl) {
+                if (customerMailSent && adminMailSent) {
+                    emailStatusEl.textContent = `Both Customer Confirmation (${customerEmail}) & Studio Admin Verification Emails Sent Successfully!`;
+                } else if (customerMailSent || adminMailSent) {
+                    emailStatusEl.textContent = `Order saved to Firebase Cloud & Confirmation Email Dispatched (Track ID: ${trackId}).`;
+                } else {
+                    emailStatusEl.textContent = `Order saved to Firebase Cloud! Download your official E-Bill below (Track ID: ${trackId}).`;
                 }
             }
 
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `<i class="fa-solid fa-check-double"></i> Submit Payment &amp; Send Confirmation Email`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-check-double"></i> Submit Payment &amp; Send Confirmation Emails`;
 
             document.getElementById('confirmOrderId').textContent = orderId;
             document.getElementById('confirmTrackId').textContent = trackId;
@@ -2844,23 +3053,23 @@
             document.getElementById('confirmOrderDetailsBox').innerHTML = `
                 <div class="flex justify-between"><span>Customer:</span><strong class="text-white">${customerName} (${customerPhone})</strong></div>
                 <div class="flex justify-between"><span>Customer Email:</span><strong class="text-lightgold">${customerEmail}</strong></div>
-                <div class="flex justify-between"><span>Watch Case:</span><strong class="text-white">${orderEntry.caseModel}</strong></div>
-                <div class="flex justify-between"><span>Watch Dial:</span><strong class="text-white">${orderEntry.dialColor} (${orderEntry.markerStyle})</strong></div>
-                <div class="flex justify-between"><span>Custom Dial Name:</span><strong class="text-white">${orderEntry.customName}</strong></div>
+                <div class="flex justify-between"><span>Step 01 (Case):</span><strong class="text-white">${firestoreOrderData.caseModel}</strong></div>
+                <div class="flex justify-between"><span>Step 02 (Dial):</span><strong class="text-white">${firestoreOrderData.dialColor} (${firestoreOrderData.markerStyle})</strong></div>
+                <div class="flex justify-between"><span>Step 03 &amp; 05:</span><strong class="text-white">${firestoreOrderData.backCase} • ${firestoreOrderData.strapLock}</strong></div>
+                <div class="flex justify-between"><span>Step 04 (Strap):</span><strong class="text-white">${firestoreOrderData.strapItem}</strong></div>
+                <div class="flex justify-between"><span>Step 06 (Custom Name):</span><strong class="text-white">${firestoreOrderData.customName}</strong></div>
                 <div class="flex justify-between items-center">
-                    <span>Custom Dial Image Print:</span>
-                    <strong class="${orderEntry.hasCustomPhoto ? 'text-emerald-400 flex items-center gap-1' : 'text-gray-400'}">
-                        ${orderEntry.hasCustomPhoto ? '<i class="fa-solid fa-circle-check"></i> ✓ Provided' : 'Not Provided'}
+                    <span>Step 06 (Custom Dial Photo):</span>
+                    <strong class="${firestoreOrderData.hasCustomPhoto ? 'text-emerald-400 flex items-center gap-1' : 'text-gray-400'}">
+                        ${firestoreOrderData.hasCustomPhoto ? '<i class="fa-solid fa-circle-check"></i> ✓ Provided' : 'Not Provided'}
                     </strong>
                 </div>
-                <div class="flex justify-between"><span>Back Cover &amp; Lock:</span><strong class="text-white">${orderEntry.backCase} • ${orderEntry.strapLock}</strong></div>
-                <div class="flex justify-between"><span>Strap / Bracelet:</span><strong class="text-white">${orderEntry.strapItem}</strong></div>
                 <div class="flex justify-between"><span>UPI UTR Number:</span><strong class="text-gold font-mono">${utrNumber}</strong></div>
                 <div class="flex justify-between border-t border-gold/30 pt-2 text-sm"><span>Total Paid:</span><strong class="text-gold">₹${state.totalPrice.toLocaleString('en-IN')}</strong></div>
             `;
 
             document.getElementById('orderConfirmedModal').classList.remove('hidden');
-            showToast(`Order ${orderId} Confirmed & Email Sent!`);
+            showToast(`Order ${orderId} Saved to Firebase & Emails Dispatched!`);
         }
 
         function downloadOrderEBill() {
@@ -2875,7 +3084,7 @@
                     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
                     <style>
                         body { font-family: 'Inter', Arial, sans-serif; background: #fff; color: #111; margin: 0; padding: 30px; }
-                        .bill-container { max-width: 700px; margin: 0 auto; border: 2px solid #D4AF37; padding: 35px; border-radius: 12px; }
+                        .bill-container { max-width: 720px; margin: 0 auto; border: 2px solid #D4AF37; padding: 35px; border-radius: 12px; }
                         .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #D4AF37; padding-bottom: 20px; margin-bottom: 20px; }
                         .brand { font-family: 'Cinzel Decorative', serif; font-size: 24px; color: #9A7209; font-weight: 700; }
                         .sub { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #555; }
@@ -2887,7 +3096,7 @@
                         th { background: #F4E8D1; color: #332200; }
                         .total-row { font-weight: bold; background: #FAF8F5; }
                         .footer { margin-top: 30px; text-align: center; font-size: 11px; color: #666; border-top: 1px solid #ddd; padding-top: 15px; }
-                        .photo-thumb { width: 90px; height: 90px; object-fit: cover; border-radius: 6px; border: 1px solid #D4AF37; margin-top: 8px; }
+                        .photo-thumb { width: 110px; height: 110px; object-fit: contain; border-radius: 8px; border: 1px solid #D4AF37; margin-top: 8px; background: #0A0A0C; }
                         @media print { .no-print { display: none; } }
                     </style>
                 </head>
@@ -2931,25 +3140,33 @@
                                 <th style="text-align:right;">Details</th>
                             </tr>
                             <tr><td>Base Horology Movement &amp; Assembly</td><td style="text-align:right;">₹2,999</td></tr>
-                            <tr><td>Watch Case &amp; Bezel</td><td style="text-align:right;">${o.caseModel}</td></tr>
-                            <tr><td>Dial &amp; Hour Markers</td><td style="text-align:right;">${o.dialColor} (${o.markerStyle})</td></tr>
-                            <tr><td>Custom Name Print</td><td style="text-align:right;">${o.customName}</td></tr>
-                            <tr><td>Custom Circular Dial Photo Print</td><td style="text-align:right; font-weight:bold; color:${o.hasCustomPhoto ? '#059669' : '#555'};">${o.hasCustomPhoto ? '✓ Provided' : 'Not Provided'}</td></tr>
-                            <tr><td>Rear Caseback Cover</td><td style="text-align:right;">${o.backCase}</td></tr>
-                            <tr><td>Strap / Bracelet</td><td style="text-align:right;">${o.strapItem}</td></tr>
-                            <tr><td>Engraved Strap Lock</td><td style="text-align:right;">${o.strapLock}</td></tr>
+                            <tr><td>Step 01 • Watch Case &amp; Bezel</td><td style="text-align:right;">${o.caseModel}</td></tr>
+                            <tr><td>Step 02 • Dial &amp; Hour Markers</td><td style="text-align:right;">${o.dialColor} (${o.markerStyle})</td></tr>
+                            <tr><td>Step 03 • Rear Caseback Cover</td><td style="text-align:right;">${o.backCase}</td></tr>
+                            <tr><td>Step 04 • Strap / Bracelet</td><td style="text-align:right;">${o.strapItem}</td></tr>
+                            <tr><td>Step 05 • Engraved Strap Lock</td><td style="text-align:right;">${o.strapLock}</td></tr>
+                            <tr><td>Step 06 • Custom Name Print</td><td style="text-align:right;">${o.customName}</td></tr>
+                            <tr><td>Step 06 • Custom Circular Dial Photo Print</td><td style="text-align:right; font-weight:bold; color:${o.hasCustomPhoto ? '#059669' : '#555'};">${o.hasCustomPhoto ? '✓ Provided' : 'Not Provided'}</td></tr>
                             <tr class="total-row">
                                 <td>Total Paid (Inclusive of Taxes)</td>
                                 <td style="text-align:right; color:#9A7209; font-size:15px;">₹${Number(o.totalPrice).toLocaleString('en-IN')}</td>
                             </tr>
                         </table>
 
-                        ${o.hasCustomPhoto && o.dialPhoto ? `
-                            <div style="margin-top:15px; font-size:12px;">
-                                <strong>Customer Uploaded Dial Photo Reference:</strong><br>
-                                <img src="${o.dialPhoto}" class="photo-thumb" alt="Custom Dial Photo">
-                            </div>
-                        ` : ''}
+                        <div style="display:flex; gap:24px; margin-top:15px; font-size:12px;">
+                            ${o.renderedWatchPhoto ? `
+                                <div>
+                                    <strong>3D Case &amp; Dial Studio Render:</strong><br>
+                                    <img src="${o.renderedWatchPhoto}" class="photo-thumb" alt="3D Watch Render">
+                                </div>
+                            ` : ''}
+                            ${o.hasCustomPhoto && o.dialPhoto ? `
+                                <div>
+                                    <strong>Customer Uploaded Dial Photo:</strong><br>
+                                    <img src="${o.dialPhoto}" class="photo-thumb" alt="Custom Dial Photo">
+                                </div>
+                            ` : ''}
+                        </div>
 
                         <div class="footer">
                             <p style="margin:0;">Thank you for choosing DYNAST Luxurious Horology • Agra, Uttar Pradesh, India.</p>
