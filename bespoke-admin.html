@@ -15,9 +15,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Firebase SDKs (Live Connection to dynast-bespoke) -->
+    <!-- Firebase SDKs (Live Cloud Firestore Connection to dynast-bespoke) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
@@ -60,7 +60,8 @@
                     fontFamily: {
                         'sans': ['Inter', 'sans-serif'],
                         'serif': ['Cinzel', 'serif'],
-                        'decorative': ['Cinzel Decorative', 'cursive']
+                        'decorative': ['Cinzel Decorative', 'cursive'],
+                        'script': ['Great Vibes', 'cursive']
                     }
                 }
             }
@@ -126,7 +127,7 @@
         <span id="adminToastText">Updated</span>
     </div>
 
-    <!-- FULL RESOLUTION PHOTO PREVIEW MODAL -->
+    <!-- FULL RESOLUTION PHOTO PREVIEW MODAL (FOR LEGACY ORDERS WITH STORED PHOTO URL) -->
     <div id="photoPreviewModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="gold-panel rounded-3xl max-w-2xl w-full p-6 relative space-y-4 border-2 border-gold shadow-2xl text-center">
             <button type="button" onclick="closePhotoModal()" class="absolute top-4 right-4 text-gray-300 hover:text-gold text-xl"><i class="fa-solid fa-xmark"></i></button>
@@ -137,7 +138,7 @@
             </div>
             <div class="flex justify-center gap-3 pt-2">
                 <a id="modalDownloadLink" href="#" download="dynast-dial-photo.png" class="btn-gold px-5 py-2.5 rounded-xl text-xs uppercase tracking-wider inline-flex items-center gap-2 shadow-lg">
-                    <i class="fa-solid fa-download"></i> Download Original Full-Res Image
+                    <i class="fa-solid fa-download"></i> Download Original Image
                 </a>
             </div>
         </div>
@@ -199,7 +200,7 @@
                 </a>
                 <div>
                     <span class="cinzel-decorative text-xl sm:text-2xl text-lightgold tracking-widest block leading-none">DYNAST</span>
-                    <span class="text-[10px] uppercase tracking-[0.3em] text-gold/90 block mt-1">Bespoke Order &amp; Print Sizing Admin</span>
+                    <span class="text-[10px] uppercase tracking-[0.3em] text-gold/90 block mt-1">6-Step Cloud Order &amp; Print Sizing Admin</span>
                 </div>
             </div>
 
@@ -209,12 +210,12 @@
                     <span class="text-gray-200">Paytm UPI: <strong class="text-white font-mono">7579942958@ptyes</strong></span>
                 </div>
 
-                <button type="button" onclick="syncAllLocalAndCloudOrders(true)" class="border border-gold/50 bg-white/5 hover:bg-gold/20 text-lightgold px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md">
-                    <i class="fa-solid fa-arrows-rotate text-gold"></i> <span>Sync Orders</span>
+                <button type="button" onclick="syncCloudOrders(true)" class="border border-gold/50 bg-white/5 hover:bg-gold/20 text-lightgold px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md">
+                    <i class="fa-solid fa-cloud-arrow-down text-gold"></i> <span>Sync Cloud Orders</span>
                 </button>
 
                 <button type="button" onclick="createSampleTestOrder()" class="border border-gold/50 bg-gold/20 hover:bg-gold/30 text-lightgold px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md">
-                    <i class="fa-solid fa-plus text-gold"></i> <span>Create Test Order</span>
+                    <i class="fa-solid fa-plus text-gold"></i> <span>Create Cloud Test Order</span>
                 </button>
 
                 <button type="button" onclick="logoutAdmin()" title="Sign Out of Admin" class="border border-red-500/50 bg-red-500/15 hover:bg-red-500/30 text-red-300 px-3.5 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition shadow-md">
@@ -229,7 +230,7 @@
         <!-- 4 KPI METRIC CARDS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <div class="gold-panel rounded-2xl p-6 shadow-xl">
-                <span class="text-[10px] uppercase tracking-widest text-gray-300 font-bold block">Total Bespoke Orders</span>
+                <span class="text-[10px] uppercase tracking-widest text-gray-300 font-bold block">Total Cloud Orders</span>
                 <p id="kpiTotalOrders" class="serif-text text-3xl font-bold text-white mt-2">0</p>
             </div>
 
@@ -244,7 +245,7 @@
             </div>
 
             <div class="gold-panel rounded-2xl p-6 shadow-xl">
-                <span class="text-[10px] uppercase tracking-widest text-emerald-400 font-bold block">Custom Photo Dials to Print</span>
+                <span class="text-[10px] uppercase tracking-widest text-emerald-400 font-bold block">Step 06 Photo Dials</span>
                 <p id="kpiPhotoDials" class="serif-text text-3xl font-bold text-emerald-400 mt-2">0</p>
             </div>
         </div>
@@ -253,7 +254,7 @@
         <section class="gold-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center gap-4 shadow-xl">
             <div class="relative flex-1 w-full">
                 <i class="fa-solid fa-magnifying-glass text-gold/80 absolute left-4 top-3.5 text-xs"></i>
-                <input type="text" id="searchOrdersInput" oninput="renderAdminOrders()" placeholder="Search by Order ID, Track ID, Customer Name, Phone, Email, Dial Name, or 12-Digit UTR..." class="w-full bg-black/90 border border-gold/40 focus:border-gold rounded-xl pl-11 pr-4 py-3 text-xs text-white outline-none">
+                <input type="text" id="searchOrdersInput" oninput="renderAdminOrders()" placeholder="Search by Order ID, Track ID, Customer Name, Phone, Email, Step 06 Dial Name, or 12-Digit UTR..." class="w-full bg-black/90 border border-gold/40 focus:border-gold rounded-xl pl-11 pr-4 py-3 text-xs text-white outline-none">
             </div>
 
             <div class="w-full md:w-72 shrink-0">
@@ -301,16 +302,14 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const isAuthed = sessionStorage.getItem('dynast_admin_authed') === 'true' ||
-                             localStorage.getItem('dynast_admin_authed_email') === ADMIN_MASTER_EMAIL;
+            const isAuthed = sessionStorage.getItem('dynast_admin_authed') === 'true';
             if (isAuthed) {
                 unlockAdminDashboard();
             }
         });
 
         window.addEventListener('admin-fb-ready', () => {
-            const isAuthed = sessionStorage.getItem('dynast_admin_authed') === 'true' ||
-                             localStorage.getItem('dynast_admin_authed_email') === ADMIN_MASTER_EMAIL;
+            const isAuthed = sessionStorage.getItem('dynast_admin_authed') === 'true';
             if (isAuthed) {
                 autoSignInFirebaseAdmin();
             }
@@ -322,7 +321,7 @@
                 await window.FB_Admin.signInWithEmailAndPassword(window.auth, ADMIN_MASTER_EMAIL, ADMIN_MASTER_PASS);
             } catch (e) {}
             startRealtimeFirestoreListener();
-            syncAllLocalAndCloudOrders(false);
+            syncCloudOrders(false);
         }
 
         async function handleAdminLogin(e) {
@@ -356,7 +355,6 @@
             }
 
             sessionStorage.setItem('dynast_admin_authed', 'true');
-            localStorage.setItem('dynast_admin_authed_email', ADMIN_MASTER_EMAIL);
 
             btn.disabled = false;
             btn.innerHTML = `<i class="fa-solid fa-unlock-keyhole"></i> Sign In to Admin Command`;
@@ -367,38 +365,17 @@
 
         function unlockAdminDashboard() {
             document.getElementById('adminLoginGate').classList.add('hidden');
-            syncAllLocalAndCloudOrders(false);
+            syncCloudOrders(false);
             startRealtimeFirestoreListener();
         }
 
         function logoutAdmin() {
             sessionStorage.removeItem('dynast_admin_authed');
-            localStorage.removeItem('dynast_admin_authed_email');
             if (window.auth && window.FB_Admin) {
                 try { window.FB_Admin.signOut(window.auth); } catch (e) {}
             }
             document.getElementById('adminPasswordInput').value = '';
             document.getElementById('adminLoginGate').classList.remove('hidden');
-        }
-
-        function collectAllLocalBrowserOrders() {
-            const map = new Map();
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key && key.startsWith('dynast_orders')) {
-                    try {
-                        const arr = JSON.parse(localStorage.getItem(key) || '[]');
-                        if (Array.isArray(arr)) {
-                            arr.forEach(o => {
-                                if (o && o.orderId) {
-                                    map.set(o.orderId, normalizeOrderObject(o));
-                                }
-                            });
-                        }
-                    } catch (e) {}
-                }
-            }
-            return Array.from(map.values());
         }
 
         function normalizeOrderObject(o) {
@@ -425,51 +402,47 @@
                 strapItem: o.strapItem || o.strapMaterial || 'Two-Tone Rose & Steel Curved Jubilee',
                 strapLock: o.strapLock || 'DYNAST Butterfly Deployant Lock',
                 customName: o.customName || 'None',
+                customNameFont: o.customNameFont || 'Cinzel',
+                customNameColor: o.customNameColor || '#FFF0E8',
                 hasCustomPhoto: Boolean(o.hasCustomPhoto || o.dialPhoto || o.customPhotoDataUrl),
                 dialPhoto: o.dialPhoto || o.customPhotoDataUrl || null,
-                totalPrice: Number(o.totalPrice || 9198),
+                photoTransform: o.photoTransform || { zoom: 100, offsetX: 0, offsetY: 0, dimmer: 15 },
+                totalPrice: Number(o.totalPrice || 9798),
                 dialMm: Number(o.dialMm || defaultMm),
                 status: o.status || 'Order Confirmed • In Bespoke Crafting Queue (Agra Studio)'
             };
         }
 
-        async function syncAllLocalAndCloudOrders(showFeedback = false) {
-            const mergedMap = new Map();
-            const localOrders = collectAllLocalBrowserOrders();
-            localOrders.forEach(o => mergedMap.set(o.orderId, o));
-
-            if (window.db && window.FB_Admin) {
-                try {
-                    const snapPromise = window.FB_Admin.getDocs(window.FB_Admin.collection(window.db, 'bespoke_orders'));
-                    const snap = await Promise.race([snapPromise, new Promise(res => setTimeout(() => res(null), 2500))]);
-                    if (snap && snap.forEach) {
-                        snap.forEach(docSnap => {
-                            const data = docSnap.data();
-                            if (data && data.orderId) {
-                                const norm = normalizeOrderObject({ ...data, docId: docSnap.id });
-                                mergedMap.set(norm.orderId, norm);
-                            }
-                        });
-                    }
-
-                    for (const locOrder of localOrders) {
-                        const existing = mergedMap.get(locOrder.orderId);
-                        if (existing && !existing.docId) {
-                            try {
-                                const docRef = await window.FB_Admin.addDoc(window.FB_Admin.collection(window.db, 'bespoke_orders'), locOrder);
-                                existing.docId = docRef.id;
-                            } catch (e) {}
-                        }
-                    }
-                } catch (err) {}
+        // ============================================================================
+        // CLOUD FIRESTORE ONLY SYNC (NO LOCAL STORAGE ORDER SAVING)
+        // ============================================================================
+        async function syncCloudOrders(showFeedback = false) {
+            if (!window.db || !window.FB_Admin) {
+                renderAdminOrders();
+                return;
             }
 
-            allOrders = Array.from(mergedMap.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
-            saveMasterOrdersToLocal(allOrders);
-            renderAdminOrders();
+            try {
+                const snapPromise = window.FB_Admin.getDocs(window.FB_Admin.collection(window.db, 'bespoke_orders'));
+                const snap = await Promise.race([snapPromise, new Promise(res => setTimeout(() => res(null), 4000))]);
+                if (snap && snap.forEach) {
+                    const cloudMap = new Map();
+                    snap.forEach(docSnap => {
+                        const data = docSnap.data();
+                        if (data && data.orderId) {
+                            const norm = normalizeOrderObject({ ...data, docId: docSnap.id });
+                            cloudMap.set(norm.orderId, norm);
+                        }
+                    });
+                    allOrders = Array.from(cloudMap.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
+                }
+            } catch (err) {
+                console.error("Cloud sync error:", err);
+            }
 
+            renderAdminOrders();
             if (showFeedback) {
-                showAdminToast(`Synced ${allOrders.length} bespoke order(s)`);
+                showAdminToast(`Synced ${allOrders.length} cloud order(s) from Firebase`);
             }
         }
 
@@ -479,7 +452,6 @@
                 const colRef = window.FB_Admin.collection(window.db, 'bespoke_orders');
                 unsubscribeSnapshot = window.FB_Admin.onSnapshot(colRef, (snapshot) => {
                     const map = new Map();
-                    collectAllLocalBrowserOrders().forEach(o => map.set(o.orderId, o));
                     snapshot.forEach(docSnap => {
                         const d = docSnap.data();
                         if (d && d.orderId) {
@@ -489,16 +461,8 @@
                     allOrders = Array.from(map.values()).sort((a, b) => new Date(b.date) - new Date(a.date));
                     renderAdminOrders();
                 });
-            } catch (e) {}
-        }
-
-        function saveMasterOrdersToLocal(ordersArray) {
-            localStorage.setItem('dynast_orders_admin_master', JSON.stringify(ordersArray));
-            for (let i = 0; i < localStorage.length; i++) {
-                const k = localStorage.key(i);
-                if (k && k.startsWith('dynast_orders_')) {
-                    localStorage.setItem(k, JSON.stringify(ordersArray));
-                }
+            } catch (e) {
+                console.error("Realtime listener error:", e);
             }
         }
 
@@ -536,8 +500,8 @@
                 container.innerHTML = `
                     <div class="gold-panel rounded-3xl p-12 text-center space-y-3">
                         <i class="fa-solid fa-box-open text-gold text-3xl"></i>
-                        <p class="text-sm text-gray-200 font-semibold">No matching bespoke orders found.</p>
-                        <p class="text-xs text-gray-400">Click "Sync Orders" or "+ Create Test Order" in the top bar to test the workflow.</p>
+                        <p class="text-sm text-gray-200 font-semibold">No matching bespoke orders found in Firebase Cloud.</p>
+                        <p class="text-xs text-gray-400">Click "Sync Cloud Orders" or "+ Create Cloud Test Order" in the top bar to test the 6-step workflow.</p>
                     </div>
                 `;
                 return;
@@ -547,21 +511,31 @@
                 const mm = Number(o.dialMm || 28.5).toFixed(1);
                 const cm = (mm / 10).toFixed(2);
                 const px600 = Math.round((mm / 25.4) * 600);
+                const pt = o.photoTransform || { zoom: 100, offsetX: 0, offsetY: 0, dimmer: 15 };
 
-                let photoSectionHtml = `<span class="text-gray-400">Custom Photo:</span><strong class="text-gray-400 text-right">No</strong>`;
+                let photoSectionHtml = `<span class="text-gray-400">Step 06 (Photo):</span><strong class="text-gray-400 text-right">Not Provided</strong>`;
                 if (o.hasCustomPhoto && o.dialPhoto) {
                     photoSectionHtml = `
                         <div class="col-span-2 flex items-center justify-between bg-white/5 p-2 rounded-xl border border-emerald-500/30">
                             <div class="flex items-center gap-2.5">
                                 <img src="${o.dialPhoto}" alt="Customer Upload" class="w-10 h-10 rounded-lg object-cover border border-gold/40 cursor-pointer hover:scale-105 transition" onclick="openFullPhotoModal('${o.orderId}')">
                                 <div>
-                                    <span class="text-xs font-bold text-emerald-400 block">Custom Photo Attached</span>
-                                    <span class="text-[10px] text-gray-300">Click thumbnail to inspect full resolution</span>
+                                    <span class="text-xs font-bold text-emerald-400 block">Step 06 Photo Attached</span>
+                                    <span class="text-[10px] text-gray-300">Zoom: ${pt.zoom}% | X: ${pt.offsetX} | Y: ${pt.offsetY}</span>
                                 </div>
                             </div>
                             <button type="button" onclick="openFullPhotoModal('${o.orderId}')" class="px-3 py-1.5 rounded-lg bg-gold/20 hover:bg-gold/30 text-lightgold text-xs font-semibold transition">
-                                <i class="fa-solid fa-expand mr-1"></i> View Full-Res
+                                <i class="fa-solid fa-expand mr-1"></i> View Photo
                             </button>
+                        </div>
+                    `;
+                } else if (o.hasCustomPhoto) {
+                    photoSectionHtml = `
+                        <div class="col-span-2 flex items-center justify-between bg-emerald-500/10 p-2.5 rounded-xl border border-emerald-500/40">
+                            <div>
+                                <span class="text-xs font-bold text-emerald-300 block"><i class="fa-solid fa-envelope-circle-check mr-1"></i> ✓ Step 06 Custom Photo Provided (Sent to Admin Email)</span>
+                                <span class="text-[10px] text-gray-300 font-mono">Dial Alignment — Zoom: ${pt.zoom}% | X: ${pt.offsetX} | Y: ${pt.offsetY} | Contrast: ${pt.dimmer}%</span>
+                            </div>
                         </div>
                     `;
                 }
@@ -598,7 +572,7 @@
                                     <option value="Delivered / Completed" ${o.status.includes('Completed') || o.status.includes('Delivered') ? 'selected' : ''}>Delivered / Completed</option>
                                 </select>
 
-                                <button type="button" onclick="deleteBespokeOrder('${o.orderId}')" title="Delete Order" class="px-3.5 py-2.5 rounded-xl bg-red-500/15 hover:bg-red-500/30 border border-red-500/50 text-red-300 text-xs transition shadow-md">
+                                <button type="button" onclick="deleteBespokeOrder('${o.orderId}')" title="Delete Order from Cloud" class="px-3.5 py-2.5 rounded-xl bg-red-500/15 hover:bg-red-500/30 border border-red-500/50 text-red-300 text-xs transition shadow-md">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
@@ -623,25 +597,28 @@
                                     <a href="https://wa.me/91${String(o.phone).replace(/\D/g, '').slice(-10)}?text=${encodeURIComponent(`Hello ${o.customerName}, your DYNAST Bespoke Order (${o.orderId}) with Tracking ID ${o.trackId} is currently: ${o.status}.`)}" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-500/25 hover:bg-emerald-500/40 border border-emerald-500/50 text-emerald-200 font-semibold inline-flex items-center gap-1.5 shadow-sm">
                                         <i class="fa-brands fa-whatsapp"></i> WhatsApp Update
                                     </a>
-                                    <a href="mailto:${o.customerEmail}?subject=${encodeURIComponent(`DYNAST Order Update (${o.orderId}) | Track ID: ${o.trackId}`)}&body=${encodeURIComponent(`Dear ${o.customerName},\n\nYour DYNAST Bespoke Timepiece Order (${o.orderId}) status has been updated:\n\n• Live Tracking ID: ${o.trackId}\n• Current Status: ${o.status}\n• Case: ${o.caseModel}\n• Dial: ${o.dialColor} (${o.markerStyle})\n• Custom Name: ${o.customName}\n• Total Paid: Rs. ${o.totalPrice}\n\nThank you for choosing DYNAST Luxurious Horology (Agra, UP).`)}" class="px-3.5 py-2 rounded-xl bg-gold/20 hover:bg-gold/35 border border-gold/50 text-lightgold font-semibold inline-flex items-center gap-1.5 shadow-sm">
+                                    <a href="mailto:${o.customerEmail}?subject=${encodeURIComponent(`DYNAST Order Update (${o.orderId}) | Track ID: ${o.trackId}`)}&body=${encodeURIComponent(`Dear ${o.customerName},\n\nYour DYNAST Bespoke Timepiece Order (${o.orderId}) status has been updated:\n\n• Live Tracking ID: ${o.trackId}\n• Current Status: ${o.status}\n• Step 01 (Case): ${o.caseModel}\n• Step 02 (Dial): ${o.dialColor} (${o.markerStyle})\n• Step 03 (Back Cover): ${o.backCase}\n• Step 04 (Strap): ${o.strapItem}\n• Step 05 (Lock): ${o.strapLock}\n• Step 06 (Custom Name): ${o.customName}\n• Total Paid: Rs. ${o.totalPrice}\n\nThank you for choosing DYNAST Luxurious Horology (Agra, UP).`)}" class="px-3.5 py-2 rounded-xl bg-gold/20 hover:bg-gold/35 border border-gold/50 text-lightgold font-semibold inline-flex items-center gap-1.5 shadow-sm">
                                         <i class="fa-solid fa-paper-plane"></i> Email Track ID
                                     </a>
                                 </div>
                             </div>
 
-                            <!-- 2. Watch Build Sheet -->
+                            <!-- 2. 6-Step Watch Build Sheet -->
                             <div class="p-5 rounded-2xl bg-black/80 border border-gold/30 space-y-2 shadow-md">
                                 <span class="text-[10px] uppercase tracking-widest text-gold font-bold block mb-1">
-                                    <i class="fa-solid fa-gears mr-1.5"></i> 5-Step Watch Build Specification
+                                    <i class="fa-solid fa-gears mr-1.5"></i> 6-Step Watch Build Specification
                                 </span>
                                 <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 01 (Case):</span><strong class="text-white text-right">${o.caseModel}</strong></div>
                                 <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 02 (Dial):</span><strong class="text-white text-right">${o.dialColor}</strong></div>
-                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Markers:</span><strong class="text-white text-right">${o.markerStyle}</strong></div>
-                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Custom Name:</span><strong class="text-lightgold text-right">${o.customName}</strong></div>
-                                <div class="grid grid-cols-2 gap-2 py-1 items-center border-b border-white/5">${photoSectionHtml}</div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 02 (Indices):</span><strong class="text-white text-right">${o.markerStyle}</strong></div>
                                 <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 03 (Back):</span><strong class="text-white text-right">${o.backCase}</strong></div>
                                 <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 04 (Strap):</span><strong class="text-white text-right">${o.strapItem}</strong></div>
-                                <div class="flex justify-between py-0.5"><span class="text-gray-400">Step 05 (Lock):</span><strong class="text-white text-right">${o.strapLock}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5"><span class="text-gray-400">Step 05 (Lock):</span><strong class="text-white text-right">${o.strapLock}</strong></div>
+                                <div class="flex justify-between py-0.5 border-b border-white/5">
+                                    <span class="text-gray-400">Step 06 (Name):</span>
+                                    <strong class="text-lightgold text-right">${o.customName} <span class="text-[10px] text-gray-400">(${o.customNameFont})</span></strong>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 pt-1 items-center">${photoSectionHtml}</div>
                             </div>
 
                             <!-- 3. Sizing & Decal Print -->
@@ -693,45 +670,55 @@
             const target = allOrders.find(o => o.orderId === orderId);
             if (!target) return;
             target.status = newStatus;
-            saveMasterOrdersToLocal(allOrders);
             renderAdminOrders();
 
             if (window.db && window.FB_Admin && target.docId) {
                 try {
                     await window.FB_Admin.updateDoc(window.FB_Admin.doc(window.db, 'bespoke_orders', target.docId), { status: newStatus });
-                } catch (e) {}
+                } catch (e) {
+                    console.error("Status update error:", e);
+                }
             }
-            showAdminToast(`Order ${orderId} status updated!`);
+            showAdminToast(`Order ${orderId} status updated in Firebase Cloud!`);
         }
 
-        function updateOrderDialMm(orderId, newMm) {
+        async function updateOrderDialMm(orderId, newMm) {
             const target = allOrders.find(o => o.orderId === orderId);
             if (!target) return;
-            target.dialMm = parseFloat(newMm) || 28.5;
-            saveMasterOrdersToLocal(allOrders);
+            const parsedMm = parseFloat(newMm) || 28.5;
+            target.dialMm = parsedMm;
             renderAdminOrders();
-            showAdminToast(`Updated dial print diameter to ${target.dialMm.toFixed(1)} mm`);
+
+            if (window.db && window.FB_Admin && target.docId) {
+                try {
+                    await window.FB_Admin.updateDoc(window.FB_Admin.doc(window.db, 'bespoke_orders', target.docId), { dialMm: parsedMm });
+                } catch (e) {
+                    console.error("Dial mm update error:", e);
+                }
+            }
+            showAdminToast(`Updated dial print diameter to ${parsedMm.toFixed(1)} mm in Cloud`);
         }
 
         async function deleteBespokeOrder(orderId) {
-            if (!confirm(`Are you sure you want to delete bespoke order ${orderId}?`)) return;
+            if (!confirm(`Are you sure you want to permanently delete order ${orderId} from Firebase Cloud?`)) return;
             const target = allOrders.find(o => o.orderId === orderId);
             allOrders = allOrders.filter(o => o.orderId !== orderId);
-            saveMasterOrdersToLocal(allOrders);
             renderAdminOrders();
 
             if (window.db && window.FB_Admin && target && target.docId) {
                 try {
                     await window.FB_Admin.deleteDoc(window.FB_Admin.doc(window.db, 'bespoke_orders', target.docId));
-                } catch (e) {}
+                } catch (e) {
+                    console.error("Cloud delete error:", e);
+                }
             }
-            showAdminToast(`Deleted order ${orderId}`);
+            showAdminToast(`Deleted order ${orderId} from Firebase Cloud`);
         }
 
         async function createSampleTestOrder() {
             const orderId = 'DYN-' + Math.floor(100000 + Math.random() * 900000);
             const trackId = 'TRK-DYN-' + Math.floor(10000000 + Math.random() * 90000000);
-            const testOrder = normalizeOrderObject({
+            const rawTestOrder = {
                 orderId,
                 trackId,
                 date: new Date().toISOString(),
@@ -748,38 +735,45 @@
                 strapItem: 'Two-Tone Rose & Steel Curved Jubilee',
                 strapLock: 'DYNAST Butterfly Deployant Lock',
                 customName: 'Hanzalah',
+                customNameFont: 'Cinzel',
+                customNameColor: '#FFF0E8',
                 hasCustomPhoto: false,
-                totalPrice: 9198,
+                photoTransform: { zoom: 100, offsetX: 0, offsetY: 0, dimmer: 15 },
+                totalPrice: 9798,
+                dialMm: 28.5,
                 status: 'Order Confirmed • In Bespoke Crafting Queue'
-            });
-
-            allOrders.unshift(testOrder);
-            saveMasterOrdersToLocal(allOrders);
-            renderAdminOrders();
+            };
 
             if (window.db && window.FB_Admin) {
                 try {
-                    const ref = await window.FB_Admin.addDoc(window.FB_Admin.collection(window.db, 'bespoke_orders'), testOrder);
-                    testOrder.docId = ref.id;
-                } catch (e) {}
+                    const ref = await window.FB_Admin.addDoc(window.FB_Admin.collection(window.db, 'bespoke_orders'), rawTestOrder);
+                    const normalized = normalizeOrderObject({ ...rawTestOrder, docId: ref.id });
+                    if (!allOrders.some(x => x.orderId === orderId)) {
+                        allOrders.unshift(normalized);
+                        renderAdminOrders();
+                    }
+                    showAdminToast(`Created cloud test order ${orderId}`);
+                } catch (e) {
+                    console.error("Create test order error:", e);
+                }
             }
-            showAdminToast(`Created test order ${orderId}`);
         }
 
         function openPrintableDecalSheet(orderId) {
             const o = allOrders.find(x => x.orderId === orderId);
             if (!o) return;
             const mm = Number(o.dialMm || 28.5).toFixed(1);
+            const fontFam = o.customNameFont || 'Cinzel';
             const win = window.open('', '_blank');
             win.document.write(`
                 <!DOCTYPE html>
                 <html>
                 <head>
                     <title>DYNAST 1:1 Dial Decal Print Sheet - ${o.orderId}</title>
-                    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+                    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Great+Vibes&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
                     <style>
                         @page { size: A4; margin: 15mm; }
-                        body { font-family: Arial, sans-serif; color: #111; margin: 0; padding: 20px; }
+                        body { font-family: 'Inter', Arial, sans-serif; color: #111; margin: 0; padding: 20px; }
                         .header { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
                         .decal-grid { display: flex; gap: 15mm; align-items: center; flex-wrap: wrap; margin-top: 20px; }
                         .dial-circle {
@@ -799,7 +793,7 @@
                         }
                         .brand { font-family: 'Cinzel Decorative', serif; font-size: 2.6mm; font-weight: 700; letter-spacing: 0.3mm; }
                         .sub { font-family: 'Cinzel', serif; font-size: 1.05mm; letter-spacing: 0.25mm; }
-                        .cname { font-family: 'Cinzel', serif; font-size: 2.1mm; font-weight: 700; }
+                        .cname { font-family: '${fontFam}', serif; font-size: ${fontFam === 'Great Vibes' ? '3.4mm' : '2.1mm'}; font-weight: 700; }
                         @media print { .no-print { display: none; } }
                     </style>
                 </head>
@@ -809,7 +803,7 @@
                     </div>
                     <div class="header">
                         <h2 style="margin:0;">DYNAST • 1:1 Waterslide Decal &amp; Dial Print Sheet (${mm} mm)</h2>
-                        <p style="margin:5px 0 0 0;font-size:12px;">Order: <strong>${o.orderId}</strong> | Track ID: <strong>${o.trackId}</strong> | Customer: <strong>${o.customerName}</strong> | Case: <strong>${o.caseModel}</strong></p>
+                        <p style="margin:5px 0 0 0;font-size:12px;">Order: <strong>${o.orderId}</strong> | Track ID: <strong>${o.trackId}</strong> | Customer: <strong>${o.customerName}</strong> | Case: <strong>${o.caseModel}</strong> | Font: <strong>${fontFam}</strong></p>
                     </div>
                     <p style="font-size:12px;">Includes 4 copies at exact <strong>${mm} mm</strong> diameter for clear waterslide decal transfer:</p>
                     <div class="decal-grid">
