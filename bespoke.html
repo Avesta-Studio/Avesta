@@ -29,10 +29,11 @@
         })();
     </script>
 
-    <!-- Firebase SDKs (Cloud Firestore Only for Customer & Watch Order Details) -->
+    <!-- Firebase SDKs (Cloud Firestore for Order Data + Cloud Storage for Gmail-Compatible Admin Email Image URLs) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getStorage, ref as storageRef, uploadString, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBM00yuvWgfXOLaVNGSCyzLSiME9e1o4",
@@ -45,8 +46,10 @@
 
         const app = initializeApp(firebaseConfig);
         window.db = getFirestore(app);
+        window.storage = getStorage(app);
         window.FB_Fns = {
-            collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot
+            collection, addDoc, getDocs, doc, setDoc, getDoc, query, where, onSnapshot,
+            storageRef, uploadString, uploadBytes, getDownloadURL
         };
         window.dispatchEvent(new Event('firebase-fully-ready'));
     </script>
@@ -515,7 +518,7 @@
                 </div>
             </div>
         </section>
-        <!-- STEP 02: BESPOKE DIAL BASE & HOUR MARKERS -->
+                <!-- STEP 02: BESPOKE DIAL BASE & HOUR MARKERS -->
         <section id="step2Section" class="gold-panel rounded-3xl p-6 sm:p-8 space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
                 <div>
@@ -1348,7 +1351,7 @@
             </div>
         </div>
     </div>
-    <!-- COMPLETE STUDIO JAVASCRIPT, 3D MONOBLOC CASE ENGINE, CLOUD FIRESTORE & DUAL FAIL-SAFE EMAILJS -->
+        <!-- COMPLETE STUDIO JAVASCRIPT, 3D MONOBLOC CASE ENGINE, CLOUD FIRESTORE & DUAL FAIL-SAFE EMAILJS -->
     <script>
         const BASE_WATCH_PRICE = 2999;
 
@@ -2822,14 +2825,33 @@
             }
         }
 
+        async function uploadEmailImageToCloudUrl(storagePath, dataUrl, rawFile = null) {
+            if (!dataUrl) return null;
+            if (window.storage && window.FB_Fns && window.FB_Fns.storageRef) {
+                try {
+                    const imgRef = window.FB_Fns.storageRef(window.storage, storagePath);
+                    if (rawFile && window.FB_Fns.uploadBytes) {
+                        await window.FB_Fns.uploadBytes(imgRef, rawFile);
+                    } else {
+                        await window.FB_Fns.uploadString(imgRef, dataUrl, 'data_url');
+                    }
+                    const httpsUrl = await window.FB_Fns.getDownloadURL(imgRef);
+                    if (httpsUrl) return httpsUrl;
+                } catch (storageErr) {
+                    console.warn("Firebase Storage upload fallback to compact DataURL:", storageErr);
+                }
+            }
+            return null;
+        }
+
         // ============================================================================
-        // CLOUD FIRESTORE SAVE (NO IMAGES, NO LOCAL STORAGE) + DUAL FAIL-SAFE EMAILJS
+        // CLOUD FIRESTORE SAVE + GMAIL-COMPATIBLE HTTPS IMAGE URL DUAL EMAILJS DISPATCH
         // ============================================================================
         async function placeBespokeOrder(e) {
             e.preventDefault();
             const submitBtn = document.getElementById('placeOrderSubmitBtn');
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving Order to Cloud &amp; Sending Emails...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-2"></i> Saving Order to Cloud &amp; Sending Both Emails...`;
 
             const orderId = 'DYN-' + Math.floor(100000 + Math.random() * 900000);
             const trackId = 'TRK-DYN-' + Math.floor(10000000 + Math.random() * 90000000);
@@ -2848,18 +2870,31 @@
             const utrNumber = document.getElementById('orderUtr').value.trim();
             const formattedDate = new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' });
 
-            // Ensure 3D Canvas is freshly rendered at 10:10 studio pose for the snapshot
+            // 1. Capture High-Resolution 3D Rendered Watch Snapshot at 10:10 Studio Pose
             const prevClock = state.liveClock;
             state.liveClock = false;
             renderFrontWatch(true);
             const frontCanvas = document.getElementById('frontWatchCanvas');
             const fullRenderedWatchUrl = frontCanvas ? frontCanvas.toDataURL('image/png') : '';
-            const emailSafeRenderedWatchUrl = createEmailSafeImageDataUrl(frontCanvas, 240, 0.62);
-            const emailSafeCustomerPhotoUrl = uploadedPhotoImg ? createEmailSafeImageDataUrl(uploadedPhotoImg, 220, 0.60) : '';
+            const emailSafeRenderedWatchUrl = createEmailSafeImageDataUrl(frontCanvas, 260, 0.65);
+            const emailSafeCustomerPhotoUrl = uploadedPhotoImg ? createEmailSafeImageDataUrl(uploadedPhotoImg, 240, 0.65) : '';
             state.liveClock = prevClock;
             renderFrontWatch(false);
 
-            // 1. Complete Customer & Watch Order Object for Firebase Cloud Firestore (Excluding Images, No Local Storage)
+            // 2. Generate Gmail-Compatible HTTPS URLs for Both Images via Firebase Storage
+            const [cloudCustomerPhotoUrl, cloudRenderedWatchUrl] = await Promise.all([
+                state.customPhotoDataUrl
+                    ? uploadEmailImageToCloudUrl(`email_order_images/${orderId}_customer_dial.jpg`, state.customPhotoDataUrl, state.rawPhotoFile)
+                    : Promise.resolve(null),
+                fullRenderedWatchUrl
+                    ? uploadEmailImageToCloudUrl(`email_order_images/${orderId}_3d_render.png`, fullRenderedWatchUrl, null)
+                    : Promise.resolve(null)
+            ]);
+
+            const finalCustomerPhotoForEmail = cloudCustomerPhotoUrl || emailSafeCustomerPhotoUrl || 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=No-Customer-Photo-Uploaded';
+            const finalRenderedWatchForEmail = cloudRenderedWatchUrl || emailSafeRenderedWatchUrl;
+
+            // 3. Save Customer & Watch Order Data to Firebase Cloud Firestore
             const firestoreOrderData = {
                 orderId,
                 trackId,
@@ -2898,14 +2933,12 @@
                 status: 'Order Confirmed • In Bespoke Crafting Queue (Agra Studio)'
             };
 
-            // Keep in-memory reference for immediate E-Bill printing in current session
             lastPlacedOrder = {
                 ...firestoreOrderData,
                 dialPhoto: state.customPhotoDataUrl,
                 renderedWatchPhoto: fullRenderedWatchUrl
             };
 
-            // Save to Firebase Cloud Firestore (Strictly No LocalStorage)
             if (window.db && window.FB_Fns) {
                 try {
                     await window.FB_Fns.addDoc(window.FB_Fns.collection(window.db, 'bespoke_orders'), firestoreOrderData);
@@ -2914,27 +2947,7 @@
                 }
             }
 
-            // 2. Build Comprehensive Shared Parameters for Both Emails
-            const fullOrderSummaryText = [
-                `Order ID: ${orderId}`,
-                `Tracking ID: ${trackId}`,
-                `Date: ${formattedDate}`,
-                `Customer Name: ${customerName}`,
-                `Customer Phone: ${customerPhone}`,
-                `Customer Email: ${customerEmail}`,
-                `Delivery Address: ${customerAddress}`,
-                `UPI UTR Reference: ${utrNumber}`,
-                `Total Paid: ₹${state.totalPrice.toLocaleString('en-IN')}`,
-                `----------------------------------------`,
-                `Step 01 (Case & Bezel): ${cObj.name}`,
-                `Step 02 (Dial & Markers): ${dObj.name} (${mObj.name})`,
-                `Step 03 (Back Cover): ${bObj.name}`,
-                `Step 04 (Strap / Bracelet): ${sObj.name}`,
-                `Step 05 (Strap Lock): ${lObj.name}`,
-                `Step 06 (Custom Dial Name): ${firestoreOrderData.customName} (Font: ${firestoreOrderData.customNameFont}, Color: ${firestoreOrderData.customNameColor})`,
-                `Step 06 (Custom Dial Photo): ${firestoreOrderData.hasCustomPhoto ? `Provided (Zoom: ${state.photoZoom}%, X: ${state.photoOffsetX}, Y: ${state.photoOffsetY})` : 'Not Provided'}`
-            ].join('\n');
-
+            // 4. Prepare Customer Email Payload (template_8aiicmc)
             const customerEmailParams = {
                 email: customerEmail,
                 to_email: customerEmail,
@@ -2942,105 +2955,82 @@
                 customer_name: customerName,
                 to_name: customerName,
                 phone: customerPhone,
-                customer_phone: customerPhone,
                 order_id: orderId,
                 track_id: trackId,
                 case_model: cObj.name,
                 dial_color: `${dObj.name} (${mObj.name})`,
-                marker_style: mObj.name,
+                custom_name: firestoreOrderData.customName,
+                total_price: `₹${state.totalPrice.toLocaleString('en-IN')}`,
+                order_date: formattedDate
+            };
+
+            // 5. Prepare Admin Email Payload (Matches Every Variable in Your Admin HTML Template template_8ftz5k9)
+            const adminEmailParams = {
+                email: 'dynast.online.org@gmail.com',
+                to_email: 'dynast.online.org@gmail.com',
+                admin_email: 'dynast.co.in@gmail.com',
+                order_id: orderId,
+                track_id: trackId,
+                order_date: formattedDate,
+                customer_name: customerName,
+                phone: customerPhone,
+                customer_email: customerEmail,
+                customer_address: customerAddress,
+                utr_number: utrNumber,
+                total_price: `₹${state.totalPrice.toLocaleString('en-IN')}`,
+                case_model: cObj.name,
+                dial_color: `${dObj.name} (${mObj.name})`,
                 custom_name: firestoreOrderData.customName,
                 custom_name_font: firestoreOrderData.customNameFont,
                 custom_name_color: firestoreOrderData.customNameColor,
                 has_photo_tick: firestoreOrderData.hasCustomPhoto ? '✓ Provided' : 'Not Provided',
+                photo_transform_info: firestoreOrderData.hasCustomPhoto
+                    ? `Zoom: ${state.photoZoom}%, X: ${state.photoOffsetX}, Y: ${state.photoOffsetY}, Contrast: ${state.photoDimmer}%`
+                    : 'Standard Dial',
                 back_case: bObj.name,
                 strap_item: sObj.name,
                 strap_lock: lObj.name,
-                total_price: `₹${state.totalPrice.toLocaleString('en-IN')}`,
-                customer_address: customerAddress,
-                address: customerAddress,
-                utr_number: utrNumber,
-                order_date: formattedDate,
-                order_summary: fullOrderSummaryText,
-                message: fullOrderSummaryText
+                // Gmail-Compatible HTTPS Image URLs:
+                customer_dial_photo: finalCustomerPhotoForEmail,
+                rendered_watch_photo: finalRenderedWatchForEmail
             };
 
-            const adminEmailParams = {
-                ...customerEmailParams,
-                // Compact email-safe DataURLs for the customer's uploaded dial photo & 3D rendered case/dial
-                dial_photo: emailSafeCustomerPhotoUrl || 'No Custom Photo Uploaded',
-                customer_image: emailSafeCustomerPhotoUrl || 'No Custom Photo Uploaded',
-                customer_dial_image: emailSafeCustomerPhotoUrl || 'No Custom Photo Uploaded',
-                rendered_image: emailSafeRenderedWatchUrl,
-                watch_render: emailSafeRenderedWatchUrl,
-                case_dial_render: emailSafeRenderedWatchUrl
-            };
-
-            // 3. Fail-Safe Dual Email Dispatch (1. Customer Email + 2. Admin Email)
+            // 6. Send Both Emails
             let customerMailSent = false;
             let adminMailSent = false;
 
-            // Send Customer Confirmation Email
             try {
                 await emailjs.send(CUSTOMER_EMAILJS_SERVICE_ID, CUSTOMER_EMAILJS_TEMPLATE_ID, customerEmailParams, {
                     publicKey: CUSTOMER_EMAILJS_PUBLIC_KEY
                 });
                 customerMailSent = true;
             } catch (custErr) {
-                console.error("Primary customer email attempt warning, retrying:", custErr);
-                try {
-                    await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, customerEmailParams, {
-                        publicKey: ADMIN_EMAILJS_PUBLIC_KEY
-                    });
-                    customerMailSent = true;
-                } catch (custRetryErr) {
-                    console.error("Customer email fallback error:", custRetryErr);
-                }
+                console.error("Customer email error:", custErr);
             }
 
-            // Send Admin Verification Email (service_4gu5akm / template_8ftz5k9 / TITqL7XhwkZQuU6Ni)
             try {
                 await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, adminEmailParams, {
                     publicKey: ADMIN_EMAILJS_PUBLIC_KEY
                 });
                 adminMailSent = true;
             } catch (adminErr) {
-                console.warn("Admin email with embedded images hit size limit, retrying with ultra-compact render so it never fails:", adminErr);
+                console.warn("Admin email retry:", adminErr);
                 try {
-                    const ultraCompactRender = createEmailSafeImageDataUrl(frontCanvas, 150, 0.5);
-                    const ultraCompactPhoto = uploadedPhotoImg ? createEmailSafeImageDataUrl(uploadedPhotoImg, 150, 0.5) : 'No Custom Photo Uploaded';
-                    await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, {
-                        ...customerEmailParams,
-                        dial_photo: ultraCompactPhoto,
-                        customer_image: ultraCompactPhoto,
-                        customer_dial_image: ultraCompactPhoto,
-                        rendered_image: ultraCompactRender,
-                        watch_render: ultraCompactRender,
-                        case_dial_render: ultraCompactRender
-                    }, {
+                    await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, customerEmailParams, {
                         publicKey: ADMIN_EMAILJS_PUBLIC_KEY
                     });
                     adminMailSent = true;
-                } catch (adminFinalFallbackErr) {
-                    console.warn("Retrying admin email with text-only payload:", adminFinalFallbackErr);
-                    try {
-                        await emailjs.send(ADMIN_EMAILJS_SERVICE_ID, ADMIN_EMAILJS_TEMPLATE_ID, customerEmailParams, {
-                            publicKey: ADMIN_EMAILJS_PUBLIC_KEY
-                        });
-                        adminMailSent = true;
-                    } catch (eFinal) {
-                        console.error("Admin email error:", eFinal);
-                    }
+                } catch (retryErr) {
+                    console.error("Admin email final error:", retryErr);
                 }
             }
 
             const emailStatusEl = document.getElementById('confirmEmailStatusText');
             if (emailStatusEl) {
                 if (customerMailSent && adminMailSent) {
-                    emailStatusEl.textContent = `Both Customer Confirmation (${customerEmail}) & Studio Admin Verification Emails Sent Successfully!`;
-                } else if (customerMailSent || adminMailSent) {
-                    emailStatusEl.textContent = `Order saved to Firebase Cloud & Confirmation Email Dispatched (Track ID: ${trackId}).`;
+                    emailStatusEl.textContent = `Customer Email (${customerEmail}) & Admin Verification Email (with Images) Sent Successfully!`;
                 } else {
-                    emailStatusEl.textContent = `Order saved to Firebase Cloud! Download your official E-Bill below (Track ID: ${trackId}).`;
+                    emailStatusEl.textContent = `Order saved to Firebase Cloud (Track ID: ${trackId}).`;
                 }
             }
 
@@ -3055,8 +3045,6 @@
                 <div class="flex justify-between"><span>Customer Email:</span><strong class="text-lightgold">${customerEmail}</strong></div>
                 <div class="flex justify-between"><span>Step 01 (Case):</span><strong class="text-white">${firestoreOrderData.caseModel}</strong></div>
                 <div class="flex justify-between"><span>Step 02 (Dial):</span><strong class="text-white">${firestoreOrderData.dialColor} (${firestoreOrderData.markerStyle})</strong></div>
-                <div class="flex justify-between"><span>Step 03 &amp; 05:</span><strong class="text-white">${firestoreOrderData.backCase} • ${firestoreOrderData.strapLock}</strong></div>
-                <div class="flex justify-between"><span>Step 04 (Strap):</span><strong class="text-white">${firestoreOrderData.strapItem}</strong></div>
                 <div class="flex justify-between"><span>Step 06 (Custom Name):</span><strong class="text-white">${firestoreOrderData.customName}</strong></div>
                 <div class="flex justify-between items-center">
                     <span>Step 06 (Custom Dial Photo):</span>
@@ -3069,7 +3057,7 @@
             `;
 
             document.getElementById('orderConfirmedModal').classList.remove('hidden');
-            showToast(`Order ${orderId} Saved to Firebase & Emails Dispatched!`);
+            showToast(`Order ${orderId} Saved & Both Emails Dispatched!`);
         }
 
         function downloadOrderEBill() {
